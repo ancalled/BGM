@@ -90,6 +90,7 @@ public class CatalogStorage {
         BaseConnector bs = new BaseConnector();
         FromBase fromBase = new FromBase(bs.connect("root", "root"));
 
+        //todo все таки в БД надо сравнивать, а не в память выкачивать )
         List<Track> comTrackList = fromBase.getAllTracksCom();
         List<Track> pubTrackList = fromBase.getAllTracksPub();
 
