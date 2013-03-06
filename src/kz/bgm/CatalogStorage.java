@@ -283,20 +283,20 @@ public class CatalogStorage {
     public static void main(String[] args) throws IOException, InvalidFormatException, ClassNotFoundException {
 //
         CatalogStorage catalog = new CatalogStorage();
-        loadCatalogFromBD(catalog);
-        List<ReportItem> items = new ArrayList<ReportItem>();
-        mergeReports(items, new ReportParser().loadClientReport("./data/October_2012_BGM (1).xlsx", 0.125f));
-        mergeReports(items, new ReportParser().loadClientReport("./data/November_2012_BGM (1).xlsx", 0.125f));
-        buildMobileReport(catalog, items);
-//
-//
-//        loadCatalog(catalog);
-//        System.out.println();
+//        loadCatalogFromBD(catalog);
 //        List<ReportItem> items = new ArrayList<ReportItem>();
 //        mergeReports(items, new ReportParser().loadClientReport("./data/October_2012_BGM (1).xlsx", 0.125f));
 //        mergeReports(items, new ReportParser().loadClientReport("./data/November_2012_BGM (1).xlsx", 0.125f));
-//        System.out.println();
 //        buildMobileReport(catalog, items);
+////
+//
+        loadCatalog(catalog);
+        System.out.println();
+        List<ReportItem> items = new ArrayList<ReportItem>();
+        mergeReports(items, new ReportParser().loadClientReport("./data/October_2012_BGM (1).xlsx", 0.125f));
+        mergeReports(items, new ReportParser().loadClientReport("./data/November_2012_BGM (1).xlsx", 0.125f));
+        System.out.println();
+        buildMobileReport(catalog, items);
 
 //        System.out.println();
 //        List<ReportItem> items = MoskvafmParser.parseReport("./data/moskvafm-top-by-channels.txt");
