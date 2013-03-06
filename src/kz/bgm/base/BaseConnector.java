@@ -8,23 +8,22 @@ public class BaseConnector {
 
     private String baseName = "bgm";
     private String baseLocation = "localhost";
+    private String basePort = "3306";
 
     public Connection connect(String user, String pass) {
-        return connect(baseName, user, pass);
+        return connect(baseLocation, basePort, baseName, user, pass);
     }
 
     public BaseConnector() {
 
     }
 
-    public Connection connect(String base, String user, String pass) {
+    public Connection connect(String host, String port, String base, String user, String pass) {
         Connection connection = null;
         try {
-            System.out.println(
-                    "Connecting to base " + base + " with user " + user);
-
+            System.out.println("Connecting to base " + base + " with user " + user);
             connection = DriverManager.getConnection(
-                    "jdbc:mysql://" + baseLocation + "/" + base,
+                    "jdbc:mysql://" + host + ":" + port + "/" + base,
                     user,
                     pass);
 
@@ -35,9 +34,6 @@ public class BaseConnector {
         return connection;
     }
 
-    public void setBaseName(String baseName) {
-        this.baseName = baseName;
-    }
 
     public void setBaseLocation(String baseLocation) {
         this.baseLocation = baseLocation;

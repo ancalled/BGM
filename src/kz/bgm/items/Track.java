@@ -3,15 +3,21 @@ package kz.bgm.items;
 
 public class Track {
 
-    private String catalog;
-    private String code;
-    private String artist;
-    private String composition;
-    private String musicAuthors;
-    private String lyricsAuthors;
-    private float royalty;
-    private float publicRate;
-    private float mobileRate;
+    private long id = 0L;
+    private String catalog = "";
+    private String code = "";
+    private String artist = "";
+    private String composition = "";
+    private String musicAuthors = "";
+    private String lyricsAuthors = "";
+    private String authors = "";
+    private String comment = "";
+    private String publisher = "";
+    private Float controlled_metch = 0F;
+    private Float collect_metch = 0F;
+    private Float royalty = 0F;
+    private Float publicRate = 0F;
+    private Float mobileRate = 0F;
 
 
     public Track() {
@@ -21,6 +27,54 @@ public class Track {
         this.code = code;
         this.composition = composition;
         this.artist = artist;
+    }
+
+    public void setControlled_metch(Float controlled_metch) {
+        this.controlled_metch = controlled_metch;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setCollect_metch(Float collect_metch) {
+        this.collect_metch = collect_metch;
+    }
+
+    public Float getControlled_metch() {
+        return controlled_metch;
+    }
+
+    public Float getCollect_metch() {
+        return collect_metch;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setAuthors(String authors) {
+        this.authors = authors;
+    }
+
+    public String getAuthors() {
+        return authors;
     }
 
     public String getCode() {
@@ -63,27 +117,27 @@ public class Track {
         this.artist = artist;
     }
 
-    public float getRoyalty() {
+    public Float getRoyalty() {
         return royalty;
     }
 
-    public void setRoyalty(float royalty) {
+    public void setRoyalty(Float royalty) {
         this.royalty = royalty;
     }
 
-    public float getPublicRate() {
+    public Float getPublicRate() {
         return publicRate;
     }
 
-    public void setPublicRate(float publicRate) {
+    public void setPublicRate(Float publicRate) {
         this.publicRate = publicRate;
     }
 
-    public float getMobileRate() {
+    public Float getMobileRate() {
         return mobileRate;
     }
 
-    public void setMobileRate(float mobileRate) {
+    public void setMobileRate(Float mobileRate) {
         this.mobileRate = mobileRate;
     }
 
@@ -96,16 +150,15 @@ public class Track {
     }
 
 
-
     @Override
     public String toString() {
         return "code: " + code +
                 ", composition: " + composition +
-                ", music authors: " + musicAuthors +
-                ", lyrics authors: " + lyricsAuthors +
+                ", authors: " + authors +
                 ", artist: " + artist +
                 ", mobileRate: " + mobileRate +
                 ", publicRate: " + publicRate +
+                ", publisher: " + publisher +
                 ", catalog: " + catalog;
     }
 }
