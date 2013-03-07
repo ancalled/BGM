@@ -105,6 +105,7 @@ public class CatalogStorage {
 
         System.out.println(catalog.commonItemsMap.size());
         System.out.println(catalog.authItemsMap.size());
+        System.out.println();
     }
 
     private static void loadCatalog(CatalogStorage catalog) throws IOException, InvalidFormatException {
