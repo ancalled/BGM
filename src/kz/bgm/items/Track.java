@@ -1,7 +1,7 @@
 package kz.bgm.items;
 
 
-public class Track {
+public class Track implements BgmResult{
 
     private long id = 0L;
     private String catalog = "";

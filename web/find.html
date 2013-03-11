@@ -8,9 +8,22 @@
 
 <form action="/find-track" method="post">
 
-    <label title="Имя исполнителя" for="find"></label>
-
+    <label>
+     Исполнитель
     <input type="text" name="find" id="find">
+    </label>
+
+    <br>
+    <label>
+        Like
+        <input type="checkbox" name="type" value="like">
+    </label>
+    <br>
+    <label>
+        Equals
+        <input type="checkbox" name="type" value="equals">
+    </label>
+    <br>
 
     <input type="submit" value="Найти">
 

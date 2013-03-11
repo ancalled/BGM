@@ -21,6 +21,7 @@ public class FindTrackServlet extends HttpServlet {
 
     public static final String DB_PROPS = APP_DIR + "/db.properties";
     public static final String TRACKS = "tracks";
+    public static final String FIND_TYPE = "type";
 
     @SuppressWarnings("unchecked")
     @Override
@@ -61,15 +62,18 @@ public class FindTrackServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String find = req.getParameter("find");
-
+        String type = req.getParameter(FIND_TYPE);
         if (find != null && !"".equals(find)) {
 
+
             CatalogStorage cs = new CatalogStorage(DB_PROPS);
-//            List<Track> foundTracks =
-//                    cs.getTracksByArtist(find);
-//
-            List<Track> foundTracks =
-                    cs.getTracksLikeArtist(find);
+            List<Track> foundTracks;
+            if (type.equals("like")) {
+                foundTracks = cs.getTracksLikeArtist(find);
+            } else {
+                foundTracks = cs.getTracksByArtist(find);
+            }
+
 
             req.getSession().setAttribute(TRACKS, foundTracks);
 
@@ -84,6 +88,28 @@ public class FindTrackServlet extends HttpServlet {
             writer.print("<body>");
 
             writer.print("Found " + foundTracks.size() + " songs");
+
+            writer.print("<br>");
+            writer.print("<br>");
+
+            writer.print("<b>" + "ID" + "</b> ");
+            writer.print("<b>" + "CODE" + "</b> ");
+            writer.print("<b>" + "Composition" + "</b> ");
+            writer.print("<b>" + "Publisher" + "</b> ");
+            writer.print("<br>");
+            writer.print("<br>");
+
+            for (Track t : foundTracks) {
+                writer.print("<b>" + t.getId() + "</b> ");
+                writer.print("<b>" + t.getCode() + "</b> ");
+                writer.print("<b>" + t.getComposition() + "</b> ");
+                writer.print("<b>" + t.getPublisher() + "</b> ");
+                writer.print("<br>");
+            }
+
+            writer.print("<br>");
+            writer.print("<br>");
+
             writer.print("</body>");
             writer.print("</html>");
 
