@@ -425,10 +425,25 @@ public class CatalogStorage {
         }
     }
 
-
-    public List<Track> getTrackListBySongName(String songName) {
+    public List<Track> getTrackBySongName(String songName) {
         FromBase fromBase = new FromBase(getConnection());
-        return fromBase.getTracksBySongName(songName);
+        return fromBase.getTracksEqSongName(songName);
+    }
+
+    public List<Track> getTracksLikeArtist(String songName) {
+        FromBase fromBase = new FromBase(getConnection());
+        return fromBase.getTracksLikeArtist(songName);
+    }
+
+    public List<Track> getTracksByArtist(String songName) {
+        FromBase fromBase = new FromBase(getConnection());
+        return fromBase.getTracksByArtist(songName);
+    }
+
+
+    public List<Track> getTrackListLikeSongName(String songName) {
+        FromBase fromBase = new FromBase(getConnection());
+        return fromBase.getTracksLikeSongName(songName);
     }
 
     public List<Track> getTrackListByUid(String uid) {

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="bgm">
+    <output-path>$PROJECT_DIR$/out/</output-path>
+    <root id="archive" name="bgm.jar">
+      <element id="module-output" name="bgm-platform" />
+    </root>
+  </artifact>
+</component>

@@ -33,8 +33,20 @@ public class FromBase {
         }
     }
 
-    public List<Track> getTracksBySongName(String songName) {
+    public List<Track> getTracksLikeSongName(String songName) {
         return getTracksLike(COLUMN_SONG_NAME, songName);
+    }
+
+    public List<Track> getTracksLikeArtist(String artist) {
+        return getTracksLike(COLUMN_ARTIST, artist);
+    }
+
+    public List<Track> getTracksByArtist(String artist) {
+        return getTracks(COLUMN_ARTIST, artist);
+    }
+
+    public List<Track> getTracksEqSongName(String songName) {
+        return getTracks(COLUMN_SONG_NAME, songName);
     }
 
     public List<Track> getTracksByUid(String songName) {
@@ -70,19 +82,18 @@ public class FromBase {
                 ps.setLong(1, (Long) value);
 
             } else {
-                ps.setString(1, "%" + (String) value + "%");
+                ps.setString(1, (String) value);
             }
 
             ResultSet resultSet = ps.executeQuery();
             long stop = System.currentTimeMillis();
-            System.out.println("Select query done in " + (stop - start) / 1000F);
+            System.out.println("Query done in " + (stop - start) / 1000F);
             return fromResultToTrack(resultSet);
         } catch (SQLException se) {
             se.printStackTrace();
         }
         return Collections.emptyList();
     }
-
 
 
     public List<Track> getTracksLike(String column, Object value) {
@@ -94,7 +105,7 @@ public class FromBase {
             long start = System.currentTimeMillis();
             System.out.println("select * from " +
                     QueryHolder.TABLE_ALL_MUSIC +
-                    " where " + column + " like '" + value + "' уxecuting");
+                    " where " + column + " like '" + value + "' executing");
 
             PreparedStatement ps =
                     connection.prepareStatement(
@@ -113,12 +124,12 @@ public class FromBase {
                 ps.setLong(1, (Long) value);
 
             } else {
-                ps.setString(1, "%" + (String) value + "%");
+                ps.setString(1, "%" + value + "%");
             }
 
             ResultSet resultSet = ps.executeQuery();
             long stop = System.currentTimeMillis();
-            System.out.println("Select query done in " + (stop - start) / 1000F);
+            System.out.println("Query done in " + (stop - start) / 1000F);
             return fromResultToTrack(resultSet);
         } catch (SQLException se) {
             se.printStackTrace();
