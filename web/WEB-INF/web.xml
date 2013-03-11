@@ -10,9 +10,19 @@
         <servlet-name>findTrackServlet</servlet-name>
         <servlet-class>kz.bgm.web.api.FindTrackServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>findServlet</servlet-name>
+        <servlet-class>kz.bgm.web.api.FindServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>findTrackServlet</servlet-name>
         <url-pattern>/find-track</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>findServlet</servlet-name>
+        <url-pattern>/finder</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>
