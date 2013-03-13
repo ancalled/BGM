@@ -1,9 +1,7 @@
 package kz.bgm;
 
-import kz.bgm.base.BaseConnector;
-import kz.bgm.base.FromBase;
+import kz.bgm.base.Executor;
 import kz.bgm.base.QueryHolder;
-import kz.bgm.base.ToBase;
 import kz.bgm.items.ReportItem;
 import kz.bgm.items.Track;
 import kz.bgm.parsers.CatalogParser;
@@ -12,7 +10,6 @@ import org.apache.poi.ss.usermodel.DataFormatter;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -21,32 +18,30 @@ public class CatalogStorage {
     public static final boolean DEBUG = false;
     //    public static final boolean DEBUG = true;
 
-    private static String BASE_NAME = "base.name";
-    private static String BASE_LOGIN = "base.login";
-    private static String BASE_PASS = "base.pass";
-    private static String BASE_HOST = "base.host";
-    private static String BASE_PORT = "base.port";
 
     public static final DataFormatter FORMATTER = new DataFormatter(true);
     public static String homeDir = System.getProperty("user.dir");
 
     private Map<String, List<Track>> authItemsMap;
     private Map<String, List<Track>> commonItemsMap;
-    private Properties props;
-    private Connection connection;
     public static final String CAT_HOME = homeDir + "/catalogs/";
+
+    private Executor baseExecutor;
 
     public CatalogStorage(String propsFile) {
         authItemsMap = new HashMap<String, List<Track>>();
         commonItemsMap = new HashMap<String, List<Track>>();
 
-        props = new Properties();
+        Properties props = new Properties();
 
         try {
             props.load(new FileInputStream(propsFile));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        baseExecutor = Executor.getInstance(props);
 
     }
 
@@ -114,8 +109,6 @@ public class CatalogStorage {
         try {
             CatalogParser parser = new CatalogParser();
 
-            ToBase toBase = new ToBase(getConnection());
-
             List<Track> trackList = null;
             if (PUB_MSG.equals(publisher) || PUB_MCS.equals(publisher)) {
                 long start = System.currentTimeMillis();
@@ -137,7 +130,7 @@ public class CatalogStorage {
             if (trackList != null) {
                 long start = System.currentTimeMillis();
 
-                toBase.storeInBaseAllMusic(QueryHolder.TABLE_ALL_MUSIC, trackList);
+                baseExecutor.storeInBaseAllMusic(QueryHolder.TABLE_ALL_MUSIC, trackList);
 
                 long stop = System.currentTimeMillis();
                 System.out.println("Catalog stored in base on: " + (stop - start) / 1000 + " sec");
@@ -156,13 +149,11 @@ public class CatalogStorage {
 
             CatalogParser parser = new CatalogParser();
 
-            ToBase toBase = new ToBase(getConnection());
-
             List<Track> mcs = parser.loadAllMCSandMGS(CAT_HOME + "MCS_Shares.xlsx");
-            toBase.storeInBaseAllMusic(QueryHolder.TABLE_ALL_MUSIC, mcs);
+            baseExecutor.storeInBaseAllMusic(QueryHolder.TABLE_ALL_MUSIC, mcs);
 
             List<Track> msg = parser.loadAllMCSandMGS(CAT_HOME + "Music Sales Group Shares.xlsx");
-            toBase.storeInBaseAllMusic(QueryHolder.TABLE_ALL_MUSIC, msg);
+            baseExecutor.storeInBaseAllMusic(QueryHolder.TABLE_ALL_MUSIC, msg);
 
 //            List<Track> mall = parser.loadAllMCSandMGS(catHome + "Russia_11092012.xlsx");
 //            toBase.storeInBaseAllMusic(QueryHolder.TABLE_MCS, mall);
@@ -172,80 +163,40 @@ public class CatalogStorage {
 
     }
 
-    private static void loadCatalogFromBD(CatalogStorage catalog) {
-//        BaseConnector bs = new BaseConnector();
-//        FromBase fromBase = new FromBase(bs.connect("root", "root"));
-//
-//        List<Track> comTrackList = fromBase.getAllTracksCom();
-//        List<Track> pubTrackList = fromBase.getAllTracksPub();
-//
-//        System.out.println("Processing common Tracks " + comTrackList.size());
-//        System.out.println("Processing auth Tracks " + pubTrackList.size());
-//
-//        for (Track i : pubTrackList) {
-//            catalog.addItem(i, false);
-//        }
-//        System.out.println();
-//        for (Track i : comTrackList) {
-//            catalog.addItem(i, true);
-//        }
-//
-//        System.out.println("CommonMap size : " + catalog.commonItemsMap.size());
-//        System.out.println("AuthMap size : " + catalog.authItemsMap.size());
-    }
-
     private void storeCatalogsToBase() throws IOException, InvalidFormatException, SQLException {
 
         CatalogParser parser = new CatalogParser();
 
-        ToBase toBase = new ToBase(getConnection());
-
         List<Track> warnerAut = parser.loadData(
                 CAT_HOME + "warner_chapel.xlsx", false, 97.5f, "WCh авторские");
-        toBase.storeInBase(QueryHolder.TABLE_WRCH_SONGS, warnerAut);
+        baseExecutor.storeInBase(QueryHolder.TABLE_WRCH_SONGS, warnerAut);
 
         List<Track> nmiAutZap = parser.loadData(
                 CAT_HOME + "nmi_aut_zap.xlsx", false, 97.5f, "НМИ авторские");
-        toBase.storeInBase(QueryHolder.TABLE_NMI_SONGS, nmiAutZap);
+        baseExecutor.storeInBase(QueryHolder.TABLE_NMI_SONGS, nmiAutZap);
 
         List<Track> nmiAut = parser.loadData(
                 CAT_HOME + "nmi_aut.xlsx", false, 70f, "НМИ авторские");
-        toBase.storeInBase(QueryHolder.TABLE_NMI_SONGS, nmiAut);
+        baseExecutor.storeInBase(QueryHolder.TABLE_NMI_SONGS, nmiAut);
 
         List<Track> pmiAutZap = parser.loadData(
                 CAT_HOME + "pmi_aut_zap.xlsx", false, 97.5f, "ПМИ авторские");
-        toBase.storeInBase(QueryHolder.TABLE_PMI_SONGS, pmiAutZap);
+        baseExecutor.storeInBase(QueryHolder.TABLE_PMI_SONGS, pmiAutZap);
 
         List<Track> pmiAut = parser.loadData(
                 CAT_HOME + "pmi_aut.xlsx", false, 70f, "ПМИ авторские");
-        toBase.storeInBase(QueryHolder.TABLE_PMI_SONGS, pmiAut);
+        baseExecutor.storeInBase(QueryHolder.TABLE_PMI_SONGS, pmiAut);
 
         List<Track> nmiCom = parser.loadData(
                 CAT_HOME + "nmi_com.xlsx", true, 70f, "НМИ смежные");
-        toBase.storeInBase(QueryHolder.TABLE_NMI_SONGS_COM, nmiCom);
+        baseExecutor.storeInBase(QueryHolder.TABLE_NMI_SONGS_COM, nmiCom);
 
 
         List<Track> pmiCom = parser.loadData(
                 CAT_HOME + "pmi_com.xlsx", true, 70f, "ПМИ смежные");
-        toBase.storeInBase(QueryHolder.TABLE_PMI_SONGS_COM, pmiCom);
+        baseExecutor.storeInBase(QueryHolder.TABLE_PMI_SONGS_COM, pmiCom);
 //
-        connection.close();    //todo потом убрать!
 
-    }
-
-    private Connection getConnection() {
-
-        if (connection == null) {
-            String baseName = (String) props.get(BASE_NAME);
-            String baseLogin = (String) props.get(BASE_LOGIN);
-            String basePass = (String) props.get(BASE_PASS);
-            String baseHost = (String) props.get(BASE_HOST);
-            String basePort = (String) props.get(BASE_PORT);
-            BaseConnector bc = new BaseConnector();
-            connection = bc.connect(baseHost, basePort, baseName, baseLogin, basePass);
-        }
-
-        return connection;
     }
 
     private static void loadCatalog(CatalogStorage catalog) throws IOException, InvalidFormatException {
@@ -303,8 +254,6 @@ public class CatalogStorage {
         System.out.println("AuthMap size : " + catalog.authItemsMap.size());
     }
 
-    //    Processing common Tracks 20331
-//    Processing auth Tracks 53971
     public static void buildMobileReport(CatalogStorage catalog, List<ReportItem> reportItems) {
 
         System.out.println("Building mobile report...");
@@ -426,29 +375,32 @@ public class CatalogStorage {
     }
 
     public List<Track> getTrackBySongName(String songName) {
-        FromBase fromBase = new FromBase(getConnection());
-        return fromBase.getTracksEqSongName(songName);
+        return baseExecutor.getTracksEqSongName(songName);
     }
 
     public List<Track> getTracksLikeArtist(String songName) {
-        FromBase fromBase = new FromBase(getConnection());
-        return fromBase.getTracksLikeArtist(songName);
+        return baseExecutor.getTracksLikeArtist(songName);
     }
 
     public List<Track> getTracksByArtist(String songName) {
-        FromBase fromBase = new FromBase(getConnection());
-        return fromBase.getTracksByArtist(songName);
+        return baseExecutor.getTracksByArtist(songName);
+    }
+
+    public List<Track> getTracksByAllNames(String value) {
+        return baseExecutor.getTracksByAllNames(value);
+    }
+
+    public List<Track> getTracksLikeAllNames(String value) {
+        return baseExecutor.getTracksLikeAllNames(value);
     }
 
 
     public List<Track> getTrackListLikeSongName(String songName) {
-        FromBase fromBase = new FromBase(getConnection());
-        return fromBase.getTracksLikeSongName(songName);
+        return baseExecutor.getTracksLikeSongName(songName);
     }
 
     public List<Track> getTrackListByUid(String uid) {
-        FromBase fromBase = new FromBase(getConnection());
-        return fromBase.getTracksByUid(uid);
+        return baseExecutor.getTracksByUid(uid);
     }
 
     public static void main(String[] args) throws IOException, InvalidFormatException, ClassNotFoundException, SQLException {
