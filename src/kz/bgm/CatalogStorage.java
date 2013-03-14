@@ -1,5 +1,6 @@
 package kz.bgm;
 
+import kz.bgm.base.BaseConnector;
 import kz.bgm.base.Executor;
 import kz.bgm.base.QueryHolder;
 import kz.bgm.items.ReportItem;
@@ -10,6 +11,7 @@ import org.apache.poi.ss.usermodel.DataFormatter;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -17,6 +19,13 @@ public class CatalogStorage {
 
     public static final boolean DEBUG = false;
     //    public static final boolean DEBUG = true;
+
+
+    private static final String BASE_NAME = "base.name";
+    private static final String BASE_LOGIN = "base.login";
+    private static final String BASE_PASS = "base.pass";
+    private static final String BASE_HOST = "base.host";
+    private static final String BASE_PORT = "base.port";
 
 
     public static final DataFormatter FORMATTER = new DataFormatter(true);
@@ -41,7 +50,19 @@ public class CatalogStorage {
             e.printStackTrace();
         }
 
-        baseExecutor = Executor.getInstance(props);
+        String baseName = (String) props.get(BASE_NAME);
+        String baseLogin = (String) props.get(BASE_LOGIN);
+        String basePass = (String) props.get(BASE_PASS);
+        String baseHost = (String) props.get(BASE_HOST);
+        String basePort = (String) props.get(BASE_PORT);
+
+        BaseConnector bc = new BaseConnector();
+        Connection connection = bc.connect(baseHost, basePort, baseName, baseLogin, basePass);
+
+        if (connection != null) {
+            baseExecutor = Executor.getInstance(connection);
+        }
+
 
     }
 
