@@ -18,13 +18,13 @@ public class FindServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        catalogService = new CatalogStorage(FindTrackServlet.DB_PROPS);
+        catalogService = new CatalogStorage(FindTrackServletJson.DB_PROPS);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String find = req.getParameter("find");
-        String type = req.getParameter(FindTrackServlet.FIND_TYPE);
+        String type = req.getParameter(FindTrackServletJson.FIND_TYPE);
         if (find != null && !"".equals(find) && type != null) {
 
             List<Track> foundTracks;

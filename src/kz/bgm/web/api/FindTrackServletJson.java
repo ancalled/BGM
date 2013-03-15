@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-public class FindTrackServlet extends HttpServlet {
+public class FindTrackServletJson extends HttpServlet {
 
     public static final String APP_DIR = System.getProperty("user.dir");
     public static final String WEB_PROPS = APP_DIR + "/jetty.properties";
@@ -38,11 +38,14 @@ public class FindTrackServlet extends HttpServlet {
         String find = req.getParameter("find");
 
         if (find != null && !"".equals(find)) {
-
+                                                       //todo эксперементировать пока над этим сервлетом
             List<Track> foundTracks =
                     catalogService.getTrackBySongName(find);
             JSONArray mass = new JSONArray();
-
+            if (foundTracks == null) {
+                resp.sendRedirect("/find.html");//todo добавить ошибку
+                return;
+            }
             for (Track t : foundTracks) {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("Id", t.getId());
@@ -65,8 +68,6 @@ public class FindTrackServlet extends HttpServlet {
         }
 
     }
-
-
 
 
 }
