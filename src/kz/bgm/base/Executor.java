@@ -6,7 +6,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Properties;
 
 public class Executor {
 
@@ -22,12 +21,6 @@ public class Executor {
     public static final String CONTROLLED_MECH_SHARE = "controlled_mech_share";
     public static final String COLLECT_MECH_SHARE = "collect_mech_share";
 
-    private static final String BASE_NAME = "base.name";
-    private static final String BASE_LOGIN = "base.login";
-    private static final String BASE_PASS = "base.pass";
-    private static final String BASE_HOST = "base.host";
-    private static final String BASE_PORT = "base.port";
-
     private static PreparedStatement allNamesState;
     private static PreparedStatement likeAllNamesState;
 
@@ -39,9 +32,9 @@ public class Executor {
     Statement statement;
     Connection connection;
 
-    public static Executor getInstance(Properties props) {
+    public static Executor getInstance(Connection connection) {
         if (instance == null) {
-            instance = new Executor(props);
+            instance = new Executor(connection);
         }
         return instance;
     }
@@ -50,16 +43,13 @@ public class Executor {
 
     }
 
+    private Executor(Connection connection) {
+        this.connection = connection;
 
-    private Executor(Properties props) {
-        String baseName = (String) props.get(BASE_NAME);
-        String baseLogin = (String) props.get(BASE_LOGIN);
-        String basePass = (String) props.get(BASE_PASS);
-        String baseHost = (String) props.get(BASE_HOST);
-        String basePort = (String) props.get(BASE_PORT);
+        if (connection == null) {
+            return;
+        }
 
-        BaseConnector bc = new BaseConnector();
-        connection = bc.connect(baseHost, basePort, baseName, baseLogin, basePass);
         try {
 
             allNamesState = connection.prepareStatement("select * from " +
