@@ -8,11 +8,11 @@
 
     <servlet>
         <servlet-name>findTrackServlet</servlet-name>
-        <servlet-class>kz.bgm.web.api.FindTrackServlet</servlet-class>
+        <servlet-class>kz.bgm.platform.web.FindTrackServletJson</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>findServlet</servlet-name>
-        <servlet-class>kz.bgm.web.api.FindServlet</servlet-class>
+        <servlet-class>kz.bgm.platform.web.FindServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

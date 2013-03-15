@@ -1,8 +1,9 @@
-package kz.bgm.web.api;
+package kz.bgm.platform.web;
 
 
-import kz.bgm.CatalogStorage;
-import kz.bgm.items.Track;
+import kz.bgm.platform.service.CatalogFactory;
+import kz.bgm.platform.service.CatalogStorage;
+import kz.bgm.platform.items.Track;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -14,13 +15,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-public class FindTrackServlet extends HttpServlet {
+public class FindTrackServletJson extends HttpServlet {
 
     public static final String APP_DIR = System.getProperty("user.dir");
-    public static final String WEB_PROPS = APP_DIR + "/jetty.properties";
 
-    public static final String DB_PROPS = APP_DIR + "/db.properties";
-    public static final String TRACKS = "tracks";
     public static final String FIND_TYPE = "type";
     public static CatalogStorage catalogService;
 
@@ -28,7 +26,7 @@ public class FindTrackServlet extends HttpServlet {
     @Override
 
     public void init() throws ServletException {
-        catalogService = new CatalogStorage(DB_PROPS);
+        catalogService = CatalogFactory.getStorage();
     }
 
     @SuppressWarnings("unchecked")
@@ -38,11 +36,14 @@ public class FindTrackServlet extends HttpServlet {
         String find = req.getParameter("find");
 
         if (find != null && !"".equals(find)) {
-
+                                                       //todo эксперементировать пока над этим сервлетом
             List<Track> foundTracks =
-                    catalogService.getTrackBySongName(find);
+                    catalogService.searchBySongName(find);
             JSONArray mass = new JSONArray();
-
+            if (foundTracks == null) {
+                resp.sendRedirect("/find.html");//todo добавить ошибку
+                return;
+            }
             for (Track t : foundTracks) {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("Id", t.getId());
@@ -65,8 +66,6 @@ public class FindTrackServlet extends HttpServlet {
         }
 
     }
-
-
 
 
 }
