@@ -65,6 +65,8 @@ public class CatalogLoader {
         catalog.storeInCatalog(authItems, false);
         catalog.storeInCatalog(commonItems, true);
 
+
+
     }
 
 
