@@ -1,5 +1,5 @@
-<%@ page import="kz.bgm.items.Track" %>
-<%@ page import="kz.bgm.web.api.FindServlet" %>
+<%@ page import="kz.bgm.platform.items.Track" %>
+<%@ page import="kz.bgm.platform.web.FindServlet" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
