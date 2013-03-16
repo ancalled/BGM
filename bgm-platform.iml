@@ -29,6 +29,7 @@
     <orderEntry type="library" name="jetty" level="project" />
     <orderEntry type="library" name="jsp" level="project" />
     <orderEntry type="library" name="mysql-connector-java-5.1.23-bin" level="project" />
+    <orderEntry type="library" name="c3p" level="project" />
   </component>
 </module>
 

@@ -5,7 +5,9 @@
 
 <%
     @SuppressWarnings("unchecked")
-    List<Track> trackList = (List<Track>) session.getAttribute(FindServlet.TRACK_LIST);
+    List<Track> trackList = (List<Track>) request.getAttribute(FindServlet.TRACK_LIST);
+    String query = (String) request.getAttribute(FindServlet.QUERY);
+
 %>
 
 <html>
@@ -21,11 +23,12 @@
 
 <div class="container">
 
+
     <div class="row">
 
         <form class="" action="/finder" method="post" style="margin-bottom:40; margin-left:100 ">
 
-            <input placeholder="Search" type="text" name="find" id="find">
+            <input type="text" name="find" id="find">
 
             <label class="radio" style="margin-top: 20">
 
@@ -45,18 +48,19 @@
         <%
             if (trackList != null) {
         %>
+        <span class="label ">Результатов:<%=trackList.size()%></span>
+
         <table class="table">
             <thead>
             <tr>
-                <td>Id</td>
-                <td>Code</td>
-                <td>Composition</td>
-                <td>Artist</td>
-                <td>Authors</td>
-                <td>Controlled Metch</td>
-                <td>Collect Metch</td>
-                <td>Publisher</td>
-                <td>Comment</td>
+                <th>Код</th>
+                <th>Композиция</th>
+                <th>Исполнитель</th>
+                <th>Авторы</th>
+                <th>Controlled Metch</th>
+                <th>Collect Metch</th>
+                <th>Правообладатель</th>
+                <th>Коментарии</th>
             </tr>
             </thead>
             <tbody>
@@ -66,8 +70,6 @@
                 for (Track t : trackList) {
             %>
             <tr>
-                <td><%=t.getId()%>
-                </td>
                 <td><%=t.getCode()%>
                 </td>
                 <td><%=t.getComposition()%>

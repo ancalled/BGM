@@ -1,8 +1,8 @@
 package kz.bgm.platform.web;
 
+import kz.bgm.platform.items.Track;
 import kz.bgm.platform.service.CatalogFactory;
 import kz.bgm.platform.service.CatalogStorage;
-import kz.bgm.platform.items.Track;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +15,7 @@ import java.util.List;
 public class FindServlet extends HttpServlet {
 
     public static final String TRACK_LIST = "track-list";
+    public static final String QUERY = "query";
 
     public static CatalogStorage catalogService;
 
@@ -43,11 +44,13 @@ public class FindServlet extends HttpServlet {
                 found = catalogService.search(find);
             }
 
-            req.getSession().setAttribute(TRACK_LIST, found);
-            resp.sendRedirect("/find.jsp");
+            req.setAttribute(TRACK_LIST, found);
+            req.setAttribute(QUERY, find);
+            req.getRequestDispatcher("/find.jsp").forward(req, resp);
 
         } else {
-            resp.sendRedirect("/find.jsp");
+            req.setAttribute(QUERY, find);
+            req.getRequestDispatcher("/find.jsp").forward(req, resp);
         }
     }
 

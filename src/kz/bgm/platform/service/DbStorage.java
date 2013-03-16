@@ -1,41 +1,61 @@
 package kz.bgm.platform.service;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 import kz.bgm.platform.items.Track;
 
-import java.sql.*;
+import java.beans.PropertyVetoException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DbStorage implements CatalogStorage {
 
 
-    private final Connection connection;
+    public static final int MAX_STATEMENTS = 200;
+    public static final int MAX_STATEMENTS_PER_CONNECTION = 10;
+    public static final int MIN_POOL_SIZE = 10;
+    public static final int MAX_POOL_SIZE = 50;
+
+    private final ComboPooledDataSource pool;
 
     public DbStorage(String host, String port, String base, String user, String pass) {
-        this.connection = connect(host, port, base, user, pass);
-
+        pool = connect(host, port, base, user, pass);
     }
 
-    private Connection connect(String host, String port, String base, String user, String pass) {
-        Connection connection = null;
+    private ComboPooledDataSource connect(String host, String port, String base, String user, String pass) {
+        String url = "jdbc:mysql://" + host + ":" + port + "/" + base;
+        System.out.println("Connecting to base " + base + " with user " + user);
+        ComboPooledDataSource pool = new ComboPooledDataSource();
         try {
-            System.out.println("Connecting to base " + base + " with user " + user);
-            connection = DriverManager.getConnection(
-                    "jdbc:mysql://" + host + ":" + port + "/" + base,
-                    user,
-                    pass);
+            configureConnectionPoll(user, pass, url, pool);
 
-            System.out.println("Connected to base by user " + user);
-        } catch (SQLException e) {
+            System.out.println("Connected to base " + base + " by user " + user);
+        } catch (PropertyVetoException e) {
             e.printStackTrace();
         }
-        return connection;
+        return pool;
+    }
+
+    private void configureConnectionPoll(String user, String pass, String url, ComboPooledDataSource pool) throws PropertyVetoException {
+        pool.setDriverClass("com.mysql.jdbc.Driver");
+        pool.setJdbcUrl(url);
+        pool.setUser(user);
+        pool.setPassword(pass);
+        pool.setMinPoolSize(MIN_POOL_SIZE);
+        pool.setMaxPoolSize(MAX_POOL_SIZE);
+        pool.setMaxStatements(MAX_STATEMENTS);
+        pool.setMaxStatementsPerConnection(MAX_STATEMENTS_PER_CONNECTION);
     }
 
 
     public void storeInCatalog(List<Track> trackList, boolean common) {
-
+        Connection connection = null;
         try {
+            connection = pool.getConnection();
             PreparedStatement ps = connection.prepareStatement("INSERT INTO " +
                     "allmusic(uid, song_name, composer, artist, " +
                     "controlled_mech_share, collect_mech_share, publisher, comment) " +
@@ -64,6 +84,14 @@ public class DbStorage implements CatalogStorage {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -84,7 +112,9 @@ public class DbStorage implements CatalogStorage {
 
     @Override
     public List<Track> search(String value) {
+        Connection connection = null;
         try {
+            connection = pool.getConnection();
             PreparedStatement stmt = connection.prepareStatement(
                     "SELECT * FROM allmusic WHERE " +
                             "song_name LIKE ? OR " +
@@ -103,15 +133,24 @@ public class DbStorage implements CatalogStorage {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
     public List<Track> searchBySongName(String songName) {
+        Connection connection = null;
         try {
-
+            connection = pool.getConnection();
             PreparedStatement stmt = connection.prepareStatement(
                     "SELECT * FROM allmusic WHERE song_name=?");
             stmt.setString(1, songName);
@@ -120,14 +159,24 @@ public class DbStorage implements CatalogStorage {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
     public List<Track> searchByArtist(String artist) {
+        Connection connection = null;
         try {
+            connection = pool.getConnection();
             PreparedStatement stmt = connection.prepareStatement(
                     "SELECT * FROM allmusic WHERE artist=?");
             stmt.setString(1, artist);
@@ -138,15 +187,25 @@ public class DbStorage implements CatalogStorage {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
 
     @Override
     public List<Track> searchByArtistLike(String artist) {
+        Connection connection = null;
         try {
+            connection = pool.getConnection();
             PreparedStatement stmt = connection.prepareStatement(
                     "SELECT * FROM allmusic WHERE artist LIKE ?");
             stmt.setString(1, "%" + artist + "%");
@@ -155,9 +214,17 @@ public class DbStorage implements CatalogStorage {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }
 
-        return null;
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return Collections.emptyList();
     }
 
 
@@ -186,8 +253,9 @@ public class DbStorage implements CatalogStorage {
         return track;
     }
 
-
-
+    public void closeConnection() {
+        pool.close();
+    }
 
 
 }

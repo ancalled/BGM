@@ -20,7 +20,9 @@ public class FileUtils {
         } finally {
 
             try {
-                fin.close();
+                if (fin != null) {
+                    fin.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -34,7 +36,7 @@ public class FileUtils {
 
     public static void writeLinesToFile(String filename, List<String> list) throws IOException {
         StringBuilder buf = new StringBuilder();
-        for (String line: list) {
+        for (String line : list) {
             buf.append(line).append("\n");
         }
 
