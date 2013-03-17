@@ -1,10 +1,7 @@
 package kz.bgm.platform.parsers.utils;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.usermodel.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,9 +17,10 @@ public class ExcelUtils {
             return null;
         }
 
-        return cell.getStringCellValue();
+        return FORMATTER.formatCellValue(cell);
     }
 
+    public static final DataFormatter FORMATTER = new DataFormatter(true);
 
     public static Workbook openFile(File file) throws IOException, InvalidFormatException {
         FileInputStream fis = null;

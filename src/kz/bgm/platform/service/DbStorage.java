@@ -28,7 +28,9 @@ public class DbStorage implements CatalogStorage {
 
     private ComboPooledDataSource connect(String host, String port, String base, String user, String pass) {
         String url = "jdbc:mysql://" + host + ":" + port + "/" + base;
+
         System.out.println("Connecting to base " + base + " with user " + user);
+
         ComboPooledDataSource pool = new ComboPooledDataSource();
         try {
             configureConnectionPoll(user, pass, url, pool);
@@ -52,35 +54,43 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-    public void storeInCatalog(List<Track> trackList, boolean common) {
+    public void storeInCatalog(List<Track> trackList, String catalog) {
         Connection connection = null;
         try {
+
+
+            int catId = getCatalogId(catalog);
+
+            long startTime = System.currentTimeMillis();
+
             connection = pool.getConnection();
             PreparedStatement ps = connection.prepareStatement("INSERT INTO " +
-                    "allmusic(uid, song_name, composer, artist, " +
-                    "controlled_mech_share, collect_mech_share, publisher, comment) " +
-                    "VALUES (?,?,?,?,?,?,?,?)");
+                    "composition(catalog_id, code, name, artist, " +
+                    "composer,shareMobile,sharePublic) " +
+                    "VALUES (?,?,?,?,?,?,?)");
 
 
             for (Track t : trackList) {
 
-                ps.setString(1, t.getCode());
-                ps.setString(2, t.getComposition());
-                ps.setString(3, t.getAuthors());
+                ps.setInt(1, catId);
+                ps.setString(2, t.getCode());
+                ps.setString(3, t.getName());
                 ps.setString(4, t.getArtist());
-                ps.setFloat(5, t.getControlled_metch());
-                ps.setFloat(6, t.getCollect_metch());
-                ps.setString(7, t.getPublisher());
-                ps.setString(8, t.getComment());
+                ps.setString(5, t.getComposer());
+                ps.setFloat(6, t.getMobileShare());
+                ps.setFloat(7, t.getPublicShare());
 
                 ps.addBatch();
             }
-
             connection.setAutoCommit(false);
-
             ps.executeBatch();
 
             connection.commit();
+            long endTime = System.currentTimeMillis();
+            long doneTime = (endTime - startTime) / 1000;
+
+            System.out.println(trackList.size() +
+                    " tracks inserted in " + doneTime + " sec");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -95,6 +105,33 @@ public class DbStorage implements CatalogStorage {
         }
     }
 
+
+    private int getCatalogId(String catalogName) {
+        Connection connection = null;
+        try {
+            connection = pool.getConnection();
+            PreparedStatement ps = connection.prepareStatement("SELECT id" +
+                    " FROM catalog WHERE name=?");
+
+            ps.setString(1, catalogName);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return 0;
+    }
 
     @Override
     public void addItem(Track track, boolean common) {
@@ -116,16 +153,18 @@ public class DbStorage implements CatalogStorage {
         try {
             connection = pool.getConnection();
             PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM allmusic WHERE " +
-                            "song_name LIKE ? OR " +
+                    "SELECT * FROM composition WHERE " +
+                            "name LIKE ? OR " +
                             "composer LIKE ? OR " +
                             "artist LIKE ? OR " +
-                            "publisher LIKE ?");
+                            "code LIKE ? ");
 
             stmt.setString(1, "%" + value + "%");
             stmt.setString(2, "%" + value + "%");
             stmt.setString(3, "%" + value + "%");
             stmt.setString(4, "%" + value + "%");
+
+            stmt.setMaxRows(100);
 
             ResultSet rs = stmt.executeQuery();
 
@@ -152,7 +191,7 @@ public class DbStorage implements CatalogStorage {
         try {
             connection = pool.getConnection();
             PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM allmusic WHERE song_name=?");
+                    "SELECT * FROM composition WHERE name=?");
             stmt.setString(1, songName);
 
             return parseTracks(stmt.executeQuery());
@@ -178,7 +217,7 @@ public class DbStorage implements CatalogStorage {
         try {
             connection = pool.getConnection();
             PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM allmusic WHERE artist=?");
+                    "SELECT * FROM composition WHERE artist=?");
             stmt.setString(1, artist);
 
             ResultSet rs = stmt.executeQuery();
@@ -207,7 +246,7 @@ public class DbStorage implements CatalogStorage {
         try {
             connection = pool.getConnection();
             PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM allmusic WHERE artist LIKE ?");
+                    "SELECT * FROM composition WHERE artist LIKE ?");
             stmt.setString(1, "%" + artist + "%");
 
             return parseTracks(stmt.executeQuery());
@@ -242,14 +281,12 @@ public class DbStorage implements CatalogStorage {
     private static Track parseTrack(ResultSet rs) throws SQLException {
         Track track = new Track();
         track.setId(rs.getLong("id"));
-        track.setCode(rs.getString("uid"));
-        track.setComposition(rs.getString("song_name"));
-        track.setAuthors(rs.getString("composer"));
+        track.setCode(rs.getString("code"));
+        track.setName(rs.getString("name"));
         track.setArtist(rs.getString("artist"));
-        track.setControlled_metch(rs.getFloat("controlled_mech_share"));
-        track.setCollect_metch(rs.getFloat("collect_mech_share"));
-        track.setPublisher(rs.getString("publisher"));
-        track.setComment(rs.getString("comment"));
+        track.setComposer(rs.getString("composer"));
+        track.setMobileShare(rs.getFloat("shareMobile"));
+        track.setPublicShare(rs.getFloat("sharePublic"));
         return track;
     }
 

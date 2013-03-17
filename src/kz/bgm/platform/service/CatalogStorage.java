@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CatalogStorage {
 
-   void storeInCatalog(List<Track> trackList, boolean common);
+   void storeInCatalog(List<Track> trackList, String catalog);
 
    void addItem(Track track, boolean common);
 

@@ -12,14 +12,14 @@
 #   collect_mech_share    DECIMAL(6, 6)
 # );
 
-CREATE TABLE catalog (
+CREATE TABLE catalogID (
   id      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name    VARCHAR(200),
   royalty DECIMAL(6, 6)
 );
 
 
-CREATE TABLE composition (
+CREATE TABLE name (
   id         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   catalog_id INT NOT NULL,
   code       VARCHAR(20),

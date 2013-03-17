@@ -46,15 +46,13 @@ public class FindTrackServletJson extends HttpServlet {
             }
             for (Track t : foundTracks) {
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("Id", t.getId());
-                jsonObject.put("Code", t.getCode());
-                jsonObject.put("Composition", t.getComposition());
-                jsonObject.put("Artist", t.getArtist());
-                jsonObject.put("Authors", t.getMusicAuthors());
-                jsonObject.put("Controlled_Metch", (double) t.getControlled_metch());
-                jsonObject.put("Collect_Metch", (double) t.getCollect_metch());
-                jsonObject.put("Publisher", t.getPublisher());
-                jsonObject.put("Comment", t.getComment());
+                jsonObject.put("id", t.getId());
+                jsonObject.put("code", t.getCode());
+                jsonObject.put("composition", t.getName());
+                jsonObject.put("artist", t.getArtist());
+                jsonObject.put("authors", t.getComposer());
+                jsonObject.put("mobile_share", (double) t.getMobileShare());
+                jsonObject.put("public_share", (double) t.getPublicShare());
 
                 mass.add(jsonObject);
             }

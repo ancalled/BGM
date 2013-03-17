@@ -6,33 +6,43 @@ import java.io.Serializable;
 public class Track implements Serializable {
 
     private long id = 0L;
-    private String catalog = "";
+    private int catalogID = 0;
     private String code = "";
     private String artist = "";
-    private String composition = "";
-    private String musicAuthors = "";
-    private String lyricsAuthors = "";
-    private String authors = "";
-    private String comment = "";
-    private String publisher = "";
-    private Float controlled_metch = 0F;
-    private Float collect_metch = 0F;
-    private Float royalty = 0F;
-    private Float publicRate = 0F;
-    private Float mobileRate = 0F;
+    private String name = "";
+    private String composer = "";
+    private float publicShare = 0F;
+    private float mobileShare = 0F;
+    private float royalty = 0F;
 
+
+    public void setMobileShare(float mobileShare) {
+        this.mobileShare = mobileShare;
+    }
+
+    public void setRoyalty(float royalty) {
+        this.royalty = royalty;
+    }
+
+    public void setPublicShare(float publicShare) {
+        this.publicShare = publicShare;
+    }
+
+    public float getRoyalty() {
+        return royalty;
+    }
+
+    public Float getPublicShare() {
+        return publicShare;
+    }
 
     public Track() {
     }
 
-    public Track(String code, String composition, String artist) {
+    public Track(String code, String name, String artist) {
         this.code = code;
-        this.composition = composition;
+        this.name = name;
         this.artist = artist;
-    }
-
-    public void setControlled_metch(Float controlled_metch) {
-        this.controlled_metch = controlled_metch;
     }
 
     public void setId(long id) {
@@ -43,41 +53,6 @@ public class Track implements Serializable {
         return id;
     }
 
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public void setCollect_metch(Float collect_metch) {
-        this.collect_metch = collect_metch;
-    }
-
-    public Float getControlled_metch() {
-        return controlled_metch;
-    }
-
-    public Float getCollect_metch() {
-        return collect_metch;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setAuthors(String authors) {
-        this.authors = authors;
-    }
-
-    public String getAuthors() {
-        return authors;
-    }
 
     public String getCode() {
         return code;
@@ -87,28 +62,12 @@ public class Track implements Serializable {
         this.code = code;
     }
 
-    public String getComposition() {
-        return composition;
+    public String getName() {
+        return name;
     }
 
-    public void setComposition(String composition) {
-        this.composition = composition;
-    }
-
-    public String getMusicAuthors() {
-        return musicAuthors;
-    }
-
-    public void setMusicAuthors(String musicAuthors) {
-        this.musicAuthors = musicAuthors;
-    }
-
-    public String getLyricsAuthors() {
-        return lyricsAuthors;
-    }
-
-    public void setLyricsAuthors(String lyricsAuthors) {
-        this.lyricsAuthors = lyricsAuthors;
+    public void setName(String composition) {
+        this.name = composition;
     }
 
     public String getArtist() {
@@ -119,48 +78,39 @@ public class Track implements Serializable {
         this.artist = artist;
     }
 
-    public Float getRoyalty() {
-        return royalty;
+    public Float sharePublic() {
+        return publicShare;
     }
 
-    public void setRoyalty(Float royalty) {
-        this.royalty = royalty;
+    public Float getMobileShare() {
+        return mobileShare;
     }
 
-    public Float getPublicRate() {
-        return publicRate;
+
+    public int getCatalogID() {
+        return catalogID;
     }
 
-    public void setPublicRate(Float publicRate) {
-        this.publicRate = publicRate;
+    public void setCatalogID(int catalogID) {
+        this.catalogID = catalogID;
     }
 
-    public Float getMobileRate() {
-        return mobileRate;
+    public void setComposer(String compositor) {
+        this.composer = compositor;
     }
 
-    public void setMobileRate(Float mobileRate) {
-        this.mobileRate = mobileRate;
+    public String getComposer() {
+        return composer;
     }
-
-    public String getCatalog() {
-        return catalog;
-    }
-
-    public void setCatalog(String catalog) {
-        this.catalog = catalog;
-    }
-
 
     @Override
     public String toString() {
         return "code: " + code +
-                ", composition: " + composition +
-                ", authors: " + authors +
+                ", name: " + name +
                 ", artist: " + artist +
-                ", mobileRate: " + mobileRate +
-                ", publicRate: " + publicRate +
-                ", publisher: " + publisher +
-                ", catalog: " + catalog;
+                ", composer: " + composer +
+                ", mobileShare: " + mobileShare +
+                ", publicShare: " + publicShare +
+                ", catalogID: " + catalogID;
     }
 }

@@ -14,7 +14,7 @@ import java.util.List;
 
 public class CatalogParser {
 
-    public List<Track> loadData(String filename, boolean commonRights, float royalty, String catalog)
+    public List<Track> loadData(String filename, boolean commonRights)
             throws IOException, InvalidFormatException {
 
         File file = new File(filename);
@@ -43,22 +43,26 @@ public class CatalogParser {
 
             int rowIdx = 1;
             comp.setCode(ExcelUtils.getCell(row, rowIdx++));
-            comp.setComposition(ExcelUtils.getCell(row, rowIdx++));
+            comp.setName(ExcelUtils.getCell(row, rowIdx++));
             if (commonRights) {
                 comp.setArtist(ExcelUtils.getCell(row, rowIdx++));
                 rowIdx++;
             } else {
-                comp.setMusicAuthors(ExcelUtils.getCell(row, rowIdx++));
-                comp.setLyricsAuthors(ExcelUtils.getCell(row, rowIdx++));
+
+                comp.setComposer(ExcelUtils.getCell(row, rowIdx++ ));
+                rowIdx++;
                 comp.setArtist(ExcelUtils.getCell(row, rowIdx++));
             }
 
-            comp.setMobileRate(Float.parseFloat(ExcelUtils.getCell(row, rowIdx++).replace(",", ".")));
-            comp.setPublicRate(Float.parseFloat(ExcelUtils.getCell(row, rowIdx++).replace(",", ".")));
+            String mobileShare = ExcelUtils.getCell(row, rowIdx++);
+            String publicShare = ExcelUtils.getCell(row, rowIdx);
 
-            comp.setRoyalty(royalty);
-            comp.setCatalog(catalog);
-
+            if (!isShareEmpty(mobileShare)) {
+                comp.setMobileShare(Float.parseFloat(mobileShare.replace(",", ".")));
+            }
+            if (!isShareEmpty(publicShare)) {
+                comp.setPublicShare(Float.parseFloat(publicShare.replace(",", ".")));
+            }
             items.add(comp);
         }
 
@@ -70,14 +74,15 @@ public class CatalogParser {
     }
 
 
-    public List<Track> loadAllMCSandMGS(String filename)
+    public List<Track> loadMGS(String filename)
             throws IOException, InvalidFormatException {
 
         File file = new File(filename);
 
         System.out.println("File size " + file.length());
+        System.out.println("Loading " + file.getName() + "... ");
 
-        System.out.print("Loading " + file.getName() + "... ");
+        long startTime = System.currentTimeMillis();
 
         Workbook wb = ExcelUtils.openFile(file);
 
@@ -94,35 +99,34 @@ public class CatalogParser {
             Track comp = new Track();
 
             int rowIdx = 0;
-            comp.setComposition(ExcelUtils.getCell(row, rowIdx++));
-            comp.setAuthors(ExcelUtils.getCell(row, rowIdx++));
+            comp.setName(ExcelUtils.getCell(row, rowIdx++));
+            comp.setComposer(ExcelUtils.getCell(row, rowIdx++));
             comp.setCode(ExcelUtils.getCell(row, rowIdx++));
 
-            String money1 = ExcelUtils.getCell(row, rowIdx++).replace(",", ".");
-            String money2 = ExcelUtils.getCell(row, rowIdx++).replace(",", ".");
-            money1 = moneyCorrector(money1);
-            money2 = moneyCorrector(money2);
+            String sh = ExcelUtils.getCell(row, rowIdx++);
+            rowIdx++;
+            rowIdx++;
 
-            comp.setControlled_metch(Float.parseFloat(money1));
-            comp.setCollect_metch(Float.parseFloat(money2));
-            comp.setPublisher(ExcelUtils.getCell(row, rowIdx++));
+            if (!isShareEmpty(sh)) {
+                String share = sh.replace(",", ".");
+                comp.setMobileShare(Float.parseFloat(share));
+                comp.setPublicShare(Float.parseFloat(share));
+            }
             comp.setArtist(ExcelUtils.getCell(row, rowIdx));
             items.add(comp);
         }
 
         long endTime = System.currentTimeMillis();
+        long proc = (endTime - startTime) / 1000;
+        System.out.println("Got " + items.size() + " items in " + proc + " sec.");
         return items;
     }
 
-    private String moneyCorrector(String money) {
-        if ("".equals(money) || money == null) {
-            return "0";
-        } else {
-            return money;
-        }
+    private boolean isShareEmpty(String money) {
+        return "".equals(money) || money == null || " ".equals(money);
     }
 
-    public List<Track> loadAllMusic(String filename)
+    public List<Track> loadSonyMusic(String filename)
             throws IOException, InvalidFormatException {
 
         File file = new File(filename);
@@ -148,16 +152,17 @@ public class CatalogParser {
             Track comp = new Track();
 
             int rowIdx = 0;
-            comp.setComposition(ExcelUtils.getCell(row, rowIdx++));
+            comp.setName(ExcelUtils.getCell(row, rowIdx++));
             comp.setCode(ExcelUtils.getCell(row, rowIdx++));
-            comp.setAuthors(ExcelUtils.getCell(row, rowIdx++));
+            comp.setComposer(ExcelUtils.getCell(row, rowIdx++));
             comp.setArtist(ExcelUtils.getCell(row, rowIdx++));
 
-            String money = ExcelUtils.getCell(row, rowIdx++);
-            money = moneyCorrector(money);
+            String money = ExcelUtils.getCell(row, rowIdx);
 
-            comp.setCollect_metch(Float.parseFloat(money.replace(",", ".")));
-            comp.setComment(ExcelUtils.getCell(row, rowIdx));
+            if (!isShareEmpty(money)) {
+                comp.setMobileShare(Float.parseFloat(money.replace(",", ".")));
+                comp.setPublicShare(Float.parseFloat(money.replace(",", ".")));
+            }
 
             items.add(comp);
         }

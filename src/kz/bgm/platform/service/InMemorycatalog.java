@@ -1,6 +1,5 @@
 package kz.bgm.platform.service;
 
-import kz.bgm.platform.items.ReportItem;
 import kz.bgm.platform.items.Track;
 
 import java.util.ArrayList;
@@ -21,11 +20,15 @@ public class InMemorycatalog implements CatalogStorage {
         commonItemsMap = new HashMap<String, List<Track>>();
     }
 
-    @Override
     public void storeInCatalog(List<Track> trackList, boolean common) {
         for (Track i : trackList) {
             addItem(i, common);
         }
+    }
+
+    @Override
+    public void storeInCatalog(List<Track> trackList, String catalog) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public void addItem(Track track, boolean common) {
@@ -64,7 +67,7 @@ public class InMemorycatalog implements CatalogStorage {
                 StringBuilder buf = new StringBuilder();
                 for (int i = 0; i < comps.size(); i++) {
                     Track comp = comps.get(i);
-                    buf.append(comp.getComposition());
+                    buf.append(comp.getName());
                     if (i < comps.size() - 1) {
                         buf.append(", ");
                     }
@@ -73,7 +76,7 @@ public class InMemorycatalog implements CatalogStorage {
             }
 
             for (Track comp : comps) {
-                if (comp.getComposition().equalsIgnoreCase(song)) {
+                if (comp.getName().equalsIgnoreCase(song)) {
                     return comp;
                 }
             }

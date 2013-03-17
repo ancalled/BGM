@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class FindServlet extends HttpServlet {
         String find = req.getParameter("find");
         String type = req.getParameter(FindTrackServletJson.FIND_TYPE);
 
+        HttpSession session = req.getSession();
         if (find != null && !"".equals(find) && type != null) {
 
             List<Track> found;
@@ -44,14 +46,14 @@ public class FindServlet extends HttpServlet {
                 found = catalogService.search(find);
             }
 
-            req.setAttribute(TRACK_LIST, found);
-            req.setAttribute(QUERY, find);
-            req.getRequestDispatcher("/find.jsp").forward(req, resp);
 
-        } else {
-            req.setAttribute(QUERY, find);
-            req.getRequestDispatcher("/find.jsp").forward(req, resp);
+            session.setAttribute(TRACK_LIST, found);
+
+
         }
+
+        session.setAttribute(QUERY, find);
+        resp.sendRedirect("/search.jsp?" + TRACK_LIST + "=" + find);
     }
 
 }
