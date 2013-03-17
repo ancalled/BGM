@@ -14,10 +14,8 @@
 <head>
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen"/>
     <title>Поиск</title>
 </head>
 <body>
@@ -69,6 +67,7 @@
                 <th>Авторы</th>
                 <th>Мобильный контент</th>
                 <th>Публичка</th>
+                <th>Каталог</th>
             </tr>
             </thead>
             <tbody>
@@ -90,6 +89,12 @@
                 </td>
                 <td><%=t.getPublicShare()%>
                 </td>
+                <%
+                    if (t.getCatalog() == null) {
+                        t.setCatalog("");
+                    }
+                %>
+                <td><%=t.getCatalog()%>
                 </td>
             </tr>
             <%

@@ -20,19 +20,16 @@ public class FindTrackServletJson extends HttpServlet {
     public static final String APP_DIR = System.getProperty("user.dir");
 
     public static final String FIND_TYPE = "type";
-    public static CatalogStorage catalogService;
 
 
-    @Override
-
-    public void init() throws ServletException {
-        catalogService = CatalogFactory.getStorage();
-    }
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
 
+
+        CatalogStorage catalogService = CatalogFactory.getStorage();
         String find = req.getParameter("find");
 
         if (find != null && !"".equals(find)) {

@@ -7,6 +7,7 @@ public class Track implements Serializable {
 
     private long id = 0L;
     private int catalogID = 0;
+    private String catalog="";
     private String code = "";
     private String artist = "";
     private String name = "";
@@ -112,5 +113,13 @@ public class Track implements Serializable {
                 ", mobileShare: " + mobileShare +
                 ", publicShare: " + publicShare +
                 ", catalogID: " + catalogID;
+    }
+
+    public String getCatalog() {
+        return catalog;
+    }
+
+    public void setCatalog(String catalog) {
+        this.catalog = catalog;
     }
 }

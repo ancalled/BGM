@@ -4,67 +4,61 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 import kz.bgm.platform.items.Track;
 
 import java.beans.PropertyVetoException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.sql.*;
+import java.util.*;
 
 public class DbStorage implements CatalogStorage {
 
 
     public static final int MAX_STATEMENTS = 200;
     public static final int MAX_STATEMENTS_PER_CONNECTION = 10;
-    public static final int MIN_POOL_SIZE = 10;
-    public static final int MAX_POOL_SIZE = 50;
+    public static final int MIN_POOL_SIZE = 1;
+    public static final int MAX_POOL_SIZE = 10;
 
     private final ComboPooledDataSource pool;
 
-    public DbStorage(String host, String port, String base, String user, String pass) {
-        pool = connect(host, port, base, user, pass);
+    public DbStorage(String host, String port,
+                     String base, String user, String pass) {
+        pool = initPool(host, port, base, user, pass);
+
+        fillAllCatalogs();
     }
 
-    private ComboPooledDataSource connect(String host, String port, String base, String user, String pass) {
+    private static ComboPooledDataSource initPool(String host,
+                                                  String port,
+                                                  String base,
+                                                  String user,
+                                                  String pass) {
         String url = "jdbc:mysql://" + host + ":" + port + "/" + base;
-
-        System.out.println("Connecting to base " + base + " with user " + user);
 
         ComboPooledDataSource pool = new ComboPooledDataSource();
         try {
-            configureConnectionPoll(user, pass, url, pool);
+            pool.setDriverClass("com.mysql.jdbc.Driver");
+            pool.setJdbcUrl(url);
+            pool.setUser(user);
+            pool.setPassword(pass);
+            pool.setMinPoolSize(MIN_POOL_SIZE);
+            pool.setMaxPoolSize(MAX_POOL_SIZE);
+            pool.setMaxStatements(MAX_STATEMENTS);
+            pool.setMaxStatementsPerConnection(MAX_STATEMENTS_PER_CONNECTION);
 
-            System.out.println("Connected to base " + base + " by user " + user);
         } catch (PropertyVetoException e) {
             e.printStackTrace();
         }
         return pool;
     }
 
-    private void configureConnectionPoll(String user, String pass, String url, ComboPooledDataSource pool) throws PropertyVetoException {
-        pool.setDriverClass("com.mysql.jdbc.Driver");
-        pool.setJdbcUrl(url);
-        pool.setUser(user);
-        pool.setPassword(pass);
-        pool.setMinPoolSize(MIN_POOL_SIZE);
-        pool.setMaxPoolSize(MAX_POOL_SIZE);
-        pool.setMaxStatements(MAX_STATEMENTS);
-        pool.setMaxStatementsPerConnection(MAX_STATEMENTS_PER_CONNECTION);
-    }
-
 
     public void storeInCatalog(List<Track> trackList, String catalog) {
         Connection connection = null;
         try {
-
-
             int catId = getCatalogId(catalog);
 
             long startTime = System.currentTimeMillis();
 
             connection = pool.getConnection();
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO " +
+            PreparedStatement ps =
+                    connection.prepareStatement("INSERT INTO " +
                     "composition(catalog_id, code, name, artist, " +
                     "composer,shareMobile,sharePublic) " +
                     "VALUES (?,?,?,?,?,?,?)");
@@ -82,6 +76,7 @@ public class DbStorage implements CatalogStorage {
 
                 ps.addBatch();
             }
+
             connection.setAutoCommit(false);
             ps.executeBatch();
 
@@ -106,11 +101,43 @@ public class DbStorage implements CatalogStorage {
     }
 
 
+    private int fillAllCatalogs() {
+        Connection connection = null;
+        catalogs = new HashMap<Integer, String>();
+        try {
+            connection = pool.getConnection();
+
+            Statement st = connection.createStatement();
+
+            ResultSet rs = st.executeQuery("SELECT *" +
+                    " FROM catalog");
+
+            while (rs.next()) {
+                catalogs.put(rs.getInt("id"),
+                        rs.getString("name"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return 0;
+    }
+
+
     private int getCatalogId(String catalogName) {
         Connection connection = null;
         try {
             connection = pool.getConnection();
-            PreparedStatement ps = connection.prepareStatement("SELECT id" +
+            PreparedStatement ps =
+                    connection.prepareStatement("SELECT id" +
                     " FROM catalog WHERE name=?");
 
             ps.setString(1, catalogName);
@@ -146,6 +173,8 @@ public class DbStorage implements CatalogStorage {
     public Track search(String author, String song, boolean common) {
         return null;
     }
+
+    private static Map<Integer, String> catalogs;
 
     @Override
     public List<Track> search(String value) {
@@ -280,6 +309,7 @@ public class DbStorage implements CatalogStorage {
 
     private static Track parseTrack(ResultSet rs) throws SQLException {
         Track track = new Track();
+        track.setCatalog(catalogs.get(rs.getInt("catalog_id")));
         track.setId(rs.getLong("id"));
         track.setCode(rs.getString("code"));
         track.setName(rs.getString("name"));
