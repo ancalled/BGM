@@ -18,16 +18,11 @@ public class FindServlet extends HttpServlet {
     public static final String TRACK_LIST = "track-list";
     public static final String QUERY = "query";
 
-    public static CatalogStorage catalogService;
-
-    @Override
-    public void init() throws ServletException {
-        catalogService = CatalogFactory.getStorage();
-    }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+
+        CatalogStorage catalogService = CatalogFactory.getStorage();
 
         String find = req.getParameter("find");
         String type = req.getParameter(FindTrackServletJson.FIND_TYPE);

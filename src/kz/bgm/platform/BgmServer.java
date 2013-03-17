@@ -61,6 +61,7 @@ public class BgmServer {
         String dbLogin = props.getProperty(BASE_LOGIN);
         String dbPass = props.getProperty(BASE_PASS);
 
+        System.out.println("Initializing data storage...");
         CatalogFactory.initDBStorage(dbHost, dbPort, dbName, dbLogin, dbPass);
     }
 

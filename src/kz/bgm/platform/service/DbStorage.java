@@ -17,48 +17,39 @@ public class DbStorage implements CatalogStorage {
 
     public static final int MAX_STATEMENTS = 200;
     public static final int MAX_STATEMENTS_PER_CONNECTION = 10;
-    public static final int MIN_POOL_SIZE = 10;
-    public static final int MAX_POOL_SIZE = 50;
+    public static final int MIN_POOL_SIZE = 1;
+    public static final int MAX_POOL_SIZE = 10;
 
     private final ComboPooledDataSource pool;
 
     public DbStorage(String host, String port, String base, String user, String pass) {
-        pool = connect(host, port, base, user, pass);
+        pool = initPool(host, port, base, user, pass);
     }
 
-    private ComboPooledDataSource connect(String host, String port, String base, String user, String pass) {
+    private static ComboPooledDataSource initPool(String host, String port, String base, String user, String pass) {
         String url = "jdbc:mysql://" + host + ":" + port + "/" + base;
-
-        System.out.println("Connecting to base " + base + " with user " + user);
 
         ComboPooledDataSource pool = new ComboPooledDataSource();
         try {
-            configureConnectionPoll(user, pass, url, pool);
+            pool.setDriverClass("com.mysql.jdbc.Driver");
+            pool.setJdbcUrl(url);
+            pool.setUser(user);
+            pool.setPassword(pass);
+            pool.setMinPoolSize(MIN_POOL_SIZE);
+            pool.setMaxPoolSize(MAX_POOL_SIZE);
+            pool.setMaxStatements(MAX_STATEMENTS);
+            pool.setMaxStatementsPerConnection(MAX_STATEMENTS_PER_CONNECTION);
 
-            System.out.println("Connected to base " + base + " by user " + user);
         } catch (PropertyVetoException e) {
             e.printStackTrace();
         }
         return pool;
     }
 
-    private void configureConnectionPoll(String user, String pass, String url, ComboPooledDataSource pool) throws PropertyVetoException {
-        pool.setDriverClass("com.mysql.jdbc.Driver");
-        pool.setJdbcUrl(url);
-        pool.setUser(user);
-        pool.setPassword(pass);
-        pool.setMinPoolSize(MIN_POOL_SIZE);
-        pool.setMaxPoolSize(MAX_POOL_SIZE);
-        pool.setMaxStatements(MAX_STATEMENTS);
-        pool.setMaxStatementsPerConnection(MAX_STATEMENTS_PER_CONNECTION);
-    }
-
 
     public void storeInCatalog(List<Track> trackList, String catalog) {
         Connection connection = null;
         try {
-
-
             int catId = getCatalogId(catalog);
 
             long startTime = System.currentTimeMillis();
@@ -82,6 +73,7 @@ public class DbStorage implements CatalogStorage {
 
                 ps.addBatch();
             }
+
             connection.setAutoCommit(false);
             ps.executeBatch();
 
