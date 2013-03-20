@@ -25,17 +25,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/kz/bgm/research/sony/SonyParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/research/install-cert.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/research/users.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/research/www.sonyatv.com.jks" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/research/www.sonyatv.com" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bgm-platform.iml" afterPath="$PROJECT_DIR$/bgm-platform.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/research/confirm.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/research/sony/SonyParser.java" afterPath="$PROJECT_DIR$/src/kz/bgm/research/sony/SonyParser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/research/www.sonyatv.com" afterPath="$PROJECT_DIR$/data/research/www.sonyatv.com" />
     </list>
     <ignored path="bgm-platform.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363631236496" ignored="false" />
+    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363659046449" ignored="false" />
     <file path="/CatalogStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363337195102" ignored="false" />
     <file path="/fragment.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363658238540" ignored="false" />
     <file path="db-console:/b524fb0f/bd8e1b6e-fe0f-401f-a88d-0e81e53c8907/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363032963765" ignored="false" />
@@ -70,7 +67,7 @@
     <file path="/ReportBuilder.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363349195380" ignored="false" />
     <file path="/scheme.sql" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363454985980" ignored="false" />
     <file path="/TestDB.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363528401767" ignored="false" />
-    <file path="/SonyParser.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363658922493" ignored="false" />
+    <file path="/SonyParser.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363745195676" ignored="false" />
     <file path="/install-cert.sh" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363657279472" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -127,7 +124,7 @@
     </breakpoint_any>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/src/kz/bgm/research/sony/SonyParser.java" line="29" class="kz.bgm.research.sony.SonyParser" package="kz.bgm.research.sony">
+      <breakpoint url="file://$PROJECT_DIR$/src/kz/bgm/research/sony/SonyParser.java" line="36" class="kz.bgm.research.sony.SonyParser" package="kz.bgm.research.sony">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -172,13 +169,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SonyParser.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="SonyParser.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/research/sony/SonyParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="8" selection-start="1374" selection-end="1374" vertical-scroll-proportion="0.91477275">
+            <state line="41" column="39" selection-start="1238" selection-end="1238" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="confirm.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/data/research/confirm.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="91" column="1" selection-start="2967" selection-end="2967" vertical-scroll-proportion="0.9510086">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -265,7 +271,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/data/test.sql" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/items/Track.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/items/ReportItem.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/ReportBuilder.java" />
@@ -281,6 +286,7 @@
         <option value="$PROJECT_DIR$/data/research/users.js" />
         <option value="$PROJECT_DIR$/data/research/install-cert.sh" />
         <option value="$PROJECT_DIR$/src/kz/bgm/research/sony/SonyParser.java" />
+        <option value="$PROJECT_DIR$/data/research/confirm.js" />
       </list>
     </option>
   </component>
@@ -955,19 +961,23 @@
       <created>1363529575202</created>
       <updated>1363529575202</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Парсер sony, первый подход к снаряду">
+      <created>1363659056014</created>
+      <updated>1363659056014</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="790" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.7" sideWeight="0.49713057" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14988814" sideWeight="0.7675033" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39850748" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39850748" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.7" sideWeight="0.4978479" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -980,8 +990,8 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27259684" sideWeight="0.6014925" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38656718" sideWeight="0.493517" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27259684" sideWeight="0.6134328" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.38656718" sideWeight="0.493517" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3296582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -996,8 +1006,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
-    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
-    <option name="CHECK_NEW_TODO" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <option name="myTodoPanelSettings">
       <value>
         <are-packages-shown value="false" />
@@ -1029,7 +1039,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Чуть попроавил по структуре" />
+    <option name="LAST_COMMIT_MESSAGE" value="Парсер sony, первый подход к снаряду" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1051,6 +1061,7 @@
     <MESSAGE value="Java 7!" />
     <MESSAGE value="новая структура БД" />
     <MESSAGE value="Чуть попроавил по структуре" />
+    <MESSAGE value="Парсер sony, первый подход к снаряду" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1060,13 +1071,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/scheme.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="2" selection-start="628" selection-end="628" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/service/InMemorycatalog.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="24" column="16" selection-start="612" selection-end="612" vertical-scroll-proportion="0.4347826">
@@ -1179,10 +1183,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/research/sony/SonyParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="8" selection-start="1374" selection-end="1374" vertical-scroll-proportion="0.91477275">
+        <state line="41" column="39" selection-start="1238" selection-end="1238" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/research/confirm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="1" selection-start="2967" selection-end="2967" vertical-scroll-proportion="0.9510086">
+          <folding />
         </state>
       </provider>
     </entry>
