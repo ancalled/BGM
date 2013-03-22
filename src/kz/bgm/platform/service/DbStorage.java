@@ -59,9 +59,9 @@ public class DbStorage implements CatalogStorage {
             connection = pool.getConnection();
             PreparedStatement ps =
                     connection.prepareStatement("INSERT INTO " +
-                    "composition(catalog_id, code, name, artist, " +
-                    "composer,shareMobile,sharePublic) " +
-                    "VALUES (?,?,?,?,?,?,?)");
+                            "composition(catalog_id, code, name, artist, " +
+                            "composer,shareMobile,sharePublic) " +
+                            "VALUES (?,?,?,?,?,?,?)");
 
 
             for (Track t : trackList) {
@@ -138,7 +138,7 @@ public class DbStorage implements CatalogStorage {
             connection = pool.getConnection();
             PreparedStatement ps =
                     connection.prepareStatement("SELECT id" +
-                    " FROM catalog WHERE name=?");
+                            " FROM catalog WHERE name=?");
 
             ps.setString(1, catalogName);
             ResultSet rs = ps.executeQuery();
@@ -213,6 +213,25 @@ public class DbStorage implements CatalogStorage {
 
         return Collections.emptyList();
     }
+
+
+    public Track searchById(String id) {
+        Connection connection = null;
+        try {
+            connection = pool.getConnection();
+
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT * FROM composition WHERE id=?");
+            stmt.setString(1, id);
+
+            Track tr = parseTrack(stmt.executeQuery());
+            return tr;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     @Override
     public List<Track> searchBySongName(String songName) {

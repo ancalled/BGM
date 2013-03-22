@@ -12,6 +12,9 @@
 #   collect_mech_share    DECIMAL(6, 6)
 # );
 
+
+
+
 CREATE TABLE catalogID (
   id      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name    VARCHAR(200),
@@ -19,7 +22,7 @@ CREATE TABLE catalogID (
 );
 
 
-CREATE TABLE name (
+CREATE TABLE composition (
   id         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   catalog_id INT NOT NULL,
   code       VARCHAR(20),
