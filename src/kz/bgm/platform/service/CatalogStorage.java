@@ -14,6 +14,7 @@ public interface CatalogStorage {
 
     Track search(String author, String song, boolean common);
 
+    Float getRoyalty(int catalogId);
 
     List<Track> searchBySongName(String songName);
 

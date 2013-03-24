@@ -15,12 +15,12 @@ public class searchLucenTest {
     public static void main(String[] args) {
         DbStorage db = new DbStorage(lHost, lPort, lBase, lLogin, lPass);
 
-        String artist = "MICHAEL JACKSON";
-        String compos = "2 BAD";
+        String artist = "Uberzone";
+        String compos = "2Kool4skool";
 
         Track t = db.search(artist, compos);
 
-        System.out.println(t);
+        System.out.println("Found----" + t);
     }
 
 }

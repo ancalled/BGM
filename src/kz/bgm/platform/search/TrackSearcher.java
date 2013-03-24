@@ -1,5 +1,6 @@
 package kz.bgm.platform.search;
 
+import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -24,7 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrackSearcher {
-
+    private static final Logger log = Logger.getLogger(TrackSearcher.class);
+    
     private static String APP_DIR = System.getProperty("user.dir");
     private static String INDEX_DIR = APP_DIR + "/lucen-indexes";
     public static final int RESULT_SIZE = 100000;
@@ -34,7 +36,7 @@ public class TrackSearcher {
         indexDoc(connection);
         long stop = System.currentTimeMillis();
         float end = stop - start;
-        System.out.println("Indexing finished in " + end / 1000);
+        log.info("Indexing finished in " + end / 1000);
     }
 
     private void indexDoc(Connection connection) throws IOException {
@@ -89,7 +91,7 @@ public class TrackSearcher {
         List<String> idList = searchTracks(value);
         long stopF = System.currentTimeMillis();
         float endF = stopF - startF;
-        System.out.println("Search finished in " + endF / 1000);
+        log.info("Search finished in " + endF / 1000);
         return idList;
 
     }
@@ -100,7 +102,7 @@ public class TrackSearcher {
         List<String> idList = searchBySongAndArtist(artist, composition);
         long stopF = System.currentTimeMillis();
         float endF = stopF - startF;
-        System.out.println("Search finished in " + endF / 1000);
+        log.info("Search finished in " + endF / 1000);
         return idList;
 
     }
@@ -108,7 +110,7 @@ public class TrackSearcher {
     private List<String> searchBySongAndArtist
             (String artist, String composition) throws IOException, ParseException {
         StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_41);
-        System.out.println("Got query '" +
+        log.info("Got query '" +
                 artist +
                 "' and" + " '" +
                 composition + "'");
@@ -123,21 +125,26 @@ public class TrackSearcher {
         Query query =
                 MultiFieldQueryParser.parse(Version.LUCENE_41, values, fields, analyzer);
 
-
         TopScoreDocCollector collector = TopScoreDocCollector.create(RESULT_SIZE, true);
         searcher.search(query, collector);
 
         int totalHits = collector.getTotalHits();
         TopDocs topDocs = collector.topDocs();
 
+        float maxScore = topDocs.getMaxScore();
+
         ScoreDoc[] hits = topDocs.scoreDocs;
 
         List<String> idList = new ArrayList<String>();
 
-        System.out.println("Found " + totalHits + " tracks id.");
+        log.info("Found " + totalHits + " tracks id.");
 
         for (int k = 0; k < totalHits; k++) {
             ScoreDoc hit = hits[k];
+            if(hit.score!=maxScore){
+            continue;
+            }
+//            log.info(hit.score);
             int docId = hit.doc;
             Document d = searcher.doc(docId);
             String baseId = d.get("id");
@@ -149,7 +156,7 @@ public class TrackSearcher {
 
     private List<String> searchTracks(String value) throws IOException, ParseException {
         StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_41);
-        System.out.println("Got query '" + value + "'");
+        log.info("Got query '" + value + "'");
         FSDirectory index = FSDirectory.open(new File(INDEX_DIR));
         IndexReader reader = DirectoryReader.open(index);
         IndexSearcher searcher = new IndexSearcher(reader);
@@ -169,7 +176,7 @@ public class TrackSearcher {
 
         List<String> idList = new ArrayList<String>();
 
-        System.out.println("Found " + totalHits + " tracks id.");
+        log.info("Found " + totalHits + " tracks id.");
 
         for (int k = 0; k < totalHits; k++) {
             ScoreDoc hit = hits[k];

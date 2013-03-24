@@ -85,6 +85,10 @@ public class InMemorycatalog implements CatalogStorage {
         return null;
     }
 
+    @Override
+    public Float getRoyalty(int catalogId) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 
 
     @Override

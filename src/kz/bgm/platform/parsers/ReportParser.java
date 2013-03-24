@@ -2,6 +2,7 @@ package kz.bgm.platform.parsers;
 
 import kz.bgm.platform.items.ReportItem;
 import kz.bgm.platform.parsers.utils.ExcelUtils;
+import org.apache.log4j.Logger;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -13,24 +14,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReportParser {
-
+   private static final Logger log= Logger.getLogger(ReportParser.class);
+    
     public List<ReportItem> loadClientReport(String filename, float clientRate)
             throws IOException, InvalidFormatException {
 
         File file = new File(filename);
         long startTime = System.currentTimeMillis();
-        System.out.println("Loading " + file.getName() + "... ");
+        log.info("Loading " + file.getName() + "... ");
 
         Workbook wb = ExcelUtils.openFile(file);
 
         List<ReportItem> items = new ArrayList<ReportItem>();
-
-        Sheet sheet = wb.getSheetAt(1);
+//        wb.getNumberOfSheets();               //todo по всем листам пробегаться
+        Sheet sheet = wb.getSheetAt(0);
         int rows = sheet.getPhysicalNumberOfRows();
 
-        System.out.println("Parsing sheet '" + sheet.getSheetName() + "' with " + rows + " rows");
+        log.info("Parsing sheet '" + sheet.getSheetName() + "' with " + rows + " rows");
 
-        int startRow = 7;
+        int startRow = 6;
         for (int i = startRow; i < rows; i++) {
             Row row = sheet.getRow(i);
             String num = ExcelUtils.getCell(row, 0);
@@ -54,7 +56,7 @@ public class ReportParser {
 
         long endTime = System.currentTimeMillis();
         long proc = (endTime - startTime) / 1000;
-        System.out.println("Got " + items.size() + " items in " + proc + " sec.");
+        log.info("Got " + items.size() + " items in " + proc + " sec.");
 
         return items;
     }

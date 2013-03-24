@@ -3,6 +3,7 @@ package kz.bgm.platform.service;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import kz.bgm.platform.items.Track;
 import kz.bgm.platform.search.TrackSearcher;
+import org.apache.log4j.Logger;
 
 import java.beans.PropertyVetoException;
 import java.sql.*;
@@ -10,6 +11,8 @@ import java.util.*;
 
 public class DbStorage implements CatalogStorage {
 
+    private static final Logger log = Logger.getLogger(DbStorage.class);
+    
     public static final int MAX_STATEMENTS = 200;
     public static final int MAX_STATEMENTS_PER_CONNECTION = 10;
     public static final int MIN_POOL_SIZE = 1;
@@ -25,8 +28,8 @@ public class DbStorage implements CatalogStorage {
         fillAllCatalogs();
         //todo врубить индексирование lucen
         trackSearcher = new TrackSearcher();
-//
-//
+
+
 //        Connection connection = null;
 //
 //        try {
@@ -106,7 +109,7 @@ public class DbStorage implements CatalogStorage {
             long endTime = System.currentTimeMillis();
             long doneTime = (endTime - startTime) / 1000;
 
-            System.out.println(trackList.size() +
+            log.info(trackList.size() +
                     " tracks inserted in " + doneTime + " sec");
 
         } catch (SQLException e) {
@@ -187,11 +190,11 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
-    public Track search(String author, String song) {
+    public Track search(String artist, String song) {
         Connection connection = null;
         try {
             connection = pool.getConnection();
-            List<String> idList = trackSearcher.search(author, song);
+            List<String> idList = trackSearcher.search(artist, song);
 
             List<Track> trackList = new ArrayList<Track>();
 
@@ -200,17 +203,11 @@ public class DbStorage implements CatalogStorage {
                 trackList.add(track);
 
             }
-
-            int j = 0;
-            for (Track t : trackList) {
-                j++;
-                System.out.println(t);
-                if (j == 200) {
-                    break;
-                }
+            if (trackList.size() > 0) {
+                return trackList.get(0);
+            } else {
+                return null;
             }
-
-            return trackList.get(0);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -236,8 +233,17 @@ public class DbStorage implements CatalogStorage {
 
     private static final int RESULT_SIZE = 150;
 
-    @Override
-    public List<Track> search(String value) {
+
+    public List<Track> search(String value, boolean withLucen) {
+        if (withLucen) {
+            return searchWithLucen(value);
+        } else {
+            return search(value);
+        }
+    }
+
+
+    public List<Track> searchWithLucen(String value) {
         Connection connection = null;
         try {
             connection = pool.getConnection();
@@ -267,42 +273,42 @@ public class DbStorage implements CatalogStorage {
         return Collections.emptyList();
     }
 
-//    public List<Track> search(String value) {
-//        Connection connection = null;
-//        try {
-//            connection = pool.getConnection();
-//            PreparedStatement stmt = connection.prepareStatement(
-//                    "SELECT * FROM composition WHERE " +
-//                            "name LIKE ? OR " +
-//                            "composer LIKE ? OR " +
-//                            "artist LIKE ? OR " +
-//                            "code LIKE ? ");
-//
-//            stmt.setString(1, "%" + value + "%");
-//            stmt.setString(2, "%" + value + "%");
-//            stmt.setString(3, "%" + value + "%");
-//            stmt.setString(4, "%" + value + "%");
-//
-//            stmt.setMaxRows(100);
-//
-//            ResultSet rs = stmt.executeQuery();
-//
-//            return parseTracks(rs);
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            if (connection != null) {
-//                try {
-//                    connection.close();
-//                } catch (SQLException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//
-//        return Collections.emptyList();
-//    }
+    public List<Track> search(String value) {
+        Connection connection = null;
+        try {
+            connection = pool.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT * FROM composition WHERE " +
+                            "name LIKE ? OR " +
+                            "composer LIKE ? OR " +
+                            "artist LIKE ? OR " +
+                            "code LIKE ? ");
+
+            stmt.setString(1, "%" + value + "%");
+            stmt.setString(2, "%" + value + "%");
+            stmt.setString(3, "%" + value + "%");
+            stmt.setString(4, "%" + value + "%");
+
+            stmt.setMaxRows(100);
+
+            ResultSet rs = stmt.executeQuery();
+
+            return parseTracks(rs);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return Collections.emptyList();
+    }
 
 
     public Track searchById(Connection connection, String id) {
@@ -432,6 +438,37 @@ public class DbStorage implements CatalogStorage {
         track.setPublicShare(rs.getFloat("sharePublic"));
         return track;
     }
+
+    @Override
+    public Float getRoyalty(int catalogId) {
+        Connection connection = null;
+        try {
+            connection = pool.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT royalty FROM catalog WHERE id=?");
+            stmt.setInt(1, catalogId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                rs.getString("royalty");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return 0f;
+    }
+
 
     public void closeConnection() {
         pool.close();

@@ -2,6 +2,7 @@ package kz.bgm.platform.parsers;
 
 import kz.bgm.platform.items.Track;
 import kz.bgm.platform.parsers.utils.ExcelUtils;
+import org.apache.log4j.Logger;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -13,21 +14,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CatalogParser {
-
+    private  static final Logger log =Logger.getLogger(CatalogParser.class); 
+    
+    
     public List<Track> loadData(String filename, boolean commonRights)
             throws IOException, InvalidFormatException {
 
         File file = new File(filename);
 
-        System.out.println("File size " + file.length());
+        log.info("File size " + file.length());
 
         long startTime = System.currentTimeMillis();
-        System.out.print("Loading " + file.getName() + "... ");
+        log.info("Loading " + file.getName() + "... ");
 
         Workbook wb = ExcelUtils.openFile(file);
 
         int sheets = wb.getNumberOfSheets();
-//        System.out.println("sheets = " + sheets);
+//        log.info("sheets = " + sheets);
 
         Sheet sheet = wb.getSheetAt(0);
         int rows = sheet.getPhysicalNumberOfRows();
@@ -68,7 +71,7 @@ public class CatalogParser {
 
         long endTime = System.currentTimeMillis();
         long proc = (endTime - startTime) / 1000;
-        System.out.println("Got " + items.size() + " items in " + proc + " sec.");
+        log.info("Got " + items.size() + " items in " + proc + " sec.");
 
         return items;
     }
@@ -79,8 +82,8 @@ public class CatalogParser {
 
         File file = new File(filename);
 
-        System.out.println("File size " + file.length());
-        System.out.println("Loading " + file.getName() + "... ");
+        log.info("File size " + file.length());
+        log.info("Loading " + file.getName() + "... ");
 
         long startTime = System.currentTimeMillis();
 
@@ -118,7 +121,7 @@ public class CatalogParser {
 
         long endTime = System.currentTimeMillis();
         long proc = (endTime - startTime) / 1000;
-        System.out.println("Got " + items.size() + " items in " + proc + " sec.");
+        log.info("Got " + items.size() + " items in " + proc + " sec.");
         return items;
     }
 
@@ -131,11 +134,11 @@ public class CatalogParser {
 
         File file = new File(filename);
 
-        System.out.println("File size " + file.length());
+        log.info("File size " + file.length());
 
         long startTime = System.currentTimeMillis();
 
-        System.out.print("Loading " + file.getName() + "... ");
+        log.info("Loading " + file.getName() + "... ");
 
         Workbook wb = ExcelUtils.openFile(file);
 
@@ -169,7 +172,7 @@ public class CatalogParser {
 
         long endTime = System.currentTimeMillis();
         long proc = (endTime - startTime) / 1000;
-        System.out.println("Got " + items.size() + " items in " + proc + " sec.");
+        log.info("Got " + items.size() + " items in " + proc + " sec.");
 
         return items;
     }
