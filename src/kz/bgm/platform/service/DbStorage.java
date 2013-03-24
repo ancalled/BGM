@@ -2,6 +2,7 @@ package kz.bgm.platform.service;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import kz.bgm.platform.items.Track;
+import kz.bgm.platform.search.TrackSearcher;
 
 import java.beans.PropertyVetoException;
 import java.sql.*;
@@ -9,19 +10,40 @@ import java.util.*;
 
 public class DbStorage implements CatalogStorage {
 
-
     public static final int MAX_STATEMENTS = 200;
     public static final int MAX_STATEMENTS_PER_CONNECTION = 10;
     public static final int MIN_POOL_SIZE = 1;
     public static final int MAX_POOL_SIZE = 10;
 
     private final ComboPooledDataSource pool;
+    private TrackSearcher trackSearcher;
 
     public DbStorage(String host, String port,
                      String base, String user, String pass) {
         pool = initPool(host, port, base, user, pass);
 
         fillAllCatalogs();
+        //todo врубить индексирование lucen
+        trackSearcher = new TrackSearcher();
+//
+//
+//        Connection connection = null;
+//
+//        try {
+//            connection = pool.getConnection();
+//            trackSearcher.init(connection);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//
+//        } finally {
+//            if (connection != null) {
+//                try {
+//                    connection.close();
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
     }
 
     private static ComboPooledDataSource initPool(String host,
@@ -166,6 +188,42 @@ public class DbStorage implements CatalogStorage {
 
     @Override
     public Track search(String author, String song) {
+        Connection connection = null;
+        try {
+            connection = pool.getConnection();
+            List<String> idList = trackSearcher.search(author, song);
+
+            List<Track> trackList = new ArrayList<Track>();
+
+            for (int k = 0; k < idList.size() && k < RESULT_SIZE; k++) {
+                Track track = searchById(connection, idList.get(k));
+                trackList.add(track);
+
+            }
+
+            int j = 0;
+            for (Track t : trackList) {
+                j++;
+                System.out.println(t);
+                if (j == 200) {
+                    break;
+                }
+            }
+
+            return trackList.get(0);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
         return null;
     }
 
@@ -176,30 +234,25 @@ public class DbStorage implements CatalogStorage {
 
     private static Map<Integer, String> catalogs;
 
+    private static final int RESULT_SIZE = 150;
+
     @Override
     public List<Track> search(String value) {
         Connection connection = null;
         try {
             connection = pool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM composition WHERE " +
-                            "name LIKE ? OR " +
-                            "composer LIKE ? OR " +
-                            "artist LIKE ? OR " +
-                            "code LIKE ? ");
+            List<String> idList = trackSearcher.search(value);
 
-            stmt.setString(1, "%" + value + "%");
-            stmt.setString(2, "%" + value + "%");
-            stmt.setString(3, "%" + value + "%");
-            stmt.setString(4, "%" + value + "%");
+            List<Track> trackList = new ArrayList<Track>();
 
-            stmt.setMaxRows(100);
+            for (int k = 0; k < idList.size() && k < RESULT_SIZE; k++) {
+                Track track = searchById(connection, idList.get(k));
+                trackList.add(track);
 
-            ResultSet rs = stmt.executeQuery();
+            }
 
-            return parseTracks(rs);
-
-        } catch (SQLException e) {
+            return trackList;
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             if (connection != null) {
@@ -214,18 +267,59 @@ public class DbStorage implements CatalogStorage {
         return Collections.emptyList();
     }
 
+//    public List<Track> search(String value) {
+//        Connection connection = null;
+//        try {
+//            connection = pool.getConnection();
+//            PreparedStatement stmt = connection.prepareStatement(
+//                    "SELECT * FROM composition WHERE " +
+//                            "name LIKE ? OR " +
+//                            "composer LIKE ? OR " +
+//                            "artist LIKE ? OR " +
+//                            "code LIKE ? ");
+//
+//            stmt.setString(1, "%" + value + "%");
+//            stmt.setString(2, "%" + value + "%");
+//            stmt.setString(3, "%" + value + "%");
+//            stmt.setString(4, "%" + value + "%");
+//
+//            stmt.setMaxRows(100);
+//
+//            ResultSet rs = stmt.executeQuery();
+//
+//            return parseTracks(rs);
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            if (connection != null) {
+//                try {
+//                    connection.close();
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//
+//        return Collections.emptyList();
+//    }
 
-    public Track searchById(String id) {
-        Connection connection = null;
+
+    public Track searchById(Connection connection, String id) {
         try {
-            connection = pool.getConnection();
-
             PreparedStatement stmt = connection.prepareStatement(
                     "SELECT * FROM composition WHERE id=?");
-            stmt.setString(1, id);
 
-            Track tr = parseTrack(stmt.executeQuery());
-            return tr;
+            stmt.setString(1, id);
+            ResultSet rs = stmt.executeQuery();
+            Track track = null;
+
+            while (rs.next()) {
+                track = parseTrack(rs);
+            }
+
+            return track;
+
         } catch (Exception e) {
             e.printStackTrace();
         }

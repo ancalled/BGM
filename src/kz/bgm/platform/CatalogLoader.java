@@ -96,7 +96,7 @@ public class CatalogLoader {
             trackList = parser.loadMGS(
                     CAT_HOME + fileName);
 
-        } else if ("SONY".equals(catalogName)) {
+        } else if ("AMP".equals(catalogName)) {
             trackList = parser.loadSonyMusic(CAT_HOME + fileName);
         }
 
@@ -120,23 +120,23 @@ public class CatalogLoader {
         DbStorage dbStorage = new DbStorage(host, port, base, user, pass);
 
         long startTime = System.currentTimeMillis();
-        loadCatalog(dbStorage, "WCh");
-        loadCatalog(dbStorage, "NMI_WEST");
-        loadCatalog(dbStorage, "NMI");
-        loadCatalog(dbStorage, "PMI_WEST");
-        loadCatalog(dbStorage, "PMI");
-        loadCatalog(dbStorage, "PMI related");
-        loadCatalog(dbStorage, "NMI related");
-
-        loadSony(dbStorage, "MCS_Shares.xlsx", "MSG_MCS");
-        loadSony(dbStorage, "Music Sales Group Shares.xlsx", "MSG_MCS");
-        loadSony(dbStorage, "R1.xlsx", "SONY");
-        loadSony(dbStorage, "R2.xlsx", "SONY");
-        loadSony(dbStorage, "R3.xlsx", "SONY");
+//        loadCatalog(dbStorage, "WCh");
+//        loadCatalog(dbStorage, "NMI_WEST");
+//        loadCatalog(dbStorage, "NMI");
+//        loadCatalog(dbStorage, "PMI_WEST");
+//        loadCatalog(dbStorage, "PMI");
+//        loadCatalog(dbStorage, "PMI related");
+//        loadCatalog(dbStorage, "NMI related");
+//
+//        loadSony(dbStorage, "MCS_Shares.xlsx", "MSG_MCS");
+//        loadSony(dbStorage, "Music Sales Group Shares.xlsx", "MSG_MCS");
+        loadSony(dbStorage, "R1.xlsx", "AMP");
+        loadSony(dbStorage, "R2.xlsx", "AMP");
+        loadSony(dbStorage, "R3.xlsx", "AMP");
 
         long endTime = System.currentTimeMillis();
         float doneTime = ((endTime - startTime) / 1000) / 60;
-        System.out.print("All catalogs loaded in " + doneTime + " min");
+        System.out.println("All catalogs loaded in " + doneTime + " min");
 
         dbStorage.closeConnection();
 

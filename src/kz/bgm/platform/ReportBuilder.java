@@ -8,11 +8,11 @@ import java.util.List;
 
 public class ReportBuilder {
 
-    public static final boolean DEBUG = false;
-
-              //todo Доделать ReportBuilder
-    public static void buildMobileReport(CatalogStorage catalog, List<ReportItem> reportItems) {
-
+//    public static final boolean DEBUG = false;
+//
+//              //todo Доделать ReportBuilder
+//    public static void buildMobileReport(CatalogStorage catalog, List<ReportItem> reportItems) {
+//
 //        System.out.println("Building mobile report...");
 //
 //        int idx = 1;
@@ -131,6 +131,6 @@ public class ReportBuilder {
 //        }
 //    }
 //
-
-    }
+//
+//    }
 }

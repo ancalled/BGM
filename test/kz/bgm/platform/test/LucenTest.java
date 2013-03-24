@@ -6,17 +6,15 @@ import kz.bgm.platform.items.Track;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
-import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
-import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.Query;
-import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.*;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 
@@ -29,6 +27,7 @@ import java.util.List;
 
 public class LucenTest {
 
+    public static final int RESULT_SIZE = 100000;
     private static String lBase = "bgm";
     private static String lLogin = "root";
     private static String lPass = "root";
@@ -36,7 +35,7 @@ public class LucenTest {
     private static String lPort = "3306";
 
     private static String appDir = System.getProperty("user.dir");
-    private static String lucenDir = appDir+"/lucenDoc";
+    private static String lucenDir = "D:/lucenDoc";
 
     private final ComboPooledDataSource pool;
 
@@ -50,15 +49,80 @@ public class LucenTest {
         LucenTest lucenTest = new LucenTest(lHost, lPort, lBase, lLogin, lPass);
 
         //Индексирование
-        lucenTest.indexDoc();
+//        startIndexing(lucenTest);
 
         //Поиск
-        List<Track> tr = lucenTest.searchTracks("Jones");
+        startSearch(lucenTest, "Trespass", true);
 
-        for (Track t : tr) {
-            System.out.println(t);
+
+    }
+
+    private static void startSearch(LucenTest lucenTest, String value, boolean multiSearch) throws IOException, ParseException {
+        long startF = System.currentTimeMillis();
+        List<Track> trackList;
+        if (multiSearch) {
+            trackList = lucenTest.multiSearchTracks(value);
+        } else {
+            trackList = lucenTest.searchTracks(value);
         }
 
+        long stopF = System.currentTimeMillis();
+        float endF = stopF - startF;
+
+        System.out.println("Found finished in " + endF / 1000);
+
+        for (Track t : trackList) {
+            System.out.println(t);
+        }
+    }
+
+    private static void startIndexing(LucenTest lucenTest) throws IOException {
+        long start = System.currentTimeMillis();
+        lucenTest.indexDoc();
+        long stop = System.currentTimeMillis();
+        float end = stop - start;
+        System.out.println("Indexing finished in " + end / 1000);
+    }
+
+
+    public List<Track> multiSearchTracks(String value) throws IOException, ParseException {
+        StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_41);
+
+        FSDirectory index = FSDirectory.open(new File(lucenDir));
+
+        IndexReader reader = DirectoryReader.open(index);
+        IndexSearcher searcher = new IndexSearcher(reader);
+
+        String[] fields = new String[]{"artist", "name", "composer"};
+        MultiFieldQueryParser queryParser =
+                new MultiFieldQueryParser(Version.LUCENE_41, fields, analyzer);
+
+        Query query = queryParser.parse(value);
+
+        TopScoreDocCollector collector = TopScoreDocCollector.create(RESULT_SIZE, true);
+
+        searcher.search(query, collector);
+
+        int totalHits = collector.getTotalHits();
+        TopDocs topDocs = collector.topDocs();
+
+        ScoreDoc[] hits = topDocs.scoreDocs;
+
+        List<Track> trackList = new ArrayList<Track>();
+
+        System.out.println("Found " + totalHits + " hits.");
+
+        for (int k = 0; k < totalHits; k++) {
+            System.out.println(k);
+            ScoreDoc hit = hits[k];
+            int docId = hit.doc;
+            Document d = searcher.doc(docId);
+            String baseId = d.get("id");
+            Track track = searchById(baseId);
+            trackList.add(track);
+        }
+        reader.close();
+        return trackList;
     }
 
     public List<Track> searchTracks(String value) throws IOException, ParseException {
@@ -71,14 +135,14 @@ public class LucenTest {
 
 
         Query query = new QueryParser(Version.LUCENE_41, "artist", analyzer).parse(value);
-        ScoreDoc[] hits = searcher.search(query, 1).scoreDocs;
+        ScoreDoc[] hits = searcher.search(query, 100).scoreDocs;
 
         List<Track> trackList = new ArrayList<Track>();
 
         System.out.println("Found " + hits.length + " hits.");
 
-        for (int i = 0; i < hits.length; ++i) {
-            int docId = hits[i].doc;
+        for (ScoreDoc hit : hits) {
+            int docId = hit.doc;
             Document d = searcher.doc(docId);
             String baseId = d.get("id");
             Track track = searchById(baseId);
@@ -108,6 +172,14 @@ public class LucenTest {
 
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }
@@ -119,7 +191,6 @@ public class LucenTest {
         FSDirectory index = FSDirectory.open(new File(lucenDir));
         IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_41, analyzer);
         IndexWriter w = new IndexWriter(index, config);
-        w.close();
 
         Connection connection = null;
 
@@ -136,9 +207,9 @@ public class LucenTest {
                 doc.add(new TextField("name", rs.getString("name"), Field.Store.YES));
                 doc.add(new TextField("artist", rs.getString("artist"), Field.Store.YES));
                 doc.add(new TextField("composer", rs.getString("composer"), Field.Store.YES));
-
                 w.addDocument(doc);
             }
+            w.close();
 
 
         } catch (SQLException e) {
