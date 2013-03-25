@@ -26,7 +26,7 @@ import java.util.List;
 
 public class TrackSearcher {
     private static final Logger log = Logger.getLogger(TrackSearcher.class);
-    
+
     private static String APP_DIR = System.getProperty("user.dir");
     private static String INDEX_DIR = APP_DIR + "/lucen-indexes";
     public static final int RESULT_SIZE = 100000;
@@ -141,10 +141,11 @@ public class TrackSearcher {
 
         for (int k = 0; k < totalHits; k++) {
             ScoreDoc hit = hits[k];
-            if(hit.score!=maxScore){
-            continue;
+
+            if (hit.score < 7) {
+                continue;
             }
-//            log.info(hit.score);
+
             int docId = hit.doc;
             Document d = searcher.doc(docId);
             String baseId = d.get("id");

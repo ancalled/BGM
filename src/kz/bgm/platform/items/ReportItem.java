@@ -6,7 +6,7 @@ public class ReportItem implements Serializable {
 
     private String author;
     private String compisition;
-    private int price;
+    private float price;
     private int qty;
     private float rate;
     private String contentType;
@@ -27,11 +27,11 @@ public class ReportItem implements Serializable {
         this.compisition = compisition;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 

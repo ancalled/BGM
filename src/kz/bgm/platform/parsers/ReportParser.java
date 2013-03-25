@@ -21,16 +21,16 @@ public class ReportParser {
 
         File file = new File(filename);
         long startTime = System.currentTimeMillis();
-        log.info("Loading " + file.getName() + "... ");
+        System.out.println("Loading " + file.getName() + "... ");
 
         Workbook wb = ExcelUtils.openFile(file);
 
         List<ReportItem> items = new ArrayList<ReportItem>();
 //        wb.getNumberOfSheets();               //todo по всем листам пробегаться
-        Sheet sheet = wb.getSheetAt(0);
+        Sheet sheet = wb.getSheetAt(1);
         int rows = sheet.getPhysicalNumberOfRows();
 
-        log.info("Parsing sheet '" + sheet.getSheetName() + "' with " + rows + " rows");
+        System.out.println("Parsing sheet '" + sheet.getSheetName() + "' with " + rows + " rows");
 
         int startRow = 6;
         for (int i = startRow; i < rows; i++) {
@@ -48,8 +48,15 @@ public class ReportParser {
 
             if (priceStr == null || "".equals(priceStr.trim())) continue;
 
-            item.setPrice(Integer.parseInt(priceStr.trim()));
-            item.setQty(Integer.parseInt(ExcelUtils.getCell(row, 6).trim()));
+            priceStr =priceStr.replace(",",".");
+
+            item.setPrice(Float.parseFloat(priceStr));
+
+            String qtyStr = ExcelUtils.getCell(row, 6).trim();
+
+            if(qtyStr==null||"".equals(qtyStr))continue;
+
+            item.setQty(Integer.parseInt(qtyStr));
             item.setRate(clientRate);
             items.add(item);
         }

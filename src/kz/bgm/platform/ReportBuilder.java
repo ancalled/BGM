@@ -5,9 +5,9 @@ import kz.bgm.platform.items.Track;
 import kz.bgm.platform.parsers.ReportParser;
 import kz.bgm.platform.service.CatalogStorage;
 import kz.bgm.platform.service.DbStorage;
-import org.apache.log4j.xml.DOMConfigurator;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
@@ -26,13 +26,15 @@ public class ReportBuilder {
         int idx = 1;
 //        String sep = ";";
         String sep = "^";
-
         for (ReportItem report : reportItems) {
 
             Track track = catalog.search(report.getAuthor(), report.getCompisition());
 
-
+            System.out.print(report.getAuthor() + " | " + report.getCompisition() + "   ");
             if (track != null) {
+
+                System.out.println("Есть");
+
                 float royalty = catalog.getRoyalty(track.getCatalogID());
 
                 float authRate = 0;
@@ -47,22 +49,24 @@ public class ReportBuilder {
 
                 String composers = track.getComposer();
 
-                System.out.println(
-                        idx++ + sep +
-                                track.getCode() + sep +
-                                track.getName() + sep +
-                                composers + sep +
-                                track.getArtist() + sep +
-                                report.getContentType() + sep +
-                                authRate + sep +
-                                report.getQty() + sep +
-                                report.getPrice() + sep +
-                                royalty + sep +
-                                authorRevenue + sep +
-                                publisherAuthRevenue + sep +
-                                authCatalog + sep
-                );
+//                System.out.println(
+//                        idx++ + sep +
+//                                track.getCode() + sep +
+//                                track.getName() + sep +
+//                                composers + sep +
+//                                track.getArtist() + sep +
+//                                report.getContentType() + sep +
+//                                authRate + sep +
+//                                report.getQty() + sep +
+//                                report.getPrice() + sep +
+//                                royalty + sep +
+//                                authorRevenue + sep +
+//                                publisherAuthRevenue + sep +
+//                                authCatalog + sep
+//                );
 
+            } else {
+                System.out.println("Нет");
             }
         }
     }
@@ -77,10 +81,10 @@ public class ReportBuilder {
     public static void main(String[] args) throws IOException, InvalidFormatException {
         CatalogStorage dbStore = new DbStorage(lHost, lPort, lBase, lLogin, lPass);
 
-        DOMConfigurator.configure("log4j.xml");
+
         ReportParser rp = new ReportParser();
 
-        List<ReportItem> reportList = rp.loadClientReport(REPORTS_DIR + "/Отчетная ведемость для - ALTEL.xls", 0);
+        List<ReportItem> reportList = rp.loadClientReport(REPORTS_DIR + "/Отчетная ведемость для -Beeline.xls", 0);
 
         buildMobileReport(dbStore, reportList);
     }
