@@ -1,48 +1,46 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
-<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
-                     debug="false">
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
 
-    <!-- APPENDER: console -->
-    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+    <appender name="CONSOLE-DEBUG" class="org.apache.log4j.ConsoleAppender">
+        <param name="target" value="System.out"/>
         <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="[%c{1}] - %m%n" />
+            <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%c{1}] %m%n"/>
         </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO"/>
+            <param name="LevelMax" value="INFO"/>
+        </filter>
     </appender>
 
-    <!-- APPENDER: rollingFileSize -->
-    <appender name="rollingFileSize"
-              class="org.apache.log4j.RollingFileAppender">
-        <param name="File"
-               value="/tmp/rollingFile.log" />
-        <param name="MaxFileSize" value="20MB" />
-        <param name="MaxBackupIndex" value="10" />
+    <appender name="CONSOLE-WARN" class="org.apache.log4j.ConsoleAppender">
+        <param name="target" value="System.err"/>
         <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern"
-                   value="%d{ISO8601} [%t] %-5p %c - %m%n" />
+            <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%c{1}] %m%n"/>
         </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="WARN"/>
+        </filter>
     </appender>
 
-    <!-- APPENDER: dailyRollingFile -->
-    <appender name="dailyRollingFile"
-              class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="/logs/bgm.log" />
-        <param name="Append" value="true" />
-        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+    <appender name="GENERAL-LOG-FILE" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="./logs/bgm.log"/>
+        <param name="append" value="true"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
         <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern"
-                   value="%d{ISO8601} [%t] %-5p %c - %m%n" />
+            <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%c{1}]:%M:%L - %m%n"/>
         </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO"/>
+            <param name="LevelMax" value="INFO"/>
+        </filter>
     </appender>
-
-    <logger name="verma.abhishek">
-        <level value="DEBUG" />
-        <appender-ref ref="dailyRollingFile" />
-    </logger>
 
     <root>
-        <level value="ERROR" />
-        <appender-ref ref="dailyRollingFile" />
-    </root>
+        <priority value="DEBUG"/>
+        <appender-ref ref="CONSOLE-WARN"/>
+        <appender-ref ref="CONSOLE-DEBUG"/>
+        <appender-ref ref="GENERAL-LOG-FILE"/>
 
+    </root>
 </log4j:configuration>
