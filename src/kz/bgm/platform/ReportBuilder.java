@@ -5,10 +5,11 @@ import kz.bgm.platform.items.Track;
 import kz.bgm.platform.parsers.ReportParser;
 import kz.bgm.platform.service.CatalogStorage;
 import kz.bgm.platform.service.DbStorage;
+import org.apache.log4j.Logger;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
-import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReportBuilder {
@@ -18,10 +19,13 @@ public class ReportBuilder {
 
     public static final String REPORTS_DIR = APP_DIR + "/reports";
 
-    //todo Доделать ReportBuilder
-    public static void buildMobileReport(CatalogStorage catalog, List<ReportItem> reportItems) {
+    private static final Logger log = Logger.getLogger(ReportBuilder.class);
 
-        System.out.println("Building mobile report...");
+    //todo Доделать ReportBuilder
+    public static List<Track> buildMobileReport(CatalogStorage catalog, List<ReportItem> reportItems) {
+
+        log.info("Building mobile report...");
+        List<Track> trackList = new ArrayList<Track>();
 
         int idx = 1;
 //        String sep = ";";
@@ -30,24 +34,24 @@ public class ReportBuilder {
 
             Track track = catalog.search(report.getAuthor(), report.getCompisition());
 
-            System.out.print(report.getAuthor() + " | " + report.getCompisition() + "   ");
             if (track != null) {
 
-                System.out.println("Есть");
+                trackList.add(track);
+//                float royalty = catalog.getRoyalty(track.getCatalogID());
 
-                float royalty = catalog.getRoyalty(track.getCatalogID());
 
-                float authRate = 0;
-                int authorRevenue = 0;
-                int publisherAuthRevenue = 0;
-                int authCatalog = -1;
-
-                authRate = track.getMobileShare();
-                authorRevenue = Math.round(report.getQty() * report.getPrice() * report.getRate() * authRate / 100);
-                publisherAuthRevenue = Math.round(authorRevenue * royalty / 100);
-                authCatalog = track.getCatalogID();
-
-                String composers = track.getComposer();
+                //todo определиться с расчетами
+//                float authRate = 0;
+//                int authorRevenue = 0;
+//                int publisherAuthRevenue = 0;
+//                int authCatalog = -1;
+//
+//                authRate = track.getMobileShare();
+//                authorRevenue = Math.round(report.getQty() * report.getPrice() * report.getRate() * authRate / 100);
+//                publisherAuthRevenue = Math.round(authorRevenue * royalty / 100);
+//                authCatalog = track.getCatalogID();
+//
+//                String composers = track.getComposer();
 
 //                System.out.println(
 //                        idx++ + sep +
@@ -65,10 +69,9 @@ public class ReportBuilder {
 //                                authCatalog + sep
 //                );
 
-            } else {
-                System.out.println("Нет");
             }
         }
+        return trackList;
     }
 
     private static String lBase = "bgm";

@@ -6,6 +6,9 @@
 <%
     @SuppressWarnings("unchecked")
     List<Track> trackList = (List<Track>) session.getAttribute(FindServlet.TRACK_LIST);
+
+    session.setAttribute(FindServlet.TRACK_LIST, null);
+
     String query = (String) session.getAttribute(FindServlet.QUERY);
 
 %>
@@ -31,8 +34,11 @@
 
         <form action="/finder" method="post">
             <div class="row">
-                <label for="find"></label><input type="text" name="find" id="find" class="input-large">
+               <label for="find"></label><input type="text" name="find" id="find" class="input-block-level">
             </div>
+
+            <br>
+
 
             <div class="row">
                 <input type="submit" value="Быстрый поиск" class="btn">
