@@ -27,18 +27,17 @@
     <option name="FILTER_BY_CURRENT_PROJECT" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/logging.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/BgmServer.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/BgmServer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bgm-platform.iml" afterPath="$PROJECT_DIR$/bgm-platform.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/dom4j.xml" afterPath="$PROJECT_DIR$/.idea/libraries/dom4j.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/log4j.xml" afterPath="$PROJECT_DIR$/log4j.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" />
+    <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="Начал разработку страницы отчета">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/CatalogLoader.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/CatalogLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/service/CatalogStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/service/CatalogStorage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/web/FindServlet.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/FindServlet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/service/InMemorycatalog.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/service/InMemorycatalog.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bgm-platform.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364409964093" ignored="false" />
+    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364496492890" ignored="false" />
     <file path="/CatalogStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364414197812" ignored="false" />
     <file path="/fragment.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364167908562" ignored="false" />
     <file path="db-console:/b524fb0f/bd8e1b6e-fe0f-401f-a88d-0e81e53c8907/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363032963765" ignored="false" />
@@ -86,6 +85,8 @@
     <file path="/log4j.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364414606937" ignored="false" />
     <file path="/report.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364422204796" ignored="false" />
     <file path="/ReportServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364420517281" ignored="false" />
+    <file path="db-console:/b7405297/0b3a3eb9-be4a-404b-833f-801c635b33d2/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364422520796" ignored="false" />
+    <file path="$USER_HOME$/My Documents/GitHub/BGM/.idea/workspace.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364423129656" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,8 +106,8 @@
     <sortChildren value="false" />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint url="file://$PROJECT_DIR$/src/kz/bgm/research/sony/SonyParser.java" line="36" class="kz.bgm.research.sony.SonyParser" package="kz.bgm.research.sony">
         <option name="ENABLED" value="true" />
@@ -211,7 +212,7 @@
       <file leaf-file-name="report.jsp" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/report.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="88" selection-start="1435" selection-end="1435" vertical-scroll-proportion="0.80714285">
+            <state line="28" column="3" selection-start="953" selection-end="953" vertical-scroll-proportion="2.2794118">
               <folding />
             </state>
           </provider>
@@ -221,35 +222,33 @@
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/ReportServlet.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="30" column="8" selection-start="692" selection-end="692" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="web.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
-          <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorReferencesProvider">
-            <state />
-          </provider>
-          <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleGeneralEditorProvider">
-            <state />
-          </provider>
           <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorProvider">
             <state />
           </provider>
+          <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorReferencesProvider">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="17" selection-start="608" selection-end="608" vertical-scroll-proportion="-3.92">
+            <state line="15" column="17" selection-start="608" selection-end="608" vertical-scroll-proportion="0.0">
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleGeneralEditorProvider">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="search.jsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/search.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="22" selection-start="758" selection-end="814" vertical-scroll-proportion="-9.807693">
+            <state line="30" column="22" selection-start="758" selection-end="814" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -533,16 +532,16 @@
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="132" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="132" />
-    <property name="project.structure.proportion" value="0.15" />
     <property name="OverrideImplement.combined" value="false" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="132" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="recentsLimit" value="5" />
-    <property name="MemberChooser.sorted" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="136" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/logging/log4j-1.2.13.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="133" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="811" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="807" />
@@ -556,18 +555,19 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="options.lastSelected" value="SQL Dialects" />
-    <property name="project.structure.side.proportion" value="0.19895288" />
+    <property name="options.lastSelected" value="settings.github" />
+    <property name="ChangesBrowser.SHOW_FLATTEN" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
+    <property name="project.structure.side.proportion" value="0.19895288" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -724,6 +724,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -750,19 +763,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -922,39 +922,43 @@
       <created>1364241332578</created>
       <updated>1364241332578</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Начал разработку страницы отчета">
+      <created>1364422311250</created>
+      <updated>1364422311250</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1288" height="1002" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.7" sideWeight="0.49713057" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.6984688" sideWeight="0.49713057" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2320377" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14991896" sideWeight="0.5559482" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14991896" sideWeight="0.30153123" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23792697" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44405183" sideWeight="0.50729334" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32979977" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32744405" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23905997" sideWeight="0.1696113" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22690438" sideWeight="0.5217903" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21555915" sideWeight="0.21790342" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21555915" sideWeight="0.5559482" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.44405183" sideWeight="0.48703402" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21555915" sideWeight="0.30153123" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44405183" sideWeight="0.48703402" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30506477" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2320377" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="TeamCity" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32979977" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -996,7 +1000,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="выполнение последних отчетов , тестовое , проверка как хорошо lucen находит треки" />
+    <option name="LAST_COMMIT_MESSAGE" value="Начал разработку страницы отчета" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1023,6 +1027,7 @@
     <MESSAGE value="Тестирование lucen" />
     <MESSAGE value="Тестирование lucen, сделала отчет с импользование lucen , начал прикручивать логирование" />
     <MESSAGE value="выполнение последних отчетов , тестовое , проверка как хорошо lucen находит треки" />
+    <MESSAGE value="Начал разработку страницы отчета" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1034,9 +1039,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/parsers/ReportParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="37" selection-start="1088" selection-end="1088" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="29" column="37" selection-start="1088" selection-end="1088" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/kz/bgm/platform/test/searchLucenTest.java">
@@ -1048,9 +1051,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/items/ReportItem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="30" selection-start="678" selection-end="678" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="33" column="30" selection-start="678" selection-end="678" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/CatalogLoader.java">
@@ -1077,10 +1078,7 @@
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/search/TrackSearcher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="87" column="25" selection-start="3174" selection-end="3174" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1364229008218" expanded="false" signature="-1:-1" placeholder="SELECT id, n..composition..." />
-            <marker date="1364229008218" expanded="true" signature="-1:-1" placeholder="SELECT id, n..composition..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1089,15 +1087,6 @@
         <state line="236" column="26" selection-start="7041" selection-end="7041" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1364168220531" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1364168220531" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..catalog..." />
-            <marker date="1364168220531" expanded="true" signature="-1:-1" placeholder="SELECT id FR..catalog..." />
-            <marker date="1364168220531" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..composition..." />
-            <marker date="1364168220531" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..composition..." />
-            <marker date="1364168220531" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..composition..." />
-            <marker date="1364168220531" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..composition..." />
-            <marker date="1364168220531" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..composition..." />
-            <marker date="1364168220531" expanded="true" signature="-1:-1" placeholder="SELECT royal..catalog..." />
           </folding>
         </state>
       </provider>
@@ -1133,38 +1122,36 @@
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/ReportServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="30" column="8" selection-start="692" selection-end="692" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
+      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="17" selection-start="608" selection-end="608" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
       <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorReferencesProvider">
         <state />
       </provider>
       <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleGeneralEditorProvider">
         <state />
       </provider>
-      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="17" selection-start="608" selection-end="608" vertical-scroll-proportion="-3.92">
-          <folding />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/search.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="22" selection-start="758" selection-end="814" vertical-scroll-proportion="-9.807693">
+        <state line="30" column="22" selection-start="758" selection-end="814" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/report.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="88" selection-start="1435" selection-end="1435" vertical-scroll-proportion="0.80714285">
+        <state line="28" column="3" selection-start="953" selection-end="953" vertical-scroll-proportion="2.2794118">
           <folding />
         </state>
       </provider>

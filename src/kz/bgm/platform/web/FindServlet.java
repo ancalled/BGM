@@ -38,7 +38,7 @@ public class FindServlet extends HttpServlet {
                 found = catalogService.searchByArtist(find);
 
             } else {
-                found = catalogService.search(find);
+                found = catalogService.search(find,true);
             }
 
 

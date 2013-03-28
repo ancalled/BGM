@@ -14,6 +14,11 @@
         <servlet-name>findServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.FindServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>reportServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.ReportServlet</servlet-class>
+    </servlet>
+
 
     <servlet-mapping>
         <servlet-name>findTrackServlet</servlet-name>
@@ -22,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>findServlet</servlet-name>
         <url-pattern>/finder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>reportServlet</servlet-name>
+        <url-pattern>/reporter</url-pattern>
     </servlet-mapping>
 
 

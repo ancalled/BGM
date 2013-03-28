@@ -4,6 +4,7 @@ import kz.bgm.platform.items.Track;
 import kz.bgm.platform.parsers.CatalogParser;
 import kz.bgm.platform.service.CatalogStorage;
 import kz.bgm.platform.service.DbStorage;
+import org.apache.log4j.Logger;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import java.io.FileInputStream;
@@ -24,6 +25,8 @@ public class CatalogLoader {
     private static final String BASE_PASS = "base.pass";
     private static final String BASE_HOST = "base.host";
     private static final String BASE_PORT = "base.port";
+
+    private static final Logger log = Logger.getLogger(CatalogLoader.class);
 
     private static void loadCatalog(CatalogStorage catalog, String catalogName) throws IOException, InvalidFormatException {
         //todo добавить имя ффайла убрать if else

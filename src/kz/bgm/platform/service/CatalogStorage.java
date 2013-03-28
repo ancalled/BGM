@@ -24,5 +24,6 @@ public interface CatalogStorage {
 
     List<Track> search(String value);
 
+    List<Track> search(String author, boolean b);
 
 }

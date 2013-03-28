@@ -112,5 +112,10 @@ public class InMemorycatalog implements CatalogStorage {
         throw new IllegalStateException("Not implemented!");
     }
 
+    @Override
+    public List<Track> search(String author, boolean b) {
+        return null;
+    }
+
 
 }
