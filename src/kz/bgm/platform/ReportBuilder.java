@@ -21,7 +21,6 @@ public class ReportBuilder {
 
     private static final Logger log = Logger.getLogger(ReportBuilder.class);
 
-    //todo Доделать ReportBuilder
     public static List<Track> buildMobileReport(CatalogStorage catalog, List<ReportItem> reportItems) {
 
         log.info("Building mobile report...");
@@ -40,7 +39,6 @@ public class ReportBuilder {
 //                float royalty = catalog.getRoyalty(track.getCatalogID());
 
 
-                //todo определиться с расчетами
 //                float authRate = 0;
 //                int authorRevenue = 0;
 //                int publisherAuthRevenue = 0;
