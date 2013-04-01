@@ -76,6 +76,8 @@
             java -${xmx-heap} -cp %CLASSPATH% kz.bgm.platform.BgmServer
         </echo>
 
+        <zip destfile="${bin}/bgm-distr.zip"
+             basedir="${bin}"/>
     </target>
 
 
