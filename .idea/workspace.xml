@@ -25,13 +25,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="non ascii comment in ReportBuilder">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/log4j-1.2.15.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/log4j_1_2_15.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Java_EE_6_Java_EE_6.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/logging.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bgm-platform.iml" afterPath="$PROJECT_DIR$/bgm-platform.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bgm-platform.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364788132103" ignored="false" />
+    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364788358916" ignored="false" />
     <file path="/CatalogStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363337195102" ignored="false" />
     <file path="/fragment.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364786489351" ignored="false" />
     <file path="db-console:/b524fb0f/bd8e1b6e-fe0f-401f-a88d-0e81e53c8907/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363032963765" ignored="false" />
@@ -167,7 +170,7 @@
       <file leaf-file-name="MusicNurKzParser.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/research/radio/MusicNurKzParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="80" column="23" selection-start="2390" selection-end="2390" vertical-scroll-proportion="0.35550457">
+            <state line="85" column="67" selection-start="2548" selection-end="2548" vertical-scroll-proportion="0.6277372">
               <folding />
             </state>
           </provider>
@@ -536,7 +539,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
+              <option name="myItemId" value="data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -550,7 +553,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
+              <option name="myItemId" value=".idea" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -871,7 +874,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32893" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -924,7 +927,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="non ascii comment in ReportBuilder" />
+    <option name="LAST_COMMIT_MESSAGE" value="log4j" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -947,6 +950,7 @@
     <MESSAGE value="Push!" />
     <MESSAGE value="non ascii comment in java" />
     <MESSAGE value="non ascii comment in ReportBuilder" />
+    <MESSAGE value="log4j" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1073,7 +1077,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/research/radio/MusicNurKzParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="23" selection-start="2390" selection-end="2390" vertical-scroll-proportion="0.35550457">
+        <state line="85" column="67" selection-start="2548" selection-end="2548" vertical-scroll-proportion="0.6277372">
           <folding />
         </state>
       </provider>
@@ -1164,7 +1168,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>log4j-1.2.15</last-edited>
+          <last-edited>jetty</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
