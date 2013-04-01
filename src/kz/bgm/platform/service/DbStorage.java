@@ -2,7 +2,7 @@ package kz.bgm.platform.service;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import kz.bgm.platform.items.Track;
-import kz.bgm.platform.search.TrackSearcher;
+import kz.bgm.platform.search.IdSearcher;
 import org.apache.log4j.Logger;
 
 import java.beans.PropertyVetoException;
@@ -132,7 +132,7 @@ public class DbStorage implements CatalogStorage {
 
     private int fillAllCatalogs() {
         Connection connection = null;
-        catalogs = new HashMap<Integer, String>();
+        catalogMap = new HashMap<Integer, String>();
         try {
             connection = pool.getConnection();
 
@@ -142,7 +142,7 @@ public class DbStorage implements CatalogStorage {
                     " FROM catalog");
 
             while (rs.next()) {
-                catalogs.put(rs.getInt("id"),
+                catalogMap.put(rs.getInt("id"),
                         rs.getString("name"));
             }
 
@@ -195,15 +195,13 @@ public class DbStorage implements CatalogStorage {
 
     @Override
     public Track search(String artist, String song) {
-        Connection connection = null;
         try {
-            connection = pool.getConnection();
             List<String> idList = idSearcher.search(artist, song);
 
             List<Track> trackList = new ArrayList<Track>();
 
             for (int k = 0; k < idList.size() && k < RESULT_SIZE; k++) {
-                Track track = searchById(connection, idList.get(k));
+                Track track = searchById(idList.get(k));
                 trackList.add(track);
 
             }
@@ -215,14 +213,6 @@ public class DbStorage implements CatalogStorage {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
 
         return null;
@@ -244,32 +234,22 @@ public class DbStorage implements CatalogStorage {
 
 
     public List<Track> searchWithLucen(String value) {
-        Connection connection = null;
         try {
-            connection = pool.getConnection();
             List<String> idList = idSearcher.search(value);
 
             List<Track> trackList = new ArrayList<Track>();
 
             for (int k = 0; k < idList.size() && k < RESULT_SIZE; k++) {
-                Track track = searchById(connection, idList.get(k));
-                trackList.add(track);
 
+                Track track = searchById(idList.get(k));
+                trackList.add(track);
             }
+
 
             return trackList;
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
-
         return Collections.emptyList();
     }
 
@@ -311,8 +291,10 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-    public Track searchById(Connection connection, String id) {
+    public Track searchById(String id) {
+        Connection connection = null;
         try {
+            connection = pool.getConnection();
             PreparedStatement stmt = connection.prepareStatement(
                     "SELECT * FROM composition WHERE id=?");
 
@@ -328,7 +310,17 @@ public class DbStorage implements CatalogStorage {
 
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+
+
         return null;
     }
 

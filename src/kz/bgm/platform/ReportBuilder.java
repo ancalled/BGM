@@ -18,7 +18,9 @@ public class ReportBuilder {
     private static final Logger log = Logger.getLogger(ReportBuilder.class);
 
     //todo Доделать ReportBuilder
-    public static List<ReportItem> buildMobileReport(CatalogStorage catalogStorage, List<ReportItem> reportItems) {
+    public static List<ReportItem> buildMobileReport(
+            CatalogStorage catalogStorage,
+            List<ReportItem> reportItems) {
 
         log.info("Building mobile report...");
         List<Track> trackList = new ArrayList<Track>();
