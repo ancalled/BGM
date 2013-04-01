@@ -49,6 +49,12 @@
         </echo>
 
 
+        <echo file="${bin}/run-screen.sh">
+            #!/bin/sh
+            screen -dmS BGM-platform sh run.sh
+        </echo>
+
+
         <echo file="${bin}/run.bat">
             set CLASSPATH=%CLASSPATH%;bgm.jar
             set CLASSPATH=%CLASSPATH%;lib/jsoap/jsoup-1.7.1.jar
