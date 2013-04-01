@@ -11,6 +11,9 @@
 
     <target name="make-distr">
 
+        <delete dir="${bin}"/>
+        <mkdir dir="${bin}"/>
+
         <copy todir="${bin}/lib">
             <fileset dir="lib"/>
         </copy>
