@@ -33,12 +33,12 @@ public class FindTrackServletJson extends HttpServlet {
         String find = req.getParameter("find");
 
         if (find != null && !"".equals(find)) {
-                                                       //todo эксперементировать пока над этим сервлетом
+
             List<Track> foundTracks =
                     catalogService.searchBySongName(find);
             JSONArray mass = new JSONArray();
             if (foundTracks == null) {
-                resp.sendRedirect("/find.html");//todo добавить ошибку
+                resp.sendRedirect("/find.html");
                 return;
             }
             for (Track t : foundTracks) {

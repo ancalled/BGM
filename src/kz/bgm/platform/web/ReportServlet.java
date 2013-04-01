@@ -82,7 +82,6 @@ public class ReportServlet extends HttpServlet {
         resp.sendRedirect("report.jsp");
     }
 
-    //todo доделать зоздание репорта убрать вывод треки
     private List<Track> buildReport(String fileName) throws IOException, InvalidFormatException {
         List<ReportItem> reportList = reportParser.loadClientReport(fileName, 0);
         return ReportBuilder.buildMobileReport(catalogService, reportList);
