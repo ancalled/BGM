@@ -3,7 +3,7 @@ package kz.bgm.platform.test;
 import kz.bgm.platform.items.Track;
 import kz.bgm.platform.service.DbStorage;
 
-public class searchLucenTest {
+public class SearchLucenTest {
 
     private static String lBase = "bgm";
     private static String lLogin = "root";

@@ -48,10 +48,8 @@ public class LucenTest {
 
         LucenTest lucenTest = new LucenTest(lHost, lPort, lBase, lLogin, lPass);
 
-        //Индексирование
 //        startIndexing(lucenTest);
 
-        //Поиск
         startSearch(lucenTest, "Trespass", true);
 
 
