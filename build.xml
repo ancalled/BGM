@@ -21,6 +21,7 @@
         <copy file="${out}/bgm.jar" todir="${bin}"/>
         <copy file="jetty.properties" todir="${bin}"/>
         <copy file="db.properties" todir="${bin}"/>
+        <copy file="log4j.xml" todir="${bin}"/>
 
 
         <echo file="${bin}/run.sh">
