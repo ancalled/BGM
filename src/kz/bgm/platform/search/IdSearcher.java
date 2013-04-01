@@ -24,8 +24,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackSearcher {
-    private static final Logger log = Logger.getLogger(TrackSearcher.class);
+public class IdSearcher {
+    private static final Logger log = Logger.getLogger(IdSearcher.class);
 
     private static String APP_DIR = System.getProperty("user.dir");
     private static String INDEX_DIR = APP_DIR + "/lucen-indexes";

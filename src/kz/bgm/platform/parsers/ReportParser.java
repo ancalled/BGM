@@ -41,7 +41,7 @@ public class ReportParser {
 
             ReportItem item = new ReportItem();
             item.setCompisition(ExcelUtils.getCell(row, 2));
-            item.setAuthor(ExcelUtils.getCell(row, 3));
+            item.setArtist(ExcelUtils.getCell(row, 3));
             item.setContentType(ExcelUtils.getCell(row, 4));
 
             String priceStr = ExcelUtils.getCell(row, 5);
@@ -57,7 +57,7 @@ public class ReportParser {
             if(qtyStr==null||"".equals(qtyStr))continue;
 
             item.setQty(Integer.parseInt(qtyStr));
-            item.setRate(clientRate);
+            item.setRate(30);
             items.add(item);
         }
 

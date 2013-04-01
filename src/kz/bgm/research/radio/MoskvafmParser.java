@@ -78,7 +78,7 @@ public class MoskvafmParser {
             String author = splitted[0].trim();
             String song = splitted[1].trim();
             ReportItem ri = new ReportItem();
-            ri.setAuthor(author);
+            ri.setArtist(author);
             ri.setCompisition(song);
             result.add(ri);
         }

@@ -12,28 +12,33 @@ import java.util.*;
 public class DbStorage implements CatalogStorage {
 
     private static final Logger log = Logger.getLogger(DbStorage.class);
-    
+
     public static final int MAX_STATEMENTS = 200;
     public static final int MAX_STATEMENTS_PER_CONNECTION = 10;
     public static final int MIN_POOL_SIZE = 1;
     public static final int MAX_POOL_SIZE = 10;
 
     private final ComboPooledDataSource pool;
-    private TrackSearcher trackSearcher;
+    private IdSearcher idSearcher;
+
+    private static Map<Integer, String> catalogMap;
+
+    private static final int RESULT_SIZE = 150;
 
     public DbStorage(String host, String port,
                      String base, String user, String pass) {
         pool = initPool(host, port, base, user, pass);
 
         fillAllCatalogs();
-        trackSearcher = new TrackSearcher();
+        //todo врубить индексирование lucen
+        idSearcher = new IdSearcher();
 
 
 //        Connection connection = null;
 //
 //        try {
 //            connection = pool.getConnection();
-//            trackSearcher.init(connection);
+//            idSearcher.init(connection);
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //
@@ -193,7 +198,7 @@ public class DbStorage implements CatalogStorage {
         Connection connection = null;
         try {
             connection = pool.getConnection();
-            List<String> idList = trackSearcher.search(artist, song);
+            List<String> idList = idSearcher.search(artist, song);
 
             List<Track> trackList = new ArrayList<Track>();
 
@@ -228,10 +233,6 @@ public class DbStorage implements CatalogStorage {
         return null;
     }
 
-    private static Map<Integer, String> catalogs;
-
-    private static final int RESULT_SIZE = 150;
-
 
     public List<Track> search(String value, boolean withLucen) {
         if (withLucen) {
@@ -246,7 +247,7 @@ public class DbStorage implements CatalogStorage {
         Connection connection = null;
         try {
             connection = pool.getConnection();
-            List<String> idList = trackSearcher.search(value);
+            List<String> idList = idSearcher.search(value);
 
             List<Track> trackList = new ArrayList<Track>();
 
@@ -425,9 +426,13 @@ public class DbStorage implements CatalogStorage {
         return tracks;
     }
 
+    public String getCatalogTitle(int catID) {
+        return catalogMap.get(catID);
+    }
+
     private static Track parseTrack(ResultSet rs) throws SQLException {
         Track track = new Track();
-        track.setCatalog(catalogs.get(rs.getInt("catalog_id")));
+        track.setCatalog(catalogMap.get(rs.getInt("catalog_id")));
         track.setId(rs.getLong("id"));
         track.setCode(rs.getString("code"));
         track.setName(rs.getString("name"));

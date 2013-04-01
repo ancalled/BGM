@@ -2,7 +2,6 @@ package kz.bgm.platform.web;
 
 import kz.bgm.platform.ReportBuilder;
 import kz.bgm.platform.items.ReportItem;
-import kz.bgm.platform.items.Track;
 import kz.bgm.platform.parsers.ReportParser;
 import kz.bgm.platform.service.CatalogFactory;
 import kz.bgm.platform.service.CatalogStorage;
@@ -54,7 +53,7 @@ public class ReportServlet extends HttpServlet {
             HttpServletResponse resp)
             throws ServletException, IOException {
 
-                    List<Track>trackList=new ArrayList<Track>();
+        List<ReportItem> trackList = new ArrayList<ReportItem>();
         try {
             List<FileItem> files = fileUploader.parseRequest(req);
             if (files != null) {
@@ -67,7 +66,7 @@ public class ReportServlet extends HttpServlet {
                     String fileName = REPORT_DIR + "/" + file.getName();
                     file.write(new File(fileName));
 
-                   trackList= buildReport(fileName);
+                    trackList = buildReport(fileName);
                 }
             }
 
@@ -77,12 +76,13 @@ public class ReportServlet extends HttpServlet {
             log.error(e.getMessage());
         }
 
-        req.getSession().setAttribute(REPORT,trackList);
+        req.getSession().setAttribute(REPORT, trackList);
 
         resp.sendRedirect("report.jsp");
     }
 
-    private List<Track> buildReport(String fileName) throws IOException, InvalidFormatException {
+    //todo доделать зоздание репорта убрать вывод треки
+    private List<ReportItem> buildReport(String fileName) throws IOException, InvalidFormatException {
         List<ReportItem> reportList = reportParser.loadClientReport(fileName, 0);
         return ReportBuilder.buildMobileReport(catalogService, reportList);
     }
