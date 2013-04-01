@@ -19,11 +19,14 @@
             <fileset dir="lib"/>
         </copy>
 
+        <copy todir="${bin}/web">
+            <fileset dir="${web}"/>
+        </copy>
+
         <copy file="${out}/bgm.jar" todir="${bin}"/>
         <copy file="jetty.properties" todir="${bin}"/>
         <copy file="db.properties" todir="${bin}"/>
         <copy file="log4j.xml" todir="${bin}"/>
-        <copy file="${web}" todir="${bin}"/>
 
 
         <echo file="${bin}/run.sh">
