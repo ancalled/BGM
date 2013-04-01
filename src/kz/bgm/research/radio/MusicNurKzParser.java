@@ -85,7 +85,6 @@ public class MusicNurKzParser {
 
         List<String> authors = new ArrayList<String>();
 //        authors.addAll(parseAuthors("http://music.nur.kz/artists-A"));
-        authors.addAll(parseAuthors("http://music.nur.kz/artists-Ч"));
 
 //        for (String page : pages) {
 //            authors.addAll(parseAuthors(page));

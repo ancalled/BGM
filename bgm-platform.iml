@@ -38,6 +38,7 @@
     <orderEntry type="library" name="c3p" level="project" />
     <orderEntry type="library" name="logging" level="project" />
     <orderEntry type="library" name="apache-commons" level="project" />
+    <orderEntry type="library" name="log4j-1.2.15" level="project" />
   </component>
 </module>
 
