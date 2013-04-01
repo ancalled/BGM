@@ -20,6 +20,9 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/catalogs" />
+      <excludeFolder url="file://$MODULE_DIR$/logs" />
+      <excludeFolder url="file://$MODULE_DIR$/lucen-indexes" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -27,13 +30,14 @@
     <orderEntry type="library" name="poi" level="project" />
     <orderEntry type="library" name="dom4j" level="project" />
     <orderEntry type="library" name="lucene" level="project" />
-    <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
     <orderEntry type="library" name="jsoap" level="project" />
     <orderEntry type="library" name="json" level="project" />
     <orderEntry type="library" name="jetty" level="project" />
     <orderEntry type="library" name="jsp" level="project" />
     <orderEntry type="library" name="mysql-connector-java-5.1.23-bin" level="project" />
     <orderEntry type="library" name="c3p" level="project" />
+    <orderEntry type="library" name="logging" level="project" />
+    <orderEntry type="library" name="apache-commons" level="project" />
   </component>
 </module>
 

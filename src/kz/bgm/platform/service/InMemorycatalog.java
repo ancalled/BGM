@@ -85,6 +85,10 @@ public class InMemorycatalog implements CatalogStorage {
         return null;
     }
 
+    @Override
+    public Float getRoyalty(int catalogId) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 
 
     @Override
@@ -106,6 +110,11 @@ public class InMemorycatalog implements CatalogStorage {
     @Override
     public List<Track> search(String value) {
         throw new IllegalStateException("Not implemented!");
+    }
+
+    @Override
+    public List<Track> search(String author, boolean b) {
+        return null;
     }
 
 

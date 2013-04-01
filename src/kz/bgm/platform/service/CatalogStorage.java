@@ -6,21 +6,24 @@ import java.util.List;
 
 public interface CatalogStorage {
 
-   void storeInCatalog(List<Track> trackList, String catalog);
+    void storeInCatalog(List<Track> trackList, String catalog);
 
-   void addItem(Track track, boolean common);
+    void addItem(Track track, boolean common);
 
-   Track search(String author, String song);
+    Track search(String author, String song);
 
-   Track search(String author, String song, boolean common);
+    Track search(String author, String song, boolean common);
 
+    Float getRoyalty(int catalogId);
 
-   List<Track> searchBySongName(String songName);
+    List<Track> searchBySongName(String songName);
 
-   List<Track> searchByArtistLike(String artist);
+    List<Track> searchByArtistLike(String artist);
 
-   List<Track> searchByArtist(String artist);
+    List<Track> searchByArtist(String artist);
 
-   List<Track> search(String value);
+    List<Track> search(String value);
+
+    List<Track> search(String author, boolean b);
 
 }

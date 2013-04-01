@@ -1,7 +1,16 @@
 package kz.bgm.platform;
 
 import kz.bgm.platform.service.CatalogFactory;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.xml.DOMConfigurator;
+import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.server.NCSARequestLog;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.ContextHandlerCollection;
+import org.eclipse.jetty.server.handler.DefaultHandler;
+import org.eclipse.jetty.server.handler.HandlerCollection;
+import org.eclipse.jetty.server.handler.RequestLogHandler;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 import java.io.FileInputStream;
@@ -18,7 +27,9 @@ public class BgmServer {
     public static final String PORT = "port";
     public static final String WEB_RESOURCE = "resource";
 
+
     private final Server jettyServer;
+    private static final Logger log = Logger.getLogger(BgmServer.class);
 
 
     public BgmServer(String propsName) throws IOException {
@@ -35,8 +46,24 @@ public class BgmServer {
         webApp.setDescriptor(APP_DIR + "/" + res + "/WEB-INF/web.xml");
         webApp.setResourceBase(APP_DIR + "/" + res);
         webApp.setContextPath("/");
-        jettyServer.setHandler(webApp);
 
+
+        HandlerCollection handlers = new HandlerCollection();
+        ContextHandlerCollection contexts = new ContextHandlerCollection();
+        RequestLogHandler requestLogHandler = new RequestLogHandler();
+        handlers.setHandlers(new Handler[]{contexts, new DefaultHandler(), requestLogHandler});
+        jettyServer.setHandler(handlers);
+
+        NCSARequestLog requestLog = new NCSARequestLog("./logs/jetty.log");
+        requestLog.setRetainDays(90);
+        requestLog.setAppend(true);
+        requestLog.setExtended(false);
+        requestLog.setLogTimeZone("GMT");
+        requestLogHandler.setRequestLog(requestLog);
+
+
+        jettyServer.setHandler(requestLogHandler);
+        jettyServer.setHandler(webApp);
     }
 
     public void start() throws Exception {
@@ -61,12 +88,12 @@ public class BgmServer {
         String dbLogin = props.getProperty(BASE_LOGIN);
         String dbPass = props.getProperty(BASE_PASS);
 
-        System.out.println("Initializing data storage...");
+        log.info("Initializing data storage...");
         CatalogFactory.initDBStorage(dbHost, dbPort, dbName, dbLogin, dbPass);
     }
 
     public static void main(String[] args) throws Exception {
-
+        DOMConfigurator.configure("log4j.xml");
         initDatabase(DB_PROPS);
 
         BgmServer server = new BgmServer(WEB_PROPS);

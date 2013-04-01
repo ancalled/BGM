@@ -1,0 +1,1 @@
+keytool -import -v -file www.sonyatv.com -keystore www.sonyatv.com.jks -storepass Ufd234

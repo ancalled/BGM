@@ -7,29 +7,21 @@ public class Track implements Serializable {
 
     private long id = 0L;
     private int catalogID = 0;
+    private String catalog="";
     private String code = "";
     private String artist = "";
     private String name = "";
     private String composer = "";
     private float publicShare = 0F;
     private float mobileShare = 0F;
-    private float royalty = 0F;
 
 
     public void setMobileShare(float mobileShare) {
         this.mobileShare = mobileShare;
     }
 
-    public void setRoyalty(float royalty) {
-        this.royalty = royalty;
-    }
-
     public void setPublicShare(float publicShare) {
         this.publicShare = publicShare;
-    }
-
-    public float getRoyalty() {
-        return royalty;
     }
 
     public Float getPublicShare() {
@@ -112,5 +104,13 @@ public class Track implements Serializable {
                 ", mobileShare: " + mobileShare +
                 ", publicShare: " + publicShare +
                 ", catalogID: " + catalogID;
+    }
+
+    public String getCatalog() {
+        return catalog;
+    }
+
+    public void setCatalog(String catalog) {
+        this.catalog = catalog;
     }
 }

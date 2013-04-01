@@ -6,6 +6,9 @@
 <%
     @SuppressWarnings("unchecked")
     List<Track> trackList = (List<Track>) session.getAttribute(FindServlet.TRACK_LIST);
+
+    session.setAttribute(FindServlet.TRACK_LIST, null);
+
     String query = (String) session.getAttribute(FindServlet.QUERY);
 
 %>
@@ -14,10 +17,8 @@
 <head>
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen"/>
     <title>Поиск</title>
 </head>
 <body>
@@ -33,8 +34,11 @@
 
         <form action="/finder" method="post">
             <div class="row">
-                <label for="find"></label><input type="text" name="find" id="find" class="input-large">
+               <label for="find"></label><input type="text" name="find" id="find" class="input-block-level">
             </div>
+
+            <br>
+
 
             <div class="row">
                 <input type="submit" value="Быстрый поиск" class="btn">
@@ -69,6 +73,7 @@
                 <th>Авторы</th>
                 <th>Мобильный контент</th>
                 <th>Публичка</th>
+                <th>Каталог</th>
             </tr>
             </thead>
             <tbody>
@@ -90,6 +95,12 @@
                 </td>
                 <td><%=t.getPublicShare()%>
                 </td>
+                <%
+                    if (t.getCatalog() == null) {
+                        t.setCatalog("");
+                    }
+                %>
+                <td><%=t.getCatalog()%>
                 </td>
             </tr>
             <%
