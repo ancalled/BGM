@@ -6,6 +6,7 @@
     <property name="data" value="${project.home}/data"/>
     <property name="out" value="${project.home}/out"/>
     <property name="bin" value="${project.home}/out/bin"/>
+    <property name="web" value="${project.home}/out/web"/>
 
     <property name="xmx-heap" value="Xmx1024m"/>
 
@@ -22,6 +23,7 @@
         <copy file="jetty.properties" todir="${bin}"/>
         <copy file="db.properties" todir="${bin}"/>
         <copy file="log4j.xml" todir="${bin}"/>
+        <copy file="${web}" todir="${bin}"/>
 
 
         <echo file="${bin}/run.sh">
