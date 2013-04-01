@@ -26,7 +26,6 @@ public class CatalogLoader {
     private static final String BASE_PORT = "base.port";
 
     private static void loadCatalog(CatalogStorage catalog, String catalogName) throws IOException, InvalidFormatException {
-        //todo добавить имя ффайла убрать if else
         List<Track> authItems = new ArrayList<Track>();
         List<Track> commonItems = new ArrayList<Track>();
         CatalogParser parser = new CatalogParser();
