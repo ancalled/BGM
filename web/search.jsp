@@ -44,7 +44,11 @@
                 <input type="submit" value="Быстрый поиск" class="btn">
             </div>
 
-
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                <li><a tabindex="-1" href="#">Regular link</a></li>
+                <li class="disabled"><a tabindex="-1" href="#">Disabled link</a></li>
+                <li><a tabindex="-1" href="#">Another link</a></li>
+            </ul>
             <%--<label class="radio" style="margin-top: 20">--%>
 
             <%--<input type="radio" name="type" class="icon-check" value="like">--%>

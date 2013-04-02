@@ -2,10 +2,12 @@ package kz.bgm.platform;
 
 import kz.bgm.platform.items.ReportItem;
 import kz.bgm.platform.items.Track;
+import kz.bgm.platform.parsers.ReportParser;
 import kz.bgm.platform.service.CatalogStorage;
 import org.apache.log4j.Logger;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 
 public class ReportBuilder {
@@ -17,23 +19,24 @@ public class ReportBuilder {
 
     private static final Logger log = Logger.getLogger(ReportBuilder.class);
 
-    //todo Доделать ReportBuilder
+
     public static List<ReportItem> buildMobileReport(
             CatalogStorage catalogStorage,
-            List<ReportItem> reportItems) {
+            String filename, float clientRate) throws IOException, InvalidFormatException {
+        log.info("Parsing mobile report ...");
+        List<ReportItem> reportList = ReportParser.loadClientReport(filename, clientRate);
+        log.info("Parsing finished");
 
         log.info("Building mobile report...");
-        List<Track> trackList = new ArrayList<Track>();
 
-//        String sep = ";";
-        String sep = "^";
-        for (ReportItem report : reportItems) {
+        for (ReportItem report : reportList) {
 
-            Track track = catalogStorage.search(report.getArtist(), report.getCompisition());
+            String artist = report.getArtist();
+            String composition = report.getCompisition();
+            Track track = catalogStorage.search(artist, composition);
 
             if (track != null) {
 
-                trackList.add(track);
                 float royalty = catalogStorage.getRoyalty(track.getCatalogID());
 
 
@@ -72,9 +75,13 @@ public class ReportBuilder {
                         "Catalog:                   " + catalogTitle + "\n"
                 );
 //
+            } else {
+                log.info("Composition '" + composition + "' with artist '" + artist + "' not found");
             }
         }
-        return reportItems;
+        log.info("Mobile Report build.");
+
+        return reportList;
     }
 
     private static void buildRadioReport(CatalogStorage catalog, List<ReportItem> items) {

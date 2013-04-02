@@ -16,7 +16,7 @@ import java.util.List;
 public class ReportParser {
    private static final Logger log= Logger.getLogger(ReportParser.class);
     
-    public List<ReportItem> loadClientReport(String filename, float clientRate)
+    public static List<ReportItem> loadClientReport(String filename, float clientRate)
             throws IOException, InvalidFormatException {
 
         File file = new File(filename);
@@ -57,7 +57,7 @@ public class ReportParser {
             if(qtyStr==null||"".equals(qtyStr))continue;
 
             item.setQty(Integer.parseInt(qtyStr));
-            item.setRate(30);
+            item.setRate(clientRate);
             items.add(item);
         }
 

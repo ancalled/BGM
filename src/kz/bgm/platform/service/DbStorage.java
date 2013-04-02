@@ -30,7 +30,7 @@ public class DbStorage implements CatalogStorage {
         pool = initPool(host, port, base, user, pass);
 
         fillAllCatalogs();
-        //todo врубить индексирование lucen
+        //todo make indexing on  lucen
         idSearcher = new IdSearcher();
 
 

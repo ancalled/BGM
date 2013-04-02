@@ -60,7 +60,7 @@
         if (reportList != null) {
     %>
 
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
         <tr>
             <th>Код</th>
@@ -77,7 +77,6 @@
         </thead>
         <tbody>
         <%
-
             for (ReportItem rt : reportList) {
         %>
         <tr>
@@ -96,8 +95,6 @@
             <td><%=rt.getAuthorRevenue()%>
             </td>
             <td><%=rt.getAuthRate()%>
-            </td>
-            <td><%=rt.getPublisherAuthRevenue()%>
             </td>
             <td><%=rt.getPublisherAuthRevenue()%>
             </td>

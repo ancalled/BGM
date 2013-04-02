@@ -2,7 +2,6 @@ package kz.bgm.platform.web;
 
 import kz.bgm.platform.ReportBuilder;
 import kz.bgm.platform.items.ReportItem;
-import kz.bgm.platform.parsers.ReportParser;
 import kz.bgm.platform.service.CatalogFactory;
 import kz.bgm.platform.service.CatalogStorage;
 import org.apache.commons.fileupload.FileItem;
@@ -31,7 +30,6 @@ public class ReportServlet extends HttpServlet {
     public static final Logger log = Logger.getLogger(ReportServlet.class);
     public static final String REPORT = "report";
 
-    private ReportParser reportParser;
     private FileItemFactory discFactory;
     private ServletFileUpload fileUploader;
 
@@ -41,8 +39,6 @@ public class ReportServlet extends HttpServlet {
     public void init() throws ServletException {
         discFactory = new DiskFileItemFactory();
         fileUploader = new ServletFileUpload(discFactory);
-
-        reportParser = new ReportParser();
 
         catalogService = CatalogFactory.getStorage();
     }
@@ -81,10 +77,9 @@ public class ReportServlet extends HttpServlet {
         resp.sendRedirect("report.jsp");
     }
 
-    //todo доделать зоздание репорта убрать вывод треки
+    //todo finishhim this
     private List<ReportItem> buildReport(String fileName) throws IOException, InvalidFormatException {
-        List<ReportItem> reportList = reportParser.loadClientReport(fileName, 0);
-        return ReportBuilder.buildMobileReport(catalogService, reportList);
+        return ReportBuilder.buildMobileReport(catalogService, fileName, 30F);
     }
 
     @Override
