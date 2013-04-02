@@ -8,6 +8,9 @@
     @SuppressWarnings("unchecked")
     List<ReportItem> reportList =
             (List<ReportItem>) session.getAttribute(ReportServlet.REPORT);
+    @SuppressWarnings("unchecked")
+    List<String> reportPath =
+            (List<String>) session.getAttribute(ReportServlet.REPORT_PATH);
 
     session.setAttribute(ReportServlet.REPORT, null);
 
@@ -50,9 +53,30 @@
                 </div>
             </div>
 
-            <input type="submit">
+
+            <div class="row-fluid">
+                <input class="btn" type="submit">
+            </div>
         </form>
 
+        <%
+            if (reportPath != null && reportPath.size() > 0) {
+
+                for (String path : reportPath) {
+        %>
+        <form>
+            <div class="row-fluid">
+                <input type="button"
+                       class="btn"
+                       value="Загрузить отчет"
+                       onClick="window.location.href='<%=path%>'">
+            </div>
+        </form>
+        <%
+                }
+            }
+
+        %>
 
     </div>
 

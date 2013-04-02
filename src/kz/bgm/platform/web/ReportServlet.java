@@ -28,7 +28,9 @@ public class ReportServlet extends HttpServlet {
     public static final String REPORT_DIR = APP_DIR + "/reports";
 
     public static final Logger log = Logger.getLogger(ReportServlet.class);
-    public static final String REPORT = "report";
+    public static final String REPORT = "reportList";
+    public static final String CLIENT_RATE = "client_rate";
+    public static final String REPORT_PATH = "reportPath";
 
     private FileItemFactory discFactory;
     private ServletFileUpload fileUploader;
@@ -49,37 +51,70 @@ public class ReportServlet extends HttpServlet {
             HttpServletResponse resp)
             throws ServletException, IOException {
 
-        List<ReportItem> reportList = new ArrayList<ReportItem>();
+
+        List<ReportItem> reportList = null;
+
+
+        //todo finish client rate
+
+        float clientRate = 30;
+
         try {
             List<FileItem> files = fileUploader.parseRequest(req);
-            if (files != null) {
+            List<String> reportsPaths = new ArrayList<String>();
+            if (files != null && clientRate > 0) {
 
                 log.info("got" + files.size());
+
                 for (FileItem file : files) {
-                    log.info("File name:" + file.getName());
-                    System.out.println("File size: " + file.getSize());
-
-                    String fileName = REPORT_DIR + "/" + file.getName();
-                    file.write(new File(fileName));
-
-                    reportList = buildReport(fileName);
+                    String filePath = saveFile(file);
+                    log.info("Got client report " + filePath);
+                    reportList = buildReport(filePath, clientRate);
+                    reportsPaths.add("/reports/" + new File(filePath).getName());   //todo bad - remake
                 }
+                req.getSession().setAttribute(REPORT_PATH, reportsPaths);
+                req.getSession().setAttribute(REPORT, reportList);
+
+            } else {
+                log.info("No one files uploaded because files = " +
+                        files + " clientRate = " + clientRate);
             }
 
-            log.info("No one files uploaded");
-
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error(e.getMessage());     //todo make errors out
+            resp.sendRedirect("report.jsp");
         }
-
-        req.getSession().setAttribute(REPORT, reportList);
 
         resp.sendRedirect("report.jsp");
     }
 
+
+    private String saveFile(FileItem file) throws Exception {
+        log.info("File name:" + file.getName());
+        System.out.println("File size: " + file.getSize());
+
+        String filePath = REPORT_DIR + "/" + file.getName();
+
+        File reportFile = getFile(filePath);
+
+        file.write(reportFile);
+        return reportFile.getPath();
+    }
+
+    private static int fileCounter = 1;
+
+    private File getFile(String filePath) {
+        File file = new File(filePath);
+        if (file.exists()) {                    //todo finish this
+            file = new File(filePath + "(" + fileCounter++ + ")");
+            file = getFile(file.getPath());
+        }
+        return file;
+    }
+
     //todo finishhim this
-    private List<ReportItem> buildReport(String fileName) throws IOException, InvalidFormatException {
-        return ReportBuilder.buildMobileReport(catalogService, fileName, 30F);
+    private List<ReportItem> buildReport(String fileName, float clientRate) throws IOException, InvalidFormatException {
+        return ReportBuilder.buildMobileReport(catalogService, fileName, clientRate);
     }
 
     @Override
