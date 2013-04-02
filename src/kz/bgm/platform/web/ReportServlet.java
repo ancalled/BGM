@@ -49,7 +49,7 @@ public class ReportServlet extends HttpServlet {
             HttpServletResponse resp)
             throws ServletException, IOException {
 
-        List<ReportItem> trackList = new ArrayList<ReportItem>();
+        List<ReportItem> reportList = new ArrayList<ReportItem>();
         try {
             List<FileItem> files = fileUploader.parseRequest(req);
             if (files != null) {
@@ -62,7 +62,7 @@ public class ReportServlet extends HttpServlet {
                     String fileName = REPORT_DIR + "/" + file.getName();
                     file.write(new File(fileName));
 
-                    trackList = buildReport(fileName);
+                    reportList = buildReport(fileName);
                 }
             }
 
@@ -72,7 +72,7 @@ public class ReportServlet extends HttpServlet {
             log.error(e.getMessage());
         }
 
-        req.getSession().setAttribute(REPORT, trackList);
+        req.getSession().setAttribute(REPORT, reportList);
 
         resp.sendRedirect("report.jsp");
     }

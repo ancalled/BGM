@@ -28,19 +28,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/service/DbStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/service/DbStorage.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/ReportBuilder.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/ReportBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/parsers/ReportParser.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/parsers/ReportParser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/web/ReportServlet.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/ReportServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/report.jsp" afterPath="$PROJECT_DIR$/web/report.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/search.jsp" afterPath="$PROJECT_DIR$/web/search.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bgm-platform.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364928784125" ignored="false" />
+    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364934433312" ignored="false" />
     <file path="/CatalogStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364414197812" ignored="false" />
     <file path="/fragment.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364933375062" ignored="false" />
     <file path="db-console:/b524fb0f/bd8e1b6e-fe0f-401f-a88d-0e81e53c8907/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363032963765" ignored="false" />
@@ -214,19 +208,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ReportBuilder.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ReportBuilder.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/ReportBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="35" selection-start="680" selection-end="680" vertical-scroll-proportion="0.0">
+            <state line="146" column="9" selection-start="5642" selection-end="5642" vertical-scroll-proportion="0.5541958">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ReportServlet.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ReportServlet.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/ReportServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="79" column="25" selection-start="2582" selection-end="2582" vertical-scroll-proportion="0.34254143">
+            <state line="54" column="31" selection-start="1876" selection-end="1876" vertical-scroll-proportion="-1.04">
               <folding />
             </state>
           </provider>
@@ -327,11 +321,11 @@
         <option value="db-console:/478b00c/0b3a3eb9-be4a-404b-833f-801c635b33d2/" />
         <option value="$PROJECT_DIR$/web/search.jsp" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/parsers/ReportParser.java" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/ReportBuilder.java" />
         <option value="db-console:/478b00c/e2da7e88-ea9c-457a-a521-d20358ebfdd9/" />
         <option value="$PROJECT_DIR$/web/report.jsp" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/service/DbStorage.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/ReportServlet.java" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/ReportBuilder.java" />
       </list>
     </option>
   </component>
@@ -976,7 +970,11 @@
       <created>1364854000812</created>
       <updated>1364854000812</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="убрал кирилицу в туду и изменил парсинг отчета , теперь отчет парсится в ReportBuilder там он помоему роднее">
+      <created>1364934436875</created>
+      <updated>1364934436875</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1004,10 +1002,10 @@
     <editor active="true" />
     <layout>
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30506477" sideWeight="0.49675852" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2803298" sideWeight="0.49713057" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2803298" sideWeight="0.49713057" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11993517" sideWeight="0.6702002" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11993517" sideWeight="0.7196702" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32979977" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1017,12 +1015,12 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32744405" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32979977" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23905997" sideWeight="0.1696113" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32979977" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32979977" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22528364" sideWeight="0.21672556" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17828201" sideWeight="0.6702002" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17828201" sideWeight="0.7196702" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32391047" sideWeight="0.48379254" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1070,7 +1068,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="порефакторил немного" />
+    <option name="LAST_COMMIT_MESSAGE" value="убрал кирилицу в туду и изменил парсинг отчета , теперь отчет парсится в ReportBuilder там он помоему роднее" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1100,6 +1098,7 @@
     <MESSAGE value="Начал разработку страницы отчета" />
     <MESSAGE value="Добавил сервлет обработки отчета , основную логику загрузки файла." />
     <MESSAGE value="порефакторил немного" />
+    <MESSAGE value="убрал кирилицу в туду и изменил парсинг отчета , теперь отчет парсится в ReportBuilder там он помоему роднее" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1195,13 +1194,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/ReportBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="35" selection-start="680" selection-end="680" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="dbDummy://db-console:/478b00c/e2da7e88-ea9c-457a-a521-d20358ebfdd9/">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="46" selection-start="0" selection-end="45" vertical-scroll-proportion="0.0">
@@ -1240,7 +1232,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/ReportServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="25" selection-start="2582" selection-end="2582" vertical-scroll-proportion="0.34254143">
+        <state line="54" column="31" selection-start="1876" selection-end="1876" vertical-scroll-proportion="-1.04">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/ReportBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="146" column="9" selection-start="5642" selection-end="5642" vertical-scroll-proportion="0.5541958">
           <folding />
         </state>
       </provider>

@@ -144,7 +144,7 @@ public class ReportBuilder {
 //
 //        ReportParser rp = new ReportParser();
 //
-//        List<ReportItem> reportList = rp.loadClientReport(REPORTS_DIR + "/Отчетная ведемость для -Beeline.xls", 0);
+//
 //
 //        buildMobileReport(dbStore, reportList);
 //    }
