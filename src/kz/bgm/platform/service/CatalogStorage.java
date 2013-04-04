@@ -1,5 +1,6 @@
 package kz.bgm.platform.service;
 
+import kz.bgm.platform.items.Customer;
 import kz.bgm.platform.items.Track;
 
 import java.util.List;
@@ -18,9 +19,17 @@ public interface CatalogStorage {
 
     List<Track> searchBySongName(String songName);
 
+    List<Track> searchByCode(String code);
+
+    List<Track> searchByComposer(String composer);
+
     List<Track> searchByArtistLike(String artist);
 
     List<Track> searchByArtist(String artist);
+
+    Customer getCustomer(String name);
+
+    Customer getCustomer(int id);
 
     List<Track> search(String value);
 

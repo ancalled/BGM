@@ -17,11 +17,23 @@
 <head>
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap-dropdown.js"></script>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="screen"/>
     <title>Поиск</title>
 </head>
 <body>
+<div class="navbar">
+    <div class="navbar-inner">
+        <a class="brand" href="#">BGM Platform</a>
+        <ul class="nav">
+            <li><a href="\index.html">Главная</a></li>
+            <li><a href="\report.jsp">Отчеты</a></li>
+            <li class="active"><a href="\search.jsp">Поиск</a></li>
+            <li><a href="">Админка</a></li>
+        </ul>
+    </div>
+</div>
 
 <div class="container">
 
@@ -34,7 +46,7 @@
 
         <form action="/finder" method="post">
             <div class="row">
-               <label for="find"></label><input type="text" name="find" id="find" class="input-block-level">
+                <label for="find"></label><input type="text" name="find" id="find" class="input-block-level">
             </div>
 
             <br>
@@ -45,10 +57,14 @@
             </div>
 
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                <li><a tabindex="-1" href="#">Regular link</a></li>
-                <li class="disabled"><a tabindex="-1" href="#">Disabled link</a></li>
-                <li><a tabindex="-1" href="#">Another link</a></li>
+                <li><a tabindex="-1" href="#">Action</a></li>
+                <li><a tabindex="-1" href="#">Another action</a></li>
+                <li><a tabindex="-1" href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a tabindex="-1" href="#">Separated link</a></li>
             </ul>
+
+
             <%--<label class="radio" style="margin-top: 20">--%>
 
             <%--<input type="radio" name="type" class="icon-check" value="like">--%>

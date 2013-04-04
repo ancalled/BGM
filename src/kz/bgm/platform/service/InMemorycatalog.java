@@ -1,5 +1,6 @@
 package kz.bgm.platform.service;
 
+import kz.bgm.platform.items.Customer;
 import kz.bgm.platform.items.Track;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class InMemorycatalog implements CatalogStorage {
 
     @Override
     public void storeInCatalog(List<Track> trackList, String catalog) {
-        //To change body of implemented methods use File | Settings | File Templates.
+
     }
 
     public void addItem(Track track, boolean common) {
@@ -87,13 +88,23 @@ public class InMemorycatalog implements CatalogStorage {
 
     @Override
     public Float getRoyalty(int catalogId) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;
     }
 
 
     @Override
     public List<Track> searchBySongName(String songName) {
         throw new IllegalStateException("Not implemented!");
+    }
+
+    @Override
+    public List<Track> searchByCode(String code) {
+        return null;
+    }
+
+    @Override
+    public List<Track> searchByComposer(String composer) {
+        return null;
     }
 
     @Override
@@ -104,6 +115,16 @@ public class InMemorycatalog implements CatalogStorage {
     @Override
     public List<Track> searchByArtist(String songName) {
         throw new IllegalStateException("Not implemented!");
+    }
+
+    @Override
+    public Customer getCustomer(String name) {
+        return null;
+    }
+
+    @Override
+    public Customer getCustomer(int id) {
+        return null;
     }
 
 

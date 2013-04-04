@@ -1,6 +1,7 @@
 package kz.bgm.platform.service;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import kz.bgm.platform.items.Customer;
 import kz.bgm.platform.items.Track;
 import kz.bgm.platform.search.IdSearcher;
 import org.apache.log4j.Logger;
@@ -352,6 +353,57 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
+    public List<Track> searchByCode(String code) {
+        Connection connection = null;
+        try {
+            connection = pool.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT * FROM composition WHERE code=?");
+            stmt.setString(1, code);
+
+            return parseTracks(stmt.executeQuery());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return Collections.emptyList();
+    }
+
+    @Override
+    public List<Track> searchByComposer(String composer) {
+        Connection connection = null;
+        try {
+            connection = pool.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT * FROM composition WHERE composer=?");
+            stmt.setString(1, composer);
+
+            return parseTracks(stmt.executeQuery());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return Collections.emptyList();
+    }
+
+    @Override
     public List<Track> searchByArtist(String artist) {
         Connection connection = null;
         try {
@@ -377,6 +429,64 @@ public class DbStorage implements CatalogStorage {
         }
 
         return Collections.emptyList();
+    }
+
+    @Override
+    public Customer getCustomer(String name) {
+        Connection connection = null;
+        try {
+            connection = pool.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT * FROM customer WHERE name=?");
+            stmt.setString(1, name);
+
+            ResultSet rs = stmt.executeQuery();
+
+            return parseCustomer(rs);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public Customer getCustomer(int id) {
+
+        Connection connection = null;
+        try {
+            connection = pool.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT * FROM composition WHERE id=?");
+            stmt.setInt(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            return parseCustomer(rs);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return null;
+
     }
 
 
@@ -406,7 +516,6 @@ public class DbStorage implements CatalogStorage {
         return Collections.emptyList();
     }
 
-
     private static List<Track> parseTracks(ResultSet rs) throws SQLException {
         if (rs == null) return null;
 
@@ -433,6 +542,15 @@ public class DbStorage implements CatalogStorage {
         track.setMobileShare(rs.getFloat("shareMobile"));
         track.setPublicShare(rs.getFloat("sharePublic"));
         return track;
+    }
+
+    private static Customer parseCustomer(ResultSet rs) throws SQLException {
+        Customer customer = new Customer();
+        customer.setId(rs.getInt("id"));
+        customer.setName(rs.getString("name"));
+        customer.setRightType(rs.getString("right_type"));
+        customer.setRoyalty(rs.getFloat("royalty"));
+        return customer;
     }
 
     @Override

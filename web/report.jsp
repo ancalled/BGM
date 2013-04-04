@@ -30,6 +30,19 @@
 
 <body>
 
+<div class="navbar">
+    <div class="navbar-inner">
+        <a class="brand" href="#">BGM Platform</a>
+        <ul class="nav">
+            <li><a href="\index.html">Главная</a></li>
+            <li class="active"><a href="\report.jsp">Отчеты</a></li>
+            <li><a href="\search.jsp">Поиск</a></li>
+            <li><a href="">Админка</a></li>
+        </ul>
+    </div>
+</div>
+
+
 <div class="container text-center">
     <div class="row text-left">
         <legend>

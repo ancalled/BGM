@@ -3,220 +3,26 @@
 <html>
 
 <head>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap-dropdown.js"></script>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <style type="text/css">
-
-        body {
-            font-size: 0.8em;
-            font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-            margin: 0px;
-            padding: 0px;
-        }
-
-        img {
-            border: 0px;
-        }
-
-        thead td {
-            font-weight: bold;
-            color: #000;
-            background-color: #E2EBED;
-        }
-
-        td {
-            padding: 2px;
-        }
-
-        table {
-            border: 1px solid #000;
-            border-collapse: collapse;
-        }
-
-        h1 {
-            font-size: 1.3em;
-            margin-bottom: 0px;
-        }
-
-        table, h1, p, #ads {
-            margin-left: 10px;
-        }
-
-        #ads {
-            margin-top: 20px;
-        }
-
-            /* These classes are used by the script as rollover effect for table 1 and 2 */
-
-        .tableRollOverEffect1 {
-            background-color: #317082;
-            color: #FFF;
-        }
-
-        .tableRollOverEffect2 {
-            background-color: #000;
-            color: #FFF;
-        }
-
-        .tableRowClickEffect1 {
-            background-color: #F00;
-            color: #FFF;
-        }
-
-        .tableRowClickEffect2 {
-            background-color: #00F;
-            color: #FFF;
-        }
-
-    </style>
-    <script type="text/javascript">
-        /************************************************************************************************************
-         (C) www.dhtmlgoodies.com, November 2005
-
-         This is a script from www.dhtmlgoodies.com. You will find this and a lot of other scripts at our website.
-
-         Terms of use:
-         You are free to use this script as long as the copyright message is kept intact. However, you may not
-         redistribute, sell or repost it without our permission.
-
-         Thank you!
-
-         www.dhtmlgoodies.com
-         Alf Magne Kalleland
-
-         ************************************************************************************************************/
-        var arrayOfRolloverClasses = new Array();
-        var arrayOfClickClasses = new Array();
-        var activeRow = false;
-        var activeRowClickArray = new Array();
-
-        function highlightTableRow() {
-            var tableObj = this.parentNode;
-            if (tableObj.tagName != 'TABLE')tableObj = tableObj.parentNode;
-
-            if (this != activeRow) {
-                this.setAttribute('origCl', this.className);
-                this.origCl = this.className;
-            }
-            this.className = arrayOfRolloverClasses[tableObj.id];
-
-            activeRow = this;
-
-        }
-
-        function clickOnTableRow() {
-            var tableObj = this.parentNode;
-            if (tableObj.tagName != 'TABLE')tableObj = tableObj.parentNode;
-
-            if (activeRowClickArray[tableObj.id] && this != activeRowClickArray[tableObj.id]) {
-                activeRowClickArray[tableObj.id].className = '';
-            }
-            this.className = arrayOfClickClasses[tableObj.id];
-
-            activeRowClickArray[tableObj.id] = this;
-
-        }
-
-        function resetRowStyle() {
-            var tableObj = this.parentNode;
-            if (tableObj.tagName != 'TABLE')tableObj = tableObj.parentNode;
-
-            if (activeRowClickArray[tableObj.id] && this == activeRowClickArray[tableObj.id]) {
-                this.className = arrayOfClickClasses[tableObj.id];
-                return;
-            }
-
-            var origCl = this.getAttribute('origCl');
-            if (!origCl)origCl = this.origCl;
-            this.className = origCl;
-
-        }
-
-        function addTableRolloverEffect(tableId, whichClass, whichClassOnClick) {
-            arrayOfRolloverClasses[tableId] = whichClass;
-            arrayOfClickClasses[tableId] = whichClassOnClick;
-
-            var tableObj = document.getElementById(tableId);
-            var tBody = tableObj.getElementsByTagName('TBODY');
-            if (tBody) {
-                var rows = tBody[0].getElementsByTagName('TR');
-            } else {
-                var rows = tableObj.getElementsByTagName('TR');
-            }
-            for (var no = 0; no < rows.length; no++) {
-                rows[no].onmouseover = highlightTableRow;
-                rows[no].onmouseout = resetRowStyle;
-
-                if (whichClassOnClick) {
-                    rows[no].onclick = clickOnTableRow;
-                }
-            }
-
-        }
-
-
-    </script>
-
-    <title>Find song</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="screen"/>
+    <title>BGM Platform</title>
 </head>
 <body>
-<label title="Композиция">
-    <input  align="center" type="text" name="find" id="song_name" size="30" style="margin: 15px">
-</label>
-<input type="button" value="Найти" onclick="findTracksFromDB(document.getElementById('song_name').value)">
 
-<h1>Result Table</h1>
-<table id="myTable">
-    <thead>
-    <tr>
-        <td>Id</td>
-        <td>Code</td>
-        <td>Composition</td>
-        <td>Artist</td>
-        <td>Authors</td>
-        <td>Controlled Metch</td>
-        <td>Collect Metch</td>
-        <td>Publisher</td>
-        <td>Comment</td>
-    </tr>
-    </thead>
-    <tbody>
-
-
-    </tbody>
-</table>
-
-
-<script type="text/javascript">
-
-    function findTracksFromDB(ask){
-        $.getJSON('/find-track?find='+ask, function (data) {
-            $("tbody").empty();
-            $.each(data, function (key, val) {
-
-
-                $("tbody").append("<tr><td>" + val.Id + "</td><td>" + val.Code + "</td>" +
-                        "<td>" + val.Composition + "</td>" +
-                        "<td>" + val.Artist + "</td>" +
-                        "<td>" + val.Authors + "</td>" +
-                        "<td>" + val.Controlled_Metch + "</td>" +
-                        "<td>" + val.Collect_Metch + "</td>" +
-                        "<td>" + val.Publisher + "</td>" +
-                        "<td>" + val.Comment + "</td></tr>");
-            });
-
-        });
-    }
-</script>
-
-<p>
-
-</p>
-
-<script type="text/javascript">
-    addTableRolloverEffect('myTable', 'tableRollOverEffect1', 'tableRowClickEffect1');
-    addTableRolloverEffect('myTable2', 'tableRollOverEffect2', 'tableRowClickEffect2');
-</script>
+<div class="navbar">
+    <div class="navbar-inner">
+        <a class="brand" href="#">BGM Platform</a>
+        <ul class="nav">
+            <li class="active"><a href="\index.html">Главная</a></li>
+            <li><a href="\report.jsp">Отчеты</a></li>
+            <li><a href="\search.jsp">Поиск</a></li>
+            <li><a href="">Админка</a></li>
+        </ul>
+    </div>
+</div>
 
 </body>
 </html>

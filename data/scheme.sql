@@ -8,8 +8,8 @@
 #   artist                VARCHAR(400),
 #   publisher             VARCHAR(400),
 #   comment               VARCHAR(600),
-#   controlled_mech_share DECIMAL(6, 6),
-#   collect_mech_share    DECIMAL(6, 6)
+#   controlled_mech_share DECIMAL(6, 3),
+#   collect_mech_share    DECIMAL(6, 3)
 # );
 
 
@@ -18,9 +18,18 @@
 CREATE TABLE catalogID (
   id      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name    VARCHAR(200),
-  royalty DECIMAL(6, 6)
+  royalty DECIMAL(6, 3)
 );
 
+CREATE TABLE customer (
+  id      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name    VARCHAR(200),
+  right_type varchar(50),
+  royalty DECIMAL(6, 3)
+);
+
+
+create index code_index on composition(code) using btree;
 
 CREATE TABLE composition (
   id         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -29,8 +38,8 @@ CREATE TABLE composition (
   name       VARCHAR (400),
   artist     VARCHAR (400),
   composer   VARCHAR(400),
-  shareMobile DECIMAL(6, 6),
-  sharePublic DECIMAL(6, 6)
+  shareMobile DECIMAL(6, 3),
+  sharePublic DECIMAL(6, 3)
 );
 
 

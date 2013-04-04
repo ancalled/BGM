@@ -29,7 +29,6 @@ public class FindServlet extends HttpServlet {
             throws ServletException, IOException {
 
 
-
         String find = req.getParameter("find");
         String type = req.getParameter(FindTrackServletJson.FIND_TYPE);
 
@@ -37,19 +36,22 @@ public class FindServlet extends HttpServlet {
         if (find != null && !"".equals(find) && type != null) {
 
             List<Track> found;
-            if (type.equals("like")) {
+            if (type.equals("like-artist")) {
                 found = catalogService.searchByArtistLike(find);
 
-            } else if (type.equals("equals")) {
+            } else if (type.equals("artist")) {
                 found = catalogService.searchByArtist(find);
-
+            } else if (type.equals("code")) {
+                found = catalogService.searchByCode(find);
+            } else if (type.equals("song")) {
+                found = catalogService.searchBySongName(find);
+            } else if (type.equals("composer")) {
+                found = catalogService.searchByComposer(find);
             } else {
-                found = catalogService.search(find,true);
+                found = catalogService.search(find, true);
             }
 
-
             session.setAttribute(TRACK_LIST, found);
-
 
         }
 
