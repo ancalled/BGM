@@ -2,10 +2,10 @@ package kz.bgm.platform.items;
 
 public class Customer {
 
-    int id = 0;
-    String name = "";
-    float royalty = 0f;
-    String rightType = "";
+    int id;
+    String name;
+    float royalty;
+    String rightType;
 
     public Customer() {
 

@@ -16,7 +16,7 @@
     </servlet>
     <servlet>
         <servlet-name>reportServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.ReportServlet</servlet-class>
+        <servlet-class>kz.bgm.platform.web.CustomerReportServlet</servlet-class>
     </servlet>
 
 

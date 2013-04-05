@@ -20,14 +20,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReportServlet extends HttpServlet {
+public class CustomerReportServlet extends HttpServlet {
 
     public static final String FILE = "file";
 
     public static final String APP_DIR = System.getProperty("user.dir");
     public static final String REPORT_DIR = APP_DIR + "/reports";
 
-    public static final Logger log = Logger.getLogger(ReportServlet.class);
+    public static final Logger log = Logger.getLogger(CustomerReportServlet.class);
     public static final String REPORT = "reportList";
     public static final String CLIENT_RATE = "client_rate";
     public static final String REPORT_PATH = "reportPath";
@@ -69,7 +69,8 @@ public class ReportServlet extends HttpServlet {
                 for (FileItem file : files) {
                     String filePath = saveFile(file);
                     log.info("Got client report " + filePath);
-                    reportList = buildReport(filePath, clientRate);
+//                    reportList = buildReport(filePath, clientRate);
+                    storeReport(filePath, clientRate);
                     reportsPaths.add("/reports/" + new File(filePath).getName());   //todo bad - remake
                 }
                 req.getSession().setAttribute(REPORT_PATH, reportsPaths);
@@ -115,6 +116,13 @@ public class ReportServlet extends HttpServlet {
     //todo finishhim this
     private List<ReportItem> buildReport(String fileName, float clientRate) throws IOException, InvalidFormatException {
         return ReportBuilder.buildMobileReport(catalogService, fileName, clientRate);
+    }
+
+    private void storeReport(String fileName, float clientRate) throws IOException, InvalidFormatException {
+        ReportBuilder.storeCustomerReport(fileName, catalogService, "GSM Technologies");
+
+        log.info("All Reports dtored");
+
     }
 
     @Override

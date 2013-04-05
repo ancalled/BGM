@@ -1,13 +1,13 @@
 package kz.bgm.platform;
 
-import kz.bgm.platform.items.ReportItem;
-import kz.bgm.platform.items.Track;
+import kz.bgm.platform.items.*;
 import kz.bgm.platform.parsers.ReportParser;
 import kz.bgm.platform.service.CatalogStorage;
 import org.apache.log4j.Logger;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 public class ReportBuilder {
@@ -19,6 +19,49 @@ public class ReportBuilder {
 
     private static final Logger log = Logger.getLogger(ReportBuilder.class);
 
+
+    public static void storeCustomerReport(String fileName,
+                                           CatalogStorage storage,
+                                           String customerName) {
+        try {
+
+            log.info("Storing to DB Customer reports " +
+                    fileName + " by customer" + customerName);
+
+            Customer customer = storage.getCustomer(customerName);
+
+            CustomerReport cr = makeCustomerReport(customer,
+                    new Date(new java.util.Date().getTime()),
+                    new Date(new java.util.Date().getTime()));
+          storage.insertCustomerReport(cr);
+
+//            storage.getCustomerReport(cr.)
+
+            List<CustomerReportItem> reportList = ReportParser.
+                    parseCustomerReport(fileName,
+                            storage,
+                            1);  //todo fix reportId
+
+            storage.insertCustomerReportItem(reportList);
+
+            log.info("storing done");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+
+
+    }
+
+    private static CustomerReport makeCustomerReport(Customer customer, Date orderDate, Date downloadDate) {
+        CustomerReport cr = new CustomerReport();
+        cr.setCustomerId(customer.getId());
+        cr.setOrderDate(orderDate);
+        cr.setDownloadDate(downloadDate);
+        return cr;
+
+    }
 
     public static List<ReportItem> buildMobileReport(
             CatalogStorage catalogStorage,

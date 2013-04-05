@@ -2,6 +2,8 @@ package kz.bgm.platform.service;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import kz.bgm.platform.items.Customer;
+import kz.bgm.platform.items.CustomerReport;
+import kz.bgm.platform.items.CustomerReportItem;
 import kz.bgm.platform.items.Track;
 import kz.bgm.platform.search.IdSearcher;
 import org.apache.log4j.Logger;
@@ -291,6 +293,85 @@ public class DbStorage implements CatalogStorage {
         return Collections.emptyList();
     }
 
+    @Override
+    public void insertCustomerReportItem(List<CustomerReportItem> reportItemList) {
+        Connection connection = null;
+        try {
+            log.info("inserting customer report items " + reportItemList.size() + " size");
+
+            connection = pool.getConnection();
+            PreparedStatement ps =
+                    connection.prepareStatement("INSERT INTO " +
+                            "customer_report_item(report_id,composition_id,name," +
+                            "artist,content_type,qty,price) " +
+                            "VALUES (?,?,?,?,?,?,?)");
+
+
+            for (CustomerReportItem cr : reportItemList) {
+                ps.setInt(1, cr.getReportId());
+                ps.setInt(2, cr.getCompositionId());
+                ps.setString(3, cr.getName());
+                ps.setString(4, cr.getArtist());
+                ps.setString(5, cr.getContentType());
+                ps.setInt(6, cr.getQty());
+                ps.setFloat(7, cr.getPrice());
+
+                ps.addBatch();
+            }
+
+            connection.setAutoCommit(false);
+            ps.executeBatch();
+            connection.commit();
+
+            log.info("insert done");
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+    @Override
+    public void insertCustomerReport(CustomerReport report) {
+        Connection connection = null;
+        try {
+            log.info("inserting customer report ");
+            connection = pool.getConnection();
+
+            PreparedStatement ps =
+                    connection.prepareStatement("INSERT INTO " +
+                            "customer_report(customer_id,order_date,download_date) " +
+                            "VALUES (?,?,?)");
+
+            ps.setInt(1, report.getCustomerId());
+            ps.setDate(2, report.getOrderDate());
+            ps.setDate(3, report.getDownloadDate());
+
+          ps.executeQuery();
+
+            log.info("insert done");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 
     public Track searchById(String id) {
         Connection connection = null;
@@ -442,6 +523,7 @@ public class DbStorage implements CatalogStorage {
 
             ResultSet rs = stmt.executeQuery();
 
+            rs.next();
             return parseCustomer(rs);
 
         } catch (SQLException e) {
@@ -470,7 +552,7 @@ public class DbStorage implements CatalogStorage {
             stmt.setInt(1, id);
 
             ResultSet rs = stmt.executeQuery();
-
+            rs.next();
             return parseCustomer(rs);
 
         } catch (SQLException e) {

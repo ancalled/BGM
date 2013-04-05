@@ -1,6 +1,8 @@
 package kz.bgm.platform.service;
 
 import kz.bgm.platform.items.Customer;
+import kz.bgm.platform.items.CustomerReport;
+import kz.bgm.platform.items.CustomerReportItem;
 import kz.bgm.platform.items.Track;
 
 import java.util.ArrayList;
@@ -131,6 +133,17 @@ public class InMemorycatalog implements CatalogStorage {
     @Override
     public List<Track> search(String value) {
         throw new IllegalStateException("Not implemented!");
+    }
+
+    @Override
+    public void insertCustomerReportItem(List<CustomerReportItem> reportItemList) {
+
+    }
+
+    @Override
+    public void insertCustomerReport(CustomerReport report) {
+
+
     }
 
     @Override

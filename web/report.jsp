@@ -1,5 +1,5 @@
 <%@ page import="kz.bgm.platform.items.ReportItem" %>
-<%@ page import="kz.bgm.platform.web.ReportServlet" %>
+<%@ page import="kz.bgm.platform.web.CustomerReportServlet" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -7,12 +7,12 @@
 <%
     @SuppressWarnings("unchecked")
     List<ReportItem> reportList =
-            (List<ReportItem>) session.getAttribute(ReportServlet.REPORT);
+            (List<ReportItem>) session.getAttribute(CustomerReportServlet.REPORT);
     @SuppressWarnings("unchecked")
     List<String> reportPath =
-            (List<String>) session.getAttribute(ReportServlet.REPORT_PATH);
+            (List<String>) session.getAttribute(CustomerReportServlet.REPORT_PATH);
 
-    session.setAttribute(ReportServlet.REPORT, null);
+    session.setAttribute(CustomerReportServlet.REPORT, null);
 
 %>
 
