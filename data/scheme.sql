@@ -50,6 +50,35 @@ CREATE TABLE customer_report_item (
 
 
 
+SELECT
+  i.id,
+  c.code,
+  price,
+  qty,
+  (price * qty) vol,
+  shareMobile,
+  @customerRoyalty := (SELECT cm.royalty
+            FROM customer cm
+            WHERE cm.id = (SELECT
+                             cr.customer_id
+                           FROM customer_report cr
+                           WHERE cr.id = i.report_id)) `customer royalty`,
+ @catalogRoyalty := (SELECT cat.royalty FROM catalog cat WHERE cat.id = c.catalog_id) `catalog royalty`,
+  round((qty * price * (shareMobile / 100) * (@customerRoyalty / 100) * (@catalogRoyalty / 100)) , 3)  revenue,
+#concat(c.name, ' - ', c.artist) nm,
+ c.name,
+(SELECT
+copyright
+  FROM catalog cat
+  WHERE cat.id = c.catalog_id)                        cat
+
+FROM customer_report_item i
+  LEFT JOIN composition c
+    ON (i.composition_id = c.id)
+WHERE i.composition_id > 0
+
+LIMIT 0, 25;
+
 
 
 CREATE index code_index ON composition(code) USING btree;

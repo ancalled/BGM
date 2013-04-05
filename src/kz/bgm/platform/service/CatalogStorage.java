@@ -39,7 +39,6 @@ public interface CatalogStorage {
 
     int insertCustomerReport(CustomerReport report);
 
-
     List<Track> search(String author, boolean b);
 
 }
