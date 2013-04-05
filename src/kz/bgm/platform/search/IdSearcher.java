@@ -30,6 +30,9 @@ public class IdSearcher {
     private static String APP_DIR = System.getProperty("user.dir");
     private static String INDEX_DIR = APP_DIR + "/lucen-indexes";
     public static final int RESULT_SIZE = 100000;
+    private FSDirectory index;
+    private IndexReader reader;
+    private IndexSearcher searcher;
 
     public void init(Connection connection) throws IOException {
         long start = System.currentTimeMillis();
@@ -51,7 +54,7 @@ public class IdSearcher {
             }
         }
 
-        FSDirectory index = FSDirectory.open(indexDir);
+        index = FSDirectory.open(indexDir);
 
         IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_41, analyzer);
         IndexWriter w = new IndexWriter(index, config);
@@ -115,9 +118,9 @@ public class IdSearcher {
                 "' and" + " '" +
                 composition + "'");
 
-        FSDirectory index = FSDirectory.open(new File(INDEX_DIR));
-        IndexReader reader = DirectoryReader.open(index);
-        IndexSearcher searcher = new IndexSearcher(reader);
+        index = FSDirectory.open(new File(INDEX_DIR));
+        reader = DirectoryReader.open(index);
+        searcher = new IndexSearcher(reader);
 
         String[] fields = new String[]{"artist", "name"};
         String[] values = new String[]{artist, composition};
