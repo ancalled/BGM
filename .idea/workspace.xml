@@ -51,26 +51,13 @@
     </treeState>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="сделал загрузку репортов">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/result.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/CatalogLoader.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/CatalogLoader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/service/CatalogStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/service/CatalogStorage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/items/CustomerReport.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/items/CustomerReport.java" />
+    <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/web/CustomerReportServlet.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/CustomerReportServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/service/DbStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/service/DbStorage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/search/IdSearcher.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/search/IdSearcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/service/InMemorycatalog.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/service/InMemorycatalog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/ReportBuilder.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/ReportBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/kz/bgm/platform/test/TestDB.java" afterPath="$PROJECT_DIR$/test/kz/bgm/platform/test/TestDB.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bgm-platform.iml" afterPath="$PROJECT_DIR$/bgm-platform.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/report.jsp" afterPath="$PROJECT_DIR$/web/report.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bgm-platform.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365135220870" ignored="false" />
+    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365136936394" ignored="false" />
     <file path="/CatalogStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365136529894" ignored="false" />
     <file path="/fragment.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365136102122" ignored="false" />
     <file path="db-console:/b524fb0f/bd8e1b6e-fe0f-401f-a88d-0e81e53c8907/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363032963765" ignored="false" />
@@ -130,7 +117,7 @@
     <file path="/a.dummy" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365068729867" ignored="false" />
     <file path="/IdSearcher.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365133803459" ignored="false" />
     <file path="/result.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365134946492" ignored="false" />
-    <file path="/CustomerReportServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365134337163" ignored="false" />
+    <file path="/CustomerReportServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365137999490" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -310,7 +297,7 @@
       <file leaf-file-name="CustomerReportServlet.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/CustomerReportServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="123" column="31" selection-start="4161" selection-end="4161" vertical-scroll-proportion="0.6642729">
+            <state line="98" column="34" selection-start="3262" selection-end="3262" vertical-scroll-proportion="0.54937166">
               <folding />
             </state>
           </provider>
@@ -1033,7 +1020,11 @@
       <created>1364809117038</created>
       <updated>1364809117039</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="доделал агрузку отчетов в БД">
+      <created>1365136940223</created>
+      <updated>1365136940223</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1107,7 +1098,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="поправил  копирование web папки  :) в build.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="доделал агрузку отчетов в БД" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1140,6 +1131,7 @@
     <MESSAGE value="добавил  копирование log4j.xml в build.xml" />
     <MESSAGE value="добавил  копирование web папки в build.xml" />
     <MESSAGE value="поправил  копирование web папки  :) в build.xml" />
+    <MESSAGE value="доделал агрузку отчетов в БД" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1288,7 +1280,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/CustomerReportServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="123" column="31" selection-start="4161" selection-end="4161" vertical-scroll-proportion="0.6642729">
+        <state line="98" column="34" selection-start="3262" selection-end="3262" vertical-scroll-proportion="0.54937166">
           <folding />
         </state>
       </provider>

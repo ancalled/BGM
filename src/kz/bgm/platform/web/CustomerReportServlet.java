@@ -81,7 +81,7 @@ public class CustomerReportServlet extends HttpServlet {
 
         } catch (Exception e) {
             log.error(e.getMessage());     //todo make errors out
-            resp.sendRedirect("report.jsp?r=error");
+            resp.sendRedirect("result.jsp?r=error");
         }
 
 
@@ -96,7 +96,7 @@ public class CustomerReportServlet extends HttpServlet {
 
         String filePath = REPORT_DIR + "/" + file.getName();
 
-        File reportFile = getFile(filePath);
+        File reportFile = new File(filePath);
 
         file.write(reportFile);
         return reportFile.getPath();
@@ -104,14 +104,7 @@ public class CustomerReportServlet extends HttpServlet {
 
     private static int fileCounter = 1;
 
-    private File getFile(String filePath) {
-        File file = new File(filePath);
-        if (file.exists()) {                    //todo finish this
-            file = new File(filePath + "(" + fileCounter++ + ")");
-            file = getFile(file.getPath());
-        }
-        return file;
-    }
+
 
     //todo finishhim this
     private List<ReportItem> buildReport(String fileName, float clientRate) throws IOException, InvalidFormatException {
