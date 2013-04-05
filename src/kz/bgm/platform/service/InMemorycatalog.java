@@ -141,8 +141,8 @@ public class InMemorycatalog implements CatalogStorage {
     }
 
     @Override
-    public void insertCustomerReport(CustomerReport report) {
-
+    public int insertCustomerReport(CustomerReport report) {
+      return 0;
 
     }
 

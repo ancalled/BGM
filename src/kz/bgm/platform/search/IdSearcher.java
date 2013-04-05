@@ -142,7 +142,7 @@ public class IdSearcher {
 
         log.info("Found " + totalHits + " tracks id.");
 
-        for (int k = 0; k < totalHits; k++) {
+        for (int k = 0; k < hits.length; k++) {
             ScoreDoc hit = hits[k];
 
             if (hit.score < 7) {

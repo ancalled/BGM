@@ -33,14 +33,13 @@ public class ReportBuilder {
             CustomerReport cr = makeCustomerReport(customer,
                     new Date(new java.util.Date().getTime()),
                     new Date(new java.util.Date().getTime()));
-          storage.insertCustomerReport(cr);
 
-//            storage.getCustomerReport(cr.)
+            int reportId = storage.insertCustomerReport(cr);
 
             List<CustomerReportItem> reportList = ReportParser.
                     parseCustomerReport(fileName,
                             storage,
-                            1);  //todo fix reportId
+                            reportId);  //todo fix reportId
 
             storage.insertCustomerReportItem(reportList);
 
@@ -57,7 +56,7 @@ public class ReportBuilder {
     private static CustomerReport makeCustomerReport(Customer customer, Date orderDate, Date downloadDate) {
         CustomerReport cr = new CustomerReport();
         cr.setCustomerId(customer.getId());
-        cr.setOrderDate(orderDate);
+        cr.setReportDate(orderDate);
         cr.setDownloadDate(downloadDate);
         return cr;
 

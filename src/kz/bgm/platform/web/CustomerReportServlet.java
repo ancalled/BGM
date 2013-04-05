@@ -73,8 +73,6 @@ public class CustomerReportServlet extends HttpServlet {
                     storeReport(filePath, clientRate);
                     reportsPaths.add("/reports/" + new File(filePath).getName());   //todo bad - remake
                 }
-                req.getSession().setAttribute(REPORT_PATH, reportsPaths);
-                req.getSession().setAttribute(REPORT, reportList);
 
             } else {
                 log.info("No one files uploaded because files = " +
@@ -83,10 +81,12 @@ public class CustomerReportServlet extends HttpServlet {
 
         } catch (Exception e) {
             log.error(e.getMessage());     //todo make errors out
-            resp.sendRedirect("report.jsp");
+            resp.sendRedirect("report.jsp?r=error");
         }
 
-        resp.sendRedirect("report.jsp");
+
+
+        resp.sendRedirect("result.jsp?r=ok");
     }
 
 
@@ -121,7 +121,7 @@ public class CustomerReportServlet extends HttpServlet {
     private void storeReport(String fileName, float clientRate) throws IOException, InvalidFormatException {
         ReportBuilder.storeCustomerReport(fileName, catalogService, "GSM Technologies");
 
-        log.info("All Reports dtored");
+        log.info("All Reports stored");
 
     }
 

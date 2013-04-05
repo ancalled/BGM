@@ -21,7 +21,7 @@ public class CustomerReport {
         this.customerId = customerId;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setReportDate(Date orderDate) {
         this.orderDate = orderDate;
     }
 

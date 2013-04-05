@@ -122,19 +122,18 @@ public class CatalogLoader {
         DbStorage dbStorage = new DbStorage(host, port, base, user, pass);
 
         long startTime = System.currentTimeMillis();
-//        loadCatalog(dbStorage, "WCh");
-//        loadCatalog(dbStorage, "NMI_WEST");
-//        loadCatalog(dbStorage, "NMI");
-//        loadCatalog(dbStorage, "PMI_WEST");
-//        loadCatalog(dbStorage, "PMI");
-//        loadCatalog(dbStorage, "PMI related");
-//        loadCatalog(dbStorage, "NMI related");
-//
-//        loadSony(dbStorage, "MCS_Shares.xlsx", "MSG_MCS");
-//        loadSony(dbStorage, "Music Sales Group Shares.xlsx", "MSG_MCS");
-        loadSony(dbStorage, "R1.xlsx", "AMP");
-        loadSony(dbStorage, "R2.xlsx", "AMP");
-        loadSony(dbStorage, "R3.xlsx", "AMP");
+        loadCatalog(dbStorage, "NMI_WEST");
+        loadCatalog(dbStorage, "NMI");
+        loadCatalog(dbStorage, "PMI_WEST");
+        loadCatalog(dbStorage, "PMI");
+        loadCatalog(dbStorage, "PMI related");
+        loadCatalog(dbStorage, "NMI related");
+
+        loadSony(dbStorage, "MSG.xlsx", "MSG_MCS");
+        loadSony(dbStorage, "MCS_Shares.xlsx", "MSG_MCS");
+//        loadSony(dbStorage, "R1.xlsx", "AMP");
+//        loadSony(dbStorage, "R2.xlsx", "AMP");
+//        loadSony(dbStorage, "R3.xlsx", "AMP");
 
         long endTime = System.currentTimeMillis();
         float doneTime = ((endTime - startTime) / 1000) / 60;

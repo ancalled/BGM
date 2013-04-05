@@ -36,7 +36,6 @@ public class DbStorage implements CatalogStorage {
         //todo make indexing on  lucen
         idSearcher = new IdSearcher();
 
-
 //        Connection connection = null;
 //
 //        try {
@@ -198,13 +197,18 @@ public class DbStorage implements CatalogStorage {
 
     @Override
     public Track search(String artist, String song) {
+        Connection connection = null;
+
         try {
+
+            connection = pool.getConnection();
+
             List<String> idList = idSearcher.search(artist, song);
 
             List<Track> trackList = new ArrayList<Track>();
 
             for (int k = 0; k < idList.size() && k < RESULT_SIZE; k++) {
-                Track track = searchById(idList.get(k));
+                Track track = searchById(connection, idList.get(k));
                 trackList.add(track);
 
             }
@@ -216,7 +220,20 @@ public class DbStorage implements CatalogStorage {
 
         } catch (Exception e) {
             e.printStackTrace();
+
+        } finally {
+
+            if (connection != null) {
+
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+
+                }
+            }
         }
+
 
         return null;
     }
@@ -237,21 +254,36 @@ public class DbStorage implements CatalogStorage {
 
 
     public List<Track> searchWithLucen(String value) {
+        Connection connection = null;
         try {
+
+            connection = pool.getConnection();
+
+            if (connection == null) {
+                return null;
+            }
+
             List<String> idList = idSearcher.search(value);
 
             List<Track> trackList = new ArrayList<Track>();
 
             for (int k = 0; k < idList.size() && k < RESULT_SIZE; k++) {
-
-                Track track = searchById(idList.get(k));
+                Track track = searchById(connection, idList.get(k));
                 trackList.add(track);
             }
-
 
             return trackList;
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    log.error(e.getMessage());
+                    e.printStackTrace();
+                }
+            }
         }
         return Collections.emptyList();
     }
@@ -340,7 +372,7 @@ public class DbStorage implements CatalogStorage {
 
 
     @Override
-    public void insertCustomerReport(CustomerReport report) {
+    public int insertCustomerReport(CustomerReport report) {
         Connection connection = null;
         try {
             log.info("inserting customer report ");
@@ -349,15 +381,21 @@ public class DbStorage implements CatalogStorage {
             PreparedStatement ps =
                     connection.prepareStatement("INSERT INTO " +
                             "customer_report(customer_id,order_date,download_date) " +
-                            "VALUES (?,?,?)");
+                            "VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
             ps.setInt(1, report.getCustomerId());
             ps.setDate(2, report.getOrderDate());
             ps.setDate(3, report.getDownloadDate());
 
-          ps.executeQuery();
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
 
             log.info("insert done");
+            rs.next();
+
+
+            return rs.getInt(1);
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -370,13 +408,13 @@ public class DbStorage implements CatalogStorage {
                 }
             }
         }
+        return 0;
     }
 
 
-    public Track searchById(String id) {
-        Connection connection = null;
+    public Track searchById(Connection connection, String id) {
+
         try {
-            connection = pool.getConnection();
             PreparedStatement stmt = connection.prepareStatement(
                     "SELECT * FROM composition WHERE id=?");
 
@@ -392,16 +430,7 @@ public class DbStorage implements CatalogStorage {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
-
 
         return null;
     }
