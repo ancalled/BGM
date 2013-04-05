@@ -13,8 +13,6 @@
 # );
 
 
-
-
 CREATE TABLE catalogID (
   id      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   NAME    VARCHAR(200),
@@ -22,77 +20,98 @@ CREATE TABLE catalogID (
 );
 
 CREATE TABLE customer (
-  id      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  NAME    VARCHAR(200),
+  id         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  NAME       VARCHAR(200),
   right_type VARCHAR(50),
-  royalty DECIMAL(6, 3)
+  royalty    DECIMAL(6, 3)
 );
 
 CREATE TABLE customer_report (
-  id      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  customer_id INT,
-  order_date DATE,
+  id            INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  customer_id   INT,
+  order_date    DATE,
   download_date DATE
 );
 
-insert into customer (name,right_type,royalty) values ('GSM Technologies','copyrights',12.5);
+INSERT INTO customer (name, right_type, royalty) VALUES ('GSM Technologies', 'copyrights', 12.5);
+INSERT INTO customer (name, right_type, royalty) VALUES ('Authors Society', 'copyrights', 12.5);
 
 CREATE TABLE customer_report_item (
-  id  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  report_id INT,
+  id             INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  report_id      INT,
   composition_id INT,
-  name VARCHAR (200),
-  artist VARCHAR (200),
-  content_type VARCHAR (100),
-  qty INT,
-  price DECIMAL(6,3)
+  name           VARCHAR(200),
+  artist         VARCHAR(200),
+  content_type   VARCHAR(100),
+  qty            INT,
+  price          DECIMAL(6, 3)
 );
 
 
 
-SELECT
-  i.id,
-  c.code,
-  price,
-  qty,
-  (price * qty) vol,
-  shareMobile,
-  @customerRoyalty := (SELECT cm.royalty
-            FROM customer cm
-            WHERE cm.id = (SELECT
-                             cr.customer_id
-                           FROM customer_report cr
-                           WHERE cr.id = i.report_id)) `customer royalty`,
- @catalogRoyalty := (SELECT cat.royalty FROM catalog cat WHERE cat.id = c.catalog_id) `catalog royalty`,
-  round((qty * price * (shareMobile / 100) * (@customerRoyalty / 100) * (@catalogRoyalty / 100)) , 3)  revenue,
-#concat(c.name, ' - ', c.artist) nm,
- c.name,
-(SELECT
-copyright
-  FROM catalog cat
-  WHERE cat.id = c.catalog_id)                        cat
 
-FROM customer_report_item i
-  LEFT JOIN composition c
-    ON (i.composition_id = c.id)
-WHERE i.composition_id > 0
-
-LIMIT 0, 25;
-
-
-
-CREATE index code_index ON composition(code) USING btree;
+CREATE INDEX code_index ON composition (code) USING BTREE;
 
 CREATE TABLE composition (
-  id         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  catalog_id INT NOT NULL,
-  code       VARCHAR(20),
-  NAME       VARCHAR (400),
-  artist     VARCHAR (400),
-  composer   VARCHAR(400),
+  id          INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  catalog_id  INT NOT NULL,
+  code        VARCHAR(20),
+  NAME        VARCHAR(400),
+  artist      VARCHAR(400),
+  composer    VARCHAR(400),
   shareMobile DECIMAL(6, 3),
   sharePublic DECIMAL(6, 3)
 );
 
 
 
+
+# -------------------------------------------------------------------------
+
+
+
+SELECT
+  i.id,
+  c.code,
+  replace(c.name, CHAR(9), ' ') name,
+  replace(c.artist, CHAR(9), ' ') artist,
+  replace(c.composer, CHAR(9), ' ') composer,
+  price,
+  sum(qty),
+  (price * sum(qty)) vol,
+  shareMobile,
+
+  @customerRoyalty := (SELECT cm.royalty
+                       FROM customer cm
+                       WHERE cm.id = (SELECT
+                                        cr.customer_id
+                                      FROM customer_report cr
+                                      WHERE cr.id =
+                                            i.report_id)) `customer royalty`,
+
+
+#   @customerRoyalty := (SELECT cm.royalty
+#                        FROM customer_report cr
+#                          LEFT JOIN customer cm
+#                            ON (cm.id = cr.customer_id)
+#                        WHERE cr.id =
+#                              i.report_id) `customer royalty`,
+
+  cat.royalty cat_royalty,
+
+  round((sum(qty) * price * (shareMobile / 100) * (@customerRoyalty / 100) * (cat.royalty / 100)), 3) revenue,
+  cat.name catalog,
+  cat.copyright copyright
+
+FROM customer_report_item i
+
+  LEFT JOIN composition c
+    ON (i.composition_id = c.id)
+
+  INNER JOIN catalog cat
+    ON (cat.id = c.catalog_id)
+
+WHERE i.composition_id > 0
+#       AND cat.platform = 'NMI'
+GROUP BY i.composition_id
+LIMIT 0, 15;
