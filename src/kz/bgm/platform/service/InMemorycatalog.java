@@ -1,9 +1,6 @@
 package kz.bgm.platform.service;
 
-import kz.bgm.platform.items.Customer;
-import kz.bgm.platform.items.CustomerReport;
-import kz.bgm.platform.items.CustomerReportItem;
-import kz.bgm.platform.items.Track;
+import kz.bgm.platform.items.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -127,6 +124,12 @@ public class InMemorycatalog implements CatalogStorage {
     @Override
     public Customer getCustomer(int id) {
         return null;
+    }
+
+    @Override
+    public List<CalculatedReportItem> getCalculatedReports() {
+        return null;
+
     }
 
 

@@ -87,7 +87,7 @@ SELECT
                                         cr.customer_id
                                       FROM customer_report cr
                                       WHERE cr.id =
-                                            i.report_id)) `customer royalty`,
+                                            i.report_id)) `customer_royalty`,
 
 
 #   @customerRoyalty := (SELECT cm.royalty
@@ -100,8 +100,8 @@ SELECT
   cat.royalty cat_royalty,
 
   round((sum(qty) * price * (shareMobile / 100) * (@customerRoyalty / 100) * (cat.royalty / 100)), 3) revenue,
-  cat.name catalog,
-  cat.copyright copyright
+  cat.name catalog
+#   cat.copyright copyright
 
 FROM customer_report_item i
 

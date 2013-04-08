@@ -1,9 +1,6 @@
 package kz.bgm.platform.service;
 
-import kz.bgm.platform.items.Customer;
-import kz.bgm.platform.items.CustomerReport;
-import kz.bgm.platform.items.CustomerReportItem;
-import kz.bgm.platform.items.Track;
+import kz.bgm.platform.items.*;
 
 import java.util.List;
 
@@ -32,6 +29,8 @@ public interface CatalogStorage {
     Customer getCustomer(String name);
 
     Customer getCustomer(int id);
+
+    List<CalculatedReportItem> getCalculatedReports();
 
     List<Track> search(String value);
 

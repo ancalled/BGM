@@ -18,6 +18,10 @@
         <servlet-name>reportServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.CustomerReportServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>processReportServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.ProcessReportServlet</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>reportServlet</servlet-name>
         <url-pattern>/reporter</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processReportServlet</servlet-name>
+        <url-pattern>/report-calculator</url-pattern>
     </servlet-mapping>
 
 

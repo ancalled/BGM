@@ -1,10 +1,7 @@
 package kz.bgm.platform.service;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import kz.bgm.platform.items.Customer;
-import kz.bgm.platform.items.CustomerReport;
-import kz.bgm.platform.items.CustomerReportItem;
-import kz.bgm.platform.items.Track;
+import kz.bgm.platform.items.*;
 import kz.bgm.platform.search.IdSearcher;
 import org.apache.log4j.Logger;
 
@@ -600,6 +597,66 @@ public class DbStorage implements CatalogStorage {
 
     }
 
+    @Override
+    public List<CalculatedReportItem> getCalculatedReports() {
+        Connection connection = null;
+
+        List<CalculatedReportItem> reportList
+                = new ArrayList<CalculatedReportItem>();
+        try {
+            connection = pool.getConnection();
+
+            PreparedStatement ps = connection.prepareStatement("SELECT\n" +
+                    "  report_item.id,\n" +
+                    "  composition.code,\n" +
+                    "  replace(composition.name, CHAR(9), ' ') name,\n" +
+                    "  replace(composition.artist, CHAR(9), ' ') artist,\n" +
+                    "  replace(composition.composer, CHAR(9), ' ') composer,\n" +
+                    "  price,\n" +
+                    "  sum(qty),\n" +
+                    "  (price * sum(qty)) vol,\n" +
+                    "  shareMobile,\n" +
+                    "\n" +
+                    "  @customerRoyalty := (SELECT cm.royalty\n" +
+                    "                       FROM customer cm\n" +
+                    "                       WHERE cm.id = (SELECT\n" +
+                    "                                        cr.customer_id\n" +
+                    "                                      FROM customer_report cr\n" +
+                    "                                      WHERE cr.id =\n" +
+                    "                                            report_item.report_id)) `customer_royalty`,\n" +
+                    "\n" +
+                    "\n" +
+                    "  cat.royalty cat_royalty,\n" +
+                    "\n" +
+                    "  round((sum(qty) * price * (shareMobile / 100) * (@customerRoyalty / 100) * (cat.royalty / 100)), 3) revenue,\n" +
+                    "  cat.name catalog,\n" +
+                    "  cat.copyright copyright\n" +
+                    "\n" +
+                    "FROM customer_report_item report_item\n" +
+                    "\n" +
+                    "  LEFT JOIN composition composition\n" +
+                    "    ON (report_item.composition_id = composition.id)\n" +
+                    "\n" +
+                    "  INNER JOIN catalog cat\n" +
+                    "    ON (cat.id = composition.catalog_id)\n" +
+                    "\n" +
+                    "WHERE report_item.composition_id > 0\n" +
+                    "  GROUP BY report_item.composition_id");
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                reportList.add(parseCalculatedReport(rs));
+            }
+
+            return reportList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return Collections.emptyList();
+    }
+
 
     @Override
     public List<Track> searchByArtistLike(String artist) {
@@ -642,7 +699,44 @@ public class DbStorage implements CatalogStorage {
         return catalogMap.get(catID);
     }
 
+    private static CalculatedReportItem parseCalculatedReport(ResultSet rs) {
+        if (rs == null) {
+            return null;
+        }
+
+        CalculatedReportItem report = new CalculatedReportItem();
+        try {
+
+            report.setReportItemId(rs.getInt("id"));
+            report.setCompositionCode(rs.getString("code"));
+            report.setCompositionName(rs.getString("name"));
+            report.setArtist(rs.getString("artist"));
+            report.setComposer(rs.getString("composer"));
+            report.setPrice(rs.getFloat("price"));
+            report.setQty(rs.getInt("sum(qty)"));
+            report.setVol(rs.getFloat("vol"));
+            report.setShareMobile(rs.getFloat("shareMobile"));
+            report.setCustomerRoyalty(rs.getFloat("customer_royalty"));
+            report.setCatalogRoyalty(rs.getFloat("cat_royalty"));
+            report.setRevenue(rs.getFloat("revenue"));
+            report.setCatalog(rs.getString("catalog"));
+            report.setCopyright(rs.getString("copyright"));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+
+        return report;
+
+
+    }
+
     private static Track parseTrack(ResultSet rs) throws SQLException {
+        if (rs == null) {
+            return null;
+        }
+
         Track track = new Track();
         track.setCatalog(catalogMap.get(rs.getInt("catalog_id")));
         track.setId(rs.getLong("id"));
@@ -656,6 +750,10 @@ public class DbStorage implements CatalogStorage {
     }
 
     private static Customer parseCustomer(ResultSet rs) throws SQLException {
+        if (rs == null) {
+            return null;
+        }
+
         Customer customer = new Customer();
         customer.setId(rs.getInt("id"));
         customer.setName(rs.getString("name"));

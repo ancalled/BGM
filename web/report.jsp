@@ -1,18 +1,15 @@
-<%@ page import="kz.bgm.platform.items.ReportItem" %>
-<%@ page import="kz.bgm.platform.web.CustomerReportServlet" %>
-<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
 <%--<%--%>
-    <%--@SuppressWarnings("unchecked")--%>
-    <%--List<ReportItem> reportList =--%>
-            <%--(List<ReportItem>) session.getAttribute(CustomerReportServlet.REPORT);--%>
-    <%--@SuppressWarnings("unchecked")--%>
-    <%--List<String> reportPath =--%>
-            <%--(List<String>) session.getAttribute(CustomerReportServlet.REPORT_PATH);--%>
+<%--@SuppressWarnings("unchecked")--%>
+<%--List<ReportItem> reportList =--%>
+<%--(List<ReportItem>) session.getAttribute(CustomerReportServlet.REPORT);--%>
+<%--@SuppressWarnings("unchecked")--%>
+<%--List<String> reportPath =--%>
+<%--(List<String>) session.getAttribute(CustomerReportServlet.REPORT_PATH);--%>
 
-    <%--session.setAttribute(CustomerReportServlet.REPORT, null);--%>
+<%--session.setAttribute(CustomerReportServlet.REPORT, null);--%>
 
 <%--%>--%>
 
@@ -72,84 +69,91 @@
             </div>
         </form>
 
-        <%--<%--%>
-            <%--if (reportPath != null && reportPath.size() > 0) {--%>
 
-                <%--for (String path : reportPath) {--%>
+        <form action="/report-calculator" method="post">
+            <div class="row-fluid">
+                <input class="btn" type="submit" value="Camone!">
+            </div>
+        </form>
+
+        <%--<%--%>
+        <%--if (reportPath != null && reportPath.size() > 0) {--%>
+
+        <%--for (String path : reportPath) {--%>
         <%--%>--%>
         <%--<form>--%>
-            <%--<div class="row-fluid">--%>
-                <%--<input type="button"--%>
-                       <%--class="btn"--%>
-                       <%--value="Загрузить отчет"--%>
-                       <%--onClick="window.location.href='<%=path%>'">--%>
-            <%--</div>--%>
+        <%--<div class="row-fluid">--%>
+        <%--<input type="button"--%>
+        <%--class="btn"--%>
+        <%--value="Загрузить отчет"--%>
+        <%--onClick="window.location.href='<%=path%>'">--%>
+        <%--</div>--%>
         <%--</form>--%>
         <%--<%--%>
-                <%--}--%>
-            <%--}--%>
+        <%--}--%>
+        <%--}--%>
 
         <%--%>--%>
 
-    <%--</div>--%>
+        <%--</div>--%>
 
-    <%--<%--%>
+        <%--<%--%>
         <%--if (reportList != null) {--%>
-    <%--%>--%>
+        <%--%>--%>
 
-    <%--<table class="table table-bordered">--%>
+        <%--<table class="table table-bordered">--%>
         <%--<thead>--%>
         <%--<tr>--%>
-            <%--<th>Код</th>--%>
-            <%--<th>Композиция</th>--%>
-            <%--<th>Исполнитель</th>--%>
-            <%--<th>Авторы</th>--%>
-            <%--<th>Цена</th>--%>
-            <%--<th>Количество</th>--%>
-            <%--<th>Авт. Доход</th>--%>
-            <%--<th>Авт. Ставка</th>--%>
-            <%--<th>Публ. Доход</th>--%>
-            <%--<th>Каталог</th>--%>
+        <%--<th>Код</th>--%>
+        <%--<th>Композиция</th>--%>
+        <%--<th>Исполнитель</th>--%>
+        <%--<th>Авторы</th>--%>
+        <%--<th>Цена</th>--%>
+        <%--<th>Количество</th>--%>
+        <%--<th>Авт. Доход</th>--%>
+        <%--<th>Авт. Ставка</th>--%>
+        <%--<th>Публ. Доход</th>--%>
+        <%--<th>Каталог</th>--%>
         <%--</tr>--%>
         <%--</thead>--%>
         <%--<tbody>--%>
         <%--<%--%>
-            <%--for (ReportItem rt : reportList) {--%>
+        <%--for (ReportItem rt : reportList) {--%>
         <%--%>--%>
         <%--<tr>--%>
-            <%--<td><%=rt.getCode()%>--%>
-            <%--</td>--%>
-            <%--<td><%=rt.getCompisition()%>--%>
-            <%--</td>--%>
-            <%--<td><%=rt.getArtist()%>--%>
-            <%--</td>--%>
-            <%--<td><%=rt.getComposer()%>--%>
-            <%--</td>--%>
-            <%--<td><%=rt.getPrice()%>--%>
-            <%--</td>--%>
-            <%--<td><%=rt.getQty()%>--%>
-            <%--</td>--%>
-            <%--<td><%=rt.getAuthorRevenue()%>--%>
-            <%--</td>--%>
-            <%--<td><%=rt.getAuthRate()%>--%>
-            <%--</td>--%>
-            <%--<td><%=rt.getPublisherAuthRevenue()%>--%>
-            <%--</td>--%>
-            <%--<td><%=rt.getCatalog()%>--%>
-            <%--</td>--%>
+        <%--<td><%=rt.getCode()%>--%>
+        <%--</td>--%>
+        <%--<td><%=rt.getCompisition()%>--%>
+        <%--</td>--%>
+        <%--<td><%=rt.getArtist()%>--%>
+        <%--</td>--%>
+        <%--<td><%=rt.getComposer()%>--%>
+        <%--</td>--%>
+        <%--<td><%=rt.getPrice()%>--%>
+        <%--</td>--%>
+        <%--<td><%=rt.getQty()%>--%>
+        <%--</td>--%>
+        <%--<td><%=rt.getAuthorRevenue()%>--%>
+        <%--</td>--%>
+        <%--<td><%=rt.getAuthRate()%>--%>
+        <%--</td>--%>
+        <%--<td><%=rt.getPublisherAuthRevenue()%>--%>
+        <%--</td>--%>
+        <%--<td><%=rt.getCatalog()%>--%>
+        <%--</td>--%>
         <%--</tr>--%>
         <%--<%--%>
-            <%--}--%>
+        <%--}--%>
         <%--%>--%>
 
         <%--</tbody>--%>
-    <%--</table>--%>
+        <%--</table>--%>
 
-    <%--<%--%>
+        <%--<%--%>
         <%--}--%>
-    <%--%>--%>
+        <%--%>--%>
 
-</div>
+    </div>
 
 
 </body>
