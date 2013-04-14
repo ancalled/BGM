@@ -76,6 +76,7 @@ SELECT
   replace(c.name, CHAR(9), ' ') name,
   replace(c.artist, CHAR(9), ' ') artist,
   replace(c.composer, CHAR(9), ' ') composer,
+  report_item.content_type,
   price,
   sum(qty),
   (price * sum(qty)) vol,

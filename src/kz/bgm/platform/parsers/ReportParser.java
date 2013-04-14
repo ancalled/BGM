@@ -1,5 +1,6 @@
 package kz.bgm.platform.parsers;
 
+import kz.bgm.platform.items.CalculatedReportItem;
 import kz.bgm.platform.items.CustomerReportItem;
 import kz.bgm.platform.items.ReportItem;
 import kz.bgm.platform.items.Track;
@@ -25,8 +26,9 @@ public class ReportParser {
             IOException, InvalidFormatException {
 
         File file = new File(fileName);
+
         long startTime = System.currentTimeMillis();
-        System.out.println("Loading " + file.getName() + "... ");
+        log.info("Loading " + file.getName() + "... ");
 
 
         Workbook wb = ExcelUtils.openFile(file);
@@ -36,7 +38,7 @@ public class ReportParser {
         Sheet sheet = wb.getSheetAt(1);
         int rows = sheet.getPhysicalNumberOfRows();
 
-        System.out.println("Parsing sheet '" + sheet.getSheetName() + "' with " + rows + " rows");
+        log.info("Parsing sheet '" + sheet.getSheetName() + "' with " + rows + " rows");
 
         int startRow = 7;
         for (int i = startRow; i < rows; i++) {
@@ -78,7 +80,7 @@ public class ReportParser {
         return items;
     }
 
-
+    @Deprecated
     public static List<ReportItem> loadClientReport(String filename, float clientRate)
             throws IOException, InvalidFormatException {
 

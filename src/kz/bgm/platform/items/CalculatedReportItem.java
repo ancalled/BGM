@@ -2,38 +2,33 @@ package kz.bgm.platform.items;
 
 public class CalculatedReportItem {
 
-    int reportItemId = 0;
-
-    String compositionCode = "";
-
-    String compositionName = "";
-
-    String artist = "";
-
-    String composer = "";
-
-    float price = 0f;
-
-    int qty = 0;
-
-    float vol = 0f;
-
-    float shareMobile = 0f;
-
-    float customerRoyalty = 0f;
-
-    float catalogRoyalty = 0f;
-
-    float revenue = 0f;
-
-    String catalog = "";
-
-    String copyright = "";
+    private int reportItemId = 0;
+    private String compositionCode = "";
+    private String compositionName = "";
+    private String artist = "";
+    private String composer = "";
+    private String contentType = "";
+    private float price = 0f;
+    private int qtySum = 0;
+    private float vol = 0f;
+    private float shareMobile = 0f;
+    private float customerRoyalty = 0f;
+    private float catalogRoyalty = 0f;
+    private float revenue = 0f;
+    private String catalog = "";
+    private String copyright = "";
 
 
     public CalculatedReportItem() {
     }
 
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public String getContentType() {
+        return contentType;
+    }
 
     public void setReportItemId(int reportItemId) {
         this.reportItemId = reportItemId;
@@ -59,8 +54,8 @@ public class CalculatedReportItem {
         this.price = price;
     }
 
-    public void setQty(int qty) {
-        this.qty = qty;
+    public void setQtySum(int qty) {
+        this.qtySum = qty;
     }
 
     public void setVol(float vol) {
@@ -115,8 +110,8 @@ public class CalculatedReportItem {
         return price;
     }
 
-    public int getQty() {
-        return qty;
+    public int getQtySum() {
+        return qtySum;
     }
 
     public float getVol() {

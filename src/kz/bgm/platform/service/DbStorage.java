@@ -613,6 +613,7 @@ public class DbStorage implements CatalogStorage {
                     "  replace(composition.artist, CHAR(9), ' ') artist,\n" +
                     "  replace(composition.composer, CHAR(9), ' ') composer,\n" +
                     "  price,\n" +
+                    "  report_item.content_type,\n" +
                     "  sum(qty),\n" +
                     "  (price * sum(qty)) vol,\n" +
                     "  shareMobile,\n" +
@@ -706,14 +707,14 @@ public class DbStorage implements CatalogStorage {
 
         CalculatedReportItem report = new CalculatedReportItem();
         try {
-
             report.setReportItemId(rs.getInt("id"));
             report.setCompositionCode(rs.getString("code"));
             report.setCompositionName(rs.getString("name"));
             report.setArtist(rs.getString("artist"));
             report.setComposer(rs.getString("composer"));
             report.setPrice(rs.getFloat("price"));
-            report.setQty(rs.getInt("sum(qty)"));
+            report.setQtySum(rs.getInt("sum(qty)"));
+            report.setContentType(rs.getString("content_type"));
             report.setVol(rs.getFloat("vol"));
             report.setShareMobile(rs.getFloat("shareMobile"));
             report.setCustomerRoyalty(rs.getFloat("customer_royalty"));
@@ -721,7 +722,6 @@ public class DbStorage implements CatalogStorage {
             report.setRevenue(rs.getFloat("revenue"));
             report.setCatalog(rs.getString("catalog"));
             report.setCopyright(rs.getString("copyright"));
-
         } catch (SQLException e) {
             e.printStackTrace();
             log.error(e.getMessage());

@@ -38,7 +38,7 @@
 //                    String authCatalog = "";
 //                    if (authTrack != null) {
 //                        authRate = authTrack.getMobileRate();
-//                        authorRevenue = Math.round(ri.getQty() * ri.getPrice() * ri.getRate() * authRate / 100);
+//                        authorRevenue = Math.round(ri.getQtySum() * ri.getPrice() * ri.getRate() * authRate / 100);
 //                        publisherAuthRevenue = Math.round(authorRevenue * authTrack.getRoyalty() / 100);
 //                        authCatalog = authTrack.getCatalog();
 //                    }
@@ -49,7 +49,7 @@
 //                    String comCatalog = "";
 //                    if (comTrack != null) {
 //                        commonRate = comTrack.getMobileRate();
-//                        commonRevenue = Math.round(ri.getQty() * ri.getPrice() * ri.getRate() * commonRate / 100);
+//                        commonRevenue = Math.round(ri.getQtySum() * ri.getPrice() * ri.getRate() * commonRate / 100);
 //                        publisherCommonRevenue = Math.round(commonRevenue * comTrack.getRoyalty() / 100);
 //                        comCatalog = comTrack.getCatalog();
 //                    }
@@ -66,7 +66,7 @@
 //                                    comp.getArtist() + sep +
 //                                    ri.getContentType() + sep +
 //                                    authRate + sep +
-//                                    ri.getQty() + sep +
+//                                    ri.getQtySum() + sep +
 //                                    ri.getPrice() + sep +
 //                                    comp.getRoyalty() + sep +
 //                                    authorRevenue + sep +
@@ -125,7 +125,7 @@
 //                if (found == null) {
 //                    items.add(ni);
 //                } else {
-//                    found.setQty(found.getQty() + ni.getQty());
+//                    found.setQtySum(found.getQtySum() + ni.getQtySum());
 //                }
 //            }
 //        }
