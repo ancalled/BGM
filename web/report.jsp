@@ -131,7 +131,7 @@
         <%--</td>--%>
         <%--<td><%=rt.getPrice()%>--%>
         <%--</td>--%>
-        <%--<td><%=rt.getQtySum()%>--%>
+        <%--<td><%=rt.getQty()%>--%>
         <%--</td>--%>
         <%--<td><%=rt.getAuthorRevenue()%>--%>
         <%--</td>--%>
