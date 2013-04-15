@@ -2,6 +2,7 @@ package kz.bgm.platform.web;
 
 
 import kz.bgm.platform.items.CalculatedReportItem;
+import kz.bgm.platform.parsers.BlankReportParser;
 import kz.bgm.platform.service.CatalogFactory;
 import kz.bgm.platform.service.CatalogStorage;
 
@@ -32,9 +33,11 @@ public class ProcessReportServlet extends HttpServlet {
 
         List<CalculatedReportItem> reportsList = storage.getCalculatedReports();
 
-        for (CalculatedReportItem rep : reportsList) {
-            System.out.println(rep.getCompositionName());
-        }
+        BlankReportParser.createCalcReportExcel("./reports/SONY.xlsx", reportsList);
+
+        req.setAttribute("mess","All DONE !!!");
+
+        req.getRequestDispatcher("/result.jsp").forward(req, resp);
 
 
     }

@@ -36,21 +36,21 @@
 //        int startRow = 7;
 //        for (int i = startRow; i < rows; i++) {
 //            Row row = sheet.getRow(i);
-//            String num = ExcelUtils.getCell(row, 0);
+//            String num = ExcelUtils.getCellVal(row, 0);
 //
 //            if (num == null || "".equals(num.trim())) continue;
 //
 //            ReportItem item = new ReportItem();
-//            item.setCompisition(ExcelUtils.getCell(row, 2));
-//            item.setAuthor(ExcelUtils.getCell(row, 3));
-//            item.setContentType(ExcelUtils.getCell(row, 4));
+//            item.setCompisition(ExcelUtils.getCellVal(row, 2));
+//            item.setAuthor(ExcelUtils.getCellVal(row, 3));
+//            item.setContentType(ExcelUtils.getCellVal(row, 4));
 //
-//            String priceStr = ExcelUtils.getCell(row, 5);
+//            String priceStr = ExcelUtils.getCellVal(row, 5);
 //
 //            if (priceStr == null || "".equals(priceStr.trim())) continue;
 //
 //            item.setPrice(Integer.parseInt(priceStr.trim()));
-//            item.setQtySum(Integer.parseInt(ExcelUtils.getCell(row, 6).trim()));
+//            item.setQtySum(Integer.parseInt(ExcelUtils.getCellVal(row, 6).trim()));
 //            item.setRate(clientRate);
 //            items.add(item);
 //        }

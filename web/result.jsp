@@ -1,4 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+
+
+
+
 <html>
 <head>
     <script src="js/jquery.js"></script>
@@ -12,7 +17,7 @@
 <body>
 
 <%
-    String result = request.getParameter("r");
+    String result = request.getParameter("mess");
 
     if (result != null) {
 %>

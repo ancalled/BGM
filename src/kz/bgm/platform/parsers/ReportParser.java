@@ -1,6 +1,5 @@
 package kz.bgm.platform.parsers;
 
-import kz.bgm.platform.items.CalculatedReportItem;
 import kz.bgm.platform.items.CustomerReportItem;
 import kz.bgm.platform.items.ReportItem;
 import kz.bgm.platform.items.Track;
@@ -43,25 +42,25 @@ public class ReportParser {
         int startRow = 7;
         for (int i = startRow; i < rows; i++) {
             Row row = sheet.getRow(i);
-            String num = ExcelUtils.getCell(row, 0);
+            String num = ExcelUtils.getCellVal(row, 0);
 
             if (num == null || "".equals(num.trim())) continue;
 
             CustomerReportItem item = new CustomerReportItem();
 
-            String name = ExcelUtils.getCell(row, 2);
-            String artist = ExcelUtils.getCell(row, 3);
+            String name = ExcelUtils.getCellVal(row, 2);
+            String artist = ExcelUtils.getCellVal(row, 3);
 
             item.setName(name);
             item.setArtist(artist);
-            item.setContentType(ExcelUtils.getCell(row, 4));
+            item.setContentType(ExcelUtils.getCellVal(row, 4));
 
-            String priceStr = ExcelUtils.getCell(row, 8);
+            String priceStr = ExcelUtils.getCellVal(row, 8);
 
             if (priceStr == null || "".equals(priceStr.trim())) continue;
 
             item.setPrice(Integer.parseInt(priceStr.trim()));
-            item.setQty(Integer.parseInt(ExcelUtils.getCell(row, 5).trim()));
+            item.setQty(Integer.parseInt(ExcelUtils.getCellVal(row, 5).trim()));
             item.setReportId(reportId);
 
             Track tr = storage.search(artist, name);
@@ -100,16 +99,16 @@ public class ReportParser {
         int startRow = 6;
         for (int i = startRow; i < rows; i++) {
             Row row = sheet.getRow(i);
-            String num = ExcelUtils.getCell(row, 0);
+            String num = ExcelUtils.getCellVal(row, 0);
 
             if (num == null || "".equals(num.trim())) continue;
 
             ReportItem item = new ReportItem();
-            item.setCompisition(ExcelUtils.getCell(row, 2));
-            item.setArtist(ExcelUtils.getCell(row, 3));
-            item.setContentType(ExcelUtils.getCell(row, 4));
+            item.setCompisition(ExcelUtils.getCellVal(row, 2));
+            item.setArtist(ExcelUtils.getCellVal(row, 3));
+            item.setContentType(ExcelUtils.getCellVal(row, 4));
 
-            String priceStr = ExcelUtils.getCell(row, 5);
+            String priceStr = ExcelUtils.getCellVal(row, 5);
 
             if (priceStr == null || "".equals(priceStr.trim())) continue;
 
@@ -117,7 +116,7 @@ public class ReportParser {
 
             item.setPrice(Float.parseFloat(priceStr));
 
-            String qtyStr = ExcelUtils.getCell(row, 6).trim();
+            String qtyStr = ExcelUtils.getCellVal(row, 6).trim();
 
             if (qtyStr == null || "".equals(qtyStr)) continue;
 

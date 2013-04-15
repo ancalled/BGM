@@ -45,20 +45,20 @@ public class CatalogParser {
             Track comp = new Track();
 
             int rowIdx = 1;
-            comp.setCode(ExcelUtils.getCell(row, rowIdx++));
-            comp.setName(ExcelUtils.getCell(row, rowIdx++));
+            comp.setCode(ExcelUtils.getCellVal(row, rowIdx++));
+            comp.setName(ExcelUtils.getCellVal(row, rowIdx++));
             if (commonRights) {
-                comp.setArtist(ExcelUtils.getCell(row, rowIdx++));
+                comp.setArtist(ExcelUtils.getCellVal(row, rowIdx++));
                 rowIdx++;
             } else {
 
-                comp.setComposer(ExcelUtils.getCell(row, rowIdx++ ));
+                comp.setComposer(ExcelUtils.getCellVal(row, rowIdx++));
                 rowIdx++;
-                comp.setArtist(ExcelUtils.getCell(row, rowIdx++));
+                comp.setArtist(ExcelUtils.getCellVal(row, rowIdx++));
             }
 
-            String mobileShare = ExcelUtils.getCell(row, rowIdx++);
-            String publicShare = ExcelUtils.getCell(row, rowIdx);
+            String mobileShare = ExcelUtils.getCellVal(row, rowIdx++);
+            String publicShare = ExcelUtils.getCellVal(row, rowIdx);
 
             if (!isShareEmpty(mobileShare)) {
                 comp.setMobileShare(Float.parseFloat(mobileShare.replace(",", ".")));
@@ -102,11 +102,11 @@ public class CatalogParser {
             Track comp = new Track();
 
             int rowIdx = 0;
-            comp.setName(ExcelUtils.getCell(row, rowIdx++));
-            comp.setComposer(ExcelUtils.getCell(row, rowIdx++));
-            comp.setCode(ExcelUtils.getCell(row, rowIdx++));
+            comp.setName(ExcelUtils.getCellVal(row, rowIdx++));
+            comp.setComposer(ExcelUtils.getCellVal(row, rowIdx++));
+            comp.setCode(ExcelUtils.getCellVal(row, rowIdx++));
 
-            String sh = ExcelUtils.getCell(row, rowIdx++);
+            String sh = ExcelUtils.getCellVal(row, rowIdx++);
             rowIdx++;
             rowIdx++;
 
@@ -115,7 +115,7 @@ public class CatalogParser {
                 comp.setMobileShare(Float.parseFloat(share));
                 comp.setPublicShare(Float.parseFloat(share));
             }
-            comp.setArtist(ExcelUtils.getCell(row, rowIdx));
+            comp.setArtist(ExcelUtils.getCellVal(row, rowIdx));
             items.add(comp);
         }
 
@@ -155,12 +155,12 @@ public class CatalogParser {
             Track comp = new Track();
 
             int rowIdx = 0;
-            comp.setName(ExcelUtils.getCell(row, rowIdx++));
-            comp.setCode(ExcelUtils.getCell(row, rowIdx++));
-            comp.setComposer(ExcelUtils.getCell(row, rowIdx++));
-            comp.setArtist(ExcelUtils.getCell(row, rowIdx++));
+            comp.setName(ExcelUtils.getCellVal(row, rowIdx++));
+            comp.setCode(ExcelUtils.getCellVal(row, rowIdx++));
+            comp.setComposer(ExcelUtils.getCellVal(row, rowIdx++));
+            comp.setArtist(ExcelUtils.getCellVal(row, rowIdx++));
 
-            String money = ExcelUtils.getCell(row, rowIdx);
+            String money = ExcelUtils.getCellVal(row, rowIdx);
 
             if (!isShareEmpty(money)) {
                 comp.setMobileShare(Float.parseFloat(money.replace(",", ".")));
@@ -179,7 +179,7 @@ public class CatalogParser {
 
 
     private boolean isEmpty(Row row) {
-        String number = ExcelUtils.getCell(row, 0);
+        String number = ExcelUtils.getCellVal(row, 0);
         if (number == null || "".equals(number.trim())) return true;
         return false;
     }
