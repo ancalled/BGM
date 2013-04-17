@@ -80,7 +80,7 @@ public class BlankReportParser {
 
             fillExcelBlank(sheet, startRow, fieldsMap, finishReps);
 
-            ExcelUtils.saveFile(wb, filePath);
+            ExcelUtils.saveFile(wb, reportBlank.getName());
 
         } catch (IOException e) {
             e.printStackTrace();

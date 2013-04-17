@@ -39,21 +39,37 @@ public class ExcelUtils {
         }
     }
 
-    public static boolean saveFile(Workbook wb, String filePath) throws IOException {
-        if (wb == null || filePath == null) return false;
-        FileOutputStream fout = new FileOutputStream(filePath + "_done");
+    public static final String COMP_REPS_PATH = System.getProperty("user.dir") + "/computed-reports";
 
+    public static boolean saveFile(Workbook wb, String fileName) throws IOException {
+        if (wb == null || fileName == null) return false;
+        FileOutputStream fout = new FileOutputStream(COMP_REPS_PATH + "/" + fileName);
         wb.write(fout);
+
         fout.close();
         return true;
     }
 
     public static void setValue(Sheet sheet, String val, int rowIdx, int columnIdx) {
+        if (sheet == null) return;
+
         Row row = sheet.getRow(rowIdx);
+        Cell cell;
         if (row == null) {
-            return;
+            sheet.createRow(rowIdx);
+            row = sheet.createRow(rowIdx);
+            row.createCell(columnIdx);
+            cell = row.getCell(columnIdx);
+            cell.setCellType(Cell.CELL_TYPE_STRING);
+        } else {
+            cell = row.getCell(columnIdx);
+
+            if (cell == null) {
+                row.createCell(columnIdx);
+                cell = row.getCell(columnIdx);
+                cell.setCellType(Cell.CELL_TYPE_STRING);
+            }
         }
-        Cell cell = row.getCell(columnIdx);
         cell.setCellValue(val);
     }
-}        //todo fnish if row or cell == null
+}
