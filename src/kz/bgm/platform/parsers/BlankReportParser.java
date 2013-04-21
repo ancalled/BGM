@@ -55,7 +55,7 @@ public class BlankReportParser {
     }
 
 
-    public static void createCalcReportExcel(String filePath,
+    public static void createDoneReportExcel(String filePath,
                                              List<CalculatedReportItem> finishReps) {
         try {
             log.info("Making Excel file report from file: " + filePath);

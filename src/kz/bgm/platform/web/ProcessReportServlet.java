@@ -31,11 +31,16 @@ public class ProcessReportServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+
+
         List<CalculatedReportItem> reportsList = storage.getCalculatedReports();
 
-        BlankReportParser.createCalcReportExcel("./reports/SONY.xlsx", reportsList);
+        BlankReportParser.createDoneReportExcel("./reports/SONY.xlsx", reportsList);
 
-        req.setAttribute("mess","All DONE !!!");
+
+
+
+        req.setAttribute("reports",reportsList);
 
         req.getRequestDispatcher("/result.jsp").forward(req, resp);
 
