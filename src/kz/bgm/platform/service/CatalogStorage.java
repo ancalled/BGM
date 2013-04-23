@@ -40,4 +40,6 @@ public interface CatalogStorage {
 
     List<Track> search(String author, boolean b);
 
+    User getUser(String name, String pass);
+
 }

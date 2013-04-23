@@ -763,6 +763,50 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
+    public User getUser(String name, String pass) {
+        Connection connection = null;
+        try {
+            connection = pool.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT * FROM user WHERE login = ? AND password = ? ");
+            stmt.setString(1, name);
+            stmt.setString(2, pass);
+
+            return parseUser(stmt.executeQuery());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
+
+    private User parseUser(ResultSet rs) {
+        if (rs == null) return null;
+
+        User user = new User();
+        try {
+            user.setId(rs.getInt("id"));
+            user.setLogin(rs.getString("login"));
+            user.setPass(rs.getString("password"));
+            user.setRole(rs.getString("role"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+
+    @Override
     public Float getRoyalty(int catalogId) {
         Connection connection = null;
         try {

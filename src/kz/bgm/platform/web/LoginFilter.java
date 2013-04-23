@@ -1,5 +1,7 @@
 package kz.bgm.platform.web;
 
+import kz.bgm.platform.items.User;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,11 +25,9 @@ public class LoginFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpSession session = req.getSession();
 
-        String user = null;
-        String role = null;
+        User user = null;
         if (session != null) {
-            user = (String) session.getAttribute("user");
-            role = (String) req.getAttribute("role");
+            user = (User) session.getAttribute("user");
         }
 
         if (user == null) {

@@ -33,6 +33,13 @@ CREATE TABLE customer_report (
   download_date DATE
 );
 
+CREATE TABLE user (
+  id       INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  login    VARCHAR(30),
+  password VARCHAR(30),
+  role     VARCHAR(15)
+);
+
 INSERT INTO customer (name, right_type, royalty) VALUES ('GSM Technologies', 'copyrights', 12.5);
 INSERT INTO customer (name, right_type, royalty) VALUES ('Authors Society', 'copyrights', 12.5);
 
@@ -46,8 +53,6 @@ CREATE TABLE customer_report_item (
   qty            INT,
   price          DECIMAL(6, 3)
 );
-
-
 
 
 CREATE INDEX code_index ON composition (code) USING BTREE;
@@ -64,31 +69,29 @@ CREATE TABLE composition (
 );
 
 
-
-
 # -------------------------------------------------------------------------
-
 
 
 SELECT
   i.id,
   c.code,
-  replace(c.name, CHAR(9), ' ') name,
-  replace(c.artist, CHAR(9), ' ') artist,
-  replace(c.composer, CHAR(9), ' ') composer,
+  replace(c.name, CHAR(9), ' ')                                                                       name,
+  replace(c.artist, CHAR(9), ' ')                                                                     artist,
+  replace(c.composer, CHAR(9), ' ')                                                                   composer,
   report_item.content_type,
   price,
   sum(qty),
-  (price * sum(qty)) vol,
+  (price * sum(qty))                                                                                  vol,
   shareMobile,
 
-  @customerRoyalty := (SELECT cm.royalty
+  @customerRoyalty := (SELECT
+  cm.royalty
                        FROM customer cm
                        WHERE cm.id = (SELECT
                                         cr.customer_id
                                       FROM customer_report cr
                                       WHERE cr.id =
-                                            i.report_id)) `customer_royalty`,
+                                            i.report_id))                                             `customer_royalty`,
 
 
 #   @customerRoyalty := (SELECT cm.royalty
@@ -98,10 +101,10 @@ SELECT
 #                        WHERE cr.id =
 #                              i.report_id) `customer royalty`,
 
-  cat.royalty cat_royalty,
+  cat.royalty                                                                                         cat_royalty,
 
   round((sum(qty) * price * (shareMobile / 100) * (@customerRoyalty / 100) * (cat.royalty / 100)), 3) revenue,
-  cat.name catalog
+  cat.name                                                                                            catalog
 #   cat.copyright copyright
 
 FROM customer_report_item i
@@ -114,5 +117,5 @@ FROM customer_report_item i
 
 WHERE i.composition_id > 0
 #       AND cat.platform = 'NMI'
-GROUP BY i.composition_id
+  GROUP BY i.composition_id
 LIMIT 0, 15;

@@ -154,5 +154,10 @@ public class InMemorycatalog implements CatalogStorage {
         return null;
     }
 
+    @Override
+    public User getUser(String name, String pass) {
+        return null;
+    }
+
 
 }
