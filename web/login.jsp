@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap-fileupload.css" media="screen"/>
     <title>Страница авторизации</title>
 </head>
-<body style="padding-left: 140">
+<body style="padding-left: 140px">
 
 <div class="row">
     <div class="container span4">

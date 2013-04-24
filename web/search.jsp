@@ -65,18 +65,24 @@
             </ul>
 
 
-            <%--<label class="radio" style="margin-top: 20">--%>
 
-            <%--<input type="radio" name="type" class="icon-check" value="like">--%>
-            <%--Поиск по имени ипонителя--%>
-            <%--</label>--%>
-
-            <%--<label class="radio" style="margin-top: 20">--%>
-            <%--<input type="radio" name="type" class="checkbox" value="full" checked="checked">--%>
-            <%--Полный поиск--%>
-            <%--</label>--%>
             <input type="hidden" name="type" value="full">
         </form>
+         <%--//todo make collapse here--%>
+        <%--<div class="accordion" id="accordion2">--%>
+          <%--<div class="accordion-group">--%>
+            <%--<div class="accordion-heading">--%>
+              <%--<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">--%>
+                <%--Расширенный поиск--%>
+              <%--</a>--%>
+            <%--</div>--%>
+            <%--<div id="collapseOne" class="accordion-body collapse in">--%>
+              <%--<div class="accordion-inner">--%>
+                <%--Anim pariatur cliche...--%>
+              <%--</div>--%>
+            <%--</div>--%>
+          <%--</div>--%>
+        <%--</div>--%>
 
 
         <%
