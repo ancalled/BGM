@@ -3,21 +3,23 @@ package kz.bgm.platform.web;
 import kz.bgm.platform.items.Track;
 import kz.bgm.platform.service.CatalogFactory;
 import kz.bgm.platform.service.CatalogStorage;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
 
-public class FindServlet extends HttpServlet {
+public class SearchTrackServlet extends HttpServlet {
 
-    public static final String TRACK_LIST = "track-list";
+    public static final String TRACK_LIST = "tracks";
     public static final String QUERY = "query";
+    public static final String SIZE = "size";
     private CatalogStorage catalogService;
+    private static final Logger log = Logger.getLogger(SearchTrackServlet.class);
 
     @Override
     public void init() throws ServletException {
@@ -29,34 +31,36 @@ public class FindServlet extends HttpServlet {
             throws ServletException, IOException {
 
 
-        String find = req.getParameter("find");
+        String query = req.getParameter("find");
         String type = req.getParameter(FindTrackServletJson.FIND_TYPE);
 
-        HttpSession session = req.getSession();
-        if (find != null && !"".equals(find) && type != null) {
+        log.info("Got query " + query + " find by " + type);
+
+        if (query != null && !"".equals(query) && type != null) {
 
             List<Track> found;
             if (type.equals("like-artist")) {
-                found = catalogService.searchByArtistLike(find);
+                found = catalogService.searchByArtistLike(query);
 
             } else if (type.equals("artist")) {
-                found = catalogService.searchByArtist(find);
+                found = catalogService.searchByArtist(query);
             } else if (type.equals("code")) {
-                found = catalogService.searchByCode(find);
+                found = catalogService.searchByCode(query);
             } else if (type.equals("song")) {
-                found = catalogService.searchBySongName(find);
+                found = catalogService.searchBySongName(query);
             } else if (type.equals("composer")) {
-                found = catalogService.searchByComposer(find);
+                found = catalogService.searchByComposer(query);
             } else {
-                found = catalogService.search(find, true);
+                found = catalogService.search(query, true);
             }
 
-            session.setAttribute(TRACK_LIST, found);
+            req.setAttribute(TRACK_LIST, found);
+            req.setAttribute(SIZE,found.size());
+            req.setAttribute(QUERY, query);
+
+            req.getRequestDispatcher("/search.jsp?q=" + query).forward(req, resp);
 
         }
-
-        session.setAttribute(QUERY, find);
-        resp.sendRedirect("/search.jsp?q=" + find);
     }
 
 }

@@ -1,17 +1,8 @@
 <%@ page import="kz.bgm.platform.items.Track" %>
-<%@ page import="kz.bgm.platform.web.FindServlet" %>
+<%@ page import="kz.bgm.platform.web.SearchTrackServlet" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<%
-    @SuppressWarnings("unchecked")
-    List<Track> trackList = (List<Track>) session.getAttribute(FindServlet.TRACK_LIST);
-
-    session.setAttribute(FindServlet.TRACK_LIST, null);
-
-    String query = (String) session.getAttribute(FindServlet.QUERY);
-
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
@@ -48,41 +39,17 @@
             <div class="row">
                 <label for="find"></label><input type="text" name="find" id="find" class="input-block-level">
             </div>
-
             <br>
-
-
             <div class="row">
                 <input type="submit" value="Быстрый поиск" class="btn">
             </div>
 
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                <li><a tabindex="-1" href="#">Action</a></li>
-                <li><a tabindex="-1" href="#">Another action</a></li>
-                <li><a tabindex="-1" href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li><a tabindex="-1" href="#">Separated link</a></li>
-            </ul>
-
-
-            <%--<label class="radio" style="margin-top: 20">--%>
-
-            <%--<input type="radio" name="type" class="icon-check" value="like">--%>
-            <%--Поиск по имени ипонителя--%>
-            <%--</label>--%>
-
-            <%--<label class="radio" style="margin-top: 20">--%>
-            <%--<input type="radio" name="type" class="checkbox" value="full" checked="checked">--%>
-            <%--Полный поиск--%>
-            <%--</label>--%>
             <input type="hidden" name="type" value="full">
         </form>
 
 
-        <%
-            if (trackList != null) {
-        %>
-        <span class="label ">На запрос '<%=query%>' найдено Результатов: <%=trackList.size()%></span>
+        <c:if test="${tracks!=null}">
+        <span class="label ">На запрос '${query}' найдено Результатов: ${size}</span>
 
         <table class="table">
             <thead>
@@ -98,41 +65,29 @@
             </thead>
             <tbody>
 
-            <%
-
-                for (Track t : trackList) {
-            %>
+            <c:forEach var="t" items="${tracks}">
             <tr>
-                <td><%=t.getCode()%>
+                <td>${t.code}
                 </td>
-                <td><%=t.getName()%>
+                <td><${t.name}
                 </td>
-                <td><%=t.getArtist()%>
+                <td>${t.artist}
                 </td>
-                <td><%=t.getComposer()%>
+                <td>${t.composer}
                 </td>
-                <td><%=t.getMobileShare()%>
+                <td>${t.mobileShare}
                 </td>
-                <td><%=t.getPublicShare()%>
+                <td>${t.publicShare}
                 </td>
-                <%
-                    if (t.getCatalog() == null) {
-                        t.setCatalog("");
-                    }
-                %>
-                <td><%=t.getCatalog()%>
+                <td>${t.catalog}
                 </td>
             </tr>
-            <%
-                }
-            %>
+            </c:forEach>
 
             </tbody>
         </table>
 
-        <%
-            }
-        %>
+        </c:if>
 
     </div>
 
