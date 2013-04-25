@@ -772,7 +772,10 @@ public class DbStorage implements CatalogStorage {
             stmt.setString(1, name);
             stmt.setString(2, pass);
 
-            return parseUser(stmt.executeQuery());
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return parseUser(rs);
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -790,18 +793,14 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-    private User parseUser(ResultSet rs) {
+    private User parseUser(ResultSet rs) throws SQLException {
         if (rs == null) return null;
 
         User user = new User();
-        try {
-            user.setId(rs.getInt("id"));
-            user.setLogin(rs.getString("login"));
-            user.setPass(rs.getString("password"));
-            user.setRole(rs.getString("role"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        user.setId(rs.getInt("id"));
+        user.setLogin(rs.getString("login"));
+        user.setPass(rs.getString("password"));
+        user.setRole(rs.getString("role"));
         return user;
     }
 
