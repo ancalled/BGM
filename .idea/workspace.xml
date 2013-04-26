@@ -52,13 +52,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/computed-reports/SONY.xlsx" afterPath="$PROJECT_DIR$/computed-reports/SONY.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/parsers/utils/ExcelUtils.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/parsers/utils/ExcelUtils.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bgm-platform.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1366976179920" ignored="false" />
+    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1366977398091" ignored="false" />
     <file path="/CatalogStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1366969644911" ignored="false" />
     <file path="/fragment.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1366951809417" ignored="false" />
     <file path="db-console:/b524fb0f/bd8e1b6e-fe0f-401f-a88d-0e81e53c8907/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363032963765" ignored="false" />
@@ -125,7 +124,7 @@
     <file path="/report.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365476864953" ignored="false" />
     <file path="/login.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1366771055631" ignored="false" />
     <file path="/BlankReportParser.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1366968942814" ignored="false" />
-    <file path="/ExcelUtils.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1366977370021" ignored="false" />
+    <file path="/ExcelUtils.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1366977623461" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -356,10 +355,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ReportBuilder.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ReportBuilder.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/parsers/ReportBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="115" column="28" selection-start="4185" selection-end="4185" vertical-scroll-proportion="0.0">
+            <state line="183" column="21" selection-start="6910" selection-end="6910" vertical-scroll-proportion="1.9310344">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1490#1498#0" expanded="true" />
@@ -370,10 +369,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ExcelUtils.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ExcelUtils.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/parsers/utils/ExcelUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="79" column="33" selection-start="2345" selection-end="2345" vertical-scroll-proportion="0.86019737">
+            <state line="60" column="42" selection-start="1813" selection-end="1813" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -1156,17 +1155,22 @@
       <created>1366976181826</created>
       <updated>1366976181826</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="изменяю формат ячеек при выгрузке отчетов">
+      <created>1366977401274</created>
+      <updated>1366977401274</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29065743" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27912343" sideWeight="0.49713057" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23068051" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14075887" sideWeight="0.7554787" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.249694" sideWeight="0.67128026" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871974" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1183,11 +1187,10 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23439412" sideWeight="0.7554787" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24452133" sideWeight="0.4847001" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23439412" sideWeight="0.7554787" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24452133" sideWeight="0.4847001" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23068051" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1230,7 +1233,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="пробую инсертить строку EXCEL file 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="изменяю формат ячеек при выгрузке отчетов" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1243,7 +1246,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Вынес Connector из Executor-а в CatalogStorage" />
     <MESSAGE value="Java 7!" />
     <MESSAGE value="новая структура БД" />
     <MESSAGE value="Чуть попроавил по структуре" />
@@ -1268,6 +1270,7 @@
     <MESSAGE value="отрубил пока фильтры" />
     <MESSAGE value="пробую инсертить строку EXCEL file" />
     <MESSAGE value="пробую инсертить строку EXCEL file 2" />
+    <MESSAGE value="изменяю формат ячеек при выгрузке отчетов" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1388,18 +1391,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/parsers/ReportBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="28" selection-start="4185" selection-end="4185" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1490#1498#0" expanded="true" />
-            <element signature="e#2529#2546#0" expanded="true" />
-            <element signature="e#7442#7459#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/ProcessReportServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="40" column="79" selection-start="1299" selection-end="1299" vertical-scroll-proportion="0.0">
@@ -1441,8 +1432,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/parsers/utils/ExcelUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="33" selection-start="2345" selection-end="2345" vertical-scroll-proportion="0.86019737">
+        <state line="60" column="42" selection-start="1813" selection-end="1813" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/parsers/ReportBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="183" column="21" selection-start="6910" selection-end="6910" vertical-scroll-proportion="1.9310344">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1490#1498#0" expanded="true" />
+            <element signature="e#2529#2546#0" expanded="true" />
+            <element signature="e#7442#7459#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
