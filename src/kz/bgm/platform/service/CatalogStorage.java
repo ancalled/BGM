@@ -30,7 +30,7 @@ public interface CatalogStorage {
 
     Customer getCustomer(int id);
 
-    List<CalculatedReportItem> getCalculatedReports();
+    List<CalculatedReportItem> getCalculatedReports(String catalog);
 
     List<Track> search(String value);
 

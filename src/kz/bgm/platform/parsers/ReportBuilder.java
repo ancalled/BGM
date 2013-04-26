@@ -16,9 +16,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BlankReportParser {
+public class ReportBuilder {
 
-    private static final Logger log = Logger.getLogger(BlankReportParser.class);
+    private static final Logger log = Logger.getLogger(ReportBuilder.class);
 
     private static final String COMPOSITION_CODE = "{code}";
     private static final String COMPOSITION_NAME = "{composition}";
@@ -55,8 +55,8 @@ public class BlankReportParser {
     }
 
 
-    public static void createDoneReportExcel(String filePath,
-                                             List<CalculatedReportItem> finishReps) {
+    public static void buildReportExcelFile(String filePath,
+                                            List<CalculatedReportItem> finishReps) {
         try {
             log.info("Making Excel file report from file: " + filePath);
 

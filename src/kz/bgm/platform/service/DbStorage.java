@@ -598,8 +598,10 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
-    public List<CalculatedReportItem> getCalculatedReports() {
+    public List<CalculatedReportItem> getCalculatedReports(String catalogName) {
         Connection connection = null;
+
+        if (catalogName == null) return null;
 
         List<CalculatedReportItem> reportList
                 = new ArrayList<CalculatedReportItem>();
@@ -639,9 +641,10 @@ public class DbStorage implements CatalogStorage {
                     "    ON (report_item.composition_id = composition.id)\n" +
                     "\n" +
                     "  INNER JOIN catalog cat\n" +
-                    "    ON (cat.id = composition.catalog_id)\n" +
+                    "    ON (cat.id = composition.catalog_id and cat.name='" + catalogName + "')\n" +
                     "\n" +
                     "WHERE report_item.composition_id > 0\n" +
+                    "and ca\n" +
                     "  GROUP BY report_item.composition_id");
 
             ResultSet rs = ps.executeQuery();

@@ -75,13 +75,13 @@ CREATE TABLE composition (
 SELECT
   i.id,
   c.code,
-  replace(c.name, CHAR(9), ' ')                                                                       name,
-  replace(c.artist, CHAR(9), ' ')                                                                     artist,
-  replace(c.composer, CHAR(9), ' ')                                                                   composer,
+  replace(c.name, CHAR(9), ' ')name,
+  replace(c.artist, CHAR(9), ' ')artist,
+  replace(c.composer, CHAR(9), ' ')composer,
   report_item.content_type,
   price,
   sum(qty),
-  (price * sum(qty))                                                                                  vol,
+  (price * sum(qty))vol,
   shareMobile,
 
   @customerRoyalty := (SELECT
@@ -91,7 +91,7 @@ SELECT
                                         cr.customer_id
                                       FROM customer_report cr
                                       WHERE cr.id =
-                                            i.report_id))                                             `customer_royalty`,
+                                            i.report_id))`customer_royalty`,
 
 
 #   @customerRoyalty := (SELECT cm.royalty
@@ -101,10 +101,10 @@ SELECT
 #                        WHERE cr.id =
 #                              i.report_id) `customer royalty`,
 
-  cat.royalty                                                                                         cat_royalty,
+  cat.royalty cat_royalty,
 
   round((sum(qty) * price * (shareMobile / 100) * (@customerRoyalty / 100) * (cat.royalty / 100)), 3) revenue,
-  cat.name                                                                                            catalog
+  cat.name catalog
 #   cat.copyright copyright
 
 FROM customer_report_item i
@@ -119,3 +119,16 @@ WHERE i.composition_id > 0
 #       AND cat.platform = 'NMI'
   GROUP BY i.composition_id
 LIMIT 0, 15;
+
+alter table catalog add column copyright varchar (20);
+
+INSERT INTO catalog (name, royalty, copyright) VALUES ('WCh', 97.500, 'AUTHOR');
+INSERT INTO catalog (name, royalty, copyright) VALUES ('NMI_WEST', 97.500, 'AUTHOR');
+INSERT INTO catalog (name, royalty, copyright) VALUES ('NMI', 70.000, 'AUTHOR');
+INSERT INTO catalog (name, royalty, copyright) VALUES ('PMI_WEST', 97.500, 'AUTHOR');
+INSERT INTO catalog (name, royalty, copyright) VALUES ('PMI', 70.000, 'AUTHOR');
+INSERT INTO catalog (name, royalty, copyright) VALUES ('NMI related', 70.000, 'RELATED');
+INSERT INTO catalog (name, royalty, copyright) VALUES ('PMI related', 70.000, 'RELATED');
+INSERT INTO catalog (name, royalty, copyright) VALUES ('Sony ATV', 90.000, 'AUTHOR');
+INSERT INTO catalog (name, royalty, copyright) VALUES ('MSG_MCS', 90.000, 'AUTHOR');
+

@@ -127,6 +127,10 @@ public class InMemorycatalog implements CatalogStorage {
     }
 
     @Override
+    public List<CalculatedReportItem> getCalculatedReports(String catalog) {
+        return null;
+    }
+
     public List<CalculatedReportItem> getCalculatedReports() {
         return null;
 

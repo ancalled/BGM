@@ -2,7 +2,7 @@ package kz.bgm.platform.web;
 
 
 import kz.bgm.platform.items.CalculatedReportItem;
-import kz.bgm.platform.parsers.BlankReportParser;
+import kz.bgm.platform.parsers.ReportBuilder;
 import kz.bgm.platform.service.CatalogFactory;
 import kz.bgm.platform.service.CatalogStorage;
 
@@ -32,13 +32,12 @@ public class ProcessReportServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
+        String catalogName = (String) req.getAttribute("catalog");
+        //todo finish gui part of calculated catalog downloading
 
-        List<CalculatedReportItem> reportsList = storage.getCalculatedReports();
+        List<CalculatedReportItem> reportsList = storage.getCalculatedReports("Sony ATV");
 
-        BlankReportParser.createDoneReportExcel("./reports/SONY.xlsx", reportsList);
-
-
-
+        ReportBuilder.buildReportExcelFile("./reports/SONY.xlsx", reportsList);
 
         req.setAttribute("reports",reportsList);
 
