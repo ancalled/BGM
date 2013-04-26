@@ -53,6 +53,16 @@ public class ExcelUtils {
     public static void setValue(Sheet sheet, String val, int rowIdx, int columnIdx) {
         if (sheet == null) return;
 
+        int cellType= 1;
+
+        try{
+            double d = Double.parseDouble(val);
+            cellType=Cell.CELL_TYPE_NUMERIC;
+        }catch (NumberFormatException ne){
+            cellType =Cell.CELL_TYPE_STRING;
+
+        }
+
         Row row = sheet.getRow(rowIdx);
         Cell cell;
         if (row == null) {
@@ -60,15 +70,14 @@ public class ExcelUtils {
             row = sheet.createRow(rowIdx);
             row.createCell(columnIdx);
             cell = row.getCell(columnIdx);
-            cell.setCellType(Cell.CELL_TYPE_STRING);
+            cell.setCellType(cellType);
         } else {
-            sheet.createRow(rowIdx + 1);
             cell = row.getCell(columnIdx);
 
             if (cell == null) {
                 row.createCell(columnIdx);
                 cell = row.getCell(columnIdx);
-                cell.setCellType(Cell.CELL_TYPE_STRING);
+                cell.setCellType(cellType);
             }
         }
         cell.setCellValue(val);
