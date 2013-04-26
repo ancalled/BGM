@@ -4,6 +4,7 @@ package kz.bgm.platform.web;
 import kz.bgm.platform.items.User;
 import kz.bgm.platform.service.CatalogFactory;
 import kz.bgm.platform.service.CatalogStorage;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +16,7 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
 
     private CatalogStorage service;
+    private static final Logger log = Logger.getLogger(LoginServlet.class);
 
     @Override
     public void init() throws ServletException {
@@ -27,18 +29,19 @@ public class LoginServlet extends HttpServlet {
         String login = req.getParameter("u");
         String pass = req.getParameter("p");
 
+        log.info("Authorization request");
+        log.info("user: " + login);
+
         if (login != null && pass != null) {
-            User user = checkUserInBase(login, pass);
-            if (user != null) {
+            User user = service.getUser(login, pass);
+            if (user != null && user.getId() > 0) {
                 HttpSession session = req.getSession();
                 session.setAttribute("user", user);
+            } else {
+                log.info("user '" + login + "' was not found");
             }
-
         }
         resp.sendRedirect("/index.html");
     }
 
-    private User checkUserInBase(String userName, String pass) {
-        return service.getUser(userName, pass);
-    }
 }

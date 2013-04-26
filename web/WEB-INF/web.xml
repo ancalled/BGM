@@ -27,7 +27,7 @@
     </servlet>
     <servlet>
         <servlet-name>findServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.FindServlet</servlet-class>
+        <servlet-class>kz.bgm.platform.web.SearchTrackServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>reportServlet</servlet-name>
