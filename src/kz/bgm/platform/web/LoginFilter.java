@@ -25,10 +25,7 @@ public class LoginFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpSession session = req.getSession();
 
-        User user = null;
-        if (session != null) {
-            user = (User) session.getAttribute("user");
-        }
+        User user = (User) session.getAttribute("user");
 
         if (user == null) {
             servletRequest.setAttribute("mess", "001");
