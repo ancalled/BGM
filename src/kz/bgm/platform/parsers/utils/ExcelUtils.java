@@ -55,21 +55,22 @@ public class ExcelUtils {
 
         Row row = sheet.getRow(rowIdx);
         Cell cell;
-//        if (row == null) {
+        if (row == null) {
             sheet.createRow(rowIdx);
             row = sheet.createRow(rowIdx);
             row.createCell(columnIdx);
             cell = row.getCell(columnIdx);
             cell.setCellType(Cell.CELL_TYPE_STRING);
-//        } else {
-//            cell = row.getCell(columnIdx);
-//
-//            if (cell == null) {
-//                row.createCell(columnIdx);
-//                cell = row.getCell(columnIdx);
-//                cell.setCellType(Cell.CELL_TYPE_STRING);
-//            }
-//        }
+        } else {
+            sheet.createRow(rowIdx + 1);
+            cell = row.getCell(columnIdx);
+
+            if (cell == null) {
+                row.createCell(columnIdx);
+                cell = row.getCell(columnIdx);
+                cell.setCellType(Cell.CELL_TYPE_STRING);
+            }
+        }
         cell.setCellValue(val);
     }
 }
