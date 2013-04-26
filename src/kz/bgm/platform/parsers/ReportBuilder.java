@@ -77,11 +77,13 @@ public class ReportBuilder {
                     break;
                 }
             }
-
+            log.info("filling data report");
             fillExcelBlank(sheet, startRow, fieldsMap, finishReps);
+            log.info("data filled");
 
+            log.info("saving in file ");
             ExcelUtils.saveFile(wb, reportBlank.getName());
-
+            log.info("saved");
         } catch (IOException e) {
             e.printStackTrace();
             log.error(e.getMessage());

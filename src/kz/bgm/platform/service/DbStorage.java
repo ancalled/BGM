@@ -644,7 +644,6 @@ public class DbStorage implements CatalogStorage {
                     "    ON (cat.id = composition.catalog_id and cat.name='" + catalogName + "')\n" +
                     "\n" +
                     "WHERE report_item.composition_id > 0\n" +
-                    "and ca\n" +
                     "  GROUP BY report_item.composition_id");
 
             ResultSet rs = ps.executeQuery();
