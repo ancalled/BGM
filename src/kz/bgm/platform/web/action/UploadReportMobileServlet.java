@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -28,11 +29,14 @@ public class UploadReportMobileServlet extends HttpServlet {
     public static final String APP_HOME = System.getProperty("user.dir");
     public static final String REPORTS_HOME = APP_HOME + "/reports";
 
+    public static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
     public static final String FILE = "file";
 
     private ServletFileUpload fileUploader;
     private CatalogStorage catalogService;
     private LuceneSearch luceneSearch;
+
 
     @Override
     public void init() throws ServletException {
@@ -47,53 +51,66 @@ public class UploadReportMobileServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
+            String dateParam = req.getParameter("dt");
+            Date reportDate = dateParam != null ? FORMAT.parse(dateParam) : new Date();
+
+            String periodParam = req.getParameter("per");
+            int per = Integer.parseInt(periodParam);
+            CustomerReport.Period period = periodParam != null ?
+                    CustomerReport.Period.values()[per] :
+                    CustomerReport.Period.MONTH;
+
+            String customerParam = req.getParameter("cid");
+            if (customerParam == null) {
+                resp.sendRedirect("result.jsp?er=no-customer-id-provided");
+                return;
+            }
+
+            long customerId = Long.parseLong(customerParam);
+
+            Customer customer = catalogService.getCustomer(customerId);
+
+            if (customer == null) {
+                resp.sendRedirect("result.jsp?er=no-customer-found");
+                return;
+            }
+
+            Date now = new Date();
+
+
+            CustomerReport report = new CustomerReport();
+            report.setCustomerId(customerId);
+            report.setStartDate(reportDate);
+            report.setPeriod(period);
+            report.setUploadDate(now);
+            report.setType(CustomerReport.Type.MOBILE);
+
+            long reportId = catalogService.saveCustomerReport(report);
+
             List<FileItem> files = fileUploader.parseRequest(req);
 
             if (files != null) {
 
-                for (FileItem file : files) {
-                    String filePath = saveFile(file);
+                for (FileItem item : files) {
 
-                    log.info("Got client report " + filePath);
-//                    reportList = buildReport(filePath, clientRate);
+                    String reportFile = REPORTS_HOME + "/" + item.getName();
+                    saveToFile(item, reportFile);
 
-                    Date reportDate = new Date();               //todo alternatively, get it from request params
-                    CustomerReport.Period period = CustomerReport.Period.MONTH;  //todo and this
-
-                    String customerName = "GSM Technologies";   //todo: put user to session after authorization -> get user from session -> get customer id (company id) from user
+                    log.info("Got client report " + item.getName());
 
 
-                    log.info("Storing to DB Customer reports " +
-                            filePath + " by customer" + customerName);
+                    List<CustomerReportItem> items = ReportParser.parseMobileReport(reportFile, reportId);
 
-                    Customer customer = catalogService.getCustomer(customerName);
+                    if (items != null) {
 
-                    if (customer != null) {
-                        Date now = new Date();
-
-                        CustomerReport report = new CustomerReport();
-                        report.setCustomerId(customer.getId());
-                        report.setStartDate(reportDate);
-                        report.setPeriod(period);
-                        report.setUploadDate(now);
-                        report.setType(CustomerReport.Type.MOBILE);
-
-                        int reportId = catalogService.saveCustomerReport(report);
-
-                        List<CustomerReportItem> items = ReportParser.parseMobileReport(filePath, reportId);
-
-                        if (items != null) {
-
-                            for (CustomerReportItem i : items) {
-                                List<Long> ids = luceneSearch.search(i.getArtist(), i.getName());
-                                if (ids.size() > 0) {
-                                    i.setCompositionId(ids.get(0));
-                                }
+                        for (CustomerReportItem i : items) {
+                            List<Long> ids = luceneSearch.search(i.getArtist(), i.getName());
+                            if (ids.size() > 0) {
+                                i.setCompositionId(ids.get(0));
                             }
-
-                            catalogService.saveCustomerReportItems(items);
-
                         }
+
+                        catalogService.saveCustomerReportItems(items);
 
                     }
 
@@ -103,21 +120,20 @@ public class UploadReportMobileServlet extends HttpServlet {
                 log.debug("No files to upload!");
             }
 
+            resp.sendRedirect("/view/report-upload-result?rid=" + reportId);
+
         } catch (Exception e) {
-            log.error(e.getMessage());
-            resp.sendRedirect("result.jsp?r=error");
+            e.printStackTrace();
+            resp.sendRedirect("result.jsp?er=" + e.getMessage());
+
         }
-
-
-        resp.sendRedirect("result.jsp?r=ok");
     }
 
 
-    private String saveFile(FileItem file) throws Exception {
-        log.info("File name:" + file.getName());
-        File reportFile = new File(REPORTS_HOME + "/" + file.getName());
-        file.write(reportFile);
-        return reportFile.getPath();
+    private void saveToFile(FileItem item, String filename) throws Exception {
+        log.info("File name:" + item.getName());
+        File reportFile = new File(REPORTS_HOME + "/" + item.getName());
+        item.write(reportFile);
     }
 
 

@@ -2,19 +2,27 @@ package kz.bgm.platform.model.service;
 
 import kz.bgm.platform.model.domain.*;
 
+import java.util.Date;
 import java.util.List;
 
 public interface CatalogStorage {
 
     void saveTracks(List<Track> trackList, String catalog);
 
+    Platform getPlatform(long id);
+
+    Catalog getCatalog(long id);
 
     Track getTrack(long id);
 
-    List<Track> getTracks(List<Long> ids);
+    List<Platform> getAllPlatforms();
 
+    List<Catalog> getAllCatalogs();
 
     List<Track> getAllTracks();
+
+
+    List<Track> getTracks(List<Long> ids);
 
     List<Track> searchTracks(String value);
 
@@ -33,15 +41,23 @@ public interface CatalogStorage {
 
     Customer getCustomer(long id);
 
-    List<CalculatedReportItem> calculatePlatformReport(String catalog);
+    User getUser(String name, String pass);
 
 
 
     void saveCustomerReportItems(List<CustomerReportItem> reportItemList);
 
-    int saveCustomerReport(CustomerReport report);
+    long saveCustomerReport(CustomerReport report);
+
+    CustomerReport getCustomerReport(long id);
+
+    List<CustomerReport> getCustomerReports(long customerId, Date from, Date to);
+
+    List<CustomerReportItem> getCustomerReportsItems(long reportId);
 
 
-    User getUser(String name, String pass);
+    List<CalculatedReportItem> calculatePlatformReport(String catalog);
+
+
 
 }

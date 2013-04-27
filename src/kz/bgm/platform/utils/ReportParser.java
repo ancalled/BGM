@@ -17,10 +17,10 @@ public class ReportParser {
     private static final Logger log = Logger.getLogger(ReportParser.class);
 
 
-    public static List<CustomerReportItem> parseMobileReport(String fileName, int reportId)
+    public static List<CustomerReportItem> parseMobileReport(String fileName, long reportId)
             throws IOException, InvalidFormatException {
 
-        log.info("Parsing " + fileName + "... ");
+        log.info("Parsing mobile report from: " + fileName + "... ");
 
         Workbook wb = ExcelUtils.openFile(new File(fileName));
 
@@ -62,10 +62,10 @@ public class ReportParser {
 
 
 
-    public static List<CustomerReportItem> parsePublicReport(String fileName, int reportId)
+    public static List<CustomerReportItem> parsePublicReport(String fileName, long reportId)
             throws IOException, InvalidFormatException {
 
-        log.info("Parsing " + fileName + "... ");
+        log.info("Parsing public report from: " + fileName + "... ");
 
         Workbook wb = ExcelUtils.openFile(new File(fileName));
 
@@ -74,30 +74,21 @@ public class ReportParser {
         Sheet sheet = wb.getSheetAt(1);
         int rows = sheet.getPhysicalNumberOfRows();
 
-        //todo use templates instead of hardcoded cell numbers
-        int startRow = 7;
+        int startRow = 1;
         for (int i = startRow; i < rows; i++) {
             Row row = sheet.getRow(i);
-            String num = ExcelUtils.getCellVal(row, 0);
-
-            if (num == null || "".equals(num.trim())) continue;
 
             CustomerReportItem item = new CustomerReportItem();
 
+            String artist = ExcelUtils.getCellVal(row, 1);
             String name = ExcelUtils.getCellVal(row, 2);
-            String artist = ExcelUtils.getCellVal(row, 3);
+            String qrtStr = ExcelUtils.getCellVal(row, 3);
+            int qty = Integer.parseInt(qrtStr.trim());
 
-            item.setName(name);
-            item.setArtist(artist);
-            item.setContentType(ExcelUtils.getCellVal(row, 4));
-
-            String priceStr = ExcelUtils.getCellVal(row, 8);
-
-            if (priceStr == null || "".equals(priceStr.trim())) continue;
-
-            item.setPrice(Integer.parseInt(priceStr.trim()));
-            item.setQty(Integer.parseInt(ExcelUtils.getCellVal(row, 5).trim()));
             item.setReportId(reportId);
+            item.setArtist(artist);
+            item.setName(name);
+            item.setQty(qty);
             items.add(item);
         }
 

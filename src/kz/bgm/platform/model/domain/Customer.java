@@ -2,16 +2,13 @@ package kz.bgm.platform.model.domain;
 
 public class Customer {
 
-    int id;
-    String name;
-    float royalty;
-    String rightType;
+    private long id;
+    private String name;
+    private float royalty;
+    private String rightType;
 
-    public Customer() {
 
-    }
-
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -27,7 +24,7 @@ public class Customer {
         this.rightType = rightType;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

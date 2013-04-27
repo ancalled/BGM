@@ -13,8 +13,8 @@ public class CustomerReport {
         MONTH, QUARTER
     }
 
-    private int id;
-    private int customerId;
+    private long id;
+    private long customerId;
     private Date startDate;
     private Date uploadDate;
     private Period period;
@@ -23,19 +23,19 @@ public class CustomerReport {
     public CustomerReport() {
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getCustomerId() {
+    public long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(long customerId) {
         this.customerId = customerId;
     }
 

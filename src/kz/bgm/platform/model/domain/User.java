@@ -2,7 +2,7 @@ package kz.bgm.platform.model.domain;
 
 public class User {
 
-    private int id;
+    private long id;
     private String login;
     private String pass;
     private String role;
@@ -10,7 +10,7 @@ public class User {
     public User() {
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -26,7 +26,7 @@ public class User {
         this.role = role;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

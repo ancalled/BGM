@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import java.beans.PropertyVetoException;
 import java.sql.*;
 import java.util.*;
+import java.util.Date;
 
 public class DbStorage implements CatalogStorage {
 
@@ -79,8 +80,7 @@ public class DbStorage implements CatalogStorage {
         try {
             connection = pool.getConnection();
             PreparedStatement ps =
-                    connection.prepareStatement("SELECT id" +
-                            " FROM catalog WHERE name=?");
+                    connection.prepareStatement("SELECT id FROM catalog WHERE name=?");
 
             ps.setString(1, catalogName);
             ResultSet rs = ps.executeQuery();
@@ -102,6 +102,46 @@ public class DbStorage implements CatalogStorage {
         return 0;
     }
 
+    @Override
+    public Platform getPlatform(final long id) {
+        return query(new Action<Platform>() {
+            @Override
+            public Platform execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM platform WHERE id=?");
+                stmt.setLong(1, id);
+
+                ResultSet rs = stmt.executeQuery();
+
+                if (rs.next()) {
+                    return parsePlatform(rs);
+                }
+
+                return null;
+            }
+        });
+    }
+
+
+    @Override
+    public Catalog getCatalog(final long id) {
+        return query(new Action<Catalog>() {
+            @Override
+            public Catalog execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM catalog WHERE id=?");
+                stmt.setLong(1, id);
+
+                ResultSet rs = stmt.executeQuery();
+
+                if (rs.next()) {
+                    return parseCatalog(rs);
+                }
+
+                return null;
+            }
+        });
+    }
 
     @Override
     public Track getTrack(final long id) {
@@ -123,6 +163,59 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+    @Override
+    public List<Platform> getAllPlatforms() {
+        return query(new Action<List<Platform>>() {
+            @Override
+            public List<Platform> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement("SELECT * FROM platform");
+
+                ResultSet rs = stmt.executeQuery();
+
+                List<Platform> tracks = new ArrayList<Platform>();
+                while (rs.next()) {
+                    tracks.add(parsePlatform(rs));
+                }
+                return tracks;
+            }
+        });
+    }
+
+    @Override
+    public List<Catalog> getAllCatalogs() {
+        return query(new Action<List<Catalog>>() {
+            @Override
+            public List<Catalog> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement("SELECT * FROM catalog");
+                ResultSet rs = stmt.executeQuery();
+
+                List<Catalog> tracks = new ArrayList<Catalog>();
+                while (rs.next()) {
+                    tracks.add(parseCatalog(rs));
+                }
+                return tracks;
+            }
+        });
+    }
+
+    @Override
+    public List<Track> getAllTracks() {
+        return query(new Action<List<Track>>() {
+            @Override
+            public List<Track> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement("SELECT * FROM composition");
+                ResultSet rs = stmt.executeQuery();
+
+                List<Track> tracks = new ArrayList<Track>();
+                while (rs.next()) {
+                    tracks.add(parseTrack(rs));
+                }
+                return tracks;
+            }
+        });
+
+    }
+
 
     @Override
     public List<Track> getTracks(final List<Long> ids) {
@@ -140,19 +233,6 @@ public class DbStorage implements CatalogStorage {
                 }
 
                 return result;
-            }
-        });
-
-    }
-
-
-    @Override
-    public List<Track> getAllTracks() {
-        return query(new Action<List<Track>>() {
-            @Override
-            public List<Track> execute(Connection con) throws SQLException {
-                PreparedStatement stmt = con.prepareStatement("SELECT * FROM composition");
-                return parseTracks(stmt.executeQuery());
             }
         });
 
@@ -179,7 +259,11 @@ public class DbStorage implements CatalogStorage {
 
                 ResultSet rs = stmt.executeQuery();
 
-                return parseTracks(rs);
+                List<Track> tracks = new ArrayList<Track>();
+                while (rs.next()) {
+                    tracks.add(parseTrack(rs));
+                }
+                return tracks;
             }
         });
 
@@ -195,7 +279,13 @@ public class DbStorage implements CatalogStorage {
                         "SELECT * FROM composition WHERE name=?");
                 stmt.setString(1, name);
 
-                return parseTracks(stmt.executeQuery());
+                ResultSet rs = stmt.executeQuery();
+
+                List<Track> tracks = new ArrayList<Track>();
+                while (rs.next()) {
+                    tracks.add(parseTrack(rs));
+                }
+                return tracks;
             }
         });
 
@@ -211,7 +301,13 @@ public class DbStorage implements CatalogStorage {
                         "SELECT * FROM composition WHERE code=?");
                 stmt.setString(1, code);
 
-                return parseTracks(stmt.executeQuery());
+                ResultSet rs = stmt.executeQuery();
+
+                List<Track> tracks = new ArrayList<Track>();
+                while (rs.next()) {
+                    tracks.add(parseTrack(rs));
+                }
+                return tracks;
             }
         });
 
@@ -226,7 +322,13 @@ public class DbStorage implements CatalogStorage {
                         "SELECT * FROM composition WHERE composer=?");
                 stmt.setString(1, composer);
 
-                return parseTracks(stmt.executeQuery());
+                ResultSet rs = stmt.executeQuery();
+
+                List<Track> tracks = new ArrayList<Track>();
+                while (rs.next()) {
+                    tracks.add(parseTrack(rs));
+                }
+                return tracks;
             }
         });
 
@@ -241,7 +343,13 @@ public class DbStorage implements CatalogStorage {
                         "SELECT * FROM composition WHERE artist=?");
                 stmt.setString(1, artist);
 
-                return parseTracks(stmt.executeQuery());
+                ResultSet rs = stmt.executeQuery();
+
+                List<Track> tracks = new ArrayList<Track>();
+                while (rs.next()) {
+                    tracks.add(parseTrack(rs));
+                }
+                return tracks;
             }
         });
     }
@@ -255,7 +363,13 @@ public class DbStorage implements CatalogStorage {
                         "SELECT * FROM composition WHERE artist LIKE?");
                 stmt.setString(1, artist);
 
-                return parseTracks(stmt.executeQuery());
+                ResultSet rs = stmt.executeQuery();
+
+                List<Track> tracks = new ArrayList<Track>();
+                while (rs.next()) {
+                    tracks.add(parseTrack(rs));
+                }
+                return tracks;
             }
         });
     }
@@ -313,23 +427,22 @@ public class DbStorage implements CatalogStorage {
 //    ----------------------------------------------------------------------------------------
 
     @Override
-    public int saveCustomerReport(final CustomerReport report) {
-        return query(new Action<Integer>() {
+    public long saveCustomerReport(final CustomerReport report) {
+        return query(new Action<Long>() {
             @Override
-            public Integer execute(Connection con) throws SQLException {
+            public Long execute(Connection con) throws SQLException {
                 PreparedStatement ps =
-                        con.prepareStatement("INSERT INTO customer_report(customer_id,order_date,download_date) VALUES (?,?,?)",
+                        con.prepareStatement("INSERT INTO customer_report(customer_id, order_date, download_date) VALUES (?,?,?)",
                                 Statement.RETURN_GENERATED_KEYS);
 
-                ps.setInt(1, report.getCustomerId());
+                ps.setLong(1, report.getCustomerId());
                 ps.setDate(2, new java.sql.Date(report.getStartDate().getTime()));
                 ps.setDate(3, new java.sql.Date(report.getUploadDate().getTime()));
 
                 ps.executeUpdate();
 
                 ResultSet rs = ps.getGeneratedKeys();
-                rs.next();
-                return rs.getInt(1);
+                return rs.next() ? rs.getLong(1) : -1;
             }
         });
     }
@@ -367,6 +480,65 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+
+    @Override
+    public CustomerReport getCustomerReport(final long id) {
+        return query(new Action<CustomerReport>() {
+            @Override
+            public CustomerReport execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM customer_report WHERE id = ?");
+                stmt.setLong(1, id);
+
+                ResultSet rs = stmt.executeQuery();
+                return rs.next() ? parseCustomerReport(rs) : null;
+            }
+        });
+    }
+
+    @Override
+    public List<CustomerReport> getCustomerReports(final long customerId, final Date from, final Date to) {
+        return query(new Action<List<CustomerReport>>() {
+            @Override
+            public List<CustomerReport> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM customer_report WHERE customer_id = ? AND start_date BETWEEN ? AND ?");
+                stmt.setLong(1, customerId);
+                stmt.setDate(2, new java.sql.Date(from.getTime()));
+                stmt.setDate(3, new java.sql.Date(to.getTime()));
+
+                ResultSet rs = stmt.executeQuery();
+
+                List<CustomerReport> reports = new ArrayList<CustomerReport>();
+                while (rs.next()) {
+                    reports.add(parseCustomerReport(rs));
+                }
+
+                return reports;
+            }
+        });
+    }
+
+    @Override
+    public List<CustomerReportItem> getCustomerReportsItems(final long reportId) {
+        return query(new Action<List<CustomerReportItem>>() {
+            @Override
+            public List<CustomerReportItem> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM customer_report_item WHERE report_id = ?");
+                stmt.setLong(1, reportId);
+
+                ResultSet rs = stmt.executeQuery();
+
+                List<CustomerReportItem> reports = new ArrayList<CustomerReportItem>();
+                while (rs.next()) {
+                    reports.add(parseCustomerReportItem(rs));
+                }
+
+                return reports;
+            }
+        });
+    }
 
     @Override
     public List<CalculatedReportItem> calculatePlatformReport(final String catalogName) {
@@ -424,8 +596,6 @@ public class DbStorage implements CatalogStorage {
                 }
 
                 return result;
-
-
             }
         });
 
@@ -435,52 +605,21 @@ public class DbStorage implements CatalogStorage {
 //    ----------------------------------------------------------------------------------------
 
 
-    private static CalculatedReportItem parseCalculatedReport(ResultSet rs) {
-        if (rs == null) {
-            return null;
-        }
-
-        CalculatedReportItem report = new CalculatedReportItem();
-        try {
-            report.setReportItemId(rs.getInt("id"));
-            report.setCompositionCode(rs.getString("code"));
-            report.setCompositionName(rs.getString("name"));
-            report.setArtist(rs.getString("artist"));
-            report.setComposer(rs.getString("composer"));
-            report.setPrice(rs.getFloat("price"));
-            report.setQtySum(rs.getInt("sum(qty)"));
-            report.setContentType(rs.getString("content_type"));
-            report.setVol(rs.getFloat("vol"));
-            report.setShareMobile(rs.getFloat("shareMobile"));
-            report.setCustomerRoyalty(rs.getFloat("customer_royalty"));
-            report.setCatalogRoyalty(rs.getFloat("cat_royalty"));
-            report.setRevenue(rs.getFloat("revenue"));
-            report.setCatalog(rs.getString("catalog"));
-            report.setCopyright(rs.getString("copyright"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-            log.error(e.getMessage());
-        }
-
-        return report;
+    private static Platform parsePlatform(ResultSet rs) throws SQLException {
+        Platform platform = new Platform();
+        platform.setId(rs.getLong("id"));
+        platform.setName(rs.getString("name"));
+        return platform;
     }
 
-
-    private static List<Track> parseTracks(ResultSet rs) throws SQLException {
-        if (rs == null) return null;
-
-        List<Track> tracks = new ArrayList<Track>();
-        while (rs.next()) {
-            tracks.add(parseTrack(rs));
-        }
-        return tracks;
+    private static Catalog parseCatalog(ResultSet rs) throws SQLException {
+        Catalog catalog = new Catalog();
+        catalog.setId(rs.getLong("id"));
+        catalog.setName(rs.getString("name"));
+        return catalog;
     }
 
     private static Track parseTrack(ResultSet rs) throws SQLException {
-        if (rs == null) {
-            return null;
-        }
-
         Track track = new Track();
         track.setCatalog(catalogMap.get(rs.getLong("catalog_id")));
         track.setId(rs.getLong("id"));
@@ -495,12 +634,8 @@ public class DbStorage implements CatalogStorage {
 
 
     private static Customer parseCustomer(ResultSet rs) throws SQLException {
-        if (rs == null) {
-            return null;
-        }
-
         Customer customer = new Customer();
-        customer.setId(rs.getInt("id"));
+        customer.setId(rs.getLong("id"));
         customer.setName(rs.getString("name"));
         customer.setRightType(rs.getString("right_type"));
         customer.setRoyalty(rs.getFloat("royalty"));
@@ -509,16 +644,75 @@ public class DbStorage implements CatalogStorage {
 
 
     private User parseUser(ResultSet rs) throws SQLException {
-        if (rs == null) return null;
-
         User user = new User();
-        user.setId(rs.getInt("id"));
+        user.setId(rs.getLong("id"));
         user.setLogin(rs.getString("login"));
         user.setPass(rs.getString("password"));
         user.setRole(rs.getString("role"));
         return user;
     }
 
+
+    private static CustomerReport parseCustomerReport(ResultSet rs) throws SQLException {
+
+        CustomerReport report = new CustomerReport();
+        report.setId(rs.getLong("id"));
+        int type = rs.getInt("type");
+        report.setType(CustomerReport.Type.values()[type]);
+
+        if (report.getType() == CustomerReport.Type.MOBILE) {
+            long customerId = rs.getLong("customer_id");
+            report.setCustomerId(customerId);
+        }
+
+        report.setStartDate(rs.getDate("start_date"));
+        int period = rs.getInt("period");
+        report.setPeriod(CustomerReport.Period.values()[period]);
+        report.setUploadDate(rs.getDate("upload_date"));
+
+        return report;
+    }
+
+
+    private static CustomerReportItem parseCustomerReportItem(ResultSet rs) throws SQLException {
+
+        CustomerReportItem item = new CustomerReportItem();
+        item.setId(rs.getLong("id"));
+        item.setReportId(rs.getLong("report_id"));
+        item.setCompositionId(rs.getLong("composition_id"));
+        item.setName(rs.getString("name"));
+        item.setArtist(rs.getString("artist"));
+        item.setContentType(rs.getString("content_type"));
+        item.setQty(rs.getInt("qty"));
+        item.setPrice(rs.getFloat("price"));
+
+        return item;
+    }
+
+
+    private static CalculatedReportItem parseCalculatedReport(ResultSet rs) throws SQLException {
+
+        CalculatedReportItem report = new CalculatedReportItem();
+        report.setReportItemId(rs.getLong("id"));
+        report.setCompositionCode(rs.getString("code"));
+        report.setCompositionName(rs.getString("name"));
+        report.setArtist(rs.getString("artist"));
+        report.setComposer(rs.getString("composer"));
+        report.setPrice(rs.getFloat("price"));
+        report.setQtySum(rs.getInt("sum(qty)"));
+        report.setContentType(rs.getString("content_type"));
+        report.setVol(rs.getFloat("vol"));
+        report.setShareMobile(rs.getFloat("shareMobile"));
+        report.setCustomerRoyalty(rs.getFloat("customer_royalty"));
+        report.setCatalogRoyalty(rs.getFloat("cat_royalty"));
+        report.setRevenue(rs.getFloat("revenue"));
+        report.setCatalog(rs.getString("catalog"));
+        report.setCopyright(rs.getString("copyright"));
+        return report;
+    }
+
+
+    //    ------------------------------------------------
 
     public void closeConnection() {
         pool.close();
@@ -590,9 +784,6 @@ public class DbStorage implements CatalogStorage {
 
         return buf.toString();
     }
-
-
-//    ------------------------------------------------
 
 
     private <T> T query(Action<T> action) {

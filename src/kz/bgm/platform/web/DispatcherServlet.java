@@ -1,5 +1,8 @@
 package kz.bgm.platform.web;
 
+import kz.bgm.platform.model.domain.Customer;
+import kz.bgm.platform.model.domain.CustomerReport;
+import kz.bgm.platform.model.domain.CustomerReportItem;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 
 public class DispatcherServlet extends HttpServlet {
@@ -33,8 +37,18 @@ public class DispatcherServlet extends HttpServlet {
             action = new Action() {
                 @Override
                 public String execute(HttpServletRequest req, HttpServletResponse resp) {
-//                    catalogStorage.calculatePlatformReport()
 
+                    String repIdStr = req.getParameter("rid");
+                    if (repIdStr == null) return null;
+                    long reportId = Long.parseLong(repIdStr);
+
+                    CustomerReport report = catalogStorage.getCustomerReport(reportId);
+                    List<CustomerReportItem> items = catalogStorage.getCustomerReportsItems(reportId);
+                    Customer customer = catalogStorage.getCustomer(report.getCustomerId());
+
+                    req.setAttribute("report", report);
+                    req.setAttribute("items", items);
+                    req.setAttribute("customer", customer);
 
                     return "report-upload-result";
                 }
