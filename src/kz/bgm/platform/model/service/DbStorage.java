@@ -36,7 +36,6 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-
     public void saveTracks(List<Track> tracks, String catalog) {
         Connection connection = null;
         try {
@@ -87,9 +86,6 @@ public class DbStorage implements CatalogStorage {
             }
         }
     }
-
-
-
 
 
     private int getCatalogId(String catalogName) {
@@ -186,7 +182,33 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-    public List<Track> search(String value) {
+    @Override
+    public List<Track> getAllTracks() {
+        Connection connection = null;
+        try {
+            connection = pool.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT * FROM composition");
+
+            return parseTracks(stmt.executeQuery());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return Collections.emptyList();
+    }
+
+
+    public List<Track> searchTracks(String value) {
         Connection connection = null;
         try {
             connection = pool.getConnection();
@@ -223,119 +245,8 @@ public class DbStorage implements CatalogStorage {
         return Collections.emptyList();
     }
 
-
     @Override
-    public int saveCustomerReport(CustomerReport report) {
-        Connection connection = null;
-        try {
-            log.info("inserting customer report ");
-            connection = pool.getConnection();
-
-            PreparedStatement ps =
-                    connection.prepareStatement("INSERT INTO " +
-                            "customer_report(customer_id,order_date,download_date) " +
-                            "VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
-
-            ps.setInt(1, report.getCustomerId());
-            ps.setDate(2, new java.sql.Date(report.getStartDate().getTime()));
-            ps.setDate(3, new java.sql.Date(report.getUploadDate().getTime()));
-
-            ps.executeUpdate();
-
-            ResultSet rs = ps.getGeneratedKeys();
-            rs.next();
-            return rs.getInt(1);
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return 0;
-    }
-
-
-    @Override
-    public void saveCustomerReportItems(List<CustomerReportItem> items) {
-        Connection connection = null;
-        try {
-            log.info("Insert customer report items " + items.size() + " size");
-
-            connection = pool.getConnection();
-            PreparedStatement ps =
-                    connection.prepareStatement("INSERT INTO " +
-                            "customer_report_item(report_id,composition_id,name," +
-                            "artist,content_type,qty,price) " +
-                            "VALUES (?,?,?,?,?,?,?)");
-
-
-            for (CustomerReportItem cr : items) {
-                ps.setLong(1, cr.getReportId());
-                ps.setLong(2, cr.getCompositionId());
-                ps.setString(3, cr.getName());
-                ps.setString(4, cr.getArtist());
-                ps.setString(5, cr.getContentType());
-                ps.setInt(6, cr.getQty());
-                ps.setFloat(7, cr.getPrice());
-
-                ps.addBatch();
-            }
-
-            connection.setAutoCommit(false);
-            ps.executeBatch();
-            connection.commit();
-
-            log.info("insert done");
-        } catch (SQLException e) {
-
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-
-    @Override
-    public List<Track> getAllTracks() {
-        Connection connection = null;
-        try {
-            connection = pool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM composition");
-
-            return parseTracks(stmt.executeQuery());
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        return Collections.emptyList();
-    }
-
-
-    @Override
-    public List<Track> searchTrackByName(String name) {
+    public List<Track> searchTracksByName(String name) {
         Connection connection = null;
         try {
             connection = pool.getConnection();
@@ -362,7 +273,7 @@ public class DbStorage implements CatalogStorage {
 
 
     @Override
-    public List<Track> searchTrackByCode(String code) {
+    public List<Track> searchTracksByCode(String code) {
         Connection connection = null;
         try {
             connection = pool.getConnection();
@@ -527,6 +438,123 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
+    public User getUser(String name, String pass) {
+        Connection connection = null;
+        try {
+            connection = pool.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT * FROM user WHERE login = ? AND password = ? ");
+            stmt.setString(1, name);
+            stmt.setString(2, pass);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return parseUser(rs);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
+
+//    ----------------------------------------------------------------------------------------
+
+    @Override
+    public int saveCustomerReport(CustomerReport report) {
+        Connection connection = null;
+        try {
+            log.info("inserting customer report ");
+            connection = pool.getConnection();
+
+            PreparedStatement ps =
+                    connection.prepareStatement("INSERT INTO " +
+                            "customer_report(customer_id,order_date,download_date) " +
+                            "VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
+
+            ps.setInt(1, report.getCustomerId());
+            ps.setDate(2, new java.sql.Date(report.getStartDate().getTime()));
+            ps.setDate(3, new java.sql.Date(report.getUploadDate().getTime()));
+
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            return rs.getInt(1);
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return 0;
+    }
+
+
+    @Override
+    public void saveCustomerReportItems(List<CustomerReportItem> items) {
+        Connection connection = null;
+        try {
+            log.info("Insert customer report items " + items.size() + " size");
+
+            connection = pool.getConnection();
+            PreparedStatement ps =
+                    connection.prepareStatement("INSERT INTO " +
+                            "customer_report_item(report_id,composition_id,name," +
+                            "artist,content_type,qty,price) " +
+                            "VALUES (?,?,?,?,?,?,?)");
+
+
+            for (CustomerReportItem cr : items) {
+                ps.setLong(1, cr.getReportId());
+                ps.setLong(2, cr.getCompositionId());
+                ps.setString(3, cr.getName());
+                ps.setString(4, cr.getArtist());
+                ps.setString(5, cr.getContentType());
+                ps.setInt(6, cr.getQty());
+                ps.setFloat(7, cr.getPrice());
+
+                ps.addBatch();
+            }
+
+            connection.setAutoCommit(false);
+            ps.executeBatch();
+            connection.commit();
+
+            log.info("insert done");
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+    @Override
     public List<CalculatedReportItem> calculatePlatformReport(String catalogName) {
 
         if (catalogName == null) return null;
@@ -592,18 +620,7 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-
-
-    private static List<Track> parseTracks(ResultSet rs) throws SQLException {
-        if (rs == null) return null;
-
-        List<Track> tracks = new ArrayList<Track>();
-        while (rs.next()) {
-            Track track = parseTrack(rs);
-            tracks.add(track);
-        }
-        return tracks;
-    }
+//    ----------------------------------------------------------------------------------------
 
 
     private static CalculatedReportItem parseCalculatedReport(ResultSet rs) {
@@ -634,8 +651,17 @@ public class DbStorage implements CatalogStorage {
         }
 
         return report;
+    }
 
 
+    private static List<Track> parseTracks(ResultSet rs) throws SQLException {
+        if (rs == null) return null;
+
+        List<Track> tracks = new ArrayList<Track>();
+        while (rs.next()) {
+            tracks.add(parseTrack(rs));
+        }
+        return tracks;
     }
 
     private static Track parseTrack(ResultSet rs) throws SQLException {
@@ -644,7 +670,7 @@ public class DbStorage implements CatalogStorage {
         }
 
         Track track = new Track();
-        track.setCatalog(catalogMap.get(rs.getInt("catalog_id")));
+        track.setCatalog(catalogMap.get(rs.getLong("catalog_id")));
         track.setId(rs.getLong("id"));
         track.setCode(rs.getString("code"));
         track.setName(rs.getString("name"));
@@ -654,6 +680,7 @@ public class DbStorage implements CatalogStorage {
         track.setPublicShare(rs.getFloat("sharePublic"));
         return track;
     }
+
 
     private static Customer parseCustomer(ResultSet rs) throws SQLException {
         if (rs == null) {
@@ -666,36 +693,6 @@ public class DbStorage implements CatalogStorage {
         customer.setRightType(rs.getString("right_type"));
         customer.setRoyalty(rs.getFloat("royalty"));
         return customer;
-    }
-
-    @Override
-    public User getUser(String name, String pass) {
-        Connection connection = null;
-        try {
-            connection = pool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM user WHERE login = ? AND password = ? ");
-            stmt.setString(1, name);
-            stmt.setString(2, pass);
-
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                return parseUser(rs);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return null;
     }
 
 
@@ -711,41 +708,9 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-    @Override
-    public Float getRoyalty(int catalogId) {
-        Connection connection = null;
-        try {
-            connection = pool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT royalty FROM catalog WHERE id=?");
-            stmt.setInt(1, catalogId);
-
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                rs.getString("royalty");
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return 0f;
-    }
-
-
     public void closeConnection() {
         pool.close();
     }
-
 
 
     private static ComboPooledDataSource initPool(String host,

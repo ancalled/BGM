@@ -14,15 +14,13 @@ public interface CatalogStorage {
     List<Track> getTracks(List<Long> ids);
 
 
-
-
-    Float getRoyalty(int catalogId);
-
     List<Track> getAllTracks();
 
-    List<Track> searchTrackByName(String songName);
+    List<Track> searchTracks(String value);
 
-    List<Track> searchTrackByCode(String code);
+    List<Track> searchTracksByName(String songName);
+
+    List<Track> searchTracksByCode(String code);
 
     List<Track> searchTracksByComposer(String composer);
 
@@ -37,7 +35,6 @@ public interface CatalogStorage {
 
     List<CalculatedReportItem> calculatePlatformReport(String catalog);
 
-    List<Track> search(String value);
 
 
     void saveCustomerReportItems(List<CustomerReportItem> reportItemList);

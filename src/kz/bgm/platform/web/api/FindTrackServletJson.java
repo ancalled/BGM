@@ -35,7 +35,7 @@ public class FindTrackServletJson extends HttpServlet {
         if (find != null && !"".equals(find)) {
 
             List<Track> foundTracks =
-                    catalogService.searchTrackByName(find);
+                    catalogService.searchTracksByName(find);
             JSONArray mass = new JSONArray();
             if (foundTracks == null) {
                 resp.sendRedirect("/find.html");

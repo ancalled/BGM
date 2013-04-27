@@ -80,7 +80,6 @@ public class UploadReportPublicServlet extends HttpServlet {
                         }
 
                         catalogService.saveCustomerReportItems(items);
-
                     }
 
                 }

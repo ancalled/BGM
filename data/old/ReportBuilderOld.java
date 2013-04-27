@@ -35,7 +35,7 @@ public class ReportBuilderOld {
 
             String artist = report.getArtist();
             String composition = report.getCompisition();
-            Track track = catalogStorage.search(artist, composition);
+            Track track = catalogStorage.searchTracks(artist, composition);
 
             if (track != null) {
 
@@ -93,7 +93,7 @@ public class ReportBuilderOld {
 
         for (ReportItem item : items) {
 
-            Track track = catalog.search(item.getArtist(), item.getCompisition(), false);
+            Track track = catalog.searchTracks(item.getArtist(), item.getCompisition(), false);
             if (track != null) {
                 System.out.println(idx++ + sep +
                         track.getCode() + sep +

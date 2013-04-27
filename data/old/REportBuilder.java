@@ -21,8 +21,8 @@ public class ReportBuilder {
 
         for (ReportItem ri : reportItems) {
 
-            Track authTrack = catalog.search(ri.getAuthor(), ri.getCompisition(), false);
-            Track comTrack = catalog.search(ri.getAuthor(), ri.getCompisition(), true);
+            Track authTrack = catalog.searchTracks(ri.getAuthor(), ri.getCompisition(), false);
+            Track comTrack = catalog.searchTracks(ri.getAuthor(), ri.getCompisition(), true);
 
             if (DEBUG) {
                 System.out.println(authTrack != null ? authTrack : "Not found :(");
@@ -91,7 +91,7 @@ public class ReportBuilder {
 
         for (ReportItem item : items) {
 
-            Track track = catalog.search(item.getAuthor(), item.getCompisition(), false);
+            Track track = catalog.searchTracks(item.getAuthor(), item.getCompisition(), false);
             if (track != null) {
                 System.out.println(idx++ + sep +
                         track.getCode() + sep +

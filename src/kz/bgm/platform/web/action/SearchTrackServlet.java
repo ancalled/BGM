@@ -53,9 +53,9 @@ public class SearchTrackServlet extends HttpServlet {
             } else if (type.equals("artist")) {
                 found = catalogService.searchTracksByArtist(query);
             } else if (type.equals("code")) {
-                found = catalogService.searchTrackByCode(query);
+                found = catalogService.searchTracksByCode(query);
             } else if (type.equals("song")) {
-                found = catalogService.searchTrackByName(query);
+                found = catalogService.searchTracksByName(query);
             } else if (type.equals("composer")) {
                 found = catalogService.searchTracksByComposer(query);
             } else {
