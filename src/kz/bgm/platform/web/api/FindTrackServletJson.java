@@ -1,9 +1,9 @@
-package kz.bgm.platform.web;
+package kz.bgm.platform.web.api;
 
 
-import kz.bgm.platform.service.CatalogFactory;
-import kz.bgm.platform.service.CatalogStorage;
-import kz.bgm.platform.items.Track;
+import kz.bgm.platform.model.service.CatalogFactory;
+import kz.bgm.platform.model.service.CatalogStorage;
+import kz.bgm.platform.model.domain.Track;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

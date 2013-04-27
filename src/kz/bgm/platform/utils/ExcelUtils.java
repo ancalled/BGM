@@ -1,4 +1,4 @@
-package kz.bgm.platform.parsers.utils;
+package kz.bgm.platform.utils;
 
 import org.apache.log4j.Logger;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;

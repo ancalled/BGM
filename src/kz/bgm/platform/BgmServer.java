@@ -1,8 +1,7 @@
 package kz.bgm.platform;
 
-import kz.bgm.platform.service.CatalogFactory;
+import kz.bgm.platform.model.service.CatalogFactory;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.NCSARequestLog;

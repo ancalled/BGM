@@ -1,75 +1,35 @@
 package kz.bgm.platform;
 
-import kz.bgm.platform.items.*;
-import kz.bgm.platform.parsers.ReportParser;
-import kz.bgm.platform.service.CatalogStorage;
-import org.apache.log4j.Logger;
+import kz.bgm.platform.utils.ExcelUtils;
+import kz.bgm.platform.model.service.CatalogStorage;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
+import java.io.File;
 import java.io.IOException;
-import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
-public class ReportBuilder {
+@Deprecated
+public class ReportBuilderOld {
 
     public static final boolean DEBUG = false;
     public static final String APP_DIR = System.getProperty("user.dir");
 
     public static final String REPORTS_DIR = APP_DIR + "/reports";
 
-    private static final Logger log = Logger.getLogger(ReportBuilder.class);
 
-
-    public static void storeCustomerReport(String fileName,
-                                           CatalogStorage storage,
-                                           String customerName) {
-        try {
-
-            log.info("Storing to DB Customer reports " +
-                    fileName + " by customer" + customerName);
-
-            Customer customer = storage.getCustomer(customerName);
-
-            CustomerReport cr = makeCustomerReport(customer,
-                    new Date(new java.util.Date().getTime()),
-                    new Date(new java.util.Date().getTime()));
-
-            int reportId = storage.insertCustomerReport(cr);
-
-            List<CustomerReportItem> reportList = ReportParser.
-                    parseCustomerReport(fileName,
-                            storage,
-                            reportId);  //todo fix reportId
-
-            storage.insertCustomerReportItem(reportList);
-
-            log.info("storing done");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error(e.getMessage());
-        }
-
-
-    }
-
-    private static CustomerReport makeCustomerReport(Customer customer, Date orderDate, Date downloadDate) {
-        CustomerReport cr = new CustomerReport();
-        cr.setCustomerId(customer.getId());
-        cr.setReportDate(orderDate);
-        cr.setDownloadDate(downloadDate);
-        return cr;
-
-    }
-
+    @Deprecated
     public static List<ReportItem> buildMobileReport(
             CatalogStorage catalogStorage,
             String filename, float clientRate) throws IOException, InvalidFormatException {
-        log.info("Parsing mobile report ...");
-        List<ReportItem> reportList = ReportParser.loadClientReport(filename, clientRate);
-        log.info("Parsing finished");
+        System.out.println("Parsing mobile report ...");
+        List<ReportItem> reportList = loadClientReport(filename, clientRate);
+        System.out.println("Parsing finished");
 
-        log.info("Building mobile report...");
+        System.out.println("Building mobile report...");
 
         for (ReportItem report : reportList) {
 
@@ -101,8 +61,8 @@ public class ReportBuilder {
                 report.setAuthorRevenue(authorRevenue);
                 report.setPublisherAuthRevenue(publisherAuthRevenue);
 //
-                log.info("Report item :");
-                log.info("ID:                        " + track.getId() + "\n" +
+                System.out.println("Report item :");
+                System.out.println("ID:                        " + track.getId() + "\n" +
                         "Code:                      " + track.getCode() + "\n" +
                         "Name:                      " + track.getName() + "\n" +
                         "Composer:                  " + composers + "\n" +
@@ -118,10 +78,10 @@ public class ReportBuilder {
                 );
 //
             } else {
-                log.info("Composition '" + composition + "' with artist '" + artist + "' not found");
+                System.out.println("Composition '" + composition + "' with artist '" + artist + "' not found");
             }
         }
-        log.info("Mobile Report build.");
+        System.out.println("Mobile Report build.");
 
         return reportList;
     }
@@ -170,6 +130,59 @@ public class ReportBuilder {
                 }
             }
         }
+    }
+
+    @Deprecated
+    public static List<ReportItem> loadClientReport(String filename, float clientRate)
+            throws IOException, InvalidFormatException {
+
+        File file = new File(filename);
+        long startTime = System.currentTimeMillis();
+        System.out.println("Loading " + file.getName() + "... ");
+
+        Workbook wb = ExcelUtils.openFile(file);
+
+        List<ReportItem> items = new ArrayList<ReportItem>();
+//        wb.getNumberOfSheets();
+        Sheet sheet = wb.getSheetAt(1);
+        int rows = sheet.getPhysicalNumberOfRows();
+
+        System.out.println("Parsing sheet '" + sheet.getSheetName() + "' with " + rows + " rows");
+
+        int startRow = 6;
+        for (int i = startRow; i < rows; i++) {
+            Row row = sheet.getRow(i);
+            String num = ExcelUtils.getCellVal(row, 0);
+
+            if (num == null || "".equals(num.trim())) continue;
+
+            ReportItem item = new ReportItem();
+            item.setCompisition(ExcelUtils.getCellVal(row, 2));
+            item.setArtist(ExcelUtils.getCellVal(row, 3));
+            item.setContentType(ExcelUtils.getCellVal(row, 4));
+
+            String priceStr = ExcelUtils.getCellVal(row, 5);
+
+            if (priceStr == null || "".equals(priceStr.trim())) continue;
+
+            priceStr = priceStr.replace(",", ".");
+
+            item.setPrice(Float.parseFloat(priceStr));
+
+            String qtyStr = ExcelUtils.getCellVal(row, 6).trim();
+
+            if (qtyStr == null || "".equals(qtyStr)) continue;
+
+            item.setQty(Integer.parseInt(qtyStr));
+            item.setRate(clientRate);
+            items.add(item);
+        }
+
+        long endTime = System.currentTimeMillis();
+        long proc = (endTime - startTime) / 1000;
+        System.out.println("Got " + items.size() + " items in " + proc + " sec.");
+
+        return items;
     }
 
 

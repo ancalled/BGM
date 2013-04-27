@@ -2,7 +2,7 @@ package kz.bgm.platform.test;
 
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import kz.bgm.platform.items.Track;
+import kz.bgm.platform.model.domain.Track;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -25,7 +25,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LucenTest {
+public class LuceneTest {
 
     public static final int RESULT_SIZE = 100000;
     private static String lBase = "bgm";
@@ -39,29 +39,29 @@ public class LucenTest {
 
     private final ComboPooledDataSource pool;
 
-    public LucenTest(String host, String port,
-                     String base, String user, String pass) {
+    public LuceneTest(String host, String port,
+                      String base, String user, String pass) {
         pool = initPool(host, port, base, user, pass);
     }
 
     public static void main(String[] args) throws IOException, ParseException {
 
-        LucenTest lucenTest = new LucenTest(lHost, lPort, lBase, lLogin, lPass);
+        LuceneTest luceneTest = new LuceneTest(lHost, lPort, lBase, lLogin, lPass);
 
-//        startIndexing(lucenTest);
+//        startIndexing(luceneTest);
 
-        startSearch(lucenTest, "Trespass", true);
+        startSearch(luceneTest, "Trespass", true);
 
 
     }
 
-    private static void startSearch(LucenTest lucenTest, String value, boolean multiSearch) throws IOException, ParseException {
+    private static void startSearch(LuceneTest luceneTest, String value, boolean multiSearch) throws IOException, ParseException {
         long startF = System.currentTimeMillis();
         List<Track> trackList;
         if (multiSearch) {
-            trackList = lucenTest.multiSearchTracks(value);
+            trackList = luceneTest.multiSearchTracks(value);
         } else {
-            trackList = lucenTest.searchTracks(value);
+            trackList = luceneTest.searchTracks(value);
         }
 
         long stopF = System.currentTimeMillis();
@@ -74,9 +74,9 @@ public class LucenTest {
         }
     }
 
-    private static void startIndexing(LucenTest lucenTest) throws IOException {
+    private static void startIndexing(LuceneTest luceneTest) throws IOException {
         long start = System.currentTimeMillis();
-        lucenTest.indexDoc();
+        luceneTest.indexDoc();
         long stop = System.currentTimeMillis();
         float end = stop - start;
         System.out.println("Indexing finished in " + end / 1000);

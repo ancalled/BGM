@@ -1,6 +1,4 @@
-package kz.bgm.platform.service;
-
-import kz.bgm.platform.items.*;
+package kz.bgm.platform.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;

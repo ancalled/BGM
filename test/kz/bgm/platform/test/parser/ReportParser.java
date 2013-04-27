@@ -1,8 +1,8 @@
 //package kz.bgm.parsers;
 //
-//import kz.bgm.items.ReportItem;
-//import kz.bgm.platform.items.ReportItem;
-//import kz.bgm.platform.parsers.utils.ExcelUtils;
+//import kz.bgm.domain.ReportItem;
+//import kz.bgm.platform.model.domain.ReportItem;
+//import kz.bgm.platform.utils.ExcelUtils;
 //import kz.bgm.utils.ExcelUtils;
 //import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 //import org.apache.poi.ss.usermodel.Row;
@@ -26,7 +26,7 @@
 //
 //        Workbook wb = ExcelUtils.openFile(file);
 //
-//        List<ReportItem> items = new ArrayList<ReportItem>();
+//        List<ReportItem> domain = new ArrayList<ReportItem>();
 //
 //        Sheet sheet = wb.getSheetAt(1);
 //        int rows = sheet.getPhysicalNumberOfRows();
@@ -52,14 +52,14 @@
 //            item.setPrice(Integer.parseInt(priceStr.trim()));
 //            item.setQtySum(Integer.parseInt(ExcelUtils.getCellVal(row, 6).trim()));
 //            item.setRate(clientRate);
-//            items.add(item);
+//            domain.add(item);
 //        }
 //
 //        long endTime = System.currentTimeMillis();
 //        long proc = (endTime - startTime) / 1000;
-//        System.out.println("Got " + items.size() + " items in " + proc + " sec.");
+//        System.out.println("Got " + domain.size() + " domain in " + proc + " sec.");
 //
-//        return items;
+//        return domain;
 //    }
 //
 //

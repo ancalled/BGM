@@ -1,4 +1,4 @@
-package kz.bgm.platform.parsers.utils;
+package kz.bgm.platform.utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;

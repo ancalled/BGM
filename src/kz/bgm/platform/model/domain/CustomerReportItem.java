@@ -1,4 +1,4 @@
-package kz.bgm.platform.items;
+package kz.bgm.platform.model.domain;
 
 
 public class CustomerReportItem {

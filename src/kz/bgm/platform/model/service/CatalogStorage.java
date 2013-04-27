@@ -1,6 +1,6 @@
-package kz.bgm.platform.service;
+package kz.bgm.platform.model.service;
 
-import kz.bgm.platform.items.*;
+import kz.bgm.platform.model.domain.*;
 
 import java.util.List;
 

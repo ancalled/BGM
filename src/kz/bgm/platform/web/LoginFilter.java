@@ -1,6 +1,6 @@
 package kz.bgm.platform.web;
 
-import kz.bgm.platform.items.User;
+import kz.bgm.platform.model.domain.User;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

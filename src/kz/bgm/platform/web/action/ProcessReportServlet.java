@@ -1,10 +1,10 @@
-package kz.bgm.platform.web;
+package kz.bgm.platform.web.action;
 
 
-import kz.bgm.platform.items.CalculatedReportItem;
-import kz.bgm.platform.parsers.ReportBuilder;
-import kz.bgm.platform.service.CatalogFactory;
-import kz.bgm.platform.service.CatalogStorage;
+import kz.bgm.platform.model.domain.CalculatedReportItem;
+import kz.bgm.platform.utils.ReportBuilder;
+import kz.bgm.platform.model.service.CatalogFactory;
+import kz.bgm.platform.model.service.CatalogStorage;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;

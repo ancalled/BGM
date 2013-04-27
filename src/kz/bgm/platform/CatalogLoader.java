@@ -1,9 +1,9 @@
 package kz.bgm.platform;
 
-import kz.bgm.platform.items.Track;
-import kz.bgm.platform.parsers.CatalogParser;
-import kz.bgm.platform.service.CatalogStorage;
-import kz.bgm.platform.service.DbStorage;
+import kz.bgm.platform.model.domain.Track;
+import kz.bgm.platform.utils.CatalogParser;
+import kz.bgm.platform.model.service.CatalogStorage;
+import kz.bgm.platform.model.service.DbStorage;
 import org.apache.log4j.Logger;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
@@ -157,12 +157,12 @@ public class CatalogLoader {
 
 
 //        loadCatalogFromBD(catalog);
-//        List<ReportItem> items = new ArrayList<ReportItem>();
-//        mergeReports(items, new ReportParser().
+//        List<ReportItem> domain = new ArrayList<ReportItem>();
+//        mergeReports(domain, new ReportParser().
 // loadClientReport("./data/October_2012_BGM (1).xlsx", 0.125f));
-//        mergeReports(items, new ReportParser().
+//        mergeReports(domain, new ReportParser().
 // loadClientReport("./data/November_2012_BGM (1).xlsx", 0.125f));
-//        buildMobileReport(catalog, items);
+//        buildMobileReport(catalog, domain);
 //        CatalogStorage ct = new CatalogStorage(homeDir + "/db.properties");
 //        if (args.length != 0) {
 //            if ("test".equals(args[0])) {
@@ -181,16 +181,16 @@ public class CatalogLoader {
 //
 //        loadCatalog(catalog);
 //        System.out.println();
-//        List<ReportItem> items = new ArrayList<ReportItem>();
-//        mergeReports(items, new ReportParser().loadClientReport("./data/October_2012_BGM (1).xlsx", 0.125f));
-//        mergeReports(items, new ReportParser().loadClientReport("./data/November_2012_BGM (1).xlsx", 0.125f));
+//        List<ReportItem> domain = new ArrayList<ReportItem>();
+//        mergeReports(domain, new ReportParser().loadClientReport("./data/October_2012_BGM (1).xlsx", 0.125f));
+//        mergeReports(domain, new ReportParser().loadClientReport("./data/November_2012_BGM (1).xlsx", 0.125f));
 //        System.out.println();
-//        buildMobileReport(catalog, items);
+//        buildMobileReport(catalog, domain);
 
 //        System.out.println();
-//        List<ReportItem> items = MoskvafmParser.parseReport("./data/moskvafm-top-by-channels.txt");
+//        List<ReportItem> domain = MoskvafmParser.parseReport("./data/moskvafm-top-by-channels.txt");
 //        System.out.println();
-//        buildRadioReport(catalog, items);
+//        buildRadioReport(catalog, domain);
 
     }
 }

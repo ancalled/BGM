@@ -1,8 +1,4 @@
-package kz.bgm.platform.service;
-
-import kz.bgm.platform.items.Track;
-
-import java.util.List;
+package kz.bgm.platform.model.service;
 
 public class CatalogFactory {
 

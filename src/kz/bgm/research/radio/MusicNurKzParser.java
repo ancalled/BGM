@@ -1,6 +1,6 @@
 package kz.bgm.research.radio;
 
-import kz.bgm.platform.parsers.utils.FileUtils;
+import kz.bgm.platform.utils.FileUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

@@ -23,23 +23,23 @@
 
     <servlet>
         <servlet-name>findTrackServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.FindTrackServletJson</servlet-class>
+        <servlet-class>kz.bgm.platform.web.api.FindTrackServletJson</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>findServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.SearchTrackServlet</servlet-class>
+        <servlet-class>kz.bgm.platform.web.action.SearchTrackServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>reportServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.CustomerReportServlet</servlet-class>
+        <servlet-class>kz.bgm.platform.web.action.MobileReportServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>processReportServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.ProcessReportServlet</servlet-class>
+        <servlet-class>kz.bgm.platform.web.action.ProcessReportServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>loginServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.LoginServlet</servlet-class>
+        <servlet-class>kz.bgm.platform.web.action.LoginServlet</servlet-class>
     </servlet>
 
 

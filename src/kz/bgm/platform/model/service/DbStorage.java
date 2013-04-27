@@ -1,8 +1,7 @@
-package kz.bgm.platform.service;
+package kz.bgm.platform.model.service;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import kz.bgm.platform.items.*;
-import kz.bgm.platform.search.IdSearcher;
+import kz.bgm.platform.model.domain.*;
 import org.apache.log4j.Logger;
 
 import java.beans.PropertyVetoException;
@@ -19,7 +18,7 @@ public class DbStorage implements CatalogStorage {
     public static final int MAX_POOL_SIZE = 10;
 
     private final ComboPooledDataSource pool;
-    private IdSearcher idSearcher;
+    private LuceneSearch luceneSearch;
 
     private static Map<Integer, String> catalogMap;
 
@@ -31,13 +30,13 @@ public class DbStorage implements CatalogStorage {
 
         fillAllCatalogs();
         //todo make indexing on  lucen
-        idSearcher = new IdSearcher();
+        luceneSearch = new LuceneSearch();
 
 //        Connection connection = null;
 //
 //        try {
 //            connection = pool.getConnection();
-//            idSearcher.init(connection);
+//            luceneSearch.init(connection);
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //
@@ -200,7 +199,7 @@ public class DbStorage implements CatalogStorage {
 
             connection = pool.getConnection();
 
-            List<String> idList = idSearcher.search(artist, song);
+            List<String> idList = luceneSearch.search(artist, song);
 
             List<Track> trackList = new ArrayList<Track>();
 
@@ -260,7 +259,7 @@ public class DbStorage implements CatalogStorage {
                 return null;
             }
 
-            List<String> idList = idSearcher.search(value);
+            List<String> idList = luceneSearch.search(value);
 
             List<Track> trackList = new ArrayList<Track>();
 
@@ -381,16 +380,13 @@ public class DbStorage implements CatalogStorage {
                             "VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
             ps.setInt(1, report.getCustomerId());
-            ps.setDate(2, report.getOrderDate());
-            ps.setDate(3, report.getDownloadDate());
+            ps.setDate(2, new java.sql.Date(report.getStartDate().getTime()));
+            ps.setDate(3, new java.sql.Date(report.getUploadDate().getTime()));
 
             ps.executeUpdate();
+
             ResultSet rs = ps.getGeneratedKeys();
-
-            log.info("insert done");
             rs.next();
-
-
             return rs.getInt(1);
 
 

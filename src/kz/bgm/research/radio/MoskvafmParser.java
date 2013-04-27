@@ -1,7 +1,7 @@
 package kz.bgm.research.radio;
 
-import kz.bgm.platform.parsers.utils.FileUtils;
-import kz.bgm.platform.items.ReportItem;
+import kz.bgm.platform.utils.FileUtils;
+import kz.bgm.platform.model.domain.ReportItem;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -104,22 +104,21 @@ public class MoskvafmParser {
     public static void main(String[] args) throws IOException {
 //        parseHits();
 
-//        List<String> result = new ArrayList<String>();
-//
-//        List<String> names = parseStations();
-//        for (String name : names) {
-//            List<String> songs = parseStationHits(name);
-//            for (String song : songs) {
-//                if (!result.contains(song)) {
-//                    result.add(song);
-//                }
-//            }
-//        }
-//
-//        for (String song : result) {
-//            System.out.println(song);
-//        }
+        List<String> result = new ArrayList<String>();
 
-        System.out.println("Test!");
+        List<String> names = parseStations();
+        for (String name : names) {
+            List<String> songs = parseStationHits(name);
+            for (String song : songs) {
+                if (!result.contains(song)) {
+                    result.add(song);
+                }
+            }
+        }
+
+        for (String song : result) {
+            System.out.println(song);
+        }
+
     }
 }
