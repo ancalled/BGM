@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Type;
 
 public class ExcelUtils {
 
@@ -50,8 +51,17 @@ public class ExcelUtils {
         return true;
     }
 
-    public static void setValue(Sheet sheet, String val, int rowIdx, int columnIdx) {
+    public static void setValue(Sheet sheet, String val, Type type, int rowIdx, int columnIdx) {
         if (sheet == null) return;
+
+        Object value;
+        int cellType = 0;
+        if (type.equals(String.class)) {
+            cellType = Cell.CELL_TYPE_STRING;
+        } else {
+            cellType = Cell.CELL_TYPE_NUMERIC;
+        }
+
 
         Row row = sheet.getRow(rowIdx);
         Cell cell;
@@ -60,14 +70,14 @@ public class ExcelUtils {
             row = sheet.createRow(rowIdx);
             row.createCell(columnIdx);
             cell = row.getCell(columnIdx);
-            cell.setCellType(Cell.CELL_TYPE_STRING);
+            cell.setCellType(cellType);
         } else {
             cell = row.getCell(columnIdx);
 
             if (cell == null) {
                 row.createCell(columnIdx);
                 cell = row.getCell(columnIdx);
-                cell.setCellType(Cell.CELL_TYPE_STRING);
+                cell.setCellType(cellType);
             }
         }
         cell.setCellValue(val);

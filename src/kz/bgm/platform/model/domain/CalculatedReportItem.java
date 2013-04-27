@@ -2,7 +2,7 @@ package kz.bgm.platform.model.domain;
 
 public class CalculatedReportItem {
 
-    private int reportItemId = 0;
+    private long reportItemId = 0;
     private String compositionCode = "";
     private String compositionName = "";
     private String artist = "";
@@ -30,7 +30,7 @@ public class CalculatedReportItem {
         return contentType;
     }
 
-    public void setReportItemId(int reportItemId) {
+    public void setReportItemId(long reportItemId) {
         this.reportItemId = reportItemId;
     }
 
@@ -86,7 +86,7 @@ public class CalculatedReportItem {
         this.copyright = copyright;
     }
 
-    public int getReportItemId() {
+    public long getReportItemId() {
         return reportItemId;
     }
 
