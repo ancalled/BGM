@@ -51,17 +51,8 @@ public class ExcelUtils {
         return true;
     }
 
-    public static void setValue(Sheet sheet, String val, Type type, int rowIdx, int columnIdx) {
+    public static void setValue(Sheet sheet, Object val, Type type, int rowIdx, int columnIdx) {
         if (sheet == null) return;
-
-        Object value;
-        int cellType = 0;
-        if (type.equals(String.class)) {
-            cellType = Cell.CELL_TYPE_STRING;
-        } else {
-            cellType = Cell.CELL_TYPE_NUMERIC;
-        }
-
 
         Row row = sheet.getRow(rowIdx);
         Cell cell;
@@ -70,16 +61,21 @@ public class ExcelUtils {
             row = sheet.createRow(rowIdx);
             row.createCell(columnIdx);
             cell = row.getCell(columnIdx);
-            cell.setCellType(cellType);
         } else {
             cell = row.getCell(columnIdx);
-
             if (cell == null) {
                 row.createCell(columnIdx);
                 cell = row.getCell(columnIdx);
-                cell.setCellType(cellType);
             }
         }
-        cell.setCellValue(val);
+        if (type.equals(String.class)) {
+            cell.setCellType(Cell.CELL_TYPE_STRING);
+            cell.setCellValue((String) val);
+
+        } else {
+            cell.setCellType(Cell.CELL_TYPE_NUMERIC);
+            cell.setCellValue((Float) val);
+        }
+
     }
 }

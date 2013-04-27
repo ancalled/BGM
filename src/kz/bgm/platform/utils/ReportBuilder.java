@@ -133,7 +133,7 @@ public class ReportBuilder {
                 }
                 if (colIdx != 0) {
                     ExcelUtils.setValue(sheet,
-                            val.toString(),
+                            val,
                             type,
                             rowIdx,
                             colIdx);
