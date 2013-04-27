@@ -16,6 +16,8 @@ public interface CatalogStorage {
 
     Float getRoyalty(int catalogId);
 
+    List<Track> getAllTracks();
+
     List<Track> searchBySongName(String songName);
 
     List<Track> searchByCode(String code);
@@ -34,9 +36,10 @@ public interface CatalogStorage {
 
     List<Track> search(String value);
 
-    void insertCustomerReportItem(List<CustomerReportItem> reportItemList);
 
-    int insertCustomerReport(CustomerReport report);
+    void saveCustomerReportItems(List<CustomerReportItem> reportItemList);
+
+    int saveCustomerReport(CustomerReport report);
 
     List<Track> search(String author, boolean b);
 

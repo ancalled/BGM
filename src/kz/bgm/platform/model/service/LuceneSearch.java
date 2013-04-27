@@ -1,5 +1,6 @@
 package kz.bgm.platform.model.service;
 
+import kz.bgm.platform.model.domain.Track;
 import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -17,31 +18,26 @@ import org.apache.lucene.util.Version;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LuceneSearch {
+
     private static final Logger log = Logger.getLogger(LuceneSearch.class);
 
     private static String APP_DIR = System.getProperty("user.dir");
     private static String INDEX_DIR = APP_DIR + "/lucen-indexes";
     public static final int RESULT_SIZE = 100000;
-    private FSDirectory index;
 
-    public void init(Connection connection) throws IOException {
-        long start = System.currentTimeMillis();
-        indexDoc(connection);
-        long stop = System.currentTimeMillis();
-        float end = stop - start;
-        log.info("Indexing finished in " + end / 1000);
+    private FSDirectory index;
+    private StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_41);
+
+
+    private LuceneSearch() {
     }
 
-    private void indexDoc(Connection connection) throws IOException {
-        StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_41);
+
+    public void index(List<Track> tracks) throws IOException {
         File indexDir = new File(INDEX_DIR);
 
         if (!indexDir.exists()) {
@@ -57,60 +53,22 @@ public class LuceneSearch {
         IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_41, analyzer);
         IndexWriter w = new IndexWriter(index, config);
 
-        try {
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT id, name,artist, composer FROM composition");
+        for (Track t : tracks) {
+            Document doc = new Document();
+            doc.add(new TextField("id", t.getId() + "", Field.Store.YES));
+            doc.add(new TextField("name", t.getName(), Field.Store.YES));
+            doc.add(new TextField("artist", t.getArtist(), Field.Store.YES));
+            doc.add(new TextField("composer", t.getComposer(), Field.Store.YES));
+            w.addDocument(doc);
 
-            while (rs.next()) {
-                Document doc = new Document();
-                String bId = Integer.toString(rs.getInt("id"));
-                doc.add(new TextField("id", bId, Field.Store.YES));
-                doc.add(new TextField("name", rs.getString("name"), Field.Store.YES));
-                doc.add(new TextField("artist", rs.getString("artist"), Field.Store.YES));
-                doc.add(new TextField("composer", rs.getString("composer"), Field.Store.YES));
-                w.addDocument(doc);
-            }
-            w.close();
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
+
+        w.close();
     }
 
-    public List<String> search(String value)
-            throws IOException, ParseException {
-        long startF = System.currentTimeMillis();
-        List<String> idList = searchTracks(value);
-        long stopF = System.currentTimeMillis();
-        float endF = stopF - startF;
-        log.info("Search finished in " + endF / 1000);
-        return idList;
 
-    }
+    public List<Long> search(String artist, String composition) throws IOException, ParseException {
 
-    public List<String> search(String artist, String composition)
-            throws IOException, ParseException {
-        long startF = System.currentTimeMillis();
-        List<String> idList = searchBySongAndArtist(artist, composition);
-        long stopF = System.currentTimeMillis();
-        float endF = stopF - startF;
-        log.info("Search finished in " + endF / 1000);
-        return idList;
-
-    }
-
-    private List<String> searchBySongAndArtist
-            (String artist, String composition) throws IOException, ParseException {
-        StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_41);
         log.info("Got query '" +
                 artist +
                 "' and" + " '" +
@@ -136,7 +94,7 @@ public class LuceneSearch {
 
         ScoreDoc[] hits = topDocs.scoreDocs;
 
-        List<String> idList = new ArrayList<String>();
+        List<Long> result = new ArrayList<Long>();
 
         log.info("Found " + totalHits + " tracks id.");
 
@@ -147,15 +105,15 @@ public class LuceneSearch {
 
             int docId = hit.doc;
             Document d = searcher.doc(docId);
-            String baseId = d.get("id");
-            idList.add(baseId);
+            result.add(Long.parseLong(d.get("id")));
         }
         reader.close();
-        return idList;
+
+        return result;
     }
 
-    private List<String> searchTracks(String value) throws IOException, ParseException {
-        StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_41);
+
+    public List<Long> search(String value) throws IOException, ParseException {
         log.info("Got query '" + value + "'");
         FSDirectory index = FSDirectory.open(new File(INDEX_DIR));
         IndexReader reader = DirectoryReader.open(index);
@@ -174,7 +132,7 @@ public class LuceneSearch {
 
         ScoreDoc[] hits = topDocs.scoreDocs;
 
-        List<String> idList = new ArrayList<String>();
+        List<Long> result = new ArrayList<Long>();
 
         log.info("Found " + totalHits + " tracks id.");
 
@@ -182,11 +140,17 @@ public class LuceneSearch {
             ScoreDoc hit = hits[k];
             int docId = hit.doc;
             Document d = searcher.doc(docId);
-            String baseId = d.get("id");
-            idList.add(baseId);
+            result.add(Long.parseLong(d.get("id")));
         }
         reader.close();
-        return idList;
+        return result;
+    }
+
+
+    private static final LuceneSearch INSTANCE = new LuceneSearch();
+
+    public static LuceneSearch getInstance() {
+        return INSTANCE;
     }
 
 

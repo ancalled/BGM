@@ -1,5 +1,8 @@
 package kz.bgm.platform.web;
 
+import kz.bgm.platform.model.service.CatalogFactory;
+import kz.bgm.platform.model.service.CatalogStorage;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,9 +14,12 @@ import java.io.IOException;
 public class DispatcherServlet extends HttpServlet {
 
 
+    private CatalogStorage catalogStorage;
+
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
+        catalogStorage = CatalogFactory.getStorage();
     }
 
     @Override
@@ -27,6 +33,7 @@ public class DispatcherServlet extends HttpServlet {
             action = new Action() {
                 @Override
                 public String execute(HttpServletRequest req, HttpServletResponse resp) {
+//                    catalogStorage.getCalculatedReports()
 
 
                     return "report-upload-result";

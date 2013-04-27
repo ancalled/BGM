@@ -2,6 +2,7 @@ package kz.bgm.platform.web.action;
 
 import kz.bgm.platform.model.domain.CustomerReport;
 import kz.bgm.platform.model.domain.CustomerReportItem;
+import kz.bgm.platform.model.service.LuceneSearch;
 import kz.bgm.platform.utils.ReportParser;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
@@ -30,11 +31,14 @@ public class UploadReportPublicServlet extends HttpServlet {
 
     private ServletFileUpload fileUploader;
     private CatalogStorage catalogService;
+    private LuceneSearch luceneSearch;
 
     @Override
     public void init() throws ServletException {
         fileUploader = new ServletFileUpload(new DiskFileItemFactory());
         catalogService = CatalogFactory.getStorage();
+        luceneSearch = LuceneSearch.getInstance();
+
     }
 
     @Override
@@ -62,12 +66,22 @@ public class UploadReportPublicServlet extends HttpServlet {
                     report.setUploadDate(now);
                     report.setType(CustomerReport.Type.PUBLIC);
 
-                    int reportId = catalogService.insertCustomerReport(report);
+                    int reportId = catalogService.saveCustomerReport(report);
 
-                    List<CustomerReportItem> reportList =
-                            ReportParser.parsePublicReport(filePath, reportId);
+                    List<CustomerReportItem> items = ReportParser.parsePublicReport(filePath, reportId);
 
-                    catalogService.insertCustomerReportItem(reportList);
+                    if (items != null) {
+
+                        for (CustomerReportItem i: items) {
+                            List<Long> ids = luceneSearch.search(i.getArtist(), i.getName());
+                            if (ids.size() > 0) {
+                                i.setCompositionId(ids.get(0));
+                            }
+                        }
+
+                        catalogService.saveCustomerReportItems(items);
+
+                    }
 
                 }
 

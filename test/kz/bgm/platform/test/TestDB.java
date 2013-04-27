@@ -23,6 +23,6 @@ public class TestDB {
         cs.setUploadDate(new Date(65465456));
         cs.setStartDate(new Date(65465456));
 
-        System.out.println(db.insertCustomerReport(cs));
+        System.out.println(db.saveCustomerReport(cs));
     }
 }

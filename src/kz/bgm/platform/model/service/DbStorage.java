@@ -18,7 +18,7 @@ public class DbStorage implements CatalogStorage {
     public static final int MAX_POOL_SIZE = 10;
 
     private final ComboPooledDataSource pool;
-    private LuceneSearch luceneSearch;
+    private final LuceneSearch luceneSearch = LuceneSearch.getInstance();
 
     private static Map<Integer, String> catalogMap;
 
@@ -30,25 +30,7 @@ public class DbStorage implements CatalogStorage {
 
         fillAllCatalogs();
         //todo make indexing on  lucen
-        luceneSearch = new LuceneSearch();
 
-//        Connection connection = null;
-//
-//        try {
-//            connection = pool.getConnection();
-//            luceneSearch.init(connection);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//
-//        } finally {
-//            if (connection != null) {
-//                try {
-//                    connection.close();
-//                } catch (SQLException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
     }
 
     private static ComboPooledDataSource initPool(String host,
@@ -199,7 +181,7 @@ public class DbStorage implements CatalogStorage {
 
             connection = pool.getConnection();
 
-            List<String> idList = luceneSearch.search(artist, song);
+            List<Long> idList = luceneSearch.search(artist, song);
 
             List<Track> trackList = new ArrayList<Track>();
 
@@ -240,16 +222,16 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-    public List<Track> search(String value, boolean withLucen) {
-        if (withLucen) {
-            return searchWithLucen(value);
+    public List<Track> search(String value, boolean withLucene) {
+        if (withLucene) {
+            return searchWithLucene(value);
         } else {
             return search(value);
         }
     }
 
 
-    public List<Track> searchWithLucen(String value) {
+    public List<Track> searchWithLucene(String value) {
         Connection connection = null;
         try {
 
@@ -259,7 +241,7 @@ public class DbStorage implements CatalogStorage {
                 return null;
             }
 
-            List<String> idList = luceneSearch.search(value);
+            List<Long> idList = luceneSearch.search(value);
 
             List<Track> trackList = new ArrayList<Track>();
 
@@ -321,54 +303,9 @@ public class DbStorage implements CatalogStorage {
         return Collections.emptyList();
     }
 
-    @Override
-    public void insertCustomerReportItem(List<CustomerReportItem> reportItemList) {
-        Connection connection = null;
-        try {
-            log.info("inserting customer report items " + reportItemList.size() + " size");
-
-            connection = pool.getConnection();
-            PreparedStatement ps =
-                    connection.prepareStatement("INSERT INTO " +
-                            "customer_report_item(report_id,composition_id,name," +
-                            "artist,content_type,qty,price) " +
-                            "VALUES (?,?,?,?,?,?,?)");
-
-
-            for (CustomerReportItem cr : reportItemList) {
-                ps.setInt(1, cr.getReportId());
-                ps.setInt(2, cr.getCompositionId());
-                ps.setString(3, cr.getName());
-                ps.setString(4, cr.getArtist());
-                ps.setString(5, cr.getContentType());
-                ps.setInt(6, cr.getQty());
-                ps.setFloat(7, cr.getPrice());
-
-                ps.addBatch();
-            }
-
-            connection.setAutoCommit(false);
-            ps.executeBatch();
-            connection.commit();
-
-            log.info("insert done");
-        } catch (SQLException e) {
-
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
 
     @Override
-    public int insertCustomerReport(CustomerReport report) {
+    public int saveCustomerReport(CustomerReport report) {
         Connection connection = null;
         try {
             log.info("inserting customer report ");
@@ -405,13 +342,63 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-    public Track searchById(Connection connection, String id) {
+
+    @Override
+    public void saveCustomerReportItems(List<CustomerReportItem> items) {
+        Connection connection = null;
+        try {
+            log.info("Insert customer report items " + items.size() + " size");
+
+            connection = pool.getConnection();
+            PreparedStatement ps =
+                    connection.prepareStatement("INSERT INTO " +
+                            "customer_report_item(report_id,composition_id,name," +
+                            "artist,content_type,qty,price) " +
+                            "VALUES (?,?,?,?,?,?,?)");
+
+
+            for (CustomerReportItem cr : items) {
+                ps.setLong(1, cr.getReportId());
+                ps.setLong(2, cr.getCompositionId());
+                ps.setString(3, cr.getName());
+                ps.setString(4, cr.getArtist());
+                ps.setString(5, cr.getContentType());
+                ps.setInt(6, cr.getQty());
+                ps.setFloat(7, cr.getPrice());
+
+                ps.addBatch();
+            }
+
+            connection.setAutoCommit(false);
+            ps.executeBatch();
+            connection.commit();
+
+            log.info("insert done");
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+
+
+
+    public Track searchById(Connection connection, Long id) {
 
         try {
             PreparedStatement stmt = connection.prepareStatement(
                     "SELECT * FROM composition WHERE id=?");
 
-            stmt.setString(1, id);
+            stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
             Track track = null;
 
@@ -426,6 +413,31 @@ public class DbStorage implements CatalogStorage {
         }
 
         return null;
+    }
+
+    @Override
+    public List<Track> getAllTracks() {
+        Connection connection = null;
+        try {
+            connection = pool.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT * FROM composition");
+
+            return parseTracks(stmt.executeQuery());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return Collections.emptyList();
     }
 
 
