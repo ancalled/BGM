@@ -16,7 +16,7 @@
         <a class="brand" href="/index.html">BGM Platform</a>
         <ul class="nav">
             <li><a href="/index.html">Главная</a></li>
-            <li><a href="/report.html">Отчеты</a></li>
+            <li><a href="/report.jsp">Отчеты</a></li>
             <li class="active"><a href="/search.jsp">Поиск</a></li>
             <li><a href="">Админка</a></li>
         </ul>
