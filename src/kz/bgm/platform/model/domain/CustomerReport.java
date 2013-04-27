@@ -20,6 +20,9 @@ public class CustomerReport {
     private Period period;
     private Type type;
 
+    private int tracks;
+    private int detected;
+
     public CustomerReport() {
     }
 
@@ -69,5 +72,21 @@ public class CustomerReport {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public int getTracks() {
+        return tracks;
+    }
+
+    public void setTracks(int tracks) {
+        this.tracks = tracks;
+    }
+
+    public int getDetected() {
+        return detected;
+    }
+
+    public void setDetected(int detected) {
+        this.detected = detected;
     }
 }

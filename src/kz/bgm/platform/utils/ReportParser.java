@@ -17,7 +17,7 @@ public class ReportParser {
     private static final Logger log = Logger.getLogger(ReportParser.class);
 
 
-    public static List<CustomerReportItem> parseMobileReport(String fileName, long reportId)
+    public static List<CustomerReportItem> parseMobileReport(String fileName)
             throws IOException, InvalidFormatException {
 
         log.info("Parsing mobile report from: " + fileName + "... ");
@@ -52,7 +52,6 @@ public class ReportParser {
 
             item.setPrice(Integer.parseInt(priceStr.trim()));
             item.setQty(Integer.parseInt(ExcelUtils.getCellVal(row, 5).trim()));
-            item.setReportId(reportId);
             items.add(item);
         }
 
@@ -62,7 +61,7 @@ public class ReportParser {
 
 
 
-    public static List<CustomerReportItem> parsePublicReport(String fileName, long reportId)
+    public static List<CustomerReportItem> parsePublicReport(String fileName)
             throws IOException, InvalidFormatException {
 
         log.info("Parsing public report from: " + fileName + "... ");
@@ -71,21 +70,20 @@ public class ReportParser {
 
         List<CustomerReportItem> items = new ArrayList<CustomerReportItem>();
 
-        Sheet sheet = wb.getSheetAt(1);
+        Sheet sheet = wb.getSheetAt(0);
         int rows = sheet.getPhysicalNumberOfRows();
 
-        int startRow = 1;
+        int startRow = 0;
         for (int i = startRow; i < rows; i++) {
             Row row = sheet.getRow(i);
 
             CustomerReportItem item = new CustomerReportItem();
 
-            String artist = ExcelUtils.getCellVal(row, 1);
-            String name = ExcelUtils.getCellVal(row, 2);
-            String qrtStr = ExcelUtils.getCellVal(row, 3);
+            String artist = ExcelUtils.getCellVal(row, 0);
+            String name = ExcelUtils.getCellVal(row, 1);
+            String qrtStr = ExcelUtils.getCellVal(row, 2);
             int qty = Integer.parseInt(qrtStr.trim());
 
-            item.setReportId(reportId);
             item.setArtist(artist);
             item.setName(name);
             item.setQty(qty);

@@ -20,16 +20,15 @@
             <li><a href="/index.html">Главная</a></li>
             <li class="active"><a href="/reports.html">Отчеты</a></li>
             <li><a href="/search.html">Поиск</a></li>
-            <li><a href="">Админка</a></li>
         </ul>
     </div>
 </div>
 
 <div class="tabbable">
-    <ul class="nav nav-tabs">
-        <li class="active"><a href="#tab1" data-toggle="tab">Загрузка клиентских отчетов</a></li>
-        <li><a href="#tab2" data-toggle="tab">Загрузка мобильного отчет</a></li>
-        <li><a href="#tab3" data-toggle="tab">Загрузка публичного отчет</a></li>
+    <ul class="nav nav-tabs" id="report-tab">
+        <li class="active"><a href="#tab1" data-toggle="tab">агрузка мобильного отчет</a></li>
+        <li><a href="#tab2" data-toggle="tab">Загрузка публичного отчет</a></li>
+        <li><a href="#tab3" data-toggle="tab">Квартальный отчет</a></li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane active" id="tab1">
@@ -64,7 +63,7 @@
                         </div>
 
                         <div class="row-fluid">
-                            <input class="btn" type="submit">
+                            <input class="btn" type="submit" value="Отпарвить">
                         </div>
                     </form>
 
@@ -104,7 +103,7 @@
                         </div>
 
                         <div class="row-fluid">
-                            <input class="btn" type="submit">
+                            <input class="btn" type="submit" value="Отправить">
                         </div>
                     </form>
 
@@ -135,6 +134,12 @@
     </div>
 </div>
 
+
+<script>
+    $(function () {
+        $('#report-tab a:last').tab('show');
+    })
+</script>
 
 </body>
 </html>

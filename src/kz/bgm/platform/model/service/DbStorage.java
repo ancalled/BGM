@@ -457,7 +457,12 @@ public class DbStorage implements CatalogStorage {
 
                 for (CustomerReportItem cr : items) {
                     ps.setLong(1, cr.getReportId());
-                    ps.setLong(2, cr.getCompositionId());
+                    if (cr.getCompositionId() != null) {
+                        ps.setLong(2, cr.getCompositionId());
+                    } else {
+                        ps.setNull(2, Types.INTEGER);
+                    }
+
                     ps.setString(3, cr.getName());
                     ps.setString(4, cr.getArtist());
                     ps.setString(5, cr.getContentType());

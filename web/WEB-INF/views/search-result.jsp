@@ -21,7 +21,6 @@
             <li><a href="/index.html">Главная</a></li>
             <li><a href="/reports.html">Отчеты</a></li>
             <li class="active"><a href="/search.html">Поиск</a></li>
-            <li><a href="">Админка</a></li>
         </ul>
     </div>
 </div>

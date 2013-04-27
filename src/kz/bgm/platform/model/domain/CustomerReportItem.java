@@ -3,24 +3,24 @@ package kz.bgm.platform.model.domain;
 
 public class CustomerReportItem {
 
-    private long id;
-    private long reportId;
-    private long compositionId;
+    private Long id;
+    private Long reportId;
+    private Long compositionId;
     private String name;
     private String artist;
     private String contentType;
     private int qty;
     private float price;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public long getReportId() {
+    public Long getReportId() {
         return reportId;
     }
 
-    public long getCompositionId() {
+    public Long getCompositionId() {
         return compositionId;
     }
 
@@ -44,15 +44,15 @@ public class CustomerReportItem {
         return price;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public void setReportId(long reportId) {
+    public void setReportId(Long reportId) {
         this.reportId = reportId;
     }
 
-    public void setCompositionId(long compositionId) {
+    public void setCompositionId(Long compositionId) {
         this.compositionId = compositionId;
     }
 

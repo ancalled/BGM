@@ -59,13 +59,21 @@ public class DispatcherServlet extends HttpServlet {
                     if (repIdStr == null) return null;
                     long reportId = Long.parseLong(repIdStr);
 
-                    CustomerReport report = catalogStorage.getCustomerReport(reportId);
-                    List<CustomerReportItem> items = catalogStorage.getCustomerReportsItems(reportId);
-                    Customer customer = catalogStorage.getCustomer(report.getCustomerId());
+//                    CustomerReport report = catalogStorage.getCustomerReport(reportId);
+//                    List<CustomerReportItem> items = catalogStorage.getCustomerReportsItems(reportId);
+//                    Customer customer = catalogStorage.getCustomer(report.getCustomerId());
+//
+//                    req.setAttribute("report", report);
+//                    req.setAttribute("items", items);
+//                    req.setAttribute("customer", customer);
 
-                    req.setAttribute("report", report);
-                    req.setAttribute("items", items);
-                    req.setAttribute("customer", customer);
+                    HttpSession ses = req.getSession();
+                    if (ses == null) return null;
+
+                    CustomerReport report = (CustomerReport) ses.getAttribute("report-" + reportId);
+                    if (report != null) {
+                        req.setAttribute("report", report);
+                    }
 
                     return "report-upload-result";
                 }

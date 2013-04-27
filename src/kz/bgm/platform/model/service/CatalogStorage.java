@@ -45,9 +45,11 @@ public interface CatalogStorage {
 
 
 
-    void saveCustomerReportItems(List<CustomerReportItem> reportItemList);
 
     long saveCustomerReport(CustomerReport report);
+
+    void saveCustomerReportItems(List<CustomerReportItem> reportItemList);
+
 
     CustomerReport getCustomerReport(long id);
 
