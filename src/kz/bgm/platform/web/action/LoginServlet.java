@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
         String login = req.getParameter("u");
         String pass = req.getParameter("p");
 
-        log.info("Authorization request");
+        log.info("Authorization ");
         log.info("user: " + login);
 
         if (login != null && pass != null) {
@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = req.getSession();
                 session.setAttribute("user", user);
             } else {
-                log.info("user '" + login + "' was not found");
+                log.info("user '" + login + "' was not found or pass incorrect");
             }
         }
         resp.sendRedirect("/index.html");
