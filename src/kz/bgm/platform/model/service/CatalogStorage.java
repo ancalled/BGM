@@ -6,33 +6,36 @@ import java.util.List;
 
 public interface CatalogStorage {
 
-    void storeInCatalog(List<Track> trackList, String catalog);
+    void saveTracks(List<Track> trackList, String catalog);
 
-    void addItem(Track track, boolean common);
 
-    Track search(String author, String song);
+    Track getTrack(long id);
 
-    Track search(String author, String song, boolean common);
+    List<Track> getTracks(List<Long> ids);
+
+
+
 
     Float getRoyalty(int catalogId);
 
     List<Track> getAllTracks();
 
-    List<Track> searchBySongName(String songName);
+    List<Track> searchTrackByName(String songName);
 
-    List<Track> searchByCode(String code);
+    List<Track> searchTrackByCode(String code);
 
-    List<Track> searchByComposer(String composer);
+    List<Track> searchTracksByComposer(String composer);
 
-    List<Track> searchByArtistLike(String artist);
+    List<Track> searchTracksByArtist(String artist);
 
-    List<Track> searchByArtist(String artist);
+    List<Track> searchTrackByArtistLike(String artist);
+
 
     Customer getCustomer(String name);
 
-    Customer getCustomer(int id);
+    Customer getCustomer(long id);
 
-    List<CalculatedReportItem> getCalculatedReports(String catalog);
+    List<CalculatedReportItem> calculatePlatformReport(String catalog);
 
     List<Track> search(String value);
 
@@ -41,7 +44,6 @@ public interface CatalogStorage {
 
     int saveCustomerReport(CustomerReport report);
 
-    List<Track> search(String author, boolean b);
 
     User getUser(String name, String pass);
 

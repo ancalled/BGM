@@ -33,7 +33,7 @@ public class DispatcherServlet extends HttpServlet {
             action = new Action() {
                 @Override
                 public String execute(HttpServletRequest req, HttpServletResponse resp) {
-//                    catalogStorage.getCalculatedReports()
+//                    catalogStorage.calculatePlatformReport()
 
 
                     return "report-upload-result";

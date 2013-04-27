@@ -3,11 +3,10 @@ package kz.bgm.platform.web.action;
 import kz.bgm.platform.model.domain.Customer;
 import kz.bgm.platform.model.domain.CustomerReport;
 import kz.bgm.platform.model.domain.CustomerReportItem;
-import kz.bgm.platform.model.domain.Track;
-import kz.bgm.platform.model.service.LuceneSearch;
-import kz.bgm.platform.utils.ReportParser;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
+import kz.bgm.platform.model.service.LuceneSearch;
+import kz.bgm.platform.utils.ReportParser;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -85,7 +84,7 @@ public class UploadReportMobileServlet extends HttpServlet {
 
                         if (items != null) {
 
-                            for (CustomerReportItem i: items) {
+                            for (CustomerReportItem i : items) {
                                 List<Long> ids = luceneSearch.search(i.getArtist(), i.getName());
                                 if (ids.size() > 0) {
                                     i.setCompositionId(ids.get(0));

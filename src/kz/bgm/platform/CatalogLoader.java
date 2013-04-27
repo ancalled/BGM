@@ -82,10 +82,10 @@ public class CatalogLoader {
         System.out.println("Processing auth Tracks " + authItems.size());
 
         if (!authItems.isEmpty()) {
-            catalog.storeInCatalog(authItems, catalogName);
+            catalog.saveTracks(authItems, catalogName);
         }
         if (!commonItems.isEmpty()) {
-            catalog.storeInCatalog(commonItems, catalogName);
+            catalog.saveTracks(commonItems, catalogName);
         }
 
     }
@@ -103,7 +103,7 @@ public class CatalogLoader {
         }
 
         if (!trackList.isEmpty()) {
-            catalog.storeInCatalog(trackList, catalogName);
+            catalog.saveTracks(trackList, catalogName);
         }
     }
 

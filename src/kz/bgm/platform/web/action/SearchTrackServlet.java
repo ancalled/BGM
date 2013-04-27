@@ -3,8 +3,10 @@ package kz.bgm.platform.web.action;
 import kz.bgm.platform.model.domain.Track;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
+import kz.bgm.platform.model.service.LuceneSearch;
 import kz.bgm.platform.web.api.FindTrackServletJson;
 import org.apache.log4j.Logger;
+import org.apache.lucene.queryparser.classic.ParseException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,15 +18,20 @@ import java.util.List;
 
 public class SearchTrackServlet extends HttpServlet {
 
+    private static final Logger log = Logger.getLogger(SearchTrackServlet.class);
+
+
     public static final String TRACK_LIST = "tracks";
     public static final String QUERY = "query";
     public static final String SIZE = "size";
+
     private CatalogStorage catalogService;
-    private static final Logger log = Logger.getLogger(SearchTrackServlet.class);
+    private LuceneSearch luceneSearch;
 
     @Override
     public void init() throws ServletException {
         catalogService = CatalogFactory.getStorage();
+        luceneSearch = LuceneSearch.getInstance();
     }
 
     @Override
@@ -39,24 +46,31 @@ public class SearchTrackServlet extends HttpServlet {
 
         if (query != null && !"".equals(query) && type != null) {
 
-            List<Track> found;
+            List<Track> found = null;
             if (type.equals("like-artist")) {
-                found = catalogService.searchByArtistLike(query);
+                found = catalogService.searchTrackByArtistLike(query);
 
             } else if (type.equals("artist")) {
-                found = catalogService.searchByArtist(query);
+                found = catalogService.searchTracksByArtist(query);
             } else if (type.equals("code")) {
-                found = catalogService.searchByCode(query);
+                found = catalogService.searchTrackByCode(query);
             } else if (type.equals("song")) {
-                found = catalogService.searchBySongName(query);
+                found = catalogService.searchTrackByName(query);
             } else if (type.equals("composer")) {
-                found = catalogService.searchByComposer(query);
+                found = catalogService.searchTracksByComposer(query);
             } else {
-                found = catalogService.search(query, true);
+
+                try {
+                    List<Long> res = luceneSearch.search(query);
+                    found = catalogService.getTracks(res);
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
 
             req.setAttribute(TRACK_LIST, found);
-            req.setAttribute(SIZE,found.size());
+            req.setAttribute(SIZE, found != null ? found.size() : 0);
             req.setAttribute(QUERY, query);
 
             req.getRequestDispatcher("/search.jsp?q=" + query).forward(req, resp);

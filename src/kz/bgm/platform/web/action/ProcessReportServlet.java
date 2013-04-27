@@ -38,7 +38,7 @@ public class ProcessReportServlet extends HttpServlet {
 
         log.info("request to build reports");
 
-        List<CalculatedReportItem> reportsList = storage.getCalculatedReports("Sony ATV");
+        List<CalculatedReportItem> reportsList = storage.calculatePlatformReport("Sony ATV");
 
         ReportBuilder.buildReportExcelFile("./reports/SONY.xlsx", reportsList);
 

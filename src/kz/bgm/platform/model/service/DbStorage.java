@@ -18,47 +18,26 @@ public class DbStorage implements CatalogStorage {
     public static final int MAX_POOL_SIZE = 10;
 
     private final ComboPooledDataSource pool;
-    private final LuceneSearch luceneSearch = LuceneSearch.getInstance();
 
-    private static Map<Integer, String> catalogMap;
+    private static Map<Long, String> catalogMap = new HashMap<Long, String>();
 
-    private static final int RESULT_SIZE = 150;
 
     public DbStorage(String host, String port,
                      String base, String user, String pass) {
         pool = initPool(host, port, base, user, pass);
 
-        fillAllCatalogs();
-        //todo make indexing on  lucen
+        prepareCatalogsMap(catalogMap);
 
     }
 
-    private static ComboPooledDataSource initPool(String host,
-                                                  String port,
-                                                  String base,
-                                                  String user,
-                                                  String pass) {
-        String url = "jdbc:mysql://" + host + ":" + port + "/" + base;
 
-        ComboPooledDataSource pool = new ComboPooledDataSource();
-        try {
-            pool.setDriverClass("com.mysql.jdbc.Driver");
-            pool.setJdbcUrl(url);
-            pool.setUser(user);
-            pool.setPassword(pass);
-            pool.setMinPoolSize(MIN_POOL_SIZE);
-            pool.setMaxPoolSize(MAX_POOL_SIZE);
-            pool.setMaxStatements(MAX_STATEMENTS);
-            pool.setMaxStatementsPerConnection(MAX_STATEMENTS_PER_CONNECTION);
-
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        }
-        return pool;
+    public String getCatalogTitle(int catID) {
+        return catalogMap.get(catID);
     }
 
 
-    public void storeInCatalog(List<Track> trackList, String catalog) {
+
+    public void saveTracks(List<Track> tracks, String catalog) {
         Connection connection = null;
         try {
             int catId = getCatalogId(catalog);
@@ -73,7 +52,7 @@ public class DbStorage implements CatalogStorage {
                             "VALUES (?,?,?,?,?,?,?)");
 
 
-            for (Track t : trackList) {
+            for (Track t : tracks) {
 
                 ps.setInt(1, catId);
                 ps.setString(2, t.getCode());
@@ -93,7 +72,7 @@ public class DbStorage implements CatalogStorage {
             long endTime = System.currentTimeMillis();
             long doneTime = (endTime - startTime) / 1000;
 
-            log.info(trackList.size() +
+            log.info(tracks.size() +
                     " tracks inserted in " + doneTime + " sec");
 
         } catch (SQLException e) {
@@ -110,35 +89,7 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-    private int fillAllCatalogs() {
-        Connection connection = null;
-        catalogMap = new HashMap<Integer, String>();
-        try {
-            connection = pool.getConnection();
 
-            Statement st = connection.createStatement();
-
-            ResultSet rs = st.executeQuery("SELECT *" +
-                    " FROM catalog");
-
-            while (rs.next()) {
-                catalogMap.put(rs.getInt("id"),
-                        rs.getString("name"));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return 0;
-    }
 
 
     private int getCatalogId(String catalogName) {
@@ -169,102 +120,71 @@ public class DbStorage implements CatalogStorage {
         return 0;
     }
 
-    @Override
-    public void addItem(Track track, boolean common) {
-    }
 
     @Override
-    public Track search(String artist, String song) {
-        Connection connection = null;
+    public Track getTrack(long id) {
 
-        try {
-
-            connection = pool.getConnection();
-
-            List<Long> idList = luceneSearch.search(artist, song);
-
-            List<Track> trackList = new ArrayList<Track>();
-
-            for (int k = 0; k < idList.size() && k < RESULT_SIZE; k++) {
-                Track track = searchById(connection, idList.get(k));
-                trackList.add(track);
-
-            }
-            if (trackList.size() > 0) {
-                return trackList.get(0);
-            } else {
-                return null;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        } finally {
-
-            if (connection != null) {
-
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-
-                }
-            }
-        }
-
-
-        return null;
-    }
-
-    @Override
-    public Track search(String author, String song, boolean common) {
-        return null;
-    }
-
-
-    public List<Track> search(String value, boolean withLucene) {
-        if (withLucene) {
-            return searchWithLucene(value);
-        } else {
-            return search(value);
-        }
-    }
-
-
-    public List<Track> searchWithLucene(String value) {
         Connection connection = null;
         try {
-
             connection = pool.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT * FROM composition WHERE id=?");
+            stmt.setLong(1, id);
 
-            if (connection == null) {
-                return null;
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return parseTrack(rs);
             }
 
-            List<Long> idList = luceneSearch.search(value);
-
-            List<Track> trackList = new ArrayList<Track>();
-
-            for (int k = 0; k < idList.size() && k < RESULT_SIZE; k++) {
-                Track track = searchById(connection, idList.get(k));
-                trackList.add(track);
-            }
-
-            return trackList;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException e) {
-                    log.error(e.getMessage());
                     e.printStackTrace();
                 }
             }
         }
-        return Collections.emptyList();
+        return null;
     }
+
+
+    @Override
+    public List<Track> getTracks(List<Long> ids) {
+
+        Connection connection = null;
+        try {
+            connection = pool.getConnection();
+
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT * FROM composition WHERE id IN (" + toString(ids) + ")");
+
+            ResultSet rs = stmt.executeQuery();
+
+            List<Track> result = new ArrayList<Track>();
+            while (rs.next()) {
+                result.add(parseTrack(rs));
+            }
+
+            return result;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
 
     public List<Track> search(String value) {
         Connection connection = null;
@@ -342,7 +262,6 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-
     @Override
     public void saveCustomerReportItems(List<CustomerReportItem> items) {
         Connection connection = null;
@@ -389,32 +308,6 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-
-
-
-    public Track searchById(Connection connection, Long id) {
-
-        try {
-            PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM composition WHERE id=?");
-
-            stmt.setLong(1, id);
-            ResultSet rs = stmt.executeQuery();
-            Track track = null;
-
-            while (rs.next()) {
-                track = parseTrack(rs);
-            }
-
-            return track;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
     @Override
     public List<Track> getAllTracks() {
         Connection connection = null;
@@ -442,13 +335,13 @@ public class DbStorage implements CatalogStorage {
 
 
     @Override
-    public List<Track> searchBySongName(String songName) {
+    public List<Track> searchTrackByName(String name) {
         Connection connection = null;
         try {
             connection = pool.getConnection();
             PreparedStatement stmt = connection.prepareStatement(
                     "SELECT * FROM composition WHERE name=?");
-            stmt.setString(1, songName);
+            stmt.setString(1, name);
 
             return parseTracks(stmt.executeQuery());
 
@@ -467,8 +360,9 @@ public class DbStorage implements CatalogStorage {
         return Collections.emptyList();
     }
 
+
     @Override
-    public List<Track> searchByCode(String code) {
+    public List<Track> searchTrackByCode(String code) {
         Connection connection = null;
         try {
             connection = pool.getConnection();
@@ -494,7 +388,7 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
-    public List<Track> searchByComposer(String composer) {
+    public List<Track> searchTracksByComposer(String composer) {
         Connection connection = null;
         try {
             connection = pool.getConnection();
@@ -519,7 +413,7 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
-    public List<Track> searchByArtist(String artist) {
+    public List<Track> searchTracksByArtist(String artist) {
         Connection connection = null;
         try {
             connection = pool.getConnection();
@@ -545,6 +439,33 @@ public class DbStorage implements CatalogStorage {
 
         return Collections.emptyList();
     }
+
+    @Override
+    public List<Track> searchTrackByArtistLike(String artist) {
+        Connection connection = null;
+        try {
+            connection = pool.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT * FROM composition WHERE artist LIKE ?");
+            stmt.setString(1, "%" + artist + "%");
+
+            return parseTracks(stmt.executeQuery());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return Collections.emptyList();
+    }
+
 
     @Override
     public Customer getCustomer(String name) {
@@ -576,14 +497,14 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
-    public Customer getCustomer(int id) {
+    public Customer getCustomer(long id) {
 
         Connection connection = null;
         try {
             connection = pool.getConnection();
             PreparedStatement stmt = connection.prepareStatement(
                     "SELECT * FROM composition WHERE id=?");
-            stmt.setInt(1, id);
+            stmt.setLong(1, id);
 
             ResultSet rs = stmt.executeQuery();
             rs.next();
@@ -606,13 +527,14 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
-    public List<CalculatedReportItem> getCalculatedReports(String catalogName) {
-        Connection connection = null;
+    public List<CalculatedReportItem> calculatePlatformReport(String catalogName) {
 
         if (catalogName == null) return null;
 
-        List<CalculatedReportItem> reportList
-                = new ArrayList<CalculatedReportItem>();
+        Connection connection;
+
+
+        List<CalculatedReportItem> result = new ArrayList<CalculatedReportItem>();
         try {
             connection = pool.getConnection();
 
@@ -649,7 +571,7 @@ public class DbStorage implements CatalogStorage {
                     "    ON (report_item.composition_id = composition.id)\n" +
                     "\n" +
                     "  INNER JOIN catalog cat\n" +
-                    "    ON (cat.id = composition.catalog_id and cat.name='" + catalogName + "')\n" +
+                    "    ON (cat.id = composition.catalog_id AND cat.name='" + catalogName + "')\n" +
                     "\n" +
                     "WHERE report_item.composition_id > 0\n" +
                     "  GROUP BY report_item.composition_id");
@@ -657,10 +579,11 @@ public class DbStorage implements CatalogStorage {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                reportList.add(parseCalculatedReport(rs));
+                result.add(parseCalculatedReport(rs));
             }
 
-            return reportList;
+            return result;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -669,31 +592,7 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-    @Override
-    public List<Track> searchByArtistLike(String artist) {
-        Connection connection = null;
-        try {
-            connection = pool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM composition WHERE artist LIKE ?");
-            stmt.setString(1, "%" + artist + "%");
 
-            return parseTracks(stmt.executeQuery());
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return Collections.emptyList();
-    }
 
     private static List<Track> parseTracks(ResultSet rs) throws SQLException {
         if (rs == null) return null;
@@ -706,9 +605,6 @@ public class DbStorage implements CatalogStorage {
         return tracks;
     }
 
-    public String getCatalogTitle(int catID) {
-        return catalogMap.get(catID);
-    }
 
     private static CalculatedReportItem parseCalculatedReport(ResultSet rs) {
         if (rs == null) {
@@ -848,6 +744,74 @@ public class DbStorage implements CatalogStorage {
 
     public void closeConnection() {
         pool.close();
+    }
+
+
+
+    private static ComboPooledDataSource initPool(String host,
+                                                  String port,
+                                                  String base,
+                                                  String user,
+                                                  String pass) {
+        String url = "jdbc:mysql://" + host + ":" + port + "/" + base;
+
+        ComboPooledDataSource pool = new ComboPooledDataSource();
+        try {
+            pool.setDriverClass("com.mysql.jdbc.Driver");
+            pool.setJdbcUrl(url);
+            pool.setUser(user);
+            pool.setPassword(pass);
+            pool.setMinPoolSize(MIN_POOL_SIZE);
+            pool.setMaxPoolSize(MAX_POOL_SIZE);
+            pool.setMaxStatements(MAX_STATEMENTS);
+            pool.setMaxStatementsPerConnection(MAX_STATEMENTS_PER_CONNECTION);
+
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        }
+        return pool;
+    }
+
+    private int prepareCatalogsMap(Map<Long, String> catalogMap) {
+        Connection connection = null;
+        try {
+            connection = pool.getConnection();
+
+            Statement st = connection.createStatement();
+
+            ResultSet rs = st.executeQuery("SELECT * FROM catalog");
+
+            while (rs.next()) {
+                long id = rs.getLong("id");
+                String name = rs.getString("name");
+                catalogMap.put(id, name);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return 0;
+    }
+
+    public static String toString(List<Long> ids) {
+        StringBuilder buf = new StringBuilder();
+        for (int i = 0; i < ids.size(); i++) {
+            long id = ids.get(i);
+            buf.append(id);
+            if (i < ids.size() - 1) {
+                buf.append(", ");
+            }
+        }
+
+        return buf.toString();
     }
 
 
