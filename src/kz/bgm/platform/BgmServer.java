@@ -70,11 +70,11 @@ public class BgmServer {
         jettyServer.join();
     }
 
-    private static final String BASE_NAME = "base.name";
-    private static final String BASE_LOGIN = "base.login";
-    private static final String BASE_PASS = "base.pass";
-    private static final String BASE_HOST = "base.host";
-    private static final String BASE_PORT = "base.port";
+    public static final String BASE_NAME = "base.name";
+    public static final String BASE_LOGIN = "base.login";
+    public static final String BASE_PASS = "base.pass";
+    public static final String BASE_HOST = "base.host";
+    public static final String BASE_PORT = "base.port";
 
 
     public static void initDatabase(String propsFile) throws IOException {

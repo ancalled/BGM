@@ -4,7 +4,7 @@ import kz.bgm.platform.model.domain.Track;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import kz.bgm.platform.model.service.LuceneSearch;
-import kz.bgm.platform.web.api.FindTrackServletJson;
+import kz.bgm.platform.web.api.JsonSearchServlet;
 import org.apache.log4j.Logger;
 import org.apache.lucene.queryparser.classic.ParseException;
 
@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -20,9 +21,7 @@ public class SearchTrackServlet extends HttpServlet {
 
     private static final Logger log = Logger.getLogger(SearchTrackServlet.class);
 
-    public static final String TRACK_LIST = "tracks";
-    public static final String QUERY = "query";
-    public static final String SIZE = "size";
+
 
     private CatalogStorage catalogService;
     private LuceneSearch luceneSearch;
@@ -37,10 +36,10 @@ public class SearchTrackServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        String query = req.getParameter("find");
-        String type = req.getParameter(FindTrackServletJson.FIND_TYPE);
+        String query = req.getParameter("q");
+        String type = req.getParameter(JsonSearchServlet.FIND_TYPE);
 
-        log.info("Got query " + query + " find by " + type);
+        log.debug("Got query: " + query + ", search type: " + type);
 
         if (query != null && !"".equals(query) && type != null) {
 
@@ -67,11 +66,13 @@ public class SearchTrackServlet extends HttpServlet {
                 }
             }
 
-            req.setAttribute(TRACK_LIST, found);
-            req.setAttribute(SIZE, found != null ? found.size() : 0);
-            req.setAttribute(QUERY, query);
+            HttpSession session = req.getSession(true);
 
-            req.getRequestDispatcher("/search.jsp?q=" + query).forward(req, resp);
+            session.setAttribute("tracks", found);
+            session.setAttribute("query", query);
+
+
+            resp.sendRedirect("/view/search-result");
 
         }
     }

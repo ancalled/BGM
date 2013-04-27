@@ -8,11 +8,11 @@
 
 
     <servlet>
-        <servlet-name>findTrackServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.api.FindTrackServletJson</servlet-class>
+        <servlet-name>searchServletJson</servlet-name>
+        <servlet-class>kz.bgm.platform.web.api.JsonSearchServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>findServlet</servlet-name>
+        <servlet-name>searchServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.action.SearchTrackServlet</servlet-class>
     </servlet>
     <servlet>
@@ -39,22 +39,22 @@
 
 
     <servlet-mapping>
-        <servlet-name>findTrackServlet</servlet-name>
-        <url-pattern>/find-track</url-pattern>
+        <servlet-name>searchServletJson</servlet-name>
+        <url-pattern>/api/search</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>findServlet</servlet-name>
-        <url-pattern>/finder</url-pattern>
+        <servlet-name>searchServlet</servlet-name>
+        <url-pattern>/action/search</url-pattern>
     </servlet-mapping>
 
 
     <servlet-mapping>
         <servlet-name>uploadReportMobileServet</servlet-name>
-        <url-pattern>/upload-mobile-report</url-pattern>
+        <url-pattern>/action/upload-mobile-report</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>uploadReportPublicServlet</servlet-name>
-        <url-pattern>/upload-public-report</url-pattern>
+        <url-pattern>/action/upload-public-report</url-pattern>
     </servlet-mapping>
 
 
@@ -66,6 +66,7 @@
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/authorize</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>dispatcherServlet</servlet-name>
         <url-pattern>/view/*</url-pattern>

@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-public class FindTrackServletJson extends HttpServlet {
+public class JsonSearchServlet extends HttpServlet {
 
     public static final String APP_DIR = System.getProperty("user.dir");
 

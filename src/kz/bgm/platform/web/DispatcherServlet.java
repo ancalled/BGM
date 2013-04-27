@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -33,7 +34,23 @@ public class DispatcherServlet extends HttpServlet {
         String pth = req.getPathInfo();
 
         Action action = null;
-        if ("/report-upload-result".equals(pth)) {
+        if ("/search-result".equals(pth)) {
+            action = new Action() {
+                @Override
+                public String execute(HttpServletRequest req, HttpServletResponse resp) {
+
+                   HttpSession ses = req.getSession();
+                    if (ses == null) return null;
+
+                    req.setAttribute("query", ses.getAttribute("query"));
+                    req.setAttribute("tracks", ses.getAttribute("tracks"));
+
+                    return "search-result";
+                }
+            };
+
+
+        } else  if ("/report-upload-result".equals(pth)) {
             action = new Action() {
                 @Override
                 public String execute(HttpServletRequest req, HttpServletResponse resp) {
@@ -58,7 +75,7 @@ public class DispatcherServlet extends HttpServlet {
 
         if (action != null) {
             String view = action.execute(req, resp);
-            req.getRequestDispatcher("/WEB-INF/" + view + ".jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/" + view + ".jsp").forward(req, resp);
 
         } else {
             resp.sendRedirect("/404.html");
