@@ -3,11 +3,11 @@
 
 <html>
 <head>
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/bootstrap-dropdown.js"></script>
+    <script src="../../web/js/jquery.js"></script>
+    <script src="../../web/js/bootstrap.js"></script>
+    <script src="../../web/js/bootstrap-dropdown.js"></script>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="../../web/css/bootstrap.css" media="screen"/>
     <title>Поиск</title>
 </head>
 <body>
@@ -16,8 +16,8 @@
         <a class="brand" href="/index.html">BGM Platform</a>
         <ul class="nav">
             <li><a href="/index.html">Главная</a></li>
-            <li><a href="/report.jsp">Отчеты</a></li>
-            <li class="active"><a href="/search.jsp">Поиск</a></li>
+            <li><a href="/data/old/report.jsp">Отчеты</a></li>
+            <li class="active"><a href="/data/old/search.jsp">Поиск</a></li>
             <li><a href="">Админка</a></li>
         </ul>
     </div>

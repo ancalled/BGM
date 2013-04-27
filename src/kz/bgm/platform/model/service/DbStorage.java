@@ -2,7 +2,6 @@ package kz.bgm.platform.model.service;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import kz.bgm.platform.model.domain.*;
-import org.apache.log4j.Logger;
 
 import java.beans.PropertyVetoException;
 import java.sql.*;
@@ -11,7 +10,6 @@ import java.util.Date;
 
 public class DbStorage implements CatalogStorage {
 
-    private static final Logger log = Logger.getLogger(DbStorage.class);
 
     public static final int MAX_STATEMENTS = 200;
     public static final int MAX_STATEMENTS_PER_CONNECTION = 10;
@@ -31,10 +29,6 @@ public class DbStorage implements CatalogStorage {
 
     }
 
-
-    public String getCatalogTitle(int catID) {
-        return catalogMap.get(catID);
-    }
 
 
     public void saveTracks(final List<Track> tracks, final String catalog) {
@@ -432,12 +426,14 @@ public class DbStorage implements CatalogStorage {
             @Override
             public Long execute(Connection con) throws SQLException {
                 PreparedStatement ps =
-                        con.prepareStatement("INSERT INTO customer_report(customer_id, order_date, download_date) VALUES (?,?,?)",
+                        con.prepareStatement("INSERT INTO customer_report(customer_id, start_date, upload_date, type, period) VALUES (?,?,?,?,?)",
                                 Statement.RETURN_GENERATED_KEYS);
 
                 ps.setLong(1, report.getCustomerId());
                 ps.setDate(2, new java.sql.Date(report.getStartDate().getTime()));
                 ps.setDate(3, new java.sql.Date(report.getUploadDate().getTime()));
+                ps.setInt(4, report.getType().ordinal());
+                ps.setInt(5, report.getPeriod().ordinal());
 
                 ps.executeUpdate();
 

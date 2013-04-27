@@ -1,47 +1,53 @@
-# CREATE TABLE allmusic (
-#   id                    INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-#   uid                   VARCHAR(100),
-#   song_name             VARCHAR(400),
-#   mobile_rate           DECIMAL(6, 6),
-#   public_rate           DECIMAL(6, 6),
-#   composer              VARCHAR(400),
-#   artist                VARCHAR(400),
-#   publisher             VARCHAR(400),
-#   comment               VARCHAR(600),
-#   controlled_mech_share DECIMAL(6, 3),
-#   collect_mech_share    DECIMAL(6, 3)
-# );
+DROP DATABASE IF EXISTS bgm_db;
+CREATE DATABASE bgm_db;
+USE bgm_db;
 
 
-CREATE TABLE catalogID (
-  id      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  NAME    VARCHAR(200),
-  royalty DECIMAL(6, 3)
+CREATE TABLE platform (
+  id   INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(200)
 );
+
+
+CREATE TABLE catalog (
+  id          INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  platform_id INT,
+  name        VARCHAR(200),
+  royalty     DECIMAL(6, 3),
+  copyright   VARCHAR(50)
+);
+
+CREATE TABLE composition (
+  id          INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  catalog_id  INT NOT NULL,
+  code        VARCHAR(20),
+  name        VARCHAR(400),
+  artist      VARCHAR(400),
+  composer    VARCHAR(400),
+  shareMobile DECIMAL(6, 3),
+  sharePublic DECIMAL(6, 3)
+);
+
+CREATE INDEX code_index ON composition (code) USING BTREE;
+
 
 CREATE TABLE customer (
   id         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  NAME       VARCHAR(200),
+  name       VARCHAR(200),
   right_type VARCHAR(50),
   royalty    DECIMAL(6, 3)
 );
 
+
 CREATE TABLE customer_report (
-  id            INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  customer_id   INT,
-  order_date    DATE,
-  download_date DATE
+  id          INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  customer_id INT,
+  start_date  DATE,
+  upload_date DATE,
+  type        INT,
+  period      INT
 );
 
-CREATE TABLE user (
-  id       INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  login    VARCHAR(30),
-  password VARCHAR(30),
-  role     VARCHAR(15)
-);
-
-INSERT INTO customer (name, right_type, royalty) VALUES ('GSM Technologies', 'copyrights', 12.5);
-INSERT INTO customer (name, right_type, royalty) VALUES ('Authors Society', 'copyrights', 12.5);
 
 CREATE TABLE customer_report_item (
   id             INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -54,35 +60,12 @@ CREATE TABLE customer_report_item (
   price          DECIMAL(6, 3)
 );
 
-
-CREATE INDEX code_index ON composition (code) USING BTREE;
-
-CREATE TABLE composition (
-  id          INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  catalog_id  INT NOT NULL,
-  code        VARCHAR(20),
-  NAME        VARCHAR(400),
-  artist      VARCHAR(400),
-  composer    VARCHAR(400),
-  shareMobile DECIMAL(6, 3),
-  sharePublic DECIMAL(6, 3)
+CREATE TABLE user (
+  id       INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  login    VARCHAR(30),
+  password VARCHAR(30),
+  role     VARCHAR(15)
 );
 
 
-# -------------------------------------------------------------------------
-
-
-
-
-alter table catalog add column copyright varchar (20);
-
-INSERT INTO catalog (name, royalty, copyright) VALUES ('WCh', 97.500, 'AUTHOR');
-INSERT INTO catalog (name, royalty, copyright) VALUES ('NMI_WEST', 97.500, 'AUTHOR');
-INSERT INTO catalog (name, royalty, copyright) VALUES ('NMI', 70.000, 'AUTHOR');
-INSERT INTO catalog (name, royalty, copyright) VALUES ('PMI_WEST', 97.500, 'AUTHOR');
-INSERT INTO catalog (name, royalty, copyright) VALUES ('PMI', 70.000, 'AUTHOR');
-INSERT INTO catalog (name, royalty, copyright) VALUES ('NMI related', 70.000, 'RELATED');
-INSERT INTO catalog (name, royalty, copyright) VALUES ('PMI related', 70.000, 'RELATED');
-INSERT INTO catalog (name, royalty, copyright) VALUES ('Sony ATV', 90.000, 'AUTHOR');
-INSERT INTO catalog (name, royalty, copyright) VALUES ('MSG_MCS', 90.000, 'AUTHOR');
 

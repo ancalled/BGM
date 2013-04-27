@@ -3,12 +3,12 @@
 
 
 <head>
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/bootstrap-fileupload.js"></script>
+    <script src="../../web/js/jquery.js"></script>
+    <script src="../../web/js/bootstrap.js"></script>
+    <script src="../../web/js/bootstrap-fileupload.js"></script>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-fileupload.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="../../web/css/bootstrap.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="../../web/css/bootstrap-fileupload.css" media="screen"/>
     <title>Обработка отчета</title>
 </head>
 
