@@ -36,55 +36,41 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-    public void saveTracks(List<Track> tracks, String catalog) {
-        Connection connection = null;
-        try {
-            int catId = getCatalogId(catalog);
+    public void saveTracks(final List<Track> tracks, final String catalog) {
+        final int catId = getCatalogId(catalog);
 
-            long startTime = System.currentTimeMillis();
-
-            connection = pool.getConnection();
-            PreparedStatement ps =
-                    connection.prepareStatement("INSERT INTO " +
-                            "composition(catalog_id, code, name, artist, " +
-                            "composer,shareMobile,sharePublic) " +
-                            "VALUES (?,?,?,?,?,?,?)");
+        query(new Action<Boolean>() {
+            @Override
+            public Boolean execute(Connection con) throws SQLException {
+                PreparedStatement ps =
+                        con.prepareStatement("INSERT INTO " +
+                                "composition(catalog_id, code, name, artist, " +
+                                "composer,shareMobile,sharePublic) " +
+                                "VALUES (?,?,?,?,?,?,?)");
 
 
-            for (Track t : tracks) {
+                for (Track t : tracks) {
 
-                ps.setInt(1, catId);
-                ps.setString(2, t.getCode());
-                ps.setString(3, t.getName());
-                ps.setString(4, t.getArtist());
-                ps.setString(5, t.getComposer());
-                ps.setFloat(6, t.getMobileShare());
-                ps.setFloat(7, t.getPublicShare());
+                    ps.setInt(1, catId);
+                    ps.setString(2, t.getCode());
+                    ps.setString(3, t.getName());
+                    ps.setString(4, t.getArtist());
+                    ps.setString(5, t.getComposer());
+                    ps.setFloat(6, t.getMobileShare());
+                    ps.setFloat(7, t.getPublicShare());
 
-                ps.addBatch();
-            }
-
-            connection.setAutoCommit(false);
-            ps.executeBatch();
-
-            connection.commit();
-            long endTime = System.currentTimeMillis();
-            long doneTime = (endTime - startTime) / 1000;
-
-            log.info(tracks.size() +
-                    " tracks inserted in " + doneTime + " sec");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                    ps.addBatch();
                 }
+
+                con.setAutoCommit(false);
+                ps.executeBatch();
+
+                con.commit();
+
+                return true;
             }
-        }
+        });
+
     }
 
 
@@ -118,505 +104,331 @@ public class DbStorage implements CatalogStorage {
 
 
     @Override
-    public Track getTrack(long id) {
+    public Track getTrack(final long id) {
+        return query(new Action<Track>() {
+            @Override
+            public Track execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM composition WHERE id=?");
+                stmt.setLong(1, id);
 
-        Connection connection = null;
-        try {
-            connection = pool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM composition WHERE id=?");
-            stmt.setLong(1, id);
+                ResultSet rs = stmt.executeQuery();
 
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                return parseTrack(rs);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                if (rs.next()) {
+                    return parseTrack(rs);
                 }
+
+                return null;
             }
-        }
-        return null;
+        });
     }
 
 
     @Override
-    public List<Track> getTracks(List<Long> ids) {
+    public List<Track> getTracks(final List<Long> ids) {
+        return query(new Action<List<Track>>() {
+            @Override
+            public List<Track> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM composition WHERE id IN (" + DbStorage.asString(ids) + ")");
 
-        Connection connection = null;
-        try {
-            connection = pool.getConnection();
+                ResultSet rs = stmt.executeQuery();
 
-            PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM composition WHERE id IN (" + toString(ids) + ")");
-
-            ResultSet rs = stmt.executeQuery();
-
-            List<Track> result = new ArrayList<Track>();
-            while (rs.next()) {
-                result.add(parseTrack(rs));
-            }
-
-            return result;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                List<Track> result = new ArrayList<Track>();
+                while (rs.next()) {
+                    result.add(parseTrack(rs));
                 }
+
+                return result;
             }
-        }
-        return null;
+        });
+
     }
 
 
     @Override
     public List<Track> getAllTracks() {
-        Connection connection = null;
-        try {
-            connection = pool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM composition");
-
-            return parseTracks(stmt.executeQuery());
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+        return query(new Action<List<Track>>() {
+            @Override
+            public List<Track> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement("SELECT * FROM composition");
+                return parseTracks(stmt.executeQuery());
             }
-        }
+        });
 
-        return Collections.emptyList();
     }
 
 
-    public List<Track> searchTracks(String value) {
-        Connection connection = null;
-        try {
-            connection = pool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM composition WHERE " +
-                            "name LIKE ? OR " +
-                            "composer LIKE ? OR " +
-                            "artist LIKE ? OR " +
-                            "code LIKE ? ");
+    public List<Track> searchTracks(final String value) {
+        return query(new Action<List<Track>>() {
+            @Override
+            public List<Track> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM composition WHERE " +
+                                "name LIKE ? OR " +
+                                "composer LIKE ? OR " +
+                                "artist LIKE ? OR " +
+                                "code LIKE ? ");
 
-            stmt.setString(1, "%" + value + "%");
-            stmt.setString(2, "%" + value + "%");
-            stmt.setString(3, "%" + value + "%");
-            stmt.setString(4, "%" + value + "%");
+                stmt.setString(1, "%" + value + "%");
+                stmt.setString(2, "%" + value + "%");
+                stmt.setString(3, "%" + value + "%");
+                stmt.setString(4, "%" + value + "%");
 
-            stmt.setMaxRows(100);
+                stmt.setMaxRows(100);
 
-            ResultSet rs = stmt.executeQuery();
+                ResultSet rs = stmt.executeQuery();
 
-            return parseTracks(rs);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                return parseTracks(rs);
             }
-        }
+        });
 
-        return Collections.emptyList();
-    }
-
-    @Override
-    public List<Track> searchTracksByName(String name) {
-        Connection connection = null;
-        try {
-            connection = pool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM composition WHERE name=?");
-            stmt.setString(1, name);
-
-            return parseTracks(stmt.executeQuery());
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        return Collections.emptyList();
-    }
-
-
-    @Override
-    public List<Track> searchTracksByCode(String code) {
-        Connection connection = null;
-        try {
-            connection = pool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM composition WHERE code=?");
-            stmt.setString(1, code);
-
-            return parseTracks(stmt.executeQuery());
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        return Collections.emptyList();
-    }
-
-    @Override
-    public List<Track> searchTracksByComposer(String composer) {
-        Connection connection = null;
-        try {
-            connection = pool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM composition WHERE composer=?");
-            stmt.setString(1, composer);
-
-            return parseTracks(stmt.executeQuery());
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return Collections.emptyList();
-    }
-
-    @Override
-    public List<Track> searchTracksByArtist(String artist) {
-        Connection connection = null;
-        try {
-            connection = pool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM composition WHERE artist=?");
-            stmt.setString(1, artist);
-
-            ResultSet rs = stmt.executeQuery();
-
-            return parseTracks(rs);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        return Collections.emptyList();
-    }
-
-    @Override
-    public List<Track> searchTrackByArtistLike(String artist) {
-        Connection connection = null;
-        try {
-            connection = pool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM composition WHERE artist LIKE ?");
-            stmt.setString(1, "%" + artist + "%");
-
-            return parseTracks(stmt.executeQuery());
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return Collections.emptyList();
-    }
-
-
-    @Override
-    public Customer getCustomer(String name) {
-        Connection connection = null;
-        try {
-            connection = pool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM customer WHERE name=?");
-            stmt.setString(1, name);
-
-            ResultSet rs = stmt.executeQuery();
-
-            rs.next();
-            return parseCustomer(rs);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        return null;
-    }
-
-    @Override
-    public Customer getCustomer(long id) {
-
-        Connection connection = null;
-        try {
-            connection = pool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM composition WHERE id=?");
-            stmt.setLong(1, id);
-
-            ResultSet rs = stmt.executeQuery();
-            rs.next();
-            return parseCustomer(rs);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        return null;
 
     }
 
     @Override
-    public User getUser(String name, String pass) {
-        Connection connection = null;
-        try {
-            connection = pool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(
-                    "SELECT * FROM user WHERE login = ? AND password = ? ");
-            stmt.setString(1, name);
-            stmt.setString(2, pass);
+    public List<Track> searchTracksByName(final String name) {
+        return query(new Action<List<Track>>() {
+            @Override
+            public List<Track> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM composition WHERE name=?");
+                stmt.setString(1, name);
 
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                return parseUser(rs);
+                return parseTracks(stmt.executeQuery());
             }
+        });
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+    }
 
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+
+    @Override
+    public List<Track> searchTracksByCode(final String code) {
+        return query(new Action<List<Track>>() {
+            @Override
+            public List<Track> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM composition WHERE code=?");
+                stmt.setString(1, code);
+
+                return parseTracks(stmt.executeQuery());
             }
-        }
-        return null;
+        });
+
+    }
+
+    @Override
+    public List<Track> searchTracksByComposer(final String composer) {
+        return query(new Action<List<Track>>() {
+            @Override
+            public List<Track> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM composition WHERE composer=?");
+                stmt.setString(1, composer);
+
+                return parseTracks(stmt.executeQuery());
+            }
+        });
+
+    }
+
+    @Override
+    public List<Track> searchTracksByArtist(final String artist) {
+        return query(new Action<List<Track>>() {
+            @Override
+            public List<Track> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM composition WHERE artist=?");
+                stmt.setString(1, artist);
+
+                return parseTracks(stmt.executeQuery());
+            }
+        });
+    }
+
+    @Override
+    public List<Track> searchTrackByArtistLike(final String artist) {
+        return query(new Action<List<Track>>() {
+            @Override
+            public List<Track> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM composition WHERE artist LIKE?");
+                stmt.setString(1, artist);
+
+                return parseTracks(stmt.executeQuery());
+            }
+        });
+    }
+
+
+    @Override
+    public Customer getCustomer(final String name) {
+        return query(new Action<Customer>() {
+            @Override
+            public Customer execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM customer WHERE name=?");
+                stmt.setString(1, name);
+
+                ResultSet rs = stmt.executeQuery();
+                return rs.next() ? parseCustomer(rs) : null;
+            }
+        });
+    }
+
+
+    @Override
+    public Customer getCustomer(final long id) {
+        return query(new Action<Customer>() {
+            @Override
+            public Customer execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM customer WHERE id=?");
+                stmt.setLong(1, id);
+
+                ResultSet rs = stmt.executeQuery();
+                return rs.next() ? parseCustomer(rs) : null;
+            }
+        });
+    }
+
+
+    @Override
+    public User getUser(final String name, final String pass) {
+        return query(new Action<User>() {
+            @Override
+            public User execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM user WHERE login = ? AND password = ? ");
+                stmt.setString(1, name);
+                stmt.setString(2, pass);
+
+                ResultSet rs = stmt.executeQuery();
+                return rs.next() ? parseUser(rs) : null;
+            }
+        });
     }
 
 
 //    ----------------------------------------------------------------------------------------
 
     @Override
-    public int saveCustomerReport(CustomerReport report) {
-        Connection connection = null;
-        try {
-            log.info("inserting customer report ");
-            connection = pool.getConnection();
+    public int saveCustomerReport(final CustomerReport report) {
+        return query(new Action<Integer>() {
+            @Override
+            public Integer execute(Connection con) throws SQLException {
+                PreparedStatement ps =
+                        con.prepareStatement("INSERT INTO customer_report(customer_id,order_date,download_date) VALUES (?,?,?)",
+                                Statement.RETURN_GENERATED_KEYS);
 
-            PreparedStatement ps =
-                    connection.prepareStatement("INSERT INTO " +
-                            "customer_report(customer_id,order_date,download_date) " +
-                            "VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                ps.setInt(1, report.getCustomerId());
+                ps.setDate(2, new java.sql.Date(report.getStartDate().getTime()));
+                ps.setDate(3, new java.sql.Date(report.getUploadDate().getTime()));
 
-            ps.setInt(1, report.getCustomerId());
-            ps.setDate(2, new java.sql.Date(report.getStartDate().getTime()));
-            ps.setDate(3, new java.sql.Date(report.getUploadDate().getTime()));
+                ps.executeUpdate();
 
-            ps.executeUpdate();
-
-            ResultSet rs = ps.getGeneratedKeys();
-            rs.next();
-            return rs.getInt(1);
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                ResultSet rs = ps.getGeneratedKeys();
+                rs.next();
+                return rs.getInt(1);
             }
-        }
-        return 0;
+        });
     }
 
 
     @Override
-    public void saveCustomerReportItems(List<CustomerReportItem> items) {
-        Connection connection = null;
-        try {
-            log.info("Insert customer report items " + items.size() + " size");
+    public void saveCustomerReportItems(final List<CustomerReportItem> items) {
+        query(new Action<Boolean>() {
+            @Override
+            public Boolean execute(Connection con) throws SQLException {
+                PreparedStatement ps =
+                        con.prepareStatement("INSERT INTO " +
+                                "customer_report_item(report_id,composition_id,name," +
+                                "artist,content_type,qty,price) " +
+                                "VALUES (?,?,?,?,?,?,?)");
 
-            connection = pool.getConnection();
-            PreparedStatement ps =
-                    connection.prepareStatement("INSERT INTO " +
-                            "customer_report_item(report_id,composition_id,name," +
-                            "artist,content_type,qty,price) " +
-                            "VALUES (?,?,?,?,?,?,?)");
+                for (CustomerReportItem cr : items) {
+                    ps.setLong(1, cr.getReportId());
+                    ps.setLong(2, cr.getCompositionId());
+                    ps.setString(3, cr.getName());
+                    ps.setString(4, cr.getArtist());
+                    ps.setString(5, cr.getContentType());
+                    ps.setInt(6, cr.getQty());
+                    ps.setFloat(7, cr.getPrice());
 
-
-            for (CustomerReportItem cr : items) {
-                ps.setLong(1, cr.getReportId());
-                ps.setLong(2, cr.getCompositionId());
-                ps.setString(3, cr.getName());
-                ps.setString(4, cr.getArtist());
-                ps.setString(5, cr.getContentType());
-                ps.setInt(6, cr.getQty());
-                ps.setFloat(7, cr.getPrice());
-
-                ps.addBatch();
-            }
-
-            connection.setAutoCommit(false);
-            ps.executeBatch();
-            connection.commit();
-
-            log.info("insert done");
-        } catch (SQLException e) {
-
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                    ps.addBatch();
                 }
+
+                con.setAutoCommit(false);
+                ps.executeBatch();
+                con.commit();
+
+                return true;
             }
-        }
+        });
     }
 
 
     @Override
-    public List<CalculatedReportItem> calculatePlatformReport(String catalogName) {
+    public List<CalculatedReportItem> calculatePlatformReport(final String catalogName) {
 
         if (catalogName == null) return null;
 
-        Connection connection;
+        return query(new Action<List<CalculatedReportItem>>() {
+            @Override
+            public List<CalculatedReportItem> execute(Connection con) throws SQLException {
+
+                PreparedStatement ps = con.prepareStatement("SELECT\n" +
+                        "  report_item.id,\n" +
+                        "  composition.code,\n" +
+                        "  replace(composition.name, CHAR(9), ' ') name,\n" +
+                        "  replace(composition.artist, CHAR(9), ' ') artist,\n" +
+                        "  replace(composition.composer, CHAR(9), ' ') composer,\n" +
+                        "  price,\n" +
+                        "  report_item.content_type,\n" +
+                        "  sum(qty),\n" +
+                        "  (price * sum(qty)) vol,\n" +
+                        "  shareMobile,\n" +
+                        "\n" +
+                        "  @customerRoyalty := (SELECT cm.royalty\n" +
+                        "                       FROM customer cm\n" +
+                        "                       WHERE cm.id = (SELECT\n" +
+                        "                                        cr.customer_id\n" +
+                        "                                      FROM customer_report cr\n" +
+                        "                                      WHERE cr.id =\n" +
+                        "                                            report_item.report_id)) `customer_royalty`,\n" +
+                        "\n" +
+                        "\n" +
+                        "  cat.royalty cat_royalty,\n" +
+                        "\n" +
+                        "  round((sum(qty) * price * (shareMobile / 100) * (@customerRoyalty / 100) * (cat.royalty / 100)), 3) revenue,\n" +
+                        "  cat.name catalog,\n" +
+                        "  cat.copyright copyright\n" +
+                        "\n" +
+                        "FROM customer_report_item report_item\n" +
+                        "\n" +
+                        "  LEFT JOIN composition composition\n" +
+                        "    ON (report_item.composition_id = composition.id)\n" +
+                        "\n" +
+                        "  INNER JOIN catalog cat\n" +
+                        "    ON (cat.id = composition.catalog_id AND cat.name='" + catalogName + "')\n" +
+                        "\n" +
+                        "WHERE report_item.composition_id > 0\n" +
+                        "  GROUP BY report_item.composition_id");
+
+                ResultSet rs = ps.executeQuery();
+
+                List<CalculatedReportItem> result = new ArrayList<CalculatedReportItem>();
+
+                while (rs.next()) {
+                    result.add(parseCalculatedReport(rs));
+                }
+
+                return result;
 
 
-        List<CalculatedReportItem> result = new ArrayList<CalculatedReportItem>();
-        try {
-            connection = pool.getConnection();
-
-            PreparedStatement ps = connection.prepareStatement("SELECT\n" +
-                    "  report_item.id,\n" +
-                    "  composition.code,\n" +
-                    "  replace(composition.name, CHAR(9), ' ') name,\n" +
-                    "  replace(composition.artist, CHAR(9), ' ') artist,\n" +
-                    "  replace(composition.composer, CHAR(9), ' ') composer,\n" +
-                    "  price,\n" +
-                    "  report_item.content_type,\n" +
-                    "  sum(qty),\n" +
-                    "  (price * sum(qty)) vol,\n" +
-                    "  shareMobile,\n" +
-                    "\n" +
-                    "  @customerRoyalty := (SELECT cm.royalty\n" +
-                    "                       FROM customer cm\n" +
-                    "                       WHERE cm.id = (SELECT\n" +
-                    "                                        cr.customer_id\n" +
-                    "                                      FROM customer_report cr\n" +
-                    "                                      WHERE cr.id =\n" +
-                    "                                            report_item.report_id)) `customer_royalty`,\n" +
-                    "\n" +
-                    "\n" +
-                    "  cat.royalty cat_royalty,\n" +
-                    "\n" +
-                    "  round((sum(qty) * price * (shareMobile / 100) * (@customerRoyalty / 100) * (cat.royalty / 100)), 3) revenue,\n" +
-                    "  cat.name catalog,\n" +
-                    "  cat.copyright copyright\n" +
-                    "\n" +
-                    "FROM customer_report_item report_item\n" +
-                    "\n" +
-                    "  LEFT JOIN composition composition\n" +
-                    "    ON (report_item.composition_id = composition.id)\n" +
-                    "\n" +
-                    "  INNER JOIN catalog cat\n" +
-                    "    ON (cat.id = composition.catalog_id AND cat.name='" + catalogName + "')\n" +
-                    "\n" +
-                    "WHERE report_item.composition_id > 0\n" +
-                    "  GROUP BY report_item.composition_id");
-
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                result.add(parseCalculatedReport(rs));
             }
+        });
 
-            return result;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return Collections.emptyList();
     }
 
 
@@ -766,7 +578,7 @@ public class DbStorage implements CatalogStorage {
         return 0;
     }
 
-    public static String toString(List<Long> ids) {
+    public static String asString(List<Long> ids) {
         StringBuilder buf = new StringBuilder();
         for (int i = 0; i < ids.size(); i++) {
             long id = ids.get(i);
@@ -777,6 +589,38 @@ public class DbStorage implements CatalogStorage {
         }
 
         return buf.toString();
+    }
+
+
+//    ------------------------------------------------
+
+
+    private <T> T query(Action<T> action) {
+
+        Connection connection = null;
+        try {
+            connection = pool.getConnection();
+            return action.execute(connection);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public static interface Action<T> {
+
+        T execute(Connection con) throws SQLException;
+
     }
 
 

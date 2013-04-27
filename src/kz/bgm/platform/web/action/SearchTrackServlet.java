@@ -20,7 +20,6 @@ public class SearchTrackServlet extends HttpServlet {
 
     private static final Logger log = Logger.getLogger(SearchTrackServlet.class);
 
-
     public static final String TRACK_LIST = "tracks";
     public static final String QUERY = "query";
     public static final String SIZE = "size";
@@ -37,7 +36,6 @@ public class SearchTrackServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
 
         String query = req.getParameter("find");
         String type = req.getParameter(FindTrackServletJson.FIND_TYPE);
