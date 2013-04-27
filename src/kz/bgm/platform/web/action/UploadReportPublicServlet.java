@@ -1,9 +1,7 @@
 package kz.bgm.platform.web.action;
 
-import kz.bgm.platform.model.domain.Customer;
 import kz.bgm.platform.model.domain.CustomerReport;
 import kz.bgm.platform.model.domain.CustomerReportItem;
-import kz.bgm.platform.model.domain.Track;
 import kz.bgm.platform.utils.ReportParser;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
@@ -21,9 +19,9 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-public class MobileReportServlet extends HttpServlet {
+public class UploadReportPublicServlet extends HttpServlet {
 
-    public static final Logger log = Logger.getLogger(MobileReportServlet.class);
+    public static final Logger log = Logger.getLogger(UploadReportPublicServlet.class);
 
     public static final String APP_HOME = System.getProperty("user.dir");
     public static final String REPORTS_HOME = APP_HOME + "/reports";
@@ -52,48 +50,24 @@ public class MobileReportServlet extends HttpServlet {
                     String filePath = saveFile(file);
 
                     log.info("Got client report " + filePath);
-//                    reportList = buildReport(filePath, clientRate);
 
-                    Date reportDate = new Date();               //todo alternatively, get it from request params
+                    Date reportDate = new Date();      //todo get from request params
                     CustomerReport.Period period = CustomerReport.Period.MONTH;  //todo and this
 
-                    String customerName = "GSM Technologies";   //todo: put user to session after authorization -> get user from session -> get customer id (company id) from user
+                    Date now = new Date();
 
+                    CustomerReport report = new CustomerReport();
+                    report.setStartDate(reportDate);
+                    report.setPeriod(period);
+                    report.setUploadDate(now);
+                    report.setType(CustomerReport.Type.PUBLIC);
 
-                    log.info("Storing to DB Customer reports " +
-                            filePath + " by customer" + customerName);
+                    int reportId = catalogService.insertCustomerReport(report);
 
-                    Customer customer = catalogService.getCustomer(customerName);
+                    List<CustomerReportItem> reportList =
+                            ReportParser.parsePublicReport(filePath, reportId);
 
-                    if (customer != null) {
-                        Date now = new Date();
-
-                        CustomerReport report = new CustomerReport();
-                        report.setCustomerId(customer.getId());
-                        report.setStartDate(reportDate);
-                        report.setPeriod(period);
-                        report.setUploadDate(now);
-                        report.setType(CustomerReport.Type.MOBILE);
-
-                        int reportId = catalogService.insertCustomerReport(report);
-
-                        List<CustomerReportItem> items = ReportParser.parseMobileReport(filePath, reportId);
-
-                        if (items != null) {
-
-                            for (CustomerReportItem i: items) {
-                                Track tr = catalogService.search(i.getArtist(), i.getName());
-                                if (tr != null) {
-                                    i.setCompositionId((int) tr.getId());
-                                }
-                            }
-
-                            catalogService.insertCustomerReportItem(items);
-
-                        }
-
-                        log.info("storing done");
-                    }
+                    catalogService.insertCustomerReportItem(reportList);
 
                 }
 
@@ -107,13 +81,17 @@ public class MobileReportServlet extends HttpServlet {
         }
 
 
-        resp.sendRedirect("result.jsp?r=ok");
+        resp.sendRedirect("/view/report-upload-result");
     }
 
 
     private String saveFile(FileItem file) throws Exception {
         log.info("File name:" + file.getName());
-        File reportFile = new File(REPORTS_HOME + "/" + file.getName());
+
+        String filePath = REPORTS_HOME + "/" + file.getName();
+
+        File reportFile = new File(filePath);
+
         file.write(reportFile);
         return reportFile.getPath();
     }
