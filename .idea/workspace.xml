@@ -27,19 +27,15 @@
     <option name="FILTER_BY_CURRENT_PROJECT" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="Переименовал сервлеты">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/kz/bgm/platform/test/reflection/ReflectionTest.java" />
+    <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/computed-reports/SONY.xlsx" afterPath="$PROJECT_DIR$/computed-reports/SONY.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CalculatedReportItem.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CalculatedReportItem.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/utils/ExcelUtils.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/utils/ExcelUtils.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/utils/ReportBuilder.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/utils/ReportBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ant.xml" afterPath="$PROJECT_DIR$/.idea/ant.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bgm-platform.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367067462687" ignored="false" />
+    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367067469937" ignored="false" />
     <file path="/CatalogStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365126468046" ignored="false" />
     <file path="/fragment.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367060890109" ignored="false" />
     <file path="db-console:/b524fb0f/bd8e1b6e-fe0f-401f-a88d-0e81e53c8907/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363032963765" ignored="false" />
@@ -104,7 +100,7 @@
     <file path="/DispatcherServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367041981328" ignored="false" />
     <file path="/report.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367042430861" ignored="false" />
     <file path="/ReflectionTest.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367064198359" ignored="false" />
-    <file path="/ExcelUtils.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367066845234" ignored="false" />
+    <file path="/ExcelUtils.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367068446031" ignored="false" />
     <file path="/CalculatedReportItem.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367065140593" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -191,8 +187,10 @@
       <file leaf-file-name="ReportBuilder.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/ReportBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="124" column="85" selection-start="4531" selection-end="4531" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="81" column="0" selection-start="2911" selection-end="2911" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#2549#2566#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -215,40 +213,40 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DbStorage.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="DbStorage.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="422" column="52" selection-start="14717" selection-end="14717" vertical-scroll-proportion="0.0">
+            <state line="418" column="75" selection-start="14536" selection-end="14536" vertical-scroll-proportion="0.61814344">
               <folding>
-                <marker date="1367067064281" expanded="true" signature="1359:1582" placeholder="INSERT INTO ..." />
-                <marker date="1367067064281" expanded="true" signature="2451:2519" placeholder="SELECT id FR..catalog..." />
-                <marker date="1367067064281" expanded="true" signature="3317:3353" placeholder="SELECT * FRO..composition..." />
-                <marker date="1367067064281" expanded="true" signature="3913:3984" placeholder="SELECT * FRO..composition..." />
-                <marker date="1367067064281" expanded="true" signature="4537:4562" placeholder="SELECT * FRO..composition..." />
-                <marker date="1367067064281" expanded="true" signature="4952:5194" placeholder="SELECT * FRO..composition..." />
-                <marker date="1367067064281" expanded="true" signature="5897:5935" placeholder="SELECT * FRO..composition..." />
-                <marker date="1367067064281" expanded="true" signature="6386:6424" placeholder="SELECT * FRO..composition..." />
-                <marker date="1367067064281" expanded="true" signature="6882:6924" placeholder="SELECT * FRO..composition..." />
-                <marker date="1367067064281" expanded="true" signature="7382:7422" placeholder="SELECT * FRO..composition..." />
-                <marker date="1367067064281" expanded="true" signature="7880:7924" placeholder="SELECT * FRO..composition..." />
-                <marker date="1367067064281" expanded="true" signature="8360:8395" placeholder="SELECT * FRO..customer..." />
-                <marker date="1367067064281" expanded="true" signature="8881:8914" placeholder="SELECT * FRO..customer..." />
-                <marker date="1367067064281" expanded="true" signature="9403:9454" placeholder="SELECT * FRO..user..." />
-                <marker date="1367067064281" expanded="true" signature="10085:10165" placeholder="INSERT INTO ..." />
-                <marker date="1367067064281" expanded="true" signature="10958:11185" placeholder="INSERT INTO ..." />
-                <marker date="1367067064281" expanded="true" signature="12233:14481" placeholder="SELECT\n rep..customer_report_item..." />
-                <marker date="1367067064281" expanded="true" signature="12908:13426" placeholder="SELECT cm.ro..customer..." />
-                <marker date="1367067064281" expanded="true" signature="13064:13425" placeholder="SELECT\n cr...customer_report..." />
-                <marker date="1367067064281" expanded="true" signature="19105:19126" placeholder="SELECT * FRO..catalog..." />
+                <marker date="1367068610656" expanded="true" signature="1359:1582" placeholder="INSERT INTO ..." />
+                <marker date="1367068610656" expanded="true" signature="2451:2519" placeholder="SELECT id FR..catalog..." />
+                <marker date="1367068610656" expanded="true" signature="3317:3353" placeholder="SELECT * FRO..composition..." />
+                <marker date="1367068610656" expanded="true" signature="3913:3984" placeholder="SELECT * FRO..composition..." />
+                <marker date="1367068610656" expanded="true" signature="4537:4562" placeholder="SELECT * FRO..composition..." />
+                <marker date="1367068610656" expanded="true" signature="4952:5194" placeholder="SELECT * FRO..composition..." />
+                <marker date="1367068610656" expanded="true" signature="5897:5935" placeholder="SELECT * FRO..composition..." />
+                <marker date="1367068610656" expanded="true" signature="6386:6424" placeholder="SELECT * FRO..composition..." />
+                <marker date="1367068610656" expanded="true" signature="6882:6924" placeholder="SELECT * FRO..composition..." />
+                <marker date="1367068610656" expanded="true" signature="7382:7422" placeholder="SELECT * FRO..composition..." />
+                <marker date="1367068610656" expanded="true" signature="7880:7924" placeholder="SELECT * FRO..composition..." />
+                <marker date="1367068610656" expanded="true" signature="8360:8395" placeholder="SELECT * FRO..customer..." />
+                <marker date="1367068610656" expanded="true" signature="8881:8914" placeholder="SELECT * FRO..customer..." />
+                <marker date="1367068610656" expanded="true" signature="9403:9454" placeholder="SELECT * FRO..user..." />
+                <marker date="1367068610656" expanded="true" signature="10085:10165" placeholder="INSERT INTO ..." />
+                <marker date="1367068610656" expanded="true" signature="10958:11185" placeholder="INSERT INTO ..." />
+                <marker date="1367068610656" expanded="true" signature="12233:14481" placeholder="SELECT\n rep..customer_report_item..." />
+                <marker date="1367068610656" expanded="true" signature="12908:13426" placeholder="SELECT cm.ro..customer..." />
+                <marker date="1367068610656" expanded="true" signature="13064:13425" placeholder="SELECT\n cr...customer_report..." />
+                <marker date="1367068610656" expanded="true" signature="19105:19126" placeholder="SELECT * FRO..catalog..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ExcelUtils.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ExcelUtils.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/ExcelUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="65" selection-start="1852" selection-end="1852" vertical-scroll-proportion="0.6694045">
+            <state line="79" column="40" selection-start="2368" selection-end="2368" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -320,9 +318,9 @@
         <option value="$PROJECT_DIR$/test/kz/bgm/platform/test/reflection/ReflectionTest.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CalculatedReportItem.java" />
         <option value="db-console:/478b00c/e2da7e88-ea9c-457a-a521-d20358ebfdd9/" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/utils/ExcelUtils.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/utils/ReportBuilder.java" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/utils/ExcelUtils.java" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" />
       </list>
     </option>
   </component>
@@ -540,26 +538,8 @@
               <option name="myItemId" value="bgm" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="bgm-platform" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BGM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bgm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="platform" />
+              <option name="myItemId" value="research" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -582,40 +562,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="platform" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bgm-platform" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BGM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bgm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="platform" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="api" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -642,10 +588,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="action" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -672,66 +614,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="utils" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bgm-platform" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BGM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bgm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="platform" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bgm-platform" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BGM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bgm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="platform" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="domain" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1179,7 +1061,11 @@
       <created>1367042882554</created>
       <updated>1367042882554</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Переименовал сервлеты">
+      <created>1367067475593</created>
+      <updated>1367067475593</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1204,7 +1090,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1288" height="1002" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.55074626" sideWeight="0.49713057" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1212,7 +1098,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39929327" sideWeight="0.49675852" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14991896" sideWeight="0.6702002" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4450801" sideWeight="0.493517" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44405183" sideWeight="0.493517" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37102473" sideWeight="0.5299838" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -1225,8 +1111,8 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26337114" sideWeight="0.6289753" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37102473" sideWeight="0.4643436" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26661265" sideWeight="0.6289753" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37102473" sideWeight="0.4643436" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1387,13 +1273,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CalculatedReportItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="36" selection-start="850" selection-end="850" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="dbDummy://db-console:/478b00c/e2da7e88-ea9c-457a-a521-d20358ebfdd9/">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="5" selection-start="496" selection-end="532" vertical-scroll-proportion="0.0">
@@ -1415,34 +1294,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="422" column="52" selection-start="14717" selection-end="14717" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1367067064281" expanded="true" signature="1359:1582" placeholder="INSERT INTO ..." />
-            <marker date="1367067064281" expanded="true" signature="2451:2519" placeholder="SELECT id FR..catalog..." />
-            <marker date="1367067064281" expanded="true" signature="3317:3353" placeholder="SELECT * FRO..composition..." />
-            <marker date="1367067064281" expanded="true" signature="3913:3984" placeholder="SELECT * FRO..composition..." />
-            <marker date="1367067064281" expanded="true" signature="4537:4562" placeholder="SELECT * FRO..composition..." />
-            <marker date="1367067064281" expanded="true" signature="4952:5194" placeholder="SELECT * FRO..composition..." />
-            <marker date="1367067064281" expanded="true" signature="5897:5935" placeholder="SELECT * FRO..composition..." />
-            <marker date="1367067064281" expanded="true" signature="6386:6424" placeholder="SELECT * FRO..composition..." />
-            <marker date="1367067064281" expanded="true" signature="6882:6924" placeholder="SELECT * FRO..composition..." />
-            <marker date="1367067064281" expanded="true" signature="7382:7422" placeholder="SELECT * FRO..composition..." />
-            <marker date="1367067064281" expanded="true" signature="7880:7924" placeholder="SELECT * FRO..composition..." />
-            <marker date="1367067064281" expanded="true" signature="8360:8395" placeholder="SELECT * FRO..customer..." />
-            <marker date="1367067064281" expanded="true" signature="8881:8914" placeholder="SELECT * FRO..customer..." />
-            <marker date="1367067064281" expanded="true" signature="9403:9454" placeholder="SELECT * FRO..user..." />
-            <marker date="1367067064281" expanded="true" signature="10085:10165" placeholder="INSERT INTO ..." />
-            <marker date="1367067064281" expanded="true" signature="10958:11185" placeholder="INSERT INTO ..." />
-            <marker date="1367067064281" expanded="true" signature="12233:14481" placeholder="SELECT\n rep..customer_report_item..." />
-            <marker date="1367067064281" expanded="true" signature="12908:13426" placeholder="SELECT cm.ro..customer..." />
-            <marker date="1367067064281" expanded="true" signature="13064:13425" placeholder="SELECT\n cr...customer_report..." />
-            <marker date="1367067064281" expanded="true" signature="19105:19126" placeholder="SELECT * FRO..catalog..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/kz/bgm/platform/test/reflection/ReflectionTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="55" selection-start="1179" selection-end="1179" vertical-scroll-proportion="0.0">
@@ -1450,18 +1301,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CalculatedReportItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="36" selection-start="850" selection-end="850" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/ReportBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="124" column="85" selection-start="4531" selection-end="4531" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="81" column="0" selection-start="2911" selection-end="2911" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#2549#2566#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/ExcelUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="65" selection-start="1852" selection-end="1852" vertical-scroll-proportion="0.6694045">
+        <state line="79" column="40" selection-start="2368" selection-end="2368" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="418" column="75" selection-start="14536" selection-end="14536" vertical-scroll-proportion="0.61814344">
+          <folding>
+            <marker date="1367068610656" expanded="true" signature="1359:1582" placeholder="INSERT INTO ..." />
+            <marker date="1367068610656" expanded="true" signature="2451:2519" placeholder="SELECT id FR..catalog..." />
+            <marker date="1367068610656" expanded="true" signature="3317:3353" placeholder="SELECT * FRO..composition..." />
+            <marker date="1367068610656" expanded="true" signature="3913:3984" placeholder="SELECT * FRO..composition..." />
+            <marker date="1367068610656" expanded="true" signature="4537:4562" placeholder="SELECT * FRO..composition..." />
+            <marker date="1367068610656" expanded="true" signature="4952:5194" placeholder="SELECT * FRO..composition..." />
+            <marker date="1367068610656" expanded="true" signature="5897:5935" placeholder="SELECT * FRO..composition..." />
+            <marker date="1367068610656" expanded="true" signature="6386:6424" placeholder="SELECT * FRO..composition..." />
+            <marker date="1367068610656" expanded="true" signature="6882:6924" placeholder="SELECT * FRO..composition..." />
+            <marker date="1367068610656" expanded="true" signature="7382:7422" placeholder="SELECT * FRO..composition..." />
+            <marker date="1367068610656" expanded="true" signature="7880:7924" placeholder="SELECT * FRO..composition..." />
+            <marker date="1367068610656" expanded="true" signature="8360:8395" placeholder="SELECT * FRO..customer..." />
+            <marker date="1367068610656" expanded="true" signature="8881:8914" placeholder="SELECT * FRO..customer..." />
+            <marker date="1367068610656" expanded="true" signature="9403:9454" placeholder="SELECT * FRO..user..." />
+            <marker date="1367068610656" expanded="true" signature="10085:10165" placeholder="INSERT INTO ..." />
+            <marker date="1367068610656" expanded="true" signature="10958:11185" placeholder="INSERT INTO ..." />
+            <marker date="1367068610656" expanded="true" signature="12233:14481" placeholder="SELECT\n rep..customer_report_item..." />
+            <marker date="1367068610656" expanded="true" signature="12908:13426" placeholder="SELECT cm.ro..customer..." />
+            <marker date="1367068610656" expanded="true" signature="13064:13425" placeholder="SELECT\n cr...customer_report..." />
+            <marker date="1367068610656" expanded="true" signature="19105:19126" placeholder="SELECT * FRO..catalog..." />
           </folding>
         </state>
       </provider>
