@@ -16,15 +16,15 @@
 
 <body>
 
-<div class="navbar-inner">
-    <a class="brand" href="/index.html">BGM Platform</a>
-    <ul class="nav">
-        <li class="active"><a href="/index.html">Главная</a></li>
-        <li><a href="/reports.html">Отчеты</a></li>
-        <li><a href="/search.html">Поиск</a></li>
-        <li><a href="/view/customers">Клиенты</a></li>
-        <li><a href="/logout">Выход</a></li>
-    </ul>
+<div class="navbar">
+    <div class="navbar-inner">
+        <a class="brand" href="/index.html">BGM Platform</a>
+        <ul class="nav">
+            <li><a href="/index.html">Главная</a></li>
+            <li class="active"><a href="/reports.html">Отчеты</a></li>
+            <li><a href="/data/old/search.jsp">Поиск</a></li>
+        </ul>
+    </div>
 </div>
 
 <div class="container">

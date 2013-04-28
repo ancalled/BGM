@@ -1,6 +1,7 @@
 package kz.bgm.platform;
 
 import kz.bgm.platform.model.service.CatalogFactory;
+import kz.bgm.platform.model.service.LuceneSearch;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.eclipse.jetty.server.Handler;
@@ -19,6 +20,8 @@ import java.util.Properties;
 public class BgmServer {
 
     public static final String APP_DIR = System.getProperty("user.dir");
+    public static final String INDEX_DIR = APP_DIR + "/lucen-indexes";
+
     public static final String WEB_PROPS = APP_DIR + "/jetty.properties";
 
     public static final String DB_PROPS = APP_DIR + "/db.properties";
@@ -89,6 +92,9 @@ public class BgmServer {
 
         log.info("Initializing data storage...");
         CatalogFactory.initDBStorage(dbHost, dbPort, dbName, dbLogin, dbPass);
+
+        LuceneSearch.getInstance().initSearcher(INDEX_DIR);
+
     }
 
     public static void main(String[] args) throws Exception {

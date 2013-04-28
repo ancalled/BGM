@@ -22,7 +22,6 @@ public class SearchTrackServlet extends HttpServlet {
     private static final Logger log = Logger.getLogger(SearchTrackServlet.class);
 
 
-
     private CatalogStorage catalogService;
     private LuceneSearch luceneSearch;
 
@@ -37,11 +36,11 @@ public class SearchTrackServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String query = req.getParameter("q");
-        String type = req.getParameter(JsonSearchServlet.FIND_TYPE);
+        String type = req.getParameter("type");
 
         log.debug("Got query: " + query + ", search type: " + type);
 
-        if (query != null && !"".equals(query) && type != null) {
+        if (query != null && !"".equals(query.trim()) && type != null) {
 
             List<Track> found = null;
             if (type.equals("like-artist")) {
@@ -56,7 +55,6 @@ public class SearchTrackServlet extends HttpServlet {
             } else if (type.equals("composer")) {
                 found = catalogService.searchTracksByComposer(query);
             } else {
-
                 try {
                     List<Long> res = luceneSearch.search(query);
                     found = catalogService.getTracks(res);

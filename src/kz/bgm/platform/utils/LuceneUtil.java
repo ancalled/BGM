@@ -12,14 +12,14 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
-public class ReindexUtil {
+public class LuceneUtil {
 
 
     private final CatalogStorage catalogStorage;
     private final LuceneSearch luceneSearch;
 
 
-    public ReindexUtil() {
+    public LuceneUtil() {
         try {
             initDatabase("db.properties");
         } catch (IOException e) {
@@ -47,14 +47,14 @@ public class ReindexUtil {
     }
 
 
-    public void reindex() throws IOException {
+    public void rebuildIndex() throws IOException {
         List<Track> tracks = catalogStorage.getAllTracks();
-        luceneSearch.index(tracks);
+        luceneSearch.index(tracks, BgmServer.INDEX_DIR);
 
     }
 
 
     public static void main(String[] args) throws IOException {
-        new ReindexUtil().reindex();
+        new LuceneUtil().rebuildIndex();
     }
 }

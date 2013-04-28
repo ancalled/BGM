@@ -424,7 +424,7 @@ public class DbStorage implements CatalogStorage {
             @Override
             public User execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM user WHERE login = ? AND password = ? ");
+                        "SELECT * FROM user WHERE login = ? AND password = ?");
                 stmt.setString(1, name);
                 stmt.setString(2, pass);
 
@@ -666,7 +666,7 @@ public class DbStorage implements CatalogStorage {
         user.setId(rs.getLong("id"));
         user.setLogin(rs.getString("login"));
         user.setPass(rs.getString("password"));
-        user.setCustomerID(rs.getLong("customer_id"));
+        user.setCustomerId(rs.getLong("customer_id"));
         return user;
     }
 

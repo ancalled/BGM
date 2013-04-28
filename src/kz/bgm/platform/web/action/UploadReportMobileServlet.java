@@ -67,12 +67,11 @@ public class UploadReportMobileServlet extends HttpServlet {
 
             HttpSession session = req.getSession(false);
 
-            Customer customer = null;
+            Customer customer;
             if (session != null) {
                 User user = (User) session.getAttribute("user");
 
-                customer = catalogService.getCustomer(user.getId());
-
+                customer = catalogService.getCustomer(user.getCustomerId());
 
             } else {
                 resp.sendRedirect("/result.jsp?er=no-customer-id-provided");

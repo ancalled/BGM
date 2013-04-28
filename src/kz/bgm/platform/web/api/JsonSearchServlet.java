@@ -19,7 +19,6 @@ public class JsonSearchServlet extends HttpServlet {
 
     public static final String APP_DIR = System.getProperty("user.dir");
 
-    public static final String FIND_TYPE = "type";
 
 
 

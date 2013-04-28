@@ -66,20 +66,13 @@
 
             <c:forEach var="t" items="${tracks}">
                 <tr>
-                    <td>${t.code}
-                    </td>
-                    <td><${t.name}
-                    </td>
-                    <td>${t.artist}
-                    </td>
-                    <td>${t.composer}
-                    </td>
-                    <td>${t.mobileShare}
-                    </td>
-                    <td>${t.publicShare}
-                    </td>
-                    <td>${t.catalog}
-                    </td>
+                    <td>${t.code}</td>
+                    <td>${t.name}</td>
+                    <td>${t.artist}</td>
+                    <td>${t.composer}</td>
+                    <td>${t.mobileShare}</td>
+                    <td>${t.publicShare}</td>
+                    <td>${t.catalog}</td>
                 </tr>
             </c:forEach>
 
