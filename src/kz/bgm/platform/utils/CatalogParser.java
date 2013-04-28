@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CatalogParser {
+
     private  static final Logger log =Logger.getLogger(CatalogParser.class); 
     
     
@@ -28,12 +29,12 @@ public class CatalogParser {
 
         Workbook wb = ExcelUtils.openFile(file);
 
-        int sheets = wb.getNumberOfSheets();
+//        int sheets = wb.getNumberOfSheets();
 //        log.info("sheets = " + sheets);
 
         Sheet sheet = wb.getSheetAt(0);
         int rows = sheet.getPhysicalNumberOfRows();
-        List<Track> items = new ArrayList<Track>();
+        List<Track> items = new ArrayList<>();
 
         int startRow = 4;
         for (int i = startRow; i < rows; i++) {
@@ -90,10 +91,10 @@ public class CatalogParser {
 
         Sheet sheet = wb.getSheetAt(0);
         int rows = sheet.getPhysicalNumberOfRows();
-        List<Track> items = new ArrayList<Track>();
+        List<Track> items = new ArrayList<>();
 
         int startRow = 1;
-        int size = 100000;
+//        int size = 100000;
         for (int i = startRow; i < rows; i++) {
             Row row = sheet.getRow(i);
 
@@ -143,7 +144,7 @@ public class CatalogParser {
 
         Sheet sheet = wb.getSheetAt(0);
         int rows = sheet.getPhysicalNumberOfRows();
-        List<Track> items = new ArrayList<Track>();
+        List<Track> items = new ArrayList<>();
 
         int startRow = 1;
 
@@ -179,8 +180,7 @@ public class CatalogParser {
 
     private boolean isEmpty(Row row) {
         String number = ExcelUtils.getCellVal(row, 0);
-        if (number == null || "".equals(number.trim())) return true;
-        return false;
+        return number == null || "".equals(number.trim());
     }
 
 

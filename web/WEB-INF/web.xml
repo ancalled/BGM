@@ -14,8 +14,6 @@
         <url-pattern>/search.html</url-pattern>
     </filter-mapping>
 
-    
-    
 
     <servlet>
         <servlet-name>searchServletJson</servlet-name>
