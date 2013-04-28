@@ -17,7 +17,7 @@
     <div class="navbar-inner">
         <a class="brand" href="/index.html">BGM Platform</a>
         <ul class="nav">
-            <li><a href="/index.html">Главная</a></li>
+            <li><a href="/main.html">Главная</a></li>
             <li><a href="/reports.html">Отчеты</a></li>
             <li><a href="/search.html">Поиск</a></li>
             <li class="active"><a href="/view/customers">Клиенты</a></li>

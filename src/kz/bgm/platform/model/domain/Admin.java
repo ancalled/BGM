@@ -1,13 +1,13 @@
 package kz.bgm.platform.model.domain;
 
 
-public class UserAdmin {
+public class Admin {
 
     long id;
     String login;
     String pass;
 
-    public UserAdmin() {
+    public Admin() {
     }
 
     public long getId() {

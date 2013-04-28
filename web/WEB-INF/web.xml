@@ -5,11 +5,23 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
     <filter>
-        <filter-name>loginFilter</filter-name>
-        <filter-class>kz.bgm.platform.web.LoginFilter</filter-class>
+        <filter-name>adminFilter</filter-name>
+        <filter-class>kz.bgm.platform.web.LoginAdminFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>loginUserFilter</filter-name>
+        <filter-class>kz.bgm.platform.web.LoginUserFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>loginFilter</filter-name>
+        <filter-name>adminFilter</filter-name>
+        <url-pattern>/main.html</url-pattern>
+        <url-pattern>/reports.html</url-pattern>
+        <url-pattern>/search.html</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>loginUserFilter</filter-name>
+        <url-pattern>/main.html</url-pattern>
         <url-pattern>/reports.html</url-pattern>
         <url-pattern>/search.html</url-pattern>
     </filter-mapping>
@@ -38,7 +50,7 @@
 
     <servlet>
         <servlet-name>loginServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.action.LoginServlet</servlet-class>
+        <servlet-class>kz.bgm.platform.web.action.LoginCustomerServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>dispatcherServlet</servlet-name>

@@ -417,6 +417,21 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+    @Override
+    public Admin getAdmin(final String name, final String pass) {
+        return query(new Action<Admin>() {
+            @Override
+            public Admin execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM user_admin WHERE login = ? AND password = ?");
+                stmt.setString(1, name);
+                stmt.setString(2, pass);
+
+                ResultSet rs = stmt.executeQuery();
+                return rs.next() ? parseAdmin(rs) : null;
+            }
+        });
+    }
 
     @Override
     public User getUser(final String name, final String pass) {
@@ -668,6 +683,14 @@ public class DbStorage implements CatalogStorage {
         user.setPass(rs.getString("password"));
         user.setCustomerId(rs.getLong("customer_id"));
         return user;
+    }
+
+    private Admin parseAdmin(ResultSet rs) throws SQLException {
+        Admin admin = new Admin();
+        admin.setId(rs.getLong("id"));
+        admin.setLogin(rs.getString("login"));
+        admin.setPass(rs.getString("password"));
+        return admin;
     }
 
 

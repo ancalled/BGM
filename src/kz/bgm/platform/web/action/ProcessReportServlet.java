@@ -45,7 +45,7 @@ public class ProcessReportServlet extends HttpServlet {
         req.setAttribute("reports",reportsList);
 
         //todo make try catch
-        req.getRequestDispatcher("/reports.jsp").forward(req, resp);
+        req.getRequestDispatcher("/reports.html").forward(req, resp);
 
 
     }

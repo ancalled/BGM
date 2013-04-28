@@ -4,12 +4,12 @@
 <html>
 
 <head>
-    <script src="/js/jquery.js"></script>
-    <script src="/js/bootstrap.js"></script>
-    <script src="/js/bootstrap-fileupload.js"></script>
+    <script src="../../js/jquery.js"></script>
+    <script src="../../js/bootstrap.js"></script>
+    <script src="../../js/bootstrap-fileupload.js"></script>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap-fileupload.css" media="screen"/>
     <title>Обработка отчета</title>
 </head>
 
@@ -20,9 +20,12 @@
     <div class="navbar-inner">
         <a class="brand" href="/index.html">BGM Platform</a>
         <ul class="nav">
-            <li><a href="/index.html">Главная</a></li>
+            <li><a href="/main.html">Главная</a></li>
+
             <li class="active"><a href="/reports.html">Отчеты</a></li>
             <li><a href="/data/old/search.jsp">Поиск</a></li>
+            <li class="active"><a href="/view/customers">Клиенты</a></li>
+            <li><a href="/logout">Выход</a></li>
         </ul>
     </div>
 </div>

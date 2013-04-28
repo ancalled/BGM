@@ -1,8 +1,11 @@
 package kz.bgm.platform.web;
 
+import kz.bgm.platform.model.domain.Customer;
 import kz.bgm.platform.model.domain.CustomerReport;
+import kz.bgm.platform.model.domain.User;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
+import kz.bgm.platform.web.action.UploadReportMobileServlet;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -11,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.Date;
+import java.util.List;
 
 
 public class DispatcherServlet extends HttpServlet {
@@ -75,6 +81,48 @@ public class DispatcherServlet extends HttpServlet {
                     return "report-upload-result";
                 }
             };
+        } else if ("/customers".equals(pth)) {
+            action = new Action() {
+                @Override
+                public String execute(HttpServletRequest req, HttpServletResponse resp) {
+                    List<Customer> customerList = catalogStorage.getCustomers();
+                    req.setAttribute("customers", customerList);
+
+                    return "customers";
+                }
+            };
+        } else if ("/all-customer-reports".equals(pth)) {
+            action = new Action() {
+                @Override
+                public String execute(HttpServletRequest req, HttpServletResponse resp) {
+                    try {
+                        String from = req.getParameter("from");
+                        String to = req.getParameter("to");
+
+                        Date fromDate = from == null ? new Date() :
+                                UploadReportMobileServlet.FORMAT.parse(from);
+                        Date toDate = to == null ? new Date() :
+                                UploadReportMobileServlet.FORMAT.parse(to);
+
+                        User user = (User) req.getSession().getAttribute("user");
+
+                        if (user == null) {
+                            return null;
+                        }
+
+                        List<CustomerReport> reports = catalogStorage.
+                                getCustomerReports(user.getCustomerId(), fromDate, toDate);
+
+                        req.setAttribute("reports", reports);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                        return null;
+                    }
+                    return "all-customer-reports";
+
+                }
+            };
+
         }
 
 

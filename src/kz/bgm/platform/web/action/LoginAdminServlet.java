@@ -1,7 +1,7 @@
 package kz.bgm.platform.web.action;
 
 
-import kz.bgm.platform.model.domain.User;
+import kz.bgm.platform.model.domain.Admin;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import org.apache.log4j.Logger;
@@ -13,14 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class LoginServlet extends HttpServlet {
+public class LoginAdminServlet extends HttpServlet {
 
-    private CatalogStorage service;
-    private static final Logger log = Logger.getLogger(LoginServlet.class);
+    private CatalogStorage catalogStorage;
+    private static final Logger log = Logger.getLogger(LoginCustomerServlet.class);
 
     @Override
     public void init() throws ServletException {
-        service = CatalogFactory.getStorage();
+        catalogStorage = CatalogFactory.getStorage();
     }
 
     @Override
@@ -29,22 +29,25 @@ public class LoginServlet extends HttpServlet {
         String login = req.getParameter("u");
         String pass = req.getParameter("p");
 
-        log.info("Authorization ");
-        log.info("user: " + login);
+        log.info("Admin authorization ");
 
         if (login != null && pass != null) {
-            User user = service.getUser(login, pass);
-            if (user != null && user.getId() > 0) {
+            Admin admin = catalogStorage.getAdmin(login, pass);
+            if (admin != null && admin.getId() > 0) {
                 HttpSession session = req.getSession();
-                log.info("User authorized");
-                session.setAttribute("user", user);
+                session.setAttribute("admin", admin);
+
+                log.info("Admin authorized");
+                log.info("login : " + login);
+
             } else {
-                log.info("user '" + login + "' was not found or pass incorrect");
-                resp.sendRedirect("/login.html?er=no-user-found");
+                log.info("user-admin '" + login + "' was not found or pass incorrect");
+                resp.sendRedirect("/login-admin.html?er=no-user-found");
                 return;
             }
         }
-        resp.sendRedirect("/index.html");
+        resp.sendRedirect("/main.html");
     }
+
 
 }

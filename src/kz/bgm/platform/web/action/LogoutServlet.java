@@ -22,6 +22,7 @@ public class LogoutServlet extends HttpServlet {
         log.info(user.getLogin() + " is logout");
 
         req.getSession().setAttribute("user", null);
+        req.getSession().setAttribute("admin", null);
 
         resp.sendRedirect("/login.html");
     }
