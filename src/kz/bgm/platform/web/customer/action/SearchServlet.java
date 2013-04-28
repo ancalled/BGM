@@ -76,7 +76,7 @@ public class SearchServlet extends HttpServlet {
             session.setAttribute("query", query);
 
 
-            resp.sendRedirect("/csutomer/view/search-result");
+            resp.sendRedirect("/customer/view/search-result");
 
         }
     }
