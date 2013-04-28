@@ -740,7 +740,7 @@ public class DbStorage implements CatalogStorage {
         report.setArtist(rs.getString("artist"));
         report.setComposer(rs.getString("composer"));
         report.setPrice(rs.getFloat("price"));
-        report.setQtySum(rs.getInt("sum(qty)"));
+        report.setQty(rs.getInt("sum(qty)"));
         report.setContentType(rs.getString("content_type"));
         report.setVol(rs.getFloat("vol"));
         report.setShareMobile(rs.getFloat("shareMobile"));
