@@ -3,6 +3,7 @@ package kz.bgm.platform.web.action;
 import kz.bgm.platform.model.domain.Customer;
 import kz.bgm.platform.model.domain.CustomerReport;
 import kz.bgm.platform.model.domain.CustomerReportItem;
+import kz.bgm.platform.model.domain.User;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import kz.bgm.platform.model.service.LuceneSearch;
@@ -62,18 +63,25 @@ public class UploadReportMobileServlet extends HttpServlet {
                     CustomerReport.Period.values()[per] :
                     CustomerReport.Period.MONTH;
 
-            String customerParam = req.getParameter("cid");
-            if (customerParam == null) {
-                resp.sendRedirect("result.jsp?er=no-customer-id-provided");
+//            String customerParam = req.getParameter("cid");
+
+            HttpSession session = req.getSession(false);
+
+            Customer customer = null;
+            if (session != null) {
+                User user = (User) session.getAttribute("user");
+
+                customer = catalogService.getCustomer(user.getId());
+
+
+            } else {
+                resp.sendRedirect("/result.jsp?er=no-customer-id-provided");
                 return;
             }
 
-            long customerId = Long.parseLong(customerParam);
-
-            Customer customer = catalogService.getCustomer(customerId);
 
             if (customer == null) {
-                resp.sendRedirect("result.jsp?er=no-customer-found");
+                resp.sendRedirect("/result.jsp?er=no-customer-found");
                 return;
             }
 
@@ -81,7 +89,7 @@ public class UploadReportMobileServlet extends HttpServlet {
             List<FileItem> files = fileUploader.parseRequest(req);
 
             if (files == null) {
-                resp.sendRedirect("result.jsp?er=no-freports-uploaded");
+                resp.sendRedirect("/result.jsp?er=no-file-reports-uploaded");
                 return;
             }
 
@@ -105,7 +113,7 @@ public class UploadReportMobileServlet extends HttpServlet {
             report.setPeriod(period);
             report.setUploadDate(now);
             report.setType(CustomerReport.Type.MOBILE);
-            report.setCustomerId(customerId);
+            report.setCustomerId(customer.getId());
             report.setTracks(allItems.size());
 
             long reportId = catalogService.saveCustomerReport(report);
@@ -128,15 +136,14 @@ public class UploadReportMobileServlet extends HttpServlet {
             HttpSession ses = req.getSession(true);
             ses.setAttribute("report-" + reportId, report);
 
-            resp.sendRedirect("/view/report-upload-result?rid=" + reportId);
+            resp.sendRedirect("/view/report-upload-result.jsp?rid=" + reportId);
 
         } catch (Exception e) {
             e.printStackTrace();
-            resp.sendRedirect("result.jsp?er=" + e.getMessage());
+            resp.sendRedirect("/result.jsp?er=" + e.getMessage());
 
         }
     }
-
 
 
     private void saveToFile(FileItem item, String filename) throws Exception {

@@ -36,9 +36,12 @@ public class LoginServlet extends HttpServlet {
             User user = service.getUser(login, pass);
             if (user != null && user.getId() > 0) {
                 HttpSession session = req.getSession();
+                log.info("User authorized");
                 session.setAttribute("user", user);
             } else {
                 log.info("user '" + login + "' was not found or pass incorrect");
+                resp.sendRedirect("/login.html?er=no-user-found");
+                return;
             }
         }
         resp.sendRedirect("/index.html");

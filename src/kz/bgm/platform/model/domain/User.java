@@ -5,7 +5,7 @@ public class User {
     private long id;
     private String login;
     private String pass;
-    private String role;
+    private long customerID;
 
     public User() {
     }
@@ -22,8 +22,8 @@ public class User {
         this.pass = pass;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setCustomerID(long customerID) {
+        this.customerID = customerID;
     }
 
     public long getId() {
@@ -38,8 +38,7 @@ public class User {
         return pass;
     }
 
-    public String getRole() {
-        return role;
+    public long getCustomerID() {
+        return customerID;
     }
-
 }

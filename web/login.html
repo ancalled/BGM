@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap-fileupload.js"></script>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-fileupload.css" media="screen"/>
+    <title>Авторизация</title>
+</head>
+<body>
+<div class="container">
+
+    <form class="form-signin span5" action="/authorize" method="post">
+        <h2 class="form-signin-heading">Пожалуйста, авторизуйтесь</h2>
+        <input type="text" class="input-block-level" name="u" placeholder="Имя">
+        <input type="password" class="input-block-level" name="p" placeholder="Пароль">
+        <label class="checkbox">
+            <input type="checkbox" value="remember-me"> Запомнить меня
+        </label>
+        <button class="btn btn-large btn-primary" type="submit">Вход</button>
+    </form>
+</div>
+
+<div class="container">
+    <strong id="message"></strong>
+</div>
+
+<script type="text/javascript">
+
+    $.urlParam = function (name) {
+        var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        return results[1] || 0;
+    };
+
+    writeMessage($.urlParam("er"));
+
+    function writeMessage(mess) {
+        if (mess == 'no-user-found') {
+            $('#message').text("Неверный пароль либо вы не зарегистрированы");
+        }
+    }
+
+</script>
+
+
+</body>
+</html>

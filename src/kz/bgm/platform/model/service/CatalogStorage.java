@@ -36,6 +36,7 @@ public interface CatalogStorage {
 
     List<Track> searchTrackByArtistLike(String artist);
 
+    List<Customer> getCustomers();
 
     Customer getCustomer(String name);
 

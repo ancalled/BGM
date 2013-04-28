@@ -40,7 +40,7 @@ public class ProcessReportServlet extends HttpServlet {
 
         List<CalculatedReportItem> reportsList = storage.calculatePlatformReport("Sony ATV");
 
-        ReportBuilder.buildReportExcelFile("./reports/SONY.xlsx", reportsList);
+        ReportBuilder.buildReportExcelFile("./report-blanks/SONY.xlsx", reportsList);
 
         req.setAttribute("reports",reportsList);
 

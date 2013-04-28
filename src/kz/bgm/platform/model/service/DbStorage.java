@@ -30,7 +30,6 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-
     public void saveTracks(final List<Track> tracks, final String catalog) {
         final int catId = getCatalogId(catalog);
 
@@ -368,6 +367,24 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+    @Override
+    public List<Customer> getCustomers() {
+        return query(new Action<List<Customer>>() {
+            @Override
+            public List<Customer> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM customer");
+                ResultSet rs = stmt.executeQuery();
+
+                List<Customer> customers = new ArrayList<Customer>();
+                while (rs.next()) {
+                    customers.add(parseCustomer(rs));
+                }
+                return customers;
+            }
+        });
+    }
+
 
     @Override
     public Customer getCustomer(final String name) {
@@ -649,7 +666,7 @@ public class DbStorage implements CatalogStorage {
         user.setId(rs.getLong("id"));
         user.setLogin(rs.getString("login"));
         user.setPass(rs.getString("password"));
-        user.setRole(rs.getString("role"));
+        user.setCustomerID(rs.getLong("customer_id"));
         return user;
     }
 

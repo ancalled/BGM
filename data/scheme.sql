@@ -61,11 +61,19 @@ CREATE TABLE customer_report_item (
 );
 
 CREATE TABLE user (
-  id       INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  login    VARCHAR(30),
-  password VARCHAR(30),
-  role     VARCHAR(15)
+  id          INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  customer_id INT,
+  login       VARCHAR(30),
+  password    VARCHAR(30)
 );
+
+CREATE TABLE user_admin (
+  id          INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  login       VARCHAR(30),
+  password    VARCHAR(30)
+);
+
+
 
 
 
