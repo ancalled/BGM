@@ -2,9 +2,9 @@ package kz.bgm.platform.web.admin.action;
 
 
 import kz.bgm.platform.model.domain.CalculatedReportItem;
-import kz.bgm.platform.utils.ReportBuilder;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
+import kz.bgm.platform.utils.ReportBuilder;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class ProcessReportServlet extends HttpServlet {
+public class LoadMobileReportServlet extends HttpServlet {
 
-    private static final Logger log = Logger.getLogger(ProcessReportServlet.class);
+    private static final Logger log = Logger.getLogger(LoadMobileReportServlet.class);
     private CatalogStorage storage;
 
     @Override
@@ -33,16 +33,16 @@ public class ProcessReportServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
-        String catalogName = (String) req.getAttribute("catalog");
+        String catalogName = req.getParameter("catalog");
         //todo finish gui part of calculated catalog downloading
 
         log.info("request to build reports");
 
-        List<CalculatedReportItem> reportsList = storage.calculatePlatformReport("Sony ATV");
+        List<CalculatedReportItem> reportsList = storage.calculatePlatformReport(catalogName);
 
         ReportBuilder.buildReportExcelFile("./data/report-templates/SONY.xlsx", reportsList);
 
-        req.setAttribute("reports",reportsList);
+        req.setAttribute("reports", reportsList);
 
         //todo make try catch
         req.getRequestDispatcher("/admin/reports.html").forward(req, resp);

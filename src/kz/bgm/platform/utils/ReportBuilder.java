@@ -12,10 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ReportBuilder {
 
@@ -82,8 +79,11 @@ public class ReportBuilder {
             fillExcelBlank(sheet, startRow, fieldsMap, finishReps);
             log.info("data filled");
 
-            log.info("saving in file " + reportBlank.getName());
-            ExcelUtils.saveFile(wb, reportBlank.getName());
+            String fileName = reportBlank.getName() + new Date().getTime();
+
+            log.info("saving in file " + fileName);
+            ExcelUtils.saveFile(wb, fileName);
+
             log.info("saved");
         } catch (IOException e) {
             e.printStackTrace();
@@ -119,7 +119,7 @@ public class ReportBuilder {
             CalculatedReportItem instance = (CalculatedReportItem) reportClass.newInstance();
             List<Method> fields = getReportFields(reportClass);
 
-            String field=null;
+            String field = null;
 
             for (String fieldName : fieldMap.keySet()) {
                 field = fieldName.replaceAll("}", "");

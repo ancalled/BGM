@@ -53,7 +53,7 @@
     </servlet>
     <servlet>
         <servlet-name>adminProcessReportServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.admin.action.ProcessReportServlet</servlet-class>
+        <servlet-class>kz.bgm.platform.web.admin.action.LoadMobileReportServlet</servlet-class>
     </servlet>
 
 

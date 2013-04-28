@@ -583,42 +583,49 @@ public class DbStorage implements CatalogStorage {
             public List<CalculatedReportItem> execute(Connection con) throws SQLException {
 
                 PreparedStatement ps = con.prepareStatement("SELECT\n" +
-                        "  report_item.id,\n" +
-                        "  composition.code,\n" +
-                        "  replace(composition.name, CHAR(9), ' ') name,\n" +
-                        "  replace(composition.artist, CHAR(9), ' ') artist,\n" +
-                        "  replace(composition.composer, CHAR(9), ' ') composer,\n" +
-                        "  price,\n" +
-                        "  report_item.content_type,\n" +
-                        "  sum(qty),\n" +
-                        "  (price * sum(qty)) vol,\n" +
-                        "  shareMobile,\n" +
-                        "\n" +
-                        "  @customerRoyalty := (SELECT cm.royalty\n" +
-                        "                       FROM customer cm\n" +
-                        "                       WHERE cm.id = (SELECT\n" +
-                        "                                        cr.customer_id\n" +
-                        "                                      FROM customer_report cr\n" +
-                        "                                      WHERE cr.id =\n" +
-                        "                                            report_item.report_id)) `customer_royalty`,\n" +
-                        "\n" +
-                        "\n" +
-                        "  cat.royalty cat_royalty,\n" +
-                        "\n" +
-                        "  round((sum(qty) * price * (shareMobile / 100) * (@customerRoyalty / 100) * (cat.royalty / 100)), 3) revenue,\n" +
+                        "  i.id,\n" +
+                        "  c.code,\n" +
+                        "  i.content_type,\n" +
+                        "  replace(c.name, CHAR(9), ' ') name,\n" +
+                        "  replace(c.artist, CHAR(9), ' ') artist,\n" +
+                        "  replace(c.composer, CHAR(9), ' ') composer,\n" +
+                        "  cat.copyright copyright,\n" +
+                        "  p.name platform,\n" +
                         "  cat.name catalog,\n" +
-                        "  cat.copyright copyright\n" +
                         "\n" +
-                        "FROM customer_report_item report_item\n" +
+                        "  c.shareMobile,\n" +
+                        "  cat.royalty cat_royalty,\n" +
+                        "  cm.royalty,\n" +
                         "\n" +
-                        "  LEFT JOIN composition composition\n" +
-                        "    ON (report_item.composition_id = composition.id)\n" +
+                        "  price,\n" +
+                        "  sum(qty) totalQty,\n" +
+                        "  (price * sum(qty)) vol,\n" +
                         "\n" +
-                        "  INNER JOIN catalog cat\n" +
-                        "    ON (cat.id = composition.catalog_id AND cat.name='" + catalogName + "')\n" +
+                        "  round((sum(qty) * price * (shareMobile / 100) * (cm.royalty / 100) * (cat.royalty / 100)), 3) revenue\n" +
                         "\n" +
-                        "WHERE report_item.composition_id > 0\n" +
-                        "  GROUP BY report_item.composition_id");
+                        "\n" +
+                        "FROM customer_report_item i\n" +
+                        "\n" +
+                        "  LEFT JOIN composition c\n" +
+                        "    ON (i.composition_id = c.id)\n" +
+                        "\n" +
+                        "  LEFT JOIN catalog cat\n" +
+                        "    ON (cat.id = c.catalog_id and cat.name='"+catalogName+"')\n" +
+                        "\n" +
+                        "  LEFT JOIN platform p\n" +
+                        "    ON (cat.platform_id = p.id)\n" +
+                        "\n" +
+                        "  LEFT JOIN customer_report r\n" +
+                        "    ON (i.report_id = r.id)\n" +
+                        "\n" +
+                        "  LEFT JOIN customer cm\n" +
+                        "    ON (r.customer_id = cm.id)\n" +
+                        "\n" +
+                        "WHERE cat.platform_id = 1\n" +
+                        "      AND r.type = 0\n" +
+                        "      AND i.composition_id > 0\n" +
+                        "\n" +
+                        "GROUP BY i.composition_id");
 
                 ResultSet rs = ps.executeQuery();
 
@@ -740,7 +747,7 @@ public class DbStorage implements CatalogStorage {
         report.setArtist(rs.getString("artist"));
         report.setComposer(rs.getString("composer"));
         report.setPrice(rs.getFloat("price"));
-        report.setQty(rs.getInt("sum(qty)"));
+        report.setQty(rs.getInt("totalQty"));
         report.setContentType(rs.getString("content_type"));
         report.setVol(rs.getFloat("vol"));
         report.setShareMobile(rs.getFloat("shareMobile"));
