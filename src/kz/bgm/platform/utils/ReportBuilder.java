@@ -102,8 +102,10 @@ public class ReportBuilder {
                 reports == null || sheet == null) return;
 
         for (CalculatedReportItem report : reports) {
+            ExcelUtils.shiftRowsDown(sheet, rowIdx);
+
             fillValues(report, sheet, fields, rowIdx);
-            rowIdx++;
+//            rowIdx++;
         }
     }
 
@@ -139,6 +141,7 @@ public class ReportBuilder {
                             colIdx);
                 }
             }
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -254,6 +257,7 @@ public class ReportBuilder {
                 String result = getIfEquals(field, val);
 
                 if (result != null) {
+                    ExcelUtils.clearCell(row,c);
                     columnMap.put(result, c);
                 }
             }

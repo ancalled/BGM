@@ -51,9 +51,17 @@ public class ExcelUtils {
         return true;
     }
 
+    public static void shiftRowsDown(Sheet sheet, int rowIdx) {
+        sheet.shiftRows(rowIdx, sheet.getLastRowNum(), 1);
+    }
+
+    public static void clearCell(Row row, int cellIdx) {
+        Cell cell = row.getCell(cellIdx);
+        cell.setCellValue("");
+    }
+
     public static void setValue(Sheet sheet, Object val, Type type, int rowIdx, int columnIdx) {
         if (sheet == null) return;
-
         Row row = sheet.getRow(rowIdx);
         Cell cell;
         if (row == null) {

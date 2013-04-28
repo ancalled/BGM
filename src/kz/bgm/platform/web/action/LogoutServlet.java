@@ -13,12 +13,13 @@ public class LogoutServlet extends HttpServlet {
 
     private static final Logger log = Logger.getLogger(LogoutServlet.class);
 
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         User user = (User) req.getSession().getAttribute("user");
 
-        log.info(user.getLogin()+" is logout");
+        log.info(user.getLogin() + " is logout");
 
         req.getSession().setAttribute("user", null);
 
