@@ -37,30 +37,32 @@ public class DispatcherServlet extends HttpServlet {
         String pth = req.getPathInfo();
 
         Action action = null;
-        if ("/search-result".equals(pth)) {
-            action = new Action() {
-                @Override
-                public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        switch (pth) {
+            case "/search-result":
+                action = new Action() {
+                    @Override
+                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
 
-                    HttpSession ses = req.getSession();
-                    if (ses == null) return null;
+                        HttpSession ses = req.getSession();
+                        if (ses == null) return null;
 
-                    req.setAttribute("query", ses.getAttribute("query"));
-                    req.setAttribute("tracks", ses.getAttribute("tracks"));
+                        req.setAttribute("query", ses.getAttribute("query"));
+                        req.setAttribute("tracks", ses.getAttribute("tracks"));
 
-                    return "search-result";
-                }
-            };
+                        return "search-result";
+                    }
+                };
 
 
-        } else if ("/report-upload-result".equals(pth)) {
-            action = new Action() {
-                @Override
-                public String execute(HttpServletRequest req, HttpServletResponse resp) {
+                break;
+            case "/report-upload-result":
+                action = new Action() {
+                    @Override
+                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
 
-                    String repIdStr = req.getParameter("rid");
-                    if (repIdStr == null) return null;
-                    long reportId = Long.parseLong(repIdStr);
+                        String repIdStr = req.getParameter("rid");
+                        if (repIdStr == null) return null;
+                        long reportId = Long.parseLong(repIdStr);
 
 //                    CustomerReport report = catalogStorage.getCustomerReport(reportId);
 //                    List<CustomerReportItem> items = catalogStorage.getCustomerReportsItems(reportId);
@@ -70,59 +72,62 @@ public class DispatcherServlet extends HttpServlet {
 //                    req.setAttribute("items", items);
 //                    req.setAttribute("customer", customer);
 
-                    HttpSession ses = req.getSession();
-                    if (ses == null) return null;
+                        HttpSession ses = req.getSession();
+                        if (ses == null) return null;
 
-                    CustomerReport report = (CustomerReport) ses.getAttribute("report-" + reportId);
-                    if (report != null) {
-                        req.setAttribute("report", report);
-                    }
-
-                    return "report-upload-result";
-                }
-            };
-        } else if ("/customers".equals(pth)) {
-            action = new Action() {
-                @Override
-                public String execute(HttpServletRequest req, HttpServletResponse resp) {
-                    List<Customer> customerList = catalogStorage.getCustomers();
-                    req.setAttribute("customers", customerList);
-
-                    return "customers";
-                }
-            };
-        } else if ("/all-customer-reports".equals(pth)) {
-            action = new Action() {
-                @Override
-                public String execute(HttpServletRequest req, HttpServletResponse resp) {
-                    try {
-                        String from = req.getParameter("from");
-                        String to = req.getParameter("to");
-
-                        Date fromDate = from == null ? new Date() :
-                                UploadReportMobileServlet.FORMAT.parse(from);
-                        Date toDate = to == null ? new Date() :
-                                UploadReportMobileServlet.FORMAT.parse(to);
-
-                        User user = (User) req.getSession().getAttribute("user");
-
-                        if (user == null) {
-                            return null;
+                        CustomerReport report = (CustomerReport) ses.getAttribute("report-" + reportId);
+                        if (report != null) {
+                            req.setAttribute("report", report);
                         }
 
-                        List<CustomerReport> reports = catalogStorage.
-                                getCustomerReports(user.getCustomerId(), fromDate, toDate);
-
-                        req.setAttribute("reports", reports);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                        return null;
+                        return "report-upload-result";
                     }
-                    return "all-customer-reports";
+                };
+                break;
+            case "/customers":
+                action = new Action() {
+                    @Override
+                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+                        List<Customer> customerList = catalogStorage.getCustomers();
+                        req.setAttribute("customers", customerList);
 
-                }
-            };
+                        return "customers";
+                    }
+                };
+                break;
+            case "/all-customer-reports":
+                action = new Action() {
+                    @Override
+                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+                        try {
+                            String from = req.getParameter("from");
+                            String to = req.getParameter("to");
 
+                            Date fromDate = from == null ? new Date() :
+                                    UploadReportMobileServlet.FORMAT.parse(from);
+                            Date toDate = to == null ? new Date() :
+                                    UploadReportMobileServlet.FORMAT.parse(to);
+
+                            User user = (User) req.getSession().getAttribute("user");
+
+                            if (user == null) {
+                                return null;
+                            }
+
+                            List<CustomerReport> reports = catalogStorage.
+                                    getCustomerReports(user.getCustomerId(), fromDate, toDate);
+
+                            req.setAttribute("reports", reports);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                            return null;
+                        }
+                        return "all-customer-reports";
+
+                    }
+                };
+
+                break;
         }
 
 
