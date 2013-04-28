@@ -56,7 +56,6 @@ LIMIT 0, 15;
 SELECT
   i.id,
   c.code,
-  i.content_type,
   replace(c.name, CHAR(9), ' ') name,
   replace(c.artist, CHAR(9), ' ') artist,
   replace(c.composer, CHAR(9), ' ') composer,
