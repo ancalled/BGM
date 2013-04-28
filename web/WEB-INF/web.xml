@@ -48,7 +48,7 @@
     </servlet>
     <servlet>
         <servlet-name>exitServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.action.ExitServlet</servlet-class>
+        <servlet-class>kz.bgm.platform.web.action.LogoutServlet</servlet-class>
     </servlet>
 
 
