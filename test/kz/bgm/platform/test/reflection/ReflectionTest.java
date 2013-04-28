@@ -2,9 +2,12 @@ package kz.bgm.platform.test.reflection;
 
 
 import kz.bgm.platform.model.domain.CalculatedReportItem;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,19 +26,32 @@ public class ReflectionTest {
     }
 
 
-    public static void main(String[] args) throws InvocationTargetException, IllegalAccessException, InstantiationException {
-        ReflectionTest reflect = new ReflectionTest();
+    private boolean checkMethodType(Method m, Class type) {
+        Type mType = m.getGenericReturnType();
+        return mType == type;
+
+
+    }
+
+    @Test
+    public void testMethods() throws InvocationTargetException, IllegalAccessException, InstantiationException {
 
         Class cl = CalculatedReportItem.class;
         CalculatedReportItem clClone = (CalculatedReportItem) cl.newInstance();
-        List<Method> getters = reflect.getGetters(cl);
+        List<Method> getters = getGetters(cl);
+
+        Assert.assertFalse(getters.isEmpty());
 
         for (Method m : getters) {
             Object o = m.invoke(clClone);
             System.out.println(o);
             System.out.println(m.getName());
             System.out.println(m.getGenericReturnType());
+
+            Assert.assertTrue(checkMethodType(m, Object.class));
+
         }
+
 
     }
 }

@@ -9,7 +9,7 @@ public class CalculatedReportItem {
     private String composer = "";
     private String contentType = "";
     private float price = 0f;
-    private int qtySum = 0;
+    private int qty = 0;
     private float vol = 0f;
     private float shareMobile = 0f;
     private float customerRoyalty = 0f;
@@ -17,6 +17,8 @@ public class CalculatedReportItem {
     private float revenue = 0f;
     private String catalog = "";
     private String copyright = "";
+
+
 
 
     public CalculatedReportItem() {
@@ -54,8 +56,8 @@ public class CalculatedReportItem {
         this.price = price;
     }
 
-    public void setQtySum(int qty) {
-        this.qtySum = qty;
+    public void setQty(int qty) {
+        this.qty = qty;
     }
 
     public void setVol(float vol) {
@@ -110,8 +112,8 @@ public class CalculatedReportItem {
         return price;
     }
 
-    public int getQtySum() {
-        return qtySum;
+    public int getQty() {
+        return qty;
     }
 
     public float getVol() {

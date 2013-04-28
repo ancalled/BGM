@@ -21,19 +21,19 @@ public class ReportBuilder {
 
     private static final Logger log = Logger.getLogger(ReportBuilder.class);
 
-    private static final String COMPOSITION_CODE = "{code}";
-    private static final String COMPOSITION_NAME = "{composition}";
+    private static final String COMPOSITION_CODE = "{compositionCode}";
+    private static final String COMPOSITION_NAME = "{compositionName}";
     private static final String ARTIST = "{artist}";
     private static final String COMPOSER = "{composer}";
-    private static final String CONTENT_TYPE = "{cont_type}";
-    private static final String PRICE = "{prise}";
-    private static final String QTY_SUM = "{qty_sum}";
+    private static final String CONTENT_TYPE = "{contentType}";
+    private static final String PRICE = "{price}";
+    private static final String QTY_SUM = "{qty}";
     private static final String VOL = "{vol}";
-    private static final String SHARE_MOBILE = "{share_mob}";
-    private static final String CUSTOMER_ROYALTY = "{cust_royal}";
-    private static final String CATALOG_ROYALTY = "{cat_royal]";
+    private static final String SHARE_MOBILE = "{shareMobile}";
+    private static final String CUSTOMER_ROYALTY = "{customerRoyalty}";
+    private static final String CATALOG_ROYALTY = "{catalogRoyalty]";
     private static final String REVENUE = "{revenue}";
-    private static final String CATALOG = "{cat}";
+    private static final String CATALOG = "{catalog}";
     private static final String COPYRIGHT = "{copyright}";
 
     private static List<String> fieldList = new ArrayList<String>();
@@ -119,27 +119,32 @@ public class ReportBuilder {
             CalculatedReportItem instance = (CalculatedReportItem) reportClass.newInstance();
             List<Method> fields = getReportFields(reportClass);
 
+            String field=null;
+
             for (String fieldName : fieldMap.keySet()) {
-                String field = fieldName.replaceAll("}", "");
+                field = fieldName.replaceAll("}", "");
                 field = field.replaceAll("\\{", "");
                 int colIdx = 0;
                 Type type = null;
                 Object val = null;
 
                 for (Method m : fields) {
-                    if (m.getName().toLowerCase().contains(field)) {
+                    String methodName = m.getName().toLowerCase();
+                    if (methodName.contains(field.toLowerCase())) {
                         type = m.getGenericReturnType();
                         val = m.invoke(report);
                         colIdx = fieldMap.get(fieldName);
                     }
+                    if (colIdx != 0) {
+                        ExcelUtils.setValue(sheet,
+                                val,
+                                type,
+                                rowIdx,
+                                colIdx);
+                        break;
+                    }
                 }
-                if (colIdx != 0) {
-                    ExcelUtils.setValue(sheet,
-                            val,
-                            type,
-                            rowIdx,
-                            colIdx);
-                }
+
             }
 
 
@@ -184,7 +189,7 @@ public class ReportBuilder {
 //
 //        if (fieldMap.containsKey(QTY_SUM)) {
 //            int qtySumIdx = fieldMap.get(QTY_SUM);
-//            String qty = Float.toString(report.getQtySum());
+//            String qty = Float.toString(report.getQty());
 //            ExcelUtils.setValue(sheet, qty, rowIdx, qtySumIdx);
 //        }
 //
@@ -257,7 +262,7 @@ public class ReportBuilder {
                 String result = getIfEquals(field, val);
 
                 if (result != null) {
-                    ExcelUtils.clearCell(row,c);
+                    ExcelUtils.clearCell(row, c);
                     columnMap.put(result, c);
                 }
             }

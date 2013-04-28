@@ -50,7 +50,7 @@
 //            if (priceStr == null || "".equals(priceStr.trim())) continue;
 //
 //            item.setPrice(Integer.parseInt(priceStr.trim()));
-//            item.setQtySum(Integer.parseInt(ExcelUtils.getCellVal(row, 6).trim()));
+//            item.setQty(Integer.parseInt(ExcelUtils.getCellVal(row, 6).trim()));
 //            item.setRate(clientRate);
 //            domain.add(item);
 //        }

@@ -63,6 +63,8 @@ public class ExcelUtils {
     public static void setValue(Sheet sheet, Object val, Type type, int rowIdx, int columnIdx) {
         if (sheet == null) return;
         Row row = sheet.getRow(rowIdx);
+
+
         Cell cell;
         if (row == null) {
             sheet.createRow(rowIdx);
@@ -76,13 +78,32 @@ public class ExcelUtils {
                 cell = row.getCell(columnIdx);
             }
         }
-        if (type.equals(String.class)) {
-            cell.setCellType(Cell.CELL_TYPE_STRING);
-            cell.setCellValue((String) val);
 
-        } else {
+
+        Workbook wb = sheet.getWorkbook();
+
+        if (type == String.class) {
+            cell.setCellType(Cell.CELL_TYPE_STRING);
+
+            cell.setCellValue((String) val);
+        } else if (type == Float.class || type == float.class) {
             cell.setCellType(Cell.CELL_TYPE_NUMERIC);
+            CellStyle cs = wb.createCellStyle();
+            cs.setDataFormat(wb.createDataFormat().getFormat("##0.00"));
+            cell.setCellStyle(cs);
             cell.setCellValue((Float) val);
+        } else if (type == Integer.class || type == int.class) {
+            cell.setCellType(Cell.CELL_TYPE_NUMERIC);
+            cell.setCellValue((Integer) val);
+        } else if (type == Double.class || type == double.class) {
+            cell.setCellType(Cell.CELL_TYPE_NUMERIC);
+            CellStyle cs = wb.createCellStyle();
+            cs.setDataFormat(wb.createDataFormat().getFormat("##0.00"));
+            cell.setCellStyle(cs);
+            cell.setCellValue((Double) val);
+        } else if (type == Boolean.class || type == boolean.class) {
+            cell.setCellType(Cell.CELL_TYPE_NUMERIC);
+            cell.setCellValue((Boolean) val);
         }
 
     }
