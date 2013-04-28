@@ -41,7 +41,7 @@ FROM customer_report_item i
 
 WHERE cat.platform_id = 1
       AND r.type = 0
-      AND r.start_date BETWEEN '2013-01-01' AND '2013-02-01'
+      AND r.start_date BETWEEN '2013-01-01' AND '2013-04-01'
       AND i.composition_id > 0
 
 GROUP BY i.composition_id
@@ -92,15 +92,3 @@ WHERE cat.platform_id = 1
 GROUP BY i.composition_id
 LIMIT 0, 15;
 
-
-# ------------------------------------------------------------------------------
-
-
-
-SELECT
-  report_id,
-  count(distinct i.id) cnt
-FROM customer_report_item i LEFT JOIN customer_report r
-    ON (r.id = i.report_id)
-WHERE r.type = 0 AND price > 0
-GROUP BY i.report_id;
