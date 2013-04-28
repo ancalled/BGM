@@ -2,19 +2,19 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/bootstrap-fileupload.js"></script>
+    <script src="/js/jquery.js" type="text/javascript"></script>
+    <script src="/js/bootstrap.js" type="text/javascript"></script>
+    <script src="/js/bootstrap-fileupload.js" type="text/javascript"></script>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-fileupload.css" media="screen"/>
-    <title>Авторизация</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" media="screen"/>
+    <title>Вход в кабинет администратора</title>
 </head>
 <body>
 <div class="container">
 
-    <form class="form-signin span5" action="/authorize" method="post">
-        <h2 class="form-signin-heading">Пожалуйста, авторизуйтесь</h2>
+    <form class="form-signin span5" action="/admin-logon" method="post">
+        <h2 class="form-signin-heading">Вход в кабинет администратора</h2>
         <input type="text" class="input-block-level" name="u" placeholder="Имя">
         <input type="password" class="input-block-level" name="p" placeholder="Пароль">
         <label class="checkbox">

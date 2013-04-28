@@ -1,10 +1,9 @@
-package kz.bgm.platform.web.action;
+package kz.bgm.platform.web.customer.action;
 
 import kz.bgm.platform.model.domain.Track;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import kz.bgm.platform.model.service.LuceneSearch;
-import kz.bgm.platform.web.api.JsonSearchServlet;
 import org.apache.log4j.Logger;
 import org.apache.lucene.queryparser.classic.ParseException;
 
@@ -17,9 +16,9 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class SearchTrackServlet extends HttpServlet {
+public class SearchServlet extends HttpServlet {
 
-    private static final Logger log = Logger.getLogger(SearchTrackServlet.class);
+    private static final Logger log = Logger.getLogger(SearchServlet.class);
 
 
     private CatalogStorage catalogService;

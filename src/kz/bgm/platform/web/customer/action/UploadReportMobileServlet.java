@@ -1,4 +1,4 @@
-package kz.bgm.platform.web.action;
+package kz.bgm.platform.web.customer.action;
 
 import kz.bgm.platform.model.domain.Customer;
 import kz.bgm.platform.model.domain.CustomerReport;
@@ -63,8 +63,6 @@ public class UploadReportMobileServlet extends HttpServlet {
                     CustomerReport.Period.values()[per] :
                     CustomerReport.Period.MONTH;
 
-//            String customerParam = req.getParameter("cid");
-
             HttpSession session = req.getSession(false);
 
             Customer customer;
@@ -74,13 +72,13 @@ public class UploadReportMobileServlet extends HttpServlet {
                 customer = catalogService.getCustomer(user.getCustomerId());
 
             } else {
-                resp.sendRedirect("/result.jsp?er=no-customer-id-provided");
+                resp.sendRedirect("/customer/reports.html?er=no-customer-id-provided");
                 return;
             }
 
 
             if (customer == null) {
-                resp.sendRedirect("/result.jsp?er=no-customer-found");
+                resp.sendRedirect("/customer/reports.html?er=no-customer-found");
                 return;
             }
 
@@ -88,12 +86,12 @@ public class UploadReportMobileServlet extends HttpServlet {
             List<FileItem> files = fileUploader.parseRequest(req);
 
             if (files == null) {
-                resp.sendRedirect("/result.jsp?er=no-file-reports-uploaded");
+                resp.sendRedirect("/customer/reports.html?er=no-file-reports-uploaded");
                 return;
             }
 
 
-            List<CustomerReportItem> allItems = new ArrayList<CustomerReportItem>();
+            List<CustomerReportItem> allItems = new ArrayList<>();
             for (FileItem item : files) {
 
                 String reportFile = REPORTS_HOME + "/" + item.getName();
@@ -135,11 +133,11 @@ public class UploadReportMobileServlet extends HttpServlet {
             HttpSession ses = req.getSession(true);
             ses.setAttribute("report-" + reportId, report);
 
-            resp.sendRedirect("/view/report-upload-result.jsp?rid=" + reportId);
+            resp.sendRedirect("/customer/view/report-upload-result.jsp?rid=" + reportId);
 
         } catch (Exception e) {
             e.printStackTrace();
-            resp.sendRedirect("/result.jsp?er=" + e.getMessage());
+            resp.sendRedirect("/customer/reports.html?er=" + e.getMessage());
 
         }
     }

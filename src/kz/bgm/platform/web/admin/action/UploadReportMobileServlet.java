@@ -1,7 +1,9 @@
-package kz.bgm.platform.web.action;
+package kz.bgm.platform.web.admin.action;
 
+import kz.bgm.platform.model.domain.Customer;
 import kz.bgm.platform.model.domain.CustomerReport;
 import kz.bgm.platform.model.domain.CustomerReportItem;
+import kz.bgm.platform.model.domain.User;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import kz.bgm.platform.model.service.LuceneSearch;
@@ -23,15 +25,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class UploadReportPublicServlet extends HttpServlet {
+public class UploadReportMobileServlet extends HttpServlet {
 
-    public static final Logger log = Logger.getLogger(UploadReportPublicServlet.class);
+    public static final Logger log = Logger.getLogger(UploadReportMobileServlet.class);
 
     public static final String APP_HOME = System.getProperty("user.dir");
     public static final String REPORTS_HOME = APP_HOME + "/reports";
 
     public static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd");
-
 
     public static final String FILE = "file";
 
@@ -39,11 +40,13 @@ public class UploadReportPublicServlet extends HttpServlet {
     private CatalogStorage catalogService;
     private LuceneSearch luceneSearch;
 
+
     @Override
     public void init() throws ServletException {
         fileUploader = new ServletFileUpload(new DiskFileItemFactory());
         catalogService = CatalogFactory.getStorage();
         luceneSearch = LuceneSearch.getInstance();
+
     }
 
     @Override
@@ -60,16 +63,29 @@ public class UploadReportPublicServlet extends HttpServlet {
                     CustomerReport.Period.values()[per] :
                     CustomerReport.Period.MONTH;
 
+            String customerParam = req.getParameter("cid");
+            if (customerParam == null) {
+                resp.sendRedirect("/admin/reports.html?er=no-customer-id-provided");
+                return;
+            }
+            long customerId = Long.parseLong(customerParam);
 
-            List<FileItem> files = fileUploader.parseRequest(req);
-
-            if (files == null) {
-                resp.sendRedirect("result.jsp?er=no-freports-uploaded");
+            Customer customer = catalogService.getCustomer(customerId);
+            if (customer == null) {
+                resp.sendRedirect("/admin/reports.html?er=no-customer-found");
                 return;
             }
 
 
-            List<CustomerReportItem> allItems = new ArrayList<CustomerReportItem>();
+            List<FileItem> files = fileUploader.parseRequest(req);
+
+            if (files == null) {
+                resp.sendRedirect("/admin/reports.html?er=no-file-reports-uploaded");
+                return;
+            }
+
+
+            List<CustomerReportItem> allItems = new ArrayList<>();
             for (FileItem item : files) {
 
                 String reportFile = REPORTS_HOME + "/" + item.getName();
@@ -77,7 +93,7 @@ public class UploadReportPublicServlet extends HttpServlet {
 
                 log.info("Got client report " + item.getName());
 
-                List<CustomerReportItem> items = ReportParser.parsePublicReport(reportFile);
+                List<CustomerReportItem> items = ReportParser.parseMobileReport(reportFile);
                 allItems.addAll(items);
             }
 
@@ -87,7 +103,8 @@ public class UploadReportPublicServlet extends HttpServlet {
             report.setStartDate(reportDate);
             report.setPeriod(period);
             report.setUploadDate(now);
-            report.setType(CustomerReport.Type.PUBLIC);
+            report.setType(CustomerReport.Type.MOBILE);
+            report.setCustomerId(customer.getId());
             report.setTracks(allItems.size());
 
             long reportId = catalogService.saveCustomerReport(report);
@@ -110,11 +127,11 @@ public class UploadReportPublicServlet extends HttpServlet {
             HttpSession ses = req.getSession(true);
             ses.setAttribute("report-" + reportId, report);
 
-            resp.sendRedirect("/view/report-upload-result?rid=" + reportId);
+            resp.sendRedirect("/admin/view/report-upload-result.jsp?rid=" + reportId);
 
         } catch (Exception e) {
             e.printStackTrace();
-            resp.sendRedirect("result.jsp?er=" + e.getMessage());
+            resp.sendRedirect("/admin/reports.html?er=" + e.getMessage());
 
         }
     }

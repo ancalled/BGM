@@ -1,4 +1,4 @@
-package kz.bgm.platform.web.action;
+package kz.bgm.platform.web.customer;
 
 import kz.bgm.platform.model.domain.User;
 import org.apache.log4j.Logger;
@@ -24,7 +24,7 @@ public class LogoutServlet extends HttpServlet {
         req.getSession().setAttribute("user", null);
         req.getSession().setAttribute("admin", null);
 
-        resp.sendRedirect("/login.html");
+        resp.sendRedirect("/admin-customer-login.html");
     }
 }
 

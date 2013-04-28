@@ -1,14 +1,14 @@
 <html xmlns="http://www.w3.org/1999/html">
 
 <head>
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/bootstrap-fileupload.js"></script>
-    <script src="js/bootstrap-datetimepicker.min.js"></script>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/bootstrap-fileupload.js"></script>
+    <script src="../js/bootstrap-datetimepicker.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-fileupload.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-fileupload.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-datetimepicker.min.css" media="screen"/>
     <title>Обработка отчета</title>
 </head>
 
@@ -17,13 +17,13 @@
 
 <div class="navbar">
     <div class="navbar-inner">
-        <a class="brand" href="/index.html">BGM Platform</a>
+        <a class="brand" href="/admin/index.html">BGM Platform</a>
         <ul class="nav">
-            <li><a href="/main.html">Главная</a></li>
-            <li class="active"><a href="/reports.html">Отчеты</a></li>
-            <li><a href="/search.html">Поиск</a></li>
-            <li><a href="/view/customers">Клиенты</a></li>
-            <li><a href="/logout">Выход</a></li>
+            <li><a href="/admin/index.html">Главная</a></li>
+            <li class="active"><a href="/admin/reports.html">Отчеты</a></li>
+            <li><a href="/admin/search.html">Поиск</a></li>
+            <li><a href="/admin/view/customers">Клиенты</a></li>
+            <li><a href="/admin/action/logout">Выход</a></li>
         </ul>
     </div>
 </div>
@@ -46,7 +46,7 @@
 
                 <div class="row ">
 
-                    <form action="/action/upload-mobile-report" method="post" enctype="multipart/form-data">
+                    <form action="/admin/action/upload-mobile-report" method="post" enctype="multipart/form-data">
 
 
                         <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -106,7 +106,7 @@
 
                 <div class="row text-left">
 
-                    <form action="/action/upload-public-report" method="post" enctype="multipart/form-data">
+                    <form action="/admin/action/upload-public-report" method="post" enctype="multipart/form-data">
                         <div class="fileupload fileupload-new" data-provides="fileupload">
                             <div class="input-append">
                                 <div class="uneditable-input span3">
@@ -145,7 +145,7 @@
                 </div>
                 <div class="row text-left">
 
-                    <form action="/report-calculator" method="post">
+                    <form action="/admin/action/report-calculator" method="post">
 
 
                         <div class="row-fluid">
@@ -164,7 +164,7 @@
                 </div>
                 <div class="row text-left">
 
-                    <form action="/report-calculator" method="post">
+                    <form action="/admin/view/report-calculator" method="post">
 
 
                         <div class="row-fluid">

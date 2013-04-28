@@ -1,4 +1,4 @@
-package kz.bgm.platform.web.action;
+package kz.bgm.platform.web.admin.action;
 
 
 import kz.bgm.platform.model.domain.CalculatedReportItem;
@@ -45,7 +45,7 @@ public class ProcessReportServlet extends HttpServlet {
         req.setAttribute("reports",reportsList);
 
         //todo make try catch
-        req.getRequestDispatcher("/reports.html").forward(req, resp);
+        req.getRequestDispatcher("/admin/reports.html").forward(req, resp);
 
 
     }

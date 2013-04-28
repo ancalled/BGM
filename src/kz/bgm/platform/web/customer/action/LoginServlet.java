@@ -1,4 +1,4 @@
-package kz.bgm.platform.web.action;
+package kz.bgm.platform.web.customer.action;
 
 
 import kz.bgm.platform.model.domain.User;
@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class LoginCustomerServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
     private CatalogStorage service;
-    private static final Logger log = Logger.getLogger(LoginCustomerServlet.class);
+    private static final Logger log = Logger.getLogger(LoginServlet.class);
 
     @Override
     public void init() throws ServletException {
@@ -44,11 +44,11 @@ public class LoginCustomerServlet extends HttpServlet {
 
             } else {
                 log.info("user '" + login + "' was not found or pass incorrect");
-                resp.sendRedirect("/login-customer.html?er=no-user-found");
+                resp.sendRedirect("/customer/admin-customer-login.html?er=no-user-found");
                 return;
             }
         }
-        resp.sendRedirect("/main.html");
+        resp.sendRedirect("/customer/index.html");
     }
 
 }

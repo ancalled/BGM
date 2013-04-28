@@ -1,4 +1,4 @@
-package kz.bgm.platform.web.api;
+package kz.bgm.platform.web.admin.api;
 
 
 import kz.bgm.platform.model.service.CatalogFactory;

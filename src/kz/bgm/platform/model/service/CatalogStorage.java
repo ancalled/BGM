@@ -44,7 +44,7 @@ public interface CatalogStorage {
 
     User getUser(String name, String pass);
 
-    Admin getAdmin(String name, String pass);
+    AdminUser getAdmin(String name, String pass);
 
 
     long saveCustomerReport(CustomerReport report);

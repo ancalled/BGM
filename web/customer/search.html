@@ -1,23 +1,22 @@
 <html>
 <head>
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/bootstrap-fileupload.js"></script>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/bootstrap-fileupload.js"></script>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-fileupload.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-fileupload.css" media="screen"/>
     <title>Поиск</title>
 </head>
 <body>
 <div class="navbar">
     <div class="navbar-inner">
-        <a class="brand" href="/index.html">BGM Platform</a>
+        <a class="brand" href="/customer/">BGM Platform</a>
         <ul class="nav">
-            <li><a href="/main.html">Главная</a></li>
-            <li><a href="/reports.html">Отчеты</a></li>
-            <li class="active"><a href="/search.html">Поиск</a></li>
-            <li><a href="/view/customers">Клиенты</a></li>
-            <li><a href="/logout">Выход</a></li>
+            <li><a href="/customer/">Главная</a></li>
+            <li><a href="/customer/reports.html">Отчеты</a></li>
+            <li class="active"><a href="/customer/search.html">Поиск</a></li>
+            <li><a href="/customer/action/logout">Выход</a></li>
         </ul>
     </div>
 </div>
@@ -31,7 +30,7 @@
             Поиск композиций
         </legend>
 
-        <form action="/action/search" method="post">
+        <form action="/customer/action/search" method="post">
             <div class="row">
                 <label for="query"></label><input type="text" name="q" id="query" class="input-block-level">
             </div>

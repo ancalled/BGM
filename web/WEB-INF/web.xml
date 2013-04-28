@@ -4,101 +4,156 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
+
+
+
+
+    <!--================= AdminUser  =======================-->
+
     <filter>
-        <filter-name>adminFilter</filter-name>
-        <filter-class>kz.bgm.platform.web.LoginAdminFilter</filter-class>
+        <filter-name>adminAuthFilter</filter-name>
+        <filter-class>kz.bgm.platform.web.admin.AuthFilter</filter-class>
     </filter>
-    <filter>
-        <filter-name>loginUserFilter</filter-name>
-        <filter-class>kz.bgm.platform.web.LoginUserFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>adminFilter</filter-name>
-        <url-pattern>/main.html</url-pattern>
-        <url-pattern>/reports.html</url-pattern>
-        <url-pattern>/search.html</url-pattern>
-    </filter-mapping>
 
     <filter-mapping>
-        <filter-name>loginUserFilter</filter-name>
-        <url-pattern>/main.html</url-pattern>
-        <url-pattern>/reports.html</url-pattern>
-        <url-pattern>/search.html</url-pattern>
+        <filter-name>adminAuthFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
     </filter-mapping>
 
 
     <servlet>
-        <servlet-name>searchServletJson</servlet-name>
-        <servlet-class>kz.bgm.platform.web.api.JsonSearchServlet</servlet-class>
+        <servlet-name>adminLoginServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.LoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>adminLogout</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>adminDispatcherServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.DispatcherServlet</servlet-class>
+    </servlet>
+
+
+    <servlet>
+        <servlet-name>adminSearchServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.SearchServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>adminSearchServletJson</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.api.JsonSearchServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>adminUploadReportMobileServet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.UploadReportMobileServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>adminUploadReportPublicServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.UploadReportPublicServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>adminProcessReportServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.ProcessReportServlet</servlet-class>
+    </servlet>
+
+
+
+    <servlet-mapping>
+        <servlet-name>adminSearchServletJson</servlet-name>
+        <url-pattern>/admin/api/search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminSearchServlet</servlet-name>
+        <url-pattern>/admin/action/search</url-pattern>
+    </servlet-mapping>
+
+
+
+    <servlet-mapping>
+        <servlet-name>adminLoginServlet</servlet-name>
+        <url-pattern>/admin-logon</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminLogout</servlet-name>
+        <url-pattern>/admin/action/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>adminDispatcherServlet</servlet-name>
+        <url-pattern>/admin/view/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>adminUploadReportMobileServet</servlet-name>
+        <url-pattern>/admin/action/upload-mobile-report</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminUploadReportPublicServlet</servlet-name>
+        <url-pattern>/admin/action/upload-public-report</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminProcessReportServlet</servlet-name>
+        <url-pattern>/admin/action/report-calculator</url-pattern>
+    </servlet-mapping>
+
+
+
+    <!--================= Customer =======================-->
+
+    <filter>
+        <filter-name>customerAuthFilter</filter-name>
+        <filter-class>kz.bgm.platform.web.customer.AuthFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>customerAuthFilter</filter-name>
+        <url-pattern>/customer/*</url-pattern>
+    </filter-mapping>
+
+
+    <servlet>
+        <servlet-name>customerLoginServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.customer.action.LoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>customerDispatcher</servlet-name>
+        <servlet-class>kz.bgm.platform.web.customer.DispatcherServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>searchServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.action.SearchTrackServlet</servlet-class>
+        <servlet-class>kz.bgm.platform.web.customer.action.SearchServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>uploadReportMobileServet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.action.UploadReportMobileServlet</servlet-class>
+        <servlet-name>uploadReportMobileServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.customer.action.UploadReportMobileServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>uploadReportPublicServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.action.UploadReportPublicServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>processReportServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.action.ProcessReportServlet</servlet-class>
-    </servlet>
-
-    <servlet>
-        <servlet-name>loginServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.action.LoginCustomerServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>dispatcherServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.DispatcherServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>exitServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.action.LogoutServlet</servlet-class>
+        <servlet-name>customerLogoutServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.customer.action.LogoutServlet</servlet-class>
     </servlet>
 
 
     <servlet-mapping>
-        <servlet-name>searchServletJson</servlet-name>
-        <url-pattern>/api/search</url-pattern>
+        <servlet-name>customerLoginServlet</servlet-name>
+        <url-pattern>/customer-logon</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>customerDispatcher</servlet-name>
+        <url-pattern>/customer/view/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>searchServlet</servlet-name>
-        <url-pattern>/action/search</url-pattern>
-    </servlet-mapping>
-
-
-    <servlet-mapping>
-        <servlet-name>uploadReportMobileServet</servlet-name>
-        <url-pattern>/action/upload-mobile-report</url-pattern>
+        <url-pattern>/customer/action/search</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>uploadReportPublicServlet</servlet-name>
-        <url-pattern>/action/upload-public-report</url-pattern>
-    </servlet-mapping>
-
-
-    <servlet-mapping>
-        <servlet-name>processReportServlet</servlet-name>
-        <url-pattern>/report-calculator</url-pattern>
+        <servlet-name>uploadReportMobileServlet</servlet-name>
+        <url-pattern>/customer/action/upload-mobile-report</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>loginServlet</servlet-name>
-        <url-pattern>/authorize</url-pattern>
+        <servlet-name>customerLogoutServlet</servlet-name>
+        <url-pattern>/customer/action/logout</url-pattern>
     </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>dispatcherServlet</servlet-name>
-        <url-pattern>/view/*</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>exitServlet</servlet-name>
-        <url-pattern>/logout</url-pattern>
-    </servlet-mapping>
-
 
 </web-app>

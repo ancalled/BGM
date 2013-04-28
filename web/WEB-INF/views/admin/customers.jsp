@@ -3,25 +3,25 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
-    <script src="../../js/jquery.js"></script>
-    <script src="../../js/bootstrap.js"></script>
-    <script src="../../js/bootstrap-fileupload.js"></script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/bootstrap-fileupload.js"></script>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="../../css/bootstrap-fileupload.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" media="screen"/>
     <title>Клиенты</title>
 </head>
 <body>
 
 <div class="navbar">
     <div class="navbar-inner">
-        <a class="brand" href="/index.html">BGM Platform</a>
+        <a class="brand" href="/admin/index.html">BGM Platform</a>
         <ul class="nav">
-            <li><a href="/main.html">Главная</a></li>
-            <li><a href="/reports.html">Отчеты</a></li>
-            <li><a href="/search.html">Поиск</a></li>
-            <li class="active"><a href="/view/customers">Клиенты</a></li>
-            <li><a href="/logout">Выход</a></li>
+            <li><a href="/admin/index.html">Главная</a></li>
+            <li><a href="/admin/reports.html">Отчеты</a></li>
+            <li><a href="/admin/search.html">Поиск</a></li>
+            <li class="active"><a href="/admin/view/customers">Клиенты</a></li>
+            <li><a href="/admin/action/logout">Выход</a></li>
         </ul>
     </div>
 </div>

@@ -1,6 +1,5 @@
-package kz.bgm.platform.web;
+package kz.bgm.platform.web.customer;
 
-import kz.bgm.platform.model.domain.Admin;
 import kz.bgm.platform.model.domain.User;
 
 import javax.servlet.*;
@@ -9,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class LoginUserFilter implements Filter {
+public class AuthFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -22,8 +21,6 @@ public class LoginUserFilter implements Filter {
             throws IOException, ServletException {
 
 
-        //todo make role check and role reaction admin and all users.
-
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
@@ -31,14 +28,13 @@ public class LoginUserFilter implements Filter {
 
         if (ses != null) {
             User user = (User) ses.getAttribute("user");
-            Admin admin = (Admin) ses.getAttribute("admin");
 
-            if (user != null || admin != null) {
+            if (user != null) {
                 filterChain.doFilter(servletRequest, servletResponse);
                 return;
             }
         }
-        resp.sendRedirect("/index.html");
+        resp.sendRedirect("/customer-login.html");
     }
 
     @Override
