@@ -1,4 +1,4 @@
-package kz.bgm.platform.test;
+package kz.bgm.platform.test.lucene;
 
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
