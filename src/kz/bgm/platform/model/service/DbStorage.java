@@ -751,7 +751,7 @@ public class DbStorage implements CatalogStorage {
         report.setContentType(rs.getString("content_type"));
         report.setVol(rs.getFloat("vol"));
         report.setShareMobile(rs.getFloat("shareMobile"));
-        report.setCustomerRoyalty(rs.getFloat("customer_royalty"));
+        report.setCustomerRoyalty(rs.getFloat("royalty"));
         report.setCatalogRoyalty(rs.getFloat("cat_royalty"));
         report.setRevenue(rs.getFloat("revenue"));
         report.setCatalog(rs.getString("catalog"));

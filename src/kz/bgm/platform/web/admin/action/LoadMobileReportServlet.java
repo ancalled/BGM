@@ -36,9 +36,11 @@ public class LoadMobileReportServlet extends HttpServlet {
         String catalogName = req.getParameter("catalog");
         //todo finish gui part of calculated catalog downloading
 
-        log.info("request to build reports");
+        log.info("LoadMobileReportServlet.doPost building reports");
 
         List<CalculatedReportItem> reportsList = storage.calculatePlatformReport(catalogName);
+
+        log.info("Calculated reports built at size " + reportsList.size());
 
         ReportBuilder.buildReportExcelFile("./data/report-templates/SONY.xlsx", reportsList);
 
