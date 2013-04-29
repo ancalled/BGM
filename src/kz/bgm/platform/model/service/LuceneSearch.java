@@ -72,16 +72,63 @@ public class LuceneSearch {
         w.close();
     }
 
+    public List<String> searchBySongAndArtist
+            (String artist, String composition) throws IOException, ParseException {
+           log.info("Got query '" +
+                   artist +
+                   "' and" + " '" +
+                   composition + "'");
+
+
+           String[] fields = new String[]{"artist", "name"};
+           String[] values = new String[]{artist, composition};
+
+           Query query =
+                   MultiFieldQueryParser.parse(Version.LUCENE_41, values, fields, analyzer);
+
+           TopScoreDocCollector collector = TopScoreDocCollector.create(RESULT_SIZE, true);
+           searcher.search(query, collector);
+
+           int totalHits = collector.getTotalHits();
+           TopDocs topDocs = collector.topDocs();
+
+           float maxScore = topDocs.getMaxScore();
+
+           ScoreDoc[] hits = topDocs.scoreDocs;
+
+           List<String> idList = new ArrayList<String>();
+
+           log.info("Found " + totalHits + " tracks id.");
+
+           for (ScoreDoc hit : hits) {
+               if (hit.score < 7) {
+                   continue;
+               }
+
+               int docId = hit.doc;
+               Document d = searcher.doc(docId);
+               String baseId = d.get("id");
+               idList.add(baseId);
+           }
+           return idList;
+       }
 
     public List<Long> search(String artist, String composition) throws IOException, ParseException {
 
         log.info("Got query '" + artist + "' and" + " '" + composition + "'");
 
+        artist = artist.replaceAll("[\\W]", " ");
+        composition = composition.replaceAll("[\\W]", " ");
+
         String[] fields = new String[]{"artist", "name"};
         String[] values = new String[]{artist, composition};
-        Query query = MultiFieldQueryParser.parse(Version.LUCENE_41, values, fields, analyzer);
+        Query query;
+        List<Long> result = new ArrayList<>();
+        try {
+            query = MultiFieldQueryParser.parse(Version.LUCENE_41, values, fields, analyzer);
 
-//        BooleanQuery query = new BooleanQuery();
+
+//        BooleanQuery  query = new BooleanQuery();
 //        query.add(new TermQuery(new Term("name", composition)), BooleanClause.Occur.MUST);
 //        query.add(new TermQuery(new Term("artist", artist.toLowerCase())), BooleanClause.Occur.MUST);
 
@@ -89,23 +136,27 @@ public class LuceneSearch {
 //        query.add(new FuzzyQuery(new Term("artist", artist)), BooleanClause.Occur.SHOULD);
 
 
+            TopDocs hits = searcher.search(query, 100);
 
-        TopDocs hits = searcher.search(query, 100);
 
-        List<Long> result = new ArrayList<>();
+            System.out.println("Hits: " + hits.totalHits);
 
-        System.out.println("Hits: " + hits.totalHits);
+            for (ScoreDoc hit : hits.scoreDocs) {
+                if (hit.score < THRESHOLD) {
+                    continue;
+                }
 
-        for (ScoreDoc hit : hits.scoreDocs) {
-            if (hit.score < THRESHOLD) {
-                continue;
+                Document d = searcher.doc(hit.doc);
+                if (d != null) {
+                    IndexableField field = d.getField("id");
+                    if (field != null && field.numericValue() != null) {
+                        result.add(field.numericValue().longValue());
+                        System.out.println(hit.score + "\t" + d.get("artist") + ": " + d.get("name"));
+                    }
+                }
             }
-
-            Document d = searcher.doc(hit.doc);
-            result.add(d.getField("id").numericValue().longValue());
-
-            System.out.println(hit.score + "\t" + d.get("artist") + ": " + d.get("name"));
-
+        } catch (ParseException pe) {
+            pe.printStackTrace();
         }
 
 
@@ -120,7 +171,6 @@ public class LuceneSearch {
 
     public List<Long> search(String queryString, int start, int length) throws IOException, ParseException {
         log.info("Got query '" + queryString + "'");
-
 
         String[] fields = new String[]{"artist", "name", "composer"};
         QueryParser queryParser =

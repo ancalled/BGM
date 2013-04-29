@@ -148,8 +148,6 @@ public class DispatcherServlet extends HttpServlet {
 
 
     public static interface Action {
-
-
         String execute(HttpServletRequest req, HttpServletResponse resp);
 
     }

@@ -669,7 +669,7 @@ public class DbStorage implements CatalogStorage {
                         "    ON (i.composition_id = c.id)\n" +
                         "\n" +
                         "  LEFT JOIN catalog cat\n" +
-                        "    ON (cat.id = c.catalog_id and cat.name='" + catalogName + "')\n" +
+                        "    ON (cat.id = c.catalog_id)\n" +
                         "\n" +
                         "  LEFT JOIN platform p\n" +
                         "    ON (cat.platform_id = p.id)\n" +
@@ -678,18 +678,20 @@ public class DbStorage implements CatalogStorage {
                         "    ON (i.report_id = r.id)\n" +
                         "\n" +
                         "\n" +
-                        "WHERE cat.platform_id = 1\n" +
+                        "WHERE\n" +
+                        "  cat.platform_id = 1\n" +
                         "      AND r.type = 1\n" +
-                        "      AND r.start_date BETWEEN '2013-01-01' AND '2013-04-01'\n" +
                         "      AND cat.copyright = 'AUTHOR'\n" +
-                        "      AND i.composition_id > 0");
+                        "      AND i.composition_id > 0\n" +
+                        "\n" +
+                        "GROUP BY i.composition_id\n;");
 
                 ResultSet rs = ps.executeQuery();
 
-                List<CalculatedReportItem> result = new ArrayList<CalculatedReportItem>();
+                List<CalculatedReportItem> result = new ArrayList<>();
 
                 while (rs.next()) {
-                    result.add(parseCalculatedReport(rs));
+                    result.add(parseCalculatedPublicReport(rs));
                 }
 
                 return result;
@@ -812,6 +814,21 @@ public class DbStorage implements CatalogStorage {
         report.setRevenue(rs.getFloat("revenue"));
         report.setCatalog(rs.getString("catalog"));
         report.setCopyright(rs.getString("copyright"));
+        return report;
+    }
+
+    private static CalculatedReportItem parseCalculatedPublicReport(ResultSet rs) throws SQLException {
+
+        CalculatedReportItem report = new CalculatedReportItem();
+        report.setReportItemId(rs.getLong("id"));
+        report.setCompositionCode(rs.getString("code"));
+        report.setCompositionName(rs.getString("name"));
+        report.setArtist(rs.getString("artist"));
+        report.setQty(rs.getInt("totalQty"));
+        String catalog = rs.getString("catalog");
+        System.out.println("Catalog is " + catalog);
+        report.setCatalog(catalog);
+        report.setSharePublic(rs.getFloat("sharePublic"));
         return report;
     }
 
