@@ -1,6 +1,5 @@
 package kz.bgm.platform.web.admin.action;
 
-
 import kz.bgm.platform.model.domain.CalculatedReportItem;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
@@ -14,10 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class LoadMobileReportServlet extends HttpServlet {
+public class LoadPublicReportServlet extends HttpServlet {
 
-    private static final Logger log = Logger.getLogger(LoadMobileReportServlet.class);
-    public static final String MOBILE_SONY_ATV_TEMPLATE = "./data/report-templates/sony-atv.xlsx";
+
+    private static final Logger log = Logger.getLogger(LoadPublicReportServlet.class);
+    public static final String PUBLIC_TEMPLATE = "./data/report-templates/public.xlsx";
     private CatalogStorage storage;
 
     @Override
@@ -37,13 +37,13 @@ public class LoadMobileReportServlet extends HttpServlet {
         String catalogName = req.getParameter("catalog");
         //todo finish gui part of calculated catalog downloading
 
-        log.info("LoadMobileReportServlet.doPost building reports");
+        log.info("LoadPublicReportServlet.doPost building reports");
 
-        List<CalculatedReportItem> reportsList = storage.calculateMobileReport(catalogName);
+        List<CalculatedReportItem> reportsList = storage.calculatePublicReport(catalogName);
 
         log.info("Calculated reports built at size " + reportsList.size());
 
-        ReportBuilder.buildReportExcelFile(MOBILE_SONY_ATV_TEMPLATE, reportsList);
+        ReportBuilder.buildReportExcelFile(PUBLIC_TEMPLATE, reportsList);
 
         req.setAttribute("reports", reportsList);
 
@@ -55,3 +55,5 @@ public class LoadMobileReportServlet extends HttpServlet {
 
 
 }
+
+
