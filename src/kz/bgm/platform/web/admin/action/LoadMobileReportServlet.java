@@ -38,7 +38,7 @@ public class LoadMobileReportServlet extends HttpServlet {
 
         log.info("LoadMobileReportServlet.doPost building reports");
 
-        List<CalculatedReportItem> reportsList = storage.calculatePlatformReport(catalogName);
+        List<CalculatedReportItem> reportsList = storage.calculateMobileReport(catalogName);
 
         log.info("Calculated reports built at size " + reportsList.size());
 

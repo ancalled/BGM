@@ -145,20 +145,26 @@
                 </div>
                 <div class="row text-left">
 
-                    <form action="/admin/action/report-calculator" method="post">
+                    <select id="type-report-change">
+                        <option value="1">Публичный</option>
+                        <option value="2">Мобильный</option>
+                    </select>
 
-                       <select name="catalog" id="catalog">
-                           <label for="catalog">Каталог</label>
-                           <option value="WCh">WCh</option>
-                           <option value="NMI_WEST">NMI_WEST</option>
-                           <option value="NMI">NMI</option>
-                           <option value="PMI_WEST">PMI_WEST</option>
-                           <option value="PMI">PMI</option>
-                           <option value="NMI related">NMI related</option>
-                           <option value="PMI related">PMI related</option>
-                           <option value="Sony ATV">Sony ATV</option>
-                           <option value="MSG_MCS">MSG_MCS</option>
-                       </select>
+                    <form action="/admin/action/load-mobile-reports" id="report-load-form" method="post">
+
+
+                        <select name="catalog" id="catalog">
+                            <label for="catalog">Каталог</label>
+                            <option value="WCh">WCh</option>
+                            <option value="NMI_WEST">NMI_WEST</option>
+                            <option value="NMI">NMI</option>
+                            <option value="PMI_WEST">PMI_WEST</option>
+                            <option value="PMI">PMI</option>
+                            <option value="NMI related">NMI related</option>
+                            <option value="PMI related">PMI related</option>
+                            <option value="Sony ATV">Sony ATV</option>
+                            <option value="MSG_MCS">MSG_MCS</option>
+                        </select>
 
                         <div class="row-fluid">
                             <input class="btn" type="submit" value="Загрузить отчеты">
@@ -171,7 +177,7 @@
             <div class="container text-center">
                 <div class="row text-left">
                     <legend>
-                       Список всех клиентских отчетов
+                        Список всех клиентских отчетов
                     </legend>
                 </div>
                 <div class="row text-left">
@@ -191,6 +197,18 @@
 
 
 <script type="text/javascript">
+
+    $('#type-report-change').change(function () {
+        var v = $(this).val();
+        if (v == 1) {
+            $("#report-load-form").attr("action", "/admin/action/load-public-reports");
+        }
+        else if (v == 2) {
+            $("#report-load-form").attr("action", "/admin/action/load-mobile-reports");
+        }
+    });
+
+
     $(function () {
         $('#date').datetimepicker({
             pickTime: true
@@ -206,12 +224,12 @@
         console.log(e.localDate.toString());
     });
 
-</script>
 
-<script>
     $(function () {
         $('#report-tab a:last').tab('show');
     })
+
+
 </script>
 
 </body>

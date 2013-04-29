@@ -55,7 +55,10 @@
         <servlet-name>adminProcessReportServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.LoadMobileReportServlet</servlet-class>
     </servlet>
-
+    <servlet>
+        <servlet-name>adminLoadPublicReport</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.LoadPublicReportServlet</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -93,7 +96,12 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>adminProcessReportServlet</servlet-name>
-        <url-pattern>/admin/action/report-calculator</url-pattern>
+        <url-pattern>/admin/action/load-mobile-reports</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>adminLoadPublicReport</servlet-name>
+        <url-pattern>/admin/action/load-public-reports</url-pattern>
     </servlet-mapping>
 
 
@@ -132,6 +140,7 @@
         <servlet-name>customerLogoutServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.customer.action.LogoutServlet</servlet-class>
     </servlet>
+
 
 
     <servlet-mapping>

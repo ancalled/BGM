@@ -574,7 +574,7 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
-    public List<CalculatedReportItem> calculatePlatformReport(final String catalogName) {
+    public List<CalculatedReportItem> calculateMobileReport(final String catalogName) {
 
         if (catalogName == null) return null;
 
@@ -610,7 +610,7 @@ public class DbStorage implements CatalogStorage {
                         "    ON (i.composition_id = c.id)\n" +
                         "\n" +
                         "  LEFT JOIN catalog cat\n" +
-                        "    ON (cat.id = c.catalog_id and cat.name='"+catalogName+"')\n" +
+                        "    ON (cat.id = c.catalog_id and cat.name='" + catalogName + "')\n" +
                         "\n" +
                         "  LEFT JOIN platform p\n" +
                         "    ON (cat.platform_id = p.id)\n" +
@@ -641,8 +641,64 @@ public class DbStorage implements CatalogStorage {
 
     }
 
+    @Override
+    public List<CalculatedReportItem> calculatePublicReport(final String catalogName) {
+        if (catalogName == null) return null;
 
-//    ----------------------------------------------------------------------------------------
+        return query(new Action<List<CalculatedReportItem>>() {
+            @Override
+            public List<CalculatedReportItem> execute(Connection con) throws SQLException {
+
+                PreparedStatement ps = con.prepareStatement("SELECT\n" +
+                        "  i.id,\n" +
+                        "  c.code,\n" +
+                        "  replace(c.name, CHAR(9), ' ') name,\n" +
+                        "  replace(c.artist, CHAR(9), ' ') artist,\n" +
+                        "  replace(c.composer, CHAR(9), ' ') composer,\n" +
+                        "  cat.copyright copyright,\n" +
+                        "  p.name platform,\n" +
+                        "  cat.name catalog,\n" +
+                        "\n" +
+                        "  c.sharePublic,\n" +
+                        "  cat.royalty cat_royalty,\n" +
+                        "  sum(qty) totalQty\n" +
+                        "\n" +
+                        "FROM customer_report_item i\n" +
+                        "\n" +
+                        "  LEFT JOIN composition c\n" +
+                        "    ON (i.composition_id = c.id)\n" +
+                        "\n" +
+                        "  LEFT JOIN catalog cat\n" +
+                        "    ON (cat.id = c.catalog_id and cat.name='" + catalogName + "')\n" +
+                        "\n" +
+                        "  LEFT JOIN platform p\n" +
+                        "    ON (cat.platform_id = p.id)\n" +
+                        "\n" +
+                        "  LEFT JOIN customer_report r\n" +
+                        "    ON (i.report_id = r.id)\n" +
+                        "\n" +
+                        "\n" +
+                        "WHERE cat.platform_id = 1\n" +
+                        "      AND r.type = 1\n" +
+                        "      AND r.start_date BETWEEN '2013-01-01' AND '2013-04-01'\n" +
+                        "      AND cat.copyright = 'AUTHOR'\n" +
+                        "      AND i.composition_id > 0");
+
+                ResultSet rs = ps.executeQuery();
+
+                List<CalculatedReportItem> result = new ArrayList<CalculatedReportItem>();
+
+                while (rs.next()) {
+                    result.add(parseCalculatedReport(rs));
+                }
+
+                return result;
+            }
+        });
+
+    }
+
+    //    ----------------------------------------------------------------------------------------
 
 
     private static Platform parsePlatform(ResultSet rs) throws SQLException {

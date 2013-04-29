@@ -32,6 +32,7 @@ public class ReportBuilder {
     private static final String REVENUE = "{revenue}";
     private static final String CATALOG = "{catalog}";
     private static final String COPYRIGHT = "{copyright}";
+    private static final String SHARE_PUBLIC = "{sharePublic}";
 
     private static List<String> fieldList = new ArrayList<String>();
 
@@ -50,15 +51,16 @@ public class ReportBuilder {
         fieldList.add(REVENUE);
         fieldList.add(CATALOG);
         fieldList.add(COPYRIGHT);
+        fieldList.add(SHARE_PUBLIC);
     }
 
 
-    public static void buildReportExcelFile(String filePath,
+    public static void buildReportExcelFile(String templFilePath,
                                             List<CalculatedReportItem> finishReps) {
         try {
-            log.info("Making Excel file report from file: " + filePath);
+            log.info("Making Excel file report from file: " + templFilePath);
 
-            File reportBlank = new File(filePath);
+            File reportBlank = new File(templFilePath);
             Workbook wb = ExcelUtils.openFile(reportBlank);
             Sheet sheet = wb.getSheetAt(1);
             log.info("Parsing sheet '" + sheet.getSheetName() + "'");
@@ -85,10 +87,7 @@ public class ReportBuilder {
             ExcelUtils.saveFile(wb, fileName);
 
             log.info("saved");
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.error(e.getMessage());
-        } catch (InvalidFormatException e) {
+        } catch (IOException | InvalidFormatException e) {
             e.printStackTrace();
             log.error(e.getMessage());
         }
@@ -124,6 +123,7 @@ public class ReportBuilder {
             for (String fieldName : fieldMap.keySet()) {
                 field = fieldName.replaceAll("}", "");
                 field = field.replaceAll("\\{", "");
+
                 int colIdx = 0;
                 Type type = null;
                 Object val = null;
@@ -144,97 +144,12 @@ public class ReportBuilder {
                         break;
                     }
                 }
-
             }
-
 
         } catch (Exception e) {
             e.printStackTrace();
 
         }
-
-
-//        if (fieldMap.containsKey(COMPOSITION_CODE)) {
-//            int codeIdx = fieldMap.get(COMPOSITION_CODE);
-//            String code = report.getCompositionCode();
-//            ExcelUtils.setValue(sheet, code, rowIdx, codeIdx);
-//        }
-//        if (fieldMap.containsKey(COMPOSITION_NAME)) {
-//            int nameIdx = fieldMap.get(COMPOSITION_NAME);
-//            String name = report.getCompositionName();
-//            ExcelUtils.setValue(sheet, name, rowIdx, nameIdx);
-//        }
-//        if (fieldMap.containsKey(ARTIST)) {
-//            int artistIdx = fieldMap.get(ARTIST);
-//            String artist = report.getArtist();
-//            ExcelUtils.setValue(sheet, artist, rowIdx, artistIdx);
-//        }
-//        if (fieldMap.containsKey(COMPOSER)) {
-//            int composerIdx = fieldMap.get(COMPOSER);
-//            String composer = report.getComposer();
-//            ExcelUtils.setValue(sheet, composer, rowIdx, composerIdx);
-//        }
-//
-//        if (fieldMap.containsKey(CONTENT_TYPE)) {
-//            int contentIdx = fieldMap.get(CONTENT_TYPE);
-//            String content = report.getContentType();
-//            ExcelUtils.setValue(sheet, content, rowIdx, contentIdx);
-//        }
-//
-//        if (fieldMap.containsKey(PRICE)) {
-//            int priceIdx = fieldMap.get(PRICE);
-//            String price = Float.toString(report.getPrice());
-//            ExcelUtils.setValue(sheet, price, rowIdx, priceIdx);
-//        }
-//
-//        if (fieldMap.containsKey(QTY_SUM)) {
-//            int qtySumIdx = fieldMap.get(QTY_SUM);
-//            String qty = Float.toString(report.getQty());
-//            ExcelUtils.setValue(sheet, qty, rowIdx, qtySumIdx);
-//        }
-//
-//        if (fieldMap.containsKey(VOL)) {
-//            int volIdx = fieldMap.get(VOL);
-//            String vol = Float.toString(report.getVol());
-//            ExcelUtils.setValue(sheet, vol, rowIdx, volIdx);
-//        }
-//
-//        if (fieldMap.containsKey(SHARE_MOBILE)) {
-//            int mobIdx = fieldMap.get(SHARE_MOBILE);
-//            String mobile = Float.toString(report.getShareMobile());
-//            ExcelUtils.setValue(sheet, mobile, rowIdx, mobIdx);
-//        }
-//
-//        if (fieldMap.containsKey(CUSTOMER_ROYALTY)) {
-//            int royalIdx = fieldMap.get(CUSTOMER_ROYALTY);
-//            String royal = Float.toString(report.getCustomerRoyalty());
-//            ExcelUtils.setValue(sheet, royal, rowIdx, royalIdx);
-//        }
-//
-//        if (fieldMap.containsKey(CATALOG_ROYALTY)) {
-//            int catIdx = fieldMap.get(CATALOG_ROYALTY);
-//            String catRoy = Float.toString(report.getCatalogRoyalty());
-//            ExcelUtils.setValue(sheet, catRoy, rowIdx, catIdx);
-//        }
-//
-//
-//        if (fieldMap.containsKey(REVENUE)) {
-//            int revenIdx = fieldMap.get(REVENUE);
-//            String revenue = Float.toString(report.getRevenue());
-//            ExcelUtils.setValue(sheet, revenue, rowIdx, revenIdx);
-//        }
-//
-//        if (fieldMap.containsKey(CATALOG)) {
-//            int catalogIdx = fieldMap.get(CATALOG);
-//            String cat = report.getCatalog();
-//            ExcelUtils.setValue(sheet, cat, rowIdx, catalogIdx);
-//        }
-//
-//        if (fieldMap.containsKey(COPYRIGHT)) {
-//            int copyIdx = fieldMap.get(COPYRIGHT);
-//            String copy = report.getCopyright();
-//            ExcelUtils.setValue(sheet, copy, rowIdx, copyIdx);
-//        }
     }
 
 
@@ -260,10 +175,12 @@ public class ReportBuilder {
             for (int c = 0; c < 100; c++) {
                 String val = ExcelUtils.getCellVal(row, c);
                 String result = getIfEquals(field, val);
-
+                //todo make values like massive for many column indexes
                 if (result != null) {
                     ExcelUtils.clearCell(row, c);
-                    columnMap.put(result, c);
+                    if (!columnMap.containsKey(result)) {
+                        columnMap.put(result, c);
+                    }
                 }
             }
         }
