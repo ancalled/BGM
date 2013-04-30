@@ -21,7 +21,7 @@ INSERT INTO composition (catalog_id, code, name, artist, composer, shareMobile, 
 INSERT INTO composition (catalog_id, code, name, artist, composer, shareMobile, sharePublic) VALUES (8, '1107996', 'All My Bells Are Ringing', 'alice smith', 'Kripac', 100.0, 100.0);
 
 
-INSERT INTO customer (id, name, right_type, royalty) VALUES (1, 'GSM Techologies', 'copyright', 12.5);
+INSERT INTO customer (id, name, right_type, royalty) VALUES (1, 'GSMTech Management', 'copyright', 12.5);
 
 INSERT INTO user(id, login, password, customer_id) VALUES (1, 'gsmuser', '123', 1);
 

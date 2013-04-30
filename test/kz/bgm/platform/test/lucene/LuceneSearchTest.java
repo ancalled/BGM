@@ -25,11 +25,11 @@ public class LuceneSearchTest {
         luceneSearch = LuceneSearch.getInstance();
         String indexDir = "./out/test_index";
 
-//        Files.deleteIfExists(Paths.get(indexDir));
-//
-//        List<Track> tracks = loadTracks("./data/test-tracks.tsv");
-//
-//        luceneSearch.index(tracks, indexDir);
+        Files.deleteIfExists(Paths.get(indexDir));
+
+        List<Track> tracks = loadTracks("./data/test-tracks.tsv");
+
+        luceneSearch.index(tracks, indexDir);
         luceneSearch.initSearcher(indexDir);
 
     }

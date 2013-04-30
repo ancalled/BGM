@@ -10,8 +10,11 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MoskvafmParser {
+
+
 
     public static List<String> parseStations() throws IOException {
         List<String> names = new ArrayList<String>();
@@ -31,16 +34,23 @@ public class MoskvafmParser {
     }
 
 
-    public static List<String> parseStationHits(String station) throws IOException {
-        List<String> songs = new ArrayList<String>();
+    public static List<Song> parseStationHits(String station) throws IOException {
+        List<Song> songs = new ArrayList<>();
         String urlTempl = "http://www.moskva.fm/stations/%station%/top100";
         String url = urlTempl.replace("%station%", station);
         Document doc = Jsoup.connect(url).get();
         Elements els = doc.select("ul.msk-colorlist-charts > li");
+        int place = 1;
         for (Element e : els) {
             String artist = getText(e, "span.artist");
-            String song = getText(e, "span.song");
-            songs.add(artist + ": " + song);
+            String track = getText(e, "span.song");
+            Song song = new Song();
+
+            song.setArtist(artist);
+            song.setTrack(track);
+            song.setStation(station);
+            song.setPlace(place++);
+            songs.add(song);
         }
         return songs;
     }
@@ -72,7 +82,7 @@ public class MoskvafmParser {
     public static List<ReportItem> parseReport(String filename) throws IOException {
 
         String[] lines = FileUtils.readByLines(filename);
-        List<ReportItem> result = new ArrayList<ReportItem>();
+        List<ReportItem> result = new ArrayList<>();
         for (String line : lines) {
             String[] splitted = line.split(": ");
             String author = splitted[0].trim();
@@ -88,12 +98,12 @@ public class MoskvafmParser {
 
 
     public static void harvestData() throws IOException {
-        List<String> result = new ArrayList<String>();
+        List<Song> result = new ArrayList<>();
 
         List<String> names = parseStations();
         for (String name : names) {
-            List<String> songs = parseStationHits(name);
-            for (String song : songs) {
+            List<Song> songs = parseStationHits(name);
+            for (Song song : songs) {
                 if (!result.contains(song)) {
                     result.add(song);
                 }
@@ -101,23 +111,75 @@ public class MoskvafmParser {
         }
     }
 
+    public static class Song {
+        private String track;
+        private String artist;
+        private String station;
+        private int place;
+
+        public String getTrack() {
+            return track;
+        }
+
+        public void setTrack(String track) {
+            this.track = track;
+        }
+
+        public String getArtist() {
+            return artist;
+        }
+
+        public void setArtist(String artist) {
+            this.artist = artist;
+        }
+
+        public String getStation() {
+            return station;
+        }
+
+        public void setStation(String station) {
+            this.station = station;
+        }
+
+        public int getPlace() {
+            return place;
+        }
+
+        public void setPlace(int place) {
+            this.place = place;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj == null || !(obj instanceof Song)) return false;
+            Song song = (Song) obj;
+
+            return song.getArtist().equalsIgnoreCase(artist) &&
+                    song.getTrack().equalsIgnoreCase(track);
+        }
+    }
+
     public static void main(String[] args) throws IOException {
 //        parseHits();
 
-        List<String> result = new ArrayList<String>();
+        List<Song> result = new ArrayList<>();
 
         List<String> names = parseStations();
         for (String name : names) {
-            List<String> songs = parseStationHits(name);
-            for (String song : songs) {
+            List<Song> songs = parseStationHits(name);
+            for (Song song : songs) {
                 if (!result.contains(song)) {
                     result.add(song);
                 }
             }
         }
 
-        for (String song : result) {
-            System.out.println(song);
+        Random r = new Random(System.currentTimeMillis());
+
+        for (Song song : result) {
+
+            int qty = (100 / song.getPlace()) * r.nextInt(10);
+            System.out.println(song.getArtist() + "|" + song.getTrack() + "|" + qty);
         }
 
     }

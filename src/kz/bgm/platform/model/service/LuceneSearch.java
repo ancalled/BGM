@@ -28,6 +28,7 @@ public class LuceneSearch {
 
     public static final int RESULT_SIZE = 100000;
     public static final double THRESHOLD = 6.5;
+    public static final int LIMIT = 100;
 
     private StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_41);
     private IndexSearcher searcher;
@@ -73,7 +74,13 @@ public class LuceneSearch {
     }
 
 
-    public List<Long> search(String artist, String composition) throws IOException, ParseException {
+    public List<Long> search(String artist, String composition)
+            throws IOException, ParseException  {
+        return search(artist, composition, LIMIT, THRESHOLD);
+    }
+
+    public List<Long> search(String artist, String composition, int limit, double threshold)
+            throws IOException, ParseException {
 
         log.info("Got query '" + artist + "' and" + " '" + composition + "'");
 
@@ -89,25 +96,22 @@ public class LuceneSearch {
 //        query.add(new FuzzyQuery(new Term("artist", artist)), BooleanClause.Occur.SHOULD);
 
 
-
-        TopDocs hits = searcher.search(query, 100);
+        TopDocs hits = searcher.search(query, limit);
 
         List<Long> result = new ArrayList<>();
 
         System.out.println("Hits: " + hits.totalHits);
 
         for (ScoreDoc hit : hits.scoreDocs) {
-            if (hit.score < THRESHOLD) {
+            if (hit.score < threshold) {
                 continue;
             }
 
             Document d = searcher.doc(hit.doc);
             result.add(d.getField("id").numericValue().longValue());
 
-            System.out.println(hit.score + "\t" + d.get("artist") + ": " + d.get("name"));
-
+//            System.out.println(hit.score + "\t" + d.get("artist") + ": " + d.get("name"));
         }
-
 
         return result;
     }
@@ -156,12 +160,69 @@ public class LuceneSearch {
     }
 
 
+    public List<SearchResult> searchWithResult(String artist, String composition, int limit, double threshold)
+            throws IOException, ParseException {
+
+        log.info("Got query '" + artist + "' and" + " '" + composition + "'");
+
+        String[] fields = new String[]{"artist", "name"};
+        String[] values = new String[]{artist, composition};
+        Query query = MultiFieldQueryParser.parse(Version.LUCENE_41, values, fields, analyzer);
+
+//        BooleanQuery query = new BooleanQuery();
+//        query.add(new TermQuery(new Term("name", composition)), BooleanClause.Occur.MUST);
+//        query.add(new TermQuery(new Term("artist", artist.toLowerCase())), BooleanClause.Occur.MUST);
+
+//        query.add(new FuzzyQuery(new Term("name", composition)), BooleanClause.Occur.SHOULD);
+//        query.add(new FuzzyQuery(new Term("artist", artist)), BooleanClause.Occur.SHOULD);
+
+
+        TopDocs hits = searcher.search(query, limit);
+
+        List<SearchResult> result = new ArrayList<>();
+
+        System.out.println("Hits: " + hits.totalHits);
+
+        for (ScoreDoc hit : hits.scoreDocs) {
+            if (hit.score < threshold) {
+                continue;
+            }
+
+            Document d = searcher.doc(hit.doc);
+            long id = Long.parseLong(d.get("id"));
+            result.add(new SearchResult(id, hit.score));
+
+//            System.out.println(hit.score + "\t" + d.get("artist") + ": " + d.get("name"));
+        }
+
+        return result;
+    }
+
+
+
     private static final LuceneSearch INSTANCE = new LuceneSearch();
 
     public static LuceneSearch getInstance() {
         return INSTANCE;
     }
 
+    public static class SearchResult {
+        private final long id;
+        private final float score;
+
+        public SearchResult(long id, float score) {
+            this.id = id;
+            this.score = score;
+        }
+
+        public long getId() {
+            return id;
+        }
+
+        public float getScore() {
+            return score;
+        }
+    }
 
 }
 

@@ -82,7 +82,8 @@ FROM customer_report_item i
     ON (i.report_id = r.id)
 
 
-WHERE cat.platform_id = 1
+WHERE
+    cat.platform_id = 1
       AND r.type = 1
       AND r.start_date BETWEEN '2013-01-01' AND '2013-04-01'
       AND cat.copyright = 'AUTHOR'
