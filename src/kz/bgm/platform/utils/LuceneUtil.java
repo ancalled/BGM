@@ -89,10 +89,7 @@ public class LuceneUtil {
         String artist = splitted[0];
         String track = splitted[1];
 
-        System.out.println("Query:"
-                + "\n\tartist: '" + artist + "'"
-                + "\n\ttrack: '" + track + "'"
-        );
+        System.out.println("Queried artist: '" + artist + "'" + ", track: '" + track + "'");
 
         LuceneUtil util = new LuceneUtil();
         util.search(artist, track);
