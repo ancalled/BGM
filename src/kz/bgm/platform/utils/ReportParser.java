@@ -78,7 +78,6 @@ public class ReportParser {
             Row row = sheet.getRow(i);
 
             CustomerReportItem item = new CustomerReportItem();
-
             String artist = ExcelUtils.getCellVal(row, 0);
             String name = ExcelUtils.getCellVal(row, 1);
             String qrtStr = ExcelUtils.getCellVal(row, 2);

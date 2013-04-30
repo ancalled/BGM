@@ -51,16 +51,19 @@ public class UploadReportPublicServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            String dateParam = req.getParameter("dt");
-            Date reportDate = dateParam != null ? FORMAT.parse(dateParam) : new Date();
+//            String dateParam = req.getParameter("dt");
+//            Date reportDate = dateParam != null ? FORMAT.parse(dateParam) : new Date();
 
-            String periodParam = req.getParameter("per");
-            int per = periodParam != null ? Integer.parseInt(periodParam) : 0;
-            CustomerReport.Period period = periodParam != null ?
-                    CustomerReport.Period.values()[per] :
-                    CustomerReport.Period.MONTH;
+            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+            Date reportDate = format.parse("2012/01/01");
 
+//            String periodParam = req.getParameter("per");
+//            int per = periodParam != null ? Integer.parseInt(periodParam) : 0;
+//            CustomerReport.Period period = periodParam != null ?
+//                    CustomerReport.Period.values()[per] :
+//                    CustomerReport.Period.MONTH;
 
+            CustomerReport.Period period = CustomerReport.Period.MONTH;
             List<FileItem> files = fileUploader.parseRequest(req);
 
             if (files == null) {
@@ -69,7 +72,7 @@ public class UploadReportPublicServlet extends HttpServlet {
             }
 
 
-            List<CustomerReportItem> allItems = new ArrayList<CustomerReportItem>();
+            List<CustomerReportItem> allItems = new ArrayList<>();
             for (FileItem item : files) {
 
                 String reportFile = REPORTS_HOME + "/" + item.getName();
@@ -103,6 +106,8 @@ public class UploadReportPublicServlet extends HttpServlet {
                     detected++;
                 }
             }
+            log.info("composition detected " + detected);
+
             report.setDetected(detected);
 
             catalogService.saveCustomerReportItems(allItems);

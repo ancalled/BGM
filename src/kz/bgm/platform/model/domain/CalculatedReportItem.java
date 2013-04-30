@@ -12,6 +12,7 @@ public class CalculatedReportItem {
     private int qty = 0;
     private float vol = 0f;
     private float shareMobile = 0f;
+    private float sharePublic = 0f;
     private float customerRoyalty = 0f;
     private float catalogRoyalty = 0f;
     private float revenue = 0f;
@@ -19,7 +20,13 @@ public class CalculatedReportItem {
     private String copyright = "";
 
 
+    public void setSharePublic(float sharePublic) {
+        this.sharePublic = sharePublic;
+    }
 
+    public float getSharePublic() {
+        return sharePublic;
+    }
 
     public CalculatedReportItem() {
     }

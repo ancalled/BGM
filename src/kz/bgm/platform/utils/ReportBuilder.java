@@ -62,7 +62,7 @@ public class ReportBuilder {
 
             File reportBlank = new File(templFilePath);
             Workbook wb = ExcelUtils.openFile(reportBlank);
-            Sheet sheet = wb.getSheetAt(1);
+            Sheet sheet = wb.getSheetAt(0);
             log.info("Parsing sheet '" + sheet.getSheetName() + "'");
 
             Map<String, Integer> fieldsMap = new HashMap<String, Integer>();
@@ -128,21 +128,29 @@ public class ReportBuilder {
                 Type type = null;
                 Object val = null;
 
+
                 for (Method m : fields) {
                     String methodName = m.getName().toLowerCase();
+
+//                    System.out.println("Comparing method name " + methodName + " with field" + field);
+
+
                     if (methodName.contains(field.toLowerCase())) {
+//                        System.out.println("true");
                         type = m.getGenericReturnType();
                         val = m.invoke(report);
                         colIdx = fieldMap.get(fieldName);
-                    }
-                    if (colIdx != 0) {
+
                         ExcelUtils.setValue(sheet,
                                 val,
                                 type,
                                 rowIdx,
                                 colIdx);
-                        break;
                     }
+//                    else {
+//                        System.out.println("false");
+//                    }
+
                 }
             }
 
