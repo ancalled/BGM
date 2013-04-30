@@ -1,7 +1,6 @@
 package kz.bgm.platform.utils;
 
 
-import kz.bgm.platform.BgmServer;
 import kz.bgm.platform.model.domain.Track;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
@@ -10,11 +9,19 @@ import org.apache.lucene.queryparser.classic.ParseException;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 public class LuceneUtil {
+
+    public static final String APP_DIR = System.getProperty("user.dir");
+    public static final String INDEX_DIR = APP_DIR + "/lucen-indexes";
+
+    public static final String BASE_NAME = "base.name";
+    public static final String BASE_LOGIN = "base.login";
+    public static final String BASE_PASS = "base.pass";
+    public static final String BASE_HOST = "base.host";
+    public static final String BASE_PORT = "base.port";
 
 
     private final CatalogStorage catalogStorage;
@@ -30,14 +37,14 @@ public class LuceneUtil {
 
         catalogStorage = CatalogFactory.getStorage();
         luceneSearch = LuceneSearch.getInstance();
-        luceneSearch.initSearcher(BgmServer.INDEX_DIR);
+        luceneSearch.initSearcher(INDEX_DIR);
     }
 
 
     public void search(String artist, String track) throws IOException, ParseException {
         List<LuceneSearch.SearchResult> res = luceneSearch.searchWithResult(artist, track, 100, 3.0);
 
-        for (LuceneSearch.SearchResult r: res) {
+        for (LuceneSearch.SearchResult r : res) {
             System.out.println("[" + r.getScore() + "] id: " + r.getId());
             Track t = catalogStorage.getTrack(r.getId());
             if (t != null) {
@@ -58,17 +65,15 @@ public class LuceneUtil {
         Properties props = new Properties();
         props.load(new FileInputStream(propsFile));
 
-        String dbHost = props.getProperty(BgmServer.BASE_HOST);
-        String dbPort = props.getProperty(BgmServer.BASE_PORT);
-        String dbName = props.getProperty(BgmServer.BASE_NAME);
-        String dbLogin = props.getProperty(BgmServer.BASE_LOGIN);
-        String dbPass = props.getProperty(BgmServer.BASE_PASS);
+        String dbHost = props.getProperty(BASE_HOST);
+        String dbPort = props.getProperty(BASE_PORT);
+        String dbName = props.getProperty(BASE_NAME);
+        String dbLogin = props.getProperty(BASE_LOGIN);
+        String dbPass = props.getProperty(BASE_PASS);
 
         System.out.println("Initializing data storage...");
         CatalogFactory.initDBStorage(dbHost, dbPort, dbName, dbLogin, dbPass);
     }
-
-
 
 
     public static void main(String[] args) throws IOException, ParseException {
@@ -78,7 +83,7 @@ public class LuceneUtil {
         }
 
         StringBuilder buf = new StringBuilder();
-        for (String a: args) {
+        for (String a : args) {
             buf.append(a);
             buf.append(" ");
         }

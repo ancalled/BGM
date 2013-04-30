@@ -29,6 +29,11 @@ public class BgmServer {
     public static final String PORT = "port";
     public static final String WEB_RESOURCE = "resource";
 
+    public static final String BASE_NAME = "base.name";
+    public static final String BASE_LOGIN = "base.login";
+    public static final String BASE_PASS = "base.pass";
+    public static final String BASE_HOST = "base.host";
+    public static final String BASE_PORT = "base.port";
 
     private final Server jettyServer;
     private static final Logger log = Logger.getLogger(BgmServer.class);
@@ -73,11 +78,7 @@ public class BgmServer {
         jettyServer.join();
     }
 
-    public static final String BASE_NAME = "base.name";
-    public static final String BASE_LOGIN = "base.login";
-    public static final String BASE_PASS = "base.pass";
-    public static final String BASE_HOST = "base.host";
-    public static final String BASE_PORT = "base.port";
+
 
 
     public static void initDatabase(String propsFile) throws IOException {
