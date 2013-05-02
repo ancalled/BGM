@@ -5,6 +5,7 @@ import kz.bgm.platform.model.domain.CustomerReportItem;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import kz.bgm.platform.model.service.LuceneSearch;
+import org.apache.log4j.xml.DOMConfigurator;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
@@ -21,12 +22,13 @@ public class MobileReportUtil {
 
     private static final String REPS_PATH = APP_DIR + "/reports";
     private static final String COMPUTED_REPS_PATH = APP_DIR + "/computed-reports";
-
+    public static final String INDEX_DIR = APP_DIR + "/lucen-indexes";
     private LuceneSearch luceneSearch;
     private ReportCalculator calculator;
 
-    MobileReportUtil(String fileProps) {
+    MobileReportUtil(String fileProps) throws IOException {
         luceneSearch = LuceneSearch.getInstance();
+        luceneSearch.initSearcher(INDEX_DIR);
         calculator = new ReportCalculator(fileProps);
     }
 
@@ -38,7 +40,7 @@ public class MobileReportUtil {
 
         System.out.println("\n\nLoading report...");
 
-        List<CustomerReportItem> reportList = ReportParser.parseMobileReport(REPS_PATH + "/" + filename);
+        List<CustomerReportItem> reportList = ReportParser.parseMobileReportLast(REPS_PATH + "/" + filename);
 
         System.out.println("Report loaded, track count " + reportList.size());
 
@@ -58,7 +60,12 @@ public class MobileReportUtil {
         System.out.println("\n\nSearching songs by report items");
         List<CustomerReportItem> found = new ArrayList<>();
         for (CustomerReportItem i : reports) {
-            List<Long> ids = luceneSearch.search(i.getArtist(), i.getName());
+            List<Long> ids = Collections.emptyList();
+            try {
+                ids = luceneSearch.search(i.getArtist(), i.getName());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             if (ids.size() > 0) {
                 found.add(i);
                 detected++;
@@ -154,7 +161,7 @@ public class MobileReportUtil {
         } else {
             filename = args[0];
         }
-
+        DOMConfigurator.configure("log4j.xml");
         System.out.println("Start process the reports");
         MobileReportUtil mobUts = new MobileReportUtil("db.properties");
 
