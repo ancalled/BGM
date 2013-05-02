@@ -54,17 +54,15 @@ public class ReportParser {
                 if ("".equals(priceStr.trim())) {
                     item.setPrice(0F);
                 } else {
-                    item.setQty(Integer.parseInt(priceStr.trim()));
+                    item.setPrice(Float.parseFloat(priceStr.replace("\\.",",").trim()));
                 }
-
-                item.setPrice(Integer.parseInt(priceStr.trim()));
 
                 String strQty = ExcelUtils.getCellVal(row, 6);
 
                 if ("".equals(strQty.trim())) {
                     item.setQty(0);
                 } else {
-                    item.setQty(Integer.parseInt(strQty.trim()));
+                    item.setQty(Integer.parseInt(strQty.replace("$,","").replace("\\.",",").trim()));
                 }
                 items.add(item);
             }

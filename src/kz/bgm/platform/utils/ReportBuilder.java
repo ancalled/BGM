@@ -62,7 +62,7 @@ public class ReportBuilder {
 
             File reportBlank = new File(templFilePath);
             Workbook wb = ExcelUtils.openFile(reportBlank);
-            Sheet sheet = wb.getSheetAt(0);
+            Sheet sheet = wb.getSheetAt(1);
             log.info("Parsing sheet '" + sheet.getSheetName() + "'");
 
             Map<String, Integer> fieldsMap = new HashMap<String, Integer>();
@@ -98,7 +98,13 @@ public class ReportBuilder {
                                        int rowIdx, Map<String, Integer> fields,
                                        List<CalculatedReportItem> reports) {
         if (rowIdx <= 0 || fields == null ||
-                reports == null || sheet == null) return;
+                reports == null || sheet == null){
+//            System.out.println("reports "+reports);
+//            System.out.println(" fields "+fields);
+//            System.out.println("sheet "+sheet);
+//            System.out.println("sheet "+sheet);
+            return;
+        }
 
         for (CalculatedReportItem report : reports) {
             ExcelUtils.shiftRowsDown(sheet, rowIdx);
@@ -117,26 +123,20 @@ public class ReportBuilder {
             Class reportClass = report.getClass();
             CalculatedReportItem instance = (CalculatedReportItem) reportClass.newInstance();
             List<Method> fields = getReportFields(reportClass);
-
             String field = null;
 
             for (String fieldName : fieldMap.keySet()) {
+
                 field = fieldName.replaceAll("}", "");
                 field = field.replaceAll("\\{", "");
 
                 int colIdx = 0;
                 Type type = null;
                 Object val = null;
-
-
                 for (Method m : fields) {
-                    String methodName = m.getName().toLowerCase();
+                    String methodName = m.getName().toLowerCase().replaceFirst("get","");   //think rabbit
 
-//                    System.out.println("Comparing method name " + methodName + " with field" + field);
-
-
-                    if (methodName.contains(field.toLowerCase())) {
-//                        System.out.println("true");
+                    if (methodName.equals(field.toLowerCase())) {
                         type = m.getGenericReturnType();
                         val = m.invoke(report);
                         colIdx = fieldMap.get(fieldName);

@@ -7,7 +7,10 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.LongField;
 import org.apache.lucene.document.TextField;
-import org.apache.lucene.index.*;
+import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
@@ -75,7 +78,7 @@ public class LuceneSearch {
 
 
     public List<Long> search(String artist, String composition)
-            throws IOException, ParseException  {
+            throws IOException, ParseException {
         return search(artist, composition, LIMIT, THRESHOLD);
     }
 
@@ -108,7 +111,9 @@ public class LuceneSearch {
             }
 
             Document d = searcher.doc(hit.doc);
-            result.add(d.getField("id").numericValue().longValue());
+            if (d.getField("id").numericValue() != null) {
+                result.add(d.getField("id").numericValue().longValue());
+            }
 
 //            System.out.println(hit.score + "\t" + d.get("artist") + ": " + d.get("name"));
         }
@@ -197,7 +202,6 @@ public class LuceneSearch {
 
         return result;
     }
-
 
 
     private static final LuceneSearch INSTANCE = new LuceneSearch();

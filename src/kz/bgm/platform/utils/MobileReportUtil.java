@@ -145,9 +145,9 @@ public class MobileReportUtil {
                 initDatabase(propsFile);
                 storage = CatalogFactory.getStorage();
             }
-            System.out.println("calculating reports..");
+            System.out.println("calculating reports.. " + reps.size());
             List<CalculatedReportItem> calcReps = storage.calculateMobileReport("");
-            System.out.println("reps calculated");
+            System.out.println("reps calculated " + calcReps.size());
             return calcReps;
         }
     }
@@ -166,10 +166,11 @@ public class MobileReportUtil {
         MobileReportUtil mobUts = new MobileReportUtil("db.properties");
 
         List<CustomerReportItem> reportItemList = mobUts.loadReport(filename);
-        List<CalculatedReportItem> calcRepList = new ArrayList<>();
-        reportItemList = mobUts.findSongsByReportsFromDB(reportItemList);
+        List<CustomerReportItem> foundItemList;
+        List<CalculatedReportItem> calcRepList;
+        foundItemList = mobUts.findSongsByReportsFromDB(reportItemList);
 
-        calcRepList = mobUts.calculateReports(reportItemList);
+        calcRepList = mobUts.calculateReports(foundItemList);
 
         mobUts.saveInFile(APP_DIR + "/data/report-templates/sony-atv.xlsx", calcRepList);
         System.out.println("Process done");
