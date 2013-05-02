@@ -6,7 +6,12 @@ public class Customer {
     private String name;
     private float royalty;
     private String rightType;
+    private long detailsId;
 
+
+    public void setDetailsId(long detailsId) {
+        this.detailsId = detailsId;
+    }
 
     public void setId(long id) {
         this.id = id;
@@ -31,6 +36,11 @@ public class Customer {
     public String getName() {
         return name;
     }
+
+    public long getDetailsId() {
+        return detailsId;
+    }
+
 
     public float getRoyalty() {
         return royalty;

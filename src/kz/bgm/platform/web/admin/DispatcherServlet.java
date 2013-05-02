@@ -2,6 +2,7 @@ package kz.bgm.platform.web.admin;
 
 import kz.bgm.platform.model.domain.Customer;
 import kz.bgm.platform.model.domain.CustomerReport;
+import kz.bgm.platform.model.domain.Details;
 import kz.bgm.platform.model.domain.User;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.soap.Detail;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -131,7 +133,26 @@ public class DispatcherServlet extends HttpServlet {
                     }
                 };
                 break;
+            case "/customer-details":
+                action = new Action() {
+                    @Override
+                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+                        String strCustId = req.getParameter("customer_id");
 
+                        long customerId = Long.parseLong(strCustId);
+                        Customer customer = catalogStorage.getCustomer(customerId);
+
+                        List<User> userList = catalogStorage.getUsersByCustomerId(customerId);
+                        Details details = catalogStorage.getDetails(customer.getDetailsId());
+
+                        req.setAttribute("name", customer.getName());
+                        req.setAttribute("users", userList);
+                        req.setAttribute("details", details);
+
+                        return "customer-details";
+                    }
+                };
+                break;
         }
 
 

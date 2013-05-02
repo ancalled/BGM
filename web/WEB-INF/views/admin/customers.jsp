@@ -28,7 +28,8 @@
 
 
 <div class="container">
-    <table class="table">
+    <%--<form action="customer-detail" method="get">--%>
+    <table class="table table-hover">
         <thead>
         <tr>
             <th>Название</th>
@@ -40,19 +41,21 @@
 
 
         <c:forEach var="c" items="${customers}">
-            <tr>
-                <td>${c.name}
-                </td>
-                <td>${c.royalty}
-                </td>
-                <td>${c.rightType}
-                </td>
-            </tr>
+            <a href="customer-detail?customer-id="${c.id}>
+                <tr>
+                    <td>${c.name}
+                    </td>
+                    <td>${c.royalty}
+                    </td>
+                    <td>${c.rightType}
+                    </td>
+                </tr>
+            </a>
         </c:forEach>
 
         </tbody>
     </table>
-
+    <%--</form>--%>
 
 </div>
 

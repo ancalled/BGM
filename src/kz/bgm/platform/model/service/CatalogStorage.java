@@ -46,11 +46,13 @@ public interface CatalogStorage {
 
     AdminUser getAdmin(String name, String pass);
 
+    List<User>getUsersByCustomerId(long customerId);
 
     long saveCustomerReport(CustomerReport report);
 
     void saveCustomerReportItems(List<CustomerReportItem> reportItemList);
 
+    Details getDetails(long id);
 
     CustomerReport getCustomerReport(long id);
 
@@ -58,10 +60,9 @@ public interface CatalogStorage {
 
     List<CustomerReportItem> getCustomerReportsItems(long reportId);
 
-    List<CalculatedReportItem>calculatePublicReport(String catalog);
+    List<CalculatedReportItem> calculatePublicReport(String catalog);
 
     List<CalculatedReportItem> calculateMobileReport(String catalog);
-
 
 
 }

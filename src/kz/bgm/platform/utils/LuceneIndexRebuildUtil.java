@@ -65,7 +65,6 @@ public class LuceneIndexRebuildUtil {
 
 
     public static void main(String[] args) throws IOException, ParseException {
-
         LuceneIndexRebuildUtil util = new LuceneIndexRebuildUtil();
         util.rebuildIndex();
 

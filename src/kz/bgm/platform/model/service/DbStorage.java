@@ -578,6 +578,9 @@ public class DbStorage implements CatalogStorage {
 
         if (catalogName == null) return null;
 
+        final String extraQuery = "".equals(catalogName) ? "" :
+                "and cat.name='" + catalogName + "'";
+
         return query(new Action<List<CalculatedReportItem>>() {
             @Override
             public List<CalculatedReportItem> execute(Connection con) throws SQLException {
@@ -610,7 +613,7 @@ public class DbStorage implements CatalogStorage {
                         "    ON (i.composition_id = c.id)\n" +
                         "\n" +
                         "  LEFT JOIN catalog cat\n" +
-                        "    ON (cat.id = c.catalog_id and cat.name='" + catalogName + "')\n" +
+                        "    ON (cat.id = c.catalog_id " + extraQuery + ")\n" +
                         "\n" +
                         "  LEFT JOIN platform p\n" +
                         "    ON (cat.platform_id = p.id)\n" +
@@ -700,8 +703,56 @@ public class DbStorage implements CatalogStorage {
 
     }
 
-    //    ----------------------------------------------------------------------------------------
+    @Override
+    public Details getDetails(final long id) {
+        return query(new Action<Details>() {
+            @Override
+            public Details execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM details WHERE id = ?");
+                stmt.setLong(1, id);
 
+                ResultSet rs = stmt.executeQuery();
+
+                Details details = null;
+                while (rs.next()) {
+                    details = parseDetails(rs);
+                }
+                return details;
+            }
+        });
+    }
+
+    @Override
+    public List<User> getUsersByCustomerId(final long id) {
+        return query(new Action<List<User>>() {
+            @Override
+            public List<User> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM user WHERE customer_id = ?");
+                stmt.setLong(1, id);
+
+                ResultSet rs = stmt.executeQuery();
+
+                List<User> userList = new ArrayList<>();
+                while (rs.next()) {
+                    userList.add(parseUser(rs));
+                }
+                return userList;
+            }
+        });
+    }
+
+    //  Parsers  ----------------------------------------------------------------------------------------
+
+    private static Details parseDetails(ResultSet rs) throws SQLException {
+        Details details = new Details();
+        details.setAddress(rs.getString("address"));
+        details.setRnn(rs.getInt("rnn"));
+        details.setBoss(rs.getString("boss"));
+
+        return details;
+    }
 
     private static Platform parsePlatform(ResultSet rs) throws SQLException {
         Platform platform = new Platform();
@@ -730,16 +781,15 @@ public class DbStorage implements CatalogStorage {
         return track;
     }
 
-
     private static Customer parseCustomer(ResultSet rs) throws SQLException {
         Customer customer = new Customer();
         customer.setId(rs.getLong("id"));
         customer.setName(rs.getString("name"));
+        customer.setDetailsId(rs.getLong("details_id"));
         customer.setRightType(rs.getString("right_type"));
         customer.setRoyalty(rs.getFloat("royalty"));
         return customer;
     }
-
 
     private User parseUser(ResultSet rs) throws SQLException {
         User user = new User();
@@ -757,7 +807,6 @@ public class DbStorage implements CatalogStorage {
         adminUser.setPass(rs.getString("password"));
         return adminUser;
     }
-
 
     private static CustomerReport parseCustomerReport(ResultSet rs) throws SQLException {
 
