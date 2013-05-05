@@ -41,7 +41,7 @@ CREATE TABLE customer (
 
 CREATE TABLE details (
   id      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  rnn     INT,
+  rnn     bigint ,
   address VARCHAR(200),
   boss    VARCHAR(50)
 );

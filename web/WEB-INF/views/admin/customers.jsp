@@ -41,9 +41,9 @@
 
 
         <c:forEach var="c" items="${customers}">
-            <a href="customer-detail?customer-id="${c.id}>
+
                 <tr>
-                    <td>${c.name}
+                    <td><a href="customer-detail?customer_id=${c.id}">${c.name} </a>
                     </td>
                     <td>${c.royalty}
                     </td>

@@ -37,8 +37,7 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = req.getSession();
                 session.setAttribute("user", user);
 
-                log.info("Admin authorized");
-                log.info("login : " + login);
+                log.info("Admin authorized login : " + login);
 
             } else {
                 log.info("Admin user '" + login + "' was not found or pass incorrect");

@@ -3,7 +3,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
-    <title>Компания ${name}</title>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/bootstrap-fileupload.js"></script>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" media="screen"/>
+    <title>Компания ${customer.name}</title>
 </head>
 <body>
 
@@ -49,7 +55,13 @@
         </tbody>
     </table>
 
+    <div class="row">
+        <form action="/admin/create-user-form.html" method="get">
+            <input type="hidden" name="cid"  value="${customer.id}">
+            <input class="btn"  type="submit" value="Создать">
 
+        </form>
+    </div>
 </div>
 
 

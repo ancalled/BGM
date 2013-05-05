@@ -1,0 +1,38 @@
+<html>
+<head>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/bootstrap-fileupload.js"></script>
+    <script src="/js/plugin-parser.js"></script>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" media="screen"/>
+    <title>Создание пользователя</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="span4">
+        <form action="/admin/action/create-user" method="post">
+            <label>
+                Имя
+                <input type="text" name="login" class="input-block-level" required="true">
+            </label>
+            <label>
+                Пароль
+                <input type="text" name="pass" class="input-block-level" required="true">
+            </label>
+
+            <input type="hidden" name="customer-id" id="customer" value="">
+            <button class="btn" type="submit">Создать</button>
+        </form>
+    </div>
+
+    <script>
+        $("#customer").val($.url().param('cid'));
+
+    </script>
+
+</div>
+</body>
+</html>

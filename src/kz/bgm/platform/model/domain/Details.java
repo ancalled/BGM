@@ -2,7 +2,7 @@ package kz.bgm.platform.model.domain;
 
 public class Details {
     private long id;
-    private int rnn;
+    private long rnn;
     private String address;
     private String boss;
 
@@ -10,7 +10,7 @@ public class Details {
         return id;
     }
 
-    public int getRnn() {
+    public long getRnn() {
         return rnn;
     }
 
@@ -26,7 +26,7 @@ public class Details {
         this.id = id;
     }
 
-    public void setRnn(int rnn) {
+    public void setRnn(long rnn) {
         this.rnn = rnn;
     }
 

@@ -19,6 +19,7 @@
     </filter-mapping>
 
 
+
     <servlet>
         <servlet-name>adminLoginServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.LoginServlet</servlet-class>
@@ -58,6 +59,10 @@
     <servlet>
         <servlet-name>adminLoadPublicReport</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.LoadPublicReportServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>createUserServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.CreateUserServlet</servlet-class>
     </servlet>
 
 
@@ -104,7 +109,10 @@
         <url-pattern>/admin/action/load-public-reports</url-pattern>
     </servlet-mapping>
 
-
+    <servlet-mapping>
+        <servlet-name>createUserServlet</servlet-name>
+        <url-pattern>/admin/action/create-user</url-pattern>
+    </servlet-mapping>
 
 
     <!--================= Customer =======================-->
@@ -142,7 +150,6 @@
     </servlet>
 
 
-
     <servlet-mapping>
         <servlet-name>customerLoginServlet</servlet-name>
         <url-pattern>/customer-logon</url-pattern>
@@ -163,5 +170,6 @@
         <servlet-name>customerLogoutServlet</servlet-name>
         <url-pattern>/customer/action/logout</url-pattern>
     </servlet-mapping>
+
 
 </web-app>

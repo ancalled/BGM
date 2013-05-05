@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.soap.Detail;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -133,7 +132,7 @@ public class DispatcherServlet extends HttpServlet {
                     }
                 };
                 break;
-            case "/customer-details":
+            case "/customer-detail":
                 action = new Action() {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
@@ -145,11 +144,20 @@ public class DispatcherServlet extends HttpServlet {
                         List<User> userList = catalogStorage.getUsersByCustomerId(customerId);
                         Details details = catalogStorage.getDetails(customer.getDetailsId());
 
-                        req.setAttribute("name", customer.getName());
+                        req.setAttribute("customer", customer);
                         req.setAttribute("users", userList);
                         req.setAttribute("details", details);
 
-                        return "customer-details";
+                        return "customer-detail";
+                    }
+                };
+                break;
+            case "/create-user-form":
+                action = new Action() {
+                    @Override
+                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+
+                        return "create-user-form";
                     }
                 };
                 break;

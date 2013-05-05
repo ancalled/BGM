@@ -748,7 +748,7 @@ public class DbStorage implements CatalogStorage {
     private static Details parseDetails(ResultSet rs) throws SQLException {
         Details details = new Details();
         details.setAddress(rs.getString("address"));
-        details.setRnn(rs.getInt("rnn"));
+        details.setRnn(rs.getLong("rnn"));
         details.setBoss(rs.getString("boss"));
 
         return details;
@@ -844,6 +844,27 @@ public class DbStorage implements CatalogStorage {
         return item;
     }
 
+    @Override
+    public long createUser(final User user) {
+        if (user==null) return -1L;
+
+        return query(new Action<Long>() {
+            @Override
+            public Long execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "insert into user(login,password,customer_id) values(?,?,?)",Statement.RETURN_GENERATED_KEYS);
+                stmt.setString(1, user.getLogin());
+                stmt.setString(2, user.getPass());
+                stmt.setLong(3, user.getCustomerId());
+
+                stmt.executeUpdate();
+
+                ResultSet rs = stmt.getGeneratedKeys();
+
+                return rs.next() ? rs.getLong(1) : -1;
+            }
+        });
+    }
 
     private static CalculatedReportItem parseCalculatedReport(ResultSet rs) throws SQLException {
 
