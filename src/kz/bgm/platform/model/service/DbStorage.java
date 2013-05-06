@@ -449,6 +449,21 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+    @Override
+    public User getUser(final String name) {
+        return query(new Action<User>() {
+            @Override
+            public User execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM user WHERE login = ?");
+                stmt.setString(1, name);
+
+                ResultSet rs = stmt.executeQuery();
+                return rs.next() ? parseUser(rs) : null;
+            }
+        });
+    }
+
 
 //    ----------------------------------------------------------------------------------------
 
@@ -580,7 +595,7 @@ public class DbStorage implements CatalogStorage {
             @Override
             public CalculatedReportItem execute(Connection con) throws SQLException {
                 CalculatedReportItem report = null;
-                System.out.println("Composition id"+reportItem.getCompositionId());
+                System.out.println("Composition id" + reportItem.getCompositionId());
                 PreparedStatement ps = con.prepareStatement("SELECT\n" +
                         "  copyright,\n" +
                         "  cat.name catalog,\n" +
@@ -621,50 +636,50 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
-        public CalculatedReportItem calculateMReportRelated(final CustomerReportItem reportItem) {
-            return query(new Action<CalculatedReportItem>() {
-                @Override
-                public CalculatedReportItem execute(Connection con) throws SQLException {
-                    CalculatedReportItem report = null;
-                    System.out.println("Composition id"+reportItem.getCompositionId());
-                    PreparedStatement ps = con.prepareStatement("SELECT\n" +
-                            "  copyright,\n" +
-                            "  cat.name catalog,\n" +
-                            "  composition.shareMobile,\n" +
-                            "  composition.code,\n" +
-                            "  composition.artist,\n" +
-                            "  composition.name name,\n" +
-                            "  composition.composer\n" +
-                            "FROM composition\n" +
-                            "\n" +
-                            "  LEFT JOIN catalog cat\n" +
-                            "    ON (cat.id = catalog_id)\n" +
-                            "\n" +
-                            "WHERE composition.id =" + reportItem.getCompositionId() + "\n" +
-                            "and cat.copyright='RELATED'\n" +
-                            "GROUP BY composition.id;");
+    public CalculatedReportItem calculateMReportRelated(final CustomerReportItem reportItem) {
+        return query(new Action<CalculatedReportItem>() {
+            @Override
+            public CalculatedReportItem execute(Connection con) throws SQLException {
+                CalculatedReportItem report = null;
+                System.out.println("Composition id" + reportItem.getCompositionId());
+                PreparedStatement ps = con.prepareStatement("SELECT\n" +
+                        "  copyright,\n" +
+                        "  cat.name catalog,\n" +
+                        "  composition.shareMobile,\n" +
+                        "  composition.code,\n" +
+                        "  composition.artist,\n" +
+                        "  composition.name name,\n" +
+                        "  composition.composer\n" +
+                        "FROM composition\n" +
+                        "\n" +
+                        "  LEFT JOIN catalog cat\n" +
+                        "    ON (cat.id = catalog_id)\n" +
+                        "\n" +
+                        "WHERE composition.id =" + reportItem.getCompositionId() + "\n" +
+                        "and cat.copyright='RELATED'\n" +
+                        "GROUP BY composition.id;");
 
-                    ResultSet rs = ps.executeQuery();
+                ResultSet rs = ps.executeQuery();
 
 
-                    while (rs.next()) {
-                        report = new CalculatedReportItem();
-    //                    report.setReportItemId(rs.getLong("id"));
-                        report.setCompositionCode(rs.getString("code"));
-                        report.setCompositionName(rs.getString("name"));
-                        report.setArtist(rs.getString("artist"));
-                        report.setComposer(rs.getString("composer"));
-                        report.setShareMobile(rs.getFloat("shareMobile"));
-                        report.setCatalog(rs.getString("catalog"));
-                        report.setCopyright(rs.getString("copyright"));
-                        report.setQty(reportItem.getQty());
-                        report.setPrice(reportItem.getPrice());
-                    }
-                    return report;
+                while (rs.next()) {
+                    report = new CalculatedReportItem();
+                    //                    report.setReportItemId(rs.getLong("id"));
+                    report.setCompositionCode(rs.getString("code"));
+                    report.setCompositionName(rs.getString("name"));
+                    report.setArtist(rs.getString("artist"));
+                    report.setComposer(rs.getString("composer"));
+                    report.setShareMobile(rs.getFloat("shareMobile"));
+                    report.setCatalog(rs.getString("catalog"));
+                    report.setCopyright(rs.getString("copyright"));
+                    report.setQty(reportItem.getQty());
+                    report.setPrice(reportItem.getPrice());
                 }
-            });
+                return report;
+            }
+        });
 
-        }
+    }
 
     @Override
     public List<CalculatedReportItem> calculateMobileReport(final String catalogName) {
@@ -794,6 +809,19 @@ public class DbStorage implements CatalogStorage {
             }
         });
 
+    }
+
+    @Override
+    public void removeUser(final long id) {
+        queryVoid(new VoidAction() {
+            public void execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "delete from user where id = ?");
+
+                stmt.setLong(1, id);
+                stmt.executeUpdate();
+            }
+        });
     }
 
     @Override
@@ -939,13 +967,13 @@ public class DbStorage implements CatalogStorage {
 
     @Override
     public long createUser(final User user) {
-        if (user==null) return -1L;
+        if (user == null) return -1L;
 
         return query(new Action<Long>() {
             @Override
             public Long execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "insert into user(login,password,customer_id) values(?,?,?)",Statement.RETURN_GENERATED_KEYS);
+                        "insert into user(login,password,customer_id) values(?,?,?)", Statement.RETURN_GENERATED_KEYS);
                 stmt.setString(1, user.getLogin());
                 stmt.setString(2, user.getPass());
                 stmt.setLong(3, user.getCustomerId());
@@ -1092,9 +1120,38 @@ public class DbStorage implements CatalogStorage {
         return null;
     }
 
+
+    private void queryVoid(VoidAction action) {
+
+        Connection connection = null;
+        try {
+            connection = pool.getConnection();
+            action.execute(connection);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+
     public static interface Action<T> {
 
         T execute(Connection con) throws SQLException;
+
+    }
+
+    public static interface VoidAction {
+
+        void execute(Connection con) throws SQLException;
 
     }
 

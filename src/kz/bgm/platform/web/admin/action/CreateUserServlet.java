@@ -33,14 +33,21 @@ public class CreateUserServlet extends HttpServlet {
         log.info("Creating user request");
 
         if (name == null || pass == null || strCustomerId == null) {
-            resp.sendRedirect("create-user-form.html");
+            resp.sendRedirect("../create-user-form.html");
             log.warn("Some params are empty");
             return;
         }
 
+        User oldUser = storage.getUser(name);
+
+        if (oldUser != null) {
+            resp.sendRedirect("../create-user-form.html?err=101"
+                    + strCustomerId);
+
+            return;
+        }
 
         Long custId = Long.parseLong(strCustomerId);
-
         User user = new User();
         user.setLogin(name);
         user.setPass(pass);
@@ -55,7 +62,7 @@ public class CreateUserServlet extends HttpServlet {
 
             resp.sendRedirect("/admin/view/customer-detail?customer_id=" + strCustomerId);
         } else {
-            resp.sendRedirect("/admin/view/customer-detail?customer_id=" + user.getCustomerId() + "&err=user not created");
+            resp.sendRedirect("/admin/view/customer-detail?customer_id=" + strCustomerId + "&err=user not created");
         }
     }
 

@@ -44,6 +44,8 @@ public interface CatalogStorage {
 
     User getUser(String name, String pass);
 
+    User getUser(String name);
+
     AdminUser getAdmin(String name, String pass);
 
     List<User>getUsersByCustomerId(long customerId);
@@ -65,9 +67,10 @@ public interface CatalogStorage {
     List<CalculatedReportItem> calculateMobileReport(String catalog);
 
     CalculatedReportItem calculateMReportAuthor(CustomerReportItem reportItems);
+
     long createUser(User user);
 
-
+    void removeUser(long id);
 
     CalculatedReportItem calculateMReportRelated(CustomerReportItem reportItems);
 }

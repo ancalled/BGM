@@ -15,6 +15,13 @@
 
 
 <div class="container">
+
+    <div class="row text-left">
+        <legend>
+            Информация по компании ${customer.name}
+        </legend>
+    </div>
+
     <div class="row">
         <div class="span2">Название</div>
         <div class="span3"><strong>${customer.name}</strong></div>
@@ -59,12 +66,17 @@
                 </td>
                 <td>${u.pass}
                 </td>
+                <td>
+                    <a href="/action/delete-user?user-id=${u.id}&cid=${customer.id}">
+                        <i class="icon-trash"></i>
+                    </a>
+                </td>
             </tr>
+
         </c:forEach>
 
         </tbody>
     </table>
-
     <div class="row span2">
         <form action="/admin/create-user-form.html" method="get">
             <input type="hidden" name="cid" value="${customer.id}">
@@ -74,6 +86,10 @@
     </div>
 </div>
 
+
+<script>
+
+</script>
 
 </body>
 </html>

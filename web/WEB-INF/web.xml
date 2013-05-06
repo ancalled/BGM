@@ -19,7 +19,6 @@
     </filter-mapping>
 
 
-
     <servlet>
         <servlet-name>adminLoginServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.LoginServlet</servlet-class>
@@ -65,6 +64,15 @@
         <servlet-class>kz.bgm.platform.web.admin.action.CreateUserServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>deleteUserServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.DeleteUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>deleteUserServlet</servlet-name>
+        <url-pattern>/action/delete-user</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>adminSearchServletJson</servlet-name>
@@ -74,7 +82,6 @@
         <servlet-name>adminSearchServlet</servlet-name>
         <url-pattern>/admin/action/search</url-pattern>
     </servlet-mapping>
-
 
 
     <servlet-mapping>

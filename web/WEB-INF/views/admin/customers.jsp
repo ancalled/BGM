@@ -28,7 +28,12 @@
 
 
 <div class="container">
-    <%--<form action="customer-detail" method="get">--%>
+    <div class="row text-left">
+        <legend>
+            Компании
+        </legend>
+    </div>
+
     <table class="table table-hover">
         <thead>
         <tr>
@@ -55,7 +60,6 @@
 
         </tbody>
     </table>
-    <%--</form>--%>
 
 </div>
 
