@@ -67,6 +67,7 @@ public class MobileReportUtil {
                 e.printStackTrace();
             }
             if (ids.size() > 0) {
+                i.setCompositionId(ids.get(0));
                 found.add(i);
                 detected++;
             }
@@ -145,10 +146,18 @@ public class MobileReportUtil {
                 initDatabase(propsFile);
                 storage = CatalogFactory.getStorage();
             }
-            System.out.println("calculating reports.. " + reps.size());
-            List<CalculatedReportItem> calcReps = storage.calculateMobileReport("");
-            System.out.println("reps calculated " + calcReps.size());
-            return calcReps;
+            List<CalculatedReportItem> calcRepsAuth = new ArrayList<>();
+            for (CustomerReportItem item : reps) {
+                System.out.println("calculating reports.. " + reps.size());
+
+                CalculatedReportItem cp = storage.calculateMReportAuthor(item);
+                if (cp != null) {
+                    calcRepsAuth.add(cp);
+                }
+
+                System.out.println("reps calculated " + calcRepsAuth.size());
+            }
+            return calcRepsAuth;
         }
     }
 

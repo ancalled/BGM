@@ -11,23 +11,33 @@
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" media="screen"/>
     <title>Компания ${customer.name}</title>
 </head>
-<body>
+<body style="padding-top: 30">
 
 
 <div class="container">
-    <ul>
-        <li>
-            ${details.address}
-        </li>
-        <li>
-            ${details.rnn}
-        </li>
-        <li>
-            ${details.boss}
-        </li>
-    </ul>
+    <div class="row">
+        <div class="span2">Название</div>
+        <div class="span3"><strong>${customer.name}</strong></div>
+    </div>
+
+    <div class="row">
+        <div class="span2">Адрес</div>
+        <div class="span3"><strong>${details.address}</strong></div>
+    </div>
+
+    <div class="row">
+        <div class="span2">РНН</div>
+        <div class="span3"><strong>${details.rnn}</strong></div>
+    </div>
+    <div class="row">
+        <div class="span2">Руководитель</div>
+        <div class="span3"><strong>${details.boss}</strong></div>
+    </div>
 </div>
 
+<br>
+<br>
+<br>
 
 <div class="container">
     <table class="table">
@@ -55,10 +65,10 @@
         </tbody>
     </table>
 
-    <div class="row">
+    <div class="row span2">
         <form action="/admin/create-user-form.html" method="get">
-            <input type="hidden" name="cid"  value="${customer.id}">
-            <input class="btn"  type="submit" value="Создать">
+            <input type="hidden" name="cid" value="${customer.id}">
+            <input class="btn" type="submit" value="Создать">
 
         </form>
     </div>

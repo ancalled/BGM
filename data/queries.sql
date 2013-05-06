@@ -83,14 +83,11 @@ FROM customer_report_item i
 
 
 WHERE
-    cat.platform_id = 1
+  cat.platform_id = 1
       AND r.type = 1
-      AND r.start_date BETWEEN '2013-01-01' AND '2013-04-01'
       AND cat.copyright = 'AUTHOR'
       AND i.composition_id > 0
 
 GROUP BY i.composition_id
 LIMIT 0, 15;
-
-
 

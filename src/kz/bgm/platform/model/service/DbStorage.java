@@ -573,6 +573,99 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+
+    @Override
+    public CalculatedReportItem calculateMReportAuthor(final CustomerReportItem reportItem) {
+        return query(new Action<CalculatedReportItem>() {
+            @Override
+            public CalculatedReportItem execute(Connection con) throws SQLException {
+                CalculatedReportItem report = null;
+                System.out.println("Composition id"+reportItem.getCompositionId());
+                PreparedStatement ps = con.prepareStatement("SELECT\n" +
+                        "  copyright,\n" +
+                        "  cat.name catalog,\n" +
+                        "  composition.shareMobile,\n" +
+                        "  composition.code,\n" +
+                        "  composition.artist,\n" +
+                        "  composition.name name,\n" +
+                        "  composition.composer\n" +
+                        "FROM composition\n" +
+                        "\n" +
+                        "  LEFT JOIN catalog cat\n" +
+                        "    ON (cat.id = catalog_id)\n" +
+                        "\n" +
+                        "WHERE composition.id =" + reportItem.getCompositionId() + "\n" +
+                        "and cat.copyright='AUTHOR'\n" +
+                        "GROUP BY composition.id;");
+
+                ResultSet rs = ps.executeQuery();
+
+
+                while (rs.next()) {
+                    report = new CalculatedReportItem();
+//                    report.setReportItemId(rs.getLong("id"));
+                    report.setCompositionCode(rs.getString("code"));
+                    report.setCompositionName(rs.getString("name"));
+                    report.setArtist(rs.getString("artist"));
+                    report.setComposer(rs.getString("composer"));
+                    report.setShareMobile(rs.getFloat("shareMobile"));
+                    report.setCatalog(rs.getString("catalog"));
+                    report.setCopyright(rs.getString("copyright"));
+                    report.setQty(reportItem.getQty());
+                    report.setPrice(reportItem.getPrice());
+                }
+                return report;
+            }
+        });
+
+    }
+
+    @Override
+        public CalculatedReportItem calculateMReportRelated(final CustomerReportItem reportItem) {
+            return query(new Action<CalculatedReportItem>() {
+                @Override
+                public CalculatedReportItem execute(Connection con) throws SQLException {
+                    CalculatedReportItem report = null;
+                    System.out.println("Composition id"+reportItem.getCompositionId());
+                    PreparedStatement ps = con.prepareStatement("SELECT\n" +
+                            "  copyright,\n" +
+                            "  cat.name catalog,\n" +
+                            "  composition.shareMobile,\n" +
+                            "  composition.code,\n" +
+                            "  composition.artist,\n" +
+                            "  composition.name name,\n" +
+                            "  composition.composer\n" +
+                            "FROM composition\n" +
+                            "\n" +
+                            "  LEFT JOIN catalog cat\n" +
+                            "    ON (cat.id = catalog_id)\n" +
+                            "\n" +
+                            "WHERE composition.id =" + reportItem.getCompositionId() + "\n" +
+                            "and cat.copyright='RELATED'\n" +
+                            "GROUP BY composition.id;");
+
+                    ResultSet rs = ps.executeQuery();
+
+
+                    while (rs.next()) {
+                        report = new CalculatedReportItem();
+    //                    report.setReportItemId(rs.getLong("id"));
+                        report.setCompositionCode(rs.getString("code"));
+                        report.setCompositionName(rs.getString("name"));
+                        report.setArtist(rs.getString("artist"));
+                        report.setComposer(rs.getString("composer"));
+                        report.setShareMobile(rs.getFloat("shareMobile"));
+                        report.setCatalog(rs.getString("catalog"));
+                        report.setCopyright(rs.getString("copyright"));
+                        report.setQty(reportItem.getQty());
+                        report.setPrice(reportItem.getPrice());
+                    }
+                    return report;
+                }
+            });
+
+        }
+
     @Override
     public List<CalculatedReportItem> calculateMobileReport(final String catalogName) {
 

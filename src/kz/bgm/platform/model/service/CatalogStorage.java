@@ -64,8 +64,10 @@ public interface CatalogStorage {
 
     List<CalculatedReportItem> calculateMobileReport(String catalog);
 
+    CalculatedReportItem calculateMReportAuthor(CustomerReportItem reportItems);
     long createUser(User user);
 
 
 
+    CalculatedReportItem calculateMReportRelated(CustomerReportItem reportItems);
 }
