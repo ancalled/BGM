@@ -49,7 +49,7 @@ public class SearchServlet extends HttpServlet {
                 found = catalogService.searchTracksByArtist(query);
             } else if (type.equals("code")) {
                 found = catalogService.searchTracksByCode(query);
-            } else if (type.equals("song")) {
+            } else if (type.equals("composition")) {
                 found = catalogService.searchTracksByName(query);
             } else if (type.equals("composer")) {
                 found = catalogService.searchTracksByComposer(query);

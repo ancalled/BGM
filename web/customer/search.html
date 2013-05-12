@@ -4,8 +4,9 @@
     <script src="../js/bootstrap.js"></script>
     <script src="../js/bootstrap-fileupload.js"></script>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap-fileupload.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-dropdown.css" media="screen"/>
     <title>Поиск</title>
 </head>
 <body>
@@ -37,7 +38,20 @@
             <br>
 
             <div class="row">
-                <input type="submit" value="Быстрый поиск" class="btn">
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"
+                    style="display: block; position: static; margin-bottom: 5px; *width: 180px;">
+                    <li><a tabindex="-1" id="code" onclick="change_type(this)">Код композиции</a></li>
+                    <li><a tabindex="-1" id="artist" onclick="change_type(this)">Артист</a></li>
+                    <li><a tabindex="-1" id="composition" onclick="change_type(this)">Композиция</a></li>
+                    <li class="divider"></li>
+                    <li><a tabindex="-1" id="full" onclick="change_type(this)">Полный поиск</a></li>
+                </ul>
+            </div>
+            <br>
+
+
+            <div class="row">
+                <input type="submit" value="Поиск" class="btn">
             </div>
 
             <input type="hidden" name="type" value="full">
@@ -45,6 +59,14 @@
     </div>
 
 </div>
+<script>
+
+    var typeEl = document.getElementById('type');
+
+    function change_type(comp) {
+        typeEl.setAttribute('value', comp.id);
+    }
+</script>
 
 </body>
 </html>

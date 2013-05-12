@@ -20,7 +20,7 @@
         <ul class="nav">
             <li><a href="/admin/index.html">Главная</a></li>
             <li><a href="/admin/reports.html">Отчеты</a></li>
-            <li class="active"><a href="/admin/search.html">Поиск</a></li>
+            <li class="active"><a href="/admin/action/search">Поиск</a></li>
             <li><a href="/admin/view/customers">Клиенты</a></li>
             <li><a href="/admin/action/logout">Выход</a></li>
         </ul>
@@ -36,13 +36,26 @@
             Поиск композиций
         </legend>
 
-        <form action="/admin/action/search" method="post">
+        <form action="../action/search" method="post">
             <div class="row">
                 <label for="query"></label><input type="text" name="q" id="query" class="input-block-level">
             </div>
+
+
+
+            <div class="row">
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"
+                    style="display: block; position: static; margin-bottom: 5px; *width: 180px;">
+                    <li><a tabindex="-1" id="code" onclick="change_type(this)">Код композиции</a></li>
+                    <li><a tabindex="-1" id="artist" onclick="change_type(this)">Артист</a></li>
+                    <li><a tabindex="-1" id="composition" onclick="change_type(this)">Композиция</a></li>
+                    <li class="divider"></li>
+                    <li><a tabindex="-1" id="full" onclick="change_type(this)">Полный поиск</a></li>
+                </ul>
+            </div>
             <br>
             <div class="row">
-                <input type="submit" value="Быстрый поиск" class="btn">
+                <input type="submit" value="Поиск" class="btn">
             </div>
 
             <input type="hidden" name="type" value="full">
@@ -85,6 +98,13 @@
     </div>
 
 </div>
+<script>
 
+    var typeEl = document.getElementById('type');
+
+    function change_type(comp) {
+        typeEl.setAttribute('value', comp.id);
+    }
+</script>
 </body>
 </html>
