@@ -47,14 +47,22 @@
 
         <c:forEach var="c" items="${customers}">
 
-                <tr>
-                    <td><a href="customer-detail?customer_id=${c.id}">${c.name} </a>
-                    </td>
-                    <td>${c.royalty}
-                    </td>
-                    <td>${c.rightType}
-                    </td>
-                </tr>
+            <tr>
+                <td><a href="customer-detail?customer_id=${c.id}">${c.name} </a>
+                </td>
+                <td>${c.royalty}
+                </td>
+                <td>
+                    <c:choose>
+                        <c:when test="${c.rightType eq 'copyright'}">
+                            авторские
+                        </c:when>
+                        <c:otherwise>
+                            смежные
+                        </c:otherwise>
+                    </c:choose>
+                </td>
+            </tr>
             </a>
         </c:forEach>
 

@@ -16,7 +16,7 @@ public class ReportParser {
 
     private static final Logger log = Logger.getLogger(ReportParser.class);
 
-    public static List<CustomerReportItem> parseMobileReportLast(String fileName)
+    public static List<CustomerReportItem> parsePublicReportLast(String fileName)
             throws IOException, InvalidFormatException {
 
         log.info("Parsing mobile report from: " + fileName + "... ");
@@ -111,7 +111,7 @@ public class ReportParser {
             item.setQty(Integer.parseInt(ExcelUtils.getCellVal(row, 5).trim()));
             items.add(item);
         }
-
+        log.info("Mobile report parsed done, tracks count: " + items.size());
         return items;
     }
 

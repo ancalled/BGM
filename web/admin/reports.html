@@ -30,13 +30,13 @@
 
 <div class="tabbable">
     <ul class="nav nav-tabs" id="report-tab">
-        <li class="active"><a href="#tab1" data-toggle="tab">Загрузка мобильного отчета</a></li>
-        <li><a href="#tab2" data-toggle="tab">Загрузка публичного отчета</a></li>
+        <li><a href="#tab1" data-toggle="tab">Загрузка мобильного отчета</a></li>
+        <li class="active"><a href="#tab2" data-toggle="tab">Загрузка публичного отчета</a></li>
         <li><a href="#tab3" data-toggle="tab">Квартальный отчет</a></li>
         <li><a href="#tab4" data-toggle="tab">Список всех отчетов</a></li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane active" id="tab1">
+        <div class="tab-pane " id="tab1">
             <div class="container text-center">
                 <div class="row text-left">
                     <legend>
@@ -44,9 +44,10 @@
                     </legend>
                 </div>
 
-                <div class="row ">
+                <div class="row text-left">
 
-                    <form action="/admin/action/upload-mobile-report" method="post" enctype="multipart/form-data">
+                    <form action="/admin/action/upload-mobile-report"
+                          method="post" enctype="multipart/form-data">
 
 
                         <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -73,18 +74,21 @@
                         <div class="well">
                             <div id="date" class="input-append">
                                 <input data-format="yyyy-MM-dd" id="dt" class="input-block-level" name="dt" type="text">
-    <span class="add-on">
-      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-      </i>
-    </span>
+                              <span class="add-on">
+                                 <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                   </i>
+                                  </span>
                             </div>
                         </div>
 
 
-                        <select name="per">
-                            <option value="0">Месячный</option>
-                            <option value="1">Квартальный</option>
-                        </select>
+                        <label>
+                            Дата отчета
+                            <select name="period">
+                                <option value="0">Месячный</option>
+                                <option value="1">Квартальный</option>
+                            </select>
+                        </label>
 
 
                         <div class="row-fluid">
@@ -96,7 +100,7 @@
 
             </div>
         </div>
-        <div class="tab-pane active" id="tab2">
+        <div class="tab-pane" id="tab2">
             <div class="container text-center">
                 <div class="row text-left">
                     <legend>
@@ -136,7 +140,7 @@
 
             </div>
         </div>
-        <div class="tab-pane active" id="tab3">
+        <div class="tab-pane" id="tab3">
             <div class="container text-center">
                 <div class="row text-left">
                     <legend>
@@ -174,7 +178,7 @@
                 </div>
             </div>
         </div>
-        <div class="tab-pane active" id="tab4">
+        <div class="tab-pane" id="tab4">
             <div class="container text-center">
                 <div class="row text-left">
                     <legend>
@@ -220,14 +224,14 @@
 
     var el = document.getElementById('date');
 
-    el.on('changeDate', function (e) {
-        alert(e.date.toString());
-        console.log(e.localDate.toString());
-    });
+    //    el.on('changeDate', function (e) {
+    //        alert(e.date.toString());
+    //        console.log(e.localDate.toString());
+    //    });
 
 
     $(function () {
-        $('#report-tab a:last').tab('show');
+        $('#tab3').tab('show');
     })
 
 

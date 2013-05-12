@@ -29,14 +29,8 @@ public class ExcelUtils {
     public static final DataFormatter FORMATTER = new DataFormatter(true);
 
     public static Workbook openFile(File file) throws IOException, InvalidFormatException {
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(file);
+        try (FileInputStream fis = new FileInputStream(file)) {
             return WorkbookFactory.create(fis);
-        } finally {
-            if (fis != null) {
-                fis.close();
-            }
         }
     }
 

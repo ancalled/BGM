@@ -70,6 +70,8 @@ public interface CatalogStorage {
 
     long createUser(User user);
 
+    long createCustomer(Customer customer);
+
     void removeUser(long id);
 
     CalculatedReportItem calculateMReportRelated(CustomerReportItem reportItems);

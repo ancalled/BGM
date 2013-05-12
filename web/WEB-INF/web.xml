@@ -44,7 +44,7 @@
     </servlet>
 
     <servlet>
-        <servlet-name>adminUploadReportMobileServet</servlet-name>
+        <servlet-name>adminUploadReportMobileServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.UploadReportMobileServlet</servlet-class>
     </servlet>
     <servlet>
@@ -99,7 +99,7 @@
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>adminUploadReportMobileServet</servlet-name>
+        <servlet-name>adminUploadReportMobileServlet</servlet-name>
         <url-pattern>/admin/action/upload-mobile-report</url-pattern>
     </servlet-mapping>
     <servlet-mapping>

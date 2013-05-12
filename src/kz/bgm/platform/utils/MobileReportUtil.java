@@ -40,7 +40,7 @@ public class MobileReportUtil {
 
         System.out.println("\n\nLoading report...");
 
-        List<CustomerReportItem> reportList = ReportParser.parseMobileReportLast(REPS_PATH + "/" + filename);
+        List<CustomerReportItem> reportList = ReportParser.parsePublicReportLast(REPS_PATH + "/" + filename);
 
         System.out.println("Report loaded, track count " + reportList.size());
 

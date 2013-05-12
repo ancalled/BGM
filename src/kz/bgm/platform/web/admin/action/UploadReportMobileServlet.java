@@ -3,7 +3,6 @@ package kz.bgm.platform.web.admin.action;
 import kz.bgm.platform.model.domain.Customer;
 import kz.bgm.platform.model.domain.CustomerReport;
 import kz.bgm.platform.model.domain.CustomerReportItem;
-import kz.bgm.platform.model.domain.User;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import kz.bgm.platform.model.service.LuceneSearch;
@@ -20,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,58 +54,25 @@ public class UploadReportMobileServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            String dateParam = req.getParameter("dt");
-            Date reportDate = dateParam != null ? FORMAT.parse(dateParam) : new Date();
+            List<FileItem> fields = fileUploader.parseRequest(req);
 
-            String periodParam = req.getParameter("per");
-            int per = periodParam != null ? Integer.parseInt(periodParam) : 0;
-            CustomerReport.Period period = periodParam != null ?
-                    CustomerReport.Period.values()[per] :
-                    CustomerReport.Period.MONTH;
-
-            String customerParam = req.getParameter("cid");
-            if (customerParam == null) {
-                resp.sendRedirect("/admin/reports.html?er=no-customer-id-provided");
-                return;
-            }
-            long customerId = Long.parseLong(customerParam);
-
-            Customer customer = catalogService.getCustomer(customerId);
-            if (customer == null) {
-                resp.sendRedirect("/admin/reports.html?er=no-customer-found");
-                return;
-            }
-
-
-            List<FileItem> files = fileUploader.parseRequest(req);
-
-            if (files == null) {
+            if (fields == null) {
                 resp.sendRedirect("/admin/reports.html?er=no-file-reports-uploaded");
+
+                log.warn("No multipart fields found");
                 return;
             }
-
-
-            List<CustomerReportItem> allItems = new ArrayList<>();
-            for (FileItem item : files) {
-
-                String reportFile = REPORTS_HOME + "/" + item.getName();
-                saveToFile(item, reportFile);
-
-                log.info("Got client report " + item.getName());
-
-                List<CustomerReportItem> items = ReportParser.parseMobileReport(reportFile);
-                allItems.addAll(items);
-            }
-
-            Date now = new Date();
+            log.info("got request admin uploader report");
 
             CustomerReport report = new CustomerReport();
-            report.setStartDate(reportDate);
-            report.setPeriod(period);
+
+            List<CustomerReportItem> allItems = new ArrayList<>();
+            fillItems(fields, report, allItems);
+            Date now = new Date();
+
             report.setUploadDate(now);
-            report.setType(CustomerReport.Type.MOBILE);
-            report.setCustomerId(customer.getId());
             report.setTracks(allItems.size());
+            report.setType(CustomerReport.Type.MOBILE);
 
             long reportId = catalogService.saveCustomerReport(report);
             report.setId(reportId);
@@ -136,6 +103,72 @@ public class UploadReportMobileServlet extends HttpServlet {
         }
     }
 
+    private void fillItems(List<FileItem> fields, CustomerReport report, List<CustomerReportItem> allItems) throws Exception {
+        for (FileItem item : fields) {
+            if (item.isFormField()) {
+                fillParam(item, report);
+            } else {
+
+                String reportFile = REPORTS_HOME + "/" + item.getName();
+                saveToFile(item, reportFile);
+
+                log.info("Got client report " + item.getName());
+
+                List<CustomerReportItem> items = ReportParser.parseMobileReport(reportFile);
+                allItems.addAll(items);
+            }
+        }
+    }
+
+    public CustomerReport fillParam(FileItem item, CustomerReport customerReport) {
+        String paramName = item.getFieldName();
+        String value;
+
+        switch (paramName) {
+            case "dt":
+                value = item.getString();
+                log.info("--Report date =" + value);
+
+                Date reportDate = null;
+                try {
+                    reportDate = value != null ? FORMAT.parse(value) : new Date();
+                } catch (ParseException e) {
+                    log.warn(e.getMessage());
+                }
+
+                customerReport.setStartDate(reportDate);
+
+                break;
+            case "period":
+                value = item.getString();
+                int per = value != null ? Integer.parseInt(value) : 0;
+                CustomerReport.Period period = value != null ?
+                        CustomerReport.Period.values()[per] :
+                        CustomerReport.Period.MONTH;
+
+                log.info("--Report period =" + period);
+
+                customerReport.setPeriod(period);
+
+                break;
+            case "cid":
+                value = item.getString();
+                log.info("--Report customer id =" + value);
+
+                long customerId = Long.parseLong(value);
+                Customer customer = catalogService.getCustomer(customerId);
+
+                if (customer == null) {
+                    log.info("Customer not found");
+                    return null;
+                }
+                customerReport.setCustomerId(customer.getId());
+                break;
+        }
+
+
+        return customerReport;
+    }
 
     private void saveToFile(FileItem item, String filename) throws Exception {
         log.info("File name:" + item.getName());

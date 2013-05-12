@@ -3,9 +3,11 @@
     <script src="/js/jquery.js" type="text/javascript"></script>
     <script src="/js/bootstrap.js" type="text/javascript"></script>
     <script src="/js/bootstrap-fileupload.js" type="text/javascript"></script>
+    <script src="/js/bootstrap-dropdown.js" type="text/javascript"></script>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-dropdown.css" media="screen"/>
     <title>Поиск</title>
 </head>
 <body>
@@ -37,15 +39,30 @@
             </div>
             <br>
 
+            <!--<div id="myCollapsibleExample"><a href="#extend" data-toggle="collapse">Расширенный поиск</a></div>-->
+            <!--<div id="extend" class="collapse">-->
+
+            <!--</div>-->
+
             <div class="row">
                 <input type="submit" value="Быстрый поиск" class="btn">
             </div>
+
 
             <input type="hidden" name="type" value="full">
         </form>
     </div>
 
 </div>
-
+<div class="dropdown">
+    <!-- Link or button to toggle dropdown -->
+    <ul class="dropdown-menu" role="menu">
+        <li><a tabindex="-1" href="#">Action</a></li>
+        <li><a tabindex="-1" href="#">Another action</a></li>
+        <li><a tabindex="-1" href="#">Something else here</a></li>
+        <li class="divider"></li>
+        <li><a tabindex="-1" href="#">Separated link</a></li>
+    </ul>
+</div>
 </body>
 </html>

@@ -28,6 +28,8 @@ public class CreateUserServlet extends HttpServlet {
             throws ServletException, IOException {
         String name = req.getParameter("login");
         String pass = req.getParameter("pass");
+        String fullName = req.getParameter("full_name");
+        String email = req.getParameter("email");
         String strCustomerId = req.getParameter("customer-id");
 
         log.info("Creating user request");
@@ -51,12 +53,16 @@ public class CreateUserServlet extends HttpServlet {
         User user = new User();
         user.setLogin(name);
         user.setPass(pass);
+        user.setFullName(fullName);
+        user.setEmail(email);
         user.setCustomerId(custId);
         long userId = storage.createUser(user);
 
         if (userId > 0) {
             log.info("New user created with:\n" +
                     "login         :    " + user.getLogin() + "\n" +
+                    "name          :    " + user.getFullName() + "\n" +
+                    "email         :    " + user.getEmail() + "\n" +
                     "id            :    " + userId + "\n" +
                     "customer-id   :    " + user.getCustomerId());
 

@@ -22,11 +22,11 @@ INSERT INTO customer (details_id, name, right_type, royalty) VALUES (1, 'GSMTech
 INSERT INTO customer (details_id, name, right_type, royalty) VALUES (2, 'Fucking music corp.', 'copyright', 17.5);
 INSERT INTO customer (details_id, name, right_type, royalty) VALUES (3, 'Rock and Roll music corp.', 'copyright', 17.5);
 
-INSERT INTO user (login, password, customer_id) VALUES ('max', '123', 1);
-INSERT INTO user (login, password, customer_id) VALUES ('vova', '123', 1);
-INSERT INTO user (login, password, customer_id) VALUES ('kirill', '123', 2);
-INSERT INTO user (login, password, customer_id) VALUES ('perdun', '123', 2);
-INSERT INTO user (login, password, customer_id) VALUES ('huii', '123', 3);
+INSERT INTO user (login, password, customer_id,full_name,email) VALUES ('max', '123', 1,'Петр Петрович','petr@mail.ru');
+INSERT INTO user (login, password, customer_id,full_name,email) VALUES ('vova', '123', 1,'Вовчик','vov@mail.ru');
+INSERT INTO user (login, password, customer_id,full_name,email) VALUES ('kirill', '123', 2,'Царь Кир','kir@mail.ru');
+INSERT INTO user (login, password, customer_id,full_name,email) VALUES ('perdun', '123', 2,'Пердун пердуныч','perd@mail.ru');
+INSERT INTO user (login, password, customer_id,full_name,email) VALUES ('huii', '123', 3,'Хуй Какой-то','huii@mail.ru');
 
 INSERT INTO user_admin (login, password) VALUES ('max', '123');
 

@@ -41,9 +41,10 @@
                     </legend>
                 </div>
 
-                <div class="row ">
+                <div class="row text-left">
 
-                    <form action="/customer/action/upload-mobile-report" method="post" enctype="multipart/form-data">
+                    <form action="/customer/action/upload-mobile-report"
+                          method="post" enctype="multipart/form-data">
 
 
                         <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -70,25 +71,27 @@
                         <div class="well">
                             <div id="date" class="input-append">
                                 <input data-format="yyyy-MM-dd" id="dt" class="input-block-level" name="dt" type="text">
-    <span class="add-on">
-      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-      </i>
-    </span>
+                              <span class="add-on">
+                                 <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                 </i>
+                                  </span>
                             </div>
                         </div>
 
 
-                        <select name="per">
-                            <option value="0">Месячный</option>
-                            <option value="1">Квартальный</option>
-                        </select>
+                        <label>
+                            Дата отчета
+                            <select name="period">
+                                <option value="0">Месячный</option>
+                                <option value="1">Квартальный</option>
+                            </select>
+                        </label>
 
 
                         <div class="row-fluid">
                             <input class="btn" type="submit" value="Отправить">
                         </div>
                     </form>
-
                 </div>
 
             </div>

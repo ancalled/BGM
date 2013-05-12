@@ -917,6 +917,8 @@ public class DbStorage implements CatalogStorage {
         user.setId(rs.getLong("id"));
         user.setLogin(rs.getString("login"));
         user.setPass(rs.getString("password"));
+        user.setFullName(rs.getString("full_name"));
+        user.setEmail(rs.getString("email"));
         user.setCustomerId(rs.getLong("customer_id"));
         return user;
     }
@@ -966,6 +968,30 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
+    public long createCustomer(final Customer customer) {
+        if (customer == null) return -1L;
+
+        return query(new Action<Long>() {
+            @Override
+            public Long execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "insert into customer(details_id, name, right_type, royalty) values(?,?,?,?)",
+                        Statement.RETURN_GENERATED_KEYS);
+                stmt.setLong(1, customer.getDetailsId());
+                stmt.setString(2, customer.getName());
+                stmt.setString(3, customer.getRightType());
+                stmt.setFloat(4, customer.getRoyalty());
+
+                stmt.executeUpdate();
+
+                ResultSet rs = stmt.getGeneratedKeys();
+
+                return rs.next() ? rs.getLong(1) : -1L;
+            }
+        });
+    }
+
+    @Override
     public long createUser(final User user) {
         if (user == null) return -1L;
 
@@ -973,10 +999,12 @@ public class DbStorage implements CatalogStorage {
             @Override
             public Long execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "insert into user(login,password,customer_id) values(?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                        "insert into user(login,password,customer_id,full_name,email) values(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
                 stmt.setString(1, user.getLogin());
                 stmt.setString(2, user.getPass());
                 stmt.setLong(3, user.getCustomerId());
+                stmt.setString(4, user.getFullName());
+                stmt.setString(5, user.getEmail());
 
                 stmt.executeUpdate();
 

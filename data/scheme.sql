@@ -41,7 +41,7 @@ CREATE TABLE customer (
 
 CREATE TABLE details (
   id      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  rnn     bigint ,
+  rnn     BIGINT,
   address VARCHAR(200),
   boss    VARCHAR(50)
 );
@@ -71,6 +71,8 @@ CREATE TABLE user (
   id          INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   customer_id INT,
   login       VARCHAR(30),
+  full_name   VARCHAR(110),
+  email       VARCHAR(30),
   password    VARCHAR(30)
 );
 

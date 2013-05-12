@@ -53,6 +53,8 @@
             <th>#</th>
             <th>Имя</th>
             <th>Пароль</th>
+            <th>Полное имя</th>
+            <th>Почта</th>
         </tr>
         </thead>
         <tbody>
@@ -65,6 +67,10 @@
                 <td>${u.login}
                 </td>
                 <td>${u.pass}
+                </td>
+                <td>${u.fullName}
+                </td>
+                <td>${u.email}
                 </td>
                 <td>
                     <a href="/action/delete-user?user-id=${u.id}&cid=${customer.id}">
