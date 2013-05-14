@@ -825,24 +825,18 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
-    public Details getDetails(final long id) {
-        return query(new Action<Details>() {
-            @Override
-            public Details execute(Connection con) throws SQLException {
+    public void removeCustomer(final long id) {
+        queryVoid(new VoidAction() {
+            public void execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM details WHERE id = ?");
+                        "delete from customer where id = ?");
+
                 stmt.setLong(1, id);
-
-                ResultSet rs = stmt.executeQuery();
-
-                Details details = null;
-                while (rs.next()) {
-                    details = parseDetails(rs);
-                }
-                return details;
+                stmt.executeUpdate();
             }
         });
     }
+
 
     @Override
     public List<User> getUsersByCustomerId(final long id) {
@@ -865,15 +859,6 @@ public class DbStorage implements CatalogStorage {
     }
 
     //  Parsers  ----------------------------------------------------------------------------------------
-
-    private static Details parseDetails(ResultSet rs) throws SQLException {
-        Details details = new Details();
-        details.setAddress(rs.getString("address"));
-        details.setRnn(rs.getLong("rnn"));
-        details.setBoss(rs.getString("boss"));
-
-        return details;
-    }
 
     private static Platform parsePlatform(ResultSet rs) throws SQLException {
         Platform platform = new Platform();
@@ -906,7 +891,7 @@ public class DbStorage implements CatalogStorage {
         Customer customer = new Customer();
         customer.setId(rs.getLong("id"));
         customer.setName(rs.getString("name"));
-        customer.setDetailsId(rs.getLong("details_id"));
+        customer.setContract(rs.getString("contract"));
         customer.setRightType(rs.getString("right_type"));
         customer.setRoyalty(rs.getFloat("royalty"));
         return customer;
@@ -975,9 +960,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public Long execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "insert into customer(details_id, name, right_type, royalty) values(?,?,?,?)",
+                        "insert into customer(contract, name, right_type, royalty) values(?,?,?,?)",
                         Statement.RETURN_GENERATED_KEYS);
-                stmt.setLong(1, customer.getDetailsId());
+                stmt.setString(1, customer.getContract());
                 stmt.setString(2, customer.getName());
                 stmt.setString(3, customer.getRightType());
                 stmt.setFloat(4, customer.getRoyalty());

@@ -8,6 +8,7 @@
 
     <!--================= Admin  =======================-->
 
+
     <filter>
         <filter-name>adminAuthFilter</filter-name>
         <filter-class>kz.bgm.platform.web.admin.AuthFilter</filter-class>
@@ -71,7 +72,7 @@
 
     <servlet-mapping>
         <servlet-name>deleteUserServlet</servlet-name>
-        <url-pattern>/action/delete-user</url-pattern>
+        <url-pattern>/admin/action/delete-user</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
@@ -121,6 +122,16 @@
         <url-pattern>/admin/action/create-user</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>createCustomerServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.CreateCustomerServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>createCustomerServlet</servlet-name>
+        <url-pattern>/admin/action/create-customer</url-pattern>
+    </servlet-mapping>
+
 
     <!--================= Customer =======================-->
 
@@ -155,6 +166,10 @@
         <servlet-name>customerLogoutServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.customer.action.LogoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>deleteCustomerServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.DeleteCustomerServlet</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -176,6 +191,10 @@
     <servlet-mapping>
         <servlet-name>customerLogoutServlet</servlet-name>
         <url-pattern>/customer/action/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteCustomerServlet</servlet-name>
+        <url-pattern>/admin/action/delete-customer</url-pattern>
     </servlet-mapping>
 
 

@@ -39,6 +39,7 @@
         <tr>
             <th>Название</th>
             <th>Ставка</th>
+            <th>Договор</th>
             <th>Тип прав</th>
         </tr>
         </thead>
@@ -52,6 +53,8 @@
                 </td>
                 <td>${c.royalty}
                 </td>
+                <td>${c.contract}
+                </td>
                 <td>
                     <c:choose>
                         <c:when test="${c.rightType eq 'copyright'}">
@@ -62,12 +65,23 @@
                         </c:otherwise>
                     </c:choose>
                 </td>
+                <td>
+                    <a href="/admin/action/delete-customer?customer-id=${c.id}">
+                        <i class="icon-trash"></i>
+                    </a>
+                </td>
             </tr>
             </a>
         </c:forEach>
 
         </tbody>
     </table>
+
+    <form action="create-customer-form" method="get">
+        <input type="hidden" name="cid" value="${customer.id}">
+        <input class="btn" type="submit" value="Создать">
+
+    </form>
 
 </div>
 

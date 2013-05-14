@@ -2,7 +2,6 @@ package kz.bgm.platform.web.admin;
 
 import kz.bgm.platform.model.domain.Customer;
 import kz.bgm.platform.model.domain.CustomerReport;
-import kz.bgm.platform.model.domain.Details;
 import kz.bgm.platform.model.domain.User;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
@@ -142,11 +141,9 @@ public class DispatcherServlet extends HttpServlet {
                         Customer customer = catalogStorage.getCustomer(customerId);
 
                         List<User> userList = catalogStorage.getUsersByCustomerId(customerId);
-                        Details details = catalogStorage.getDetails(customer.getDetailsId());
 
                         req.setAttribute("customer", customer);
                         req.setAttribute("users", userList);
-                        req.setAttribute("details", details);
 
                         return "customer-detail";
                     }
@@ -158,6 +155,15 @@ public class DispatcherServlet extends HttpServlet {
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
 
                         return "create-user-form";
+                    }
+                };
+                break;
+            case "/create-customer-form":
+                action = new Action() {
+                    @Override
+                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+
+                        return "create-customer-form";
                     }
                 };
                 break;

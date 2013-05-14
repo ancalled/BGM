@@ -17,32 +17,13 @@
 <div class="container">
 
     <div class="row text-left">
-        <legend>
+    <legend>
             Информация по компании ${customer.name}
         </legend>
     </div>
 
-    <div class="row">
-        <div class="span2">Название</div>
-        <div class="span3"><strong>${customer.name}</strong></div>
-    </div>
-
-    <div class="row">
-        <div class="span2">Адрес</div>
-        <div class="span3"><strong>${details.address}</strong></div>
-    </div>
-
-    <div class="row">
-        <div class="span2">РНН</div>
-        <div class="span3"><strong>${details.rnn}</strong></div>
-    </div>
-    <div class="row">
-        <div class="span2">Руководитель</div>
-        <div class="span3"><strong>${details.boss}</strong></div>
-    </div>
 </div>
 
-<br>
 <br>
 <br>
 
@@ -73,7 +54,7 @@
                 <td>${u.email}
                 </td>
                 <td>
-                    <a href="/action/delete-user?user-id=${u.id}&cid=${customer.id}">
+                    <a href="/admin/action/delete-user?user-id=${u.id}&cid=${customer.id}">
                         <i class="icon-trash"></i>
                     </a>
                 </td>
@@ -84,7 +65,7 @@
         </tbody>
     </table>
     <div class="row span2">
-        <form action="/admin/create-user-form.html" method="get">
+        <form action="create-user-form" method="get">
             <input type="hidden" name="cid" value="${customer.id}">
             <input class="btn" type="submit" value="Создать">
 

@@ -34,17 +34,11 @@ CREATE INDEX code_index ON composition (code) USING BTREE;
 CREATE TABLE customer (
   id         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name       VARCHAR(200),
-  details_id INT,
   right_type VARCHAR(50),
-  royalty    DECIMAL(6, 3)
+  royalty    DECIMAL(6, 3),
+  contract   VARCHAR(100)
 );
 
-CREATE TABLE details (
-  id      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  rnn     BIGINT,
-  address VARCHAR(200),
-  boss    VARCHAR(50)
-);
 
 CREATE TABLE customer_report (
   id          INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

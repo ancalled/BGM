@@ -35,7 +35,7 @@ public class CreateUserServlet extends HttpServlet {
         log.info("Creating user request");
 
         if (name == null || pass == null || strCustomerId == null) {
-            resp.sendRedirect("../create-user-form.html");
+            resp.sendRedirect("../create-user-form.jsp");
             log.warn("Some params are empty");
             return;
         }
@@ -43,7 +43,7 @@ public class CreateUserServlet extends HttpServlet {
         User oldUser = storage.getUser(name);
 
         if (oldUser != null) {
-            resp.sendRedirect("../create-user-form.html?err=101"
+            resp.sendRedirect("../create-user-form.jsp?err=101"
                     + strCustomerId);
 
             return;

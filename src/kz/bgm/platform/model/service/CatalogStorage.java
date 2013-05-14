@@ -54,8 +54,6 @@ public interface CatalogStorage {
 
     void saveCustomerReportItems(List<CustomerReportItem> reportItemList);
 
-    Details getDetails(long id);
-
     CustomerReport getCustomerReport(long id);
 
     List<CustomerReport> getCustomerReports(long customerId, Date from, Date to);
@@ -73,6 +71,8 @@ public interface CatalogStorage {
     long createCustomer(Customer customer);
 
     void removeUser(long id);
+
+    void removeCustomer(long id);
 
     CalculatedReportItem calculateMReportRelated(CustomerReportItem reportItems);
 }

@@ -6,11 +6,15 @@ public class Customer {
     private String name;
     private float royalty;
     private String rightType;
-    private long detailsId;
+    private String contract;
 
 
-    public void setDetailsId(long detailsId) {
-        this.detailsId = detailsId;
+    public String getContract() {
+        return contract;
+    }
+
+    public void setContract(String contract) {
+        this.contract = contract;
     }
 
     public void setId(long id) {
@@ -35,10 +39,6 @@ public class Customer {
 
     public String getName() {
         return name;
-    }
-
-    public long getDetailsId() {
-        return detailsId;
     }
 
 

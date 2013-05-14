@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
     <script src="/js/jquery.js"></script>
@@ -37,15 +40,12 @@
                 <input type="text" name="email" class="input-block-level" required="true">
             </label>
 
-            <input type="hidden" name="customer-id" id="customer" value="">
+            <input type="hidden" name="customer-id" id="customer" value=<c:out value="${param.cid}"/>>
             <button class="btn" type="submit">Создать</button>
         </form>
     </div>
 
-    <script>
-        $("#customer").val($.url().param('cid'));
 
-    </script>
 
 </div>
 </body>
