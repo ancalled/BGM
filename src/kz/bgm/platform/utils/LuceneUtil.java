@@ -77,6 +77,7 @@ public class LuceneUtil {
 
 
     public static void main(String[] args) throws IOException, ParseException {
+
         if (args.length < 1) {
             System.out.println("Expected:\nsearch-track.sh artist: composition");
             return;
@@ -92,7 +93,7 @@ public class LuceneUtil {
 
         String[] splitted = query.split(":[\\s]?");
         String artist = splitted[0];
-        String track = splitted[1];
+        String track = splitted.length > 1 ? splitted[1] : "";
 
         System.out.println("Queried artist: '" + artist + "'" + ", track: '" + track + "'");
 

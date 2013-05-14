@@ -42,25 +42,32 @@ public class SearchServlet extends HttpServlet {
         if (query != null && !"".equals(query.trim()) && type != null) {
 
             List<Track> found = null;
-            if (type.equals("like-artist")) {
-                found = catalogService.searchTrackByArtistLike(query);
+            switch (type) {
+                case "like-artist":
+                    found = catalogService.searchTrackByArtistLike(query);
 
-            } else if (type.equals("artist")) {
-                found = catalogService.searchTracksByArtist(query);
-            } else if (type.equals("code")) {
-                found = catalogService.searchTracksByCode(query);
-            } else if (type.equals("composition")) {
-                found = catalogService.searchTracksByName(query);
-            } else if (type.equals("composer")) {
-                found = catalogService.searchTracksByComposer(query);
-            } else {
-                try {
-                    List<Long> res = luceneSearch.search(query);
-                    found = catalogService.getTracks(res);
+                    break;
+                case "artist":
+                    found = catalogService.searchTracksByArtist(query);
+                    break;
+                case "code":
+                    found = catalogService.searchTracksByCode(query);
+                    break;
+                case "composition":
+                    found = catalogService.searchTracksByName(query);
+                    break;
+                case "composer":
+                    found = catalogService.searchTracksByComposer(query);
+                    break;
+                default:
+                    try {
+                        List<Long> res = luceneSearch.search(query);
+                        found = catalogService.getTracks(res);
 
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    break;
             }
 
             HttpSession session = req.getSession(true);
