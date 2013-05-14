@@ -21,6 +21,7 @@ public class DeleteCustomerServlet extends HttpServlet {
         storage = CatalogFactory.getStorage();
     }
 
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String StrCustomerId = req.getParameter("customer-id");
