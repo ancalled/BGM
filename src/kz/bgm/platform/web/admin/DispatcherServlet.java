@@ -1,5 +1,6 @@
 package kz.bgm.platform.web.admin;
 
+import kz.bgm.platform.model.domain.Catalog;
 import kz.bgm.platform.model.domain.Customer;
 import kz.bgm.platform.model.domain.CustomerReport;
 import kz.bgm.platform.model.domain.User;
@@ -164,6 +165,17 @@ public class DispatcherServlet extends HttpServlet {
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
 
                         return "create-customer-form";
+                    }
+                };
+                break;
+            case "/main":
+                action = new Action() {
+                    @Override
+                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+                        List <Catalog> catalogList = catalogStorage.getAllCatalogs();
+
+                         //todo finish
+                        return "main";
                     }
                 };
                 break;
