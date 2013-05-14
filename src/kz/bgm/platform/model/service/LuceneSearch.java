@@ -30,8 +30,14 @@ public class LuceneSearch {
 
 
     public static final int RESULT_SIZE = 100000;
+
     public static final double THRESHOLD = 6.5;
     public static final int LIMIT = 100;
+
+    public static final String FIELD_ID = "id";
+    public static final String FIELD_NAME = "name";
+    public static final String FIELD_ARTIST = "artist";
+    public static final String FIELD_COMPOSER = "composer";
 
     private StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_41);
     private IndexSearcher searcher;
@@ -65,10 +71,10 @@ public class LuceneSearch {
 
         for (Track t : tracks) {
             Document doc = new Document();
-            doc.add(new LongField("id", t.getId(), Field.Store.YES));
-            doc.add(new TextField("name", t.getName(), Field.Store.YES));
-            doc.add(new TextField("artist", t.getArtist(), Field.Store.YES));
-            doc.add(new TextField("composer", t.getComposer(), Field.Store.YES));
+            doc.add(new LongField(FIELD_ID, t.getId(), Field.Store.YES));
+            doc.add(new TextField(FIELD_NAME, t.getName(), Field.Store.YES));
+            doc.add(new TextField(FIELD_ARTIST, t.getArtist(), Field.Store.YES));
+            doc.add(new TextField(FIELD_COMPOSER, t.getComposer(), Field.Store.YES));
             w.addDocument(doc);
 
         }
@@ -87,16 +93,9 @@ public class LuceneSearch {
 
         log.info("Got query '" + artist + "' and" + " '" + composition + "'");
 
-        String[] fields = new String[]{"artist", "name"};
+        String[] fields = new String[]{FIELD_ARTIST, FIELD_NAME};
         String[] values = new String[]{artist, composition};
         Query query = MultiFieldQueryParser.parse(Version.LUCENE_41, values, fields, analyzer);
-
-//        BooleanQuery query = new BooleanQuery();
-//        query.add(new TermQuery(new Term("name", composition)), BooleanClause.Occur.MUST);
-//        query.add(new TermQuery(new Term("artist", artist.toLowerCase())), BooleanClause.Occur.MUST);
-
-//        query.add(new FuzzyQuery(new Term("name", composition)), BooleanClause.Occur.SHOULD);
-//        query.add(new FuzzyQuery(new Term("artist", artist)), BooleanClause.Occur.SHOULD);
 
 
         TopDocs hits = searcher.search(query, limit);
@@ -111,8 +110,8 @@ public class LuceneSearch {
             }
 
             Document d = searcher.doc(hit.doc);
-            if (d.getField("id").numericValue() != null) {
-                result.add(d.getField("id").numericValue().longValue());
+            if (d.getField(FIELD_ID).numericValue() != null) {
+                result.add(d.getField(FIELD_ID).numericValue().longValue());
             }
 
 //            System.out.println(hit.score + "\t" + d.get("artist") + ": " + d.get("name"));
@@ -130,8 +129,7 @@ public class LuceneSearch {
     public List<Long> search(String queryString, int start, int length) throws IOException, ParseException {
         log.info("Got query '" + queryString + "'");
 
-
-        String[] fields = new String[]{"artist", "name", "composer"};
+        String[] fields = new String[]{FIELD_ARTIST, FIELD_NAME, FIELD_COMPOSER};
         QueryParser queryParser =
                 new MultiFieldQueryParser(Version.LUCENE_41, fields, analyzer);
 
@@ -155,9 +153,9 @@ public class LuceneSearch {
         for (int k = start; k < end; k++) {
             ScoreDoc hit = hits[k];
             Document d = searcher.doc(hit.doc);
-            result.add(Long.parseLong(d.get("id")));
+            result.add(Long.parseLong(d.get(FIELD_ID)));
 
-            System.out.println(hit.score + "\t" + d.get("artist") + ": " + d.get("name"));
+            System.out.println(hit.score + "\t" + d.get(FIELD_ARTIST) + ": " + d.get(FIELD_NAME));
 
         }
 
@@ -168,25 +166,23 @@ public class LuceneSearch {
     public List<SearchResult> searchWithResult(String artist, String composition, int limit, double threshold)
             throws IOException, ParseException {
 
-        log.info("Got query '" + artist + "' and" + " '" + composition + "'");
+//        log.info("Got query '" + artist + "' and" + " '" + composition + "'");
 
-        String[] fields = new String[]{"artist", "name"};
-        String[] values = new String[]{artist, composition};
-        Query query = MultiFieldQueryParser.parse(Version.LUCENE_41, values, fields, analyzer);
+//        String[] fields = new String[]{FIELD_ARTIST, FIELD_NAME};
+//        String[] values = new String[]{artist, composition};
+//        Query query = MultiFieldQueryParser.parse(Version.LUCENE_41, values, fields, analyzer);
 
-//        BooleanQuery query = new BooleanQuery();
-//        query.add(new TermQuery(new Term("name", composition)), BooleanClause.Occur.MUST);
-//        query.add(new TermQuery(new Term("artist", artist.toLowerCase())), BooleanClause.Occur.MUST);
-
-//        query.add(new FuzzyQuery(new Term("name", composition)), BooleanClause.Occur.SHOULD);
-//        query.add(new FuzzyQuery(new Term("artist", artist)), BooleanClause.Occur.SHOULD);
-
+        BooleanQuery query = new BooleanQuery();
+        query.add(createTermQuery(FIELD_ARTIST, artist, 1.5f), BooleanClause.Occur.MUST);
+        if (!composition.isEmpty()) {
+            query.add(createTermQuery(FIELD_NAME, composition, 1), BooleanClause.Occur.MUST);
+        }
 
         TopDocs hits = searcher.search(query, limit);
 
         List<SearchResult> result = new ArrayList<>();
 
-        System.out.println("Hits: " + hits.totalHits);
+//        System.out.println("Hits: " + hits.totalHits);
 
         for (ScoreDoc hit : hits.scoreDocs) {
             if (hit.score < threshold) {
@@ -194,13 +190,19 @@ public class LuceneSearch {
             }
 
             Document d = searcher.doc(hit.doc);
-            long id = Long.parseLong(d.get("id"));
+            long id = Long.parseLong(d.get(FIELD_ID));
             result.add(new SearchResult(id, hit.score));
 
 //            System.out.println(hit.score + "\t" + d.get("artist") + ": " + d.get("name"));
         }
 
         return result;
+    }
+
+    private Query createTermQuery(String field, String value, float boost) throws ParseException {
+        Query parse = new QueryParser(Version.LUCENE_41, field, analyzer).parse(value);
+        parse.setBoost(boost);
+        return parse;
     }
 
 
