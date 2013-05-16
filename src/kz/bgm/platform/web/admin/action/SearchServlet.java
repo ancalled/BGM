@@ -45,7 +45,6 @@ public class SearchServlet extends HttpServlet {
             switch (type) {
                 case "like-artist":
                     found = catalogService.searchTrackByArtistLike(query);
-
                     break;
                 case "artist":
                     found = catalogService.searchTracksByArtist(query);
