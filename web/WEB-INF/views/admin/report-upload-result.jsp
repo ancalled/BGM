@@ -22,7 +22,7 @@
         <ul class="nav">
             <li><a href="/admin/index.html">Главная</a></li>
             <li class="active"><a href="/admin/reports.html">Отчеты</a></li>
-            <li><a href="/admin/search.html">Поиск</a></li>
+            <li><a href="/admin/view/search-result">Поиск</a></li>
             <li><a href="/admin/view/customers">Клиенты</a></li>
             <li><a href="/admin/action/logout">Выход</a></li>
         </ul>

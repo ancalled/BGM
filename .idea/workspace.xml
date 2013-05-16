@@ -48,14 +48,17 @@
     </treeState>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/LoginServlet.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/LoginServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
+    <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="&#10;">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/customers.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/customers.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/admin/index.html" afterPath="$PROJECT_DIR$/web/admin/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/report-upload-result.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/report-upload-result.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/admin/reports.html" afterPath="$PROJECT_DIR$/web/admin/reports.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/search-result.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/search-result.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bgm-platform.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368691889585" ignored="false" />
+    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368696545065" ignored="false" />
     <file path="/CatalogStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367559900201" ignored="false" />
     <file path="/fragment.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367553754839" ignored="false" />
     <file path="db-console:/b524fb0f/bd8e1b6e-fe0f-401f-a88d-0e81e53c8907/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363032963765" ignored="false" />
@@ -232,64 +235,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="db.properties" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="13" selection-start="13" selection-end="13" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="DbStorage.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1073" column="0" selection-start="38999" selection-end="38999" vertical-scroll-proportion="0.0">
+            <state line="220" column="25" selection-start="6714" selection-end="6714" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#6398#6960#0" expanded="true" />
+                <element signature="e#6949#6950#0" expanded="true" />
+                <element signature="e#35358#36114#0" expanded="true" />
+                <element signature="e#36103#36104#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SearchServlet.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/SearchServlet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="39" column="56" selection-start="1269" selection-end="1280" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.jsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/main.jsp">
+      <file leaf-file-name="search.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/admin/search.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginServlet.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/LoginServlet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="54" selection-start="1542" selection-end="1542" vertical-scroll-proportion="0.50961536">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LuceneUtil.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="16" selection-start="1315" selection-end="1315" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LuceneSearch.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="165" column="30" selection-start="5548" selection-end="5548" vertical-scroll-proportion="0.0">
+            <state line="24" column="33" selection-start="1062" selection-end="1062" vertical-scroll-proportion="2.0">
               <folding />
             </state>
           </provider>
@@ -298,16 +270,61 @@
       <file leaf-file-name="customers.jsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/customers.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="21" column="50" selection-start="968" selection-end="968" vertical-scroll-proportion="-13.730769">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="customer-detail.jsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/customer-detail.jsp">
+      <file leaf-file-name="reports.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/admin/reports.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="23" selection-start="1343" selection-end="1343" vertical-scroll-proportion="-7.4615383">
+            <state line="23" column="50" selection-start="1017" selection-end="1017" vertical-scroll-proportion="-15.038462">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/admin/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="40" selection-start="767" selection-end="767" vertical-scroll-proportion="-11.115385">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="search-result.jsp" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/search-result.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="65" selection-start="987" selection-end="987" vertical-scroll-proportion="0.47103274">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="report-upload-result.jsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/report-upload-result.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="50" selection-start="995" selection-end="995" vertical-scroll-proportion="-15.692307">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CatalogStorage.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="16" selection-start="592" selection-end="592" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scheme.sql" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/scheme.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="74" column="40" selection-start="1666" selection-end="1666" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -337,12 +354,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CalculatedReportItem.java" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java" />
-        <option value="$PROJECT_DIR$/test/kz/bgm/platform/test/lucene/LuceneSearchUtil.java" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneSearchUtil.java" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UploadReportPublicServlet.java" />
-        <option value="$PROJECT_DIR$/data/queries.sql" />
         <option value="$PROJECT_DIR$/test/kz/bgm/platform/test/builder/ReportBuilderTest.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/utils/ReportBuilder.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/utils/ReportParser.java" />
@@ -353,6 +364,12 @@
         <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/customer-detail.jsp" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/LoginServlet.java" />
         <option value="$PROJECT_DIR$/db.properties" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/SearchServlet.java" />
+        <option value="$PROJECT_DIR$/web/admin/index.html" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/customers.jsp" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/report-upload-result.jsp" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/search-result.jsp" />
+        <option value="$PROJECT_DIR$/web/admin/reports.html" />
       </list>
     </option>
   </component>
@@ -469,15 +486,99 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bgm-platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BGM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="customer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bgm-platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BGM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bgm-platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BGM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bgm-platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BGM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="bgm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="research" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -590,58 +691,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="action" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bgm-platform" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BGM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bgm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="platform" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bgm-platform" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BGM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bgm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="platform" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1180,7 +1229,15 @@
       <created>1367812009191</created>
       <updated>1367812009191</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="поменял редирект после админского логина на index.html пока не доделал главную страничку &#10;">
+      <created>1368693444327</created>
+      <updated>1368693444327</updated>
+    </task>
+    <task id="LOCAL-00042" summary="поправил поиск">
+      <created>1368696553703</created>
+      <updated>1368696553703</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1190,8 +1247,8 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6170704" sideWeight="0.49713057" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22899885" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12362301" sideWeight="0.62975776" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2283737" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12362301" sideWeight="0.62975776" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.249694" sideWeight="0.67128026" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3160323" sideWeight="0.49265605" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TeamCity" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1203,12 +1260,12 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871974" sideWeight="0.497552" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23905997" sideWeight="0.1696113" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24724603" sideWeight="0.77100116" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24724603" sideWeight="0.62975776" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32986537" sideWeight="0.6839677" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18971848" sideWeight="0.62975776" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3702422" sideWeight="0.4749082" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26744187" sideWeight="0.62975776" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3702422" sideWeight="0.4749082" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26297578" sideWeight="0.497552" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1254,7 +1311,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="допил утулитки для отчетов + доработка страничек админстратора по созданию пользователей" />
+    <option name="LAST_COMMIT_MESSAGE" value="поправил поиск" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1267,8 +1324,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Добавил реализацию Lucen в тестовый пакет" />
-    <MESSAGE value="Тестирование lucen" />
     <MESSAGE value="Тестирование lucen, сделала отчет с импользование lucen , начал прикручивать логирование" />
     <MESSAGE value="выполнение последних отчетов , тестовое , проверка как хорошо lucen находит треки" />
     <MESSAGE value="Начал разработку страницы отчета" />
@@ -1292,6 +1347,8 @@
     <MESSAGE value="потерфлсф public servlet , пересоздал" />
     <MESSAGE value="допил выгрузки паблик отчетов + тест к ниму сделал" />
     <MESSAGE value="допил утулитки для отчетов + доработка страничек админстратора по созданию пользователей" />
+    <MESSAGE value="поменял редирект после админского логина на index.html пока не доделал главную страничку &#10;" />
+    <MESSAGE value="поправил поиск" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1323,77 +1380,63 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/MobileReportUtil.java">
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/LoginServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="152" column="0" selection-start="5588" selection-end="5588" vertical-scroll-proportion="0.0">
+        <state line="43" column="54" selection-start="1542" selection-end="1542" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://db-console:/b5e0f336/c1bdb8de-ad36-430b-b4d0-4ec1460b4f35/">
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="299" column="18" selection-start="8017" selection-end="8035" vertical-scroll-proportion="0.56335616" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/customers.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="30" column="16" selection-start="592" selection-end="592" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/customer-detail.jsp">
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="23" selection-start="1343" selection-end="1343" vertical-scroll-proportion="-7.4615383">
-          <folding />
+        <state line="220" column="25" selection-start="6714" selection-end="6714" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#6398#6960#0" expanded="true" />
+            <element signature="e#6949#6950#0" expanded="true" />
+            <element signature="e#35358#36114#0" expanded="true" />
+            <element signature="e#36103#36104#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java">
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/SearchServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="165" column="30" selection-start="5548" selection-end="5548" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="16" selection-start="1315" selection-end="1315" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/kz/bgm/platform/test/lucene/LuceneTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="49" selection-start="3385" selection-end="3385" vertical-scroll-proportion="0.25310558">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/sample-data.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="0" selection-start="2370" selection-end="2747" vertical-scroll-proportion="0.64659274">
+        <state line="39" column="56" selection-start="1269" selection-end="1280" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/scheme.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="0" selection-start="694" selection-end="881" vertical-scroll-proportion="0.026397515">
+        <state line="74" column="40" selection-start="1666" selection-end="1666" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/queries.sql">
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/all-customer-reports.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.6133541">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/old/REportBuilder.java">
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/create-customer-form.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="38" selection-start="594" selection-end="594" vertical-scroll-proportion="0.33229813">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.19899245">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/customer-detail.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1405,30 +1448,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/index.html">
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/report-upload-result.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="50" selection-start="995" selection-end="995" vertical-scroll-proportion="-15.692307">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/create-user-form.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java">
+    <entry file="file://$PROJECT_DIR$/web/admin/search.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1073" column="0" selection-start="38999" selection-end="38999" vertical-scroll-proportion="0.0">
+        <state line="24" column="33" selection-start="1062" selection-end="1062" vertical-scroll-proportion="2.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db.properties">
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/customers.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="13" selection-start="13" selection-end="13" vertical-scroll-proportion="0.0">
+        <state line="21" column="50" selection-start="968" selection-end="968" vertical-scroll-proportion="-13.730769">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/LoginServlet.java">
+    <entry file="file://$PROJECT_DIR$/web/admin/reports.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="54" selection-start="1542" selection-end="1542" vertical-scroll-proportion="0.50961536">
+        <state line="23" column="50" selection-start="1017" selection-end="1017" vertical-scroll-proportion="-15.038462">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/admin/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="40" selection-start="767" selection-end="767" vertical-scroll-proportion="-11.115385">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/search-result.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="65" selection-start="987" selection-end="987" vertical-scroll-proportion="0.47103274">
           <folding />
         </state>
       </provider>
