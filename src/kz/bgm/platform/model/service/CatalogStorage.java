@@ -56,6 +56,8 @@ public interface CatalogStorage {
 
     CustomerReport getCustomerReport(long id);
 
+    List<CustomerReport> getAllCustomerReports();
+
     List<CustomerReport> getCustomerReports(long customerId, Date from, Date to);
 
     List<CustomerReportItem> getCustomerReportsItems(long reportId);
@@ -75,4 +77,6 @@ public interface CatalogStorage {
     void removeCustomer(long id);
 
     CalculatedReportItem calculateMReportRelated(CustomerReportItem reportItems);
+
+    int getCompositionCount(long catalogId);
 }

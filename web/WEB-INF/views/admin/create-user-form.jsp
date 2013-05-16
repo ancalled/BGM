@@ -14,7 +14,15 @@
 </head>
 <body>
 
+<c:import url="navbar.jsp">
+    <c:param name="customers" value="active"/>
+</c:import>
+
+
+
 <div class="container">
+
+
     <div class="row text-left">
         <legend>
             Создание пользователя

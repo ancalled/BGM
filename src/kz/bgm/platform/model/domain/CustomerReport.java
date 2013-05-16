@@ -89,4 +89,12 @@ public class CustomerReport {
     public void setDetected(int detected) {
         this.detected = detected;
     }
+
+    public int getTypeOrdinal() {
+        return type.ordinal();
+    }
+
+    public int getPeriodOrdinal() {
+        return period.ordinal();
+    }
 }

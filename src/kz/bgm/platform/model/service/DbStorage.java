@@ -530,6 +530,27 @@ public class DbStorage implements CatalogStorage {
 
 
     @Override
+    public List<CustomerReport> getAllCustomerReports() {
+        return query(new Action<List<CustomerReport>>() {
+            @Override
+            public List<CustomerReport> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM customer_report");
+
+                ResultSet rs = stmt.executeQuery();
+
+                List<CustomerReport> reportList = new ArrayList();
+
+                while (rs.next()) {
+                    reportList.add(parseCustomerReport(rs));
+                }
+
+                return reportList;
+            }
+        });
+    }
+
+    @Override
     public CustomerReport getCustomerReport(final long id) {
         return query(new Action<CustomerReport>() {
             @Override
@@ -679,6 +700,24 @@ public class DbStorage implements CatalogStorage {
             }
         });
 
+    }
+
+    @Override
+    public int getCompositionCount(final long catalogId) {
+        return query(new Action<Integer>() {
+            @Override
+            public Integer execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT COUNT(*)cnt FROM composition where catalog_id= ?");
+
+                stmt.setLong(1, catalogId);
+
+                ResultSet rs = stmt.executeQuery();
+
+
+                return rs.next() ? rs.getInt("cnt") : null;
+            }
+        });
     }
 
     @Override
@@ -871,6 +910,8 @@ public class DbStorage implements CatalogStorage {
         Catalog catalog = new Catalog();
         catalog.setId(rs.getLong("id"));
         catalog.setName(rs.getString("name"));
+        catalog.setRoyalty(rs.getFloat("royalty"));
+        catalog.setCopyright(rs.getString("copyright"));
         return catalog;
     }
 

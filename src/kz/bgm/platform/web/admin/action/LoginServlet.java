@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
                 return;
             }
         }
-        resp.sendRedirect("/admin/index.html");
+        resp.sendRedirect("/admin/view/index");
     }
 
 

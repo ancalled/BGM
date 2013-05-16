@@ -1,5 +1,6 @@
 package kz.bgm.platform.web.customer;
 
+import kz.bgm.platform.model.domain.Catalog;
 import kz.bgm.platform.model.domain.Customer;
 import kz.bgm.platform.model.domain.CustomerReport;
 import kz.bgm.platform.model.domain.User;
@@ -16,7 +17,9 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class DispatcherServlet extends HttpServlet {
@@ -86,9 +89,57 @@ public class DispatcherServlet extends HttpServlet {
                     }
                 };
                 break;
+            case "/index":
+
+                action = new Action() {
+                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+                        HttpSession session = req.getSession();
+
+                        String catalogsAttr = "catalogs";
+                        String reportsAttr = "reports";
+                        String statisticAttr = "cat_stat";
+
+                        @SuppressWarnings("unchecked")
+                        List<Catalog> catalogList = (List<Catalog>)
+                                session.getAttribute(catalogsAttr);
+                        if (catalogList == null) {
+                            catalogList = catalogStorage.getAllCatalogs();
+                            session.setAttribute(catalogsAttr, catalogList);
+                        }
 
 
+                        @SuppressWarnings("unchecked")
+                        List<CustomerReport> customerReportList = (List<CustomerReport>)
+                                session.getAttribute(reportsAttr);
 
+                        if (customerReportList == null) {
+                            customerReportList = catalogStorage.getAllCustomerReports();
+                            session.setAttribute(reportsAttr, customerReportList);
+                        }
+
+                        @SuppressWarnings("unchecked")
+                        Map<String, Integer> catalogStatMap = (Map<String, Integer>)
+                                session.getAttribute(statisticAttr);
+
+                        if (catalogStatMap == null) {
+                            catalogStatMap = new LinkedHashMap<>();
+
+                            for (Catalog cat : catalogList) {
+                                int compCount = catalogStorage.getCompositionCount(cat.getId());
+                                catalogStatMap.put(cat.getName(), compCount);
+                            }
+                            session.setAttribute(statisticAttr, catalogStatMap);
+                        }
+                        //todo навреное стоит запихнуть это в сессию, а потом проверять на наличие
+                        // todo чтобы не делать много лишних запросов
+                        req.setAttribute("cat_stat", catalogStatMap);
+                        req.setAttribute("catalogs", catalogList);
+                        req.setAttribute("reports", customerReportList);
+
+                        return "index";
+                    }
+                };
+                break;
 
         }
 

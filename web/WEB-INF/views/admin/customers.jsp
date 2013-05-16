@@ -13,19 +13,9 @@
 </head>
 <body>
 
-<div class="navbar">
-    <div class="navbar-inner">
-        <a class="brand" href="/admin/index.html">BGM Platform</a>
-        <ul class="nav">
-            <li><a href="/admin/index.html">Главная</a></li>
-            <li><a href="/admin/reports.html">Отчеты</a></li>
-            <li><a href="/admin/view/search-result">Поиск</a></li>
-            <li class="active"><a href="/admin/view/customers">Клиенты</a></li>
-            <li><a href="/admin/action/logout">Выход</a></li>
-        </ul>
-    </div>
-</div>
-
+<c:import url="navbar.jsp">
+    <c:param name="customers" value="active"/>
+</c:import>
 
 <div class="container">
     <div class="row text-left">

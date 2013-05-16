@@ -11,8 +11,11 @@
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" media="screen"/>
     <title>Компания ${customer.name}</title>
 </head>
-<body style="padding-top: 30">
+<body>
 
+<c:import url="navbar.jsp">
+    <c:param name="customers" value="active"/>
+</c:import>
 
 <div class="container">
 
