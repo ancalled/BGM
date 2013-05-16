@@ -58,54 +58,52 @@
         <input type="hidden" id="type" name="type" value="full">
     </form>
 
-</div>
 
-<script>
+    <script>
 
-    var typeEl = document.getElementById('type');
+        var typeEl = document.getElementById('type');
 
-    function change_type(comp) {
-        typeEl.setAttribute('value', comp.id);
-    }
-</script>
+        function change_type(comp) {
+            typeEl.setAttribute('value', comp.id);
+        }
+    </script>
 
+    <c:if test="${not empty tracks}">
+    <p>
+        По запросу '${query}' найдено ${fn:length(tracks)} композиций
+    </p>
 
-        <p>
-            По запросу '${query}' найдено ${fn:length(tracks)} композиций
-        </p>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Код</th>
+            <th>Композиция</th>
+            <th>Исполнитель</th>
+            <th>Авторы</th>
+            <th>Мобильный контент</th>
+            <th>Публичка</th>
+            <th>Каталог</th>
+        </tr>
+        </thead>
+        <tbody>
 
-        <table class="table">
-            <thead>
+        <c:forEach var="t" items="${tracks}">
             <tr>
-                <th>Код</th>
-                <th>Композиция</th>
-                <th>Исполнитель</th>
-                <th>Авторы</th>
-                <th>Мобильный контент</th>
-                <th>Публичка</th>
-                <th>Каталог</th>
+                <td>${t.code}</td>
+                <td>${t.name}</td>
+                <td>${t.artist}</td>
+                <td>${t.composer}</td>
+                <td>${t.mobileShare}</td>
+                <td>${t.publicShare}</td>
+                <td>${t.catalog}</td>
             </tr>
-            </thead>
-            <tbody>
+        </c:forEach>
 
-            <c:forEach var="t" items="${tracks}">
-                <tr>
-                    <td>${t.code}</td>
-                    <td>${t.name}</td>
-                    <td>${t.artist}</td>
-                    <td>${t.composer}</td>
-                    <td>${t.mobileShare}</td>
-                    <td>${t.publicShare}</td>
-                    <td>${t.catalog}</td>
-                </tr>
-            </c:forEach>
-
-            </tbody>
-        </table>
-
-
-    </div>
+        </tbody>
+    </table>
+    </c:if>
 
 </div>
+
 </body>
 </html>
