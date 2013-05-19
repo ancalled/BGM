@@ -9,6 +9,8 @@
     <!--================= Admin  =======================-->
 
 
+
+
     <filter>
         <filter-name>adminAuthFilter</filter-name>
         <filter-class>kz.bgm.platform.web.admin.AuthFilter</filter-class>
@@ -170,6 +172,10 @@
         <servlet-name>deleteCustomerServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.DeleteCustomerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>putToBasketServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.customer.action.PutToBasketServlet</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -197,5 +203,9 @@
         <url-pattern>/admin/action/delete-customer</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>putToBasketServlet</servlet-name>
+        <url-pattern>/customer/action/add-to-basket</url-pattern>
+    </servlet-mapping>
 
 </web-app>

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html xmlns="http://www.w3.org/1999/html">
 
@@ -26,93 +27,118 @@
 <div class="container">
 
     <div class="row">
-        <div class="span5">
-            <legend>
-                Статистика Каталогов
-            </legend>
+        <legend>
+            Каталоги
+        </legend>
 
-            <c:if test="${not empty catalogs}">
+        <c:if test="${not empty cat_stat}">
 
-                <table class="table">
-                    <thead>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Каталог</th>
+                    <th>Ставка</th>
+                    <th>Права</th>
+                    <th>Количество исполнителей</th>
+                    <th>Количество треков</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${cat_stat}" var="c">
                     <tr>
-                        <th>Каталог</th>
-                        <th>Ставка</th>
-                        <th>Права</th>
-                        <th>Количество треков</th>
+                        <td>${c.catalog}</td>
+                        <td>${c.royalty}</td>
+                        <td><c:choose>
+                            <c:when test="${c.rights eq 'AUTHOR'}">
+                                Авторские
+                            </c:when>
+                            <c:when test="${c.rights eq 'RELATED'}">
+                                Смежные
+                            </c:when>
+                            <c:otherwise>
+                                ${c.rights}
+                            </c:otherwise>
+                        </c:choose></td>
+                        <td>
+                            <fmt:formatNumber type="number"
+                                              maxFractionDigits="3" value="${c.artistCount}"/>
+                        </td>
+                        <td>
+                            <fmt:formatNumber type="number"
+                                              maxFractionDigits="3" value="${c.trackCount}"/>
+                        </td>
                     </tr>
-                    </thead>
-                    <tbody>
+                </c:forEach>
+                </tbody>
+            </table>
 
+        </c:if>
+    </div>
+    <div class="row">
+        <legend>
+            Загруженные клиентские отчеты
+        </legend>
 
-                    <c:forEach items="${cat_stat}" var="entry" varStatus="status">
-                        <tr>
-                            <td>${entry.key}</td>
-                            <td>${catalogs[status.count-1].royalty}</td>
-                            <td>${catalogs[status.count-1].copyright}</td>
-                            <td>${entry.value}</td>
-                        </tr>
-                    </c:forEach>
+        <c:if test="${not empty reports}">
 
-                    </tbody>
-                </table>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Клиент</th>
+                    <th>Дата подачи</th>
+                    <th>Отчет за</th>
+                    <th>Тип</th>
+                    <th>Период</th>
+                    <th>Расчитан</th>
+                </tr>
+                </thead>
+                <tbody>
 
-            </c:if>
-        </div>
-
-        <div class="span5">
-            <legend>
-                Загруженные клиентские отчеты
-            </legend>
-
-            <c:if test="${not empty reports}">
-
-                <table class="table">
-                    <thead>
+                <c:forEach items="${reports}" var="r">
                     <tr>
-                        <th>Дата подачи</th>
-                        <th>Отчет за</th>
-                        <th>Тип</th>
-                        <th>Период</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-
-                    <c:forEach items="${reports}" var="r">
-                        <tr>
-                            <td>${r.uploadDate}</td>
-                            <td>${r.startDate}</td>
-                            <td>
-                                <c:choose>
-                                    <c:when test="${r.typeOrdinal ==1}">
-                                        Публичка
-                                    </c:when>
-                                    <c:otherwise>
-                                        Мобильный
-                                    </c:otherwise>
-                                </c:choose>
-                            </td>
-                            <td><c:choose>
-                                <c:when test="${r.periodOrdinal ==1}">
-                                    Квартальный
+                        <td>${r.customer}</td>
+                        <td>${r.sendDate}</td>
+                        <td>${r.reportDate}</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${r.reportType ==1}">
+                                    Публичка
                                 </c:when>
                                 <c:otherwise>
-                                    Месячный
+                                    Мобильный
                                 </c:otherwise>
                             </c:choose>
-                            </td>
-                        </tr>
-                    </c:forEach>
+                        </td>
+                        <td><c:choose>
+                            <c:when test="${r.reportPeriod ==1}">
+                                Квартальный
+                            </c:when>
+                            <c:otherwise>
+                                Месячный
+                            </c:otherwise>
+                        </c:choose>
+                        </td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${r.calculated ==true}">
+                                    <i class="icon-ok"></i>
+                                </c:when>
+                                <c:otherwise>
+                                    <i class="icon-remove"></i>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
+                    </tr>
+                </c:forEach>
 
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
 
-            </c:if>
-
-        </div>
+        </c:if>
 
     </div>
+
+</div>
 
 </div>
 
