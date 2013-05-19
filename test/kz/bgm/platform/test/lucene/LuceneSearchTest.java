@@ -23,7 +23,7 @@ public class LuceneSearchTest {
     @Before
     public void init() throws IOException {
         luceneSearch = LuceneSearch.getInstance();
-        String indexDir = "./out/test_index";
+        String indexDir = "./out/test_index_2";
 
         Files.deleteIfExists(Paths.get(indexDir));
 

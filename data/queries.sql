@@ -91,3 +91,76 @@ WHERE
 GROUP BY i.composition_id
 LIMIT 0, 15;
 
+
+
+
+
+# ---------------------------------------------------------------------------------
+#             CATALOG UPDATES
+
+# Create temporary table to load all spreadsheet data into it
+CREATE TABLE comp_tmp
+  LIKE composition;
+ALTER TABLE comp_tmp ADD done TINYINT NULL;
+
+# Load data
+LOAD DATA LOCAL INFILE './nmi_related.csv'
+INTO TABLE comp_tmp
+CHARACTER SET 'utf8'
+FIELDS TERMINATED BY ';'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(@dummy, code, name, composer, artist, @dummy, @dummy, @shareMobile, @sharePublic)
+SET catalog_id=7,
+  shareMobile=IF(@shareMobile != '', @shareMobile, 0),
+  sharePublic=IF(@sharePublic != '', @sharePublic, 0);
+
+
+#Show warnings
+SHOW WARNINGS LIMIT 0, 10;
+
+# Show number of code-intercepting rows
+SELECT
+  count(DISTINCT t.id)
+FROM composition c INNER JOIN comp_tmp t
+    ON c.code = t.code;
+
+# show table diff:
+SELECT
+  t.code,
+  IF(t.artist != c.artist, concat('\'', c.artist, '\' -> \'', t.artist, '\''), '') artistDiff,
+  IF(t.name != c.name, concat('\'', c.name, '\' -> \'', t.name, '\''), '') nameDiff,
+  IF(t.composer != c.composer, concat('\'', c.composer, '\' -> \'', t.composer, '\''), '') composerDiff,
+  IF(t.shareMobile != c.shareMobile, concat(c.shareMobile, ' -> ', t.shareMobile), '') shareMobileDiff,
+  IF(t.sharePublic != c.sharePublic, concat(c.sharePublic, ' -> ', t.sharePublic), '') sharePublicDiff,
+  IF(t.catalog_id != c.catalog_id, concat(c.catalog_id, ' -> ', t.catalog_id), '') sharePublicDiff
+FROM composition c INNER JOIN comp_tmp t
+    ON c.code = t.code;
+
+
+
+
+# Update existing tracks
+UPDATE composition c
+  INNER JOIN comp_tmp t
+    ON c.code = t.code
+SET c.name = t.name,
+  c.composer = t.composer,
+  c.artist = t.artist,
+  c.shareMobile = t.shareMobile,
+  c.sharePublic = t.sharePublic,
+  c.catalog_id = t.catalog_id,
+  t.done = 1;
+
+# Insert new tracks
+INSERT INTO composition (code, name, composer, artist, shareMobile, sharePublic, catalog_id)
+  SELECT
+    code,
+    name,
+    composer,
+    artist,
+    shareMobile,
+    sharePublic,
+    catalog_id
+  FROM comp_tmp
+  WHERE done IS null;
