@@ -1,7 +1,7 @@
 package kz.bgm.platform.web.customer.action;
 
 
-import kz.bgm.platform.model.domain.TrackBasket;
+import kz.bgm.platform.model.service.TrackBasket;
 import kz.bgm.platform.model.domain.User;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;

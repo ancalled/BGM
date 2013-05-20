@@ -1,7 +1,7 @@
 package kz.bgm.platform.web.customer.action;
 
 
-import kz.bgm.platform.model.domain.TrackBasket;
+import kz.bgm.platform.model.service.TrackBasket;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

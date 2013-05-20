@@ -47,11 +47,11 @@
 
                     <c:forEach items="${reports}" var="r">
                         <tr>
-                            <td>${r.uploadDate}</td>
-                            <td>${r.startDate}</td>
+                            <td>${r.sendDate}</td>
+                            <td>${r.reportDate}</td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${r.typeOrdinal ==1}">
+                                    <c:when test="${r.reportType ==1}">
                                         Публичка
                                     </c:when>
                                     <c:otherwise>
@@ -60,7 +60,7 @@
                                 </c:choose>
                             </td>
                             <td><c:choose>
-                                <c:when test="${r.periodOrdinal ==1}">
+                                <c:when test="${r.reportPeriod ==1}">
                                     Квартальный
                                 </c:when>
                                 <c:otherwise>

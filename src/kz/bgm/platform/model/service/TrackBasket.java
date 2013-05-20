@@ -1,4 +1,4 @@
-package kz.bgm.platform.model.domain;
+package kz.bgm.platform.model.service;
 
 import java.util.ArrayList;
 import java.util.List;
