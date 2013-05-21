@@ -22,6 +22,10 @@ public class UpdateCatalogServlet extends HttpServlet {
     public static final String APP_HOME = System.getProperty("user.dir");
     public static final String CATALOG_UPDATES_HOME = APP_HOME + "/catalog-updates";
 
+    public static final String VIEWS_HOME_URL = "../view";
+    public static final String RESULT_URL = VIEWS_HOME_URL + "/catalog-update";
+
+
 
     private static final Logger log = Logger.getLogger(UpdateCatalogServlet.class);
 
@@ -34,10 +38,6 @@ public class UpdateCatalogServlet extends HttpServlet {
         fileUploader = new ServletFileUpload(new DiskFileItemFactory());
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -46,7 +46,7 @@ public class UpdateCatalogServlet extends HttpServlet {
         try {
             List<FileItem> fields = fileUploader.parseRequest(req);
             if (fields == null) {
-                resp.sendRedirect("../view/catalog-update-result?er=no-file-reports-uploaded");
+                resp.sendRedirect(RESULT_URL + "?er=no-file-reports-uploaded");
                 log.warn("No multipart fields found");
                 return;
             }
@@ -56,7 +56,7 @@ public class UpdateCatalogServlet extends HttpServlet {
             FileItem item = getFileItem(fields);
 
             if (catalogId == null || item == null) {
-                resp.sendRedirect("../view/catalog-update-result?er=no-file-reports-uploaded");
+                resp.sendRedirect(RESULT_URL + "?er=no-file-reports-uploaded");
                 return;
             }
 
@@ -70,7 +70,7 @@ public class UpdateCatalogServlet extends HttpServlet {
             storage.resetTempTrackTable();
 
             log.debug("Loading csv to temp table...");
-            CatalogUpdate res = storage.loadCatalog(updateFileName, catalogId);
+            CatalogUpdate res = storage.saveCatalogUpdate(updateFileName, catalogId);
             res.setFile(updateFile.getName());
 
             log.debug("Got result: " + res.getStatus());
@@ -84,14 +84,14 @@ public class UpdateCatalogServlet extends HttpServlet {
             }
 
             HttpSession ses = req.getSession(true);
-            ses.setAttribute("catalog-upload-result", res);
+            ses.setAttribute("catalog-update", res);
 
-            resp.sendRedirect("../view/catalog-update-result");
+            resp.sendRedirect(RESULT_URL);
 
 
         } catch (Exception e) {
             e.printStackTrace();
-            resp.sendRedirect("../view/catalog-update-result?er=" + e.getMessage());
+            resp.sendRedirect(RESULT_URL + "?er=" + e.getMessage());
 
         }
     }
@@ -121,7 +121,7 @@ public class UpdateCatalogServlet extends HttpServlet {
 
 
     private void saveToFile(FileItem item, File reportFile) throws Exception {
-        log.info("File name:" + item.getName());
+        log.info("Saving upload to " + reportFile.getAbsolutePath());
 
         if (!reportFile.getParentFile().exists()) {
             reportFile.getParentFile().mkdirs();

@@ -90,9 +90,12 @@ public interface CatalogStorage {
 
     void resetTempTrackTable();
 
-    CatalogUpdate loadCatalog(final String dataFile, final long catId);
+    CatalogUpdate saveCatalogUpdate(String dataFile, long catId);
 
     List<TrackDiff> getCatalogUpdateDiff(final int from, final int size);
+
+    void applyCatalogUpdate();
+
 
     void updateCatalogsStat();
 

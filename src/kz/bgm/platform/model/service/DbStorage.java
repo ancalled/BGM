@@ -929,7 +929,7 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-    public CatalogUpdate loadCatalog(final String dataFile, final long catId) {
+    public CatalogUpdate saveCatalogUpdate(final String dataFile, final long catId) {
         return query(new Action<CatalogUpdate>() {
             @Override
             public CatalogUpdate execute(Connection con) throws SQLException {
@@ -974,18 +974,45 @@ public class DbStorage implements CatalogStorage {
                 res.setStatus(st);
 
                 if (st == Status.OK) {
-                    rs = con.createStatement().executeQuery("SELECT count(*) FROM comp_tmp");
-                    if (rs.next()) {
-                        int count = rs.getInt(1);
-                        res.setTracks(count);
-                    }
-
+                    res.setTracks(getCompTmpRows());
+                    res.setCrossing(getCompTmpCrossingRows());
                 }
-
 
                 return res;
             }
         });
+    }
+
+
+    private int getCompTmpRows() {
+        return query(new Action<Integer>() {
+            @Override
+            public Integer execute(Connection con) throws SQLException {
+                ResultSet rs = con.createStatement().executeQuery("SELECT count(*) FROM comp_tmp");
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+                return 0;
+            }
+        });
+
+    }
+
+    private int getCompTmpCrossingRows() {
+        return query(new Action<Integer>() {
+            @Override
+            public Integer execute(Connection con) throws SQLException {
+                ResultSet rs = con.createStatement().executeQuery("SELECT\n" +
+                        "  count(DISTINCT t.id)\n" +
+                        "FROM composition c INNER JOIN comp_tmp t\n" +
+                        "    ON c.code = t.code;");
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+                return 0;
+            }
+        });
+
     }
 
 
@@ -1037,6 +1064,45 @@ public class DbStorage implements CatalogStorage {
 
     }
 
+
+    @Override
+    public void applyCatalogUpdate() {
+        query(new Action<Object>() {
+            @Override
+            public Object execute(Connection con) throws SQLException {
+                con.createStatement().execute(
+                        "UPDATE composition c\n" +
+                                "  INNER JOIN comp_tmp t\n" +
+                                "    ON c.code = t.code\n" +
+                                "SET c.name = t.name,\n" +
+                                "  c.composer = t.composer,\n" +
+                                "  c.artist = t.artist,\n" +
+                                "  c.shareMobile = t.shareMobile,\n" +
+                                "  c.sharePublic = t.sharePublic,\n" +
+                                "  c.catalog_id = t.catalog_id,\n" +
+                                "  t.done = 1"
+                );
+
+
+                con.createStatement().execute(
+                        "INSERT INTO composition (code, name, composer, artist, shareMobile, sharePublic, catalog_id)\n" +
+                                "  SELECT\n" +
+                                "    code,\n" +
+                                "    name,\n" +
+                                "    composer,\n" +
+                                "    artist,\n" +
+                                "    shareMobile,\n" +
+                                "    sharePublic,\n" +
+                                "    catalog_id\n" +
+                                "  FROM comp_tmp\n" +
+                                "  WHERE done IS null"
+                );
+
+                return null;
+            }
+        });
+
+    }
 
     @Override
     public void removeUser(final long id) {

@@ -158,7 +158,7 @@ public class DispatcherServlet extends HttpServlet {
                 break;
 
 
-            case "/catalog-update-result":
+            case "/catalog-update":
                 action = new Action() {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
@@ -170,16 +170,18 @@ public class DispatcherServlet extends HttpServlet {
 
                         HttpSession ses = req.getSession();
                         if (ses != null) {
-                            CatalogUpdate res = (CatalogUpdate) ses.getAttribute("catalog-upload-result");
-                            if (res != null) {
-                                req.setAttribute("result", res);
+                            CatalogUpdate update = (CatalogUpdate) ses.getAttribute("catalog-update");
+                            if (update != null) {
+                                req.setAttribute("update", update);
 
-                                Catalog catalog = catalogStorage.getCatalog(res.getCatalogId());
+                                Catalog catalog = catalogStorage.getCatalog(update.getCatalogId());
                                 req.setAttribute("catalog", catalog);
 
-                                if (res.getStatus() == CatalogUpdate.Status.OK) {
+                                if (update.getStatus() == CatalogUpdate.Status.OK) {
                                     String fromStr =  req.getParameter("from");
                                     int from = fromStr != null ? Integer.parseInt(fromStr) : 0;
+                                    if (from < 0) from = 0;
+                                    if (from > update.getCrossing()) from = update.getCrossing();
 
                                     List<TrackDiff> diffs =  catalogStorage.getCatalogUpdateDiff(from, TRACKS_PER_PAGE);
                                     req.setAttribute("diffs", diffs);
@@ -189,7 +191,7 @@ public class DispatcherServlet extends HttpServlet {
                             }
                         }
 
-                        return "catalog-update-result";
+                        return "catalog-update";
                     }
                 };
                 break;

@@ -11,7 +11,9 @@ public class CatalogUpdate {
     private Long catalogId;
     private Status status;
     private Integer tracks;
+    private Integer crossing;
     private String file;
+    private boolean applied = false;
 
     private final List<String> errors = new ArrayList<>();
 
@@ -44,6 +46,14 @@ public class CatalogUpdate {
         this.tracks = tracks;
     }
 
+    public Integer getCrossing() {
+        return crossing;
+    }
+
+    public void setCrossing(Integer crossing) {
+        this.crossing = crossing;
+    }
+
     public void addError(String er) {
         errors.add(er);
     }
@@ -54,5 +64,13 @@ public class CatalogUpdate {
 
     public void setFile(String file) {
         this.file = file;
+    }
+
+    public boolean isApplied() {
+        return applied;
+    }
+
+    public void setApplied(boolean applied) {
+        this.applied = applied;
     }
 }

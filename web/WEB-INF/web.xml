@@ -70,14 +70,20 @@
         <servlet-class>kz.bgm.platform.web.admin.action.DeleteUserServlet</servlet-class>
     </servlet>
 
+
+    <servlet>
+        <servlet-name>createCustomerServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.CreateCustomerServlet</servlet-class>
+    </servlet>
+
     <servlet>
         <servlet-name>updateCatalog</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.UpdateCatalogServlet</servlet-class>
     </servlet>
 
     <servlet>
-        <servlet-name>createCustomerServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.admin.action.CreateCustomerServlet</servlet-class>
+        <servlet-name>applyUpdateCatalog</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.ApplyUpdateServlet</servlet-class>
     </servlet>
 
 
@@ -135,14 +141,21 @@
     </servlet-mapping>
 
     <servlet-mapping>
+        <servlet-name>createCustomerServlet</servlet-name>
+        <url-pattern>/admin/action/create-customer</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
         <servlet-name>updateCatalog</servlet-name>
         <url-pattern>/admin/action/update-catalog</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>createCustomerServlet</servlet-name>
-        <url-pattern>/admin/action/create-customer</url-pattern>
+        <servlet-name>applyUpdateCatalog</servlet-name>
+        <url-pattern>/admin/action/appy-catalog-update</url-pattern>
     </servlet-mapping>
+
+
 
 
     <!--================= Customer =======================-->
