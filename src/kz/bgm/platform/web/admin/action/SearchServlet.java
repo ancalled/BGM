@@ -36,6 +36,29 @@ public class SearchServlet extends HttpServlet {
 
         String query = req.getParameter("q");
         String type = req.getParameter("type");
+        String strCatalogId = req.getParameter("catalog");
+        String strFrom = req.getParameter("from");
+        String strPageSize = req.getParameter("pageSize");
+
+        long catalogId = 0;
+
+        if (strCatalogId != null &&
+                !"".equals(strCatalogId) &&
+                !"all".equals(strCatalogId)) {
+            catalogId = Long.parseLong(strCatalogId);
+        }
+
+//for pagination
+//        int from = 0;
+//        int pageSize = 50;
+//        if (strFrom != null&&!"".equals(strFrom)) {
+//            from = Integer.parseInt(strFrom);
+//        }
+//
+//        if (strPageSize != null&&!"".equals(strPageSize)) {
+//            pageSize = Integer.parseInt(strPageSize);
+//        }
+
 
         log.debug("Got query: " + query + ", search type: " + type);
 
@@ -60,19 +83,24 @@ public class SearchServlet extends HttpServlet {
                     break;
                 default:
                     try {
-                        List<Long> res = luceneSearch.search(query);
-                        found = catalogService.getTracks(res);
+                        List<Long> res = luceneSearch.search(query/*from,pageSize*/);
 
+                        if ("all".equals(strCatalogId) || catalogId == 0) {
+                            found = catalogService.getTracks(res);
+                        } else {
+                            found = catalogService.getTracks(res, catalogId);
+                        }
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                     break;
             }
 
-            HttpSession session = req.getSession(true);
+            HttpSession session = req.getSession();
 
             session.setAttribute("tracks", found);
             session.setAttribute("query", query);
+            session.setAttribute("type", type);
 
 
             resp.sendRedirect("/admin/view/search-result");

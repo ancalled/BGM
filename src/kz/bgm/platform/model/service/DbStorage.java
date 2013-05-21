@@ -263,6 +263,28 @@ public class DbStorage implements CatalogStorage {
 
     }
 
+    @Override
+    public List<Track> getTracks(final List<Long> ids, final long catalogId) {
+        return query(new Action<List<Track>>() {
+            @Override
+            public List<Track> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM composition WHERE id IN (" + DbStorage.asString(ids) + ") AND catalog_id=?");
+
+                stmt.setLong(1, catalogId);
+
+                ResultSet rs = stmt.executeQuery();
+
+                List<Track> result = new ArrayList<>();
+                while (rs.next()) {
+                    result.add(parseTrack(rs));
+                }
+
+                return result;
+            }
+        });
+
+    }
 
     public List<Track> searchTracks(final String value) {
         return query(new Action<List<Track>>() {

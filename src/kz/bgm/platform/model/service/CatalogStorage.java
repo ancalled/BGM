@@ -26,6 +26,8 @@ public interface CatalogStorage {
 
     List<Track> getTracks(List<Long> ids);
 
+    List<Track> getTracks(List<Long> ids,long catalogId);
+
     List<Track> searchTracks(String value);
 
     List<Track> searchTracksByName(String songName);
