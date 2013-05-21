@@ -79,4 +79,6 @@ public interface CatalogStorage {
     CalculatedReportItem calculateMReportRelated(CustomerReportItem reportItems);
 
     int getCompositionCount(long catalogId);
+
+    int getArtistCount(long catalogId);
 }

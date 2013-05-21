@@ -528,6 +528,21 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+    @Override
+    public int getArtistCount(final long catalogId) {
+        return query(new Action<Integer>() {
+            @Override
+            public Integer execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT count(DISTINCT artist)cnt FROM composition WHERE catalog_id=?");
+                stmt.setLong(1, catalogId);
+
+                ResultSet rs = stmt.executeQuery();
+
+                return rs.next() ? rs.getInt("cnt") : -1;
+            }
+        });
+    }
 
     @Override
     public List<CustomerReport> getAllCustomerReports() {

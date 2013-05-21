@@ -28,26 +28,32 @@
             Поиск композиций
         </legend>
 
+
         <form action="../action/search" method="post">
             <div class="row">
-                <label for="query"></label><input type="text" name="q" id="query" class="input-block-level">
-            </div>
+                <div class="container span3">
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"
+                        style="display: block; position: static; margin-bottom: 5px; *width: 180px;">
+                        <li><a tabindex="-1" id="code" onclick="change_type(this)">Код композиции</a></li>
+                        <li><a tabindex="-1" id="artist" onclick="change_type(this)">Артист</a></li>
+                        <li><a tabindex="-1" id="composition" onclick="change_type(this)">Композиция</a></li>
+                        <li class="divider"></li>
+                        <li><a tabindex="-1" id="full" onclick="change_type(this)">Полный поиск</a></li>
+                    </ul>
+                </div>
+                <div class="container span8">
+                    <label for="query"></label><input type="text" name="q" id="query" class="input-block-level">
+                </div>
 
-
-            <div class="row">
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"
-                    style="display: block; position: static; margin-bottom: 5px; *width: 180px;">
-                    <li><a tabindex="-1" id="code" onclick="change_type(this)">Код композиции</a></li>
-                    <li><a tabindex="-1" id="artist" onclick="change_type(this)">Артист</a></li>
-                    <li><a tabindex="-1" id="composition" onclick="change_type(this)">Композиция</a></li>
-                    <li class="divider"></li>
-                    <li><a tabindex="-1" id="full" onclick="change_type(this)">Полный поиск</a></li>
-                </ul>
             </div>
             <br>
+
             <div class="row">
                 <input type="submit" value="Поиск" class="btn">
+
             </div>
+            <br>
+
 
             <input type="hidden" name="type" value="full">
         </form>
@@ -57,39 +63,63 @@
         </p>
 
         <table class="table">
-            <thead>
-            <tr>
-                <th>Код</th>
-                <th>Композиция</th>
-                <th>Исполнитель</th>
-                <th>Авторы</th>
-                <th>Мобильный контент</th>
-                <th>Публичка</th>
-                <th>Каталог</th>
-            </tr>
-            </thead>
-            <tbody>
+            <form id="chooser" action="/customer/action/add-to-basket" method="post">
 
-            <c:forEach var="t" items="${tracks}">
+                <thead>
                 <tr>
-                    <td>${t.code}</td>
-                    <td>${t.name}</td>
-                    <td>${t.artist}</td>
-                    <td>${t.composer}</td>
-                    <td>${t.mobileShare}</td>
-                    <td>${t.publicShare}</td>
-                    <td>${t.catalog}</td>
+                    <th>Код</th>
+                    <th>Композиция</th>
+                    <th>Исполнитель</th>
+                    <th>Авторы</th>
+                    <th>Мобильный контент</th>
+                    <th>Публичка</th>
+                    <th>Каталог</th>
+                    <th><input type="submit" value="Доваить треки" class="btn"></th>
                 </tr>
-            </c:forEach>
+                </thead>
+                <tbody>
 
-            </tbody>
+                <c:forEach var="t" items="${tracks}">
+                    <tr>
+                        <td>${t.code}</td>
+                        <td>${t.name}</td>
+                        <td>${t.artist}</td>
+                        <td>${t.composer}</td>
+                        <td>${t.mobileShare}</td>
+                        <td>${t.publicShare}</td>
+                        <td>${t.catalog}</td>
+                        <td><input type="checkbox" name="check_${t.id}" onclick="choseTrack(this)" value="${t.id}"/>
+                        </td>
+                    </tr>
+                </c:forEach>
+
+                </tbody>
+
+
+            </form>
         </table>
 
 
     </div>
 
 </div>
+
 <script>
+    var elForm = document.getElementById("chooser");
+
+    function choseTrack(track) {
+        if (track.checked) {
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = track.name;
+            input.id = track.name;
+            input.value = track.value;
+            elForm.appendChild(input);
+        } else {
+            var oldInput = document.getElementById(track.name);
+            elForm.removeChild(oldInput);
+        }
+    }
 
     var typeEl = document.getElementById('type');
 

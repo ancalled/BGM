@@ -1,6 +1,7 @@
 package kz.bgm.platform.web.customer.action;
 
 
+import kz.bgm.platform.model.service.TrackBasket;
 import kz.bgm.platform.model.domain.User;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
@@ -37,6 +38,7 @@ public class LoginServlet extends HttpServlet {
             if (user != null && user.getId() > 0) {
                 HttpSession session = req.getSession();
                 session.setAttribute("user", user);
+                session.setAttribute("basket", new TrackBasket());
 
                 log.info("User authorized");
                 log.info("login:         " + login);

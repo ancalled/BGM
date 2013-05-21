@@ -1,9 +1,9 @@
 package kz.bgm.platform.web.customer;
 
-import kz.bgm.platform.model.domain.Catalog;
 import kz.bgm.platform.model.domain.Customer;
 import kz.bgm.platform.model.domain.CustomerReport;
-import kz.bgm.platform.model.domain.User;
+import kz.bgm.platform.model.domain.CustomerReportItem;
+import kz.bgm.platform.model.domain.CustomerReportStatistic;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 
@@ -14,12 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 public class DispatcherServlet extends HttpServlet {
@@ -90,57 +87,88 @@ public class DispatcherServlet extends HttpServlet {
                 };
                 break;
             case "/index":
-
                 action = new Action() {
+                    @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
                         HttpSession session = req.getSession();
 
-                        String catalogsAttr = "catalogs";
+//                                   String catalogsAttr = "catalogs";
                         String reportsAttr = "reports";
-                        String statisticAttr = "cat_stat";
+//                                   String statisticAttr = "cat_stat";
+
+//                                   @SuppressWarnings("unchecked")
+//                                   List<Catalog> catalogList = (List<Catalog>)
+//                                           session.getAttribute(catalogsAttr);
+//                                   if (catalogList == null) {
+//                                       catalogList = catalogStorage.getAllCatalogs();
+//                                       session.setAttribute(catalogsAttr, catalogList);
+//                                   }
+
 
                         @SuppressWarnings("unchecked")
-                        List<Catalog> catalogList = (List<Catalog>)
-                                session.getAttribute(catalogsAttr);
-                        if (catalogList == null) {
-                            catalogList = catalogStorage.getAllCatalogs();
-                            session.setAttribute(catalogsAttr, catalogList);
-                        }
-
-
-                        @SuppressWarnings("unchecked")
-                        List<CustomerReport> customerReportList = (List<CustomerReport>)
+                        List<CustomerReportStatistic> customerReportList = (List<CustomerReportStatistic>)
                                 session.getAttribute(reportsAttr);
 
                         if (customerReportList == null) {
-                            customerReportList = catalogStorage.getAllCustomerReports();
-                            session.setAttribute(reportsAttr, customerReportList);
-                        }
+                            List<CustomerReport> reports = catalogStorage.getAllCustomerReports();
 
-                        @SuppressWarnings("unchecked")
-                        Map<String, Integer> catalogStatMap = (Map<String, Integer>)
-                                session.getAttribute(statisticAttr);
+                            List<CustomerReportStatistic> reportStatistics = new ArrayList<>();
 
-                        if (catalogStatMap == null) {
-                            catalogStatMap = new LinkedHashMap<>();
+                            for (CustomerReport rep : reports) {
+                                Customer customer = catalogStorage.getCustomer(rep.getCustomerId());
+                                List<CustomerReportItem> repItemList = catalogStorage.
+                                        getCustomerReportsItems(rep.getId());
+                                CustomerReportStatistic crs = new CustomerReportStatistic();
+                                crs.setReportDate(rep.getStartDate());
+                                crs.setSendDate(rep.getUploadDate());
+                                crs.setReportPeriod(rep.getPeriodOrdinal());
+                                crs.setReportType(rep.getTypeOrdinal());
 
-                            for (Catalog cat : catalogList) {
-                                int compCount = catalogStorage.getCompositionCount(cat.getId());
-                                catalogStatMap.put(cat.getName(), compCount);
+                                if (customer != null) {
+                                    crs.setCustomer(customer.getName());
+                                }
+                                if (repItemList.size() > 0) {
+                                    crs.setCalculated(true);
+                                } else {
+                                    crs.setCalculated(false);
+                                }
+                                reportStatistics.add(crs);
                             }
-                            session.setAttribute(statisticAttr, catalogStatMap);
+
+                            session.setAttribute(reportsAttr, reportStatistics);
                         }
-                        //todo навреное стоит запихнуть это в сессию, а потом проверять на наличие
-                        // todo чтобы не делать много лишних запросов
-                        req.setAttribute("cat_stat", catalogStatMap);
-                        req.setAttribute("catalogs", catalogList);
-                        req.setAttribute("reports", customerReportList);
+
+//                                   @SuppressWarnings("unchecked")
+//                                   List<CatalogStatistic> catalogStatList = (List<CatalogStatistic>)
+//                                           session.getAttribute(statisticAttr);
+//
+//                                   if (catalogStatList == null) {
+//                                       catalogStatList = new ArrayList<>();
+//
+//                                       for (Catalog cat : catalogList) {
+//                                           int trackCount = catalogStorage.getCompositionCount(cat.getId());
+//                                           int artistCount = catalogStorage.getArtistCount(cat.getId());
+//
+//                                           CatalogStatistic catStat = new CatalogStatistic();
+//
+//                                           catStat.setArtistCount(artistCount);
+//                                           catStat.setTrackCount(trackCount);
+//                                           catStat.setCatalog(cat.getName());
+//                                           catStat.setRoyalty(cat.getRoyalty());
+//                                           catStat.setRights(cat.getCopyright());
+//                                           catalogStatList.add(catStat);
+//                                       }
+//                                       session.setAttribute(statisticAttr, catalogStatList);
+//                                   }
+
+//                                   req.setAttribute(statisticAttr, catalogStatList);
+//                                   req.setAttribute(catalogsAttr, catalogList);
+                        req.setAttribute(reportsAttr, customerReportList);
 
                         return "index";
                     }
                 };
                 break;
-
         }
 
 
