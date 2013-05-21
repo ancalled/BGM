@@ -6,8 +6,8 @@ import java.io.Serializable;
 public class Track implements Serializable {
 
     private long id = 0L;
-    private int catalogID = 0;
-    private String catalog="";
+    private int catalogId = 0;
+    private String catalog = "";
     private String code = "";
     private String artist = "";
     private String name = "";
@@ -79,12 +79,12 @@ public class Track implements Serializable {
     }
 
 
-    public int getCatalogID() {
-        return catalogID;
+    public int getCatalogId() {
+        return catalogId;
     }
 
-    public void setCatalogID(int catalogID) {
-        this.catalogID = catalogID;
+    public void setCatalogId(int catalogId) {
+        this.catalogId = catalogId;
     }
 
     public void setComposer(String compositor) {
@@ -95,6 +95,14 @@ public class Track implements Serializable {
         return composer;
     }
 
+    public String getCatalog() {
+        return catalog;
+    }
+
+    public void setCatalog(String catalog) {
+        this.catalog = catalog;
+    }
+
     @Override
     public String toString() {
         return "code: " + code +
@@ -103,14 +111,6 @@ public class Track implements Serializable {
                 ", composer: " + composer +
                 ", mobileShare: " + mobileShare +
                 ", publicShare: " + publicShare +
-                ", catalogID: " + catalogID;
-    }
-
-    public String getCatalog() {
-        return catalog;
-    }
-
-    public void setCatalog(String catalog) {
-        this.catalog = catalog;
+                ", catalogId: " + catalogId;
     }
 }

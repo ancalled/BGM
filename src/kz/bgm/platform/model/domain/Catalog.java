@@ -8,6 +8,9 @@ public class Catalog {
     private float royalty;
     private String copyright;
 
+    private int tracks;
+    private int artists;
+
     public void setCopyright(String copyright) {
         this.copyright = copyright;
     }
@@ -38,5 +41,21 @@ public class Catalog {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getTracks() {
+        return tracks;
+    }
+
+    public void setTracks(int tracks) {
+        this.tracks = tracks;
+    }
+
+    public int getArtists() {
+        return artists;
+    }
+
+    public void setArtists(int artists) {
+        this.artists = artists;
     }
 }

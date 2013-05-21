@@ -22,6 +22,7 @@ public class DispatcherServlet extends HttpServlet {
 
 
     public static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    public static final int TRACKS_PER_PAGE = 50;
 
 
     private CatalogStorage catalogStorage;
@@ -40,6 +41,47 @@ public class DispatcherServlet extends HttpServlet {
 
         Action action = null;
         switch (pth) {
+            case "/index":
+                action = new Action() {
+                    @Override
+                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+
+                        List<Platform> platforms = catalogStorage.getAllPlatforms();
+                        req.setAttribute("platforms", platforms);
+
+                        List<CustomerReport> reports = catalogStorage.getAllCustomerReports();
+
+                        List<CustomerReportStatistic> reportStatistics = new ArrayList<>();
+
+                        for (CustomerReport rep : reports) {
+                            Customer customer = catalogStorage.getCustomer(rep.getCustomerId());
+                            List<CustomerReportItem> repItemList = catalogStorage.
+                                    getCustomerReportsItems(rep.getId());
+                            CustomerReportStatistic crs = new CustomerReportStatistic();
+                            crs.setReportDate(rep.getStartDate());
+                            crs.setSendDate(rep.getUploadDate());
+                            crs.setReportPeriod(rep.getPeriodOrdinal());
+                            crs.setReportType(rep.getTypeOrdinal());
+
+                            crs.setCustomerId(rep.getCustomerId());
+                            if (customer != null) {
+                                crs.setCustomer(customer.getName());
+                            }
+                            if (repItemList.size() > 0) {
+                                crs.setCalculated(true);
+                            } else {
+                                crs.setCalculated(false);
+                            }
+                            reportStatistics.add(crs);
+                        }
+
+                        req.setAttribute("reports", reportStatistics);
+
+                        return "index";
+                    }
+                };
+                break;
+
             case "/search-result":
                 action = new Action() {
                     @Override
@@ -90,13 +132,68 @@ public class DispatcherServlet extends HttpServlet {
                 action = new Action() {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-                        List<Customer> customers = catalogStorage.getCustomers();
+                        List<Customer> customers = catalogStorage.getAllCustomers();
                         req.setAttribute("customers", customers);
 
                         return "customers";
                     }
                 };
                 break;
+
+            case "/catalog":
+                action = new Action() {
+                    @Override
+                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+
+                        String catIdStr = req.getParameter("catId");
+                        if (catIdStr != null) {
+                            long catId = Long.parseLong(catIdStr);
+                            Catalog catalog = catalogStorage.getCatalog(catId);
+                            req.setAttribute("catalog", catalog);
+                        }
+
+                        return "catalog";
+                    }
+                };
+                break;
+
+
+            case "/catalog-update-result":
+                action = new Action() {
+                    @Override
+                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+
+                        String erCode = req.getParameter("er");
+                        if (erCode != null) {
+                            req.setAttribute("erCode", erCode);
+                        }
+
+                        HttpSession ses = req.getSession();
+                        if (ses != null) {
+                            CatalogUpdate res = (CatalogUpdate) ses.getAttribute("catalog-upload-result");
+                            if (res != null) {
+                                req.setAttribute("result", res);
+
+                                Catalog catalog = catalogStorage.getCatalog(res.getCatalogId());
+                                req.setAttribute("catalog", catalog);
+
+                                if (res.getStatus() == CatalogUpdate.Status.OK) {
+                                    String fromStr =  req.getParameter("from");
+                                    int from = fromStr != null ? Integer.parseInt(fromStr) : 0;
+
+                                    List<TrackDiff> diffs =  catalogStorage.getCatalogUpdateDiff(from, TRACKS_PER_PAGE);
+                                    req.setAttribute("diffs", diffs);
+                                    req.setAttribute("from", from);
+                                    req.setAttribute("pageSize", TRACKS_PER_PAGE);
+                                }
+                            }
+                        }
+
+                        return "catalog-update-result";
+                    }
+                };
+                break;
+
 
             case "/all-customer-reports":
                 action = new Action() {
@@ -130,6 +227,7 @@ public class DispatcherServlet extends HttpServlet {
                     }
                 };
                 break;
+
             case "/customer-detail":
                 action = new Action() {
                     @Override
@@ -148,6 +246,7 @@ public class DispatcherServlet extends HttpServlet {
                     }
                 };
                 break;
+
             case "/create-user-form":
                 action = new Action() {
                     @Override
@@ -157,6 +256,7 @@ public class DispatcherServlet extends HttpServlet {
                     }
                 };
                 break;
+
             case "/create-customer-form":
                 action = new Action() {
                     @Override
@@ -166,6 +266,7 @@ public class DispatcherServlet extends HttpServlet {
                     }
                 };
                 break;
+
             case "/reports":
                 action = new Action() {
                     @Override
@@ -175,89 +276,8 @@ public class DispatcherServlet extends HttpServlet {
                     }
                 };
                 break;
-            case "/index":
-                action = new Action() {
-                    @Override
-                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
-                        HttpSession session = req.getSession();
-
-                        String catalogsAttr = "catalogs";
-                        String reportsAttr = "reports";
-                        String statisticAttr = "cat_stat";
-
-                        @SuppressWarnings("unchecked")
-                        List<Catalog> catalogList = (List<Catalog>)
-                                session.getAttribute(catalogsAttr);
-                        if (catalogList == null) {
-                            catalogList = catalogStorage.getAllCatalogs();
-                            session.setAttribute(catalogsAttr, catalogList);
-                        }
 
 
-                        @SuppressWarnings("unchecked")
-                        List<CustomerReportStatistic> customerReportList = (List<CustomerReportStatistic>)
-                                session.getAttribute(reportsAttr);
-
-                        if (customerReportList == null) {
-                            List<CustomerReport> reports = catalogStorage.getAllCustomerReports();
-
-                            List<CustomerReportStatistic> reportStatistics = new ArrayList<>();
-
-                            for (CustomerReport rep : reports) {
-                                Customer customer = catalogStorage.getCustomer(rep.getCustomerId());
-                                List<CustomerReportItem> repItemList = catalogStorage.
-                                        getCustomerReportsItems(rep.getId());
-                                CustomerReportStatistic crs = new CustomerReportStatistic();
-                                crs.setReportDate(rep.getStartDate());
-                                crs.setSendDate(rep.getUploadDate());
-                                crs.setReportPeriod(rep.getPeriodOrdinal());
-                                crs.setReportType(rep.getTypeOrdinal());
-
-                                if (customer != null) {
-                                    crs.setCustomer(customer.getName());
-                                }
-                                if (repItemList.size() > 0) {
-                                    crs.setCalculated(true);
-                                } else {
-                                    crs.setCalculated(false);
-                                }
-                                reportStatistics.add(crs);
-                            }
-
-                            session.setAttribute(reportsAttr, reportStatistics);
-                        }
-
-                        @SuppressWarnings("unchecked")
-                        List<CatalogStatistic> catalogStatList = (List<CatalogStatistic>)
-                                session.getAttribute(statisticAttr);
-
-                        if (catalogStatList == null) {
-                            catalogStatList = new ArrayList<>();
-
-                            for (Catalog cat : catalogList) {
-                                int trackCount = catalogStorage.getCompositionCount(cat.getId());
-                                int artistCount = catalogStorage.getArtistCount(cat.getId());
-
-                                CatalogStatistic catStat = new CatalogStatistic();
-
-                                catStat.setArtistCount(artistCount);
-                                catStat.setTrackCount(trackCount);
-                                catStat.setCatalog(cat.getName());
-                                catStat.setRoyalty(cat.getRoyalty());
-                                catStat.setRights(cat.getCopyright());
-                                catalogStatList.add(catStat);
-                            }
-                            session.setAttribute(statisticAttr, catalogStatList);
-                        }
-
-                        req.setAttribute(statisticAttr, catalogStatList);
-                        req.setAttribute(catalogsAttr, catalogList);
-                        req.setAttribute(reportsAttr, customerReportList);
-
-                        return "index";
-                    }
-                };
-                break;
         }
 
 

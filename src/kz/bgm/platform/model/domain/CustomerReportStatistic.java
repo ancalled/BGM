@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class CustomerReportStatistic {
 
+    private Long customerId;
     private String customer;
     private Date sendDate;
     private Date reportDate;
@@ -18,6 +19,14 @@ public class CustomerReportStatistic {
 
     public boolean getCalculated() {
         return calculated;
+    }
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
     public void setCustomer(String customer) {

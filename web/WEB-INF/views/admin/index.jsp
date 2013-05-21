@@ -27,114 +27,122 @@
 <div class="container">
 
     <div class="row">
-        <legend>
-            Каталоги
-        </legend>
+        <div class="span8">
+            <section>
+                <legend>
+                    Каталоги
+                </legend>
 
-        <c:if test="${not empty cat_stat}">
+                <c:forEach var="p" items="${platforms}">
 
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Каталог</th>
-                    <th>Ставка</th>
-                    <th>Права</th>
-                    <th>Количество исполнителей</th>
-                    <th>Количество треков</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${cat_stat}" var="c">
-                    <tr>
-                        <td>${c.catalog}</td>
-                        <td>${c.royalty}</td>
-                        <td><c:choose>
-                            <c:when test="${c.rights eq 'AUTHOR'}">
-                                Авторские
-                            </c:when>
-                            <c:when test="${c.rights eq 'RELATED'}">
-                                Смежные
-                            </c:when>
-                            <c:otherwise>
-                                ${c.rights}
-                            </c:otherwise>
-                        </c:choose></td>
-                        <td>
-                            <fmt:formatNumber type="number"
-                                              maxFractionDigits="3" value="${c.artistCount}"/>
-                        </td>
-                        <td>
-                            <fmt:formatNumber type="number"
-                                              maxFractionDigits="3" value="${c.trackCount}"/>
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
+                    <h4>${p.name}</h4>
 
-        </c:if>
-    </div>
-    <div class="row">
-        <legend>
-            Загруженные клиентские отчеты
-        </legend>
+                    <dl class="dl-horizontal">
+                        <c:forEach var="c" items="${p.catalogs}">
+                            <dt>
+                                <a href="catalog?catId=${c.id}">
+                                        ${c.name}
+                                </a>
+                            </dt>
+                            <dd>
+                                <ul class="inline">
+                                    <li>
+                                        <c:choose>
+                                            <c:when test="${c.copyright eq 'AUTHOR'}">
+                                                Авторские
+                                            </c:when>
+                                            <c:otherwise>
+                                                Смежные
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </li>
+                                    <li>
+                            <span>
+                                 <i class="icon-music"></i>
+                            </span>
+                            <span>
+                                 <fmt:formatNumber type="number" maxFractionDigits="3" value="${c.tracks}"/>
+                            </span>
+                                    </li>
+                                    <li>
+                            <span>
+                                 <i class="icon-user"></i>
+                            </span>
+                            <span>
+                                 <fmt:formatNumber type="number" maxFractionDigits="3" value="${c.artists}"/>
+                            </span>
+                                    </li>
+                                </ul>
 
-        <c:if test="${not empty reports}">
-
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Клиент</th>
-                    <th>Дата подачи</th>
-                    <th>Отчет за</th>
-                    <th>Тип</th>
-                    <th>Период</th>
-                    <th>Расчитан</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                <c:forEach items="${reports}" var="r">
-                    <tr>
-                        <td>${r.customer}</td>
-                        <td>${r.sendDate}</td>
-                        <td>${r.reportDate}</td>
-                        <td>
-                            <c:choose>
-                                <c:when test="${r.reportType ==1}">
-                                    Публичка
-                                </c:when>
-                                <c:otherwise>
-                                    Мобильный
-                                </c:otherwise>
-                            </c:choose>
-                        </td>
-                        <td><c:choose>
-                            <c:when test="${r.reportPeriod ==1}">
-                                Квартальный
-                            </c:when>
-                            <c:otherwise>
-                                Месячный
-                            </c:otherwise>
-                        </c:choose>
-                        </td>
-                        <td>
-                            <c:choose>
-                                <c:when test="${r.calculated ==true}">
-                                    <i class="icon-ok"></i>
-                                </c:when>
-                                <c:otherwise>
-                                    <i class="icon-remove"></i>
-                                </c:otherwise>
-                            </c:choose>
-                        </td>
-                    </tr>
+                            </dd>
+                        </c:forEach>
+                    </dl>
                 </c:forEach>
 
-                </tbody>
-            </table>
+            </section>
 
-        </c:if>
+
+            <section>
+                <legend>
+                    Входящие отчеты
+                </legend>
+
+                <dl class="dl-horizontal">
+                    <c:forEach items="${reports}" var="r">
+                        <dt>
+                            <a href="customer-detail?customer_id=${r.customerId}">
+                                ${r.customer}
+                            </a>
+                        </dt>
+                        <dd>
+                            <ul class="inline">
+                                    <%--<li>${r.sendDate}</li>--%>
+                                <li>${r.reportDate}</li>
+                                <li>
+                                    <c:choose>
+                                        <c:when test="${r.reportType ==1}">
+                                            Публичка
+                                        </c:when>
+                                        <c:otherwise>
+                                            Мобильный
+                                        </c:otherwise>
+                                    </c:choose>
+                                </li>
+                                <li>
+                                    <c:choose>
+                                        <c:when test="${r.reportPeriod ==1}">
+                                            Квартальный
+                                        </c:when>
+                                        <c:otherwise>
+                                            Ежемесячный
+                                        </c:otherwise>
+                                    </c:choose>
+                                </li>
+                                <li>
+                                    <c:choose>
+                                        <c:when test="${r.calculated ==true}">
+                                            <i class="icon-ok"></i>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <i class="icon-remove"></i>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </li>
+                            </ul>
+                        </dd>
+
+                    </c:forEach>
+                </dl>
+
+            </section>
+
+
+            <section>
+                <legend>
+                    Исходящие отчеты
+                </legend>
+            </section>
+        </div>
 
     </div>
 

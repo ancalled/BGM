@@ -103,6 +103,7 @@ public class UploadReportMobileServlet extends HttpServlet {
         }
     }
 
+
     private void fillItems(List<FileItem> fields, CustomerReport report, List<CustomerReportItem> allItems) throws Exception {
         for (FileItem item : fields) {
             if (item.isFormField()) {
@@ -120,13 +121,13 @@ public class UploadReportMobileServlet extends HttpServlet {
         }
     }
 
-    public CustomerReport fillParam(FileItem item, CustomerReport customerReport) {
-        String paramName = item.getFieldName();
-        String value;
 
-        switch (paramName) {
+    public CustomerReport fillParam(FileItem item, CustomerReport customerReport) {
+        String param = item.getFieldName();
+        String value = item.getString();
+
+        switch (param) {
             case "dt":
-                value = item.getString();
                 log.info("--Report date =" + value);
 
                 Date reportDate = null;
@@ -137,10 +138,9 @@ public class UploadReportMobileServlet extends HttpServlet {
                 }
 
                 customerReport.setStartDate(reportDate);
-
                 break;
+
             case "period":
-                value = item.getString();
                 int per = value != null ? Integer.parseInt(value) : 0;
                 CustomerReport.Period period = value != null ?
                         CustomerReport.Period.values()[per] :
@@ -149,10 +149,9 @@ public class UploadReportMobileServlet extends HttpServlet {
                 log.info("--Report period =" + period);
 
                 customerReport.setPeriod(period);
-
                 break;
+
             case "cid":
-                value = item.getString();
                 log.info("--Report customer id =" + value);
 
                 long customerId = Long.parseLong(value);

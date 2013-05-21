@@ -99,7 +99,7 @@ LIMIT 0, 15;
 #             CATALOG UPDATES
 
 # Create temporary table to load all spreadsheet data into it
-CREATE TABLE comp_tmp
+CREATE TABLE IF NOT EXISTS comp_tmp
   LIKE composition;
 ALTER TABLE comp_tmp ADD done TINYINT NULL;
 
@@ -164,3 +164,19 @@ INSERT INTO composition (code, name, composer, artist, shareMobile, sharePublic,
     catalog_id
   FROM comp_tmp
   WHERE done IS null;
+
+
+
+# Update catalog stats
+
+UPDATE catalog c
+SET tracks = (SELECT
+                count(DISTINCT t.id)
+              FROM composition t
+              WHERE t.catalog_id = c.id);
+
+UPDATE catalog c
+SET artists = (SELECT
+                 count(DISTINCT t.artist)
+               FROM composition t
+               WHERE t.catalog_id = c.id);

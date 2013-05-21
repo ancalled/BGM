@@ -19,6 +19,8 @@ public interface CatalogStorage {
 
     List<Catalog> getAllCatalogs();
 
+    List<Catalog> getCatalogsByPlatform(long catId);
+
     List<Track> getAllTracks();
 
 
@@ -36,7 +38,7 @@ public interface CatalogStorage {
 
     List<Track> searchTrackByArtistLike(String artist);
 
-    List<Customer> getCustomers();
+    List<Customer> getAllCustomers();
 
     Customer getCustomer(String name);
 
@@ -81,4 +83,17 @@ public interface CatalogStorage {
     int getCompositionCount(long catalogId);
 
     int getArtistCount(long catalogId);
+
+
+
+
+
+    void resetTempTrackTable();
+
+    CatalogUpdate loadCatalog(final String dataFile, final long catId);
+
+    List<TrackDiff> getCatalogUpdateDiff(final int from, final int size);
+
+    void updateCatalogsStat();
+
 }

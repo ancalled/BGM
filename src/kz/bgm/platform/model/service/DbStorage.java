@@ -8,6 +8,8 @@ import java.sql.*;
 import java.util.*;
 import java.util.Date;
 
+import static kz.bgm.platform.model.domain.CatalogUpdate.Status;
+
 public class DbStorage implements CatalogStorage {
 
 
@@ -18,7 +20,7 @@ public class DbStorage implements CatalogStorage {
 
     private final ComboPooledDataSource pool;
 
-    private static Map<Long, String> catalogMap = new HashMap<Long, String>();
+    private static Map<Long, String> catalogMap = new HashMap<>();
 
 
     public DbStorage(String host, String port,
@@ -165,10 +167,15 @@ public class DbStorage implements CatalogStorage {
 
                 ResultSet rs = stmt.executeQuery();
 
-                List<Platform> tracks = new ArrayList<Platform>();
+                List<Platform> tracks = new ArrayList<>();
                 while (rs.next()) {
-                    tracks.add(parsePlatform(rs));
+                    Platform p = parsePlatform(rs);
+                    tracks.add(p);
+
+                    List<Catalog> catalogs = getCatalogsByPlatform(p.getId());
+                    p.setCatalogs(catalogs);
                 }
+
                 return tracks;
             }
         });
@@ -182,14 +189,39 @@ public class DbStorage implements CatalogStorage {
                 PreparedStatement stmt = con.prepareStatement("SELECT * FROM catalog");
                 ResultSet rs = stmt.executeQuery();
 
-                List<Catalog> tracks = new ArrayList<Catalog>();
+                List<Catalog> catalogs = new ArrayList<>();
                 while (rs.next()) {
-                    tracks.add(parseCatalog(rs));
+                    catalogs.add(parseCatalog(rs));
                 }
-                return tracks;
+                return catalogs;
             }
         });
     }
+
+
+    @Override
+    public List<Catalog> getCatalogsByPlatform(final long platformId) {
+        return query(new Action<List<Catalog>>() {
+            @Override
+            public List<Catalog> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM  catalog WHERE platform_id = ?"
+                );
+                stmt.setLong(1, platformId);
+
+                ResultSet rs = stmt.executeQuery();
+
+                List<Catalog> catalogs = new ArrayList<>();
+                while (rs.next()) {
+                    Catalog cat = parseCatalog(rs);
+
+                    catalogs.add(cat);
+                }
+                return catalogs;
+            }
+        });
+    }
+
 
     @Override
     public List<Track> getAllTracks() {
@@ -199,7 +231,7 @@ public class DbStorage implements CatalogStorage {
                 PreparedStatement stmt = con.prepareStatement("SELECT * FROM composition");
                 ResultSet rs = stmt.executeQuery();
 
-                List<Track> tracks = new ArrayList<Track>();
+                List<Track> tracks = new ArrayList<>();
                 while (rs.next()) {
                     tracks.add(parseTrack(rs));
                 }
@@ -220,7 +252,7 @@ public class DbStorage implements CatalogStorage {
 
                 ResultSet rs = stmt.executeQuery();
 
-                List<Track> result = new ArrayList<Track>();
+                List<Track> result = new ArrayList<>();
                 while (rs.next()) {
                     result.add(parseTrack(rs));
                 }
@@ -252,7 +284,7 @@ public class DbStorage implements CatalogStorage {
 
                 ResultSet rs = stmt.executeQuery();
 
-                List<Track> tracks = new ArrayList<Track>();
+                List<Track> tracks = new ArrayList<>();
                 while (rs.next()) {
                     tracks.add(parseTrack(rs));
                 }
@@ -274,7 +306,7 @@ public class DbStorage implements CatalogStorage {
 
                 ResultSet rs = stmt.executeQuery();
 
-                List<Track> tracks = new ArrayList<Track>();
+                List<Track> tracks = new ArrayList<>();
                 while (rs.next()) {
                     tracks.add(parseTrack(rs));
                 }
@@ -296,7 +328,7 @@ public class DbStorage implements CatalogStorage {
 
                 ResultSet rs = stmt.executeQuery();
 
-                List<Track> tracks = new ArrayList<Track>();
+                List<Track> tracks = new ArrayList<>();
                 while (rs.next()) {
                     tracks.add(parseTrack(rs));
                 }
@@ -317,7 +349,7 @@ public class DbStorage implements CatalogStorage {
 
                 ResultSet rs = stmt.executeQuery();
 
-                List<Track> tracks = new ArrayList<Track>();
+                List<Track> tracks = new ArrayList<>();
                 while (rs.next()) {
                     tracks.add(parseTrack(rs));
                 }
@@ -338,7 +370,7 @@ public class DbStorage implements CatalogStorage {
 
                 ResultSet rs = stmt.executeQuery();
 
-                List<Track> tracks = new ArrayList<Track>();
+                List<Track> tracks = new ArrayList<>();
                 while (rs.next()) {
                     tracks.add(parseTrack(rs));
                 }
@@ -358,7 +390,7 @@ public class DbStorage implements CatalogStorage {
 
                 ResultSet rs = stmt.executeQuery();
 
-                List<Track> tracks = new ArrayList<Track>();
+                List<Track> tracks = new ArrayList<>();
                 while (rs.next()) {
                     tracks.add(parseTrack(rs));
                 }
@@ -368,7 +400,7 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
-    public List<Customer> getCustomers() {
+    public List<Customer> getAllCustomers() {
         return query(new Action<List<Customer>>() {
             @Override
             public List<Customer> execute(Connection con) throws SQLException {
@@ -376,7 +408,7 @@ public class DbStorage implements CatalogStorage {
                         "SELECT * FROM customer");
                 ResultSet rs = stmt.executeQuery();
 
-                List<Customer> customers = new ArrayList<Customer>();
+                List<Customer> customers = new ArrayList<>();
                 while (rs.next()) {
                     customers.add(parseCustomer(rs));
                 }
@@ -554,7 +586,7 @@ public class DbStorage implements CatalogStorage {
 
                 ResultSet rs = stmt.executeQuery();
 
-                List<CustomerReport> reportList = new ArrayList();
+                List<CustomerReport> reportList = new ArrayList<>();
 
                 while (rs.next()) {
                     reportList.add(parseCustomerReport(rs));
@@ -564,6 +596,7 @@ public class DbStorage implements CatalogStorage {
             }
         });
     }
+
 
     @Override
     public CustomerReport getCustomerReport(final long id) {
@@ -580,6 +613,7 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+
     @Override
     public List<CustomerReport> getCustomerReports(final long customerId, final Date from, final Date to) {
         return query(new Action<List<CustomerReport>>() {
@@ -593,7 +627,7 @@ public class DbStorage implements CatalogStorage {
 
                 ResultSet rs = stmt.executeQuery();
 
-                List<CustomerReport> reports = new ArrayList<CustomerReport>();
+                List<CustomerReport> reports = new ArrayList<>();
                 while (rs.next()) {
                     reports.add(parseCustomerReport(rs));
                 }
@@ -602,6 +636,7 @@ public class DbStorage implements CatalogStorage {
             }
         });
     }
+
 
     @Override
     public List<CustomerReportItem> getCustomerReportsItems(final long reportId) {
@@ -614,7 +649,7 @@ public class DbStorage implements CatalogStorage {
 
                 ResultSet rs = stmt.executeQuery();
 
-                List<CustomerReportItem> reports = new ArrayList<CustomerReportItem>();
+                List<CustomerReportItem> reports = new ArrayList<>();
                 while (rs.next()) {
                     reports.add(parseCustomerReportItem(rs));
                 }
@@ -723,7 +758,7 @@ public class DbStorage implements CatalogStorage {
             @Override
             public Integer execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT COUNT(*)cnt FROM composition where catalog_id= ?");
+                        "SELECT COUNT(*) cnt FROM composition WHERE catalog_id= ?");
 
                 stmt.setLong(1, catalogId);
 
@@ -734,6 +769,7 @@ public class DbStorage implements CatalogStorage {
             }
         });
     }
+
 
     @Override
     public List<CalculatedReportItem> calculateMobileReport(final String catalogName) {
@@ -794,7 +830,7 @@ public class DbStorage implements CatalogStorage {
 
                 ResultSet rs = ps.executeQuery();
 
-                List<CalculatedReportItem> result = new ArrayList<CalculatedReportItem>();
+                List<CalculatedReportItem> result = new ArrayList<>();
 
                 while (rs.next()) {
                     result.add(parseCalculatedReport(rs));
@@ -805,6 +841,7 @@ public class DbStorage implements CatalogStorage {
         });
 
     }
+
 
     @Override
     public List<CalculatedReportItem> calculatePublicReport(final String catalogName) {
@@ -865,12 +902,148 @@ public class DbStorage implements CatalogStorage {
 
     }
 
+
+    public void resetTempTrackTable() {
+        query(new Action<Object>() {
+            @Override
+            public Object execute(Connection con) throws SQLException {
+
+                //create a clone structure as composition
+//                con.createStatement().executeUpdate(
+//                        "CREATE TABLE IF NOT EXISTS comp_tmp LIKE composition"
+//                );
+//
+//                //add additional `done`-field
+//                con.createStatement().executeUpdate(
+//                        "ALTER TABLE comp_tmp ADD done TINYINT NULL"
+//                );
+
+                //clear all data if remain
+                con.createStatement().executeUpdate(
+                        "DELETE FROM comp_tmp"
+                );
+
+                return null;
+            }
+        });
+    }
+
+
+    public CatalogUpdate loadCatalog(final String dataFile, final long catId) {
+        return query(new Action<CatalogUpdate>() {
+            @Override
+            public CatalogUpdate execute(Connection con) throws SQLException {
+
+                //create a clone structure as composition
+                PreparedStatement stmt = con.prepareStatement(
+                        "LOAD DATA LOCAL INFILE ?\n" +
+                                "INTO TABLE comp_tmp\n" +
+                                "CHARACTER SET 'utf8'\n" +
+                                "FIELDS TERMINATED BY ?\n" +
+                                "LINES TERMINATED BY '\\n'\n" +
+                                "IGNORE 1 LINES\n" +
+                                "(@dummy, code, name, composer, artist, @shareMobile, @sharePublic)\n" +
+//                                "(@dummy, code, name, composer, artist, @dummy, @dummy, @shareMobile, @sharePublic)\n" +
+                                "SET catalog_id=?,\n" +
+                                "  shareMobile=IF(@shareMobile != '', @shareMobile, 0),\n" +
+                                "  sharePublic=IF(@sharePublic != '', @sharePublic, 0)"
+                );
+
+                stmt.setString(1, dataFile);
+                stmt.setString(2, ";");
+                stmt.setLong(3, catId);
+
+                CatalogUpdate res = new CatalogUpdate();
+                res.setCatalogId(catId);
+
+                stmt.execute();
+
+                // Check for errors...
+
+                ResultSet rs = con.createStatement().executeQuery("SHOW WARNINGS");
+
+                Status st = Status.OK;
+
+                while (rs.next()) {
+                    res.addError(rs.getString("Level") +
+                            "\t" + rs.getString("Code") +
+                            "\t" + rs.getString("Message"));
+                    st = Status.HAS_ERRORS;
+                }
+
+                res.setStatus(st);
+
+                if (st == Status.OK) {
+                    rs = con.createStatement().executeQuery("SELECT count(*) FROM comp_tmp");
+                    if (rs.next()) {
+                        int count = rs.getInt(1);
+                        res.setTracks(count);
+                    }
+
+                }
+
+
+                return res;
+            }
+        });
+    }
+
+
+    public List<TrackDiff> getCatalogUpdateDiff(final int from, final int size) {
+
+        return query(new Action<List<TrackDiff>>() {
+            @Override
+            public List<TrackDiff> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT c.code code," +
+                                "c.id c_id, " +
+                                "c.code c_code, " +
+                                "c.catalog_id c_catalog_id, " +
+                                "c.name c_name, " +
+                                "c.artist c_artist, " +
+                                "c.composer c_composer, " +
+                                "c.shareMobile c_shareMobile, " +
+                                "c.sharePublic c_sharePublic, " +
+                                "t.id t_id, " +
+                                "t.code t_code, " +
+                                "t.catalog_id t_catalog_id, " +
+                                "t.name t_name, " +
+                                "t.artist t_artist, " +
+                                "t.composer t_composer, " +
+                                "t.shareMobile t_shareMobile, " +
+                                "t.sharePublic t_sharePublic " +
+                                "FROM comp_tmp t " +
+                                "INNER JOIN composition c ON c.code = t.code LIMIT ?, ?"
+                );
+                stmt.setInt(1, from);
+                stmt.setInt(2, size);
+
+                ResultSet rs = stmt.executeQuery();
+
+                List<TrackDiff> res = new ArrayList<>();
+                int num = from;
+                while (rs.next()) {
+                    TrackDiff d = new TrackDiff();
+                    d.setNumber(num++);
+                    d.setCode(rs.getString("code"));
+                    d.setOldTrack(parseTrack(rs, "c_"));
+                    d.setNewTrack(parseTrack(rs, "t_"));
+                    res.add(d);
+                }
+
+                return res;
+            }
+        });
+
+    }
+
+
     @Override
     public void removeUser(final long id) {
         queryVoid(new VoidAction() {
             public void execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "delete from user where id = ?");
+                        "DELETE FROM user WHERE id = ?");
 
                 stmt.setLong(1, id);
                 stmt.executeUpdate();
@@ -883,7 +1056,7 @@ public class DbStorage implements CatalogStorage {
         queryVoid(new VoidAction() {
             public void execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "delete from customer where id = ?");
+                        "DELETE FROM customer WHERE id = ?");
 
                 stmt.setLong(1, id);
                 stmt.executeUpdate();
@@ -912,6 +1085,33 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+
+    @Override
+    public void updateCatalogsStat() {
+        query(new Action() {
+            @Override
+            public Object execute(Connection con) throws SQLException {
+                con.createStatement().executeUpdate(
+                        "UPDATE catalog c\n" +
+                                "SET tracks = (SELECT\n" +
+                                "                count(DISTINCT t.id)\n" +
+                                "              FROM composition t\n" +
+                                "              WHERE t.catalog_id = c.id)"
+                );
+
+                con.createStatement().executeUpdate(
+                        "UPDATE catalog c\n" +
+                                "SET artists = (SELECT\n" +
+                                "                count(DISTINCT t.artist)\n" +
+                                "              FROM composition t\n" +
+                                "              WHERE t.catalog_id = c.id)"
+                );
+                return null;
+            }
+        });
+    }
+
+
     //  Parsers  ----------------------------------------------------------------------------------------
 
     private static Platform parsePlatform(ResultSet rs) throws SQLException {
@@ -927,19 +1127,26 @@ public class DbStorage implements CatalogStorage {
         catalog.setName(rs.getString("name"));
         catalog.setRoyalty(rs.getFloat("royalty"));
         catalog.setCopyright(rs.getString("copyright"));
+        catalog.setTracks(rs.getInt("tracks"));
+        catalog.setArtists(rs.getInt("artists"));
         return catalog;
     }
 
     private static Track parseTrack(ResultSet rs) throws SQLException {
+        return parseTrack(rs, "");
+    }
+
+
+    private static Track parseTrack(ResultSet rs, String tblPrefix) throws SQLException {
         Track track = new Track();
-        track.setCatalog(catalogMap.get(rs.getLong("catalog_id")));
-        track.setId(rs.getLong("id"));
-        track.setCode(rs.getString("code"));
-        track.setName(rs.getString("name"));
-        track.setArtist(rs.getString("artist"));
-        track.setComposer(rs.getString("composer"));
-        track.setMobileShare(rs.getFloat("shareMobile"));
-        track.setPublicShare(rs.getFloat("sharePublic"));
+        track.setCatalog(catalogMap.get(rs.getLong(tblPrefix + "catalog_id")));
+        track.setId(rs.getLong(tblPrefix + "id"));
+        track.setCode(rs.getString(tblPrefix + "code"));
+        track.setName(rs.getString(tblPrefix + "name"));
+        track.setArtist(rs.getString(tblPrefix + "artist"));
+        track.setComposer(rs.getString(tblPrefix + "composer"));
+        track.setMobileShare(rs.getFloat(tblPrefix + "shareMobile"));
+        track.setPublicShare(rs.getFloat(tblPrefix + "sharePublic"));
         return track;
     }
 
@@ -1016,7 +1223,7 @@ public class DbStorage implements CatalogStorage {
             @Override
             public Long execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "insert into customer(contract, name, right_type, royalty) values(?,?,?,?)",
+                        "INSERT INTO customer(contract, name, right_type, royalty) VALUES(?,?,?,?)",
                         Statement.RETURN_GENERATED_KEYS);
                 stmt.setString(1, customer.getContract());
                 stmt.setString(2, customer.getName());
@@ -1040,7 +1247,7 @@ public class DbStorage implements CatalogStorage {
             @Override
             public Long execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "insert into user(login,password,customer_id,full_name,email) values(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                        "INSERT INTO user(login,password,customer_id,full_name,email) VALUES(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
                 stmt.setString(1, user.getLogin());
                 stmt.setString(2, user.getPass());
                 stmt.setLong(3, user.getCustomerId());

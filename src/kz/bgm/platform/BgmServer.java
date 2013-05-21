@@ -20,6 +20,7 @@ import java.util.Properties;
 public class BgmServer {
 
     public static final String APP_DIR = System.getProperty("user.dir");
+
     public static final String INDEX_DIR = APP_DIR + "/lucen-indexes";
 
     public static final String WEB_PROPS = APP_DIR + "/jetty.properties";
@@ -35,16 +36,16 @@ public class BgmServer {
     public static final String BASE_HOST = "base.host";
     public static final String BASE_PORT = "base.port";
 
-    private final Server jettyServer;
     private static final Logger log = Logger.getLogger(BgmServer.class);
 
+
+    private final Server jettyServer;
 
     public BgmServer(String propsName) throws IOException {
         Properties props = new Properties();
         props.load(new FileInputStream(propsName));
 
         int port = Integer.parseInt(props.getProperty(PORT));
-
         jettyServer = new Server(port);
 
         String res = props.getProperty(WEB_RESOURCE);
@@ -53,7 +54,6 @@ public class BgmServer {
         webApp.setDescriptor(APP_DIR + "/" + res + "/WEB-INF/web.xml");
         webApp.setResourceBase(APP_DIR + "/" + res);
         webApp.setContextPath("/");
-
 
         HandlerCollection handlers = new HandlerCollection();
         ContextHandlerCollection contexts = new ContextHandlerCollection();
@@ -68,17 +68,15 @@ public class BgmServer {
         requestLog.setLogTimeZone("GMT");
         requestLogHandler.setRequestLog(requestLog);
 
-
         jettyServer.setHandler(requestLogHandler);
         jettyServer.setHandler(webApp);
     }
+
 
     public void start() throws Exception {
         jettyServer.start();
         jettyServer.join();
     }
-
-
 
 
     public static void initDatabase(String propsFile) throws IOException {
@@ -95,8 +93,8 @@ public class BgmServer {
         CatalogFactory.initDBStorage(dbHost, dbPort, dbName, dbLogin, dbPass);
 
         LuceneSearch.getInstance().initSearcher(INDEX_DIR);
-
     }
+
 
     public static void main(String[] args) throws Exception {
         DOMConfigurator.configure("log4j.xml");

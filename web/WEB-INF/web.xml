@@ -9,8 +9,6 @@
     <!--================= Admin  =======================-->
 
 
-
-
     <filter>
         <filter-name>adminAuthFilter</filter-name>
         <filter-class>kz.bgm.platform.web.admin.AuthFilter</filter-class>
@@ -56,11 +54,11 @@
     </servlet>
     <servlet>
         <servlet-name>adminProcessReportServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.admin.action.LoadMobileReportServlet</servlet-class>
+        <servlet-class>kz.bgm.platform.web.admin.action.DownloadReportMobileServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>adminLoadPublicReport</servlet-name>
-        <servlet-class>kz.bgm.platform.web.admin.action.LoadPublicReportServlet</servlet-class>
+        <servlet-class>kz.bgm.platform.web.admin.action.DownloadReportPublicServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>createUserServlet</servlet-name>
@@ -72,19 +70,15 @@
         <servlet-class>kz.bgm.platform.web.admin.action.DeleteUserServlet</servlet-class>
     </servlet>
 
-    <servlet-mapping>
-        <servlet-name>deleteUserServlet</servlet-name>
-        <url-pattern>/admin/action/delete-user</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>updateCatalog</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.UpdateCatalogServlet</servlet-class>
+    </servlet>
 
-    <servlet-mapping>
-        <servlet-name>adminSearchServletJson</servlet-name>
-        <url-pattern>/admin/api/search</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>adminSearchServlet</servlet-name>
-        <url-pattern>/admin/action/search</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>createCustomerServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.CreateCustomerServlet</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -100,6 +94,22 @@
         <servlet-name>adminDispatcherServlet</servlet-name>
         <url-pattern>/admin/view/*</url-pattern>
     </servlet-mapping>
+
+
+    <servlet-mapping>
+        <servlet-name>deleteUserServlet</servlet-name>
+        <url-pattern>/admin/action/delete-user</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>adminSearchServletJson</servlet-name>
+        <url-pattern>/admin/api/search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminSearchServlet</servlet-name>
+        <url-pattern>/admin/action/search</url-pattern>
+    </servlet-mapping>
+
 
     <servlet-mapping>
         <servlet-name>adminUploadReportMobileServlet</servlet-name>
@@ -124,10 +134,10 @@
         <url-pattern>/admin/action/create-user</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>createCustomerServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.admin.action.CreateCustomerServlet</servlet-class>
-    </servlet>
+    <servlet-mapping>
+        <servlet-name>updateCatalog</servlet-name>
+        <url-pattern>/admin/action/update-catalog</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>createCustomerServlet</servlet-name>
