@@ -75,10 +75,12 @@
                                     <strong>Применен</strong>
                                 </c:when>
                                 <c:otherwise>
-                                    <form action="../action/appy-catalog-update" method="post">
-                                        <input class="btn btn-small btn-primary apply-btn" type="submit"
-                                               value="Применить!">
-                                    </form>
+                                    <c:if test="${update.status == 'OK'}">
+                                        <form action="../action/appy-catalog-update" method="post">
+                                            <input class="btn btn-small btn-primary apply-btn" type="submit"
+                                                   value="Применить!">
+                                        </form>
+                                    </c:if>
                                 </c:otherwise>
                             </c:choose>
 

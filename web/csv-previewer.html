@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <script src="/js/jquery.js" type="text/javascript"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+
+    <script src="/js/bootstrap.js" type="text/javascript"></script>
+    <script src="/js/bootstrap-fileupload.js" type="text/javascript"></script>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/css/csv-preview.csss" media="screen"/>
+    <title>CSV Reader</title>
+
+    <style>
+
+
+            /*##### the table stuff #####*/
+        table {
+            font-size: 10px;
+            border-collapse:collapse;
+            font-family:Tahoma,Helvetica,Arial,sans-serif;
+        }
+        td, th {
+            text-align:left;
+            vertical-align:top;
+        }
+
+        tr{
+            marging:0;
+            padding:0;
+        }
+
+        table td, table th {
+            border:1px solid #CCC;
+            font-size:0.9em;
+            padding:3px;
+        }
+
+        table.sar-table th {
+            background:none repeat scroll 0 0 #FBF9EA;
+            color:#000;
+            font-weight:normal;
+            height:20px;
+            width:100px;
+            cursor:move;
+        }
+
+        #handlerTable th {
+            cursor:default;
+        }
+
+        .some-handle {
+            cursor:move;
+        }
+
+        #constrainTable th {
+            cursor:default;
+        }
+
+        #constrainTable th.accept {
+            cursor:move;
+        }
+
+        .some-handle {
+            background-image:url("img/handle.png");
+            background-repeat:repeat-x;
+            height:18px;
+            margin:0 1px;
+        }
+
+        <!---->
+        .dragtable-sortable {
+            list-style-type: none; margin: 0; padding: 0; -moz-user-select: none;
+        }
+        .dragtable-sortable li {
+            margin: 0; padding: 0; float: left; font-size: 1em; background: white;
+        }
+
+        .dragtable-sortable th, .dragtable-sortable td{
+            border-left: 0px;
+        }
+
+        .dragtable-sortable li:first-child th, .dragtable-sortable li:first-child td {
+            border-left: 1px solid #CCC;
+        }
+
+        .ui-sortable-helper {
+            opacity: 0.7;filter: alpha(opacity=70);
+        }
+        .ui-sortable-placeholder {
+            -moz-box-shadow: 4px 5px 4px #C6C6C6 inset;
+            -webkit-box-shadow: 4px 5px 4px #C6C6C6 inset;
+            box-shadow: 4px 5px 4px #C6C6C6 inset;
+            border-bottom: 1px solid #CCCCCC;
+            border-top: 1px solid #CCCCCC;
+            visibility: visible !important;
+            background: #EFEFEF !important;
+            visibility: visible !important;
+        }
+        .ui-sortable-placeholder * {
+            opacity: 0.0; visibility: hidden;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container" style="margin-top: 100px">
+    <div class="row">
+        <div class="span10">
+            <section>
+                <form action="/load">
+                    <input type='file' id="fileinput"/>
+                    <!--<input type='file' id="fileinput" onchange="readURL(this);"/>-->
+                </form>
+            </section>
+            <section>
+                <div id="preview-container">
+
+                </div>
+
+
+                <div class="demo-content">
+                    <!--<table id="defaultTable" class="sar-table">-->
+                        <!--<thead>-->
+                        <!--<tr>-->
+                            <!--<th>%nice</th>-->
+
+                            <!--<th>%system</th>-->
+                            <!--<th>%iowait</th>-->
+                            <!--<th>TIME</th>-->
+                            <!--<th>%idle</th>-->
+                            <!--<th>%user</th>-->
+                        <!--</tr>-->
+                        <!--</thead>-->
+
+                        <!--<tbody>-->
+                        <!--<tr>-->
+                            <!--<td>0.04</td><td>1.65</td><td>0.08</td><td>12:10:01 AM</td><td>69.36</td><td>28.86</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td>0.00</td><td>1.64</td><td>0.08</td><td>12:20:01 AM</td><td>71.74</td><td>26.54</td>-->
+
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td>0.00</td><td>1.66</td><td>0.09</td><td>12:30:01 AM</td><td>68.52</td><td>29.73</td>-->
+                        <!--</tr>-->
+                        <!--</tbody>-->
+                    <!--</table>-->
+
+                </div>
+
+            </section>
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript" src="js/csv-helper.js"></script>
+<script type="text/javascript" src="js/jquery.dragtable.js"></script>
+
+<script type="text/javascript">
+
+    var fileData;
+
+    $(document).ready(function () {
+
+        $("#fileinput").on('change', function (e) {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    processContents(event.target.result)
+                };
+                reader.readAsText(this.files[0], "UTF8");
+            }
+        });
+
+
+    });
+
+
+    function processContents(contents) {
+        fileData = contents;
+        var data = convertCSVToArray(contents, ";");
+        var tbl = buildTable(data, "tableId", 'table table-striped', 0, 10);
+
+        var $preview = $("#preview-container");
+        $preview.addClass('csv-preview');
+        $preview.html(tbl);
+        $preview.append("<div class='preview-more'>... и еще " + (data.length - 10) + " строк </div>")
+
+        $('#tableId').dragtable({maxMovingRows:1});
+
+    }
+
+
+</script>
+
+
+</body>
+</html>

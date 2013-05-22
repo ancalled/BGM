@@ -17,6 +17,12 @@
     <title>Главная</title>
 </head>
 
+<style>
+    span.small {
+        font-size: 10px;
+    }
+</style>
+
 
 <body>
 
@@ -57,18 +63,18 @@
                                         </c:choose>
                                     </li>
                                     <li>
-                            <span>
+                            <span class="small">
                                  <i class="icon-music"></i>
                             </span>
-                            <span>
+                            <span class="small">
                                  <fmt:formatNumber type="number" maxFractionDigits="3" value="${c.tracks}"/>
                             </span>
                                     </li>
                                     <li>
-                            <span>
+                            <span class="small">
                                  <i class="icon-user"></i>
                             </span>
-                            <span>
+                            <span class="small">
                                  <fmt:formatNumber type="number" maxFractionDigits="3" value="${c.artists}"/>
                             </span>
                                     </li>
