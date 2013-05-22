@@ -1,6 +1,9 @@
 package kz.bgm.platform.web.customer.action;
 
 
+import kz.bgm.platform.model.domain.Track;
+import kz.bgm.platform.model.service.CatalogFactory;
+import kz.bgm.platform.model.service.CatalogStorage;
 import kz.bgm.platform.model.service.TrackBasket;
 
 import javax.servlet.ServletException;
@@ -15,6 +18,12 @@ import java.util.List;
 
 public class PutToBasketServlet extends HttpServlet {
 
+    CatalogStorage storage;
+
+    @Override
+    public void init() throws ServletException {
+        storage = CatalogFactory.getStorage();
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,7 +32,7 @@ public class PutToBasketServlet extends HttpServlet {
         TrackBasket basket = (TrackBasket) session.getAttribute("basket");
 
         if (basket != null) {
-            List<Long> idList = getBasketAttrs(req);
+            List<Track> idList = getTracks(req);
             basket.addTrack(idList);
         }
 
@@ -31,19 +40,22 @@ public class PutToBasketServlet extends HttpServlet {
 
     }
 
-    private List<Long> getBasketAttrs(HttpServletRequest req) {
-
+    private List<Track> getTracks(HttpServletRequest req) {
         Enumeration<String> names = req.getParameterNames();
-        List<Long> idList = new ArrayList<>();
+        List<Track> trackList = new ArrayList<>();
         while (names.hasMoreElements()) {
             String elName = names.nextElement();
             String strId = (String) req.getParameter(elName);
 
             if (strId != null) {
                 Long id = Long.parseLong(strId);
-                idList.add(id);
+                Track track = storage.getTrack(id);
+
+                if (track != null) {
+                    trackList.add(track);
+                }
             }
         }
-        return idList;
+        return trackList;
     }
 }

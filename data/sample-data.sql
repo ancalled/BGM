@@ -30,9 +30,4 @@ INSERT INTO user (login, password, customer_id,full_name,email) VALUES ('huii', 
 
 INSERT INTO user_admin (login, password) VALUES ('max', '123');
 
-INSERT INTO details (rnn, address, boss) VALUES (60098745612, 'Ленина 77 уг. Калинина', 'Иванов Л.В.');
-INSERT INTO details (rnn, address, boss) VALUES (56798745612, 'Пушкина 77 Колотушкина 55', 'Петров Л.В.');
-INSERT INTO details (rnn, address, boss) VALUES (1119811612, 'Кирова 98', 'Сидоров Л.В.');
-
-
 

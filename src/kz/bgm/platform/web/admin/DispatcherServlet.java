@@ -23,6 +23,9 @@ public class DispatcherServlet extends HttpServlet {
 
     public static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     public static final int TRACKS_PER_PAGE = 50;
+    public static final String CUSTOMER = "customer";
+    public static final String USERS = "users";
+    public static final String CUSTOMER_ID = "customer_id";
 
 
     private CatalogStorage catalogStorage;
@@ -88,11 +91,18 @@ public class DispatcherServlet extends HttpServlet {
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
 
                         HttpSession ses = req.getSession();
-                        if (ses == null) return null;
+                        int from = 0;
 
+                        String strFrom = req.getParameter("from");
+
+                        if (strFrom != null) {
+                            from = Integer.parseInt(strFrom);
+                        }
+                        req.setAttribute("catalogs", catalogStorage.getAllCatalogs());
                         req.setAttribute("query", ses.getAttribute("query"));
                         req.setAttribute("tracks", ses.getAttribute("tracks"));
-
+                        req.setAttribute("from", from);
+                        req.setAttribute("pageSize", TRACKS_PER_PAGE);
                         return "search-result";
                     }
                 };
@@ -178,12 +188,12 @@ public class DispatcherServlet extends HttpServlet {
                                 req.setAttribute("catalog", catalog);
 
                                 if (update.getStatus() == CatalogUpdate.Status.OK) {
-                                    String fromStr =  req.getParameter("from");
+                                    String fromStr = req.getParameter("from");
                                     int from = fromStr != null ? Integer.parseInt(fromStr) : 0;
                                     if (from < 0) from = 0;
                                     if (from > update.getCrossing()) from = update.getCrossing();
 
-                                    List<TrackDiff> diffs =  catalogStorage.getCatalogUpdateDiff(from, TRACKS_PER_PAGE);
+                                    List<TrackDiff> diffs = catalogStorage.getCatalogUpdateDiff(from, TRACKS_PER_PAGE);
                                     req.setAttribute("diffs", diffs);
                                     req.setAttribute("from", from);
                                     req.setAttribute("pageSize", TRACKS_PER_PAGE);
@@ -234,15 +244,15 @@ public class DispatcherServlet extends HttpServlet {
                 action = new Action() {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-                        String strCustId = req.getParameter("customer_id");
+                        String strCustId = req.getParameter(CUSTOMER_ID);
 
                         long customerId = Long.parseLong(strCustId);
                         Customer customer = catalogStorage.getCustomer(customerId);
 
                         List<User> userList = catalogStorage.getUsersByCustomerId(customerId);
 
-                        req.setAttribute("customer", customer);
-                        req.setAttribute("users", userList);
+                        req.setAttribute(CUSTOMER, customer);
+                        req.setAttribute(USERS, userList);
 
                         return "customer-detail";
                     }
