@@ -49,45 +49,45 @@
             </ul>
             </div>
 
-            <%--<ul class="nav nav-pills">--%>
-                <%--<li class="dropdown">--%>
-                    <%--<a class="dropdown-toggle" id="catalog" role="button" data-toggle="dropdown" href="#">Каталог<b--%>
-                            <%--class="caret"></b></a>--%>
-                    <%--<ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="catalog">--%>
-                        <%--<c:forEach var="c" items="${catalogs}">--%>
+            <ul class="nav nav-pills">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" id="catalog" role="button" data-toggle="dropdown" href="#">Каталог<b
+                            class="caret"></b></a>
+                    <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="catalog">
+                        <c:forEach var="c" items="${catalogs}">
 
-                            <%--<li role="presentation"><a role="menuitem" tabindex="-1" id="${c.id}"--%>
-                                                       <%--onclick="setCatalog(this)" href="">${c.name}</a></li>--%>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" id="${c.id}"
+                                                       onclick="setCatalog(this)" href="">${c.name}</a></li>
 
-                        <%--</c:forEach>--%>
-                    <%--</ul>--%>
-                <%--</li>--%>
+                        </c:forEach>
+                    </ul>
+                </li>
 
-            <%--</ul>--%>
-            <%--<script>--%>
-                <%--var catalogComp = document.getElementById("catalog");--%>
+            </ul>
+            <script>
+                var catalogComp = document.getElementById("catalog");
 
-              <%--function setCatalog(cat) {--%>
-                    <%--catalogComp.textContent = cat.textContent;--%>
-                <%--}--%>
-            <%--</script>--%>
+              function setCatalog(cat) {
+                    catalogComp.textContent = cat.textContent;
+                }
+            </script>
 
-            <c:if test="${not empty catalogs}">
-            <label>
-            <select name="catalog", style="margin-left: 20px">
-            <option value="all">Все</option>
+            <%--<c:if test="${not empty catalogs}">--%>
+            <%--<label>--%>
+            <%--<select name="catalog", style="margin-left: 20px">--%>
+            <%--<option value="all">Все</option>--%>
+<%----%>
+            <%--<c:forEach var="c" items="${catalogs}">--%>
+<%----%>
 
-            <c:forEach var="c" items="${catalogs}">
+            <%--<option value="${c.id}">${c.name}</option>--%>
+<%----%>
+            <%--</c:forEach>--%>
+            <%--</select>--%>
+            <%--</label>--%>
 
 
-            <option value="${c.id}">${c.name}</option>
-
-            </c:forEach>
-            </select>
-            </label>
-
-
-            </c:if>
+            <%--</c:if>--%>
 
 
         </div>
