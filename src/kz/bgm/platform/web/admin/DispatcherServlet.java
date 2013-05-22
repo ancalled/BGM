@@ -160,6 +160,10 @@ public class DispatcherServlet extends HttpServlet {
                             long catId = Long.parseLong(catIdStr);
                             Catalog catalog = catalogStorage.getCatalog(catId);
                             req.setAttribute("catalog", catalog);
+
+                            List<CatalogUpdate> updates = catalogStorage.getCatalogUpdates(catId);
+                            req.setAttribute("updates", updates);
+
                         }
 
                         return "catalog";
@@ -173,32 +177,35 @@ public class DispatcherServlet extends HttpServlet {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
 
-                        String erCode = req.getParameter("er");
-                        if (erCode != null) {
-                            req.setAttribute("erCode", erCode);
-                        }
+                        String idStr = req.getParameter("id");
+                        if (idStr != null) {
+                            long updateId = Long.parseLong(idStr);
 
-                        HttpSession ses = req.getSession();
-                        if (ses != null) {
-                            CatalogUpdate update = (CatalogUpdate) ses.getAttribute("catalog-update");
+                            String erCode = req.getParameter("er");
+                            if (erCode != null) {
+                                req.setAttribute("erCode", erCode);
+                            }
+
+                            CatalogUpdate update = catalogStorage.getCatalogUpdate(updateId);
                             if (update != null) {
                                 req.setAttribute("update", update);
 
                                 Catalog catalog = catalogStorage.getCatalog(update.getCatalogId());
                                 req.setAttribute("catalog", catalog);
 
-//                                if (update.getStatus() == CatalogUpdate.Status.OK) {
-                                    String fromStr = req.getParameter("from");
-                                    int from = fromStr != null ? Integer.parseInt(fromStr) : 0;
-                                    if (from < 0) from = 0;
-                                    if (update.getCrossing() != null && from > update.getCrossing())
-                                        from = update.getCrossing();
+                                String fromStr = req.getParameter("from");
+                                int from = fromStr != null ? Integer.parseInt(fromStr) : 0;
+                                if (from < 0) {
+                                    from = 0;
+                                }
+                                if (from > update.getCrossing()) {
+                                    from = update.getCrossing();
+                                }
 
-                                    List<TrackDiff> diffs = catalogStorage.geChangedTracks(from, TRACKS_PER_PAGE);
-                                    req.setAttribute("diffs", diffs);
-                                    req.setAttribute("from", from);
-                                    req.setAttribute("pageSize", TRACKS_PER_PAGE);
-//                                }
+                                List<TrackDiff> diffs = catalogStorage.geChangedTracks(updateId, from, TRACKS_PER_PAGE);
+                                req.setAttribute("diffs", diffs);
+                                req.setAttribute("from", from);
+                                req.setAttribute("pageSize", TRACKS_PER_PAGE);
                             }
                         }
 

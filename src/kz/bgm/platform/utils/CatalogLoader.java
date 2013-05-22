@@ -1,7 +1,6 @@
-package kz.bgm.platform;
+package kz.bgm.platform.utils;
 
 import kz.bgm.platform.model.domain.Track;
-import kz.bgm.platform.utils.CatalogParser;
 import kz.bgm.platform.model.service.CatalogStorage;
 import kz.bgm.platform.model.service.DbStorage;
 import org.apache.log4j.Logger;

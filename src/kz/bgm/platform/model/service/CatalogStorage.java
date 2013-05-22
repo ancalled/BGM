@@ -89,14 +89,19 @@ public interface CatalogStorage {
 
     void resetTempTrackTable();
 
-    CatalogUpdate saveCatalogUpdate(String dataFile, long catId);
+    CatalogUpdate updateCatalog(CatalogUpdate update);
 
-    List<TrackDiff> geChangedTracks(int from, final int size);
+    Long saveCatalogUpdate(CatalogUpdate update);
 
-    List<Track> getNewTracks(int from, final int size);
+    List<TrackDiff> geChangedTracks(long updateId, int from, final int size);
 
-    void applyCatalogUpdate();
+    List<Track> getNewTracks(long updateId, int from, final int size);
 
+    void applyCatalogUpdate(long updateId);
+
+    CatalogUpdate getCatalogUpdate(long updateId);
+
+    List<CatalogUpdate> getCatalogUpdates(long catalogId);
 
     void updateCatalogsStat();
 

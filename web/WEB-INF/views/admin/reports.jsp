@@ -50,7 +50,7 @@
                                 <div class="uneditable-input span3">
                                     <i class="icon-file fileupload-exists"></i>
                                     <span class="fileupload-preview"></span></div>
-                                <span class="btn btn-file">
+                                <span class="btn btn-fileName">
                                     <span class="fileupload-new">Выбрать отчет</span>
                                     <span class="fileupload-exists">Изменить</span><input name="file" type="file"/>
                                 </span>
@@ -70,7 +70,7 @@
                             <div id="date" class="input-append">
                                 <input data-format="yyyy-MM-dd" id="dt" class="input-block-level" name="dt" type="text">
                               <span class="add-on">
-                                 <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                 <i data-time-icon="icon-time" data-whenUpdated-icon="icon-calendar">
                                  </i>
                                   </span>
                             </div>
@@ -111,7 +111,7 @@
                                 <div class="uneditable-input span3">
                                     <i class="icon-file fileupload-exists"></i>
                                     <span class="fileupload-preview"></span></div>
-                                <span class="btn btn-file">
+                                <span class="btn btn-fileName">
                                     <span class="fileupload-new">Выбрать отчет</span>
                                     <span class="fileupload-exists">Изменить</span><input name="file" type="file"/>
                                 </span>

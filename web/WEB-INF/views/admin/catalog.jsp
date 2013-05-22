@@ -71,7 +71,7 @@
         }
 
         .table, .preview {
-            max-width:none;
+            max-width: none;
         }
 
         #upload-options {
@@ -86,7 +86,6 @@
             height: 10px;
             background: green;
         }
-
 
 
     </style>
@@ -144,6 +143,29 @@
                     Обновления
                 </legend>
 
+
+                <p>
+
+                    <c:forEach items="${updates}" var="u">
+                    <c:if test="${u.applied}">
+                <dl class="dl-horizontal">
+                    <dt>Обновлен</dt>
+                    <dd>${u.whenUpdated}</dd>
+
+                    <dt>Фвйл</dt>
+                    <dd>${u.fileName}</dd>
+
+                    <dt>Новых треков</dt>
+                    <dd>${u.tracks - u.crossing}</dd>
+
+                    <dt>Измененных</dt>
+                    <dd>${u.crossing}</dd>
+                </dl>
+                </c:if>
+
+                </c:forEach>
+                </p>
+
                 <form class="form-horizontal" action="../action/update-catalog" method="post"
                       enctype="multipart/form-data">
                     <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -153,11 +175,12 @@
                                 <span class="fileupload-preview"></span>
                             </div>
 
-                <span class="btn btn-file">
+                <span class="btn btn-fileName">
                     <span class="fileupload-new">Выбрать обновление</span>
                     <span class="fileupload-exists">Изменить</span>
 
-                    <input name="file" type="file" id="fileinput"  accept=".csv" data-url="../action/update-catalog" multiple/>
+                    <input name="file" type="file" id="fileinput" accept=".csv" data-url="../action/update-catalog"
+                           multiple/>
                 </span>
 
                             <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Убрать</a>
@@ -181,14 +204,13 @@
                     <input type="hidden" name="catId" value="${catalog.id}">
 
 
-
                     <%--<div id="upload-options">--%>
-                        <%--<div class="control-group">--%>
-                            <%--<label class="control-label" for="inputEmail">Email</label>--%>
-                            <%--<div class="controls">--%>
-                                <%--<input type="text" id="inputEmail" placeholder="Email">--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
+                    <%--<div class="control-group">--%>
+                    <%--<label class="control-label" for="inputEmail">Email</label>--%>
+                    <%--<div class="controls">--%>
+                    <%--<input type="text" id="inputEmail" placeholder="Email">--%>
+                    <%--</div>--%>
+                    <%--</div>--%>
 
                     <%--</div>--%>
                 </form>
@@ -204,8 +226,8 @@
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<%--<script src="/js/bootstrap.js"></script>--%>
-<%--<script src="/js/bootstrap-fileupload.js"></script>--%>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/bootstrap-fileupload.js"></script>
 <script src="/js/csv-helper.js"></script>
 <script src="/js/jquery.ui.widget.js"></script>
 <script src="/js/jquery.iframe-transport.js"></script>
@@ -253,9 +275,9 @@
 
             add: function (e, data) {
                 $("#sbmtBtn").click(function () {
-                            data.context = $('<p/>').text('Загрузка...').replaceAll($(this));
-                            data.submit();
-                        });
+                    data.context = $('<p/>').text('Загрузка...').replaceAll($(this));
+                    data.submit();
+                });
             },
 
             progressall: function (e, data) {
@@ -307,7 +329,6 @@
 
 
     }
-
 
 
 </script>

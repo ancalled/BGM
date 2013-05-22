@@ -82,21 +82,30 @@ public class UpdateCatalogServlet extends HttpServlet {
             File updateFile = new File(updateFileName);
             saveToFile(item, updateFile);
 
+            CatalogUpdate update = new CatalogUpdate();
+            update.setCatalogId(catalogId);
+            update.setFilePath(updateFile.getAbsolutePath());
+            update.setFileName(updateFile.getName());
+            update.setEncoding("utf8");
+            update.setSeparator(";");
+            update.setEnclosedBy("\"");
+            update.setNewline("\n");
+            update.setFromLine(1);
+
             log.info("Got catalog updates " + item.getName());
 
-            log.debug("Resetting temp table");
-            storage.resetTempTrackTable();
+//            log.debug("Resetting temp table");
+//            storage.resetTempTrackTable();
 
             log.debug("Loading csv to temp table...");
-            CatalogUpdate res = storage.saveCatalogUpdate(updateFileName, catalogId);
-            res.setFile(updateFile.getName());
+            update = storage.updateCatalog(update);
 
-            log.debug("Got result: " + res.getStatus());
+            log.debug("Got result: " + update.getStatus());
 
-            if (res.getStatus() == Status.HAS_WARNINGS) {
+            if (update.getStatus() == Status.HAS_WARNINGS) {
                 int i = 0;
                 JSONArray jsonAr = new JSONArray();
-                for (UpdateWarning wrn : res.getWarnings()) {
+                for (UpdateWarning wrn : update.getWarnings()) {
                     JSONObject jsnWrn = new JSONObject();
                     jsnWrn.put("number", wrn.getNumber());
                     jsnWrn.put("column", wrn.getColumn());
@@ -112,12 +121,10 @@ public class UpdateCatalogServlet extends HttpServlet {
                 jsonObj.put("warningsList", jsonAr);
             }
 
-            HttpSession ses = req.getSession(true);
-            ses.setAttribute("catalog-update", res);
-
 //            resp.sendRedirect(RESULT_URL);
-            jsonObj.put("status", res.getStatus() == Status.OK ? "ok" : "warn");
-            jsonObj.put("redirect", RESULT_URL);
+            jsonObj.put("id", update.getId());
+            jsonObj.put("status", update.getStatus() == Status.OK ? "ok" : "warn");
+            jsonObj.put("redirect", RESULT_URL + "?id=" + update.getId());
             jsonObj.writeJSONString(out);
 
 
