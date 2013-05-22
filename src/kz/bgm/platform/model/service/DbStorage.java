@@ -987,18 +987,20 @@ public class DbStorage implements CatalogStorage {
                 Status st = Status.OK;
 
                 while (rs.next()) {
-                    res.addError(rs.getString("Level") +
-                            "\t" + rs.getString("Code") +
-                            "\t" + rs.getString("Message"));
-                    st = Status.HAS_ERRORS;
+                    String level = rs.getString("Level");
+                    if ("Warning".equals(level)) {
+                        UpdateWarning w = new UpdateWarning();
+                        w.setNumber(rs.getInt("Code"));
+                        w.parseMessage(rs.getString("Message"));
+                        res.addWarning(w);
+                        st = Status.HAS_WARNINGS;
+                    }
                 }
 
                 res.setStatus(st);
 
-                if (st == Status.OK) {
-                    res.setTracks(getCompTmpRows());
-                    res.setCrossing(getCompTmpCrossingRows());
-                }
+                res.setTracks(getCompTmpRows());
+                res.setCrossing(getCompTmpCrossingRows());
 
                 return res;
             }
@@ -1027,7 +1029,8 @@ public class DbStorage implements CatalogStorage {
                 ResultSet rs = con.createStatement().executeQuery("SELECT\n" +
                         "  count(DISTINCT t.id)\n" +
                         "FROM composition c INNER JOIN comp_tmp t\n" +
-                        "    ON c.code = t.code;");
+                        "    ON c.code = t.code" +
+                        " AND c.catalog_id = t.catalog_id");
                 if (rs.next()) {
                     return rs.getInt(1);
                 }
@@ -1038,7 +1041,7 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-    public List<TrackDiff> getCatalogUpdateDiff(final int from, final int size) {
+    public List<TrackDiff> geChangedTracks(final int from, final int size) {
 
         return query(new Action<List<TrackDiff>>() {
             @Override
@@ -1062,7 +1065,10 @@ public class DbStorage implements CatalogStorage {
                                 "t.shareMobile t_shareMobile, " +
                                 "t.sharePublic t_sharePublic " +
                                 "FROM comp_tmp t " +
-                                "INNER JOIN composition c ON c.code = t.code LIMIT ?, ?"
+                                "INNER JOIN composition c " +
+                                "ON c.code = t.code " +
+                                "AND c.catalog_id = t.catalog_id " +
+                                "LIMIT ?, ?"
                 );
                 stmt.setInt(1, from);
                 stmt.setInt(2, size);
@@ -1086,6 +1092,25 @@ public class DbStorage implements CatalogStorage {
 
     }
 
+    @Override
+    public List<Track> getNewTracks(int from, int size) {
+        return query(new Action<List<Track>>() {
+            @Override
+            public List<Track> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM composition WHERE artist LIKE?");
+//                stmt.setString(1, artist);
+
+                ResultSet rs = stmt.executeQuery();
+
+                List<Track> tracks = new ArrayList<>();
+                while (rs.next()) {
+                    tracks.add(parseTrack(rs));
+                }
+                return tracks;
+            }
+        });
+    }
 
     @Override
     public void applyCatalogUpdate() {
@@ -1096,6 +1121,7 @@ public class DbStorage implements CatalogStorage {
                         "UPDATE composition c\n" +
                                 "  INNER JOIN comp_tmp t\n" +
                                 "    ON c.code = t.code\n" +
+                                "       AND c.catalog_id = t.catalog_id\n" +
                                 "SET c.name = t.name,\n" +
                                 "  c.composer = t.composer,\n" +
                                 "  c.artist = t.artist,\n" +

@@ -187,17 +187,18 @@ public class DispatcherServlet extends HttpServlet {
                                 Catalog catalog = catalogStorage.getCatalog(update.getCatalogId());
                                 req.setAttribute("catalog", catalog);
 
-                                if (update.getStatus() == CatalogUpdate.Status.OK) {
+//                                if (update.getStatus() == CatalogUpdate.Status.OK) {
                                     String fromStr = req.getParameter("from");
                                     int from = fromStr != null ? Integer.parseInt(fromStr) : 0;
                                     if (from < 0) from = 0;
-                                    if (from > update.getCrossing()) from = update.getCrossing();
+                                    if (update.getCrossing() != null && from > update.getCrossing())
+                                        from = update.getCrossing();
 
-                                    List<TrackDiff> diffs = catalogStorage.getCatalogUpdateDiff(from, TRACKS_PER_PAGE);
+                                    List<TrackDiff> diffs = catalogStorage.geChangedTracks(from, TRACKS_PER_PAGE);
                                     req.setAttribute("diffs", diffs);
                                     req.setAttribute("from", from);
                                     req.setAttribute("pageSize", TRACKS_PER_PAGE);
-                                }
+//                                }
                             }
                         }
 

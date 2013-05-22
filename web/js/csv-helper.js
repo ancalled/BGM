@@ -1,90 +1,34 @@
-function convertCSVToArray(strData, strDelimiter) {
-    // Check to see if the delimiter is defined. If not,
-    // then default to comma.
-    strDelimiter = (strDelimiter || ",");
 
-    // Create a regular expression to parse the CSV values.
-    var objPattern = new RegExp(
-        (
-            // Delimiters.
-            "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
+function parseCSV(csv, delim) {
+    delim = (delim || ",");
 
-                // Quoted fields.
-                "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
+    var pat = new RegExp((
+        "(\\" + delim + "|\\r?\\n|\\r|^)" +
+        "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
+        "([^\"\\" + delim + "\\r\\n]*))"),
+        "gi");
 
-                // Standard fields.
-                "([^\"\\" + strDelimiter + "\\r\\n]*))"
-            ),
-        "gi"
-    );
+    var res = [[]];
+    var matches = null;
 
-
-    // Create an array to hold our data. Give the array
-    // a default empty first row.
-    var arrData = [
-        []
-    ];
-
-    // Create an array to hold our individual pattern
-    // matching groups.
-    var arrMatches = null;
-
-
-    // Keep looping over the regular expression matches
-    // until we can no longer find a match.
-    while (arrMatches = objPattern.exec(strData)) {
-
-        // Get the delimiter that was found.
-        var strMatchedDelimiter = arrMatches[ 1 ];
-
-        // Check to see if the given delimiter has a length
-        // (is not the start of string) and if it matches
-        // field delimiter. If id does not, then we know
-        // that this delimiter is a row delimiter.
-        if (
-            strMatchedDelimiter.length &&
-                (strMatchedDelimiter != strDelimiter)
-            ) {
-
-            // Since we have reached a new row of data,
-            // add an empty row to our data array.
-            arrData.push([]);
-
+    while (matches = pat.exec(csv)) {
+        var d = matches[1];
+        if (d.length && (d != delim)) {
+            res.push([]);
         }
 
-
-        // Now that we have our delimiter out of the way,
-        // let's check to see which kind of value we
-        // captured (quoted or unquoted).
-        if (arrMatches[ 2 ]) {
-
-            // We found a quoted value. When we capture
-            // this value, unescape any double quotes.
-            var strMatchedValue = arrMatches[ 2 ].replace(
-                new RegExp("\"\"", "g"),
-                "\""
-            );
-
+        var value;
+        if (matches[2]) {
+            value = matches[2].replace(new RegExp("\"\"", "g"), "\"");
         } else {
-
-            // We found a non-quoted value.
-            var strMatchedValue = arrMatches[ 3 ];
-
+            value = matches[3];
         }
 
-
-        // Now that we have our value string, let's add
-        // it to the data array.
-        arrData[ arrData.length - 1 ].push(strMatchedValue);
+        res[res.length - 1].push(value);
     }
 
-    // Return the parsed data.
-    return( arrData );
+    return res;
 }
-
-
-
-
 
 
 String.prototype.format = function () {
@@ -97,8 +41,7 @@ String.prototype.format = function () {
 };
 
 
-function buildTable(data, tableId, tableClassName, from, size, headers) {
-    if (!data || !headers) return;
+function buildTable(data, headers, from, size, tableId, tableClassName) {
 
     var idMarkup = tableId ? ' id="' + tableId + '"' : '';
     var classMarkup = tableClassName ? ' class="' + tableClassName + '"' : '';
@@ -113,14 +56,24 @@ function buildTable(data, tableId, tableClassName, from, size, headers) {
     var tbCon = '';
     var trCon = '';
 
-    for (i = 0; i < headers.length; i++)
+    if (data[0] && headers.length < data[0].length) {
+        for (i = headers.length; i < data[0].length; i++) {
+            headers[i] = '';
+        }
+    }
+
+    for (i = 0; i < headers.length; i++) {
         thCon += thRow.format(headers[i]);
+    }
+
+
 
     th = th.format(tr.format(thCon));
 
-    for (i = from; i < size; i++) {
-        for (j = 0; j < data[i].length; j++) {
-            var value = data[i][j];
+    for (i = from; i < Math.min(size, data.length); i++) {
+        var col = data[i];
+        for (j = 0; j < Math.max(col.length, headers.length); j++) {
+            var value = col[j];
             if (!value) {
                 value = '';
             }
@@ -133,6 +86,24 @@ function buildTable(data, tableId, tableClassName, from, size, headers) {
     tbl = tbl.format(th, tb);
 
     return tbl;
+}
+
+
+function validateDate(data, expectedCols) {
+    return data && data[0] && data[0].length >= expectedCols.length
+}
+
+
+function addCommas(nStr) {
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    return x1 + x2;
 }
 
 

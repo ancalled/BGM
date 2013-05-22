@@ -183,7 +183,7 @@
 
     function processContents(contents) {
         fileData = contents;
-        var data = convertCSVToArray(contents, ";");
+        var data = parseCSV(contents, ";");
         var tbl = buildTable(data, "tableId", 'table table-striped', 0, 10);
 
         var $preview = $("#preview-container");

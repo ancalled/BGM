@@ -87,14 +87,13 @@ public interface CatalogStorage {
     int getArtistCount(long catalogId);
 
 
-
-
-
     void resetTempTrackTable();
 
     CatalogUpdate saveCatalogUpdate(String dataFile, long catId);
 
-    List<TrackDiff> getCatalogUpdateDiff(final int from, final int size);
+    List<TrackDiff> geChangedTracks(int from, final int size);
+
+    List<Track> getNewTracks(int from, final int size);
 
     void applyCatalogUpdate();
 

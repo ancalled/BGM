@@ -134,9 +134,12 @@ SELECT
   IF(t.shareMobile != c.shareMobile, concat(c.shareMobile, ' -> ', t.shareMobile), '') shareMobileDiff,
   IF(t.sharePublic != c.sharePublic, concat(c.sharePublic, ' -> ', t.sharePublic), '') sharePublicDiff,
   IF(t.catalog_id != c.catalog_id, concat(c.catalog_id, ' -> ', t.catalog_id), '') sharePublicDiff
-FROM composition c INNER JOIN comp_tmp t
-    ON c.code = t.code;
+FROM comp_tmp t INNER JOIN composition c
+    ON c.code = t.code
+       AND c.catalog_id = t.catalog_id;
 
+
+;
 
 
 
@@ -144,6 +147,7 @@ FROM composition c INNER JOIN comp_tmp t
 UPDATE composition c
   INNER JOIN comp_tmp t
     ON c.code = t.code
+     AND c.catalog_id = t.catalog_id
 SET c.name = t.name,
   c.composer = t.composer,
   c.artist = t.artist,

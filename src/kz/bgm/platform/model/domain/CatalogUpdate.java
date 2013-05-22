@@ -6,7 +6,7 @@ import java.util.List;
 
 public class CatalogUpdate {
 
-    public static enum Status {OK, HAS_ERRORS}
+    public static enum Status {OK, HAS_WARNINGS}
 
     private Long catalogId;
     private Status status;
@@ -15,7 +15,7 @@ public class CatalogUpdate {
     private String file;
     private boolean applied = false;
 
-    private final List<String> errors = new ArrayList<>();
+    private final List<UpdateWarning> warnings = new ArrayList<>();
 
 
     public Long getCatalogId() {
@@ -26,8 +26,8 @@ public class CatalogUpdate {
         this.catalogId = catalogId;
     }
 
-    public List<String> getErrors() {
-        return errors;
+    public List<UpdateWarning> getWarnings() {
+        return warnings;
     }
 
     public Status getStatus() {
@@ -54,8 +54,8 @@ public class CatalogUpdate {
         this.crossing = crossing;
     }
 
-    public void addError(String er) {
-        errors.add(er);
+    public void addWarning(UpdateWarning w) {
+        warnings.add(w);
     }
 
     public String getFile() {
