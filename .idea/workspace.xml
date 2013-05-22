@@ -25,18 +25,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/js/csv-helper.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/css/csv-preview.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/csv-previewer.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/js/jquery.dragtable.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/index.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/index.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bgm-platform.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369148868786" ignored="false" />
+    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369188548703" ignored="false" />
     <file path="/CatalogStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369147398724" ignored="false" />
     <file path="/fragment.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369147331003" ignored="false" />
     <file path="db-console:/b524fb0f/bd8e1b6e-fe0f-401f-a88d-0e81e53c8907/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363032963765" ignored="false" />
@@ -456,7 +449,7 @@
       <file leaf-file-name="catalog-update.jsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="43" selection-start="2355" selection-end="2758" vertical-scroll-proportion="-23.571428">
+            <state line="77" column="43" selection-start="2355" selection-end="2758" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -477,7 +470,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="112" column="85" selection-start="2323" selection-end="2405" vertical-scroll-proportion="-4.2222223">
+            <state line="112" column="85" selection-start="2323" selection-end="2405" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -486,7 +479,7 @@
       <file leaf-file-name="catalog.jsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="179" column="46" selection-start="5996" selection-end="5996" vertical-scroll-proportion="-76.125">
+            <state line="179" column="46" selection-start="5996" selection-end="5996" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -495,7 +488,7 @@
       <file leaf-file-name="index.jsp" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="21" selection-start="1064" selection-end="1064" vertical-scroll-proportion="0.44871795">
+            <state line="21" column="21" selection-start="1064" selection-end="1064" vertical-scroll-proportion="0.021306818">
               <folding />
             </state>
           </provider>
@@ -614,8 +607,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -970,6 +961,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -985,15 +978,15 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="811" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="132" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="125" />
-    <property name="Database.TableEditor.Splitter" value="0.9" />
     <property name="JdbcConsole.ResultToolbar" value="false" />
+    <property name="Database.TableEditor.Splitter" value="0.9" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="ChangesBrowser.SHOW_FLATTEN" value="false" />
     <property name="options.lastSelected" value="settings.github" />
+    <property name="ChangesBrowser.SHOW_FLATTEN" value="false" />
     <property name="project.structure.side.proportion" value="0.19895288" />
     <property name="JdbcConsole.Extract.ClosingQuote" value="\&quot;" />
     <property name="MemberChooser.copyJavadoc" value="false" />
@@ -1024,8 +1017,8 @@
     <property name="JdbcConsole.Extract.QuoteEverything" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="JdbcConsole.ResultPageSize" value="1000" />
-    <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -1201,19 +1194,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -1240,6 +1220,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1533,7 +1526,11 @@
       <created>1369148871767</created>
       <updated>1369148871767</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Предпросмотр csv">
+      <created>1369188514792</created>
+      <updated>1369188514793</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1558,12 +1555,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5520833" sideWeight="0.49713057" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34748012" sideWeight="0.49675852" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15064563" sideWeight="0.42592594" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5641791" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1573,7 +1569,6 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32686567" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32891247" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23905997" sideWeight="0.1696113" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32979977" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1591,6 +1586,8 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34748012" sideWeight="0.49675852" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32891247" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1636,7 +1633,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Доделал обновление каталога" />
+    <option name="LAST_COMMIT_MESSAGE" value="Предпросмотр csv" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1650,7 +1647,6 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="порефакторил немного" />
     <MESSAGE value="убрал кирилицу в туду и изменил парсинг отчета , теперь отчет парсится в ReportBuilder там он помоему роднее" />
     <MESSAGE value="брал кирилицу из коммента" />
     <MESSAGE value="начал делаь простенький импорт отчета." />
@@ -1675,6 +1671,7 @@
     <MESSAGE value="Вернул IndexRebuild" />
     <MESSAGE value="Запросы на обновление каталога" />
     <MESSAGE value="Доделал обновление каталога" />
+    <MESSAGE value="Предпросмотр csv" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1718,120 +1715,8 @@
             <element signature="e#7249#7250#0" expanded="false" />
             <element signature="e#7364#7921#0" expanded="false" />
             <element signature="e#7910#7911#0" expanded="false" />
-            <element signature="e#8012#8996#0" expanded="false" />
-            <element signature="e#8985#8986#0" expanded="false" />
-            <element signature="e#9106#9670#0" expanded="false" />
-            <element signature="e#9659#9660#0" expanded="false" />
-            <element signature="e#9780#10344#0" expanded="false" />
-            <element signature="e#10333#10334#0" expanded="false" />
-            <element signature="e#10461#11033#0" expanded="false" />
-            <element signature="e#11022#11023#0" expanded="false" />
-            <element signature="e#11146#11714#0" expanded="false" />
-            <element signature="e#11703#11704#0" expanded="false" />
-            <element signature="e#11829#12401#0" expanded="false" />
-            <element signature="e#12390#12391#0" expanded="false" />
-            <element signature="e#12492#13019#0" expanded="false" />
-            <element signature="e#13008#13009#0" expanded="false" />
-            <element signature="e#13118#13544#0" expanded="false" />
-            <element signature="e#13533#13534#0" expanded="false" />
-            <element signature="e#13639#14059#0" expanded="false" />
-            <element signature="e#14048#14049#0" expanded="false" />
-            <element signature="e#14174#14662#0" expanded="false" />
-            <element signature="e#14651#14652#0" expanded="false" />
-            <element signature="e#14771#15242#0" expanded="false" />
-            <element signature="e#15231#15232#0" expanded="false" />
-            <element signature="e#15332#15745#0" expanded="false" />
-            <element signature="e#15734#15735#0" expanded="false" />
-            <element signature="e#15953#16829#0" expanded="false" />
-            <element signature="e#16818#16819#0" expanded="false" />
-            <element signature="e#16948#18191#0" expanded="false" />
-            <element signature="e#18180#18181#0" expanded="false" />
-            <element signature="e#18290#18748#0" expanded="false" />
-            <element signature="e#18737#18738#0" expanded="false" />
-            <element signature="e#18851#19415#0" expanded="false" />
-            <element signature="e#19404#19405#0" expanded="false" />
-            <element signature="e#19522#19969#0" expanded="false" />
-            <element signature="e#19958#19959#0" expanded="false" />
-            <element signature="e#20123#20909#0" expanded="false" />
             <element signature="e#20898#20899#0" expanded="false" />
-            <element signature="e#21038#21676#0" expanded="false" />
-            <element signature="e#21665#21666#0" expanded="false" />
-            <element signature="e#21816#23821#0" expanded="false" />
-            <element signature="e#23810#23811#0" expanded="false" />
-            <element signature="e#23962#25988#0" expanded="false" />
-            <element signature="e#25977#25978#0" expanded="false" />
-            <element signature="e#26093#26543#0" expanded="false" />
-            <element signature="e#26532#26533#0" expanded="false" />
-            <element signature="e#26844#29546#0" expanded="false" />
-            <element signature="e#29535#29536#0" expanded="false" />
-            <element signature="e#29728#31987#0" expanded="false" />
-            <element signature="e#31976#31977#0" expanded="false" />
-            <element signature="e#32053#32800#0" expanded="false" />
-            <element signature="e#32789#32790#0" expanded="false" />
-            <element signature="e#32918#34965#0" expanded="false" />
-            <element signature="e#34954#34955#0" expanded="false" />
-            <element signature="e#35032#35392#0" expanded="false" />
             <element signature="e#35381#35382#0" expanded="false" />
-            <element signature="e#35467#35982#0" expanded="false" />
-            <element signature="e#35971#35972#0" expanded="false" />
-            <element signature="e#36098#38047#0" expanded="false" />
-            <element signature="e#38036#38037#0" expanded="false" />
-            <element signature="e#38126#39687#0" expanded="false" />
-            <element signature="e#39676#39677#0" expanded="false" />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT id FR..catalog..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..platform..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..catalog..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..composition..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..platform..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..catalog..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..catalog..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..composition..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..composition..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..composition..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..composition..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..composition..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..composition..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..composition..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..composition..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..customer..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..customer..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..customer..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_admin..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT count..composition..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..customer_report..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..customer_report..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..customer_report..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..customer_report_item..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT\n cop..composition..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT\n cop..composition..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..composition..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT\n i.i..customer_report_item..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT\n i.i..customer_report_item..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="LOAD DATA LO..comp_tmp..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SHOW WARNING..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT count..comp_tmp..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT count..comp_tmp..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT\n cou..composition..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT c.cod..comp_tmp..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="UPDATE compo..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT\n cod..comp_tmp..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="UPDATE catal..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT\n cou..composition..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="UPDATE catal..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT\n cou..composition..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1369148105000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..catalog..." />
           </folding>
         </state>
       </provider>
@@ -1840,13 +1725,13 @@
       <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorProvider">
         <state />
       </provider>
-      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleGeneralEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="147" column="22" selection-start="5169" selection-end="5169" vertical-scroll-proportion="-13.333333">
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleGeneralEditorProvider">
+        <state />
       </provider>
       <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorReferencesProvider">
         <state />
@@ -1868,9 +1753,7 @@
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/apache-commons/commons-fileupload-1.3.jar!/org/apache/commons/fileupload/servlet/ServletFileUpload.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="11" selection-start="504" selection-end="504" vertical-scroll-proportion="0.2706767">
-          <folding />
-        </state>
+        <state line="13" column="11" selection-start="504" selection-end="504" vertical-scroll-proportion="0.2706767" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java">
@@ -1899,10 +1782,6 @@
         <state line="59" column="4" selection-start="1567" selection-end="1567" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1369160006000" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1369160006000" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1369160006000" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1369160006000" expanded="true" signature="-1:-1" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -1921,7 +1800,7 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="85" selection-start="2323" selection-end="2405" vertical-scroll-proportion="-4.2222223">
+        <state line="112" column="85" selection-start="2323" selection-end="2405" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1942,21 +1821,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="43" selection-start="2355" selection-end="2758" vertical-scroll-proportion="-23.571428">
+        <state line="77" column="43" selection-start="2355" selection-end="2758" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="179" column="46" selection-start="5996" selection-end="5996" vertical-scroll-proportion="-76.125">
+        <state line="179" column="46" selection-start="5996" selection-end="5996" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="21" selection-start="1064" selection-end="1064" vertical-scroll-proportion="0.44871795">
+        <state line="21" column="21" selection-start="1064" selection-end="1064" vertical-scroll-proportion="0.021306818">
           <folding />
         </state>
       </provider>
