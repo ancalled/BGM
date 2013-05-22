@@ -33,16 +33,18 @@ public class ApplyUpdateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        log.info("Applying catalog updates");
 
-        storage.applyCatalogUpdate();
+        String idStr = req.getParameter("id");
+        if (idStr != null) {
+            long id = Long.parseLong(idStr);
 
-        log.info("Applied.");
+            log.info("Applying catalog updates, id: " + id);
 
-        HttpSession ses = req.getSession();
-        CatalogUpdate upd = (CatalogUpdate) ses.getAttribute("catalog-update");
-        if (upd != null) {
-            upd.setApplied(true);
+
+            storage.applyCatalogUpdate(id);
+
+            log.info("Applied.");
+
         }
 
         resp.sendRedirect(RESULT_URL);

@@ -102,6 +102,7 @@ LIMIT 0, 15;
 CREATE TABLE IF NOT EXISTS comp_tmp
   LIKE composition;
 ALTER TABLE comp_tmp ADD done TINYINT NULL;
+ALTER TABLE comp_tmp ADD update_id INT NULL;
 
 # Load data
 LOAD DATA LOCAL INFILE './nmi_related.csv'
@@ -123,7 +124,8 @@ SHOW WARNINGS LIMIT 0, 10;
 SELECT
   count(DISTINCT t.id)
 FROM composition c INNER JOIN comp_tmp t
-    ON c.code = t.code;
+    ON c.code = t.code
+WHERE t.update_id = 1;
 
 # show table diff:
 SELECT
@@ -136,10 +138,8 @@ SELECT
   IF(t.catalog_id != c.catalog_id, concat(c.catalog_id, ' -> ', t.catalog_id), '') sharePublicDiff
 FROM comp_tmp t INNER JOIN composition c
     ON c.code = t.code
-       AND c.catalog_id = t.catalog_id;
-
-
-;
+       AND c.catalog_id = t.catalog_id
+WHERE t.update_id = 1;
 
 
 
@@ -148,13 +148,15 @@ UPDATE composition c
   INNER JOIN comp_tmp t
     ON c.code = t.code
      AND c.catalog_id = t.catalog_id
-SET c.name = t.name,
-  c.composer = t.composer,
-  c.artist = t.artist,
-  c.shareMobile = t.shareMobile,
-  c.sharePublic = t.sharePublic,
-  c.catalog_id = t.catalog_id,
-  t.done = 1;
+SET c.name = IF(t.name != '', t.name, c.name),
+  c.composer = IF(t.composer != '', t.composer, c.composer),
+  c.artist = IF(t.artist != '', t.artist, c.artist),
+  c.shareMobile = IF(t.shareMobile != '', t.shareMobile, c.shareMobile),
+  c.sharePublic = IF(t.sharePublic != '', t.sharePublic, c.sharePublic),
+  t.done = 1
+WHERE t.update_id = 1;
+
+
 
 # Insert new tracks
 INSERT INTO composition (code, name, composer, artist, shareMobile, sharePublic, catalog_id)
@@ -167,7 +169,7 @@ INSERT INTO composition (code, name, composer, artist, shareMobile, sharePublic,
     sharePublic,
     catalog_id
   FROM comp_tmp
-  WHERE done IS null;
+  WHERE done IS null AND update_id = 1;
 
 
 

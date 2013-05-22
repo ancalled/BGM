@@ -43,7 +43,7 @@
                     <div class="uneditable-input span3">
                         <i class="icon-file fileupload-exists"></i>
                         <span class="fileupload-preview"></span></div>
-                        <span class="btn btn-file">
+                        <span class="btn btn-fileName">
                             <span class="fileupload-new">Выбрать отчет</span>
                             <span class="fileupload-exists">Изменить</span><input name="file" type="file"/>
                         </span>

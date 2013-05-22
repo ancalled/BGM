@@ -14,7 +14,9 @@ CREATE TABLE catalog (
   platform_id INT,
   name        VARCHAR(200),
   royalty     DECIMAL(6, 3),
-  copyright   VARCHAR(50)
+  copyright   VARCHAR(50),
+  tracks      INT,
+  artists     INT
 );
 
 CREATE TABLE composition (
@@ -77,6 +79,21 @@ CREATE TABLE user_admin (
 );
 
 
+CREATE TABLE IF NOT EXISTS comp_tmp
+  LIKE composition;
+ALTER TABLE comp_tmp ADD done TINYINT NULL;
 
+
+CREATE TABLE catalog_update (
+  id          INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  whenUpdated DATETIME,
+  catalog_id  INT,
+  status      VARCHAR(30),
+  tracks      INT,
+  crossing    INT,
+  applied     BOOL,
+  filepath    VARCHAR(300),
+  filename    VARCHAR(100)
+);
 
 

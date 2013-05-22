@@ -69,11 +69,12 @@
 
                     <dl class="unstyled dl-horizontal">
                         <dt>Файл</dt>
-                        <dd>${update.file}</dd>
+                        <dd>${update.fileName}</dd>
                         <dt>Всего треков</dt>
-                        <dd>${update.tracks}</dd>
+                        <dd><fmt:formatNumber type="number" maxFractionDigits="3" value="${update.tracks}"/></dd>
                         <dt>Новых / измененных</dt>
-                        <dd>${update.tracks - update.crossing} / ${update.crossing}</dd>
+                        <dd><fmt:formatNumber type="number" maxFractionDigits="3" value="${update.tracks - update.crossing}"/> /
+                            <fmt:formatNumber type="number" maxFractionDigits="3" value="${update.crossing}"/></dd>
                         <dt></dt>
                         <dd>
                             <c:choose>
@@ -85,6 +86,7 @@
                                         <form action="../action/appy-catalog-update" method="post">
                                             <input class="btn btn-small btn-primary apply-btn" type="submit"
                                                    value="Применить!">
+                                            <input type="hidden" name="id" value="${update.id}">
                                         </form>
                                     <%--</c:if>--%>
                                 </c:otherwise>
@@ -115,7 +117,7 @@
                         <ul>
                             <c:choose>
                                 <c:when test="${from >= pageSize}">
-                                    <li><a href="catalog-update?from=${from - pageSize}">&laquo;</a></li>
+                                    <li><a href="catalog-update?id=${update.id}&from=${from - pageSize}">&laquo;</a></li>
                                 </c:when>
                                 <c:otherwise>
                                     <li class="disabled"><a href="#">&laquo;</a></li>
@@ -125,13 +127,13 @@
                             <c:forEach var="i" begin="1" end="${(update.crossing / pageSize) + 1}" step="1"
                                        varStatus="status">
                                 <li class="${from == (i - 1) * pageSize ? 'active' : ''}">
-                                    <a href="catalog-update?from=${(i - 1) * pageSize}">${i}</a>
+                                    <a href="catalog-update?id=${update.id}&from=${(i - 1) * pageSize}">${i}</a>
                                 </li>
                             </c:forEach>
 
                             <c:choose>
                                 <c:when test="${from + pageSize < update.crossing}">
-                                    <li><a href="catalog-update?from=${from + pageSize}">&raquo;</a></li>
+                                    <li><a href="catalog-update?id=${update.id}&from=${from + pageSize}">&raquo;</a></li>
                                 </c:when>
                                 <c:otherwise>
                                     <li class="disabled"><a href="#">&raquo;</a></li>
@@ -208,7 +210,7 @@
                         <ul>
                             <c:choose>
                                 <c:when test="${from >= pageSize}">
-                                    <li><a href="catalog-update?from=${from - pageSize}">&laquo;</a></li>
+                                    <li><a href="catalog-update?id=${update.id}&from=${from - pageSize}">&laquo;</a></li>
                                 </c:when>
                                 <c:otherwise>
                                     <li class="disabled"><a href="#">&laquo;</a></li>
@@ -218,13 +220,13 @@
                             <c:forEach var="i" begin="1" end="${(update.crossing / pageSize) + 1}" step="1"
                                        varStatus="status">
                                 <li class="${from == (i - 1) * pageSize ? 'active' : ''}">
-                                    <a href="catalog-update?from=${(i - 1) * pageSize}">${i}</a>
+                                    <a href="catalog-update?id=${update.id}&from=${(i - 1) * pageSize}">${i}</a>
                                 </li>
                             </c:forEach>
 
                             <c:choose>
                                 <c:when test="${from + pageSize < update.crossing}">
-                                    <li><a href="catalog-update?from=${from + pageSize}">&raquo;</a></li>
+                                    <li><a href="catalog-update?id=${update.id}&from=${from + pageSize}">&raquo;</a></li>
                                 </c:when>
                                 <c:otherwise>
                                     <li class="disabled"><a href="#">&raquo;</a></li>

@@ -925,231 +925,52 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-    public void resetTempTrackTable() {
-        query(new Action<Object>() {
-            @Override
-            public Object execute(Connection con) throws SQLException {
-
-                //create a clone structure as composition
-//                con.createStatement().executeUpdate(
-//                        "CREATE TABLE IF NOT EXISTS comp_tmp LIKE composition"
-//                );
-//
-//                //add additional `done`-field
-//                con.createStatement().executeUpdate(
-//                        "ALTER TABLE comp_tmp ADD done TINYINT NULL"
-//                );
-
-                //clear all data if remain
-                con.createStatement().executeUpdate(
-                        "DELETE FROM comp_tmp"
-                );
-
-                return null;
-            }
-        });
-    }
-
-
-    public CatalogUpdate saveCatalogUpdate(final String dataFile, final long catId) {
-        return query(new Action<CatalogUpdate>() {
-            @Override
-            public CatalogUpdate execute(Connection con) throws SQLException {
-
-                //create a clone structure as composition
-                PreparedStatement stmt = con.prepareStatement(
-                        "LOAD DATA LOCAL INFILE ?\n" +
-                                "INTO TABLE comp_tmp\n" +
-                                "CHARACTER SET 'utf8'\n" +
-                                "FIELDS TERMINATED BY ?\n" +
-                                "LINES TERMINATED BY '\\n'\n" +
-                                "IGNORE 1 LINES\n" +
-                                "(@dummy, code, name, composer, artist, @shareMobile, @sharePublic)\n" +
-//                                "(@dummy, code, name, composer, artist, @dummy, @dummy, @shareMobile, @sharePublic)\n" +
-                                "SET catalog_id=?,\n" +
-                                "  shareMobile=IF(@shareMobile != '', @shareMobile, 0),\n" +
-                                "  sharePublic=IF(@sharePublic != '', @sharePublic, 0)"
-                );
-
-                stmt.setString(1, dataFile);
-                stmt.setString(2, ";");
-                stmt.setLong(3, catId);
-
-                CatalogUpdate res = new CatalogUpdate();
-                res.setCatalogId(catId);
-
-                stmt.execute();
-
-                // Check for errors...
-
-                ResultSet rs = con.createStatement().executeQuery("SHOW WARNINGS");
-
-                Status st = Status.OK;
-
-                while (rs.next()) {
-                    String level = rs.getString("Level");
-                    if ("Warning".equals(level)) {
-                        UpdateWarning w = new UpdateWarning();
-                        w.setNumber(rs.getInt("Code"));
-                        w.parseMessage(rs.getString("Message"));
-                        res.addWarning(w);
-                        st = Status.HAS_WARNINGS;
-                    }
-                }
-
-                res.setStatus(st);
-
-                res.setTracks(getCompTmpRows());
-                res.setCrossing(getCompTmpCrossingRows());
-
-                return res;
-            }
-        });
-    }
-
-
-    private int getCompTmpRows() {
-        return query(new Action<Integer>() {
-            @Override
-            public Integer execute(Connection con) throws SQLException {
-                ResultSet rs = con.createStatement().executeQuery("SELECT count(*) FROM comp_tmp");
-                if (rs.next()) {
-                    return rs.getInt(1);
-                }
-                return 0;
-            }
-        });
-
-    }
-
-    private int getCompTmpCrossingRows() {
-        return query(new Action<Integer>() {
-            @Override
-            public Integer execute(Connection con) throws SQLException {
-                ResultSet rs = con.createStatement().executeQuery("SELECT\n" +
-                        "  count(DISTINCT t.id)\n" +
-                        "FROM composition c INNER JOIN comp_tmp t\n" +
-                        "    ON c.code = t.code" +
-                        " AND c.catalog_id = t.catalog_id");
-                if (rs.next()) {
-                    return rs.getInt(1);
-                }
-                return 0;
-            }
-        });
-
-    }
-
-
-    public List<TrackDiff> geChangedTracks(final int from, final int size) {
-
-        return query(new Action<List<TrackDiff>>() {
-            @Override
-            public List<TrackDiff> execute(Connection con) throws SQLException {
-                PreparedStatement stmt = con.prepareStatement(
-                        "SELECT c.code code," +
-                                "c.id c_id, " +
-                                "c.code c_code, " +
-                                "c.catalog_id c_catalog_id, " +
-                                "c.name c_name, " +
-                                "c.artist c_artist, " +
-                                "c.composer c_composer, " +
-                                "c.shareMobile c_shareMobile, " +
-                                "c.sharePublic c_sharePublic, " +
-                                "t.id t_id, " +
-                                "t.code t_code, " +
-                                "t.catalog_id t_catalog_id, " +
-                                "t.name t_name, " +
-                                "t.artist t_artist, " +
-                                "t.composer t_composer, " +
-                                "t.shareMobile t_shareMobile, " +
-                                "t.sharePublic t_sharePublic " +
-                                "FROM comp_tmp t " +
-                                "INNER JOIN composition c " +
-                                "ON c.code = t.code " +
-                                "AND c.catalog_id = t.catalog_id " +
-                                "LIMIT ?, ?"
-                );
-                stmt.setInt(1, from);
-                stmt.setInt(2, size);
-
-                ResultSet rs = stmt.executeQuery();
-
-                List<TrackDiff> res = new ArrayList<>();
-                int num = from;
-                while (rs.next()) {
-                    TrackDiff d = new TrackDiff();
-                    d.setNumber(num++);
-                    d.setCode(rs.getString("code"));
-                    d.setOldTrack(parseTrack(rs, "c_"));
-                    d.setNewTrack(parseTrack(rs, "t_"));
-                    res.add(d);
-                }
-
-                return res;
-            }
-        });
-
-    }
-
     @Override
-    public List<Track> getNewTracks(int from, int size) {
-        return query(new Action<List<Track>>() {
+    public long createCustomer(final Customer customer) {
+        if (customer == null) return -1L;
+
+        return query(new Action<Long>() {
             @Override
-            public List<Track> execute(Connection con) throws SQLException {
+            public Long execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM composition WHERE artist LIKE?");
-//                stmt.setString(1, artist);
+                        "INSERT INTO customer(contract, name, right_type, royalty) VALUES(?,?,?,?)",
+                        Statement.RETURN_GENERATED_KEYS);
+                stmt.setString(1, customer.getContract());
+                stmt.setString(2, customer.getName());
+                stmt.setString(3, customer.getRightType());
+                stmt.setFloat(4, customer.getRoyalty());
 
-                ResultSet rs = stmt.executeQuery();
+                stmt.executeUpdate();
 
-                List<Track> tracks = new ArrayList<>();
-                while (rs.next()) {
-                    tracks.add(parseTrack(rs));
-                }
-                return tracks;
+                ResultSet rs = stmt.getGeneratedKeys();
+
+                return rs.next() ? rs.getLong(1) : -1L;
             }
         });
     }
 
     @Override
-    public void applyCatalogUpdate() {
-        query(new Action<Object>() {
+    public long createUser(final User user) {
+        if (user == null) return -1L;
+
+        return query(new Action<Long>() {
             @Override
-            public Object execute(Connection con) throws SQLException {
-                con.createStatement().execute(
-                        "UPDATE composition c\n" +
-                                "  INNER JOIN comp_tmp t\n" +
-                                "    ON c.code = t.code\n" +
-                                "       AND c.catalog_id = t.catalog_id\n" +
-                                "SET c.name = t.name,\n" +
-                                "  c.composer = t.composer,\n" +
-                                "  c.artist = t.artist,\n" +
-                                "  c.shareMobile = t.shareMobile,\n" +
-                                "  c.sharePublic = t.sharePublic,\n" +
-                                "  c.catalog_id = t.catalog_id,\n" +
-                                "  t.done = 1"
-                );
+            public Long execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "INSERT INTO user(login,password,customer_id,full_name,email) VALUES(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                stmt.setString(1, user.getLogin());
+                stmt.setString(2, user.getPass());
+                stmt.setLong(3, user.getCustomerId());
+                stmt.setString(4, user.getFullName());
+                stmt.setString(5, user.getEmail());
 
+                stmt.executeUpdate();
 
-                con.createStatement().execute(
-                        "INSERT INTO composition (code, name, composer, artist, shareMobile, sharePublic, catalog_id)\n" +
-                                "  SELECT\n" +
-                                "    code,\n" +
-                                "    name,\n" +
-                                "    composer,\n" +
-                                "    artist,\n" +
-                                "    shareMobile,\n" +
-                                "    sharePublic,\n" +
-                                "    catalog_id\n" +
-                                "  FROM comp_tmp\n" +
-                                "  WHERE done IS null"
-                );
+                ResultSet rs = stmt.getGeneratedKeys();
 
-                return null;
+                return rs.next() ? rs.getLong(1) : -1;
             }
         });
-
     }
 
     @Override
@@ -1199,6 +1020,321 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+
+    public void resetTempTrackTable() {
+        query(new Action<Object>() {
+            @Override
+            public Object execute(Connection con) throws SQLException {
+
+                //create a clone structure as composition
+//                con.createStatement().executeUpdate(
+//                        "CREATE TABLE IF NOT EXISTS comp_tmp LIKE composition"
+//                );
+//
+//                //add additional `done`-field
+//                con.createStatement().executeUpdate(
+//                        "ALTER TABLE comp_tmp ADD done TINYINT NULL"
+//                );
+
+                //clear all data if remain
+                con.createStatement().executeUpdate(
+                        "DELETE FROM comp_tmp"
+                );
+
+                return null;
+            }
+        });
+    }
+
+
+    public CatalogUpdate updateCatalog(final CatalogUpdate update) {
+        return query(new Action<CatalogUpdate>() {
+            @Override
+            public CatalogUpdate execute(Connection con) throws SQLException {
+
+
+                PreparedStatement ps =
+                        con.prepareStatement(
+                                "INSERT INTO catalog_update(catalog_id, filepath, filename, whenUpdated) " +
+                                        "VALUES (?,?,?, NOW())",
+                                Statement.RETURN_GENERATED_KEYS);
+                ps.setLong(1, update.getCatalogId());
+                ps.setString(2, update.getFilePath());
+                ps.setString(3, update.getFileName());
+
+                ps.executeUpdate();
+
+                ResultSet rs = ps.getGeneratedKeys();
+                if (!rs.next()) return null;
+
+                long updateId = rs.getLong(1);
+
+                update.setId(updateId);
+
+
+                //create a clone structure as composition
+                PreparedStatement stmt = con.prepareStatement(
+                        "LOAD DATA LOCAL INFILE ?\n" +
+                                "INTO TABLE comp_tmp\n" +
+                                "CHARACTER SET ?\n" +
+                                "FIELDS TERMINATED BY ?\n" +
+                                "OPTIONALLY ENCLOSED BY ?" +
+                                "LINES TERMINATED BY ?\n" +
+                                "IGNORE ? LINES\n" +
+                                "(@dummy, code, name, composer, artist, @shareMobile, @sharePublic)\n" +
+//                                "(@dummy, code, name, composer, artist, @dummy, @dummy, @shareMobile, @sharePublic)\n" +
+                                "SET update_id=?,\n" +
+                                "  catalog_id=?,\n" +
+                                "  shareMobile=IF(@shareMobile != '', @shareMobile, 0),\n" +
+                                "  sharePublic=IF(@sharePublic != '', @sharePublic, 0)"
+                );
+
+                stmt.setString(1, update.getFilePath());
+                stmt.setString(2, update.getEncoding());
+                stmt.setString(3, update.getSeparator());
+                stmt.setString(4, update.getEnclosedBy());
+                stmt.setString(5, update.getNewline());
+                stmt.setInt(6, update.getFromLine());
+                stmt.setLong(7, updateId);
+                stmt.setLong(8, update.getCatalogId());
+
+                stmt.execute();
+
+                // Check for errors...
+
+                rs = con.createStatement().executeQuery("SHOW WARNINGS");
+
+                Status st = Status.OK;
+                while (rs.next()) {
+                    String level = rs.getString("Level");
+                    if ("Warning".equals(level)) {
+                        UpdateWarning w = new UpdateWarning();
+                        w.setNumber(rs.getInt("Code"));
+                        w.parseMessage(rs.getString("Message"));
+                        update.addWarning(w);
+                        st = Status.HAS_WARNINGS;
+                    }
+                }
+                update.setStatus(st);
+
+                ps = con.prepareStatement(
+                        "UPDATE catalog_update u " +
+                                "SET status = ?," +
+                                "tracks = (SELECT count(*) FROM comp_tmp WHERE update_id = u.id), " +
+                                "crossing = (SELECT count(DISTINCT t.id) " +
+                                "FROM composition c " +
+                                "INNER JOIN comp_tmp t " +
+                                "ON c.code = t.code " +
+                                "AND c.catalog_id = t.catalog_id " +
+                                "WHERE t.update_id = u.id)" +
+                                "WHERE id = ?");
+                ps.setString(1, st.toString());
+                ps.setLong(2, updateId);
+
+                ps.executeUpdate();
+
+
+                return update;
+            }
+        });
+    }
+
+
+    public Long saveCatalogUpdate(final CatalogUpdate update) {
+        return query(new Action<Long>() {
+            @Override
+            public Long execute(Connection con) throws SQLException {
+                PreparedStatement ps =
+                        con.prepareStatement(
+                                "INSERT INTO catalog_update(whenUpdated, catalog_id, status, tracks, crossing, applied, filepath, filename) " +
+                                        "VALUES (?,?,?,?,?,?,?,?)",
+                                Statement.RETURN_GENERATED_KEYS);
+
+                ps.setDate(1, new java.sql.Date(update.getWhenUpdated().getTime()));
+                ps.setLong(2, update.getCatalogId());
+                ps.setString(3, update.getStatus().toString());
+                ps.setInt(4, update.getTracks());
+                ps.setInt(5, update.getCrossing());
+                ps.setBoolean(6, update.isApplied());
+                ps.setString(7, update.getFilePath());
+                ps.setString(8, update.getFileName());
+
+
+                ps.executeUpdate();
+
+                ResultSet rs = ps.getGeneratedKeys();
+                return rs.next() ? rs.getLong(1) : -1;
+            }
+        });
+    }
+
+
+    public List<TrackDiff> geChangedTracks(final long updateId, final int from, final int size) {
+
+        return query(new Action<List<TrackDiff>>() {
+            @Override
+            public List<TrackDiff> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT c.code code," +
+                                "c.id c_id, " +
+                                "c.code c_code, " +
+                                "c.catalog_id c_catalog_id, " +
+                                "c.name c_name, " +
+                                "c.artist c_artist, " +
+                                "c.composer c_composer, " +
+                                "c.shareMobile c_shareMobile, " +
+                                "c.sharePublic c_sharePublic, " +
+                                "t.id t_id, " +
+                                "t.code t_code, " +
+                                "t.catalog_id t_catalog_id, " +
+                                "t.name t_name, " +
+                                "t.artist t_artist, " +
+                                "t.composer t_composer, " +
+                                "t.shareMobile t_shareMobile, " +
+                                "t.sharePublic t_sharePublic " +
+                                "FROM comp_tmp t " +
+                                "INNER JOIN composition c " +
+                                "ON c.code = t.code " +
+                                "AND c.catalog_id = t.catalog_id " +
+                                "WHERE t.update_id = ? " +
+                                "LIMIT ?, ?"
+                );
+                stmt.setLong(1, updateId);
+                stmt.setInt(2, from);
+                stmt.setInt(3, size);
+
+                ResultSet rs = stmt.executeQuery();
+
+                List<TrackDiff> res = new ArrayList<>();
+                int num = from;
+                while (rs.next()) {
+                    TrackDiff d = new TrackDiff();
+                    d.setNumber(num++);
+                    d.setCode(rs.getString("code"));
+                    d.setOldTrack(parseTrack(rs, "c_"));
+                    d.setNewTrack(parseTrack(rs, "t_"));
+                    res.add(d);
+                }
+
+                return res;
+            }
+        });
+
+    }
+
+    @Override
+    public List<Track> getNewTracks(final long updateId, final int from, final int size) {
+        return query(new Action<List<Track>>() {
+            @Override
+            public List<Track> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM composition WHERE artist LIKE?");
+//                stmt.setString(1, artist);
+
+                ResultSet rs = stmt.executeQuery();
+
+                List<Track> tracks = new ArrayList<>();
+                while (rs.next()) {
+                    tracks.add(parseTrack(rs));
+                }
+                return tracks;
+            }
+        });
+    }
+
+
+    @Override
+    public void applyCatalogUpdate(final long updateId) {
+        query(new Action<Object>() {
+            @Override
+            public Object execute(Connection con) throws SQLException {
+                PreparedStatement stmt1 = con.prepareStatement(
+                        "UPDATE composition c\n" +
+                                "  INNER JOIN comp_tmp t\n" +
+                                "    ON c.code = t.code\n" +
+                                "     AND c.catalog_id = t.catalog_id\n" +
+                                "SET c.name = IF(t.name != '', t.name, c.name),\n" +
+                                "  c.composer = IF(t.composer != '', t.composer, c.composer),\n" +
+                                "  c.artist = IF(t.artist != '', t.artist, c.artist),\n" +
+                                "  c.shareMobile = IF(t.shareMobile != '', t.shareMobile, c.shareMobile),\n" +
+                                "  c.sharePublic = IF(t.sharePublic != '', t.sharePublic, c.sharePublic),\n" +
+                                "  t.done = 1\n" +
+                                "WHERE t.update_id = ?"
+                );
+                stmt1.setLong(1, updateId);
+                stmt1.executeUpdate();
+
+
+                PreparedStatement stmt2 = con.prepareStatement(
+                        "INSERT INTO composition (code, name, composer, artist, shareMobile, sharePublic, catalog_id)\n" +
+                                "  SELECT\n" +
+                                "    code,\n" +
+                                "    name,\n" +
+                                "    composer,\n" +
+                                "    artist,\n" +
+                                "    shareMobile,\n" +
+                                "    sharePublic,\n" +
+                                "    catalog_id\n" +
+                                "  FROM comp_tmp\n" +
+                                "  WHERE done IS null AND update_id = ?"
+                );
+                stmt2.setLong(1, updateId);
+                stmt2.executeUpdate();
+
+                PreparedStatement stmt3 = con.prepareStatement(
+                        "UPDATE  catalog_update SET applied = TRUE WHERE id = ?"
+                );
+                stmt3.setLong(1, updateId);
+                stmt3.executeUpdate();
+
+                return null;
+            }
+        });
+
+    }
+
+
+    @Override
+    public CatalogUpdate getCatalogUpdate(final long updateId) {
+        return query(new Action<CatalogUpdate>() {
+            @Override
+            public CatalogUpdate execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM catalog_update WHERE id = ?");
+                stmt.setLong(1, updateId);
+
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    return parseCatalogUpdate(rs);
+                }
+
+                return null;
+            }
+        });
+    }
+
+
+    @Override
+    public List<CatalogUpdate> getCatalogUpdates(final long catalogId) {
+        return query(new Action<List<CatalogUpdate>>() {
+            @Override
+            public List<CatalogUpdate> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM catalog_update WHERE catalog_id = ?");
+                stmt.setLong(1, catalogId);
+
+                ResultSet rs = stmt.executeQuery();
+
+                List<CatalogUpdate> reportList = new ArrayList<>();
+
+                while (rs.next()) {
+                    reportList.add(parseCatalogUpdate(rs));
+                }
+
+                return reportList;
+            }
+        });
+    }
 
     @Override
     public void updateCatalogsStat() {
@@ -1329,53 +1465,6 @@ public class DbStorage implements CatalogStorage {
         return item;
     }
 
-    @Override
-    public long createCustomer(final Customer customer) {
-        if (customer == null) return -1L;
-
-        return query(new Action<Long>() {
-            @Override
-            public Long execute(Connection con) throws SQLException {
-                PreparedStatement stmt = con.prepareStatement(
-                        "INSERT INTO customer(contract, name, right_type, royalty) VALUES(?,?,?,?)",
-                        Statement.RETURN_GENERATED_KEYS);
-                stmt.setString(1, customer.getContract());
-                stmt.setString(2, customer.getName());
-                stmt.setString(3, customer.getRightType());
-                stmt.setFloat(4, customer.getRoyalty());
-
-                stmt.executeUpdate();
-
-                ResultSet rs = stmt.getGeneratedKeys();
-
-                return rs.next() ? rs.getLong(1) : -1L;
-            }
-        });
-    }
-
-    @Override
-    public long createUser(final User user) {
-        if (user == null) return -1L;
-
-        return query(new Action<Long>() {
-            @Override
-            public Long execute(Connection con) throws SQLException {
-                PreparedStatement stmt = con.prepareStatement(
-                        "INSERT INTO user(login,password,customer_id,full_name,email) VALUES(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-                stmt.setString(1, user.getLogin());
-                stmt.setString(2, user.getPass());
-                stmt.setLong(3, user.getCustomerId());
-                stmt.setString(4, user.getFullName());
-                stmt.setString(5, user.getEmail());
-
-                stmt.executeUpdate();
-
-                ResultSet rs = stmt.getGeneratedKeys();
-
-                return rs.next() ? rs.getLong(1) : -1;
-            }
-        });
-    }
 
     private static CalculatedReportItem parseCalculatedReport(ResultSet rs) throws SQLException {
 
@@ -1413,6 +1502,22 @@ public class DbStorage implements CatalogStorage {
         return report;
     }
 
+
+    private static CatalogUpdate parseCatalogUpdate(ResultSet rs) throws SQLException {
+
+        CatalogUpdate update = new CatalogUpdate();
+        update.setId(rs.getLong("id"));
+        update.setWhenUpdated(rs.getDate("whenUpdated"));
+        update.setCatalogId(rs.getLong("catalog_id"));
+        update.setStatus(Status.valueOf(rs.getString("status")));
+        update.setTracks(rs.getInt("tracks"));
+        update.setCrossing(rs.getInt("crossing"));
+        update.setApplied(rs.getBoolean("applied"));
+        update.setFilePath(rs.getString("filepath"));
+        update.setFileName(rs.getString("filename"));
+
+        return update;
+    }
 
     //    ------------------------------------------------
 
