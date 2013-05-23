@@ -1133,7 +1133,6 @@ public class DbStorage implements CatalogStorage {
 
                 ps.executeUpdate();
 
-
                 return update;
             }
         });
@@ -1287,6 +1286,9 @@ public class DbStorage implements CatalogStorage {
                 stmt3.setLong(1, updateId);
                 stmt3.executeUpdate();
 
+
+
+
                 return null;
             }
         });
@@ -1326,6 +1328,26 @@ public class DbStorage implements CatalogStorage {
             }
         });
     }
+
+    public List<Track> getUpdates(final long updateId) {
+        return query(new Action<List<Track>>() {
+            @Override
+            public List<Track> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM comp_tmp WHERE id = ?");
+                stmt.setLong(1, updateId);
+
+                ResultSet rs = stmt.executeQuery();
+                List<Track> tracks = new ArrayList<>();
+                while (rs.next()) {
+                    tracks.add(parseTrack(rs));
+                }
+
+                return tracks;
+            }
+        });
+    }
+
 
     @Override
     public CatalogUpdate getCatalogUpdate(final long updateId) {

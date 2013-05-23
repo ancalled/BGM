@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BuildServerSettings">
-    <option name="LOGIN" value="ancalled" />
-    <option name="SERVER_URL" value="http://teamcity.microcosmus.net" />
-    <option name="PASSWORD" value="dfdedfcfdfcbdfc7dfc9dfc3dfdedfd3dfc7dfcfdfc6dfc1dfc5dfd8" />
+    <option name="LOGIN" value="" />
+    <option name="SERVER_URL" value="http://buildserver" />
+    <option name="PASSWORD" />
     <option name="REMEMBER_ME" value="true" />
     <option name="USE_IDEA_PROXY_SETTINGS" value="true" />
     <option name="TEST_STATUS_BUILD_TYPE_IDS" />
@@ -22,42 +22,36 @@
     <option name="SHOW_CLOSE_PROMPT" value="true" />
     <option name="TOOL_WINDOW_SELECTED_CONTENT_INDEX" value="0" />
     <option name="FILTER_BY_CURRENT_PROJECT" value="true" />
-    <treeState key="project">
-      <selectedPath>
-        <pathElement>
-          <option name="myNodeId" value="project2" />
-          <option name="myNodeType" value="jetbrains.buildServer.tree.descriptors.ProjectDescriptor" />
-        </pathElement>
-        <pathElement>
-          <option name="myNodeId" value="bt2" />
-          <option name="myNodeType" value="jetbrains.buildServer.tree.descriptors.BuildTypeDescriptor" />
-        </pathElement>
-      </selectedPath>
-    </treeState>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/ApplyUpdateServlet.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/ApplyUpdateServlet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ant.xml" afterPath="$PROJECT_DIR$/.idea/ant.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/queries.sql" afterPath="$PROJECT_DIR$/data/queries.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/scheme.sql" afterPath="$PROJECT_DIR$/data/scheme.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bgm-platform.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369246795009" ignored="false" />
-    <file path="/CatalogStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369243118974" ignored="false" />
-    <file path="/fragment.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369147331003" ignored="false" />
+    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369297543141" ignored="false" />
+    <file path="/CatalogStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369220134688" ignored="false" />
+    <file path="/fragment.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369132078301" ignored="false" />
     <file path="db-console:/b524fb0f/bd8e1b6e-fe0f-401f-a88d-0e81e53c8907/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363032963765" ignored="false" />
     <file path="$PROJECT_DIR$/../bgm-platform/bgm-platform-master/web/WEB-INF/web.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363025365937" ignored="false" />
     <file path="/FromBase.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363203397093" ignored="false" />
-    <file path="/index.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369188401828" ignored="false" />
+    <file path="/index.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369118675060" ignored="false" />
     <file path="/FindTrackServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363328585190" ignored="false" />
     <file path="/find.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363037675359" ignored="false" />
-    <file path="/Track.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364583828406" ignored="false" />
+    <file path="/Track.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369105540972" ignored="false" />
     <file path="/BgmResult.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363036753546" ignored="false" />
     <file path="/ResultTime.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363036671203" ignored="false" />
     <file path="/FindServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365108294375" ignored="false" />
-    <file path="/web.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369148251367" ignored="false" />
+    <file path="/web.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369108552448" ignored="false" />
     <file path="/find.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363328926328" ignored="false" />
     <file path="/BaseExecutor.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363200821203" ignored="false" />
     <file path="/Executor.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363213670171" ignored="false" />
@@ -65,9 +59,9 @@
     <file path="/Data Source" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363329818468" ignored="false" />
     <file path="D:/Next/NewTS/trade-client/src/kz/kase/client/ui/panels/OrderPanel.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363334272687" ignored="false" />
     <file path="/OrderPanel.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363333730904" ignored="false" />
-    <file path="/BgmServer.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367078014303" ignored="false" />
+    <file path="/BgmServer.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364412289046" ignored="false" />
     <file path="/InMemorycatalog.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365126596328" ignored="false" />
-    <file path="/DbStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369245122668" ignored="false" />
+    <file path="/DbStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369296871964" ignored="false" />
     <file path="/CatalogFactory.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363338029526" ignored="false" />
     <file path="/BaseConnector.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363337985741" ignored="false" />
     <file path="/QueryHolder.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363338189273" ignored="false" />
@@ -76,18 +70,18 @@
     <file path="db-console:/b7826fe8/dbad64dd-c51c-4ccb-9fc6-9631eed14fb3/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363344340612" ignored="false" />
     <file path="D:/Next/cs-client/.idea/workspace.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363347421511" ignored="false" />
     <file path="/ReportItem.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364583206406" ignored="false" />
-    <file path="/ReportBuilder.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365126586171" ignored="false" />
-    <file path="/scheme.sql" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369243795694" ignored="false" />
-    <file path="/TestDB.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363528401767" ignored="false" />
+    <file path="/ReportBuilder.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367191664609" ignored="false" />
+    <file path="/scheme.sql" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369279780963" ignored="false" />
+    <file path="/TestDB.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367037201540" ignored="false" />
     <file path="/SonyParser.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363745195676" ignored="false" />
     <file path="/install-cert.sh" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363657279472" ignored="false" />
     <file path="/TrackSearcher.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364224485500" ignored="false" />
-    <file path="/LucenTest.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364138990953" ignored="false" />
+    <file path="/LucenTest.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367037180711" ignored="false" />
     <file path="dbtable:/b7405297/0b3a3eb9-be4a-404b-833f-801c635b33d2/bgm..composition" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363914728640" ignored="false" />
-    <file path="/Bgm" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365126040625" ignored="false" />
+    <file path="/Bgm" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367188525593" ignored="false" />
     <file path="/searchTestByLucen.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364151075484" ignored="false" />
     <file path="/searchLucenTest.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364162529578" ignored="false" />
-    <file path="/ReportParser.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365126257359" ignored="false" />
+    <file path="/ReportParser.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367036514913" ignored="false" />
     <file path="/CatalogParser.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364167949031" ignored="false" />
     <file path="/log4j.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364414606937" ignored="false" />
     <file path="/report.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365114341171" ignored="false" />
@@ -95,270 +89,130 @@
     <file path="db-console:/b7405297/0b3a3eb9-be4a-404b-833f-801c635b33d2/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364422520796" ignored="false" />
     <file path="$USER_HOME$/My Documents/GitHub/BGM/.idea/workspace.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364423129656" ignored="false" />
     <file path="/search.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365114310968" ignored="false" />
-    <file path="/a.dummy" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369144724921" ignored="false" />
-    <file path="/index.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367164896830" ignored="false" />
+    <file path="/a.dummy" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369204152550" ignored="false" />
+    <file path="/index.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367162144046" ignored="false" />
     <file path="/Customer.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365112075562" ignored="false" />
-    <file path="/CustomerReport.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367064526213" ignored="false" />
-    <file path="/CustomerReportItem.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367064981121" ignored="false" />
-    <file path="/CustomerReportServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365125970078" ignored="false" />
-    <file path="/DispatcherServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369243187105" ignored="false" />
-    <file path="/LuceneSearch.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367084281770" ignored="false" />
-    <file path="/UploadReportMobileServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367164015454" ignored="false" />
-    <file path="/ReindexUtil.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367078063466" ignored="false" />
-    <file path="/UploadReportPublicServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367064833819" ignored="false" />
-    <file path="/SearchTrackServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367078707746" ignored="false" />
-    <file path="/sample-data.sql" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367126990336" ignored="false" />
-    <file path="/db.properties" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369188600311" ignored="false" />
-    <file path="/reports.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367164908071" ignored="false" />
-    <file path="/search.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367164944711" ignored="false" />
-    <file path="/FindTrackServletJson.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367061976969" ignored="false" />
-    <file path="/search-result.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367165935345" ignored="false" />
-    <file path="/ReportUploadResult.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367064466892" ignored="false" />
-    <file path="/report-upload-result.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367164251417" ignored="false" />
-    <file path="/LuceneUtil.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367078063466" ignored="false" />
-    <file path="/LuceneSearchTest.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367081177761" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/javaee_web_services_client_1_3.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239485" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/persistence.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239485" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/application-client_5.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239486" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/html_basic.tld" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239486" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/xml.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239486" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/ejb-jar_3_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239486" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/html_basic_2_0.tld" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239486" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/jsf-ui.tld" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239486" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/composite.tld" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239486" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/javaee_web_services_1_3.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239486" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/ui.taglib.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239486" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/javaee_6.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239486" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/javaee_web_services_1_2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239486" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/html_basic.taglib.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239487" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/web-fragment_3_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239487" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/web-facesconfig_1_2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239487" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/web-facesconfig_1_1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239487" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/jsp_2_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239487" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/jsf-ui-2_0.tld" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239487" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/javaee_web_services_1_2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239487" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/web-facesconfig_2_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239487" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/jstl-fn.taglib.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239487" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/application_6.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239487" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/jsf_core_2_0.tld" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239487" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/connector_1_6.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239487" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/jstl.core.facelets.tld" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239488" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/web-jsptaglibrary_2_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239488" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/jstl.fn.facelets.tld" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239488" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/web-app_2_5.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239488" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/javaee_5.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239488" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/javaee_web_services_client_1_2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239488" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/composite.taglib.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239488" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/javaee_web_services_client_1_2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239488" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/web-facelettaglibrary_2_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239488" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/mojarra_ext.taglib.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239488" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/web-facesuicomponent_2_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239488" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/web-partialresponse_2_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239488" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/jsf_core.tld" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239489" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/jstl-core.taglib.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239489" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JSF/lib/jsf-support.jar!/resources/schemas/facelets_jsf_core.taglib.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239489" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/SpringBatch/lib/SpringBatch.jar!/schemas/spring-batch-2.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239489" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/SpringBatch/lib/SpringBatch.jar!/schemas/spring-batch-2.1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239489" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/xpath/lib/xpath.jar!/org/intellij/lang/xpath/xslt/resources/documentation.xsl" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239490" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/xpath/lib/xpath.jar!/org/intellij/lang/xpath/xslt/resources/documentation.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239490" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/xpath/lib/xpath.jar!/org/intellij/lang/xpath/xslt/resources/xslt-schema.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239490" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven.jar!/schemas/settings-1.0.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239490" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven.jar!/schemas/maven-4.0.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239490" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/resources/relaxng.rng" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239491" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven.jar!/schemas/profiles-1.0.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239491" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/soap-encoding.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239491" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/wsdl11_mimebinding.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239491" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/wadl20061109.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239491" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/bindingschema_2_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239491" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/jboss-jaxrpc-config_2_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239491" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/wsdl20.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239491" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/wsdl12.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239491" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/bindingfile.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239491" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/business-process.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239491" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/wsdl11.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239491" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/jersey.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239492" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/XMLSchema.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239492" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/wsdl11_httpbinding.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239492" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/jboss-ws-security_1_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239492" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/ws-addr.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239492" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/ws-eventing.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239492" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/wsdl11soap12.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239492" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/cxf-jaxws.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239492" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/jboss-jaxws-config_2_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239492" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/cxf-soap.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239493" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-util-2.5.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239493" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/wsdl_customizationschema_2_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239493" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-task-3.1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239493" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/wsdd_provider_java.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239493" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-cache-3.1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239496" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/xjc.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239496" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-tx-2.5.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239496" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/ws-addr2006.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239496" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-aop-2.5.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239496" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/jbossws-tool_1_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239496" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-aop-3.1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239496" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/sun-jaxws.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239504" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-aop-3.2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239504" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/wadl20090202.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239505" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-beans-3.2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239505" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/soap-encoding1_2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239505" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/wsdl11_soapbinding.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239505" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/j2ee_jaxrpc_mapping_1_1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239505" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-lang-3.2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239517" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/ws-policy.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239517" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-tx-2.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239517" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/WebServices/lib/WebServices.jar!/schemas/soap-envelope.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239517" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-beans-2.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239517" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-util-2.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239517" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-aop-3.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239517" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-beans-3.1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239518" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-jms-2.5.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239518" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-oxm-3.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239518" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-util-3.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239518" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-lang-2.5.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239518" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-jms-3.1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239518" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-task-3.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239518" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-context-3.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239518" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-lang-3.1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239518" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-beans-3.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239519" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-mvc-3.2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239519" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-tx-3.2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239519" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-oxm-3.1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239519" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-jee-2.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239519" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-jms-3.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239519" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/XMLSchema-instance.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239519" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-tool-3.1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239519" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-tool-3.2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239519" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-tx-3.1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239519" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-mvc-3.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239520" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-util-3.1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239520" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-jee-3.2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239520" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xhtml1-transitional.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239520" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-tool-2.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239520" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xhtml1-strict.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239520" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-lang-2.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239520" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-task-3.2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239520" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-jee-3.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239520" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-jdbc-3.2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239520" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/XMLSchema.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239520" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-tx-3.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239521" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-aop-2.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239521" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xinclude.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239521" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xslt-1_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239522" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-util-3.2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239523" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xslt-2_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239523" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-beans-2.5.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239523" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-mvc-3.1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239523" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-jee-2.5.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239523" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xml.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239523" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-jms-3.2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239523" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-tool-3.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239523" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xhtml1-frameset.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239523" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-jee-3.1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239523" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-jdbc-3.1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239523" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-oxm-3.2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239523" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/catalog.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239524" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-cache-3.2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239524" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/html5/xhtml5.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239524" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-context-2.5.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239524" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-tool-2.5.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239524" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-lang-3.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239524" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/Spring/lib/spring.jar!/resources/schemas/spring-jdbc-3.0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239524" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/ejb-jar_2_1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239524" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/application_1_4.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239524" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/connector_1_5.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239524" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/jsp_2_2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239524" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/j2ee_1_4.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239524" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/web-app_3_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239525" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/persistence_2_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239525" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/javaee_5.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239525" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/spring.tld" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239525" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JBoss/lib/jbossIntegration.jar!/descriptors/jboss-deployment-structure-1_1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239525" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/jsp_2_1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239525" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JBoss/lib/jbossIntegration.jar!/descriptors/jboss-deployment-structure-1_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239525" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/orm_1_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239525" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/application_5.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239525" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/web-facesconfig_1_2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239525" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/web-jsptaglibrary_2_1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239525" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/web-app_2_4.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239525" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/web-common_3_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239526" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/orm_2_0.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239526" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/application-client_1_4.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239526" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/application-client_6.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239526" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/ejb-jar_3_1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239526" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/spring-form.tld" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239526" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/j2ee_web_services_client_1_1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239526" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/jspxml.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239526" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/jspxml.tld" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367122239526" ignored="false" />
-    <file path="/User.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367127061569" ignored="false" />
-    <file path="/login.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367163313993" ignored="false" />
-    <file path="/Admin.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367163037986" ignored="false" />
-    <file path="/customers.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367164477233" ignored="false" />
-    <file path="/customer-login.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367163764551" ignored="false" />
-    <file path="/LogoutServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367164666986" ignored="false" />
-    <file path="/queries.sql" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369245989511" ignored="false" />
-    <file path="$PROJECT_DIR$/../HelloAppAndroid/.idea/workspace.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368339270875" ignored="false" />
-    <file path="$PROJECT_DIR$/../HelloAppServer/.idea/workspace.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368889718910" ignored="false" />
-    <file path="/LuceneIndexRebuildUtil.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367504419997" ignored="false" />
-    <file path="$PROJECT_DIR$/../HelloAppAndroid/src/net/microcosmus/helloapp/DiscountActivity.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368213677941" ignored="false" />
-    <file path="/DiscountActivity.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368213170760" ignored="false" />
-    <file path="/LuceneTest.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368245941299" ignored="false" />
-    <file path="$PROJECT_DIR$/../HelloAppServer/web/WEB-INF/views/partner/confirmers.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368291798746" ignored="false" />
-    <file path="$PROJECT_DIR$/../HelloAppAndroid/AndroidManifest.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368338712363" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/android/lib/android.jar!/org/jetbrains/android/android.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368338720860" ignored="false" />
-    <file path="$PROJECT_DIR$/../HelloAppAndroid/src/net/microcosmus/helloapp/MainActivity.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368339268262" ignored="false" />
-    <file path="/MainActivity.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368339232343" ignored="false" />
-    <file path="$PROJECT_DIR$/../AndroidAuthTest/src/com/example/AndroidAuthTest/AndroidAuthTest.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368346744175" ignored="false" />
-    <file path="$PROJECT_DIR$/../AndroidAuthTest/AndroidManifest.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368346335418" ignored="false" />
-    <file path="$PROJECT_DIR$/../AndroidAuthTest/res/layout/main.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368346335418" ignored="false" />
-    <file path="$PROJECT_DIR$/../AndroidAuthTest/build.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368346335418" ignored="false" />
-    <file path="$PROJECT_DIR$/../AndroidAuthTest/res/menu/login_menu.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368346387627" ignored="false" />
-    <file path="$PROJECT_DIR$/../AndroidAuthTest/res/values/strings.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368346412730" ignored="false" />
-    <file path="/strings.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368346412730" ignored="false" />
-    <file path="/AndroidAuthTest.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368346517529" ignored="false" />
-    <file path="$PROJECT_DIR$/../AndroidAuthTest/src/com/example/AndroidAuthTest/WebViewActivity.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368346940613" ignored="false" />
-    <file path="/WebViewActivity.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368346534184" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/main/java/com/cloudhopper/smpp/pdu/BaseSm.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063948" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/main/java/com/cloudhopper/smpp/SmppClient.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/main/java/com/cloudhopper/smpp/SmppServer.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/main/java/com/cloudhopper/smpp/SmppSession.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/main/java/com/cloudhopper/smpp/SmppBindType.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/test/java/com/cloudhopper/smpp/demo/SimulatorMain.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/main/java/com/cloudhopper/smpp/SmppSessionConfiguration.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/main/java/com/cloudhopper/smpp/SmppServerCounters.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/test/java/com/cloudhopper/smpp/demo/ParserMain.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/main/java/com/cloudhopper/smpp/PduAsyncResponse.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/test/java/com/cloudhopper/smpp/demo/ServerMain.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/main/java/com/cloudhopper/smpp/SmppSessionHandler.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/main/java/com/cloudhopper/smpp/type/LoggingOptions.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/test/java/com/cloudhopper/smpp/demo/SslClientMain.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/main/java/com/cloudhopper/smpp/SmppConstants.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/test/java/com/cloudhopper/smpp/demo/ClientMain.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368583260414" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/main/java/com/cloudhopper/smpp/SmppServerConfiguration.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/test/java/com/cloudhopper/smpp/demo/RebindMain.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/main/java/com/cloudhopper/smpp/SmppServerHandler.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/main/java/com/cloudhopper/smpp/SmppServerSession.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/main/java/com/cloudhopper/smpp/pdu/Pdu.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/main/java/com/cloudhopper/smpp/SmppSessionCounters.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/main/java/com/cloudhopper/smpp/type/SmppConnectionConfiguration.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/main/java/com/cloudhopper/smpp/pdu/PduResponse.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063949" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/test/java/com/cloudhopper/smpp/demo/SlowServerMain.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063950" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/test/java/com/cloudhopper/smpp/demo/DeliveryReceiptMain.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063950" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/test/java/com/cloudhopper/smpp/demo/SslServerMain.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063950" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/test/java/com/cloudhopper/smpp/demo/QueryCancelMain.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063950" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/src/test/java/com/cloudhopper/smpp/demo/PerformanceClientMain.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582063950" ignored="false" />
-    <file path="$PROJECT_DIR$/../cloudhopper-smpp/pom.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582064521" ignored="false" />
-    <file path="/ClientMain.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368582972356" ignored="false" />
-    <file path="/BGM Datasource" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368947302826" ignored="false" />
-    <file path="/a.regexp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368943378823" ignored="false" />
-    <file path="/UpdateCatalogServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369243288406" ignored="false" />
-    <file path="/catalog-update.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369245203583" ignored="false" />
-    <file path="/CatalogUpdate.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369242225008" ignored="false" />
-    <file path="/ApplyUpdateServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369243371100" ignored="false" />
-    <file path="/admin-login.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369148168222" ignored="false" />
-    <file path="/csv-previewer.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369155528605" ignored="false" />
-    <file path="/csv-helper.js" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369187681953" ignored="false" />
-    <file path="/catalog.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369242605203" ignored="false" />
+    <file path="/CustomerReport.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1366982926463" ignored="false" />
+    <file path="/CustomerReportItem.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365120497140" ignored="false" />
+    <file path="/CustomerReportServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367036290758" ignored="false" />
+    <file path="/MobileReportServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367036240582" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/plugins/jsp/lib/jsp-impl.jar!/standardSchemas/jspxml2_1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1366984926183" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/plugins/jsp/lib/jsp-impl.jar!/standardSchemas/jspdirectives2_1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1366984926183" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/plugins/jsp/lib/jsp-impl.jar!/standardSchemas/jspxml2.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1366984926183" ignored="false" />
+    <file path="/PublicReportServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367042085156" ignored="false" />
+    <file path="/DispatcherServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369223143383" ignored="false" />
+    <file path="/report.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367042430861" ignored="false" />
+    <file path="/ReflectionTest.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367183084000" ignored="false" />
+    <file path="/ExcelUtils.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367183956750" ignored="false" />
+    <file path="/CalculatedReportItem.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367065140593" ignored="false" />
+    <file path="/reports.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367193508250" ignored="false" />
+    <file path="/db.properties" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369191421439" ignored="false" />
+    <file path="/result.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367096072250" ignored="false" />
+    <file path="/login.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367099552609" ignored="false" />
+    <file path="/LoginServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367162321765" ignored="false" />
+    <file path="/LoginFilter.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367163623046" ignored="false" />
+    <file path="/search.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367100452437" ignored="false" />
+    <file path="/ExitServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367101127671" ignored="false" />
+    <file path="/customers.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367105211359" ignored="false" />
+    <file path="/UserAdmin.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367103676468" ignored="false" />
+    <file path="/User.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367104595468" ignored="false" />
+    <file path="/UploadReportMobileServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369108081066" ignored="false" />
+    <file path="/AllClientReportsServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367114618296" ignored="false" />
+    <file path="/FetchCientReportsServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367114552921" ignored="false" />
+    <file path="/all-customer-reports.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367115022593" ignored="false" />
+    <file path="/LogoutServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367151777078" ignored="false" />
+    <file path="/LoginAdminFilter.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367164184546" ignored="false" />
+    <file path="/search-result.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367161924359" ignored="false" />
+    <file path="/LoginAdminServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367163985546" ignored="false" />
+    <file path="/main.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367162581593" ignored="false" />
+    <file path="/LoginUserFilter.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367164192218" ignored="false" />
+    <file path="/LoginCustomerServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367164308187" ignored="false" />
+    <file path="/ProcessReportServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367186612421" ignored="false" />
+    <file path="/LoadMobileReportServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369106552394" ignored="false" />
+    <file path="/LoadPublicREportServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367190866390" ignored="false" />
+    <file path="/sample-data.sql" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367205267570" ignored="false" />
+    <file path="/MoskvafmParser.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367206543030" ignored="false" />
+    <file path="/queries.sql" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369218145421" ignored="false" />
+    <file path="/LuceneUtil.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369302012733" ignored="false" />
+    <file path="/LuceneSearch.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369301897186" ignored="false" />
+    <file path="$PROJECT_DIR$/../../Next/NewTS/.idea/workspace.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368606153755" ignored="false" />
+    <file path="/gen-inserts.xsl" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368502903690" ignored="false" />
+    <file path="/LuceneTest.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368529424995" ignored="false" />
+    <file path="/ReportItemTrack.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368586697034" ignored="false" />
+    <file path="$PROJECT_DIR$/../../Next/NewTS/test/misc/Producer.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368590112666" ignored="false" />
+    <file path="$PROJECT_DIR$/../../Next/NewTS/test/misc/Consumer.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368590106553" ignored="false" />
+    <file path="/Producer.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368589912767" ignored="false" />
+    <file path="/Consumer.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368589892272" ignored="false" />
+    <file path="$PROJECT_DIR$/../../Next/NewTS/test/misc/TestMessage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368589915047" ignored="false" />
+    <file path="/TestMessage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368589705529" ignored="false" />
+    <file path="$PROJECT_DIR$/../../Next/NewTS/src/kz/kase/next/tradesystem/mainboard/MainBoardImpl.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368591742618" ignored="false" />
+    <file path="/MainBoardImpl.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368591733547" ignored="false" />
+    <file path="$PROJECT_DIR$/../../Next/NewTS/test/misc/AtomicRefTest.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368594995116" ignored="false" />
+    <file path="/AtomicRefTest.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368594965845" ignored="false" />
+    <file path="$PROJECT_DIR$/../../Next/NewTS/src/kz/kase/next/tradesystem/domain/Instrument.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368592771052" ignored="false" />
+    <file path="$PROJECT_DIR$/../../Next/NewTS/connector/src/kz/kase/next/connector/ChangesWaiter.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368599470439" ignored="false" />
+    <file path="/ChangesWaiter.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368599289739" ignored="false" />
+    <file path="$PROJECT_DIR$/../../Next/NewTS/connector/src/kz/kase/next/connector/TsSender.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368604642729" ignored="false" />
+    <file path="/TsSender.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368601204459" ignored="false" />
+    <file path="$PROJECT_DIR$/../../Next/NewTS/connector/src/kz/kase/next/connector/RefWaiter.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368604680664" ignored="false" />
+    <file path="$PROJECT_DIR$/../../Next/NewTS/connector/src/kz/kase/next/connector/ResponseWaiter.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368604756142" ignored="false" />
+    <file path="/TsConnector.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368606015204" ignored="false" />
+    <file path="$PROJECT_DIR$/../../Next/NewTS/connector/src/kz/kase/next/connector/TsConnector.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368606084513" ignored="false" />
+    <file path="/TrackDiff.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369138220097" ignored="false" />
+    <file path="/UpdateCatalogServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369223094492" ignored="false" />
+    <file path="/catalogs.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369115255641" ignored="false" />
+    <file path="/navbar.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369110251586" ignored="false" />
+    <file path="/Platform.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369110749793" ignored="false" />
+    <file path="/Catalog.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369112856441" ignored="false" />
+    <file path="/BGM datasource" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369219547343" ignored="false" />
+    <file path="/catalog.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369281679587" ignored="false" />
+    <file path="/CustomerReportStatistic.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369118605961" ignored="false" />
+    <file path="/CatalogLoadResult.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369137480340" ignored="false" />
+    <file path="/catalog-update-result.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369138335636" ignored="false" />
+    <file path="db-console:/73672c05/73f6712d-d6ee-45d1-932d-a48340071002/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369133387772" ignored="false" />
+    <file path="db-console:/73672c05/d426416e-5d09-4216-9dc3-b98628d5eae3/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369133187890" ignored="false" />
+    <file path="/Production" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369133385612" ignored="false" />
+    <file path="/CatalogUpdate.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369221891092" ignored="false" />
+    <file path="/csv-helper.js" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369211477140" ignored="false" />
+    <file path="$PROJECT_DIR$/../../Next/NewTS/data/forex-market.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369204220862" ignored="false" />
+    <file path="/forex-market.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369204174849" ignored="false" />
+    <file path="/a.regexp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369219490641" ignored="false" />
+    <file path="/catalog-update.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369223743784" ignored="false" />
+    <file path="/Warning.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369222568826" ignored="false" />
+    <file path="/UpdateWarning.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369222569801" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/utils/CryptoHelper.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774335" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/resource/color/Colors.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774335" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/build.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774335" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/utils/Configuration.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774335" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/ui/account/DealsHistoryPanel.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774335" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/ui/order/DirectRepoOrderPanel.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774335" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/ui/order/StockOrderPanel.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774335" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/ui/order/AbstractOrder.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774335" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/ui/order/FuturesOrder.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774335" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/net-config.properties" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774335" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/ui/order/BondOrderPanel.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774335" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/styles.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774335" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/ui/order/AutoRepoOrderPanel.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774335" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/client-settings.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774335" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/ui/FavoritesTable.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774335" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/ui/utils/ConfigurableTable.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774335" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/ui/MainForm.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774336" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/ui/InstrContainerGroup.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774336" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/ui/CustomBlackFrame.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774336" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/ui/MarketViewTable.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774336" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/Strade.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774336" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/ui/InfoFrame.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774336" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/trader-settings.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774336" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/ui/InstrTypeChooserDialog.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774336" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/ui/instrument/QuotesTable.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774336" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/lang.en.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774336" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/ui/InstrContainerForm.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774336" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/utils/About.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774336" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/ui/instrument/chart/MainChart.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774336" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/ui/instrument/chart/NavigationChart.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774336" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/utils/Lang.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774336" ignored="false" />
+    <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/ui/instrument/chart/ChartManagerPanel.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774336" ignored="false" />
+    <file path="/ApplyUpdateServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369297474253" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -366,11 +220,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
-  <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/bgm-platform$LuceneSearchTest_test.coverage" NAME="LuceneSearchTest.test Coverage Results" MODIFIED="1367080725048" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>kz.bgm.platform.test.lucene.*</FILTER>
-    </SUITE>
-  </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -384,6 +233,68 @@
   </component>
   <component name="DebuggerManager">
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint url="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" line="1028" class="kz.bgm.platform.model.service.DbStorage$40" package="kz.bgm.platform.model.service">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java" line="80" class="kz.bgm.platform.web.admin.action.UpdateCatalogServlet" package="kz.bgm.platform.web.admin.action">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" line="1082" class="kz.bgm.platform.model.service.DbStorage$41" package="kz.bgm.platform.model.service">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java" line="52" class="kz.bgm.platform.web.admin.action.UpdateCatalogServlet" package="kz.bgm.platform.web.admin.action">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -420,53 +331,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UploadReportPublicServlet.java" line="53" class="kz.bgm.platform.web.admin.action.UploadReportPublicServlet" package="kz.bgm.platform.web.admin.action">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/test/kz/bgm/platform/test/lucene/LuceneSearchTest.java" line="29" class="kz.bgm.platform.test.lucene.LuceneSearchTest" package="kz.bgm.platform.test.lucene">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java" line="80" class="kz.bgm.platform.web.admin.action.UpdateCatalogServlet" package="kz.bgm.platform.web.admin.action">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -476,113 +340,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="catalog-update.jsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="119" column="80" selection-start="4376" selection-end="4376" vertical-scroll-proportion="-2.3061225">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="queries.sql" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/queries.sql">
-          <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="105" column="0" selection-start="2206" selection-end="2206" vertical-scroll-proportion="-2.8148148">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="DbStorage.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1262" column="0" selection-start="46170" selection-end="46170" vertical-scroll-proportion="-108.24">
-              <folding>
-                <element signature="e#36887#40790#0" expanded="true" />
-                <element signature="e#40779#40780#0" expanded="true" />
-                <element signature="e#47511#48026#0" expanded="true" />
-                <element signature="e#48015#48016#0" expanded="true" />
-                <element signature="e#48145#48769#0" expanded="true" />
-                <element signature="e#48758#48759#0" expanded="true" />
-                <marker date="1369246130000" expanded="true" signature="1238:1461" placeholder="INSERT INTO ..." />
-                <marker date="1369246130000" expanded="true" signature="2330:2365" placeholder="SELECT id FR..catalog..." />
-                <marker date="1369246130000" expanded="true" signature="3174:3207" placeholder="SELECT * FRO..platform..." />
-                <marker date="1369246130000" expanded="true" signature="3752:3784" placeholder="SELECT * FRO..catalog..." />
-                <marker date="1369246130000" expanded="true" signature="4319:4355" placeholder="SELECT * FRO..composition..." />
-                <marker date="1369246130000" expanded="true" signature="4884:4906" placeholder="SELECT * FRO..platform..." />
-                <marker date="1369246130000" expanded="true" signature="5627:5648" placeholder="SELECT * FRO..catalog..." />
-                <marker date="1369246130000" expanded="true" signature="6264:6308" placeholder="SELECT * FRO..catalog..." />
-                <marker date="1369246130000" expanded="true" signature="6966:6991" placeholder="SELECT * FRO..composition..." />
-                <marker date="1369246130000" expanded="true" signature="7579:7650" placeholder="SELECT * FRO..composition..." />
-                <marker date="1369246130000" expanded="true" signature="8261:8349" placeholder="SELECT * FRO..composition..." />
-                <marker date="1369246130000" expanded="true" signature="8970:9212" placeholder="SELECT * FRO..composition..." />
-                <marker date="1369246130000" expanded="true" signature="10064:10102" placeholder="SELECT * FRO..composition..." />
-                <marker date="1369246130000" expanded="true" signature="10738:10776" placeholder="SELECT * FRO..composition..." />
-                <marker date="1369246130000" expanded="true" signature="11419:11461" placeholder="SELECT * FRO..composition..." />
-                <marker date="1369246130000" expanded="true" signature="12104:12144" placeholder="SELECT * FRO..composition..." />
-                <marker date="1369246130000" expanded="true" signature="12787:12831" placeholder="SELECT * FRO..composition..." />
-                <marker date="1369246130000" expanded="true" signature="13456:13478" placeholder="SELECT * FRO..customer..." />
-                <marker date="1369246130000" expanded="true" signature="14070:14105" placeholder="SELECT * FRO..customer..." />
-                <marker date="1369246130000" expanded="true" signature="14591:14624" placeholder="SELECT * FRO..customer..." />
-                <marker date="1369246130000" expanded="true" signature="15128:15185" placeholder="SELECT * FRO..user_admin..." />
-                <marker date="1369246130000" expanded="true" signature="15715:15766" placeholder="SELECT * FRO..user..." />
-                <marker date="1369246130000" expanded="true" signature="16276:16310" placeholder="SELECT * FRO..user..." />
-                <marker date="1369246130000" expanded="true" signature="16894:16992" placeholder="INSERT INTO ..." />
-                <marker date="1369246130000" expanded="true" signature="17895:18122" placeholder="INSERT INTO ..." />
-                <marker date="1369246130000" expanded="true" signature="19240:19308" placeholder="SELECT count..composition..." />
-                <marker date="1369246130000" expanded="true" signature="19827:19856" placeholder="SELECT * FRO..customer_report..." />
-                <marker date="1369246130000" expanded="true" signature="20486:20528" placeholder="SELECT * FRO..customer_report..." />
-                <marker date="1369246130000" expanded="true" signature="21099:21181" placeholder="SELECT * FRO..customer_report..." />
-                <marker date="1369246130000" expanded="true" signature="22022:22076" placeholder="SELECT * FRO..customer_report_item..." />
-                <marker date="1369246130000" expanded="true" signature="22903:23692" placeholder="SELECT\n cop..composition..." />
-                <marker date="1369246130000" expanded="true" signature="25049:25839" placeholder="SELECT\n cop..composition..." />
-                <marker date="1369246130000" expanded="true" signature="27043:27099" placeholder="SELECT COUNT..composition..." />
-                <marker date="1369246130000" expanded="true" signature="27806:29993" placeholder="SELECT\n i.i..customer_report_item..." />
-                <marker date="1369246130000" expanded="true" signature="30690:32425" placeholder="SELECT\n i.i..customer_report_item..." />
-                <marker date="1369246130000" expanded="true" signature="33079:33152" placeholder="INSERT INTO ..." />
-                <marker date="1369246130000" expanded="true" signature="33951:34029" placeholder="INSERT INTO ..." />
-                <marker date="1369246130000" expanded="true" signature="34769:34798" placeholder="DELETE FROM ..." />
-                <marker date="1369246130000" expanded="true" signature="35168:35201" placeholder="DELETE FROM ..." />
-                <marker date="1369246130000" expanded="true" signature="35623:35663" placeholder="SELECT * FRO..user..." />
-                <marker date="1369246130000" expanded="true" signature="36692:36712" placeholder="DELETE FROM ..." />
-                <marker date="1369246130000" expanded="true" signature="37138:37276" placeholder="INSERT INTO ..." />
-                <marker date="1369246130000" expanded="true" signature="37883:38776" placeholder="LOAD DATA LO..comp_tmp..." />
-                <marker date="1369246130000" expanded="true" signature="39369:39382" placeholder="SHOW WARNING..." />
-                <marker date="1369246130000" expanded="true" signature="39998:40072" placeholder="UPDATE catal..." />
-                <marker date="1369246130000" expanded="true" signature="39998:40604" placeholder="UPDATE catal..." />
-                <marker date="1369246130000" expanded="true" signature="40121:40173" placeholder="SELECT count..comp_tmp..." />
-                <marker date="1369246130000" expanded="true" signature="40225:40554" placeholder="SELECT count..composition..." />
-                <marker date="1369246130000" expanded="true" signature="41117:41293" placeholder="INSERT INTO ..." />
-                <marker date="1369246130000" expanded="true" signature="42357:43649" placeholder="SELECT c.cod..comp_tmp..." />
-                <marker date="1369246130000" expanded="true" signature="44680:44724" placeholder="SELECT * FRO..composition..." />
-                <marker date="1369246130000" expanded="true" signature="45342:46168" placeholder="UPDATE compo..." />
-                <marker date="1369246130000" expanded="true" signature="46363:46994" placeholder="INSERT INTO ..." />
-                <marker date="1369246130000" expanded="true" signature="46496:46994" placeholder="SELECT\n cod..comp_tmp..." />
-                <marker date="1369246130000" expanded="true" signature="47188:47222" placeholder="UPDATE catal..." />
-                <marker date="1369246130000" expanded="true" signature="47188:47242" placeholder="UPDATE catal..." />
-                <marker date="1369246130000" expanded="true" signature="47730:47771" placeholder="SELECT * FRO..catalog_update..." />
-                <marker date="1369246130000" expanded="true" signature="48376:48425" placeholder="SELECT * FRO..catalog_update..." />
-                <marker date="1369246130000" expanded="true" signature="49033:49333" placeholder="UPDATE catal..." />
-                <marker date="1369246130000" expanded="true" signature="49102:49332" placeholder="SELECT\n cou..composition..." />
-                <marker date="1369246130000" expanded="true" signature="49433:49738" placeholder="UPDATE catal..." />
-                <marker date="1369246130000" expanded="true" signature="49503:49737" placeholder="SELECT\n cou..composition..." />
-                <marker date="1369246130000" expanded="true" signature="57474:57495" placeholder="SELECT * FRO..catalog..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UpdateCatalogServlet.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="91" column="31" selection-start="3366" selection-end="3366" vertical-scroll-proportion="1.1156716">
-              <folding>
-                <element signature="e#1638#1668#0" expanded="true" />
-              </folding>
+            <state line="1298" column="55" selection-start="47424" selection-end="47468" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -590,16 +352,7 @@
       <file leaf-file-name="ApplyUpdateServlet.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/ApplyUpdateServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="30" selection-start="1265" selection-end="1265" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="csv-helper.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/js/csv-helper.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="109" column="0" selection-start="2534" selection-end="2534" vertical-scroll-proportion="0.0">
+            <state line="51" column="50" selection-start="1648" selection-end="1648" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -608,16 +361,7 @@
       <file leaf-file-name="CatalogStorage.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="91" column="18" selection-start="2176" selection-end="2176" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CatalogUpdate.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CatalogUpdate.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="0" selection-start="417" selection-end="417" vertical-scroll-proportion="0.0">
+            <state line="101" column="48" selection-start="2487" selection-end="2487" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -626,19 +370,61 @@
       <file leaf-file-name="catalog.jsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="178" column="28" selection-start="4969" selection-end="4969" vertical-scroll-proportion="45.625">
+            <state line="180" column="24" selection-start="4982" selection-end="4982" vertical-scroll-proportion="-3.75">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scheme.sql" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/scheme.sql">
-          <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-            <state />
-          </provider>
+      <file leaf-file-name="LuceneUtil.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="88" column="0" selection-start="1881" selection-end="2151" vertical-scroll-proportion="-16.703703">
+            <state line="101" column="36" selection-start="3660" selection-end="3660" vertical-scroll-proportion="0.7971831">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LuceneIndexRebuildUtil.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneIndexRebuildUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="35" selection-start="421" selection-end="443" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LuceneSearch.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="214" column="0" selection-start="7426" selection-end="7426" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="catalog-update.jsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="48" column="21" selection-start="1403" selection-end="1403" vertical-scroll-proportion="5.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LuceneSearchTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/kz/bgm/platform/test/lucene/LuceneSearchTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="31" column="21" selection-start="832" selection-end="832" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IndexWriter.class" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/lib/lucene-core-4.1.0.jar!/org/apache/lucene/index/IndexWriter.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="58" column="11" selection-start="3296" selection-end="3296" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -668,29 +454,30 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/web/csv-previewer.html" />
-        <option value="$PROJECT_DIR$/web/js/csv-helper.js" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/index.jsp" />
-        <option value="$PROJECT_DIR$/db.properties" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/utils/CatalogLoader.java" />
-        <option value="db-console:/89446b08/5a112371-ec62-433a-a61b-f6ef82fb253a/" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CatalogUpdate.java" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/DispatcherServlet.java" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/ApplyUpdateServlet.java" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" />
         <option value="$PROJECT_DIR$/data/queries.sql" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/Warning.java" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CatalogUpdate.java" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/UpdateWarning.java" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/DispatcherServlet.java" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp" />
+        <option value="$PROJECT_DIR$/data/replace-empty-lines.sh" />
+        <option value="db-console:/4e802f14/b1ed7fcf-b56a-49b0-a869-b1a4c75c3585/" />
         <option value="$PROJECT_DIR$/data/scheme.sql" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/ApplyUpdateServlet.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="22" />
-    <option name="width" value="1440" />
-    <option name="height" value="874" />
+    <option name="x" value="53" />
+    <option name="y" value="24" />
+    <option name="width" value="1547" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -724,7 +511,7 @@
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
-    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="false" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
     <OptionsSetting value="true" id="Undo Check Out" />
@@ -748,13 +535,16 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="bgm-platform" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -875,29 +665,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bgm-platform" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BGM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
+              <option name="myItemId" value="test" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -994,6 +762,40 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bgm-platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BGM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bgm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="api" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1117,27 +919,13 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bgm-platform" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BGM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="JdbcConsole.Extract.LineSuffix" value="" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="132" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="132" />
     <property name="options.splitter.main.proportions" value="0.3" />
@@ -1156,134 +944,73 @@
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="ChangesBrowser.SHOW_FLATTEN" value="false" />
     <property name="options.lastSelected" value="settings.github" />
+    <property name="ChangesBrowser.SHOW_FLATTEN" value="false" />
     <property name="project.structure.side.proportion" value="0.19895288" />
-    <property name="JdbcConsole.Extract.ClosingQuote" value="\&quot;" />
+    <property name="JdbcConsole.Extract.ClosingQuote" value="'" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="JdbcConsole.EnableParameterPattern" value="false" />
     <property name="JdbcConsole.ParameterPattern" value="(\?\d*|\:\w+|\@\w+|\$\{[^$\{\}]*\}|\$\w+\$|\#\w+\#)" />
     <property name="project.structure.last.edited" value="Libraries" />
-    <property name="JdbcConsole.Extract.Separator" value="," />
     <property name="project.structure.proportion" value="0.15" />
     <property name="OverrideImplement.combined" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../tmp/9/bgm-data" />
-    <property name="JdbcConsole.Extract.LineSeparator" value="\n" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../tmp/21/data.xml" />
     <property name="JdbcConsole.ResultInNewTab" value="false" />
-    <property name="JdbcConsole.Extract.LinePrefix" value="" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="JdbcConsole.Extract.IncludeRowNumbers" value="false" />
+    <property name="Console.TableResult.DefaultCopyAction" value="Tab-separated Values (TSV)" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="JdbcConsole.Extract.OpeningQuote" value="\&quot;" />
+    <property name="JdbcConsole.Extract.OpeningQuote" value="'" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="JdbcConsole.Extract.IncludeHeader" value="false" />
-    <property name="JdbcConsole.Extract.QuoteEverything" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
+    <property name="last.edited.regexp" value="Sample }Text" />
     <property name="JdbcConsole.ResultPageSize" value="1000" />
-    <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="kz.bgm.platform.web.admin.action" />
-      <recent name="kz.bgm.platform.utils" />
-      <recent name="kz.bgm.platform.web.customer.action" />
-      <recent name="kz.bgm.platform.web.customer" />
+      <recent name="kz.bgm.platform.model.domain" />
+      <recent name="kz.bgm.platform.web" />
       <recent name="kz.bgm" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/web/WEB-INF/views/customer" />
-      <recent name="$PROJECT_DIR$/web/admin" />
-      <recent name="$PROJECT_DIR$/web/customer" />
+      <recent name="$PROJECT_DIR$/web/WEB-INF/views/admin" />
       <recent name="C:\Documents and Settings\Admin\My Documents\GitHub\BGM\src\kz\bgm" />
       <recent name="C:\Documents and Settings\Admin\My Documents\GitHub\BGM\src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/web" />
-      <recent name="$PROJECT_DIR$/web/WEB-INF/views/admin" />
-      <recent name="$PROJECT_DIR$/web/customer" />
-      <recent name="$PROJECT_DIR$/web/admin" />
+      <recent name="D:\Projects\BGM\data" />
+      <recent name="D:\Projects\BGM\web" />
+      <recent name="D:\Projects\BGM\test" />
+      <recent name="$PROJECT_DIR$/src/kz/bgm/platform" />
       <recent name="$PROJECT_DIR$/data/old" />
     </key>
   </component>
   <component name="RunManager" selected="Application.BgmServer">
-    <configuration default="false" name="BgmServer" type="Application" factoryName="Application" temporary="true">
+    <configuration default="false" name="LuceneIndexRebuildUtil" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="kz.bgm.*" />
+          <option name="PATTERN" value="kz.bgm.platform.utils.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="kz.bgm.platform.BgmServer" />
+      <option name="MAIN_CLASS_NAME" value="kz.bgm.platform.utils.LuceneIndexRebuildUtil" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="C:/Program Files/Java/jdk1.6.0_25" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="bgm-platform" />
-      <envs />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="ReportBuilder" type="Application" factoryName="Application" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="kz.bgm.platform.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="kz.bgm.platform.ReportBuilder" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="C:/Program Files/Java/jdk1.6.0_27" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="bgm-platform" />
-      <envs />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="MoskvafmParser" type="Application" factoryName="Application" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="kz.bgm.research.radio.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="kz.bgm.research.radio.MoskvafmParser" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="C:/Program Files/Java/jdk1.6.0_27" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
@@ -1305,7 +1032,7 @@
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="C:/Program Files/Java/jdk1.6.0_27" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
@@ -1315,7 +1042,35 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="LuceneSearchTest.test" type="JUnit" factoryName="JUnit" temporary="true">
+    <configuration default="false" name="LuceneTest" type="Application" factoryName="Application" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="kz.bgm.platform.test.lucene.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="kz.bgm.platform.test.lucene.LuceneTest" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="./data/test-reports/report4.txt" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="bgm-platform" />
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="LuceneSearchTest" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="kz.bgm.platform.test.lucene.*" />
@@ -1327,8 +1082,8 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="kz.bgm.platform.test.lucene" />
       <option name="MAIN_CLASS_NAME" value="kz.bgm.platform.test.lucene.LuceneSearchTest" />
-      <option name="METHOD_NAME" value="test" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -1339,15 +1094,29 @@
       </option>
       <envs />
       <patterns />
-      <RunnerSettings RunnerId="Cover" />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Cover" />
-      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="UpdateWarning" type="Application" factoryName="Application" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="kz.bgm.platform.model.domain.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="kz.bgm.platform.model.domain.UpdateWarning" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="bgm-platform" />
+      <envs />
+      <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -1363,19 +1132,6 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -1406,19 +1162,39 @@
       <listeners />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="kz.bgm.CatalogStorage" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="ALTERNATIVE_JRE_PATH" value="C:/Program Files/Java/jdk1.6.0_27" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="bgm-platform" />
       <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Local" singleton="true">
+      <JSDebuggerConfigurationSettings>
+        <option name="engineId" value="embedded" />
+        <option name="fileUrl" />
+      </JSDebuggerConfigurationSettings>
       <method />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
@@ -1448,20 +1224,54 @@
       <option name="CONTEXT_PROVIDER" />
       <method />
     </configuration>
-    <list size="5">
+    <configuration default="false" name="BgmServer" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="kz.bgm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="kz.bgm.platform.BgmServer" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="C:/Program Files/Java/jdk1.6.0_25" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="bgm-platform" />
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method>
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="bgm" />
+          <artifact name="web" />
+        </option>
+      </method>
+    </configuration>
+    <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Application.BgmServer" />
-      <item index="1" class="java.lang.String" itemvalue="Application.ReportBuilder" />
-      <item index="2" class="java.lang.String" itemvalue="Application.MoskvafmParser" />
-      <item index="3" class="java.lang.String" itemvalue="Application.LuceneUtil" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.LuceneSearchTest.test" />
+      <item index="1" class="java.lang.String" itemvalue="Application.LuceneIndexRebuildUtil" />
+      <item index="2" class="java.lang.String" itemvalue="Application.LuceneUtil" />
+      <item index="3" class="java.lang.String" itemvalue="Application.LuceneTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.LuceneSearchTest" />
+      <item index="5" class="java.lang.String" itemvalue="Application.UpdateWarning" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.BgmServer" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.LuceneSearchTest.test" />
+        <item index="0" class="java.lang.String" itemvalue="Application.UpdateWarning" />
+        <item index="1" class="java.lang.String" itemvalue="Application.LuceneTest" />
         <item index="2" class="java.lang.String" itemvalue="Application.LuceneUtil" />
-        <item index="3" class="java.lang.String" itemvalue="Application.MoskvafmParser" />
-        <item index="4" class="java.lang.String" itemvalue="Application.ReportBuilder" />
+        <item index="3" class="java.lang.String" itemvalue="Application.LuceneIndexRebuildUtil" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.LuceneSearchTest" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -1478,7 +1288,7 @@
   <component name="StructureViewFactory">
     <option name="ACTIVE_ACTIONS" value="ALPHA_COMPARATOR" />
   </component>
-  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="sslv3">
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
     <option name="USER" value="" />
     <option name="PASSWORD" value="" />
     <option name="mySSHConnectionTimeout" value="30000" />
@@ -1601,115 +1411,51 @@
       <created>1365114511687</created>
       <updated>1365114511687</updated>
     </task>
-    <task id="LOCAL-00026" summary="merge">
-      <created>1367043257484</created>
-      <updated>1367043257484</updated>
+    <task id="LOCAL-00026" summary="Подправил структуру проекта, разделил парсинг от определения треков">
+      <created>1367037297393</created>
+      <updated>1367037297393</updated>
     </task>
-    <task id="LOCAL-00027" summary="Еще рефакторинг">
-      <created>1367047818026</created>
-      <updated>1367047818026</updated>
+    <task id="LOCAL-00027" summary="Переименовал сервлеты">
+      <created>1367042882554</created>
+      <updated>1367042882554</updated>
     </task>
-    <task id="LOCAL-00028" summary="Убрал lucene из DbStorage">
-      <created>1367049567135</created>
-      <updated>1367049567135</updated>
+    <task id="LOCAL-00028" summary="Переименовал сервлеты">
+      <created>1367067475593</created>
+      <updated>1367067475593</updated>
     </task>
-    <task id="LOCAL-00029" summary="Разбил DbStorage на поиск и обработку отчетов">
-      <created>1367050237255</created>
-      <updated>1367050237255</updated>
+    <task id="LOCAL-00029" summary="при выгрузке отчетов  в ексель добавил фрматы ячеек">
+      <created>1367068654265</created>
+      <updated>1367068654265</updated>
     </task>
-    <task id="LOCAL-00030" summary="упростил запросы к бд, вынес создание конекшна в метод query">
-      <created>1367051763000</created>
-      <updated>1367051763000</updated>
+    <task id="LOCAL-00030" summary="добавил новую сущность с таблицей г=userAdmin, добавил в пользьвователе айди кастомера , сделал страничку вывода кастомеров , начал делать вывод всех отчетов ,">
+      <created>1367115111765</created>
+      <updated>1367115111765</updated>
     </task>
-    <task id="LOCAL-00031" summary="упростил запросы к бд, вынес создание конекшна в метод query">
-      <created>1367057696095</created>
-      <updated>1367057696095</updated>
+    <task id="LOCAL-00031" summary="добавил insert в выгрузку расчитанного отчета">
+      <created>1367155691968</created>
+      <updated>1367155691968</updated>
     </task>
-    <task id="LOCAL-00032" summary="Поправил sql-схему">
-      <created>1367060865773</created>
-      <updated>1367060865773</updated>
+    <task id="LOCAL-00032" summary="дорабтал авторизацию, добавил админскую авторизвцию , отсалось дело за скриптами ..">
+      <created>1367168168125</created>
+      <updated>1367168168125</updated>
     </task>
-    <task id="LOCAL-00033" summary="Вынес результат поиска в диспатчер">
-      <created>1367062673359</created>
-      <updated>1367062673359</updated>
+    <task id="LOCAL-00033" summary="доработал проверку типов при рвыдаче расчитанного мобильного отчета.">
+      <created>1367185097953</created>
+      <updated>1367185097953</updated>
     </task>
-    <task id="LOCAL-00034" summary="Подправил загрузку отчетов">
-      <created>1367065823717</created>
-      <updated>1367065823717</updated>
+    <task id="LOCAL-00034" summary="переложил templates отчетов в data">
+      <created>1367185724390</created>
+      <updated>1367185724390</updated>
     </task>
-    <task id="LOCAL-00035" summary="Опечатка">
-      <created>1367065851082</created>
-      <updated>1367065851082</updated>
+    <task id="LOCAL-00035" summary="gпоправил парсер отчета в dbStorage там изменился столбец">
+      <created>1367189259312</created>
+      <updated>1367189259312</updated>
     </task>
-    <task id="LOCAL-00036" summary="Небольшие поправочки">
-      <created>1367127114427</created>
-      <updated>1367127114427</updated>
+    <task id="LOCAL-00036" summary="еще поправил парсинг отчета , при запрос к db">
+      <created>1367190190781</created>
+      <updated>1367190190781</updated>
     </task>
-    <task id="LOCAL-00037" summary="ExitSevlet -&gt; LogoutServlet">
-      <created>1367127394048</created>
-      <updated>1367127394048</updated>
-    </task>
-    <task id="LOCAL-00038" summary="Junit">
-      <created>1367137471437</created>
-      <updated>1367137471437</updated>
-    </task>
-    <task id="LOCAL-00039" summary="прикол, зацени строки в свитче)">
-      <created>1367160580797</created>
-      <updated>1367160580797</updated>
-    </task>
-    <task id="LOCAL-00040" summary="Разделил админа от кастомера в web-е">
-      <created>1367165017620</created>
-      <updated>1367165017620</updated>
-    </task>
-    <task id="LOCAL-00041" summary="Еще кое-что поправил">
-      <created>1367165718919</created>
-      <updated>1367165718920</updated>
-    </task>
-    <task id="LOCAL-00042" summary="Еще кое-что поправил">
-      <created>1367165990692</created>
-      <updated>1367165990692</updated>
-    </task>
-    <task id="LOCAL-00043" summary="Запросы подправил">
-      <created>1367169344833</created>
-      <updated>1367169344833</updated>
-    </task>
-    <task id="LOCAL-00044" summary="Запросы подправил">
-      <created>1367170332042</created>
-      <updated>1367170332042</updated>
-    </task>
-    <task id="LOCAL-00045" summary="Добавил шаблон отчета по публичке">
-      <created>1367170927429</created>
-      <updated>1367170927429</updated>
-    </task>
-    <task id="LOCAL-00046" summary="Вернул IndexRebuild">
-      <created>1367504443899</created>
-      <updated>1367504443899</updated>
-    </task>
-    <task id="LOCAL-00047" summary="Запросы на обновление каталога">
-      <created>1368947787975</created>
-      <updated>1368947787975</updated>
-    </task>
-    <task id="LOCAL-00048" summary="Запросы на обновление каталога">
-      <created>1369100778106</created>
-      <updated>1369100778106</updated>
-    </task>
-    <task id="LOCAL-00049" summary="Доделал обновление каталога">
-      <created>1369148871767</created>
-      <updated>1369148871767</updated>
-    </task>
-    <task id="LOCAL-00050" summary="Предпросмотр csv">
-      <created>1369188514792</created>
-      <updated>1369188514793</updated>
-    </task>
-    <task id="LOCAL-00051" summary="Предпросмотр csv">
-      <created>1369188565397</created>
-      <updated>1369188565397</updated>
-    </task>
-    <task id="LOCAL-00052" summary="Поправки по обновлению каталогов">
-      <created>1369246797241</created>
-      <updated>1369246797242</updated>
-    </task>
-    <option name="localTasksCounter" value="53" />
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1733,40 +1479,37 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1440" height="874" extended-state="0" />
-    <editor active="false" />
+    <frame x="53" y="24" width="1547" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5729443" sideWeight="0.493517" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5520833" sideWeight="0.49713057" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5494071" sideWeight="0.49713057" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34748012" sideWeight="0.49675852" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15064563" sideWeight="0.42705572" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.260493" sideWeight="0.6287979" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5636605" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TeamCity" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32891247" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37267905" sideWeight="0.5235008" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31836197" sideWeight="0.49027553" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TeamCity" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3657289" sideWeight="0.54294974" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32686567" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275862" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32628798" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893" sideWeight="0.49675852" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23905997" sideWeight="0.1696113" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23905997" sideWeight="0.1696113" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32979977" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40028694" sideWeight="0.29446408" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39951378" sideWeight="0.5641932" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26398852" sideWeight="0.6710875" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5769231" sideWeight="0.47082657" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.6283582" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2631579" sideWeight="0.48480844" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.51519156" sideWeight="0.45137763" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3712021" sideWeight="0.493517" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39630118" sideWeight="0.49675852" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1812,7 +1555,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Поправки по обновлению каталогов" />
+    <option name="LAST_COMMIT_MESSAGE" value="Потерялись js-ы" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1826,34 +1569,36 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+    <MESSAGE value="Добавил реализацию Lucen в тестовый пакет" />
+    <MESSAGE value="Тестирование lucen" />
+    <MESSAGE value="Тестирование lucen, сделала отчет с импользование lucen , начал прикручивать логирование" />
+    <MESSAGE value="выполнение последних отчетов , тестовое , проверка как хорошо lucen находит треки" />
+    <MESSAGE value="Начал разработку страницы отчета" />
+    <MESSAGE value="Добавил сервлет обработки отчета , основную логику загрузки файла." />
+    <MESSAGE value="порефакторил немного" />
+    <MESSAGE value="убрал кирилицу в туду и изменил парсинг отчета , теперь отчет парсится в ReportBuilder там он помоему роднее" />
     <MESSAGE value="брал кирилицу из коммента" />
     <MESSAGE value="начал делаь простенький импорт отчета." />
     <MESSAGE value="добавил табличку customer и сделал главную страничку с меню, добавил лпарочку скриптов которые ранее забыл (js-ки буутстраповские )" />
-    <MESSAGE value="merge" />
-    <MESSAGE value="Еще рефакторинг" />
-    <MESSAGE value="Убрал lucene из DbStorage" />
-    <MESSAGE value="Разбил DbStorage на поиск и обработку отчетов" />
-    <MESSAGE value="упростил запросы к бд, вынес создание конекшна в метод query" />
-    <MESSAGE value="Поправил sql-схему" />
-    <MESSAGE value="Вынес результат поиска в диспатчер" />
-    <MESSAGE value="Подправил загрузку отчетов" />
-    <MESSAGE value="Опечатка" />
-    <MESSAGE value="Небольшие поправочки" />
-    <MESSAGE value="ExitSevlet -&gt; LogoutServlet" />
-    <MESSAGE value="Junit" />
-    <MESSAGE value="прикол, зацени строки в свитче)" />
-    <MESSAGE value="Разделил админа от кастомера в web-е" />
-    <MESSAGE value="Еще кое-что поправил" />
-    <MESSAGE value="Запросы подправил" />
-    <MESSAGE value="Добавил шаблон отчета по публичке" />
-    <MESSAGE value="Вернул IndexRebuild" />
-    <MESSAGE value="Запросы на обновление каталога" />
-    <MESSAGE value="Доделал обновление каталога" />
-    <MESSAGE value="Предпросмотр csv" />
-    <MESSAGE value="Поправки по обновлению каталогов" />
+    <MESSAGE value="Подправил структуру проекта, разделил парсинг от определения треков" />
+    <MESSAGE value="Переименовал сервлеты" />
+    <MESSAGE value="при выгрузке отчетов  в ексель добавил фрматы ячеек" />
+    <MESSAGE value="добавил новую сущность с таблицей г=userAdmin, добавил в пользьвователе айди кастомера , сделал страничку вывода кастомеров , начал делать вывод всех отчетов ," />
+    <MESSAGE value="добавил insert в выгрузку расчитанного отчета" />
+    <MESSAGE value="дорабтал авторизацию, добавил админскую авторизвцию , отсалось дело за скриптами .." />
+    <MESSAGE value="доработал проверку типов при рвыдаче расчитанного мобильного отчета." />
+    <MESSAGE value="переложил templates отчетов в data" />
+    <MESSAGE value="gпоправил парсер отчета в dbStorage там изменился столбец" />
+    <MESSAGE value="еще поправил парсинг отчета , при запрос к db" />
+    <MESSAGE value="Утилита для поиска треков из консоли" />
+    <MESSAGE value="Тесты и настройка поиска" />
+    <MESSAGE value="Обновление каталогов" />
+    <MESSAGE value="Потерялись js-ы" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -1872,84 +1617,26 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/index.jsp">
+    <entry file="file://$PROJECT_DIR$/data/replace-empty-lines.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="21" selection-start="1064" selection-end="1064" vertical-scroll-proportion="0.0">
+        <state line="0" column="11" selection-start="11" selection-end="11" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/queries.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="183" column="0" selection-start="4466" selection-end="4623" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db.properties">
+    <entry file="dbDummy://db-console:/4e802f14/b1ed7fcf-b56a-49b0-a869-b1a4c75c3585/">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="16" selection-start="49" selection-end="49" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="30" column="11" selection-start="570" selection-end="839" vertical-scroll-proportion="-15.5172415" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/CatalogLoader.java">
+    <entry file="file://$PROJECT_DIR$/data/scheme.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="13" selection-start="460" selection-end="460" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/sample-data.sql">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://db-console:/89446b08/5a112371-ec62-433a-a61b-f6ef82fb253a/">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="13" selection-start="1980" selection-end="2197" vertical-scroll-proportion="-19.62069">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/DispatcherServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="208" column="0" selection-start="8722" selection-end="8722" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#1458#3311#0" expanded="true" />
-            <element signature="e#3292#3293#0" expanded="true" />
-            <element signature="e#3397#4298#0" expanded="true" />
-            <element signature="e#4279#4280#0" expanded="true" />
-            <element signature="e#4391#5644#0" expanded="true" />
-            <element signature="e#5625#5626#0" expanded="true" />
-            <element signature="e#5726#6100#0" expanded="true" />
-            <element signature="e#6081#6082#0" expanded="true" />
-            <element signature="e#6180#6925#0" expanded="true" />
-            <element signature="e#6906#6907#0" expanded="true" />
-            <element signature="e#7013#8867#0" expanded="true" />
-            <element signature="e#8848#8849#0" expanded="true" />
-            <element signature="e#8961#10157#0" expanded="true" />
-            <element signature="e#10138#10139#0" expanded="true" />
-            <element signature="e#10245#10920#0" expanded="true" />
-            <element signature="e#10901#10902#0" expanded="true" />
-            <element signature="e#11009#11239#0" expanded="true" />
-            <element signature="e#11220#11221#0" expanded="true" />
-            <element signature="e#11332#11566#0" expanded="true" />
-            <element signature="e#11547#11548#0" expanded="true" />
-            <element signature="e#11646#11867#0" expanded="true" />
-            <element signature="e#11848#11849#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/ApplyUpdateServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="30" selection-start="1265" selection-end="1265" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="18" selection-start="2176" selection-end="2176" vertical-scroll-proportion="0.0">
+        <state line="84" column="44" selection-start="1833" selection-end="1877" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1961,130 +1648,80 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp">
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="119" column="80" selection-start="4376" selection-end="4376" vertical-scroll-proportion="-2.3061225">
+        <state line="100" column="37" selection-start="3659" selection-end="3659" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/queries.sql">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="105" column="0" selection-start="2206" selection-end="2206" vertical-scroll-proportion="-2.8148148">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/scheme.sql">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="0" selection-start="1881" selection-end="2151" vertical-scroll-proportion="-16.703703">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="178" column="28" selection-start="4969" selection-end="4969" vertical-scroll-proportion="45.625">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/js/csv-helper.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="109" column="0" selection-start="2534" selection-end="2534" vertical-scroll-proportion="0.0">
+        <state line="101" column="48" selection-start="2487" selection-end="2487" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1262" column="0" selection-start="46170" selection-end="46170" vertical-scroll-proportion="-108.24">
-          <folding>
-            <element signature="e#36887#40790#0" expanded="true" />
-            <element signature="e#40779#40780#0" expanded="true" />
-            <element signature="e#47511#48026#0" expanded="true" />
-            <element signature="e#48015#48016#0" expanded="true" />
-            <element signature="e#48145#48769#0" expanded="true" />
-            <element signature="e#48758#48759#0" expanded="true" />
-            <marker date="1369246130000" expanded="true" signature="1238:1461" placeholder="INSERT INTO ..." />
-            <marker date="1369246130000" expanded="true" signature="2330:2365" placeholder="SELECT id FR..catalog..." />
-            <marker date="1369246130000" expanded="true" signature="3174:3207" placeholder="SELECT * FRO..platform..." />
-            <marker date="1369246130000" expanded="true" signature="3752:3784" placeholder="SELECT * FRO..catalog..." />
-            <marker date="1369246130000" expanded="true" signature="4319:4355" placeholder="SELECT * FRO..composition..." />
-            <marker date="1369246130000" expanded="true" signature="4884:4906" placeholder="SELECT * FRO..platform..." />
-            <marker date="1369246130000" expanded="true" signature="5627:5648" placeholder="SELECT * FRO..catalog..." />
-            <marker date="1369246130000" expanded="true" signature="6264:6308" placeholder="SELECT * FRO..catalog..." />
-            <marker date="1369246130000" expanded="true" signature="6966:6991" placeholder="SELECT * FRO..composition..." />
-            <marker date="1369246130000" expanded="true" signature="7579:7650" placeholder="SELECT * FRO..composition..." />
-            <marker date="1369246130000" expanded="true" signature="8261:8349" placeholder="SELECT * FRO..composition..." />
-            <marker date="1369246130000" expanded="true" signature="8970:9212" placeholder="SELECT * FRO..composition..." />
-            <marker date="1369246130000" expanded="true" signature="10064:10102" placeholder="SELECT * FRO..composition..." />
-            <marker date="1369246130000" expanded="true" signature="10738:10776" placeholder="SELECT * FRO..composition..." />
-            <marker date="1369246130000" expanded="true" signature="11419:11461" placeholder="SELECT * FRO..composition..." />
-            <marker date="1369246130000" expanded="true" signature="12104:12144" placeholder="SELECT * FRO..composition..." />
-            <marker date="1369246130000" expanded="true" signature="12787:12831" placeholder="SELECT * FRO..composition..." />
-            <marker date="1369246130000" expanded="true" signature="13456:13478" placeholder="SELECT * FRO..customer..." />
-            <marker date="1369246130000" expanded="true" signature="14070:14105" placeholder="SELECT * FRO..customer..." />
-            <marker date="1369246130000" expanded="true" signature="14591:14624" placeholder="SELECT * FRO..customer..." />
-            <marker date="1369246130000" expanded="true" signature="15128:15185" placeholder="SELECT * FRO..user_admin..." />
-            <marker date="1369246130000" expanded="true" signature="15715:15766" placeholder="SELECT * FRO..user..." />
-            <marker date="1369246130000" expanded="true" signature="16276:16310" placeholder="SELECT * FRO..user..." />
-            <marker date="1369246130000" expanded="true" signature="16894:16992" placeholder="INSERT INTO ..." />
-            <marker date="1369246130000" expanded="true" signature="17895:18122" placeholder="INSERT INTO ..." />
-            <marker date="1369246130000" expanded="true" signature="19240:19308" placeholder="SELECT count..composition..." />
-            <marker date="1369246130000" expanded="true" signature="19827:19856" placeholder="SELECT * FRO..customer_report..." />
-            <marker date="1369246130000" expanded="true" signature="20486:20528" placeholder="SELECT * FRO..customer_report..." />
-            <marker date="1369246130000" expanded="true" signature="21099:21181" placeholder="SELECT * FRO..customer_report..." />
-            <marker date="1369246130000" expanded="true" signature="22022:22076" placeholder="SELECT * FRO..customer_report_item..." />
-            <marker date="1369246130000" expanded="true" signature="22903:23692" placeholder="SELECT\n cop..composition..." />
-            <marker date="1369246130000" expanded="true" signature="25049:25839" placeholder="SELECT\n cop..composition..." />
-            <marker date="1369246130000" expanded="true" signature="27043:27099" placeholder="SELECT COUNT..composition..." />
-            <marker date="1369246130000" expanded="true" signature="27806:29993" placeholder="SELECT\n i.i..customer_report_item..." />
-            <marker date="1369246130000" expanded="true" signature="30690:32425" placeholder="SELECT\n i.i..customer_report_item..." />
-            <marker date="1369246130000" expanded="true" signature="33079:33152" placeholder="INSERT INTO ..." />
-            <marker date="1369246130000" expanded="true" signature="33951:34029" placeholder="INSERT INTO ..." />
-            <marker date="1369246130000" expanded="true" signature="34769:34798" placeholder="DELETE FROM ..." />
-            <marker date="1369246130000" expanded="true" signature="35168:35201" placeholder="DELETE FROM ..." />
-            <marker date="1369246130000" expanded="true" signature="35623:35663" placeholder="SELECT * FRO..user..." />
-            <marker date="1369246130000" expanded="true" signature="36692:36712" placeholder="DELETE FROM ..." />
-            <marker date="1369246130000" expanded="true" signature="37138:37276" placeholder="INSERT INTO ..." />
-            <marker date="1369246130000" expanded="true" signature="37883:38776" placeholder="LOAD DATA LO..comp_tmp..." />
-            <marker date="1369246130000" expanded="true" signature="39369:39382" placeholder="SHOW WARNING..." />
-            <marker date="1369246130000" expanded="true" signature="39998:40072" placeholder="UPDATE catal..." />
-            <marker date="1369246130000" expanded="true" signature="39998:40604" placeholder="UPDATE catal..." />
-            <marker date="1369246130000" expanded="true" signature="40121:40173" placeholder="SELECT count..comp_tmp..." />
-            <marker date="1369246130000" expanded="true" signature="40225:40554" placeholder="SELECT count..composition..." />
-            <marker date="1369246130000" expanded="true" signature="41117:41293" placeholder="INSERT INTO ..." />
-            <marker date="1369246130000" expanded="true" signature="42357:43649" placeholder="SELECT c.cod..comp_tmp..." />
-            <marker date="1369246130000" expanded="true" signature="44680:44724" placeholder="SELECT * FRO..composition..." />
-            <marker date="1369246130000" expanded="true" signature="45342:46168" placeholder="UPDATE compo..." />
-            <marker date="1369246130000" expanded="true" signature="46363:46994" placeholder="INSERT INTO ..." />
-            <marker date="1369246130000" expanded="true" signature="46496:46994" placeholder="SELECT\n cod..comp_tmp..." />
-            <marker date="1369246130000" expanded="true" signature="47188:47222" placeholder="UPDATE catal..." />
-            <marker date="1369246130000" expanded="true" signature="47188:47242" placeholder="UPDATE catal..." />
-            <marker date="1369246130000" expanded="true" signature="47730:47771" placeholder="SELECT * FRO..catalog_update..." />
-            <marker date="1369246130000" expanded="true" signature="48376:48425" placeholder="SELECT * FRO..catalog_update..." />
-            <marker date="1369246130000" expanded="true" signature="49033:49333" placeholder="UPDATE catal..." />
-            <marker date="1369246130000" expanded="true" signature="49102:49332" placeholder="SELECT\n cou..composition..." />
-            <marker date="1369246130000" expanded="true" signature="49433:49738" placeholder="UPDATE catal..." />
-            <marker date="1369246130000" expanded="true" signature="49503:49737" placeholder="SELECT\n cou..composition..." />
-            <marker date="1369246130000" expanded="true" signature="57474:57495" placeholder="SELECT * FRO..catalog..." />
-          </folding>
+        <state line="1298" column="55" selection-start="47424" selection-end="47468" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java">
+    <entry file="jar://$PROJECT_DIR$/lib/lucene-core-4.1.0.jar!/org/apache/lucene/index/IndexWriter.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="31" selection-start="3366" selection-end="3366" vertical-scroll-proportion="1.1156716">
-          <folding>
-            <element signature="e#1638#1668#0" expanded="true" />
-          </folding>
+        <state line="58" column="11" selection-start="3296" selection-end="3296" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/kz/bgm/platform/test/lucene/LuceneSearchTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="21" selection-start="832" selection-end="832" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneIndexRebuildUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="35" selection-start="421" selection-end="443" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/ApplyUpdateServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="50" selection-start="1648" selection-end="1648" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="21" selection-start="1403" selection-end="1403" vertical-scroll-proportion="5.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="180" column="24" selection-start="4982" selection-end="4982" vertical-scroll-proportion="-3.75">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="214" column="0" selection-start="7426" selection-end="7426" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="101" column="36" selection-start="3660" selection-end="3660" vertical-scroll-proportion="0.7971831">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2095,10 +1732,10 @@
         <settings>
           <artifact-editor>
             <show-content>
-              <type id="library" />
               <type id="javaee-facet-resources" />
-              <type id="artifact" />
               <type id="jpa-descriptors" />
+              <type id="library" />
+              <type id="artifact" />
             </show-content>
           </artifact-editor>
           <last-edited>bgm</last-edited>
@@ -2114,7 +1751,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>Web (bgm-platform)|Web</last-edited>
+          <last-edited>Web</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -2175,7 +1812,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>junit-4.11</last-edited>
+          <last-edited>json</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

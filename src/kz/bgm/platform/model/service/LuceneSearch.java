@@ -183,6 +183,40 @@ public class LuceneSearch {
         return result;
     }
 
+
+    public List<SearchResult> search(String artist, String authors, String composition, int limit, double threshold)
+            throws IOException, ParseException {
+
+        BooleanQuery query = new BooleanQuery();
+        if (composition != null && !composition.isEmpty()) {
+            query.add(createTermQuery(FIELD_NAME, composition, 1), BooleanClause.Occur.MUST);
+        }
+        if (authors != null && !authors.isEmpty()) {
+            query.add(createTermQuery(FIELD_COMPOSER, authors, 1), BooleanClause.Occur.MUST);
+        }
+        if (artist != null && !artist.isEmpty()) {
+            query.add(createTermQuery(FIELD_ARTIST, artist, 1.5f), BooleanClause.Occur.MUST);
+        }
+
+
+        TopDocs hits = searcher.search(query, limit);
+
+        List<SearchResult> result = new ArrayList<>();
+
+
+        for (ScoreDoc hit : hits.scoreDocs) {
+            if (hit.score < threshold) {
+                continue;
+            }
+
+            Document d = searcher.doc(hit.doc);
+            long id = Long.parseLong(d.get(FIELD_ID));
+            result.add(new SearchResult(id, hit.score));
+        }
+
+        return result;
+    }
+
     private Query createTermQuery(String field, String value, float boost) throws ParseException {
         Query parse = new QueryParser(Version.LUCENE_41, field, analyzer).parse(value);
         parse.setBoost(boost);

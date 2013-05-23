@@ -145,26 +145,35 @@
 
 
                 <p>
-
                     <c:forEach items="${updates}" var="u">
-                    <c:if test="${u.applied}">
-                <dl class="dl-horizontal">
-                    <dt>Обновлен</dt>
-                    <dd>${u.whenUpdated}</dd>
+                        <c:if test="${u.applied}">
+                            <dd>
 
-                    <dt>Фвйл</dt>
-                    <dd>${u.fileName}</dd>
+                            </dd>
 
-                    <dt>Новых треков</dt>
-                    <dd>${u.tracks - u.crossing}</dd>
-
-                    <dt>Измененных</dt>
-                    <dd>${u.crossing}</dd>
-                </dl>
-                </c:if>
-
-                </c:forEach>
+                        </c:if>
+                    </c:forEach>
                 </p>
+
+
+                    <%--<c:if test="${u.applied}">--%>
+                <%--<dl class="dl-horizontal">--%>
+                    <%--<dt>Обновлен</dt>--%>
+                    <%--<dd>${u.whenUpdated}</dd>--%>
+
+                    <%--<dt>Файл</dt>--%>
+                    <%--<dd>${u.fileName}</dd>--%>
+
+                    <%--<dt>Новых треков</dt>--%>
+                    <%--<dd>${u.tracks - u.crossing}</dd>--%>
+
+                    <%--<dt>Измененных</dt>--%>
+                    <%--<dd>${u.crossing}</dd>--%>
+                <%--</dl>--%>
+                <%--</c:if>--%>
+
+                <%--</c:forEach>--%>
+
 
                 <form class="form-horizontal" action="../action/update-catalog" method="post"
                       enctype="multipart/form-data">
@@ -176,14 +185,11 @@
                             </div>
 
 
-
-
                 <span class="btn btn-fileName">
                     <span class="fileupload-new">Выбрать обновление</span>
                     <span class="fileupload-exists">Изменить</span>
 
-                    <input name="file" type="file" id="fileinput" accept=".csv" data-url="../action/update-catalog"
-                           multiple/>
+                    <input name="file" type="file" id="fileinput" accept=".csv" data-url="../action/update-catalog"/>
                 </span>
 
                             <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Убрать</a>
@@ -191,7 +197,8 @@
                     </div>
 
                     <div class="row-fluid">
-                        <div id="progress">
+
+                        <div id="progress" class="progress progress-success progress-striped">
                             <div class="bar" style="width: 0%;"></div>
                         </div>
 
@@ -229,8 +236,8 @@
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<%--<script src="/js/bootstrap.js"></script>--%>
-<%--<script src="/js/bootstrap-fileupload.js"></script>--%>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/bootstrap-fileupload.js"></script>
 <script src="/js/csv-helper.js"></script>
 <script src="/js/jquery.ui.widget.js"></script>
 <script src="/js/jquery.iframe-transport.js"></script>

@@ -102,6 +102,8 @@ public interface CatalogStorage {
 
     void applyCatalogUpdate(long updateId);
 
+    List<Track> getUpdates(final long updateId);
+
     CatalogUpdate getCatalogUpdate(long updateId);
 
     List<CatalogUpdate> getCatalogUpdates(long catalogId);
