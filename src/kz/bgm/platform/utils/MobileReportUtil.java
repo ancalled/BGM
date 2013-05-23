@@ -40,7 +40,7 @@ public class MobileReportUtil {
 
         System.out.println("\n\nLoading report...");
 
-        List<CustomerReportItem> reportList = ReportParser.parsePublicReportLast(REPS_PATH + "/" + filename);
+        List<CustomerReportItem> reportList = ReportParser.parseNotForBaseReports(REPS_PATH + "/" + filename);
 
         System.out.println("Report loaded, track count " + reportList.size());
 
@@ -60,17 +60,19 @@ public class MobileReportUtil {
         System.out.println("\n\nSearching songs by report items");
         List<CustomerReportItem> found = new ArrayList<>();
         for (CustomerReportItem i : reports) {
-            List<Long> ids = Collections.emptyList();
-            try {
-                ids = luceneSearch.search(i.getArtist(), i.getName());
-            } catch (Exception e) {
-                e.printStackTrace();
+            List<Long> ids = new ArrayList<>();
+            List<LuceneSearch.SearchResult> results = luceneSearch.search(i.getArtist(), i.getComposer(), i.getName(), 100, 7);
+
+            if (results.size() > 0) {
+                for (LuceneSearch.SearchResult res : results) {
+                    ids.add(res.getId());
+                    detected++;
+                }
             }
-            if (ids.size() > 0) {
+            if (!ids.isEmpty()) {
                 i.setCompositionId(ids.get(0));
-                found.add(i);
-                detected++;
             }
+
         }
         System.out.println("Songs detected " + detected);
         return found;
@@ -165,7 +167,7 @@ public class MobileReportUtil {
     public static void main(String[] args) throws IOException, InvalidFormatException, ParseException {
         String filename = null;
         if (args.length == 0) {
-            System.out.println("Not enough args ... arg = file name");
+            System.out.println("Not enough args ... arg = report file name");
             System.exit(0);
         } else {
             filename = args[0];
@@ -174,14 +176,17 @@ public class MobileReportUtil {
         System.out.println("Start process the reports");
         MobileReportUtil mobUts = new MobileReportUtil("db.properties");
 
-        List<CustomerReportItem> reportItemList = mobUts.loadReport(filename);
-        List<CustomerReportItem> foundItemList;
-        List<CalculatedReportItem> calcRepList;
-        foundItemList = mobUts.findSongsByReportsFromDB(reportItemList);
 
-        calcRepList = mobUts.calculateReports(foundItemList);
+        List<CustomerReportItem> reportItemList =
+                mobUts.loadReport(filename);
 
-        mobUts.saveInFile(APP_DIR + "/data/report-templates/sony-atv.xlsx", calcRepList);
+        List<CustomerReportItem> foundItemList =
+                mobUts.findSongsByReportsFromDB(reportItemList);
+
+        List<CalculatedReportItem> calcRepList =
+                mobUts.calculateReports(foundItemList);
+
+        mobUts.saveInFile(APP_DIR + "/data/report-templates/public.xlsx", calcRepList);
         System.out.println("Process done");
     }
 

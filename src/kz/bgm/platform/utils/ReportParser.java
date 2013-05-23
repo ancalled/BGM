@@ -15,25 +15,19 @@ import java.util.List;
 public class ReportParser {
 
     private static final Logger log = Logger.getLogger(ReportParser.class);
+    public static final int FIRST_SHEET = 0;
+    public static final int COL_NAME = 2;
+    public static final int COL_ARTIST = 3;
+    public static final int COL_AUTHOR = 4;
 
-    public static List<CustomerReportItem> parsePublicReportLast(String fileName)
+    public static List<CustomerReportItem> parseNotForBaseReports(String fileName)
             throws IOException, InvalidFormatException {
 
         log.info("Parsing mobile report from: " + fileName + "... ");
-
         Workbook wb = ExcelUtils.openFile(new File(fileName));
 
         List<CustomerReportItem> items = new ArrayList<CustomerReportItem>();
-
-        int sheetSize = wb.getNumberOfSheets();
-        Sheet sheet;
-//        for (int i = 0; i < sheetSize; i++) {
-
-        sheet = wb.getSheetAt(sheetSize - 1);
-
-//            if (sheet == null) {
-//                break;
-//            }
+        Sheet sheet = wb.getSheetAt(FIRST_SHEET);
         int rows = sheet.getPhysicalNumberOfRows();
 
         //todo use templates instead of hardcoded cell numbers
@@ -46,11 +40,14 @@ public class ReportParser {
 
             CustomerReportItem item = new CustomerReportItem();
 
-            String name = ExcelUtils.getCellVal(row, 2);
-            String artist = ExcelUtils.getCellVal(row, 3);
+            String name = ExcelUtils.getCellVal(row, COL_NAME);
+            String artist = ExcelUtils.getCellVal(row, COL_ARTIST);
+            String composer = ExcelUtils.getCellVal(row, COL_AUTHOR);
 
             item.setName(name);
             item.setArtist(artist);
+            item.setComposer(composer);
+
             String priceStr = ExcelUtils.getCellVal(row, 5);
 
             if ("".equals(priceStr.trim())) {

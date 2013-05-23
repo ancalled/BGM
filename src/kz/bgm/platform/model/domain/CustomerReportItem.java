@@ -8,9 +8,19 @@ public class CustomerReportItem {
     private Long compositionId;
     private String name;
     private String artist;
+    private String composer;
     private String contentType;
     private int qty;
     private float price;
+
+
+    public String getComposer() {
+        return composer;
+    }
+
+    public void setComposer(String composer) {
+        this.composer = composer;
+    }
 
     public Long getId() {
         return id;

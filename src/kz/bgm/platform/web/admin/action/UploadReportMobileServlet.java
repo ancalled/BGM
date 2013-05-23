@@ -82,6 +82,7 @@ public class UploadReportMobileServlet extends HttpServlet {
             for (CustomerReportItem i : allItems) {
                 i.setReportId(reportId);
                 List<Long> ids = luceneSearch.search(i.getArtist(), i.getName());
+
                 if (ids.size() > 0) {
                     i.setCompositionId(ids.get(0));
                     detected++;
