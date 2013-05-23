@@ -1,8 +1,11 @@
 package kz.bgm.platform.web.admin.action;
 
 import kz.bgm.platform.model.domain.CatalogUpdate;
+import kz.bgm.platform.model.domain.Track;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
+import kz.bgm.platform.model.service.LuceneSearch;
+import kz.bgm.platform.utils.LuceneIndexRebuildUtil;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -11,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 public class ApplyUpdateServlet extends HttpServlet {
 
@@ -22,10 +26,12 @@ public class ApplyUpdateServlet extends HttpServlet {
     private static final Logger log = Logger.getLogger(ApplyUpdateServlet.class);
 
     private CatalogStorage storage;
+    private LuceneSearch luceneSearch;
 
     @Override
     public void init() throws ServletException {
         storage = CatalogFactory.getStorage();
+        luceneSearch = LuceneSearch.getInstance();
     }
 
 
@@ -40,8 +46,11 @@ public class ApplyUpdateServlet extends HttpServlet {
 
             log.info("Applying catalog updates, id: " + id);
 
-
             storage.applyCatalogUpdate(id);
+
+//            List<Track> tracks = storage.getUpdates(id);
+//            luceneSearch.index(tracks, LuceneIndexRebuildUtil.INDEX_DIR);
+
 
             log.info("Applied.");
 

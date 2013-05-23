@@ -31,73 +31,67 @@
         <input type="hidden" name="pageSize" id="till-p">
 
 
-        <div class="row span9" style="background:rgba(223,223,223,0.31);border-radius: 5px;padding: 4px">
-            <label for="query"></label><input type="text" name="q" id="query" class="input-block-level span8"
+        <div class="row">
+            <label for="query"></label><input type="text" name="q" id="query" class="input-block-level span6"
                                               style="margin-top: 10px">
 
             <input type="submit" value="Поиск" class="btn">
-
-
-            <div class="container-fluid">
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"
-            style="display: block; position: static; margin-bottom: 5px; *width: 180px;">
-            <li><a tabindex="-1" id="code" onclick="change_type(this)">Код композиции</a></li>
-            <li><a tabindex="-1" id="artist" onclick="change_type(this)">Артист</a></li>
-            <li><a tabindex="-1" id="composition" onclick="change_type(this)">Композиция</a></li>
-            <li class="divider"></li>
-            <li><a tabindex="-1" id="full" onclick="change_type(this)">Полный поиск</a></li>
-            </ul>
-            </div>
-
-            <%--<ul class="nav nav-pills">--%>
-                <%--<li class="dropdown">--%>
-                    <%--<a class="dropdown-toggle" id="catalog" role="button" data-toggle="dropdown" href="#">Каталог<b--%>
-                            <%--class="caret"></b></a>--%>
-                    <%--<ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="catalog">--%>
-                        <%--<c:forEach var="c" items="${catalogs}">--%>
-
-                            <%--<li role="presentation"><a role="menuitem" tabindex="-1" id="${c.id}"--%>
-                                                       <%--onclick="setCatalog(this)" href="">${c.name}</a></li>--%>
-
-                        <%--</c:forEach>--%>
-                    <%--</ul>--%>
-                <%--</li>--%>
-
-            <%--</ul>--%>
-            <%--<script>--%>
-                <%--var catalogComp = document.getElementById("catalog");--%>
-
-              <%--function setCatalog(cat) {--%>
-                    <%--catalogComp.textContent = cat.textContent;--%>
-                <%--}--%>
-            <%--</script>--%>
-
-            <c:if test="${not empty catalogs}">
-            <label>
-            <select name="catalog", style="margin-left: 20px">
-            <option value="all">Все</option>
-
-            <c:forEach var="c" items="${catalogs}">
-
-
-            <option value="${c.id}">${c.name}</option>
-
-            </c:forEach>
-            </select>
-            </label>
-
-
-            </c:if>
-
-
         </div>
+
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                Расширенный поиск
+            </a>
+        </div>
+        <div id="collapseTwo" class="accordion-body in collapse" style="height: auto;">
+            <div class="accordion-inner">
+                <div class="container-fluid">
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"
+                        style="display: block; position: static; margin-bottom: 5px; *width: 180px;">
+                        <li><a tabindex="-1" id="code" onclick="change_type(this)">Код композиции</a></li>
+                        <li><a tabindex="-1" id="artist" onclick="change_type(this)">Артист</a></li>
+                        <li><a tabindex="-1" id="composition" onclick="change_type(this)">Композиция</a></li>
+                        <li class="divider"></li>
+                        <li><a tabindex="-1" id="full" onclick="change_type(this)">Полный поиск</a></li>
+                    </ul>
+
+                <c:if test="${not empty catalogs}">
+                        <label>
+                            <select name="catalog", style="margin-left: 20px">
+                                <option value="all">Все</option>
+
+                                <c:forEach var="c" items="${catalogs}">
+
+
+                                <option value="${c.trackId}">${c.track}</option>
+
+                                </c:forEach>
+                            </select>
+                        </label>
+
+                    </div>
+                </c:if>
+
+            </div>
+        </div>
+
+
+        <br>
 
 
         <input type="hidden" id="type" name="type" value="full">
     </form>
 
-</div>
-<div class="container" style="margin-top: 25px">
+
+    <script>
+
+        var typeEl = document.getElementById('type');
+
+        function change_type(comp) {
+            typeEl.setAttribute('value', comp.trackId);
+        }
+    </script>
+
     <c:if test="${not empty tracks}">
 
         <%--<div class="pagination pagination-centered">--%>
@@ -151,7 +145,7 @@
             <c:forEach var="t" items="${tracks}">
                 <tr>
                     <td>${t.code}</td>
-                    <td>${t.name}</td>
+                    <td>${t.track}</td>
                     <td>${t.artist}</td>
                     <td>${t.composer}</td>
                     <td>${t.mobileShare}</td>
@@ -196,15 +190,6 @@
 
 </div>
 <script>
-
-
-    var typeEl = document.getElementById('type');
-
-    function change_type(comp) {
-        typeEl.setAttribute('value', comp.id);
-    }
-
-
     var searchForm = document.getElementById("searcher");
     var from_page_input = document.getElementById("from-p");
     var till_page_input = document.getElementById("till-p");

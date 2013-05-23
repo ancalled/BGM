@@ -41,12 +41,12 @@ public class LuceneUtil {
     }
 
 
-    public void search(String artist, String track) throws IOException, ParseException {
-        List<LuceneSearch.SearchResult> res = luceneSearch.searchWithResult(artist, track, 100, 3.0);
+    public void search(String artist, String authors, String track) throws IOException, ParseException {
+        List<LuceneSearch.SearchResult> res = luceneSearch.search(artist, authors, track, 100, 3.0);
 
         for (LuceneSearch.SearchResult r : res) {
-            System.out.println("[" + r.getScore() + "] id: " + r.getId());
-            Track t = catalogStorage.getTrack(r.getId());
+            System.out.println("[" + r.getScore() + "] id: " + r.getTrackId());
+            Track t = catalogStorage.getTrack(r.getTrackId());
             if (t != null) {
                 System.out.println("\tartist: '" + t.getArtist() + "'" +
                         "\n\ttrack: '" + t.getName() + "'" +
@@ -93,12 +93,13 @@ public class LuceneUtil {
 
         String[] splitted = query.split(":[\\s]?");
         String artist = splitted[0];
-        String track = splitted.length > 1 ? splitted[1] : "";
+        String authors = splitted.length > 1 ? splitted[1] : null;
+        String track = splitted.length > 2 ? splitted[2] : null;
 
         System.out.println("Queried artist: '" + artist + "'" + ", track: '" + track + "'");
 
         LuceneUtil util = new LuceneUtil();
-        util.search(artist, track);
+        util.search(artist, authors, track);
 
 //        new LuceneUtil().rebuildIndex();
 

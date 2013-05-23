@@ -23,6 +23,9 @@ public interface CatalogStorage {
 
     List<Track> getAllTracks();
 
+    int getTrackCount();
+
+    List<Track> getTracks(int from,int size);
 
     List<Track> getTracks(List<Long> ids);
 
@@ -55,6 +58,10 @@ public interface CatalogStorage {
     List<User>getUsersByCustomerId(long customerId);
 
     long saveCustomerReport(CustomerReport report);
+
+    long saveCustomerReportItem(CustomerReportItem item);
+
+    void saveReportItemTracks(List<ReportItemTrack> reportItemList);
 
     void saveCustomerReportItems(List<CustomerReportItem> reportItemList);
 
@@ -98,6 +105,8 @@ public interface CatalogStorage {
     List<Track> getNewTracks(long updateId, int from, final int size);
 
     void applyCatalogUpdate(long updateId);
+
+    List<Track> getUpdates(final long updateId);
 
     CatalogUpdate getCatalogUpdate(long updateId);
 

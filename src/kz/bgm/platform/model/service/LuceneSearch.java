@@ -4,13 +4,9 @@ import kz.bgm.platform.model.domain.Track;
 import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
-import org.apache.lucene.document.Field;
-import org.apache.lucene.document.LongField;
-import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
@@ -23,6 +19,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static org.apache.lucene.search.BooleanClause.Occur;
 
 public class LuceneSearch {
 
@@ -53,33 +51,11 @@ public class LuceneSearch {
     }
 
 
-    public void index(List<Track> tracks, String indexDirPath) throws IOException {
-        File indexDir = new File(indexDirPath);
+    public void index(List<Track> tracks, IndexWriter writer) throws IOException {
 
-        if (!indexDir.exists()) {
-            boolean dirCreated = indexDir.mkdir();
 
-            if (!dirCreated) {
-                throw new IOException("Could not create dir " + indexDirPath);
-            }
-        }
 
-        FSDirectory index = FSDirectory.open(indexDir);
 
-        IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_41, analyzer);
-        IndexWriter w = new IndexWriter(index, config);
-
-        for (Track t : tracks) {
-            Document doc = new Document();
-            doc.add(new LongField(FIELD_ID, t.getId(), Field.Store.YES));
-            doc.add(new TextField(FIELD_NAME, t.getName(), Field.Store.YES));
-            doc.add(new TextField(FIELD_ARTIST, t.getArtist(), Field.Store.YES));
-            doc.add(new TextField(FIELD_COMPOSER, t.getComposer(), Field.Store.YES));
-            w.addDocument(doc);
-
-        }
-
-        w.close();
     }
 
 
@@ -173,9 +149,9 @@ public class LuceneSearch {
 //        Query query = MultiFieldQueryParser.parse(Version.LUCENE_41, values, fields, analyzer);
 
         BooleanQuery query = new BooleanQuery();
-        query.add(createTermQuery(FIELD_ARTIST, artist, 1.5f), BooleanClause.Occur.MUST);
+        query.add(createTermQuery(FIELD_ARTIST, artist, 1.5f), Occur.MUST);
         if (!composition.isEmpty()) {
-            query.add(createTermQuery(FIELD_NAME, composition, 1), BooleanClause.Occur.MUST);
+            query.add(createTermQuery(FIELD_NAME, composition, 1), Occur.MUST);
         }
 
         TopDocs hits = searcher.search(query, limit);
@@ -199,6 +175,50 @@ public class LuceneSearch {
         return result;
     }
 
+
+    public List<SearchResult> search(String artist, String authors, String composition, int limit, double threshold)
+            throws IOException, ParseException {
+
+        BooleanQuery query = new BooleanQuery();
+        if (composition != null && !composition.isEmpty()) {
+            query.add(createTermQuery(FIELD_NAME, composition, 2.0f), Occur.MUST);
+        }
+
+        if (authors != null &&  artist != null) {
+            BooleanQuery subq = new BooleanQuery();
+            subq.add(createTermQuery(FIELD_COMPOSER, authors, 1), Occur.SHOULD);
+            subq.add(createTermQuery(FIELD_ARTIST, artist, 1), Occur.SHOULD);
+            query.add(subq, Occur.MUST);
+
+        } else if (artist != null) {
+            BooleanQuery subq = new BooleanQuery();
+            subq.add(createTermQuery(FIELD_ARTIST, artist, 1), Occur.SHOULD);
+            subq.add(createTermQuery(FIELD_COMPOSER, artist, 1), Occur.SHOULD);
+            query.add(subq, Occur.MUST);
+
+        } else if (authors != null) {
+            query.add(createTermQuery(FIELD_COMPOSER, authors, 1), Occur.MUST);
+        }
+
+
+        TopDocs hits = searcher.search(query, limit);
+
+        List<SearchResult> result = new ArrayList<>();
+
+
+        for (ScoreDoc hit : hits.scoreDocs) {
+            if (hit.score < threshold) {
+                continue;
+            }
+
+            Document d = searcher.doc(hit.doc);
+            long id = Long.parseLong(d.get(FIELD_ID));
+            result.add(new SearchResult(id, hit.score));
+        }
+
+        return result;
+    }
+
     private Query createTermQuery(String field, String value, float boost) throws ParseException {
         Query parse = new QueryParser(Version.LUCENE_41, field, analyzer).parse(value);
         parse.setBoost(boost);
@@ -213,16 +233,16 @@ public class LuceneSearch {
     }
 
     public static class SearchResult {
-        private final long id;
+        private final long trackId;
         private final float score;
 
-        public SearchResult(long id, float score) {
-            this.id = id;
+        public SearchResult(long trackId, float score) {
+            this.trackId = trackId;
             this.score = score;
         }
 
-        public long getId() {
-            return id;
+        public long getTrackId() {
+            return trackId;
         }
 
         public float getScore() {

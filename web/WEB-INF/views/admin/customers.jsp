@@ -39,7 +39,7 @@
         <c:forEach var="c" items="${customers}">
 
             <tr>
-                <td><a href="customer-detail?customer_id=${c.id}">${c.name} </a>
+                <td><a href="customer-detail?customer_id=${c.trackId}">${c.track} </a>
                 </td>
                 <td>${c.royalty}
                 </td>
@@ -56,7 +56,7 @@
                     </c:choose>
                 </td>
                 <td>
-                    <a href="/admin/action/delete-customer?customer-id=${c.id}">
+                    <a href="/admin/action/delete-customer?customer-trackId=${c.trackId}">
                         <i class="icon-trash"></i>
                     </a>
                 </td>
@@ -68,7 +68,7 @@
     </table>
 
     <form action="create-customer-form" method="get">
-        <input type="hidden" name="cid" value="${customer.id}">
+        <input type="hidden" name="cid" value="${customer.trackId}">
         <input class="btn" type="submit" value="Создать">
 
     </form>

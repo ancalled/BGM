@@ -9,7 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" media="screen"/>
-    <title>Компания ${customer.name}</title>
+    <title>Компания ${customer.track}</title>
 </head>
 <body>
 
@@ -21,7 +21,7 @@
 
     <div class="row text-left">
     <legend>
-            Информация по компании ${customer.name}
+            Информация по компании ${customer.track}
         </legend>
     </div>
 
@@ -57,7 +57,7 @@
                 <td>${u.email}
                 </td>
                 <td>
-                    <a href="/admin/action/delete-user?user-id=${u.id}&cid=${customer.id}">
+                    <a href="/admin/action/delete-user?user-trackId=${u.trackId}&cid=${customer.trackId}">
                         <i class="icon-trash"></i>
                     </a>
                 </td>
@@ -69,7 +69,7 @@
     </table>
     <div class="row span2">
         <form action="create-user-form" method="get">
-            <input type="hidden" name="cid" value="${customer.id}">
+            <input type="hidden" name="cid" value="${customer.trackId}">
             <input class="btn" type="submit" value="Создать">
 
         </form>

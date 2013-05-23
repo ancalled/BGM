@@ -16,8 +16,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class LuceneTest {
 
@@ -99,8 +97,8 @@ public class LuceneTest {
 
                 } else {
                     for (LuceneSearch.SearchResult r : res) {
-                        buf.append("[score: " + r.getScore() + ", id: " + r.getId());
-                        Track t = catalogStorage.getTrack(r.getId());
+                        buf.append("[score: " + r.getScore() + ", id: " + r.getTrackId());
+                        Track t = catalogStorage.getTrack(r.getTrackId());
                         if (t != null) {
                             buf.append(", artist: '" + t.getArtist() + "'" +
                                     ", track: '" + t.getName() + "'" +

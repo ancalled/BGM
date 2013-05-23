@@ -82,6 +82,8 @@ CREATE TABLE user_admin (
 CREATE TABLE IF NOT EXISTS comp_tmp
   LIKE composition;
 ALTER TABLE comp_tmp ADD done TINYINT NULL;
+ALTER TABLE comp_tmp ADD update_id INT NULL;
+
 
 
 CREATE TABLE catalog_update (
@@ -95,5 +97,16 @@ CREATE TABLE catalog_update (
   filepath    VARCHAR(300),
   filename    VARCHAR(100)
 );
+
+
+
+CREATE TABLE report_item_track (
+  id             INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  item_id      INT,
+  track_id       INT,
+  score          FLOAT,
+  matched        BOOL
+);
+
 
 
