@@ -4,9 +4,6 @@ import kz.bgm.platform.model.domain.Track;
 import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
-import org.apache.lucene.document.Field;
-import org.apache.lucene.document.LongField;
-import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
@@ -57,14 +54,7 @@ public class LuceneSearch {
     public void index(List<Track> tracks, IndexWriter writer) throws IOException {
 
 
-        for (Track t : tracks) {
-            Document doc = new Document();
-            doc.add(new LongField(FIELD_ID, t.getId(), Field.Store.YES));
-            doc.add(new TextField(FIELD_NAME, t.getName(), Field.Store.YES));
-            doc.add(new TextField(FIELD_ARTIST, t.getArtist(), Field.Store.YES));
-            doc.add(new TextField(FIELD_COMPOSER, t.getComposer(), Field.Store.YES));
-            writer.addDocument(doc);
-        }
+
 
     }
 

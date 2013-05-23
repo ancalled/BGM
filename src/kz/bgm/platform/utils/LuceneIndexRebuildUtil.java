@@ -6,6 +6,10 @@ import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import kz.bgm.platform.model.service.LuceneSearch;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.document.LongField;
+import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.queryparser.classic.ParseException;
@@ -29,6 +33,10 @@ public class LuceneIndexRebuildUtil {
     public static final String BASE_HOST = "base.host";
     public static final String BASE_PORT = "base.port";
 
+    public static final String FIELD_ID = "id";
+    public static final String FIELD_NAME = "name";
+    public static final String FIELD_ARTIST = "artist";
+    public static final String FIELD_COMPOSER = "composer";
 
     private final CatalogStorage catalogStorage;
     private final LuceneSearch luceneSearch;
@@ -68,18 +76,24 @@ public class LuceneIndexRebuildUtil {
         IndexWriter writer = new IndexWriter(index, config);
 
 
-        //todo getTracks(from, size); size = 10 000
+
         int from = 0;
         int size = 100000;
-        int step=100000;
         while (true) {
             if (from >= trackCount) break;
 
             List<Track> tracks = catalogStorage.getTracks(from, size);
             System.out.println("Got tracks from " + from + " size " + size);
-            luceneSearch.index(tracks, writer);
-            from = size;
-            size += step;
+            for (Track t : tracks) {
+                Document doc = new Document();
+                doc.add(new LongField(FIELD_ID, t.getId(), Field.Store.YES));
+                doc.add(new TextField(FIELD_NAME, t.getName(), Field.Store.YES));
+                doc.add(new TextField(FIELD_ARTIST, t.getArtist(), Field.Store.YES));
+                doc.add(new TextField(FIELD_COMPOSER, t.getComposer(), Field.Store.YES));
+                writer.addDocument(doc);
+            }
+            from += size;
+
         }
         writer.close();
         System.out.println("Done");
