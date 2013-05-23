@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BuildServerSettings">
-    <option name="LOGIN" value="" />
-    <option name="SERVER_URL" value="http://buildserver" />
-    <option name="PASSWORD" />
+    <option name="LOGIN" value="ancalled" />
+    <option name="SERVER_URL" value="http://teamcity.microcosmus.net" />
+    <option name="PASSWORD" value="dfdedfcfdfcbdfc7dfc9dfc3dfdedfd3dfc7dfcfdfc6dfc1dfc5dfd8" />
     <option name="REMEMBER_ME" value="true" />
     <option name="USE_IDEA_PROXY_SETTINGS" value="true" />
     <option name="TEST_STATUS_BUILD_TYPE_IDS" />
@@ -22,32 +22,29 @@
     <option name="SHOW_CLOSE_PROMPT" value="true" />
     <option name="TOOL_WINDOW_SELECTED_CONTENT_INDEX" value="0" />
     <option name="FILTER_BY_CURRENT_PROJECT" value="true" />
+    <treeState key="project">
+      <selectedPath>
+        <pathElement>
+          <option name="myNodeId" value="project2" />
+          <option name="myNodeType" value="jetbrains.buildServer.tree.descriptors.ProjectDescriptor" />
+        </pathElement>
+        <pathElement>
+          <option name="myNodeId" value="bt2" />
+          <option name="myNodeType" value="jetbrains.buildServer.tree.descriptors.BuildTypeDescriptor" />
+        </pathElement>
+      </selectedPath>
+    </treeState>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="Предпросмотр csv">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/CatalogLoader.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/utils/CatalogLoader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/ApplyUpdateServlet.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/ApplyUpdateServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CatalogUpdate.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CatalogUpdate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/DispatcherServlet.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/DispatcherServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ant.xml" afterPath="$PROJECT_DIR$/.idea/ant.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp" />
+    <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/queries.sql" afterPath="$PROJECT_DIR$/data/queries.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/old/report.jsp" afterPath="$PROJECT_DIR$/data/old/report.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/old/report_depricated.jsp" afterPath="$PROJECT_DIR$/data/old/report_depricated.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/admin/reports.html" afterPath="$PROJECT_DIR$/web/admin/reports.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/customer/reports.html" afterPath="$PROJECT_DIR$/web/customer/reports.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/reports.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/reports.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/scheme.sql" afterPath="$PROJECT_DIR$/data/scheme.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bgm-platform.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369245944695" ignored="false" />
+    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369246795009" ignored="false" />
     <file path="/CatalogStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369243118974" ignored="false" />
     <file path="/fragment.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369147331003" ignored="false" />
     <file path="db-console:/b524fb0f/bd8e1b6e-fe0f-401f-a88d-0e81e53c8907/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363032963765" ignored="false" />
@@ -494,16 +491,16 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="146" column="0" selection-start="3564" selection-end="4010" vertical-scroll-proportion="-10.592592">
+            <state line="105" column="0" selection-start="2206" selection-end="2206" vertical-scroll-proportion="-2.8148148">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DbStorage.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="DbStorage.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1262" column="0" selection-start="46170" selection-end="46170" vertical-scroll-proportion="-0.057522126">
+            <state line="1262" column="0" selection-start="46170" selection-end="46170" vertical-scroll-proportion="-108.24">
               <folding>
                 <element signature="e#36887#40790#0" expanded="true" />
                 <element signature="e#40779#40780#0" expanded="true" />
@@ -579,10 +576,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UpdateCatalogServlet.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="UpdateCatalogServlet.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="102" column="0" selection-start="3675" selection-end="3675" vertical-scroll-proportion="0.0">
+            <state line="91" column="31" selection-start="3366" selection-end="3366" vertical-scroll-proportion="1.1156716">
               <folding>
                 <element signature="e#1638#1668#0" expanded="true" />
               </folding>
@@ -599,34 +596,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DispatcherServlet.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/DispatcherServlet.java">
+      <file leaf-file-name="csv-helper.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/js/csv-helper.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="208" column="0" selection-start="8722" selection-end="8722" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#1458#3311#0" expanded="true" />
-                <element signature="e#3292#3293#0" expanded="true" />
-                <element signature="e#3397#4298#0" expanded="true" />
-                <element signature="e#4279#4280#0" expanded="true" />
-                <element signature="e#4391#5644#0" expanded="true" />
-                <element signature="e#5625#5626#0" expanded="true" />
-                <element signature="e#5726#6100#0" expanded="true" />
-                <element signature="e#6081#6082#0" expanded="true" />
-                <element signature="e#6180#6925#0" expanded="true" />
-                <element signature="e#6906#6907#0" expanded="true" />
-                <element signature="e#7013#8867#0" expanded="true" />
-                <element signature="e#8848#8849#0" expanded="true" />
-                <element signature="e#8961#10157#0" expanded="true" />
-                <element signature="e#10138#10139#0" expanded="true" />
-                <element signature="e#10245#10920#0" expanded="true" />
-                <element signature="e#10901#10902#0" expanded="true" />
-                <element signature="e#11009#11239#0" expanded="true" />
-                <element signature="e#11220#11221#0" expanded="true" />
-                <element signature="e#11332#11566#0" expanded="true" />
-                <element signature="e#11547#11548#0" expanded="true" />
-                <element signature="e#11646#11867#0" expanded="true" />
-                <element signature="e#11848#11849#0" expanded="true" />
-              </folding>
+            <state line="109" column="0" selection-start="2534" selection-end="2534" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -652,7 +626,7 @@
       <file leaf-file-name="catalog.jsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="164" column="31" selection-start="4381" selection-end="4381" vertical-scroll-proportion="-18.125">
+            <state line="178" column="28" selection-start="4969" selection-end="4969" vertical-scroll-proportion="45.625">
               <folding />
             </state>
           </provider>
@@ -664,7 +638,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="95" column="23" selection-start="2099" selection-end="2099" vertical-scroll-proportion="-20.592592">
+            <state line="88" column="0" selection-start="1881" selection-end="2151" vertical-scroll-proportion="-16.703703">
               <folding />
             </state>
           </provider>
@@ -704,12 +678,12 @@
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/DispatcherServlet.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/ApplyUpdateServlet.java" />
-        <option value="$PROJECT_DIR$/data/scheme.sql" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" />
-        <option value="$PROJECT_DIR$/data/queries.sql" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" />
+        <option value="$PROJECT_DIR$/data/queries.sql" />
+        <option value="$PROJECT_DIR$/data/scheme.sql" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" />
       </list>
     </option>
   </component>
@@ -1731,7 +1705,11 @@
       <created>1369188565397</created>
       <updated>1369188565397</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Поправки по обновлению каталогов">
+      <created>1369246797241</created>
+      <updated>1369246797242</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1756,7 +1734,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5729443" sideWeight="0.493517" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5520833" sideWeight="0.49713057" order="7" side_tool="false" content_ui="tabs" />
@@ -1766,7 +1744,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15064563" sideWeight="0.42705572" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5636605" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TeamCity" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="TeamCity" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32891247" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37267905" sideWeight="0.5235008" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -1780,8 +1758,8 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26398852" sideWeight="0.42307693" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5769231" sideWeight="0.47082657" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26398852" sideWeight="0.6710875" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5769231" sideWeight="0.47082657" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.6283582" order="9" side_tool="true" content_ui="tabs" />
@@ -1834,7 +1812,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Предпросмотр csv" />
+    <option name="LAST_COMMIT_MESSAGE" value="Поправки по обновлению каталогов" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1848,7 +1826,6 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="убрал кирилицу в туду и изменил парсинг отчета , теперь отчет парсится в ReportBuilder там он помоему роднее" />
     <MESSAGE value="брал кирилицу из коммента" />
     <MESSAGE value="начал делаь простенький импорт отчета." />
     <MESSAGE value="добавил табличку customer и сделал главную страничку с меню, добавил лпарочку скриптов которые ранее забыл (js-ки буутстраповские )" />
@@ -1873,6 +1850,7 @@
     <MESSAGE value="Запросы на обновление каталога" />
     <MESSAGE value="Доделал обновление каталога" />
     <MESSAGE value="Предпросмотр csv" />
+    <MESSAGE value="Поправки по обновлению каталогов" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1894,13 +1872,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/web/js/csv-helper.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="109" column="0" selection-start="2534" selection-end="2534" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="21" selection-start="1064" selection-end="1064" vertical-scroll-proportion="0.0">
@@ -1976,16 +1947,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/scheme.sql">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="23" selection-start="2099" selection-end="2099" vertical-scroll-proportion="-20.592592">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="91" column="18" selection-start="2176" selection-end="2176" vertical-scroll-proportion="0.0">
@@ -2000,25 +1961,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="0" selection-start="3675" selection-end="3675" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#1638#1668#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="119" column="80" selection-start="4376" selection-end="4376" vertical-scroll-proportion="-2.3061225">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="164" column="31" selection-start="4381" selection-end="4381" vertical-scroll-proportion="-18.125">
           <folding />
         </state>
       </provider>
@@ -2028,14 +1973,38 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="146" column="0" selection-start="3564" selection-end="4010" vertical-scroll-proportion="-10.592592">
+        <state line="105" column="0" selection-start="2206" selection-end="2206" vertical-scroll-proportion="-2.8148148">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/scheme.sql">
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="0" selection-start="1881" selection-end="2151" vertical-scroll-proportion="-16.703703">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="178" column="28" selection-start="4969" selection-end="4969" vertical-scroll-proportion="45.625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/csv-helper.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="109" column="0" selection-start="2534" selection-end="2534" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1262" column="0" selection-start="46170" selection-end="46170" vertical-scroll-proportion="-0.057522126">
+        <state line="1262" column="0" selection-start="46170" selection-end="46170" vertical-scroll-proportion="-108.24">
           <folding>
             <element signature="e#36887#40790#0" expanded="true" />
             <element signature="e#40779#40780#0" expanded="true" />
@@ -2106,6 +2075,15 @@
             <marker date="1369246130000" expanded="true" signature="49433:49738" placeholder="UPDATE catal..." />
             <marker date="1369246130000" expanded="true" signature="49503:49737" placeholder="SELECT\n cou..composition..." />
             <marker date="1369246130000" expanded="true" signature="57474:57495" placeholder="SELECT * FRO..catalog..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="31" selection-start="3366" selection-end="3366" vertical-scroll-proportion="1.1156716">
+          <folding>
+            <element signature="e#1638#1668#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -82,6 +82,8 @@ CREATE TABLE user_admin (
 CREATE TABLE IF NOT EXISTS comp_tmp
   LIKE composition;
 ALTER TABLE comp_tmp ADD done TINYINT NULL;
+ALTER TABLE comp_tmp ADD update_id INT NULL;
+
 
 
 CREATE TABLE catalog_update (

@@ -175,6 +175,9 @@
                                 <span class="fileupload-preview"></span>
                             </div>
 
+
+
+
                 <span class="btn btn-fileName">
                     <span class="fileupload-new">Выбрать обновление</span>
                     <span class="fileupload-exists">Изменить</span>
@@ -226,8 +229,8 @@
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="/js/bootstrap.js"></script>
-<script src="/js/bootstrap-fileupload.js"></script>
+<%--<script src="/js/bootstrap.js"></script>--%>
+<%--<script src="/js/bootstrap-fileupload.js"></script>--%>
 <script src="/js/csv-helper.js"></script>
 <script src="/js/jquery.ui.widget.js"></script>
 <script src="/js/jquery.iframe-transport.js"></script>
