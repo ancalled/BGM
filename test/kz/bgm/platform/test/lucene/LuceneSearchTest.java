@@ -29,8 +29,8 @@ public class LuceneSearchTest {
 
         List<Track> tracks = loadTracks("./data/test-tracks.tsv");
 
-        luceneSearch.index(tracks, indexDir);
-        luceneSearch.initSearcher(indexDir);
+//        luceneSearch.index(tracks, indexDir);
+//        luceneSearch.initSearcher(indexDir);
 
     }
 

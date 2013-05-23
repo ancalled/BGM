@@ -1293,6 +1293,39 @@ public class DbStorage implements CatalogStorage {
 
     }
 
+    @Override
+    public List<Track> getTracks(final int from, final int size) {
+        return query(new Action<List<Track>>() {
+            @Override
+            public List<Track> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement("SELECT * FROM composition LIMIT " + from + "," + size );
+                ResultSet rs = stmt.executeQuery();
+
+                List<Track> tracks = new ArrayList<>();
+                while (rs.next()) {
+                    tracks.add(parseTrack(rs));
+                }
+                return tracks;
+            }
+        });
+    }
+
+    @Override
+    public int getTrackCount() {
+        return query(new Action<Integer>() {
+            @Override
+            public Integer execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT COUNT(*)cnt FROM composition");
+
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("cnt");
+                }
+                return null;
+            }
+        });
+    }
 
     @Override
     public CatalogUpdate getCatalogUpdate(final long updateId) {

@@ -10,7 +10,6 @@ import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
@@ -53,21 +52,8 @@ public class LuceneSearch {
     }
 
 
-    public void index(List<Track> tracks, String indexDirPath) throws IOException {
-        File indexDir = new File(indexDirPath);
+    public void index(List<Track> tracks, IndexWriter writer) throws IOException {
 
-        if (!indexDir.exists()) {
-            boolean dirCreated = indexDir.mkdir();
-
-            if (!dirCreated) {
-                throw new IOException("Could not create dir " + indexDirPath);
-            }
-        }
-
-        FSDirectory index = FSDirectory.open(indexDir);
-
-        IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_41, analyzer);
-        IndexWriter w = new IndexWriter(index, config);
 
         for (Track t : tracks) {
             Document doc = new Document();
@@ -75,11 +61,9 @@ public class LuceneSearch {
             doc.add(new TextField(FIELD_NAME, t.getName(), Field.Store.YES));
             doc.add(new TextField(FIELD_ARTIST, t.getArtist(), Field.Store.YES));
             doc.add(new TextField(FIELD_COMPOSER, t.getComposer(), Field.Store.YES));
-            w.addDocument(doc);
-
+            writer.addDocument(doc);
         }
 
-        w.close();
     }
 
 

@@ -23,6 +23,9 @@ public interface CatalogStorage {
 
     List<Track> getAllTracks();
 
+    int getTrackCount();
+
+    List<Track> getTracks(int from,int size);
 
     List<Track> getTracks(List<Long> ids);
 

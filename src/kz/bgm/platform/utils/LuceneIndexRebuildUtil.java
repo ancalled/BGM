@@ -5,8 +5,14 @@ import kz.bgm.platform.model.domain.Track;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import kz.bgm.platform.model.service.LuceneSearch;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.util.Version;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
@@ -40,13 +46,44 @@ public class LuceneIndexRebuildUtil {
     }
 
 
-   public void rebuildIndex() throws IOException {
-       System.out.println("Rebuilding index");
-       List<Track> tracks = catalogStorage.getAllTracks();
-       System.out.println("Got " + tracks.size() + " tracks...");
-       luceneSearch.index(tracks, INDEX_DIR);
-       System.out.println("Done");
-   }
+    public void rebuildIndex() throws IOException {
+        System.out.println("Rebuilding index");
+
+        int trackCount = catalogStorage.getTrackCount();
+
+        File indexDir = new File(INDEX_DIR);
+
+        if (!indexDir.exists()) {
+            boolean dirCreated = indexDir.mkdir();
+
+            if (!dirCreated) {
+                throw new IOException("Could not create dir " + INDEX_DIR);
+            }
+        }
+
+        FSDirectory index = FSDirectory.open(indexDir);
+
+        StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_41);
+        IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_41, analyzer);
+        IndexWriter writer = new IndexWriter(index, config);
+
+
+        //todo getTracks(from, size); size = 10 000
+        int from = 0;
+        int size = 100000;
+        int step=100000;
+        while (true) {
+            if (from >= trackCount) break;
+
+            List<Track> tracks = catalogStorage.getTracks(from, size);
+            System.out.println("Got tracks from " + from + " size " + size);
+            luceneSearch.index(tracks, writer);
+            from = size;
+            size += step;
+        }
+        writer.close();
+        System.out.println("Done");
+    }
 
 
     public static void initDatabase(String propsFile) throws IOException {
