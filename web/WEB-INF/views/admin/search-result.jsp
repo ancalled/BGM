@@ -63,7 +63,7 @@
                                 <c:forEach var="c" items="${catalogs}">
 
 
-                                <option value="${c.id}">${c.name}</option>
+                                <option value="${c.trackId}">${c.track}</option>
 
                                 </c:forEach>
                             </select>
@@ -88,7 +88,7 @@
         var typeEl = document.getElementById('type');
 
         function change_type(comp) {
-            typeEl.setAttribute('value', comp.id);
+            typeEl.setAttribute('value', comp.trackId);
         }
     </script>
 
@@ -145,7 +145,7 @@
             <c:forEach var="t" items="${tracks}">
                 <tr>
                     <td>${t.code}</td>
-                    <td>${t.name}</td>
+                    <td>${t.track}</td>
                     <td>${t.artist}</td>
                     <td>${t.composer}</td>
                     <td>${t.mobileShare}</td>

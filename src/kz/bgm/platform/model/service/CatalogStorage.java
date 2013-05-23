@@ -59,6 +59,10 @@ public interface CatalogStorage {
 
     long saveCustomerReport(CustomerReport report);
 
+    long saveCustomerReportItem(CustomerReportItem item);
+
+    void saveReportItemTracks(List<ReportItemTrack> reportItemList);
+
     void saveCustomerReportItems(List<CustomerReportItem> reportItemList);
 
     CustomerReport getCustomerReport(long id);

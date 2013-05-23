@@ -62,7 +62,7 @@ public class MobileReportUtil {
         for (CustomerReportItem i : reports) {
             List<Long> ids = Collections.emptyList();
             try {
-                ids = luceneSearch.search(i.getArtist(), i.getName());
+                ids = luceneSearch.search(i.getArtist(), i.getTrack());
             } catch (Exception e) {
                 e.printStackTrace();
             }

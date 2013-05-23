@@ -544,6 +544,66 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+    @Override
+    public long saveCustomerReportItem(final CustomerReportItem item) {
+        return query(new Action<Long>() {
+            @Override
+            public Long execute(Connection con) throws SQLException {
+                PreparedStatement ps =
+                        con.prepareStatement("INSERT INTO " +
+                                "customer_report_item(report_id,composition_id,name," +
+                                "artist,content_type,qty,price) " +
+                                "VALUES (?,?,?,?,?,?,?)",
+                                Statement.RETURN_GENERATED_KEYS);
+
+                ps.setLong(1, item.getReportId());
+                if (item.getCompositionId() != null) {
+                    ps.setLong(2, item.getCompositionId());
+                } else {
+                    ps.setNull(2, Types.INTEGER);
+                }
+
+                ps.setString(3, item.getTrack());
+                ps.setString(4, item.getArtist());
+                ps.setString(5, item.getContentType());
+                ps.setInt(6, item.getQty());
+                ps.setFloat(7, item.getPrice());
+
+                ps.executeUpdate();
+
+                ResultSet rs = ps.getGeneratedKeys();
+                return rs.next() ? rs.getLong(1) : -1;
+            }
+        });
+    }
+
+
+    @Override
+    public void saveReportItemTracks(final List<ReportItemTrack> items) {
+        query(new Action<Boolean>() {
+            @Override
+            public Boolean execute(Connection con) throws SQLException {
+                PreparedStatement ps =
+                        con.prepareStatement("INSERT INTO " +
+                                "report_item_track(item_id, track_id, score, matched) " +
+                                "VALUES (?,?,?,?)");
+
+                for (ReportItemTrack cr : items) {
+                    ps.setLong(1, cr.getItemId());
+                    ps.setLong(2, cr.getTrackId());
+                    ps.setFloat(3, cr.getScore());
+                    ps.setBoolean(4, cr.isMatched());
+                    ps.addBatch();
+                }
+
+                con.setAutoCommit(false);
+                ps.executeBatch();
+                con.commit();
+
+                return true;
+            }
+        });
+    }
 
     @Override
     public void saveCustomerReportItems(final List<CustomerReportItem> items) {
@@ -564,7 +624,7 @@ public class DbStorage implements CatalogStorage {
                         ps.setNull(2, Types.INTEGER);
                     }
 
-                    ps.setString(3, cr.getName());
+                    ps.setString(3, cr.getTrack());
                     ps.setString(4, cr.getArtist());
                     ps.setString(5, cr.getContentType());
                     ps.setInt(6, cr.getQty());
@@ -581,6 +641,7 @@ public class DbStorage implements CatalogStorage {
             }
         });
     }
+
 
     @Override
     public int getArtistCount(final long catalogId) {
@@ -957,7 +1018,8 @@ public class DbStorage implements CatalogStorage {
             @Override
             public Long execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "INSERT INTO user(login,password,customer_id,full_name,email) VALUES(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                        "INSERT INTO user(login, password, customer_id, full_name, email) VALUES(?,?,?,?,?)",
+                        Statement.RETURN_GENERATED_KEYS);
                 stmt.setString(1, user.getLogin());
                 stmt.setString(2, user.getPass());
                 stmt.setLong(3, user.getCustomerId());
@@ -1287,8 +1349,6 @@ public class DbStorage implements CatalogStorage {
                 stmt3.executeUpdate();
 
 
-
-
                 return null;
             }
         });
@@ -1300,7 +1360,7 @@ public class DbStorage implements CatalogStorage {
         return query(new Action<List<Track>>() {
             @Override
             public List<Track> execute(Connection con) throws SQLException {
-                PreparedStatement stmt = con.prepareStatement("SELECT * FROM composition LIMIT " + from + "," + size );
+                PreparedStatement stmt = con.prepareStatement("SELECT * FROM composition LIMIT " + from + "," + size);
                 ResultSet rs = stmt.executeQuery();
 
                 List<Track> tracks = new ArrayList<>();
@@ -1511,11 +1571,24 @@ public class DbStorage implements CatalogStorage {
         item.setId(rs.getLong("id"));
         item.setReportId(rs.getLong("report_id"));
         item.setCompositionId(rs.getLong("composition_id"));
-        item.setName(rs.getString("name"));
+        item.setTrack(rs.getString("name"));
         item.setArtist(rs.getString("artist"));
         item.setContentType(rs.getString("content_type"));
         item.setQty(rs.getInt("qty"));
         item.setPrice(rs.getFloat("price"));
+
+        return item;
+    }
+
+
+    private static ReportItemTrack parseReportItemTrack(ResultSet rs) throws SQLException {
+
+        ReportItemTrack item = new ReportItemTrack();
+        item.setId(rs.getLong("id"));
+        item.setItemId(rs.getLong("item_id"));
+        item.setTrackId(rs.getLong("track_id"));
+        item.setScore(rs.getInt("score"));
+        item.setMatched(rs.getBoolean("matched"));
 
         return item;
     }

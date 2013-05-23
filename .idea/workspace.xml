@@ -25,12 +25,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CustomerReportItem.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CustomerReportItem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/kz/bgm/platform/test/lucene/LuceneTest.java" afterPath="$PROJECT_DIR$/test/kz/bgm/platform/test/lucene/LuceneTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/utils/MobileReportUtil.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/utils/MobileReportUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/ReportItemTrack.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/ReportItemTrack.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/utils/ReportParser.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/utils/ReportParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UploadReportMobileServlet.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UploadReportMobileServlet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/web/customer/action/UploadReportMobileServlet.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/customer/action/UploadReportMobileServlet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UploadReportPublicServlet.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UploadReportPublicServlet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/customer-detail.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/customer-detail.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/customers.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/customers.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/index.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/index.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/report-upload-result.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/report-upload-result.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/customer/report-upload-result.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/customer/report-upload-result.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/scheme.sql" afterPath="$PROJECT_DIR$/data/scheme.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/search-result.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/search-result.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/customer/search-result.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/customer/search-result.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/admin/search.html" afterPath="$PROJECT_DIR$/web/admin/search.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/customer/search.html" afterPath="$PROJECT_DIR$/web/customer/search.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/old/search.jsp" afterPath="$PROJECT_DIR$/data/old/search.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bgm-platform.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369303099396" ignored="false" />
-    <file path="/CatalogStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369220134688" ignored="false" />
+    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369303105207" ignored="false" />
+    <file path="/CatalogStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369309310599" ignored="false" />
     <file path="/fragment.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369132078301" ignored="false" />
     <file path="db-console:/b524fb0f/bd8e1b6e-fe0f-401f-a88d-0e81e53c8907/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363032963765" ignored="false" />
     <file path="$PROJECT_DIR$/../bgm-platform/bgm-platform-master/web/WEB-INF/web.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363025365937" ignored="false" />
@@ -52,7 +78,7 @@
     <file path="/OrderPanel.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363333730904" ignored="false" />
     <file path="/BgmServer.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364412289046" ignored="false" />
     <file path="/InMemorycatalog.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365126596328" ignored="false" />
-    <file path="/DbStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369296871964" ignored="false" />
+    <file path="/DbStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369309556163" ignored="false" />
     <file path="/CatalogFactory.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363338029526" ignored="false" />
     <file path="/BaseConnector.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363337985741" ignored="false" />
     <file path="/QueryHolder.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363338189273" ignored="false" />
@@ -62,7 +88,7 @@
     <file path="D:/Next/cs-client/.idea/workspace.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363347421511" ignored="false" />
     <file path="/ReportItem.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364583206406" ignored="false" />
     <file path="/ReportBuilder.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367191664609" ignored="false" />
-    <file path="/scheme.sql" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369279780963" ignored="false" />
+    <file path="/scheme.sql" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369309021720" ignored="false" />
     <file path="/TestDB.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367037201540" ignored="false" />
     <file path="/SonyParser.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363745195676" ignored="false" />
     <file path="/install-cert.sh" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363657279472" ignored="false" />
@@ -84,7 +110,7 @@
     <file path="/index.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367162144046" ignored="false" />
     <file path="/Customer.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365112075562" ignored="false" />
     <file path="/CustomerReport.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1366982926463" ignored="false" />
-    <file path="/CustomerReportItem.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365120497140" ignored="false" />
+    <file path="/CustomerReportItem.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369307509646" ignored="false" />
     <file path="/CustomerReportServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367036290758" ignored="false" />
     <file path="/MobileReportServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367036240582" ignored="false" />
     <file path="$APPLICATION_HOME_DIR$/plugins/jsp/lib/jsp-impl.jar!/standardSchemas/jspxml2_1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1366984926183" ignored="false" />
@@ -107,7 +133,7 @@
     <file path="/customers.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367105211359" ignored="false" />
     <file path="/UserAdmin.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367103676468" ignored="false" />
     <file path="/User.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367104595468" ignored="false" />
-    <file path="/UploadReportMobileServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369108081066" ignored="false" />
+    <file path="/UploadReportMobileServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369309608454" ignored="false" />
     <file path="/AllClientReportsServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367114618296" ignored="false" />
     <file path="/FetchCientReportsServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367114552921" ignored="false" />
     <file path="/all-customer-reports.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367115022593" ignored="false" />
@@ -124,12 +150,12 @@
     <file path="/sample-data.sql" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367205267570" ignored="false" />
     <file path="/MoskvafmParser.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367206543030" ignored="false" />
     <file path="/queries.sql" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369218145421" ignored="false" />
-    <file path="/LuceneUtil.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369302012733" ignored="false" />
-    <file path="/LuceneSearch.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369302846929" ignored="false" />
+    <file path="/LuceneUtil.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369307659947" ignored="false" />
+    <file path="/LuceneSearch.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369308983232" ignored="false" />
     <file path="$PROJECT_DIR$/../../Next/NewTS/.idea/workspace.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368606153755" ignored="false" />
     <file path="/gen-inserts.xsl" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368502903690" ignored="false" />
     <file path="/LuceneTest.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368529424995" ignored="false" />
-    <file path="/ReportItemTrack.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368586697034" ignored="false" />
+    <file path="/ReportItemTrack.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369309008587" ignored="false" />
     <file path="$PROJECT_DIR$/../../Next/NewTS/test/misc/Producer.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368590112666" ignored="false" />
     <file path="$PROJECT_DIR$/../../Next/NewTS/test/misc/Consumer.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368590106553" ignored="false" />
     <file path="/Producer.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368589912767" ignored="false" />
@@ -155,7 +181,7 @@
     <file path="/navbar.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369110251586" ignored="false" />
     <file path="/Platform.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369110749793" ignored="false" />
     <file path="/Catalog.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369112856441" ignored="false" />
-    <file path="/BGM datasource" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369219547343" ignored="false" />
+    <file path="/BGM datasource" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369309491378" ignored="false" />
     <file path="/catalog.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369281679587" ignored="false" />
     <file path="/CustomerReportStatistic.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369118605961" ignored="false" />
     <file path="/CatalogLoadResult.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369137480340" ignored="false" />
@@ -225,7 +251,7 @@
   <component name="DebuggerManager">
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" line="1028" class="kz.bgm.platform.model.service.DbStorage$40" package="kz.bgm.platform.model.service">
+      <breakpoint url="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" line="1090" class="kz.bgm.platform.model.service.DbStorage$40" package="kz.bgm.platform.model.service">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -255,7 +281,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" line="1082" class="kz.bgm.platform.model.service.DbStorage$41" package="kz.bgm.platform.model.service">
+      <breakpoint url="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" line="1144" class="kz.bgm.platform.model.service.DbStorage$41" package="kz.bgm.platform.model.service">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -334,16 +360,130 @@
       <file leaf-file-name="DbStorage.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1298" column="55" selection-start="47424" selection-end="47468" vertical-scroll-proportion="0.0">
+            <state line="599" column="0" selection-start="19697" selection-end="19697" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#17689#18865#0" expanded="true" />
+                <element signature="e#18854#18855#0" expanded="true" />
+                <element signature="e#21277#21735#0" expanded="true" />
+                <element signature="e#21724#21725#0" expanded="true" />
+                <element signature="e#21838#22402#0" expanded="true" />
+                <element signature="e#22391#22392#0" expanded="true" />
+                <element signature="e#22509#22956#0" expanded="true" />
+                <element signature="e#22945#22946#0" expanded="true" />
+                <element signature="e#23110#23896#0" expanded="true" />
+                <element signature="e#23885#23886#0" expanded="true" />
+                <element signature="e#29080#29530#0" expanded="true" />
+                <element signature="e#29519#29520#0" expanded="true" />
+                <element signature="e#29831#32533#0" expanded="true" />
+                <element signature="e#32522#32523#0" expanded="true" />
+                <element signature="e#32715#34974#0" expanded="true" />
+                <element signature="e#34963#34964#0" expanded="true" />
+                <element signature="e#35994#36778#0" expanded="true" />
+                <element signature="e#36767#36768#0" expanded="true" />
+                <element signature="e#37263#37576#0" expanded="true" />
+                <element signature="e#37565#37566#0" expanded="true" />
+                <element signature="e#37682#38246#0" expanded="true" />
+                <element signature="e#38235#38236#0" expanded="true" />
+                <element signature="e#38311#39058#0" expanded="true" />
+                <element signature="e#39047#39048#0" expanded="true" />
+                <element signature="e#39159#43061#0" expanded="true" />
+                <element signature="e#43050#43051#0" expanded="true" />
+                <element signature="e#43157#44274#0" expanded="true" />
+                <element signature="e#44263#44264#0" expanded="true" />
+                <element signature="e#44405#46599#0" expanded="true" />
+                <element signature="e#46588#46589#0" expanded="true" />
+                <element signature="e#46736#47310#0" expanded="true" />
+                <element signature="e#47299#47300#0" expanded="true" />
+                <element signature="e#50373#50820#0" expanded="true" />
+                <element signature="e#50809#50810#0" expanded="true" />
+                <element signature="e#51582#52097#0" expanded="true" />
+                <element signature="e#52086#52087#0" expanded="true" />
+                <element signature="e#52216#52840#0" expanded="true" />
+                <element signature="e#52829#52830#0" expanded="true" />
+                <marker date="1369309616377" expanded="true" signature="1238:1461" placeholder="INSERT INTO ..." />
+                <marker date="1369309616377" expanded="true" signature="2330:2365" placeholder="SELECT id FR..catalog..." />
+                <marker date="1369309616377" expanded="true" signature="3174:3207" placeholder="SELECT * FRO..platform..." />
+                <marker date="1369309616377" expanded="true" signature="3752:3784" placeholder="SELECT * FRO..catalog..." />
+                <marker date="1369309616377" expanded="true" signature="4319:4355" placeholder="SELECT * FRO..composition..." />
+                <marker date="1369309616377" expanded="true" signature="4884:4906" placeholder="SELECT * FRO..platform..." />
+                <marker date="1369309616377" expanded="true" signature="5627:5648" placeholder="SELECT * FRO..catalog..." />
+                <marker date="1369309616377" expanded="true" signature="6264:6308" placeholder="SELECT * FRO..catalog..." />
+                <marker date="1369309616377" expanded="true" signature="6966:6991" placeholder="SELECT * FRO..composition..." />
+                <marker date="1369309616377" expanded="true" signature="7579:7650" placeholder="SELECT * FRO..composition..." />
+                <marker date="1369309616377" expanded="true" signature="8261:8349" placeholder="SELECT * FRO..composition..." />
+                <marker date="1369309616377" expanded="true" signature="8970:9212" placeholder="SELECT * FRO..composition..." />
+                <marker date="1369309616377" expanded="true" signature="10064:10102" placeholder="SELECT * FRO..composition..." />
+                <marker date="1369309616377" expanded="true" signature="10738:10776" placeholder="SELECT * FRO..composition..." />
+                <marker date="1369309616377" expanded="true" signature="11419:11461" placeholder="SELECT * FRO..composition..." />
+                <marker date="1369309616377" expanded="true" signature="12104:12144" placeholder="SELECT * FRO..composition..." />
+                <marker date="1369309616377" expanded="true" signature="12787:12831" placeholder="SELECT * FRO..composition..." />
+                <marker date="1369309616377" expanded="true" signature="13456:13478" placeholder="SELECT * FRO..customer..." />
+                <marker date="1369309616377" expanded="true" signature="14070:14105" placeholder="SELECT * FRO..customer..." />
+                <marker date="1369309616377" expanded="true" signature="14591:14624" placeholder="SELECT * FRO..customer..." />
+                <marker date="1369309616377" expanded="true" signature="15128:15185" placeholder="SELECT * FRO..user_admin..." />
+                <marker date="1369309616377" expanded="true" signature="15715:15766" placeholder="SELECT * FRO..user..." />
+                <marker date="1369309616377" expanded="true" signature="16276:16310" placeholder="SELECT * FRO..user..." />
+                <marker date="1369309616377" expanded="true" signature="16894:16992" placeholder="INSERT INTO ..." />
+                <marker date="1369309616377" expanded="true" signature="17887:18114" placeholder="INSERT INTO ..." />
+                <marker date="1369309616377" expanded="true" signature="19182:19337" placeholder="INSERT INTO ..." />
+                <marker date="1369309616377" expanded="true" signature="20137:20364" placeholder="INSERT INTO ..." />
+                <marker date="1369309616377" expanded="true" signature="21484:21552" placeholder="SELECT count..composition..." />
+                <marker date="1369309616377" expanded="true" signature="22071:22100" placeholder="SELECT * FRO..customer_report..." />
+                <marker date="1369309616377" expanded="true" signature="22730:22772" placeholder="SELECT * FRO..customer_report..." />
+                <marker date="1369309616377" expanded="true" signature="23343:23425" placeholder="SELECT * FRO..customer_report..." />
+                <marker date="1369309616377" expanded="true" signature="24266:24320" placeholder="SELECT * FRO..customer_report_item..." />
+                <marker date="1369309616377" expanded="true" signature="25147:25936" placeholder="SELECT\n cop..composition..." />
+                <marker date="1369309616377" expanded="true" signature="27293:28083" placeholder="SELECT\n cop..composition..." />
+                <marker date="1369309616377" expanded="true" signature="29287:29343" placeholder="SELECT COUNT..composition..." />
+                <marker date="1369309616377" expanded="true" signature="30050:32237" placeholder="SELECT\n i.i..customer_report_item..." />
+                <marker date="1369309616377" expanded="true" signature="32934:34669" placeholder="SELECT\n i.i..customer_report_item..." />
+                <marker date="1369309616377" expanded="true" signature="35323:35396" placeholder="INSERT INTO ..." />
+                <marker date="1369309616377" expanded="true" signature="36195:36277" placeholder="INSERT INTO ..." />
+                <marker date="1369309616377" expanded="true" signature="37041:37070" placeholder="DELETE FROM ..." />
+                <marker date="1369309616377" expanded="true" signature="37440:37473" placeholder="DELETE FROM ..." />
+                <marker date="1369309616377" expanded="true" signature="37895:37935" placeholder="SELECT * FRO..user..." />
+                <marker date="1369309616377" expanded="true" signature="38964:38984" placeholder="DELETE FROM ..." />
+                <marker date="1369309616377" expanded="true" signature="39410:39548" placeholder="INSERT INTO ..." />
+                <marker date="1369309616377" expanded="true" signature="40155:41048" placeholder="LOAD DATA LO..comp_tmp..." />
+                <marker date="1369309616377" expanded="true" signature="41641:41654" placeholder="SHOW WARNING..." />
+                <marker date="1369309616377" expanded="true" signature="42270:42876" placeholder="UPDATE catal..." />
+                <marker date="1369309616377" expanded="true" signature="42393:42445" placeholder="SELECT count..comp_tmp..." />
+                <marker date="1369309616377" expanded="true" signature="42497:42826" placeholder="SELECT count..composition..." />
+                <marker date="1369309616377" expanded="true" signature="43388:43564" placeholder="INSERT INTO ..." />
+                <marker date="1369309616377" expanded="true" signature="44628:45920" placeholder="SELECT c.cod..comp_tmp..." />
+                <marker date="1369309616377" expanded="true" signature="46951:46995" placeholder="SELECT * FRO..composition..." />
+                <marker date="1369309616377" expanded="true" signature="47613:48439" placeholder="UPDATE compo..." />
+                <marker date="1369309616377" expanded="true" signature="48634:49265" placeholder="INSERT INTO ..." />
+                <marker date="1369309616377" expanded="true" signature="48767:49265" placeholder="SELECT\n cod..comp_tmp..." />
+                <marker date="1369309616377" expanded="true" signature="49459:49513" placeholder="UPDATE catal..." />
+                <marker date="1369309616377" expanded="true" signature="49974:50019" placeholder="SELECT * FRO..composition..." />
+                <marker date="1369309616377" expanded="true" signature="50580:50615" placeholder="SELECT COUNT..composition..." />
+                <marker date="1369309616377" expanded="true" signature="51123:51158" placeholder="SELECT * FRO..comp_tmp..." />
+                <marker date="1369309616377" expanded="true" signature="51801:51842" placeholder="SELECT * FRO..catalog_update..." />
+                <marker date="1369309616377" expanded="true" signature="52447:52496" placeholder="SELECT * FRO..catalog_update..." />
+                <marker date="1369309616377" expanded="true" signature="53104:53404" placeholder="UPDATE catal..." />
+                <marker date="1369309616377" expanded="true" signature="53173:53403" placeholder="SELECT\n cou..composition..." />
+                <marker date="1369309616377" expanded="true" signature="53504:53809" placeholder="UPDATE catal..." />
+                <marker date="1369309616377" expanded="true" signature="53574:53808" placeholder="SELECT\n cou..composition..." />
+                <marker date="1369309616377" expanded="true" signature="61951:61972" placeholder="SELECT * FRO..catalog..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LuceneUtil.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="44" column="59" selection-start="1463" selection-end="1463" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ApplyUpdateServlet.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/ApplyUpdateServlet.java">
+      <file leaf-file-name="UploadReportMobileServlet.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UploadReportMobileServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="50" selection-start="1648" selection-end="1648" vertical-scroll-proportion="0.0">
+            <state line="95" column="13" selection-start="3490" selection-end="3490" vertical-scroll-proportion="0.71267605">
               <folding />
             </state>
           </provider>
@@ -352,70 +492,63 @@
       <file leaf-file-name="CatalogStorage.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="101" column="48" selection-start="2487" selection-end="2487" vertical-scroll-proportion="0.0">
+            <state line="63" column="50" selection-start="1439" selection-end="1439" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="catalog.jsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp">
+      <file leaf-file-name="ReportParser.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/ReportParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="180" column="24" selection-start="4982" selection-end="4982" vertical-scroll-proportion="-3.75">
+            <state line="74" column="43" selection-start="2378" selection-end="2378" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LuceneUtil.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java">
+      <file leaf-file-name="CustomerReportItem.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CustomerReportItem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="101" column="36" selection-start="3660" selection-end="3660" vertical-scroll-proportion="0.0">
+            <state line="41" column="20" selection-start="811" selection-end="811" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LuceneIndexRebuildUtil.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneIndexRebuildUtil.java">
+      <file leaf-file-name="scheme.sql" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/scheme.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="35" selection-start="421" selection-end="443" vertical-scroll-proportion="0.0">
+            <state line="104" column="0" selection-start="2155" selection-end="2246" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LuceneSearch.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="BGM datasource" pinned="false" current="false" current-in-tab="false">
+        <entry file="dbDummy://db-console:/4e802f14/b1ed7fcf-b56a-49b0-a869-b1a4c75c3585/">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="49" column="2" selection-start="877" selection-end="1058" vertical-scroll-proportion="-21.931034">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ReportItemTrack.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/domain/ReportItemTrack.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="50" column="17" selection-start="924" selection-end="924" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LuceneSearch.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="200" column="29" selection-start="7028" selection-end="7028" vertical-scroll-proportion="0.43802816">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="catalog-update.jsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="21" selection-start="1403" selection-end="1403" vertical-scroll-proportion="5.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LuceneSearchTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/kz/bgm/platform/test/lucene/LuceneSearchTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="21" selection-start="832" selection-end="832" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IndexWriter.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/lib/lucene-core-4.1.0.jar!/org/apache/lucene/index/IndexWriter.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="11" selection-start="3296" selection-end="3296" vertical-scroll-proportion="0.0">
+            <state line="245" column="35" selection-start="8369" selection-end="8369" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -445,22 +578,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/data/queries.sql" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/Warning.java" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CatalogUpdate.java" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/UpdateWarning.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/DispatcherServlet.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp" />
         <option value="$PROJECT_DIR$/data/replace-empty-lines.sh" />
-        <option value="db-console:/4e802f14/b1ed7fcf-b56a-49b0-a869-b1a4c75c3585/" />
-        <option value="$PROJECT_DIR$/data/scheme.sql" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/ApplyUpdateServlet.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CustomerReportItem.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/utils/ReportParser.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/ReportItemTrack.java" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" />
+        <option value="$PROJECT_DIR$/data/scheme.sql" />
+        <option value="db-console:/4e802f14/b1ed7fcf-b56a-49b0-a869-b1a4c75c3585/" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UploadReportMobileServlet.java" />
       </list>
     </option>
   </component>
@@ -907,6 +1040,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="domain" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bgm-platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BGM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1473,9 +1620,11 @@
     <frame x="53" y="24" width="1547" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3712021" sideWeight="0.493517" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5494071" sideWeight="0.49713057" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39630118" sideWeight="0.49675852" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.260493" sideWeight="0.6287979" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31836197" sideWeight="0.49027553" order="3" side_tool="false" content_ui="tabs" />
@@ -1493,14 +1642,12 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2631579" sideWeight="0.48480844" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2631579" sideWeight="0.6287979" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.51519156" sideWeight="0.45137763" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3712021" sideWeight="0.493517" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39630118" sideWeight="0.49675852" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1608,65 +1755,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/replace-empty-lines.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="11" selection-start="11" selection-end="11" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/queries.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="183" column="0" selection-start="4466" selection-end="4623" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://db-console:/4e802f14/b1ed7fcf-b56a-49b0-a869-b1a4c75c3585/">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="11" selection-start="570" selection-end="839" vertical-scroll-proportion="-15.5172415" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/scheme.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="44" selection-start="1833" selection-end="1877" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CatalogUpdate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="417" selection-end="417" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="37" selection-start="3659" selection-end="3659" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="48" selection-start="2487" selection-end="2487" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1298" column="55" selection-start="47424" selection-end="47468" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/lucene-core-4.1.0.jar!/org/apache/lucene/index/IndexWriter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="11" selection-start="3296" selection-end="3296" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/kz/bgm/platform/test/lucene/LuceneSearchTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="31" column="21" selection-start="832" selection-end="832" vertical-scroll-proportion="0.0">
@@ -1697,21 +1785,191 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="180" column="24" selection-start="4982" selection-end="4982" vertical-scroll-proportion="-3.75">
+        <state line="180" column="24" selection-start="4984" selection-end="4984" vertical-scroll-proportion="-3.75">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CustomerReportStatistic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="13" selection-start="76" selection-end="76" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CustomerReportItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="20" selection-start="811" selection-end="811" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="36" selection-start="3660" selection-end="3660" vertical-scroll-proportion="0.0">
+        <state line="44" column="59" selection-start="1463" selection-end="1463" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/ReportParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="43" selection-start="2378" selection-end="2378" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="200" column="29" selection-start="7028" selection-end="7028" vertical-scroll-proportion="0.43802816">
+        <state line="245" column="35" selection-start="8369" selection-end="8369" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="50" selection-start="1439" selection-end="1439" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/scheme.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="104" column="0" selection-start="2155" selection-end="2246" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://db-console:/4e802f14/b1ed7fcf-b56a-49b0-a869-b1a4c75c3585/">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="2" selection-start="877" selection-end="1058" vertical-scroll-proportion="-21.931034">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/domain/ReportItemTrack.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="17" selection-start="924" selection-end="924" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="599" column="0" selection-start="19697" selection-end="19697" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#17689#18865#0" expanded="true" />
+            <element signature="e#18854#18855#0" expanded="true" />
+            <element signature="e#21277#21735#0" expanded="true" />
+            <element signature="e#21724#21725#0" expanded="true" />
+            <element signature="e#21838#22402#0" expanded="true" />
+            <element signature="e#22391#22392#0" expanded="true" />
+            <element signature="e#22509#22956#0" expanded="true" />
+            <element signature="e#22945#22946#0" expanded="true" />
+            <element signature="e#23110#23896#0" expanded="true" />
+            <element signature="e#23885#23886#0" expanded="true" />
+            <element signature="e#29080#29530#0" expanded="true" />
+            <element signature="e#29519#29520#0" expanded="true" />
+            <element signature="e#29831#32533#0" expanded="true" />
+            <element signature="e#32522#32523#0" expanded="true" />
+            <element signature="e#32715#34974#0" expanded="true" />
+            <element signature="e#34963#34964#0" expanded="true" />
+            <element signature="e#35994#36778#0" expanded="true" />
+            <element signature="e#36767#36768#0" expanded="true" />
+            <element signature="e#37263#37576#0" expanded="true" />
+            <element signature="e#37565#37566#0" expanded="true" />
+            <element signature="e#37682#38246#0" expanded="true" />
+            <element signature="e#38235#38236#0" expanded="true" />
+            <element signature="e#38311#39058#0" expanded="true" />
+            <element signature="e#39047#39048#0" expanded="true" />
+            <element signature="e#39159#43061#0" expanded="true" />
+            <element signature="e#43050#43051#0" expanded="true" />
+            <element signature="e#43157#44274#0" expanded="true" />
+            <element signature="e#44263#44264#0" expanded="true" />
+            <element signature="e#44405#46599#0" expanded="true" />
+            <element signature="e#46588#46589#0" expanded="true" />
+            <element signature="e#46736#47310#0" expanded="true" />
+            <element signature="e#47299#47300#0" expanded="true" />
+            <element signature="e#50373#50820#0" expanded="true" />
+            <element signature="e#50809#50810#0" expanded="true" />
+            <element signature="e#51582#52097#0" expanded="true" />
+            <element signature="e#52086#52087#0" expanded="true" />
+            <element signature="e#52216#52840#0" expanded="true" />
+            <element signature="e#52829#52830#0" expanded="true" />
+            <marker date="1369309616377" expanded="true" signature="1238:1461" placeholder="INSERT INTO ..." />
+            <marker date="1369309616377" expanded="true" signature="2330:2365" placeholder="SELECT id FR..catalog..." />
+            <marker date="1369309616377" expanded="true" signature="3174:3207" placeholder="SELECT * FRO..platform..." />
+            <marker date="1369309616377" expanded="true" signature="3752:3784" placeholder="SELECT * FRO..catalog..." />
+            <marker date="1369309616377" expanded="true" signature="4319:4355" placeholder="SELECT * FRO..composition..." />
+            <marker date="1369309616377" expanded="true" signature="4884:4906" placeholder="SELECT * FRO..platform..." />
+            <marker date="1369309616377" expanded="true" signature="5627:5648" placeholder="SELECT * FRO..catalog..." />
+            <marker date="1369309616377" expanded="true" signature="6264:6308" placeholder="SELECT * FRO..catalog..." />
+            <marker date="1369309616377" expanded="true" signature="6966:6991" placeholder="SELECT * FRO..composition..." />
+            <marker date="1369309616377" expanded="true" signature="7579:7650" placeholder="SELECT * FRO..composition..." />
+            <marker date="1369309616377" expanded="true" signature="8261:8349" placeholder="SELECT * FRO..composition..." />
+            <marker date="1369309616377" expanded="true" signature="8970:9212" placeholder="SELECT * FRO..composition..." />
+            <marker date="1369309616377" expanded="true" signature="10064:10102" placeholder="SELECT * FRO..composition..." />
+            <marker date="1369309616377" expanded="true" signature="10738:10776" placeholder="SELECT * FRO..composition..." />
+            <marker date="1369309616377" expanded="true" signature="11419:11461" placeholder="SELECT * FRO..composition..." />
+            <marker date="1369309616377" expanded="true" signature="12104:12144" placeholder="SELECT * FRO..composition..." />
+            <marker date="1369309616377" expanded="true" signature="12787:12831" placeholder="SELECT * FRO..composition..." />
+            <marker date="1369309616377" expanded="true" signature="13456:13478" placeholder="SELECT * FRO..customer..." />
+            <marker date="1369309616377" expanded="true" signature="14070:14105" placeholder="SELECT * FRO..customer..." />
+            <marker date="1369309616377" expanded="true" signature="14591:14624" placeholder="SELECT * FRO..customer..." />
+            <marker date="1369309616377" expanded="true" signature="15128:15185" placeholder="SELECT * FRO..user_admin..." />
+            <marker date="1369309616377" expanded="true" signature="15715:15766" placeholder="SELECT * FRO..user..." />
+            <marker date="1369309616377" expanded="true" signature="16276:16310" placeholder="SELECT * FRO..user..." />
+            <marker date="1369309616377" expanded="true" signature="16894:16992" placeholder="INSERT INTO ..." />
+            <marker date="1369309616377" expanded="true" signature="17887:18114" placeholder="INSERT INTO ..." />
+            <marker date="1369309616377" expanded="true" signature="19182:19337" placeholder="INSERT INTO ..." />
+            <marker date="1369309616377" expanded="true" signature="20137:20364" placeholder="INSERT INTO ..." />
+            <marker date="1369309616377" expanded="true" signature="21484:21552" placeholder="SELECT count..composition..." />
+            <marker date="1369309616377" expanded="true" signature="22071:22100" placeholder="SELECT * FRO..customer_report..." />
+            <marker date="1369309616377" expanded="true" signature="22730:22772" placeholder="SELECT * FRO..customer_report..." />
+            <marker date="1369309616377" expanded="true" signature="23343:23425" placeholder="SELECT * FRO..customer_report..." />
+            <marker date="1369309616377" expanded="true" signature="24266:24320" placeholder="SELECT * FRO..customer_report_item..." />
+            <marker date="1369309616377" expanded="true" signature="25147:25936" placeholder="SELECT\n cop..composition..." />
+            <marker date="1369309616377" expanded="true" signature="27293:28083" placeholder="SELECT\n cop..composition..." />
+            <marker date="1369309616377" expanded="true" signature="29287:29343" placeholder="SELECT COUNT..composition..." />
+            <marker date="1369309616377" expanded="true" signature="30050:32237" placeholder="SELECT\n i.i..customer_report_item..." />
+            <marker date="1369309616377" expanded="true" signature="32934:34669" placeholder="SELECT\n i.i..customer_report_item..." />
+            <marker date="1369309616377" expanded="true" signature="35323:35396" placeholder="INSERT INTO ..." />
+            <marker date="1369309616377" expanded="true" signature="36195:36277" placeholder="INSERT INTO ..." />
+            <marker date="1369309616377" expanded="true" signature="37041:37070" placeholder="DELETE FROM ..." />
+            <marker date="1369309616377" expanded="true" signature="37440:37473" placeholder="DELETE FROM ..." />
+            <marker date="1369309616377" expanded="true" signature="37895:37935" placeholder="SELECT * FRO..user..." />
+            <marker date="1369309616377" expanded="true" signature="38964:38984" placeholder="DELETE FROM ..." />
+            <marker date="1369309616377" expanded="true" signature="39410:39548" placeholder="INSERT INTO ..." />
+            <marker date="1369309616377" expanded="true" signature="40155:41048" placeholder="LOAD DATA LO..comp_tmp..." />
+            <marker date="1369309616377" expanded="true" signature="41641:41654" placeholder="SHOW WARNING..." />
+            <marker date="1369309616377" expanded="true" signature="42270:42876" placeholder="UPDATE catal..." />
+            <marker date="1369309616377" expanded="true" signature="42393:42445" placeholder="SELECT count..comp_tmp..." />
+            <marker date="1369309616377" expanded="true" signature="42497:42826" placeholder="SELECT count..composition..." />
+            <marker date="1369309616377" expanded="true" signature="43388:43564" placeholder="INSERT INTO ..." />
+            <marker date="1369309616377" expanded="true" signature="44628:45920" placeholder="SELECT c.cod..comp_tmp..." />
+            <marker date="1369309616377" expanded="true" signature="46951:46995" placeholder="SELECT * FRO..composition..." />
+            <marker date="1369309616377" expanded="true" signature="47613:48439" placeholder="UPDATE compo..." />
+            <marker date="1369309616377" expanded="true" signature="48634:49265" placeholder="INSERT INTO ..." />
+            <marker date="1369309616377" expanded="true" signature="48767:49265" placeholder="SELECT\n cod..comp_tmp..." />
+            <marker date="1369309616377" expanded="true" signature="49459:49513" placeholder="UPDATE catal..." />
+            <marker date="1369309616377" expanded="true" signature="49974:50019" placeholder="SELECT * FRO..composition..." />
+            <marker date="1369309616377" expanded="true" signature="50580:50615" placeholder="SELECT COUNT..composition..." />
+            <marker date="1369309616377" expanded="true" signature="51123:51158" placeholder="SELECT * FRO..comp_tmp..." />
+            <marker date="1369309616377" expanded="true" signature="51801:51842" placeholder="SELECT * FRO..catalog_update..." />
+            <marker date="1369309616377" expanded="true" signature="52447:52496" placeholder="SELECT * FRO..catalog_update..." />
+            <marker date="1369309616377" expanded="true" signature="53104:53404" placeholder="UPDATE catal..." />
+            <marker date="1369309616377" expanded="true" signature="53173:53403" placeholder="SELECT\n cou..composition..." />
+            <marker date="1369309616377" expanded="true" signature="53504:53809" placeholder="UPDATE catal..." />
+            <marker date="1369309616377" expanded="true" signature="53574:53808" placeholder="SELECT\n cou..composition..." />
+            <marker date="1369309616377" expanded="true" signature="61951:61972" placeholder="SELECT * FRO..catalog..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UploadReportMobileServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="95" column="13" selection-start="3490" selection-end="3490" vertical-scroll-proportion="0.71267605">
           <folding />
         </state>
       </provider>

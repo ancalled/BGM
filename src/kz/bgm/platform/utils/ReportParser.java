@@ -49,7 +49,7 @@ public class ReportParser {
             String name = ExcelUtils.getCellVal(row, 2);
             String artist = ExcelUtils.getCellVal(row, 3);
 
-            item.setName(name);
+            item.setTrack(name);
             item.setArtist(artist);
             String priceStr = ExcelUtils.getCellVal(row, 5);
 
@@ -79,7 +79,7 @@ public class ReportParser {
 
         Workbook wb = ExcelUtils.openFile(new File(fileName));
 
-        List<CustomerReportItem> items = new ArrayList<CustomerReportItem>();
+        List<CustomerReportItem> items = new ArrayList<>();
 
         Sheet sheet = wb.getSheetAt(0);
 
@@ -98,7 +98,7 @@ public class ReportParser {
             String name = ExcelUtils.getCellVal(row, 2);
             String artist = ExcelUtils.getCellVal(row, 3);
 
-            item.setName(name);
+            item.setTrack(name);
             item.setArtist(artist);
             item.setContentType(ExcelUtils.getCellVal(row, 4));
 
@@ -139,7 +139,7 @@ public class ReportParser {
             int qty = Integer.parseInt(qrtStr.trim());
 
             item.setArtist(artist);
-            item.setName(name);
+            item.setTrack(name);
             item.setQty(qty);
             items.add(item);
         }

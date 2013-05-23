@@ -100,3 +100,13 @@ CREATE TABLE catalog_update (
 
 
 
+CREATE TABLE report_item_track (
+  id             INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  item_id      INT,
+  track_id       INT,
+  score          FLOAT,
+  matched        BOOL
+);
+
+
+

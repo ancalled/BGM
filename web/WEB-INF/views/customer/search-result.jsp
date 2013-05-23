@@ -82,13 +82,13 @@
                 <c:forEach var="t" items="${tracks}">
                     <tr>
                         <td>${t.code}</td>
-                        <td>${t.name}</td>
+                        <td>${t.track}</td>
                         <td>${t.artist}</td>
                         <td>${t.composer}</td>
                         <td>${t.mobileShare}</td>
                         <td>${t.publicShare}</td>
                         <td>${t.catalog}</td>
-                        <td><input type="checkbox" name="check_${t.id}" onclick="choseTrack(this)" value="${t.id}"/>
+                        <td><input type="checkbox" name="check_${t.trackId}" onclick="choseTrack(this)" value="${t.trackId}"/>
                         </td>
                     </tr>
                 </c:forEach>
@@ -111,12 +111,12 @@
         if (track.checked) {
             var input = document.createElement('input');
             input.type = 'hidden';
-            input.name = track.name;
-            input.id = track.name;
+            input.name = track.track;
+            input.id = track.track;
             input.value = track.value;
             elForm.appendChild(input);
         } else {
-            var oldInput = document.getElementById(track.name);
+            var oldInput = document.getElementById(track.track);
             elForm.removeChild(oldInput);
         }
     }
@@ -124,7 +124,7 @@
     var typeEl = document.getElementById('type');
 
     function change_type(comp) {
-        typeEl.setAttribute('value', comp.id);
+        typeEl.setAttribute('value', comp.trackId);
     }
 </script>
 </body>

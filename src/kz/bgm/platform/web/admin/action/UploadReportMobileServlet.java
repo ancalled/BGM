@@ -3,6 +3,7 @@ package kz.bgm.platform.web.admin.action;
 import kz.bgm.platform.model.domain.Customer;
 import kz.bgm.platform.model.domain.CustomerReport;
 import kz.bgm.platform.model.domain.CustomerReportItem;
+import kz.bgm.platform.model.domain.ReportItemTrack;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import kz.bgm.platform.model.service.LuceneSearch;
@@ -35,6 +36,8 @@ public class UploadReportMobileServlet extends HttpServlet {
     public static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     public static final String FILE = "file";
+    public static final double THRESHOLD = 3.0;
+    public static final int LIMIT = 10;
 
     private ServletFileUpload fileUploader;
     private CatalogStorage catalogService;
@@ -77,19 +80,22 @@ public class UploadReportMobileServlet extends HttpServlet {
             long reportId = catalogService.saveCustomerReport(report);
             report.setId(reportId);
 
-            int detected = 0;
+            List<ReportItemTrack> tracks = new ArrayList<>();
 
             for (CustomerReportItem i : allItems) {
                 i.setReportId(reportId);
-                List<Long> ids = luceneSearch.search(i.getArtist(), i.getName());
-                if (ids.size() > 0) {
-                    i.setCompositionId(ids.get(0));
-                    detected++;
+
+                long itemId = catalogService.saveCustomerReportItem(i);
+
+                List<LuceneSearch.SearchResult> found = luceneSearch.search(i.getArtist(), i.getAuthors(), i.getTrack(),
+                        LIMIT, THRESHOLD);
+
+                for (LuceneSearch.SearchResult r: found) {
+                    tracks.add(new ReportItemTrack(itemId, r.getTrackId(), r.getScore()));
                 }
             }
-            report.setDetected(detected);
 
-            catalogService.saveCustomerReportItems(allItems);
+            catalogService.saveReportItemTracks(tracks);
 
             HttpSession ses = req.getSession(true);
             ses.setAttribute("report-" + reportId, report);

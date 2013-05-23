@@ -191,20 +191,23 @@ public class LuceneSearch {
 
         BooleanQuery query = new BooleanQuery();
         if (composition != null && !composition.isEmpty()) {
-            query.add(createTermQuery(FIELD_NAME, composition, 1), Occur.MUST);
+            query.add(createTermQuery(FIELD_NAME, composition, 2.0f), Occur.MUST);
         }
 
-        if (!authors.isEmpty() &&  !artist.isEmpty()) {
+        if (authors != null &&  artist != null) {
             BooleanQuery subq = new BooleanQuery();
             subq.add(createTermQuery(FIELD_COMPOSER, authors, 1), Occur.SHOULD);
             subq.add(createTermQuery(FIELD_ARTIST, artist, 1), Occur.SHOULD);
             query.add(subq, Occur.MUST);
 
-        } else if (!artist.isEmpty()) {
-            query.add(createTermQuery(FIELD_ARTIST, artist, 1.5f), Occur.MUST);
+        } else if (artist != null) {
+            BooleanQuery subq = new BooleanQuery();
+            subq.add(createTermQuery(FIELD_ARTIST, artist, 1), Occur.SHOULD);
+            subq.add(createTermQuery(FIELD_COMPOSER, artist, 1), Occur.SHOULD);
+            query.add(subq, Occur.MUST);
 
-        } else if (!authors.isEmpty()) {
-            query.add(createTermQuery(FIELD_COMPOSER, authors, 1.5f), Occur.MUST);
+        } else if (authors != null) {
+            query.add(createTermQuery(FIELD_COMPOSER, authors, 1), Occur.MUST);
         }
 
 
@@ -240,16 +243,16 @@ public class LuceneSearch {
     }
 
     public static class SearchResult {
-        private final long id;
+        private final long trackId;
         private final float score;
 
-        public SearchResult(long id, float score) {
-            this.id = id;
+        public SearchResult(long trackId, float score) {
+            this.trackId = trackId;
             this.score = score;
         }
 
-        public long getId() {
-            return id;
+        public long getTrackId() {
+            return trackId;
         }
 
         public float getScore() {

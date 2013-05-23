@@ -26,7 +26,7 @@
 
         <dl class="dl-horizontal">
             <dt>Номер</dt>
-            <dd>${report.id}</dd>
+            <dd>${report.trackId}</dd>
             <dt>Дата отчета</dt>
             <dd>
                 <fmt:formatDate pattern="yyyy-MM-dd" value="${report.startDate}" />

@@ -90,7 +90,7 @@
 
     </style>
 
-    <title>${catalog.name}</title>
+    <title>${catalog.track}</title>
 </head>
 <body>
 
@@ -104,7 +104,7 @@
 
             <section>
                 <legend>
-                    Каталог ${catalog.name}
+                    Каталог ${catalog.track}
                 </legend>
 
 
@@ -211,7 +211,7 @@
                         <div id="status-bar"></div>
                     </div>
 
-                    <input type="hidden" name="catId" value="${catalog.id}">
+                    <input type="hidden" name="catId" value="${catalog.trackId}">
 
 
                     <%--<div id="upload-options">--%>

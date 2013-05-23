@@ -45,8 +45,8 @@ public class LuceneUtil {
         List<LuceneSearch.SearchResult> res = luceneSearch.search(artist, authors, track, 100, 3.0);
 
         for (LuceneSearch.SearchResult r : res) {
-            System.out.println("[" + r.getScore() + "] id: " + r.getId());
-            Track t = catalogStorage.getTrack(r.getId());
+            System.out.println("[" + r.getScore() + "] id: " + r.getTrackId());
+            Track t = catalogStorage.getTrack(r.getTrackId());
             if (t != null) {
                 System.out.println("\tartist: '" + t.getArtist() + "'" +
                         "\n\ttrack: '" + t.getName() + "'" +
@@ -93,8 +93,8 @@ public class LuceneUtil {
 
         String[] splitted = query.split(":[\\s]?");
         String artist = splitted[0];
-        String authors = splitted.length > 1 ? splitted[1] : "";
-        String track = splitted.length > 2 ? splitted[2] : "";
+        String authors = splitted.length > 1 ? splitted[1] : null;
+        String track = splitted.length > 2 ? splitted[2] : null;
 
         System.out.println("Queried artist: '" + artist + "'" + ", track: '" + track + "'");
 
