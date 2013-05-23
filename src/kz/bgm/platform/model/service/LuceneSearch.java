@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static org.apache.lucene.search.BooleanClause.Occur;
+
 public class LuceneSearch {
 
     private static final Logger log = Logger.getLogger(LuceneSearch.class);
@@ -157,9 +159,9 @@ public class LuceneSearch {
 //        Query query = MultiFieldQueryParser.parse(Version.LUCENE_41, values, fields, analyzer);
 
         BooleanQuery query = new BooleanQuery();
-        query.add(createTermQuery(FIELD_ARTIST, artist, 1.5f), BooleanClause.Occur.MUST);
+        query.add(createTermQuery(FIELD_ARTIST, artist, 1.5f), Occur.MUST);
         if (!composition.isEmpty()) {
-            query.add(createTermQuery(FIELD_NAME, composition, 1), BooleanClause.Occur.MUST);
+            query.add(createTermQuery(FIELD_NAME, composition, 1), Occur.MUST);
         }
 
         TopDocs hits = searcher.search(query, limit);
@@ -189,13 +191,20 @@ public class LuceneSearch {
 
         BooleanQuery query = new BooleanQuery();
         if (composition != null && !composition.isEmpty()) {
-            query.add(createTermQuery(FIELD_NAME, composition, 1), BooleanClause.Occur.MUST);
+            query.add(createTermQuery(FIELD_NAME, composition, 1), Occur.MUST);
         }
-        if (authors != null && !authors.isEmpty()) {
-            query.add(createTermQuery(FIELD_COMPOSER, authors, 1), BooleanClause.Occur.MUST);
-        }
-        if (artist != null && !artist.isEmpty()) {
-            query.add(createTermQuery(FIELD_ARTIST, artist, 1.5f), BooleanClause.Occur.MUST);
+
+        if (!authors.isEmpty() &&  !artist.isEmpty()) {
+            BooleanQuery subq = new BooleanQuery();
+            subq.add(createTermQuery(FIELD_COMPOSER, authors, 1), Occur.SHOULD);
+            subq.add(createTermQuery(FIELD_ARTIST, artist, 1), Occur.SHOULD);
+            query.add(subq, Occur.MUST);
+
+        } else if (!artist.isEmpty()) {
+            query.add(createTermQuery(FIELD_ARTIST, artist, 1.5f), Occur.MUST);
+
+        } else if (!authors.isEmpty()) {
+            query.add(createTermQuery(FIELD_COMPOSER, authors, 1.5f), Occur.MUST);
         }
 
 

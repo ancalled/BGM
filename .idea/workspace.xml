@@ -25,20 +25,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/ApplyUpdateServlet.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/ApplyUpdateServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ant.xml" afterPath="$PROJECT_DIR$/.idea/ant.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/scheme.sql" afterPath="$PROJECT_DIR$/data/scheme.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bgm-platform.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369297543141" ignored="false" />
+    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369302154209" ignored="false" />
     <file path="/CatalogStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369220134688" ignored="false" />
     <file path="/fragment.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369132078301" ignored="false" />
     <file path="db-console:/b524fb0f/bd8e1b6e-fe0f-401f-a88d-0e81e53c8907/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363032963765" ignored="false" />
@@ -134,7 +126,7 @@
     <file path="/MoskvafmParser.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367206543030" ignored="false" />
     <file path="/queries.sql" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369218145421" ignored="false" />
     <file path="/LuceneUtil.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369302012733" ignored="false" />
-    <file path="/LuceneSearch.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369301897186" ignored="false" />
+    <file path="/LuceneSearch.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369302846929" ignored="false" />
     <file path="$PROJECT_DIR$/../../Next/NewTS/.idea/workspace.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368606153755" ignored="false" />
     <file path="/gen-inserts.xsl" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368502903690" ignored="false" />
     <file path="/LuceneTest.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1368529424995" ignored="false" />
@@ -376,10 +368,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LuceneUtil.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="LuceneUtil.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="101" column="36" selection-start="3660" selection-end="3660" vertical-scroll-proportion="0.7971831">
+            <state line="101" column="36" selection-start="3660" selection-end="3660" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -394,10 +386,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LuceneSearch.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="LuceneSearch.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="214" column="0" selection-start="7426" selection-end="7426" vertical-scroll-proportion="0.0">
+            <state line="200" column="29" selection-start="7028" selection-end="7028" vertical-scroll-proportion="0.43802816">
               <folding />
             </state>
           </provider>
@@ -468,8 +460,8 @@
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/ApplyUpdateServlet.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java" />
       </list>
     </option>
   </component>
@@ -1555,7 +1547,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Потерялись js-ы" />
+    <option name="LAST_COMMIT_MESSAGE" value="Поправки в утилите по поиску, добавлен поиск по авторам" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1569,7 +1561,6 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Добавил реализацию Lucen в тестовый пакет" />
     <MESSAGE value="Тестирование lucen" />
     <MESSAGE value="Тестирование lucen, сделала отчет с импользование lucen , начал прикручивать логирование" />
     <MESSAGE value="выполнение последних отчетов , тестовое , проверка как хорошо lucen находит треки" />
@@ -1594,6 +1585,7 @@
     <MESSAGE value="Тесты и настройка поиска" />
     <MESSAGE value="Обновление каталогов" />
     <MESSAGE value="Потерялись js-ы" />
+    <MESSAGE value="Поправки в утилите по поиску, добавлен поиск по авторам" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1711,16 +1703,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java">
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="214" column="0" selection-start="7426" selection-end="7426" vertical-scroll-proportion="0.0">
+        <state line="101" column="36" selection-start="3660" selection-end="3660" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java">
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="36" selection-start="3660" selection-end="3660" vertical-scroll-proportion="0.7971831">
+        <state line="200" column="29" selection-start="7028" selection-end="7028" vertical-scroll-proportion="0.43802816">
           <folding />
         </state>
       </provider>
