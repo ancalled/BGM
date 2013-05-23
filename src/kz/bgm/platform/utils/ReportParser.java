@@ -42,11 +42,11 @@ public class ReportParser {
 
             String name = ExcelUtils.getCellVal(row, COL_NAME);
             String artist = ExcelUtils.getCellVal(row, COL_ARTIST);
-            String composer = ExcelUtils.getCellVal(row, COL_AUTHOR);
+            String auth = ExcelUtils.getCellVal(row, COL_AUTHOR);
 
             item.setTrack(name);
             item.setArtist(artist);
-            item.setComposer(composer);
+            item.setAuthors(auth);
 
             String priceStr = ExcelUtils.getCellVal(row, 5);
 

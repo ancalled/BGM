@@ -61,11 +61,11 @@ public class MobileReportUtil {
         List<CustomerReportItem> found = new ArrayList<>();
         for (CustomerReportItem i : reports) {
             List<Long> ids = new ArrayList<>();
-            List<LuceneSearch.SearchResult> results = luceneSearch.search(i.getArtist(), i.getComposer(), i.getName(), 100, 7);
+            List<LuceneSearch.SearchResult> results = luceneSearch.search(i.getArtist(), i.getAuthors(), i.getTrack(), 100, 7);
 
             if (results.size() > 0) {
                 for (LuceneSearch.SearchResult res : results) {
-                    ids.add(res.getId());
+                    ids.add(res.getTrackId());
                     detected++;
                 }
             }
