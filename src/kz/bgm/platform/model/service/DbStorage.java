@@ -243,6 +243,43 @@ public class DbStorage implements CatalogStorage {
 
 
     @Override
+    public List<Track> getTracks(final List<Long> ids, final List<Long> catalogIds) {
+
+        return query(new Action<List<Track>>() {
+            @Override
+            public List<Track> execute(Connection con) throws SQLException {
+
+                String catalogsPart = "";
+                if (catalogIds != null) {
+                    for (Long cat : catalogIds) {
+                        if (catalogIds.indexOf(cat) == 0) {
+                            catalogsPart = catalogsPart.concat("AND (");
+                        }
+                        catalogsPart = catalogsPart.concat("catalog_id=" + cat);
+                        if (catalogIds.indexOf(cat) != catalogIds.size()-1) {
+                            catalogsPart = catalogsPart.concat(" OR ");
+                        } else {
+                            catalogsPart = catalogsPart.concat(")");
+                        }
+                    }
+                }
+
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM composition WHERE id IN (" + DbStorage.asString(ids) + ") "+catalogsPart);
+
+                ResultSet rs = stmt.executeQuery();
+
+                List<Track> result = new ArrayList<>();
+                while (rs.next()) {
+                    result.add(parseTrack(rs));
+                }
+
+                return result;
+            }
+        });
+    }
+
+    @Override
     public List<Track> getTracks(final List<Long> ids) {
         return query(new Action<List<Track>>() {
             @Override
@@ -284,6 +321,50 @@ public class DbStorage implements CatalogStorage {
             }
         });
 
+    }
+
+    @Override
+    public List<Track> searchTracks(final String field, final String value, final List<Long> catalogIds) {
+        return query(new Action<List<Track>>() {
+
+            @Override
+            public List<Track> execute(Connection con) throws SQLException {
+
+                String catalogsPart = "";
+                if (catalogIds != null) {
+                    for (Long cat : catalogIds) {
+                        if (catalogIds.indexOf(cat) == 0) {
+                            catalogsPart = catalogsPart.concat("AND (");
+                        }
+                        catalogsPart = catalogsPart.concat("catalog_id=" + cat);
+                        if (catalogIds.indexOf(cat) != catalogIds.size()-1) {
+                            catalogsPart = catalogsPart.concat(" OR ");
+                        } else {
+                            catalogsPart = catalogsPart.concat(")");
+                        }
+                    }
+                }
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM composition WHERE " +
+                                field + "= ? " +
+                                catalogsPart);
+                if ("code".equals(field)) {
+                    stmt.setLong(1, Long.parseLong(value));
+                } else {
+                    stmt.setString(1, value);
+                }
+
+                stmt.setMaxRows(100);
+
+                ResultSet rs = stmt.executeQuery();
+
+                List<Track> tracks = new ArrayList<>();
+                while (rs.next()) {
+                    tracks.add(parseTrack(rs));
+                }
+                return tracks;
+            }
+        });
     }
 
     public List<Track> searchTracks(final String value) {

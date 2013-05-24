@@ -13,13 +13,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 
 public class SearchServlet extends HttpServlet {
 
     private static final Logger log = Logger.getLogger(SearchServlet.class);
-
+    public static final String ARTIST = "artist";
+    public static final String CODE = "code";
+    public static final String NAME = "name";
+    public static final String COMPOSER = "composer";
 
     private CatalogStorage catalogService;
     private LuceneSearch luceneSearch;
@@ -35,18 +40,12 @@ public class SearchServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String query = req.getParameter("q");
-        String type = req.getParameter("type");
-        String strCatalogId = req.getParameter("catalog");
+        String field = req.getParameter("field");
+
         String strFrom = req.getParameter("from");
         String strPageSize = req.getParameter("pageSize");
 
-        long catalogId = 0;
-
-        if (strCatalogId != null &&
-                !"".equals(strCatalogId) &&
-                !"all".equals(strCatalogId)) {
-            catalogId = Long.parseLong(strCatalogId);
-        }
+        List<Long> catalogIdList = getCatalogsId(req);
 
 //for pagination
 //        int from = 0;
@@ -60,52 +59,55 @@ public class SearchServlet extends HttpServlet {
 //        }
 
 
-        log.debug("Got query: " + query + ", search type: " + type);
+        log.debug("Got query: " + query + ", search type: " + field);
 
-        if (query != null && !"".equals(query.trim()) && type != null) {
+        List<Track> found = null;
 
-            List<Track> found = null;
-            switch (type) {
-                case "like-artist":
-                    found = catalogService.searchTrackByArtistLike(query);
-                    break;
-                case "artist":
-                    found = catalogService.searchTracksByArtist(query);
-                    break;
-                case "code":
-                    found = catalogService.searchTracksByCode(query);
-                    break;
-                case "composition":
-                    found = catalogService.searchTracksByName(query);
-                    break;
-                case "composer":
-                    found = catalogService.searchTracksByComposer(query);
-                    break;
-                default:
-                    try {
-                        List<Long> res = luceneSearch.search(query/*from,pageSize*/);
 
-                        if ("all".equals(strCatalogId) || catalogId == 0) {
-                            found = catalogService.getTracks(res);
-                        } else {
-                            found = catalogService.getTracks(res, catalogId);
-                        }
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    break;
+        if (field.equals("all")) {
+
+            try {
+                List<Long> trackIdList = luceneSearch.search(query/*from,pageSize*/);
+                found = catalogService.getTracks(trackIdList, catalogIdList);
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-
-            HttpSession session = req.getSession();
-
-            session.setAttribute("tracks", found);
-            session.setAttribute("query", query);
-            session.setAttribute("type", type);
-
-
-            resp.sendRedirect("/admin/view/search-result");
-
+        } else {
+            found = catalogService.searchTracks(field, query, catalogIdList);
         }
+
+        HttpSession session = req.getSession();
+
+        session.setAttribute("tracks", found);
+        session.setAttribute("query", query);
+        session.setAttribute("type", field);
+
+
+        resp.sendRedirect("/admin/view/search-result");
+
     }
+
+
+    private List<Long> getCatalogsId(HttpServletRequest req) {
+        Enumeration<String> paramNames = req.getParameterNames();
+        List<Long> idList = new ArrayList<Long>();
+
+        while (paramNames.hasMoreElements()) {
+            String param = paramNames.nextElement();
+
+            if (param.contains("catalog")) {
+                String strCatId = req.getParameter(param);
+                Long id = Long.parseLong(strCatId);
+                if (id == -1) {
+                    return null;
+                }
+                idList.add(id);
+            }
+        }
+
+        return idList;
+
+    }
+
 
 }
