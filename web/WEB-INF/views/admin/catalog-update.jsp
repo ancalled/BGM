@@ -63,7 +63,7 @@
         <div class="span12">
 
             <section>
-                <legend>Обновления по каталогу ${catalog.track}</legend>
+                <legend>Обновления по каталогу ${catalog.name}</legend>
 
                 <div class="apply-pane">
 
@@ -86,7 +86,7 @@
                                         <form action="../action/appy-catalog-update" method="post">
                                             <input class="btn btn-small btn-primary apply-btn" type="submit"
                                                    value="Применить!">
-                                            <input type="hidden" name="id" value="${update.trackId}">
+                                            <input type="hidden" name="id" value="${update.id}">
                                         </form>
                                     <%--</c:if>--%>
                                 </c:otherwise>
@@ -117,7 +117,7 @@
                         <ul>
                             <c:choose>
                                 <c:when test="${from >= pageSize}">
-                                    <li><a href="catalog-update?trackId=${update.trackId}&from=${from - pageSize}">&laquo;</a></li>
+                                    <li><a href="catalog-update?id=${update.id}&from=${from - pageSize}">&laquo;</a></li>
                                 </c:when>
                                 <c:otherwise>
                                     <li class="disabled"><a href="#">&laquo;</a></li>
@@ -127,13 +127,13 @@
                             <c:forEach var="i" begin="1" end="${(update.crossing / pageSize) + 1}" step="1"
                                        varStatus="status">
                                 <li class="${from == (i - 1) * pageSize ? 'active' : ''}">
-                                    <a href="catalog-update?trackId=${update.trackId}&from=${(i - 1) * pageSize}">${i}</a>
+                                    <a href="catalog-update?id=${update.id}&from=${(i - 1) * pageSize}">${i}</a>
                                 </li>
                             </c:forEach>
 
                             <c:choose>
                                 <c:when test="${from + pageSize < update.crossing}">
-                                    <li><a href="catalog-update?trackId=${update.trackId}&from=${from + pageSize}">&raquo;</a></li>
+                                    <li><a href="catalog-update?id=${update.id}&from=${from + pageSize}">&raquo;</a></li>
                                 </c:when>
                                 <c:otherwise>
                                     <li class="disabled"><a href="#">&raquo;</a></li>
@@ -161,10 +161,10 @@
                                 <td class="invariant">${d.number + 1}</td>
                                 <td class="invariant">${d.code}</td>
                                 <td>
-                                    <c:if test="${d.oldTrack.track != d.newTrack.track}">
+                                    <c:if test="${d.oldTrack.name != d.newTrack.name}">
                                         <ul class="unstyled">
-                                            <li class="deleted">${d.oldTrack.track}</li>
-                                            <li>${d.newTrack.track}</li>
+                                            <li class="deleted">${d.oldTrack.name}</li>
+                                            <li>${d.newTrack.name}</li>
                                         </ul>
                                     </c:if>
                                 </td>
@@ -210,7 +210,7 @@
                         <ul>
                             <c:choose>
                                 <c:when test="${from >= pageSize}">
-                                    <li><a href="catalog-update?trackId=${update.trackId}&from=${from - pageSize}">&laquo;</a></li>
+                                    <li><a href="catalog-update?id=${update.id}&from=${from - pageSize}">&laquo;</a></li>
                                 </c:when>
                                 <c:otherwise>
                                     <li class="disabled"><a href="#">&laquo;</a></li>
@@ -220,13 +220,13 @@
                             <c:forEach var="i" begin="1" end="${(update.crossing / pageSize) + 1}" step="1"
                                        varStatus="status">
                                 <li class="${from == (i - 1) * pageSize ? 'active' : ''}">
-                                    <a href="catalog-update?trackId=${update.trackId}&from=${(i - 1) * pageSize}">${i}</a>
+                                    <a href="catalog-update?id=${update.id}&from=${(i - 1) * pageSize}">${i}</a>
                                 </li>
                             </c:forEach>
 
                             <c:choose>
                                 <c:when test="${from + pageSize < update.crossing}">
-                                    <li><a href="catalog-update?trackId=${update.trackId}&from=${from + pageSize}">&raquo;</a></li>
+                                    <li><a href="catalog-update?id=${update.id}&from=${from + pageSize}">&raquo;</a></li>
                                 </c:when>
                                 <c:otherwise>
                                     <li class="disabled"><a href="#">&raquo;</a></li>

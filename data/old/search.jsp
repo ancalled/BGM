@@ -66,7 +66,7 @@
             <tr>
                 <td>${t.code}
                 </td>
-                <td><${t.track}
+                <td><${t.name}
                 </td>
                 <td>${t.artist}
                 </td>

@@ -82,13 +82,13 @@
                 <c:forEach var="t" items="${tracks}">
                     <tr>
                         <td>${t.code}</td>
-                        <td>${t.track}</td>
+                        <td>${t.name}</td>
                         <td>${t.artist}</td>
                         <td>${t.composer}</td>
                         <td>${t.mobileShare}</td>
                         <td>${t.publicShare}</td>
                         <td>${t.catalog}</td>
-                        <td><input type="checkbox" name="check_${t.trackId}" onclick="choseTrack(this)" value="${t.trackId}"/>
+                        <td><input type="checkbox" name="check_${t.id}" onclick="choseTrack(this)" value="${t.id}"/>
                         </td>
                     </tr>
                 </c:forEach>
@@ -124,7 +124,7 @@
     var typeEl = document.getElementById('type');
 
     function change_type(comp) {
-        typeEl.setAttribute('value', comp.trackId);
+        typeEl.setAttribute('value', comp.id);
     }
 </script>
 </body>

@@ -24,21 +24,31 @@
     <option name="FILTER_BY_CURRENT_PROJECT" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/utils/MobileReportUtil.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/utils/MobileReportUtil.java" />
+    <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="Переработка отчетов">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/utils/ReportParser.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/utils/ReportParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ant.xml" afterPath="$PROJECT_DIR$/.idea/ant.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/customer-detail.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/customer-detail.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/customers.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/customers.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/index.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/index.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/report-upload-result.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/report-upload-result.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/customer/report-upload-result.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/customer/report-upload-result.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/search-result.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/search-result.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/customer/search-result.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/customer/search-result.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/admin/search.html" afterPath="$PROJECT_DIR$/web/admin/search.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/customer/search.html" afterPath="$PROJECT_DIR$/web/customer/search.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/old/search.jsp" afterPath="$PROJECT_DIR$/data/old/search.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bgm-platform.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369310700160" ignored="false" />
+    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369367748531" ignored="false" />
     <file path="/CatalogStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369309310599" ignored="false" />
     <file path="/fragment.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369132078301" ignored="false" />
     <file path="db-console:/b524fb0f/bd8e1b6e-fe0f-401f-a88d-0e81e53c8907/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363032963765" ignored="false" />
     <file path="$PROJECT_DIR$/../bgm-platform/bgm-platform-master/web/WEB-INF/web.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363025365937" ignored="false" />
     <file path="/FromBase.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363203397093" ignored="false" />
-    <file path="/index.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369118675060" ignored="false" />
+    <file path="/index.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369367631661" ignored="false" />
     <file path="/FindTrackServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363328585190" ignored="false" />
     <file path="/find.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363037675359" ignored="false" />
     <file path="/Track.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369105540972" ignored="false" />
@@ -82,8 +92,8 @@
     <file path="/ReportServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365120544625" ignored="false" />
     <file path="db-console:/b7405297/0b3a3eb9-be4a-404b-833f-801c635b33d2/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364422520796" ignored="false" />
     <file path="$USER_HOME$/My Documents/GitHub/BGM/.idea/workspace.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364423129656" ignored="false" />
-    <file path="/search.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365114310968" ignored="false" />
-    <file path="/a.dummy" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369204152550" ignored="false" />
+    <file path="/search.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369367456858" ignored="false" />
+    <file path="/a.dummy" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369367837831" ignored="false" />
     <file path="/index.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367162144046" ignored="false" />
     <file path="/Customer.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365112075562" ignored="false" />
     <file path="/CustomerReport.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1366982926463" ignored="false" />
@@ -105,9 +115,9 @@
     <file path="/login.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367099552609" ignored="false" />
     <file path="/LoginServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367162321765" ignored="false" />
     <file path="/LoginFilter.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367163623046" ignored="false" />
-    <file path="/search.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367100452437" ignored="false" />
+    <file path="/search.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369367860342" ignored="false" />
     <file path="/ExitServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367101127671" ignored="false" />
-    <file path="/customers.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367105211359" ignored="false" />
+    <file path="/customers.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369367621466" ignored="false" />
     <file path="/UserAdmin.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367103676468" ignored="false" />
     <file path="/User.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367104595468" ignored="false" />
     <file path="/UploadReportMobileServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369309608454" ignored="false" />
@@ -116,7 +126,7 @@
     <file path="/all-customer-reports.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367115022593" ignored="false" />
     <file path="/LogoutServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367151777078" ignored="false" />
     <file path="/LoginAdminFilter.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367164184546" ignored="false" />
-    <file path="/search-result.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367161924359" ignored="false" />
+    <file path="/search-result.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369367650505" ignored="false" />
     <file path="/LoginAdminServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367163985546" ignored="false" />
     <file path="/main.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367162581593" ignored="false" />
     <file path="/LoginUserFilter.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367164192218" ignored="false" />
@@ -159,7 +169,7 @@
     <file path="/Platform.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369110749793" ignored="false" />
     <file path="/Catalog.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369112856441" ignored="false" />
     <file path="/BGM datasource" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369309491378" ignored="false" />
-    <file path="/catalog.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369281679587" ignored="false" />
+    <file path="/catalog.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369368123201" ignored="false" />
     <file path="/CustomerReportStatistic.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369118605961" ignored="false" />
     <file path="/CatalogLoadResult.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369137480340" ignored="false" />
     <file path="/catalog-update-result.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369138335636" ignored="false" />
@@ -171,7 +181,7 @@
     <file path="$PROJECT_DIR$/../../Next/NewTS/data/forex-market.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369204220862" ignored="false" />
     <file path="/forex-market.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369204174849" ignored="false" />
     <file path="/a.regexp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369219490641" ignored="false" />
-    <file path="/catalog-update.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369223743784" ignored="false" />
+    <file path="/catalog-update.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369367945049" ignored="false" />
     <file path="/Warning.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369222568826" ignored="false" />
     <file path="/UpdateWarning.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369222569801" ignored="false" />
     <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/utils/CryptoHelper.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774335" ignored="false" />
@@ -208,6 +218,8 @@
     <file path="$PROJECT_DIR$/../../strade-client/src/kz/kase/slim/ui/instrument/chart/ChartManagerPanel.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369285774336" ignored="false" />
     <file path="/ApplyUpdateServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369297474253" ignored="false" />
     <file path="/MobileReportUtil.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369310785854" ignored="false" />
+    <file path="/customer-detail.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369367616512" ignored="false" />
+    <file path="/report-upload-result.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1369368033699" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -344,37 +356,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LuceneUtil.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="59" selection-start="1463" selection-end="1463" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="UploadReportMobileServlet.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UploadReportMobileServlet.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="102" column="110" selection-start="3749" selection-end="3749" vertical-scroll-proportion="0.0">
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CatalogStorage.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="50" selection-start="1439" selection-end="1439" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReportParser.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ReportParser.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/ReportParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="32" selection-start="1816" selection-end="1816" vertical-scroll-proportion="0.6126761">
+            <state line="28" column="54" selection-start="1026" selection-end="1026" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -398,28 +394,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scheme.sql" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/scheme.sql">
+      <file leaf-file-name="catalog.jsp" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="104" column="0" selection-start="2155" selection-end="2246" vertical-scroll-proportion="0.0">
+            <state line="92" column="25" selection-start="2397" selection-end="2397" vertical-scroll-proportion="0.36585367">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BGM datasource" pinned="false" current="false" current-in-tab="false">
-        <entry file="dbDummy://db-console:/4e802f14/b1ed7fcf-b56a-49b0-a869-b1a4c75c3585/">
+      <file leaf-file-name="LuceneTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/kz/bgm/platform/test/lucene/LuceneTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="2" selection-start="877" selection-end="1058" vertical-scroll-proportion="0.0">
+            <state line="103" column="39" selection-start="3509" selection-end="3509" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ReportItemTrack.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/domain/ReportItemTrack.java">
+      <file leaf-file-name="Catalog.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/domain/Catalog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="17" selection-start="924" selection-end="924" vertical-scroll-proportion="0.0">
+            <state line="3" column="13" selection-start="53" selection-end="53" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -449,22 +445,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/DispatcherServlet.java" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp" />
-        <option value="$PROJECT_DIR$/data/replace-empty-lines.sh" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/ApplyUpdateServlet.java" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CustomerReportItem.java" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/ReportItemTrack.java" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" />
-        <option value="$PROJECT_DIR$/data/scheme.sql" />
-        <option value="db-console:/4e802f14/b1ed7fcf-b56a-49b0-a869-b1a4c75c3585/" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UploadReportMobileServlet.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/utils/MobileReportUtil.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/utils/ReportParser.java" />
+        <option value="$PROJECT_DIR$/data/old/search.jsp" />
+        <option value="$PROJECT_DIR$/web/admin/search.html" />
+        <option value="$PROJECT_DIR$/web/customer/search.html" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/customer-detail.jsp" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/customers.jsp" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/index.jsp" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/report-upload-result.jsp" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/search-result.jsp" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/views/customer/report-upload-result.jsp" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/views/customer/search-result.jsp" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" />
       </list>
     </option>
   </component>
@@ -530,6 +526,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -931,7 +928,6 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1489,11 +1485,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="53" y="24" width="1547" height="876" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5494071" sideWeight="0.49713057" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.54821664" sideWeight="0.49713057" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39630118" sideWeight="0.49675852" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.260493" sideWeight="0.6287979" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31836197" sideWeight="0.49027553" order="3" side_tool="false" content_ui="tabs" />
@@ -1511,14 +1508,13 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2631579" sideWeight="0.6287979" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2631579" sideWeight="0.45178336" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.51519156" sideWeight="0.45137763" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3712021" sideWeight="0.493517" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39630118" sideWeight="0.49675852" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1626,100 +1622,100 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneIndexRebuildUtil.java">
+    <entry file="file://$PROJECT_DIR$/data/old/search.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="35" selection-start="421" selection-end="443" vertical-scroll-proportion="0.0">
+        <state line="68" column="29" selection-start="2109" selection-end="2109" vertical-scroll-proportion="0.3523316">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/ApplyUpdateServlet.java">
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/ReportParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="50" selection-start="1648" selection-end="1648" vertical-scroll-proportion="0.0">
+        <state line="28" column="54" selection-start="1026" selection-end="1026" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/admin/search.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="65" column="20" selection-start="2370" selection-end="2370" vertical-scroll-proportion="0.6735751">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/customer/search.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="44" selection-start="2408" selection-end="2408" vertical-scroll-proportion="0.634715">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/kz/bgm/platform/test/lucene/LuceneTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="103" column="39" selection-start="3509" selection-end="3509" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="21" selection-start="1403" selection-end="1403" vertical-scroll-proportion="5.0">
+        <state line="131" column="52" selection-start="5129" selection-end="5129" vertical-scroll-proportion="0.4974093">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp">
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/customer-detail.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="180" column="24" selection-start="4984" selection-end="4984" vertical-scroll-proportion="-3.75">
+        <state line="68" column="22" selection-start="1825" selection-end="1825" vertical-scroll-proportion="0.7343283">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CustomerReportStatistic.java">
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/customers.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="13" selection-start="76" selection-end="76" vertical-scroll-proportion="0.0">
+        <state line="79" column="27" selection-start="2240" selection-end="2240" vertical-scroll-proportion="0.73134327">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java">
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="245" column="35" selection-start="8041" selection-end="8041" vertical-scroll-proportion="0.0">
+        <state line="50" column="42" selection-start="1750" selection-end="1750" vertical-scroll-proportion="0.42089552">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java">
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/report-upload-result.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="50" selection-start="1439" selection-end="1439" vertical-scroll-proportion="0.0">
+        <state line="28" column="27" selection-start="907" selection-end="909" vertical-scroll-proportion="0.3523316">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/scheme.sql">
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/search-result.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="0" selection-start="2155" selection-end="2246" vertical-scroll-proportion="0.0">
+        <state line="90" column="48" selection-start="3256" selection-end="3256" vertical-scroll-proportion="0.3316062">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://db-console:/4e802f14/b1ed7fcf-b56a-49b0-a869-b1a4c75c3585/">
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/customer/report-upload-result.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="2" selection-start="877" selection-end="1058" vertical-scroll-proportion="0.0">
+        <state line="28" column="27" selection-start="909" selection-end="909" vertical-scroll-proportion="0.3523316">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/domain/ReportItemTrack.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="17" selection-start="924" selection-end="924" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/LuceneUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="59" selection-start="1463" selection-end="1463" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UploadReportMobileServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="110" selection-start="3749" selection-end="3749" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="599" column="0" selection-start="19697" selection-end="19697" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CustomerReportItem.java">
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/domain/Catalog.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="13" selection-start="53" selection-end="53" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/customer/search-result.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="126" column="44" selection-start="4150" selection-end="4150" vertical-scroll-proportion="0.9611399">
           <folding />
         </state>
       </provider>
@@ -1731,9 +1727,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/utils/ReportParser.java">
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="32" selection-start="1816" selection-end="1816" vertical-scroll-proportion="0.6126761">
+        <state line="92" column="25" selection-start="2397" selection-end="2397" vertical-scroll-proportion="0.36585367">
           <folding />
         </state>
       </provider>
