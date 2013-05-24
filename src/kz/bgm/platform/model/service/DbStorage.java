@@ -1574,6 +1574,7 @@ public class DbStorage implements CatalogStorage {
         catalog.setRoyalty(rs.getFloat("royalty"));
         catalog.setCopyright(rs.getString("copyright"));
         catalog.setTracks(rs.getInt("tracks"));
+        catalog.setPlatformId(rs.getLong("platform_id"));
         catalog.setArtists(rs.getInt("artists"));
         return catalog;
     }

@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 
 
 public class SearchServlet extends HttpServlet {
@@ -41,13 +42,11 @@ public class SearchServlet extends HttpServlet {
 
         String query = req.getParameter("q");
         String field = req.getParameter("field");
-
-        String strFrom = req.getParameter("from");
-        String strPageSize = req.getParameter("pageSize");
-
         List<Long> catalogIdList = getCatalogsId(req);
 
 //for pagination
+//        String strFrom = req.getParameter("from");
+//        String strPageSize = req.getParameter("pageSize");
 //        int from = 0;
 //        int pageSize = 50;
 //        if (strFrom != null&&!"".equals(strFrom)) {
@@ -63,19 +62,25 @@ public class SearchServlet extends HttpServlet {
 
         List<Track> found = null;
 
+        try {
+            switch (field) {
+                case "all":
+                    List<Long> trackIdList = luceneSearch.search(query/*from,pageSize*/);
 
-        if (field.equals("all")) {
+                    if (!catalogIdList.isEmpty()) {
+                        found = catalogService.getTracks(trackIdList, catalogIdList);
+                    } else {
+                        found = catalogService.getTracks(trackIdList);
+                    }
 
-            try {
-                List<Long> trackIdList = luceneSearch.search(query/*from,pageSize*/);
-                found = catalogService.getTracks(trackIdList, catalogIdList);
-            } catch (ParseException e) {
-                e.printStackTrace();
+                    break;
+                default:
+                    found = catalogService.searchTracks(field, query, catalogIdList);
+                    break;
             }
-        } else {
-            found = catalogService.searchTracks(field, query, catalogIdList);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-
         HttpSession session = req.getSession();
 
         session.setAttribute("tracks", found);
@@ -83,7 +88,32 @@ public class SearchServlet extends HttpServlet {
         session.setAttribute("type", field);
 
 
-        resp.sendRedirect("/admin/view/search-result");
+        StringBuilder respPath = new StringBuilder();
+
+        respPath.append("/admin/view/search-result");
+//
+//        if (!catalogIdList.isEmpty()) {
+//            respPath.append("?");
+//            for (Long cid : catalogIdList) {
+//
+//                respPath.append(cid.toString());
+//                respPath.append("&");
+//            }
+//        }
+        Map<String, String[]> paramMap = req.getParameterMap();
+        if (!paramMap.keySet().isEmpty()) {
+            respPath.append("?");
+
+            for (String paramName : paramMap.keySet()) {
+                respPath.append(paramName);
+                respPath.append("=");
+                respPath.append(paramMap.get(paramName)[0]);
+                respPath.append("&");
+            }
+
+        }
+
+        resp.sendRedirect(respPath.toString());
 
     }
 
@@ -99,7 +129,7 @@ public class SearchServlet extends HttpServlet {
                 String strCatId = req.getParameter(param);
                 Long id = Long.parseLong(strCatId);
                 if (id == -1) {
-                    return null;
+                    return idList;
                 }
                 idList.add(id);
             }

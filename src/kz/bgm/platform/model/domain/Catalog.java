@@ -7,9 +7,18 @@ public class Catalog {
     private String name;
     private float royalty;
     private String copyright;
-
+    private long platformId;
     private int tracks;
     private int artists;
+
+
+    public long getPlatformId() {
+        return platformId;
+    }
+
+    public void setPlatformId(long platformId) {
+        this.platformId = platformId;
+    }
 
     public void setCopyright(String copyright) {
         this.copyright = copyright;

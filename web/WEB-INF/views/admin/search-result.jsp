@@ -31,51 +31,59 @@
         <input type="hidden" name="pageSize" id="till-p">
 
         <%--<div class="hero-unit" style="padding: 10px">--%>
-            <div class="container-fluid" style="border-bottom-style: solid;border-color: #ececec;border-bottom-width: 1px;padding: 10px">
-                <div class="row-fluid">
+        <div class="container-fluid"
+             style="border-bottom-style: solid;border-color: #ececec;border-bottom-width: 1px;padding: 10px">
+            <div class="row-fluid">
 
-                    <div class="span6">
-                        <label for="query"></label><input type="text" name="q" id="query" class="input-block-level"
-                                                          style="margin-top: 0px">
+                <div class="span6">
+                    <label for="query"></label><input type="text" name="q" id="query" class="input-block-level"
+                                                      style="margin-top: 0px">
 
-                        <input type="submit" value="Поиск" class="btn">
-                    </div>
+                    <input type="submit" value="Поиск" class="btn">
+                </div>
 
 
-                    <div class="span3">
-                        <h4>Поле</h4>
-                        <input type="radio" style="margin-right: 10px" value="all" id="all-field" name="field">Полный
-                        поиск<br>
-                        <input type="radio" style="margin-right: 10px" value="code" name="field">Код <br>
-                        <input type="radio" style="margin-right: 10px" value="artist" name="field">Артист <br>
-                        <input type="radio" style="margin-right: 10px" value="composer" name="field">Автор <br>
-                        <input type="radio" style="margin-right: 10px" value="name" name="field">Композиция <br>
-                    </div>
+                <div class="span3" align="right">
+                    <h4>Поле</h4>
+                    Полный поиск <input type="radio" style="margin-left: 10px" value="all" id="all-field" name="field">
+                    <br>
+                    Код<input type="radio" style="margin-left: 10px" value="code" name="field"> <br>
+                    Артист<input type="radio" style="margin-left: 10px" value="artist" name="field"> <br>
+                    Автор<input type="radio" style="margin-left: 10px" value="composer" name="field"> <br>
+                    Композиция<input type="radio" style="margin-left: 10px" value="name" name="field"> <br>
+                </div>
 
-                    <div class="span3 pull-left">
-                        <h4>Каталог</h4>
-                        <c:if test="${not empty catalogs}">
-                            <ul class="nav nav-list bs-docs-sidenav">
-                                <li>
-                                    <input id="all-cat" type="checkbox" onchange="deselectForEachCatalog()" value="-1"
-                                           name="catalog"
-                                           style="margin-right: 10px;font-size: 11pt">
-                                    Все
+                <div class="span3 pull-left" style="padding-left: 15px">
+                    <h4>Платформа</h4>
+                    <ul class="nav nav-list bs-docs-sidenav">
+
+                        <li>
+                            <input id="all-cat" type="checkbox" onchange="deselectForEachCatalog()" value="-1"
+                                   name="catalog"
+                                   style="margin-right: 10px;font-size: 11pt">
+                            Все
+                        </li>
+                        <c:forEach var="p" items="${platforms}">
+
+                            <h4>${p.name}</h4>
+
+
+                            <c:forEach var="c" items="${p.catalogs}">
+
+                                <li style="font-size: 11pt">
+                                    <input type="checkbox" value="${c.id}" onchange="deselectAllCatalogs()"
+                                           name="catalog${c.id}" style="margin-right: 10px;font-size: 11pt">
+                                        ${c.name}
                                 </li>
-                                <c:forEach var="c" items="${catalogs}">
-                                    <li style="font-size: 11pt">
-                                        <input type="checkbox" value="${c.id}" onchange="deselectAllCatalogs()"
-                                               name="catalog${c.id}" style="margin-right: 10px;font-size: 11pt">
-                                            ${c.name}
-                                    </li>
-                                </c:forEach>
-                            </ul>
-                        </c:if>
-                    </div>
+                            </c:forEach>
 
+                        </c:forEach>
+                    </ul>
                 </div>
 
             </div>
+
+        </div>
         <%--</div>--%>
 
         <input type="hidden" id="type" name="type" value="full">
@@ -189,12 +197,28 @@
 
 </div>
 <script>
+    var isAny = false;
+    function updateParams() {
+        $('[type=checkbox]').each(function () {
+            var param = getParameterByName((this).name);
+
+            if (param != "") {
+                $(this).prop('checked', true);
+                isAny = true;
+            }
+
+        });
+        if (isAny == false) {
+            $('#all-cat').prop('checked', true);
+        }
+    }
+
+
     var searchForm = document.getElementById("searcher");
     var from_page_input = document.getElementById("from-p");
     var till_page_input = document.getElementById("till-p");
     var search_input = document.getElementById("query");
 
-    $('#all-cat').prop('checked', true);
     $('#all-field').prop('checked', true);
 
     function nextPage(from) {
@@ -205,24 +229,39 @@
     }
 
     function deselectForEachCatalog() {
-        var count =0;
+        var count = 0;
 
         $('[type=checkbox]').each(function () {
-            if ($(this).prop('checked')&&(this).id!=="all-cat") {
+            if ($(this).prop('checked') && (this).id !== "all-cat") {
                 $(this).prop('checked', false);
                 count++;
             }
 
         });
-           if(count==0){
-               $('#all-cat').prop('checked', true);
-           }
+        if (count == 0) {
+            $('#all-cat').prop('checked', true);
+        }
     }
 
 
     function deselectAllCatalogs() {
         $('#all-cat').prop('checked', false);
     }
+
+    updateParams();
+
+
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regexS = "[\\?&]" + name + "=([^&#]*)";
+        var regex = new RegExp(regexS);
+        var results = regex.exec(window.location.search);
+        if (results == null)
+            return "";
+        else
+            return decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
 
 </script>
 </body>
