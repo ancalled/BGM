@@ -30,54 +30,61 @@
         <input type="hidden" name="from" id="from-p">
         <input type="hidden" name="pageSize" id="till-p">
 
+        <%--<div class="hero-unit" style="padding: 10px">--%>
+        <div class="container-fluid"
+             style="border-bottom-style: solid;border-color: #ececec;border-bottom-width: 1px;padding: 10px">
+            <div class="row-fluid">
 
-        <div class="row">
-            <label for="query"></label><input type="text" name="q" id="query" class="input-block-level span6"
-                                              style="margin-top: 10px">
+                <div class="span6">
+                    <label for="query"></label><input type="text" name="q" id="query" class="input-block-level"
+                                                      style="margin-top: 0px">
 
-            <input type="submit" value="Поиск" class="btn">
-        </div>
+                    <input type="submit" value="Поиск" class="btn">
+                </div>
 
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                Расширенный поиск
-            </a>
-        </div>
-        <div id="collapseTwo" class="accordion-body in collapse" style="height: auto;">
-            <div class="accordion-inner">
-                <div class="container-fluid">
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"
-                        style="display: block; position: static; margin-bottom: 5px; *width: 180px;">
-                        <li><a tabindex="-1" id="code" onclick="change_type(this)">Код композиции</a></li>
-                        <li><a tabindex="-1" id="artist" onclick="change_type(this)">Артист</a></li>
-                        <li><a tabindex="-1" id="composition" onclick="change_type(this)">Композиция</a></li>
-                        <li class="divider"></li>
-                        <li><a tabindex="-1" id="full" onclick="change_type(this)">Полный поиск</a></li>
+
+                <div class="span3" align="right">
+                    <h4>Поле</h4>
+                    Полный поиск <input type="radio" style="margin-left: 10px" value="all" id="all-field" name="field">
+                    <br>
+                    Код<input type="radio" style="margin-left: 10px" value="code" name="field"> <br>
+                    Артист<input type="radio" style="margin-left: 10px" value="artist" name="field"> <br>
+                    Автор<input type="radio" style="margin-left: 10px" value="composer" name="field"> <br>
+                    Композиция<input type="radio" style="margin-left: 10px" value="name" name="field"> <br>
+                </div>
+
+                <div class="span3 pull-left" style="padding-left: 15px">
+                    <h4>Платформа</h4>
+                    <ul class="nav nav-list bs-docs-sidenav">
+
+                        <li>
+                            <input id="all-cat" type="checkbox" onchange="deselectForEachCatalog()" value="-1"
+                                   name="catalog"
+                                   style="margin-right: 10px;font-size: 11pt">
+                            Все
+                        </li>
+                        <c:forEach var="p" items="${platforms}">
+
+                            <h4>${p.name}</h4>
+
+
+                            <c:forEach var="c" items="${p.catalogs}">
+
+                                <li style="font-size: 11pt">
+                                    <input type="checkbox" value="${c.id}" onchange="deselectAllCatalogs()"
+                                           name="catalog${c.id}" style="margin-right: 10px;font-size: 11pt">
+                                        ${c.name}
+                                </li>
+                            </c:forEach>
+
+                        </c:forEach>
                     </ul>
-
-                <c:if test="${not empty catalogs}">
-                        <label>
-                            <select name="catalog", style="margin-left: 20px">
-                                <option value="all">Все</option>
-
-                                <c:forEach var="c" items="${catalogs}">
-
-
-                                <option value="${c.trackId}">${c.track}</option>
-
-                                </c:forEach>
-                            </select>
-                        </label>
-
-                    </div>
-                </c:if>
+                </div>
 
             </div>
+
         </div>
-
-
-        <br>
-
+        <%--</div>--%>
 
         <input type="hidden" id="type" name="type" value="full">
     </form>
@@ -88,7 +95,7 @@
         var typeEl = document.getElementById('type');
 
         function change_type(comp) {
-            typeEl.setAttribute('value', comp.trackId);
+            typeEl.setAttribute('value', comp.id);
         }
     </script>
 
@@ -145,7 +152,7 @@
             <c:forEach var="t" items="${tracks}">
                 <tr>
                     <td>${t.code}</td>
-                    <td>${t.track}</td>
+                    <td>${t.name}</td>
                     <td>${t.artist}</td>
                     <td>${t.composer}</td>
                     <td>${t.mobileShare}</td>
@@ -190,12 +197,29 @@
 
 </div>
 <script>
+    var isAny = false;
+    function updateParams() {
+        $('[type=checkbox]').each(function () {
+            var param = getParameterByName((this).name);
+
+            if (param != "") {
+                $(this).prop('checked', true);
+                isAny = true;
+            }
+
+        });
+        if (isAny == false) {
+            $('#all-cat').prop('checked', true);
+        }
+    }
+
+
     var searchForm = document.getElementById("searcher");
     var from_page_input = document.getElementById("from-p");
     var till_page_input = document.getElementById("till-p");
     var search_input = document.getElementById("query");
 
-    $(".collapse").collapse()
+    $('#all-field').prop('checked', true);
 
     function nextPage(from) {
         from_page_input.value = from;
@@ -203,6 +227,42 @@
         search_input.value = '${query}';
         searchForm.submit();
     }
+
+    function deselectForEachCatalog() {
+        var count = 0;
+
+        $('[type=checkbox]').each(function () {
+            if ($(this).prop('checked') && (this).id !== "all-cat") {
+                $(this).prop('checked', false);
+                count++;
+            }
+
+        });
+        if (count == 0) {
+            $('#all-cat').prop('checked', true);
+        }
+    }
+
+
+    function deselectAllCatalogs() {
+        $('#all-cat').prop('checked', false);
+    }
+
+    updateParams();
+
+
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regexS = "[\\?&]" + name + "=([^&#]*)";
+        var regex = new RegExp(regexS);
+        var results = regex.exec(window.location.search);
+        if (results == null)
+            return "";
+        else
+            return decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+
 </script>
 </body>
 </html>

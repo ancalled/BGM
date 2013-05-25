@@ -26,7 +26,7 @@ public class ReportParser {
         log.info("Parsing mobile report from: " + fileName + "... ");
         Workbook wb = ExcelUtils.openFile(new File(fileName));
 
-        List<CustomerReportItem> items = new ArrayList<CustomerReportItem>();
+        List<CustomerReportItem> items = new ArrayList<>();
         Sheet sheet = wb.getSheetAt(FIRST_SHEET);
         int rows = sheet.getPhysicalNumberOfRows();
 

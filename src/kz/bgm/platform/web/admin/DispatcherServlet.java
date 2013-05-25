@@ -91,17 +91,20 @@ public class DispatcherServlet extends HttpServlet {
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
 
                         HttpSession ses = req.getSession();
-                        int from = 0;
 
-                        String strFrom = req.getParameter("from");
+//                        int from = 0;
+//                        String strFrom = req.getParameter("from");
+//
+//                        if (strFrom != null) {
+//                            from = Integer.parseInt(strFrom);
+//                        }
+                 //todo закончить пагинацию
+                        List<Platform> platforms = catalogStorage.getAllPlatforms();
 
-                        if (strFrom != null) {
-                            from = Integer.parseInt(strFrom);
-                        }
-                        req.setAttribute("catalogs", catalogStorage.getAllCatalogs());
+                        req.setAttribute("platforms", platforms);
                         req.setAttribute("query", ses.getAttribute("query"));
                         req.setAttribute("tracks", ses.getAttribute("tracks"));
-                        req.setAttribute("from", from);
+//                        req.setAttribute("from", from);
                         req.setAttribute("pageSize", TRACKS_PER_PAGE);
                         return "search-result";
                     }

@@ -41,13 +41,13 @@
 
                 <c:forEach var="p" items="${platforms}">
 
-                    <h4>${p.track}</h4>
+                    <h4>${p.name}</h4>
 
                     <dl class="dl-horizontal">
                         <c:forEach var="c" items="${p.catalogs}">
                             <dt>
-                                <a href="catalog?catId=${c.trackId}">
-                                        ${c.track}
+                                <a href="catalog?catId=${c.id}">
+                                        ${c.name}
                                 </a>
                             </dt>
                             <dd>
