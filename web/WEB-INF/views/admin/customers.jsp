@@ -24,7 +24,7 @@
         </legend>
     </div>
 
-    <table class="table table-hover">
+    <table class="table">
         <thead>
         <tr>
             <th>Название</th>
@@ -56,12 +56,17 @@
                     </c:choose>
                 </td>
                 <td>
-                    <a href="/admin/action/delete-customer?customer-id=${c.id}">
-                        <i class="icon-trash"></i>
-                    </a>
+
+                    <i class="icon-trash" id="${c.id}"></i>
+
+                        <%--<a href="/admin/action/delete-customer?customer-id=${c.id}">--%>
+                        <%--<i class="icon-trash"></i>--%>
+                        <%--</a>--%>
                 </td>
             </tr>
             </a>
+
+
         </c:forEach>
 
         </tbody>
@@ -75,6 +80,55 @@
 
 </div>
 
+
+<%--Modal--%>
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Удаление клиента</h3>
+    </div>
+    <div class="modal-body">
+        <p>Вы действительно хотите удалить компанию ?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal">Нет</button>
+        <button class="btn btn-primary" id="remove-btn" aria-hidden="true">Да</button>
+    </div>
+</div>
+<%--====================--%>
+
+<form action="/admin/action/delete-customer" method="post" id="customer-remove">
+
+    <input type="hidden" id="customer" name="customer-id">
+
+</form>
+
+<script>
+    var delButtons = document.getElementsByTagName('i');
+    for (var i = 0; i < delButtons.length; ++i) {
+        var but = delButtons[i];
+        $(but).mouseenter(function () {
+            $(this).css('opacity', '0.3');
+        });
+        $(but).mouseout(function () {
+            $(this).css('opacity', '1');
+        });
+        $(but).click(function () {
+            $('#customer').val(this.id);
+            $('#remove-btn').click(function () {
+               submitRemover();
+            });
+            $('#myModal').modal('show');
+
+        });
+    }
+
+
+    function submitRemover() {
+        document.getElementById("customer-remove").submit();
+    }
+
+</script>
 
 </body>
 </html>

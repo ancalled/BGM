@@ -29,7 +29,7 @@ public class CreateCustomerServlet extends HttpServlet {
         if (hasNullParameter(req)) {
             resp.sendRedirect("/admin/view/customers");
         }
-
+        req.setCharacterEncoding("UTF-8");
 
         String name = req.getParameter("name");
         String right = req.getParameter("right");

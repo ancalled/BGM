@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <html>
 <head>
     <script src="/js/jquery.js"></script>
@@ -30,7 +31,7 @@
     </div>
     <div class="span4">
 
-        <form action="/admin/action/create-user" method="post">
+        <form action="/admin/action/create-user" method="post" enctype="">
             <label>
                 Имя
                 <input type="text" name="login" class="input-block-level" required="true">
