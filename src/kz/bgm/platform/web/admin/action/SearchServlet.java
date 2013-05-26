@@ -87,19 +87,15 @@ public class SearchServlet extends HttpServlet {
         session.setAttribute("query", query);
         session.setAttribute("type", field);
 
+        String pathWithParams = getReqParams(req);
 
+        resp.sendRedirect(pathWithParams);
+
+    }
+
+    private String getReqParams(HttpServletRequest req) {
         StringBuilder respPath = new StringBuilder();
-
         respPath.append("/admin/view/search-result");
-//
-//        if (!catalogIdList.isEmpty()) {
-//            respPath.append("?");
-//            for (Long cid : catalogIdList) {
-//
-//                respPath.append(cid.toString());
-//                respPath.append("&");
-//            }
-//        }
         Map<String, String[]> paramMap = req.getParameterMap();
         if (!paramMap.keySet().isEmpty()) {
             respPath.append("?");
@@ -112,9 +108,7 @@ public class SearchServlet extends HttpServlet {
             }
 
         }
-
-        resp.sendRedirect(respPath.toString());
-
+        return respPath.toString();
     }
 
 

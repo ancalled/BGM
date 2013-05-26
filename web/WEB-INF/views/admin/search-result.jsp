@@ -56,28 +56,30 @@
                 <div class="span3 pull-left" style="padding-left: 15px">
                     <h4>Платформа</h4>
                     <ul class="nav nav-list bs-docs-sidenav">
-
+                        <div style="height:220px;width:170px;border:1px solid #ececec;overflow:auto;padding: 5px">
                         <li>
                             <input id="all-cat" type="checkbox" onchange="deselectForEachCatalog()" value="-1"
                                    name="catalog"
                                    style="margin-right: 10px;font-size: 11pt">
                             Все
                         </li>
-                        <c:forEach var="p" items="${platforms}">
 
-                            <h4>${p.name}</h4>
+                            <c:forEach var="p" items="${platforms}">
+
+                                <h4>${p.name}</h4>
 
 
-                            <c:forEach var="c" items="${p.catalogs}">
+                                <c:forEach var="c" items="${p.catalogs}">
 
-                                <li style="font-size: 11pt">
-                                    <input type="checkbox" value="${c.id}" onchange="deselectAllCatalogs()"
-                                           name="catalog${c.id}" style="margin-right: 10px;font-size: 11pt">
-                                        ${c.name}
-                                </li>
+                                    <li style="font-size: 11pt">
+                                        <input type="checkbox" value="${c.id}" onchange="deselectAllCatalogs()"
+                                               name="catalog${c.id}" style="margin-right: 10px;font-size: 11pt">
+                                            ${c.name}
+                                    </li>
+                                </c:forEach>
+
                             </c:forEach>
-
-                        </c:forEach>
+                        </div>
                     </ul>
                 </div>
 
@@ -86,7 +88,6 @@
         </div>
         <%--</div>--%>
 
-        <input type="hidden" id="type" name="type" value="full">
     </form>
 
 
@@ -197,29 +198,44 @@
 
 </div>
 <script>
-    var isAny = false;
-    function updateParams() {
-        $('[type=checkbox]').each(function () {
-            var param = getParameterByName((this).name);
-
-            if (param != "") {
-                $(this).prop('checked', true);
-                isAny = true;
-            }
-
-        });
-        if (isAny == false) {
-            $('#all-cat').prop('checked', true);
-        }
-    }
-
-
     var searchForm = document.getElementById("searcher");
     var from_page_input = document.getElementById("from-p");
     var till_page_input = document.getElementById("till-p");
     var search_input = document.getElementById("query");
 
-    $('#all-field').prop('checked', true);
+    function updateParams() {
+        var isAny = false;
+
+        $('[type=checkbox]').each(function () {
+            var param = getParameterByName((this).name);
+            if (param == this.value) {
+                $(this).prop('checked', true);
+                isAny = true;
+            }
+        });
+
+        if (isAny == false) {
+            $('#all-cat').prop('checked', true);
+        }
+
+        var field = getParameterByName('field');
+        var filedEmpty = true;
+        $('[type=radio]').each(function () {
+            if (this.value == field) {
+                filedEmpty = false;
+                $(this).prop('checked', true);
+            }
+        });
+
+        if (filedEmpty == true) {
+            $('#all-field').prop('checked', true);
+        }
+
+        var query = getParameterByName('q');
+        search_input.value = query;
+
+    }
+
 
     function nextPage(from) {
         from_page_input.value = from;

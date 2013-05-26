@@ -256,7 +256,7 @@ public class DbStorage implements CatalogStorage {
                             catalogsPart = catalogsPart.concat("AND (");
                         }
                         catalogsPart = catalogsPart.concat("catalog_id=" + cat);
-                        if (catalogIds.indexOf(cat) != catalogIds.size()-1) {
+                        if (catalogIds.indexOf(cat) != catalogIds.size() - 1) {
                             catalogsPart = catalogsPart.concat(" OR ");
                         } else {
                             catalogsPart = catalogsPart.concat(")");
@@ -265,7 +265,7 @@ public class DbStorage implements CatalogStorage {
                 }
 
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM composition WHERE id IN (" + DbStorage.asString(ids) + ") "+catalogsPart);
+                        "SELECT * FROM composition WHERE id IN (" + DbStorage.asString(ids) + ") " + catalogsPart);
 
                 ResultSet rs = stmt.executeQuery();
 
@@ -337,7 +337,7 @@ public class DbStorage implements CatalogStorage {
                             catalogsPart = catalogsPart.concat("AND (");
                         }
                         catalogsPart = catalogsPart.concat("catalog_id=" + cat);
-                        if (catalogIds.indexOf(cat) != catalogIds.size()-1) {
+                        if (catalogIds.indexOf(cat) != catalogIds.size() - 1) {
                             catalogsPart = catalogsPart.concat(" OR ");
                         } else {
                             catalogsPart = catalogsPart.concat(")");
@@ -349,7 +349,12 @@ public class DbStorage implements CatalogStorage {
                                 field + "= ? " +
                                 catalogsPart);
                 if ("code".equals(field)) {
-                    stmt.setLong(1, Long.parseLong(value));
+                    try {
+                        stmt.setLong(1, Long.parseLong(value));
+                    } catch (NumberFormatException ne) {
+                        System.out.println("not digits input");
+                        return Collections.emptyList();
+                    }
                 } else {
                     stmt.setString(1, value);
                 }
