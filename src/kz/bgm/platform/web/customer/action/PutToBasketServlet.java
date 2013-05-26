@@ -2,9 +2,11 @@ package kz.bgm.platform.web.customer.action;
 
 
 import kz.bgm.platform.model.domain.Track;
+import kz.bgm.platform.model.domain.User;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import kz.bgm.platform.model.service.TrackBasket;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +21,7 @@ import java.util.List;
 public class PutToBasketServlet extends HttpServlet {
 
     CatalogStorage storage;
+    private static final Logger log = Logger.getLogger(PutToBasketServlet.class);
 
     @Override
     public void init() throws ServletException {
@@ -29,11 +32,31 @@ public class PutToBasketServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
-        TrackBasket basket = (TrackBasket) session.getAttribute("basket");
 
-        if (basket != null) {
-            List<Track> idList = getTracks(req);
-            basket.addTrack(idList);
+        User user = (User) session.getAttribute("user");
+
+        if (user != null) {
+            TrackBasket basket = (TrackBasket) session.getAttribute("basket");
+
+            if (basket != null) {
+                log.info("Adding track in basket of user \n" +
+                        "    login :" + user.getLogin() + "\n" +
+                        "    id    :" + user.getId());
+
+                List<Track> trackList = getTracks(req);
+
+                log.info("Track ids :");
+                for (Track t : trackList) {
+                    log.info(t.getId());
+                }
+
+                basket.addTracks(trackList);
+
+            } else {
+                log.warn("Basket is not found");
+            }
+        } else {
+            log.warn("User not found");
         }
 
         resp.sendRedirect("/customer/view/search-result");

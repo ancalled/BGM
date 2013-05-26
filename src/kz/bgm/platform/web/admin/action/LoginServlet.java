@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
             AdminUser user = catalogStorage.getAdmin(login, pass);
             if (user != null) {
                 HttpSession session = req.getSession();
-                session.setAttribute("user", user);
+                session.setAttribute("admin", user);
 
                 log.info("Admin authorized login : " + login);
 

@@ -27,7 +27,7 @@ public class AuthFilter implements Filter {
         HttpSession ses = req.getSession(false);
 
         if (ses != null) {
-            AdminUser adminUser = (AdminUser) ses.getAttribute("user");
+            AdminUser adminUser = (AdminUser) ses.getAttribute("admin");
 
             if (adminUser != null) {
                 filterChain.doFilter(servletRequest, servletResponse);

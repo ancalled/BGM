@@ -1,9 +1,6 @@
 package kz.bgm.platform.web.customer;
 
-import kz.bgm.platform.model.domain.Customer;
-import kz.bgm.platform.model.domain.CustomerReport;
-import kz.bgm.platform.model.domain.CustomerReportItem;
-import kz.bgm.platform.model.domain.CustomerReportStatistic;
+import kz.bgm.platform.model.domain.*;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 
@@ -24,7 +21,7 @@ public class DispatcherServlet extends HttpServlet {
 
     public static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
-
+    public static final int TRACKS_PER_PAGE = 50;
     private CatalogStorage catalogStorage;
 
     @Override
@@ -47,16 +44,25 @@ public class DispatcherServlet extends HttpServlet {
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
 
                         HttpSession ses = req.getSession();
-                        if (ses == null) return null;
 
+//                        int from = 0;
+//                        String strFrom = req.getParameter("from");
+//
+//                        if (strFrom != null) {
+//                            from = Integer.parseInt(strFrom);
+//                        }
+                        //todo закончить пагинацию
+                        List<Platform> platforms = catalogStorage.getAllPlatforms();
+
+                        req.setAttribute("platforms", platforms);
                         req.setAttribute("query", ses.getAttribute("query"));
                         req.setAttribute("tracks", ses.getAttribute("tracks"));
-
+//                        req.setAttribute("from", from);
+                        req.setAttribute("pageSize", TRACKS_PER_PAGE);
                         return "search-result";
                     }
                 };
                 break;
-
             case "/report-upload-result":
                 action = new Action() {
                     @Override
@@ -90,80 +96,37 @@ public class DispatcherServlet extends HttpServlet {
                 action = new Action() {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-                        HttpSession session = req.getSession();
 
-//                                   String catalogsAttr = "catalogs";
-                        String reportsAttr = "reports";
-//                                   String statisticAttr = "cat_stat";
+                        List<Platform> platforms = catalogStorage.getAllPlatforms();
+                        req.setAttribute("platforms", platforms);
 
-//                                   @SuppressWarnings("unchecked")
-//                                   List<Catalog> catalogList = (List<Catalog>)
-//                                           session.getAttribute(catalogsAttr);
-//                                   if (catalogList == null) {
-//                                       catalogList = catalogStorage.getAllCatalogs();
-//                                       session.setAttribute(catalogsAttr, catalogList);
-//                                   }
+                        List<CustomerReport> reports = catalogStorage.getAllCustomerReports();
 
+                        List<CustomerReportStatistic> reportStatistics = new ArrayList<>();
 
-                        @SuppressWarnings("unchecked")
-                        List<CustomerReportStatistic> customerReportList = (List<CustomerReportStatistic>)
-                                session.getAttribute(reportsAttr);
+                        for (CustomerReport rep : reports) {
+                            Customer customer = catalogStorage.getCustomer(rep.getCustomerId());
+                            List<CustomerReportItem> repItemList = catalogStorage.
+                                    getCustomerReportsItems(rep.getId());
+                            CustomerReportStatistic crs = new CustomerReportStatistic();
+                            crs.setReportDate(rep.getStartDate());
+                            crs.setSendDate(rep.getUploadDate());
+                            crs.setReportPeriod(rep.getPeriodOrdinal());
+                            crs.setReportType(rep.getTypeOrdinal());
 
-                        if (customerReportList == null) {
-                            List<CustomerReport> reports = catalogStorage.getAllCustomerReports();
-
-                            List<CustomerReportStatistic> reportStatistics = new ArrayList<>();
-
-                            for (CustomerReport rep : reports) {
-                                Customer customer = catalogStorage.getCustomer(rep.getCustomerId());
-                                List<CustomerReportItem> repItemList = catalogStorage.
-                                        getCustomerReportsItems(rep.getId());
-                                CustomerReportStatistic crs = new CustomerReportStatistic();
-                                crs.setReportDate(rep.getStartDate());
-                                crs.setSendDate(rep.getUploadDate());
-                                crs.setReportPeriod(rep.getPeriodOrdinal());
-                                crs.setReportType(rep.getTypeOrdinal());
-
-                                if (customer != null) {
-                                    crs.setCustomer(customer.getName());
-                                }
-                                if (repItemList.size() > 0) {
-                                    crs.setCalculated(true);
-                                } else {
-                                    crs.setCalculated(false);
-                                }
-                                reportStatistics.add(crs);
+                            crs.setCustomerId(rep.getCustomerId());
+                            if (customer != null) {
+                                crs.setCustomer(customer.getName());
                             }
-
-                            session.setAttribute(reportsAttr, reportStatistics);
+                            if (repItemList.size() > 0) {
+                                crs.setCalculated(true);
+                            } else {
+                                crs.setCalculated(false);
+                            }
+                            reportStatistics.add(crs);
                         }
 
-//                                   @SuppressWarnings("unchecked")
-//                                   List<CatalogStatistic> catalogStatList = (List<CatalogStatistic>)
-//                                           session.getAttribute(statisticAttr);
-//
-//                                   if (catalogStatList == null) {
-//                                       catalogStatList = new ArrayList<>();
-//
-//                                       for (Catalog cat : catalogList) {
-//                                           int trackCount = catalogStorage.getCompositionCount(cat.getId());
-//                                           int artistCount = catalogStorage.getArtistCount(cat.getId());
-//
-//                                           CatalogStatistic catStat = new CatalogStatistic();
-//
-//                                           catStat.setArtistCount(artistCount);
-//                                           catStat.setTrackCount(trackCount);
-//                                           catStat.setCatalog(cat.getName());
-//                                           catStat.setRoyalty(cat.getRoyalty());
-//                                           catStat.setRights(cat.getCopyright());
-//                                           catalogStatList.add(catStat);
-//                                       }
-//                                       session.setAttribute(statisticAttr, catalogStatList);
-//                                   }
-
-//                                   req.setAttribute(statisticAttr, catalogStatList);
-//                                   req.setAttribute(catalogsAttr, catalogList);
-                        req.setAttribute(reportsAttr, customerReportList);
+                        req.setAttribute("reports", reportStatistics);
 
                         return "index";
                     }

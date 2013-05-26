@@ -1,7 +1,6 @@
 package kz.bgm.platform.web.admin.action;
 
 import kz.bgm.platform.model.domain.AdminUser;
-import kz.bgm.platform.model.domain.User;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -18,12 +17,12 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        AdminUser user = (AdminUser) req.getSession().getAttribute("user");
+        AdminUser user = (AdminUser) req.getSession().getAttribute("admin");
 
-        log.info(user.getLogin() + " is logout");
-
-        req.getSession().setAttribute("user", null);
-        req.getSession().setAttribute("admin", null);
+        if (user != null) {
+            req.getSession().setAttribute("admin", null);
+            log.info(user.getLogin() + " logged out");
+        }
 
         resp.sendRedirect("/admin-login.html");
     }

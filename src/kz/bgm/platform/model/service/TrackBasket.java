@@ -13,11 +13,11 @@ public class TrackBasket {
         trackList = new ArrayList<>();
     }
 
-    public void addTrack(Track track) {
+    public void setTrack(Track track) {
         trackList.add(track);
     }
 
-    public void addTrack(List<Track> tracks) {
+    public void addTracks(List<Track> tracks) {
         this.trackList.addAll(tracks);
     }
 

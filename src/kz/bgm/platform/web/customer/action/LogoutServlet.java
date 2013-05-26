@@ -18,12 +18,10 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         User user = (User) req.getSession().getAttribute("user");
-
-        log.info(user.getLogin() + " is logout");
-
-        req.getSession().setAttribute("user", null);
-        req.getSession().setAttribute("admin", null);
-
+        if (user != null) {
+            req.getSession().setAttribute("user", null);
+            log.info(user.getLogin() + " logged out");
+        }
         resp.sendRedirect("/customer/admin-customer-login.html");
     }
 }

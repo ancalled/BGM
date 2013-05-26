@@ -26,7 +26,7 @@
 <div class="tabbable">
     <ul class="nav nav-tabs" id="report-tab">
         <li><a href="#tab1" data-toggle="tab">Загрузка мобильного отчета</a></li>
-        <li class="active"><a href="#tab2" data-toggle="tab">Загрузка публичного отчета</a></li>
+        <li><a href="#tab2" data-toggle="tab">Загрузка публичного отчета</a></li>
         <li><a href="#tab3" data-toggle="tab">Квартальный отчет</a></li>
         <li><a href="#tab4" data-toggle="tab">Список всех отчетов</a></li>
     </ul>
@@ -66,7 +66,7 @@
                         <!--</div>-->
 
 
-                        <div class="well">
+                            Дата отчета <br>
                             <div id="date" class="input-append">
                                 <input data-format="yyyy-MM-dd" id="dt" class="input-block-level" name="dt" type="text">
                               <span class="add-on">
@@ -74,11 +74,11 @@
                                  </i>
                                   </span>
                             </div>
-                        </div>
+
 
 
                         <label>
-                            Дата отчета
+                            Период<br>
                             <select name="period">
                                 <option value="0">Месячный</option>
                                 <option value="1">Квартальный</option>
@@ -122,7 +122,10 @@
                         <div class="alert alert-block">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                             <h4>Формат отчета</h4>
-                            Формат клиентского отчета Должна быть в Excel таки ;)
+                            № |	 Вид произведения |	Название |	Исполнитель	| Вид контента|
+                            Кол-во | Авторская доля % | Сумма сбора за авторские права |
+                            Стоимость за единицу | Кол-во	| Смежная доля % | 	Сумма сбора за смежные права | ОБЩАЯ СУММА
+
 
                         </div>
 
@@ -225,9 +228,9 @@
     //    });
 
 
-    $(function () {
-        $('#tab3').tab('show');
-    })
+
+        $('#report-tab a:first').tab('show');
+
 
 
 </script>

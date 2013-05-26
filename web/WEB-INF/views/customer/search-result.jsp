@@ -14,118 +14,309 @@
     <title>Поиск</title>
 </head>
 <body>
-
 <c:import url="navbar.jsp">
     <c:param name="search" value="active"/>
 </c:import>
 
 <div class="container">
 
-
-    <div class="row">
-
-        <legend>
-            Поиск композиций
-        </legend>
+<c:set var="bascket" value='${sessionScope.basket}'/>
 
 
-        <form action="../action/search" method="post">
-            <div class="row">
-                <div class="container span3">
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"
-                        style="display: block; position: static; margin-bottom: 5px; *width: 180px;">
-                        <li><a tabindex="-1" id="code" onclick="change_type(this)">Код композиции</a></li>
-                        <li><a tabindex="-1" id="artist" onclick="change_type(this)">Артист</a></li>
-                        <li><a tabindex="-1" id="composition" onclick="change_type(this)">Композиция</a></li>
-                        <li class="divider"></li>
-                        <li><a tabindex="-1" id="full" onclick="change_type(this)">Полный поиск</a></li>
-                    </ul>
-                </div>
-                <div class="container span8">
-                    <label for="query"></label><input type="text" name="q" id="query" class="input-block-level">
-                </div>
-
-            </div>
-            <br>
-
-            <div class="row">
-                <input type="submit" value="Поиск" class="btn">
-
-            </div>
-            <br>
-
-
-            <input type="hidden" name="type" value="full">
-        </form>
-
-        <p>
-            По запросу '${query}' найдено ${fn:length(tracks)} композиций
-        </p>
-
-        <table class="table">
-            <form id="chooser" action="/customer/action/add-to-basket" method="post">
-
-                <thead>
-                <tr>
-                    <th>Код</th>
-                    <th>Композиция</th>
-                    <th>Исполнитель</th>
-                    <th>Авторы</th>
-                    <th>Мобильный контент</th>
-                    <th>Публичка</th>
-                    <th>Каталог</th>
-                    <th><input type="submit" value="Доваить треки" class="btn"></th>
-                </tr>
-                </thead>
-                <tbody>
-
-                <c:forEach var="t" items="${tracks}">
-                    <tr>
-                        <td>${t.code}</td>
-                        <td>${t.name}</td>
-                        <td>${t.artist}</td>
-                        <td>${t.composer}</td>
-                        <td>${t.mobileShare}</td>
-                        <td>${t.publicShare}</td>
-                        <td>${t.catalog}</td>
-                        <td><input type="checkbox" name="check_${t.id}" onclick="choseTrack(this)" value="${t.id}"/>
-                        </td>
-                    </tr>
-                </c:forEach>
-
-                </tbody>
-
-
-            </form>
-        </table>
-
-
-    </div>
+<div class="row text-left">
+    <legend>
+        Поиск композиций
+    </legend>
 
 </div>
+<form id="searcher" action="/customer/action/search" method="post">
+    <input type="hidden" name="from" id="from-p">
+    <input type="hidden" name="pageSize" id="till-p">
+
+    <%--<div class="hero-unit" style="padding: 10px">--%>
+    <div class="container-fluid"
+         style="border-bottom-style: solid;border-color: #ececec;border-bottom-width: 1px;padding: 10px">
+        <div class="row-fluid">
+
+            <div class="span6">
+                <label for="query"></label><input type="text" name="q" id="query" class="input-block-level"
+                                                  style="margin-top: 0px">
+
+                <input type="submit" value="Поиск" class="btn">
+            </div>
+
+
+            <div class="span3" align="right">
+                <h4>Поле</h4>
+                Полный поиск <input type="radio" style="margin-left: 10px" value="all" id="all-field" name="field">
+                <br>
+                Код<input type="radio" style="margin-left: 10px" value="code" name="field"> <br>
+                Артист<input type="radio" style="margin-left: 10px" value="artist" name="field"> <br>
+                Автор<input type="radio" style="margin-left: 10px" value="composer" name="field"> <br>
+                Композиция<input type="radio" style="margin-left: 10px" value="name" name="field"> <br>
+            </div>
+
+            <div class="span3 pull-left" style="padding-left: 15px">
+                <h4>Платформа</h4>
+                <ul class="nav nav-list bs-docs-sidenav">
+                    <div style="height:220px;width:170px;border:1px solid #ececec;overflow:auto;padding: 5px">
+                        <li>
+                            <input id="all-cat" type="checkbox" onchange="deselectForEachCatalog()" value="-1"
+                                   name="catalog"
+                                   style="margin-right: 10px;font-size: 11pt">
+                            Все
+                        </li>
+
+                        <c:forEach var="p" items="${platforms}">
+
+                            <h4>${p.name}</h4>
+
+
+                            <c:forEach var="c" items="${p.catalogs}">
+
+                                <li style="font-size: 11pt">
+                                    <input type="checkbox" value="${c.id}" onchange="deselectAllCatalogs()"
+                                           name="catalog${c.id}" style="margin-right: 10px;font-size: 11pt">
+                                        ${c.name}
+                                </li>
+                            </c:forEach>
+
+                        </c:forEach>
+                    </div>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+    <%--</div>--%>
+
+</form>
+
 
 <script>
-    var elForm = document.getElementById("chooser");
-
-    function choseTrack(track) {
-        if (track.checked) {
-            var input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = track.track;
-            input.id = track.track;
-            input.value = track.value;
-            elForm.appendChild(input);
-        } else {
-            var oldInput = document.getElementById(track.track);
-            elForm.removeChild(oldInput);
-        }
-    }
 
     var typeEl = document.getElementById('type');
 
     function change_type(comp) {
         typeEl.setAttribute('value', comp.id);
     }
+</script>
+
+
+<%--<div class="pagination pagination-centered">--%>
+<%--<ul>--%>
+<%--<c:choose>--%>
+<%--<c:when test="${from >= pageSize}">--%>
+<%--<li><a href="catalog-update?from=${from - pageSize}">&laquo;</a></li>--%>
+<%--</c:when>--%>
+<%--<c:otherwise>--%>
+<%--<li class="disabled"><a href="#">&laquo;</a></li>--%>
+<%--</c:otherwise>--%>
+<%--</c:choose>--%>
+
+<%--<c:forEach var="i" begin="1" end="${(fn:length(tracks) / pageSize) + 1}" step="1"--%>
+<%--varStatus="status">--%>
+<%--<li class="${from == (i - 1) * pageSize ? 'active' : ''}">--%>
+<%--<a onclick="nextPage(${(i - 1) * pageSize})">${i}</a>--%>
+<%--</li>--%>
+<%--</c:forEach>--%>
+
+<%--<c:choose>--%>
+<%--<c:when test="${from + pageSize < update.crossing}">--%>
+<%--<li><a onclick="nextPage(${from + pageSize})">&raquo;</a></li>--%>
+<%--</c:when>--%>
+<%--<c:otherwise>--%>
+<%--<li class="disabled"><a href="#">&raquo;</a></li>--%>
+<%--</c:otherwise>--%>
+<%--</c:choose>--%>
+<%--</ul>--%>
+<%--</div>--%>
+
+
+<p>
+    По запросу '${query}' найдено ${fn:length(tracks)} композиций
+</p>
+
+<form id="chooser" action="/customer/action/add-to-basket" method="post">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Код</th>
+            <th>Композиция</th>
+            <th>Исполнитель</th>
+            <th>Авторы</th>
+            <th>Мобильный контент</th>
+            <th>Публичка</th>
+            <th>Каталог</th>
+            <th><input type="submit" value="В корзину" class="btn"></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <c:forEach var="t" items="${tracks}">
+            <tr>
+                <td>${t.code}</td>
+                <td>${t.name}</td>
+                <td>${t.artist}</td>
+                <td>${t.composer}</td>
+                <td>${t.mobileShare}</td>
+                <td>${t.publicShare}</td>
+                <td>${t.catalog}</td>
+                <c:set var="found_in_box" value="false"/>
+                <c:forEach var="bt" items="${bascket.tracks}">
+                    <c:if test="${bt.id==t.id}">
+                        <td>InBox</td>
+                        <c:set var="found_in_box" value="true"/>
+                    </c:if>
+                </c:forEach>
+
+                <c:choose>
+                    <c:when test="${found_in_box!=true}">
+                        <td>
+                            <input type="checkbox" name="check_${t.id}" onclick="addTrackToBasket(this)"
+                                   value="${t.id}"/>
+                        </td>
+                    </c:when>
+                    <c:otherwise>
+
+                    </c:otherwise>
+                </c:choose>
+
+            </tr>
+
+        </c:forEach>
+
+        </tbody>
+    </table>
+</form>
+<%--<div class="pagination pagination-centered">--%>
+<%--<ul>--%>
+<%--<c:choose>--%>
+<%--<c:when test="${from >= pageSize}">--%>
+<%--<li><a href="catalog-update?from=${from - pageSize}">&laquo;</a></li>--%>
+<%--</c:when>--%>
+<%--<c:otherwise>--%>
+<%--<li class="disabled"><a href="#">&laquo;</a></li>--%>
+<%--</c:otherwise>--%>
+<%--</c:choose>--%>
+
+<%--<c:forEach var="i" begin="1" end="${(fn:length(tracks) / pageSize) + 1}" step="1"--%>
+<%--varStatus="status">--%>
+<%--<li class="${from == (i - 1) * pageSize ? 'active' : ''}">--%>
+<%--<a href="search-result?from=${(i - 1) * pageSize}">${i}</a>--%>
+<%--</li>--%>
+<%--</c:forEach>--%>
+
+<%--<c:choose>--%>
+<%--<c:when test="${from + pageSize < update.crossing}">--%>
+<%--<li><a href="search-result?from=${from + pageSize}">&raquo;</a></li>--%>
+<%--</c:when>--%>
+<%--<c:otherwise>--%>
+<%--<li class="disabled"><a href="#">&raquo;</a></li>--%>
+<%--</c:otherwise>--%>
+<%--</c:choose>--%>
+<%--</ul>--%>
+<%--</div>--%>
+
+</div>
+<script>
+    var searchForm = document.getElementById("searcher");
+    var from_page_input = document.getElementById("from-p");
+    var till_page_input = document.getElementById("till-p");
+    var search_input = document.getElementById("query");
+
+    function updateParams() {
+        var isAny = false;
+
+        $('[type=checkbox]').each(function () {
+            var param = getParameterByName((this).name);
+            if (param == this.value) {
+                $(this).prop('checked', true);
+                isAny = true;
+            }
+        });
+
+        if (isAny == false) {
+            $('#all-cat').prop('checked', true);
+        }
+
+        var field = getParameterByName('field');
+        var filedEmpty = true;
+        $('[type=radio]').each(function () {
+            if (this.value == field) {
+                filedEmpty = false;
+                $(this).prop('checked', true);
+            }
+        });
+
+        if (filedEmpty == true) {
+            $('#all-field').prop('checked', true);
+        }
+
+        var query = getParameterByName('q');
+        search_input.value = query;
+
+    }
+
+
+    function nextPage(from) {
+        from_page_input.value = from;
+        till_page_input.value = '${pageSize}';
+        search_input.value = '${query}';
+        searchForm.submit();
+    }
+
+    function deselectForEachCatalog() {
+        var count = 0;
+
+        $('[type=checkbox]').each(function () {
+            if ($(this).prop('checked') && (this).id !== "all-cat") {
+                $(this).prop('checked', false);
+                count++;
+            }
+
+        });
+        if (count == 0) {
+            $('#all-cat').prop('checked', true);
+        }
+    }
+
+
+    function deselectAllCatalogs() {
+        $('#all-cat').prop('checked', false);
+    }
+
+    updateParams();
+
+
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regexS = "[\\?&]" + name + "=([^&#]*)";
+        var regex = new RegExp(regexS);
+        var results = regex.exec(window.location.search);
+        if (results == null)
+            return "";
+        else
+            return decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+    var elForm = document.getElementById("chooser")
+
+    function addTrackToBasket(checkbox) {
+        if (checkbox.checked) {
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = checkbox.name;
+            input.id = checkbox.value;
+            input.value = checkbox.value;
+            elForm.appendChild(input);
+        } else {
+            var oldInput = document.getElementById(checkbox.value);
+            elForm.removeChild(oldInput);
+        }
+    }
+
 </script>
 </body>
 </html>

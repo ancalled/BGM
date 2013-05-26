@@ -100,8 +100,6 @@
         }
     </script>
 
-    <c:if test="${not empty tracks}">
-
         <%--<div class="pagination pagination-centered">--%>
         <%--<ul>--%>
         <%--<c:choose>--%>
@@ -194,7 +192,6 @@
         <%--</ul>--%>
         <%--</div>--%>
 
-    </c:if>
 
 </div>
 <script>
