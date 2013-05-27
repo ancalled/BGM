@@ -57,12 +57,12 @@
                     <h4>Платформа</h4>
                     <ul class="nav nav-list bs-docs-sidenav">
                         <div style="height:220px;width:170px;border:1px solid #ececec;overflow:auto;padding: 5px">
-                        <li>
-                            <input id="all-cat" type="checkbox" onchange="deselectForEachCatalog()" value="-1"
-                                   name="catalog"
-                                   style="margin-right: 10px;font-size: 11pt">
-                            Все
-                        </li>
+                            <li>
+                                <input id="all-cat" type="checkbox" onchange="deselectForEachCatalog()" value="-1"
+                                       name="catalog"
+                                       style="margin-right: 10px;font-size: 11pt">
+                                Все
+                            </li>
 
                             <c:forEach var="p" items="${platforms}">
 
@@ -100,97 +100,97 @@
         }
     </script>
 
-        <%--<div class="pagination pagination-centered">--%>
-        <%--<ul>--%>
-        <%--<c:choose>--%>
-        <%--<c:when test="${from >= pageSize}">--%>
-        <%--<li><a href="catalog-update?from=${from - pageSize}">&laquo;</a></li>--%>
-        <%--</c:when>--%>
-        <%--<c:otherwise>--%>
-        <%--<li class="disabled"><a href="#">&laquo;</a></li>--%>
-        <%--</c:otherwise>--%>
-        <%--</c:choose>--%>
+    <%--<div class="pagination pagination-centered">--%>
+    <%--<ul>--%>
+    <%--<c:choose>--%>
+    <%--<c:when test="${from >= pageSize}">--%>
+    <%--<li><a href="catalog-update?from=${from - pageSize}">&laquo;</a></li>--%>
+    <%--</c:when>--%>
+    <%--<c:otherwise>--%>
+    <%--<li class="disabled"><a href="#">&laquo;</a></li>--%>
+    <%--</c:otherwise>--%>
+    <%--</c:choose>--%>
 
-        <%--<c:forEach var="i" begin="1" end="${(fn:length(tracks) / pageSize) + 1}" step="1"--%>
-        <%--varStatus="status">--%>
-        <%--<li class="${from == (i - 1) * pageSize ? 'active' : ''}">--%>
-        <%--<a onclick="nextPage(${(i - 1) * pageSize})">${i}</a>--%>
-        <%--</li>--%>
-        <%--</c:forEach>--%>
+    <%--<c:forEach var="i" begin="1" end="${(fn:length(tracks) / pageSize) + 1}" step="1"--%>
+    <%--varStatus="status">--%>
+    <%--<li class="${from == (i - 1) * pageSize ? 'active' : ''}">--%>
+    <%--<a onclick="nextPage(${(i - 1) * pageSize})">${i}</a>--%>
+    <%--</li>--%>
+    <%--</c:forEach>--%>
 
-        <%--<c:choose>--%>
-        <%--<c:when test="${from + pageSize < update.crossing}">--%>
-        <%--<li><a onclick="nextPage(${from + pageSize})">&raquo;</a></li>--%>
-        <%--</c:when>--%>
-        <%--<c:otherwise>--%>
-        <%--<li class="disabled"><a href="#">&raquo;</a></li>--%>
-        <%--</c:otherwise>--%>
-        <%--</c:choose>--%>
-        <%--</ul>--%>
-        <%--</div>--%>
+    <%--<c:choose>--%>
+    <%--<c:when test="${from + pageSize < update.crossing}">--%>
+    <%--<li><a onclick="nextPage(${from + pageSize})">&raquo;</a></li>--%>
+    <%--</c:when>--%>
+    <%--<c:otherwise>--%>
+    <%--<li class="disabled"><a href="#">&raquo;</a></li>--%>
+    <%--</c:otherwise>--%>
+    <%--</c:choose>--%>
+    <%--</ul>--%>
+    <%--</div>--%>
 
 
-        <p>
-            По запросу '${query}' найдено ${fn:length(tracks)} композиций
-        </p>
+    <span class="label">
+        По запросу '${query}' найдено ${fn:length(tracks)} композиций
+    </span>
 
-        <table class="table">
-            <thead>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Код</th>
+            <th>Композиция</th>
+            <th>Исполнитель</th>
+            <th>Авторы</th>
+            <th>Мобильный контент</th>
+            <th>Публичка</th>
+            <th>Каталог</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <c:forEach var="t" items="${tracks}">
             <tr>
-                <th>Код</th>
-                <th>Композиция</th>
-                <th>Исполнитель</th>
-                <th>Авторы</th>
-                <th>Мобильный контент</th>
-                <th>Публичка</th>
-                <th>Каталог</th>
+                <td>${t.code}</td>
+                <td>${t.name}</td>
+                <td>${t.artist}</td>
+                <td>${t.composer}</td>
+                <td>${t.mobileShare}</td>
+                <td>${t.publicShare}</td>
+                <td>${t.catalog}</td>
             </tr>
-            </thead>
-            <tbody>
+        </c:forEach>
 
-            <c:forEach var="t" items="${tracks}">
-                <tr>
-                    <td>${t.code}</td>
-                    <td>${t.name}</td>
-                    <td>${t.artist}</td>
-                    <td>${t.composer}</td>
-                    <td>${t.mobileShare}</td>
-                    <td>${t.publicShare}</td>
-                    <td>${t.catalog}</td>
-                </tr>
-            </c:forEach>
+        </tbody>
+    </table>
 
-            </tbody>
-        </table>
+    <%--<div class="pagination pagination-centered">--%>
+    <%--<ul>--%>
+    <%--<c:choose>--%>
+    <%--<c:when test="${from >= pageSize}">--%>
+    <%--<li><a href="catalog-update?from=${from - pageSize}">&laquo;</a></li>--%>
+    <%--</c:when>--%>
+    <%--<c:otherwise>--%>
+    <%--<li class="disabled"><a href="#">&laquo;</a></li>--%>
+    <%--</c:otherwise>--%>
+    <%--</c:choose>--%>
 
-        <%--<div class="pagination pagination-centered">--%>
-        <%--<ul>--%>
-        <%--<c:choose>--%>
-        <%--<c:when test="${from >= pageSize}">--%>
-        <%--<li><a href="catalog-update?from=${from - pageSize}">&laquo;</a></li>--%>
-        <%--</c:when>--%>
-        <%--<c:otherwise>--%>
-        <%--<li class="disabled"><a href="#">&laquo;</a></li>--%>
-        <%--</c:otherwise>--%>
-        <%--</c:choose>--%>
+    <%--<c:forEach var="i" begin="1" end="${(fn:length(tracks) / pageSize) + 1}" step="1"--%>
+    <%--varStatus="status">--%>
+    <%--<li class="${from == (i - 1) * pageSize ? 'active' : ''}">--%>
+    <%--<a href="search-result?from=${(i - 1) * pageSize}">${i}</a>--%>
+    <%--</li>--%>
+    <%--</c:forEach>--%>
 
-        <%--<c:forEach var="i" begin="1" end="${(fn:length(tracks) / pageSize) + 1}" step="1"--%>
-        <%--varStatus="status">--%>
-        <%--<li class="${from == (i - 1) * pageSize ? 'active' : ''}">--%>
-        <%--<a href="search-result?from=${(i - 1) * pageSize}">${i}</a>--%>
-        <%--</li>--%>
-        <%--</c:forEach>--%>
-
-        <%--<c:choose>--%>
-        <%--<c:when test="${from + pageSize < update.crossing}">--%>
-        <%--<li><a href="search-result?from=${from + pageSize}">&raquo;</a></li>--%>
-        <%--</c:when>--%>
-        <%--<c:otherwise>--%>
-        <%--<li class="disabled"><a href="#">&raquo;</a></li>--%>
-        <%--</c:otherwise>--%>
-        <%--</c:choose>--%>
-        <%--</ul>--%>
-        <%--</div>--%>
+    <%--<c:choose>--%>
+    <%--<c:when test="${from + pageSize < update.crossing}">--%>
+    <%--<li><a href="search-result?from=${from + pageSize}">&raquo;</a></li>--%>
+    <%--</c:when>--%>
+    <%--<c:otherwise>--%>
+    <%--<li class="disabled"><a href="#">&raquo;</a></li>--%>
+    <%--</c:otherwise>--%>
+    <%--</c:choose>--%>
+    <%--</ul>--%>
+    <%--</div>--%>
 
 
 </div>
@@ -237,7 +237,7 @@
     function nextPage(from) {
         from_page_input.value = from;
         till_page_input.value = '${pageSize}';
-        search_input.value = '${query}';
+        search_input.value = "${query}";
         searchForm.submit();
     }
 

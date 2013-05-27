@@ -54,15 +54,59 @@ public class LuceneSearch {
     public void index(List<Track> tracks, IndexWriter writer) throws IOException {
 
 
-
-
     }
 
+    public static List<Long> parseSearchResult(List<SearchResult> results) {
+        List<Long> idList = new ArrayList<>();
+
+        for (SearchResult rs : results) {
+            idList.add(rs.getTrackId());
+        }
+        return idList;
+    }
 
     public List<Long> search(String artist, String composition)
             throws IOException, ParseException {
         return search(artist, composition, LIMIT, THRESHOLD);
     }
+
+    public List<Long> searchByAuthor(String track, String author)
+            throws IOException, ParseException {
+        return search(track, author, LIMIT, THRESHOLD);
+    }
+
+    public List<Long> searchByAuthor(String track, String author, int limit, double threshold)
+            throws IOException, ParseException {
+
+        log.info("Got query '" + track + "' and" + " '" + author + "'");
+
+        String[] fields = new String[]{FIELD_NAME, FIELD_COMPOSER};
+        String[] values = new String[]{track, author};
+        Query query = MultiFieldQueryParser.parse(Version.LUCENE_41, values, fields, analyzer);
+
+
+        TopDocs hits = searcher.search(query, limit);
+
+        List<Long> result = new ArrayList<>();
+
+        System.out.println("Hits: " + hits.totalHits);
+
+        for (ScoreDoc hit : hits.scoreDocs) {
+            if (hit.score < threshold) {
+                continue;
+            }
+
+            Document d = searcher.doc(hit.doc);
+            if (d.getField(FIELD_ID).numericValue() != null) {
+                result.add(d.getField(FIELD_ID).numericValue().longValue());
+            }
+
+            //            System.out.println(hit.score + "\t" + d.get("artist") + ": " + d.get("name"));
+        }
+
+        return result;
+    }
+
 
     public List<Long> search(String artist, String composition, int limit, double threshold)
             throws IOException, ParseException {
@@ -184,7 +228,7 @@ public class LuceneSearch {
             query.add(createTermQuery(FIELD_NAME, composition, 2.0f), Occur.MUST);
         }
 
-        if (authors != null &&  artist != null) {
+        if (authors != null && artist != null) {
             BooleanQuery subq = new BooleanQuery();
             subq.add(createTermQuery(FIELD_COMPOSER, authors, 1), Occur.SHOULD);
             subq.add(createTermQuery(FIELD_ARTIST, artist, 1), Occur.SHOULD);

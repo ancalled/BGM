@@ -281,6 +281,11 @@ public class DbStorage implements CatalogStorage {
 
     @Override
     public List<Track> getTracks(final List<Long> ids) {
+
+        if (ids.isEmpty()) {
+            return Collections.emptyList();
+        }
+
         return query(new Action<List<Track>>() {
             @Override
             public List<Track> execute(Connection con) throws SQLException {
