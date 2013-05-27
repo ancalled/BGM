@@ -68,19 +68,15 @@ public class SearchServlet extends HttpServlet {
                 String[] fields = query.split(";");
                 List<Long> trackIdList = new ArrayList<Long>();
                 if (fields.length == 2) {
-                    trackIdList = luceneSearch.searchByAuthor(fields[0], fields[1],100,3);
+                    trackIdList = luceneSearch.searchByAuthor(fields[0], fields[1], 100, 3);
                 } else if (fields.length >= 3) {
                     List<LuceneSearch.SearchResult> resultList = luceneSearch.search(fields[2], fields[1], fields[0], 100, 3);
                     trackIdList = LuceneSearch.parseSearchResult(resultList);
                 }
-                switch (field) {
-                    case "all":
-
-                        found = catalogService.getTracks(trackIdList);
-                        break;
-                    default:
-                        found = catalogService.getTracks(trackIdList, catalogIdList);
-                        break;
+                if (!catalogIdList.isEmpty()) {
+                    found = catalogService.getTracks(trackIdList, catalogIdList);
+                } else {
+                    found = catalogService.getTracks(trackIdList);
                 }
 
             } else {
