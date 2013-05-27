@@ -166,7 +166,7 @@
                 <c:set var="found_in_box" value="false"/>
                 <c:forEach var="bt" items="${bascket.tracks}">
                     <c:if test="${bt.id==t.id}">
-                        <td>InBox</td>
+                        <td><i class="icon-shopping-cart"></i></td>
                         <c:set var="found_in_box" value="true"/>
                     </c:if>
                 </c:forEach>

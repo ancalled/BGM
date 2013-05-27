@@ -3,6 +3,7 @@ package kz.bgm.platform.web.customer;
 import kz.bgm.platform.model.domain.*;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
+import kz.bgm.platform.model.service.TrackBasket;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -129,6 +130,22 @@ public class DispatcherServlet extends HttpServlet {
                         req.setAttribute("reports", reportStatistics);
 
                         return "index";
+                    }
+                };
+                break;
+            case "/basket":
+                action = new Action() {
+                    @Override
+                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+
+                        HttpSession session = req.getSession();
+                        TrackBasket basket = (TrackBasket) session.getAttribute("basket");
+
+                        if (basket != null) {
+                            req.setAttribute("tracks", basket);
+                        }
+
+                        return "basket";
                     }
                 };
                 break;
