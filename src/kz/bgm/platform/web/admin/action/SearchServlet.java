@@ -13,10 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class SearchServlet extends HttpServlet {
@@ -57,49 +54,22 @@ public class SearchServlet extends HttpServlet {
 //            pageSize = Integer.parseInt(strPageSize);
 //        }
 
-
         log.debug("Got query: " + query + ", search type: " + field);
-
-        List<Track> found = null;
-
+        List<Track> found = Collections.emptyList();
         try {
-
             if (query.contains(";")) {
-                String[] fields = query.split(";");
-                List<Long> trackIdList = new ArrayList<Long>();
-                if (fields.length == 2) {
-                    trackIdList = luceneSearch.searchByAuthor(fields[0], fields[1], 100, 3);
-                } else if (fields.length >= 3) {
-                    List<LuceneSearch.SearchResult> resultList = luceneSearch.search(fields[2], fields[1], fields[0], 100, 3);
-                    trackIdList = LuceneSearch.parseSearchResult(resultList);
-                }
-                if (!catalogIdList.isEmpty()) {
-                    found = catalogService.getTracks(trackIdList, catalogIdList);
-                } else {
-                    found = catalogService.getTracks(trackIdList);
-                }
+
+                found = compoundSearch(query, catalogIdList);
 
             } else {
 
-                switch (field) {
-                    case "all":
-                        List<Long> trackIdList = luceneSearch.search(query/*from,pageSize*/);
+                found = easySearch(query, field, catalogIdList);
 
-                        if (!catalogIdList.isEmpty()) {
-                            found = catalogService.getTracks(trackIdList, catalogIdList);
-                        } else {
-                            found = catalogService.getTracks(trackIdList);
-                        }
-
-                        break;
-                    default:
-                        found = catalogService.searchTracks(field, query, catalogIdList);
-                        break;
-                }
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        //todo убрать этот session
         HttpSession session = req.getSession();
 
         session.setAttribute("tracks", found);
@@ -110,6 +80,45 @@ public class SearchServlet extends HttpServlet {
 
         resp.sendRedirect(pathWithParams);
 
+    }
+
+    private List<Track> easySearch(String query, String field, List<Long> catalogIdList) throws IOException, ParseException {
+        List<Track> found;
+        switch (field) {
+            case "all":
+                List<Long> trackIdList = luceneSearch.search(query/*from,pageSize*/);
+
+                if (!catalogIdList.isEmpty()) {
+                    found = catalogService.getTracks(trackIdList, catalogIdList);
+                } else {
+                    found = catalogService.getTracks(trackIdList);
+                }
+
+                break;
+            default:
+                found = catalogService.searchTracks(field, query, catalogIdList);
+                break;
+        }
+        return found;
+    }
+
+    private List<Track> compoundSearch(String query, List<Long> catalogIdList) throws IOException, ParseException {
+        List<Track> found;
+        String[] fields = query.split(";");
+        List<Long> trackIdList = new ArrayList<Long>();
+
+        if (fields.length == 2) {
+            trackIdList = luceneSearch.searchByAuthor(fields[0], fields[1], 100, 3);
+        } else if (fields.length >= 3) {
+            List<LuceneSearch.SearchResult> resultList = luceneSearch.search(fields[2], fields[1], fields[0], 100, 3);
+            trackIdList = LuceneSearch.parseSearchResult(resultList);
+        }
+        if (!catalogIdList.isEmpty()) {
+            found = catalogService.getTracks(trackIdList, catalogIdList);
+        } else {
+            found = catalogService.getTracks(trackIdList);
+        }
+        return found;
     }
 
     private String getReqParams(HttpServletRequest req) {

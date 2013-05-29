@@ -31,74 +31,78 @@
         <input type="hidden" name="pageSize" id="till-p">
 
         <%--<div class="hero-unit" style="padding: 10px">--%>
-        <div class="container-fluid"
-             style="border-bottom-style: solid;border-color: #ececec;border-bottom-width: 1px;padding: 10px">
-            <div class="row-fluid">
+        <div class="row" style="margin-bottom: 0px">
+            <div class="span8" style="margin-right: 4px">
 
-                <div class="span6">
-                    <label for="query"></label><input type="text" name="q" id="query" class="input-block-level"
-                                                      style="margin-top: 0px">
-
-                    <input type="submit" value="Поиск" class="btn">
-                </div>
+                <label for="query"></label><input type="text" name="q" id="query" class="input-block-level"
+                                                  style="margin-top: 0px">
+            </div>
+                <input type="submit" value="Поиск" class="btn" style="margin-top: 4px">
 
 
-                <div class="span3" align="right">
-                    <h4>Поле</h4>
-                    Полный поиск <input type="radio" style="margin-left: 10px" value="all" id="all-field" name="field">
-                    <br>
-                    Код<input type="radio" style="margin-left: 10px" value="code" name="field"> <br>
-                    Артист<input type="radio" style="margin-left: 10px" value="artist" name="field"> <br>
-                    Автор<input type="radio" style="margin-left: 10px" value="composer" name="field"> <br>
-                    Композиция<input type="radio" style="margin-left: 10px" value="name" name="field"> <br>
-                </div>
+        </div>
+        <div class="row" style="margin-top: -5px">
+            <div class="accordion-heading" style="margin-left: 5px">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" id="extra"
+                   href="#collapseOne" style=" text-decoration: none">
+                    Расширенный
+                </a>
+            </div>
+            <div id="collapseOne" class="accordion-body collapse in span9" style="margin-left: 5px">
+                <div class="accordion-inner">
+                    <div class="container" style="background: #edf9f9; margin-left: 0">
 
-                <div class="span3 pull-left" style="padding-left: 15px">
-                    <h4>Платформа</h4>
-                    <ul class="nav nav-list bs-docs-sidenav">
-                        <div style="height:220px;width:170px;border:1px solid #ececec;overflow:auto;padding: 5px">
-                            <li>
-                                <input id="all-cat" type="checkbox" onchange="deselectForEachCatalog()" value="-1"
-                                       name="catalog"
-                                       style="margin-right: 10px;font-size: 11pt">
-                                Все
-                            </li>
+                        <div class=" span3 pull-left">
+                            <h4>Ищщем по</h4>
+                            <input type="radio" style="margin-right: 10px;margin-top: -2px" value="all" id="all-field"
+                                   name="field">всем полям<br>
+                            <input type="radio" style="margin-right: 10px;margin-top: -2px" value="code" name="field">коду <br>
+                            <input type="radio" style="margin-right: 10px;margin-top: -2px" value="artist" name="field">артисту <br>
+                            <input type="radio" style="margin-right: 10px;margin-top: -2px" value="composer" name="field">автору <br>
+                            <input type="radio" style="margin-right: 10px;margin-top: -2px" value="name" name="field">композиции <br>
+                        </div>
 
-                            <c:forEach var="p" items="${platforms}">
+                        <%--<h4>Платформа</h4>--%>
+                        <%--//todo добавить поиск по всем каталогам--%>
+                        <%--<li>--%>
+                        <%--<input id="all-cat" type="checkbox" onchange="deselectForEachCatalog()"--%>
+                        <%--value="-1"--%>
+                        <%--name="catalog"--%>
+                        <%--style="margin-right: 10px;font-size: 11pt">--%>
+                        <%--Все--%>
+                        <%--</li>--%>
+                        <div class="span4">
+                        <c:forEach var="p" items="${platforms}">
+                            <div class=" pull-left" >
 
                                 <h4>${p.name}</h4>
 
+                                <div style="height:145px;width:140px;overflow:auto;padding: 5px">
+                                    <ul class="nav nav-list bs-docs-sidenav">
 
-                                <c:forEach var="c" items="${p.catalogs}">
+                                        <c:forEach var="c" items="${p.catalogs}">
+                                            <li style="font-size: 11pt">
+                                                <input type="checkbox" value="${c.id}" onchange="deselectAllCatalogs()"
+                                                       name="catalog${c.id}" style="margin-right: 10px;font-size: 11pt;margin-top: -2px">
+                                                    ${c.name}
+                                            </li>
 
-                                    <li style="font-size: 11pt">
-                                        <input type="checkbox" value="${c.id}" onchange="deselectAllCatalogs()"
-                                               name="catalog${c.id}" style="margin-right: 10px;font-size: 11pt">
-                                            ${c.name}
-                                    </li>
-                                </c:forEach>
+                                        </c:forEach>
 
-                            </c:forEach>
+                                    </ul>
+                                </div>
+                            </div>
+                        </c:forEach>
                         </div>
-                    </ul>
+
+                    </div>
+
                 </div>
-
             </div>
-
         </div>
-        <%--</div>--%>
+
 
     </form>
-
-
-    <script>
-
-        var typeEl = document.getElementById('type');
-
-        function change_type(comp) {
-            typeEl.setAttribute('value', comp.id);
-        }
-    </script>
 
     <%--<div class="pagination pagination-centered">--%>
     <%--<ul>--%>
@@ -129,9 +133,11 @@
     <%--</ul>--%>
     <%--</div>--%>
 
-
+    <c:if test="${not empty query}">
     <span class="label">
-        По запросу '${query}' найдено ${fn:length(tracks)} композиций
+
+            По запросу '${query}' найдено ${fn:length(tracks)} композиций
+
     </span>
 
     <table class="table">
@@ -162,7 +168,7 @@
 
         </tbody>
     </table>
-
+    </c:if>
     <%--<div class="pagination pagination-centered">--%>
     <%--<ul>--%>
     <%--<c:choose>--%>
@@ -195,6 +201,13 @@
 
 </div>
 <script>
+
+    var typeEl = document.getElementById('type');
+
+    function change_type(comp) {
+        typeEl.setAttribute('value', comp.id);
+    }
+
     var searchForm = document.getElementById("searcher");
     var from_page_input = document.getElementById("from-p");
     var till_page_input = document.getElementById("till-p");
@@ -256,6 +269,11 @@
         }
     }
 
+    $('#extra').click(function () {
+        $('#collapseOne').show();
+    })
+    $('#collapseOne').hide();
+    $('#collapseOne').collapse();
 
     function deselectAllCatalogs() {
         $('#all-cat').prop('checked', false);
