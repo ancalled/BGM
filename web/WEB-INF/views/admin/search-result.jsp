@@ -29,7 +29,7 @@
     <form id="searcher" action="/admin/action/search" method="post">
         <input type="hidden" name="from" id="from-p">
         <input type="hidden" name="pageSize" id="till-p">
-
+        <input type="hidden" name="extend" id="extend-search" value=" ">
         <%--<div class="hero-unit" style="padding: 10px">--%>
         <div class="row" style="margin-bottom: 0px">
             <div class="span8" style="margin-right: 4px">
@@ -37,7 +37,7 @@
                 <label for="query"></label><input type="text" name="q" id="query" class="input-block-level"
                                                   style="margin-top: 0px">
             </div>
-                <input type="submit" value="Поиск" class="btn" style="margin-top: 4px">
+            <input type="submit" value="Поиск" class="btn" style="margin-top: 4px">
 
 
         </div>
@@ -56,10 +56,14 @@
                             <h4>Ищщем по</h4>
                             <input type="radio" style="margin-right: 10px;margin-top: -2px" value="all" id="all-field"
                                    name="field">всем полям<br>
-                            <input type="radio" style="margin-right: 10px;margin-top: -2px" value="code" name="field">коду <br>
-                            <input type="radio" style="margin-right: 10px;margin-top: -2px" value="artist" name="field">артисту <br>
-                            <input type="radio" style="margin-right: 10px;margin-top: -2px" value="composer" name="field">автору <br>
-                            <input type="radio" style="margin-right: 10px;margin-top: -2px" value="name" name="field">композиции <br>
+                            <input type="radio" style="margin-right: 10px;margin-top: -2px" value="code" name="field">коду
+                            <br>
+                            <input type="radio" style="margin-right: 10px;margin-top: -2px" value="artist" name="field">артисту
+                            <br>
+                            <input type="radio" style="margin-right: 10px;margin-top: -2px" value="composer"
+                                   name="field">автору <br>
+                            <input type="radio" style="margin-right: 10px;margin-top: -2px" value="name" name="field">композиции
+                            <br>
                         </div>
 
                         <%--<h4>Платформа</h4>--%>
@@ -72,27 +76,28 @@
                         <%--</li>--%>
 
                         <div class="span4">
-                        <c:forEach var="p" items="${platforms}">
-                            <div class=" pull-left" >
+                            <c:forEach var="p" items="${platforms}">
+                                <div class=" pull-left">
 
-                                <h4>${p.name}</h4>
+                                    <h4>${p.name}</h4>
 
-                                <div style="height:145px;width:140px;overflow:auto;padding: 5px">
-                                    <ul class="nav nav-list bs-docs-sidenav">
+                                    <div style="height:145px;width:140px;overflow:auto;padding: 5px">
+                                        <ul class="nav nav-list bs-docs-sidenav">
 
-                                        <c:forEach var="c" items="${p.catalogs}">
-                                            <li style="font-size: 11pt">
-                                                <input type="checkbox" value="${c.id}"
-                                                       name="catalog${c.id}" style="margin-right: 10px;font-size: 11pt;margin-top: -2px">
-                                                    ${c.name}
-                                            </li>
+                                            <c:forEach var="c" items="${p.catalogs}">
+                                                <li style="font-size: 11pt">
+                                                    <input type="checkbox" value="${c.id}"
+                                                           name="catalog${c.id}"
+                                                           style="margin-right: 10px;font-size: 11pt;margin-top: -2px">
+                                                        ${c.name}
+                                                </li>
 
-                                        </c:forEach>
+                                            </c:forEach>
 
-                                    </ul>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                        </c:forEach>
+                            </c:forEach>
                         </div>
 
                     </div>
@@ -140,34 +145,34 @@
 
     </span>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Код</th>
-            <th>Композиция</th>
-            <th>Исполнитель</th>
-            <th>Авторы</th>
-            <th>Мобильный контент</th>
-            <th>Публичка</th>
-            <th>Каталог</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        <c:forEach var="t" items="${tracks}">
+        <table class="table">
+            <thead>
             <tr>
-                <td>${t.code}</td>
-                <td>${t.name}</td>
-                <td>${t.artist}</td>
-                <td>${t.composer}</td>
-                <td>${t.mobileShare}</td>
-                <td>${t.publicShare}</td>
-                <td>${t.catalog}</td>
+                <th>Код</th>
+                <th>Композиция</th>
+                <th>Исполнитель</th>
+                <th>Авторы</th>
+                <th>Мобильный контент</th>
+                <th>Публичка</th>
+                <th>Каталог</th>
             </tr>
-        </c:forEach>
+            </thead>
+            <tbody>
 
-        </tbody>
-    </table>
+            <c:forEach var="t" items="${tracks}">
+                <tr>
+                    <td>${t.code}</td>
+                    <td>${t.name}</td>
+                    <td>${t.artist}</td>
+                    <td>${t.composer}</td>
+                    <td>${t.mobileShare}</td>
+                    <td>${t.publicShare}</td>
+                    <td>${t.catalog}</td>
+                </tr>
+            </c:forEach>
+
+            </tbody>
+        </table>
     </c:if>
     <%--<div class="pagination pagination-centered">--%>
     <%--<ul>--%>
@@ -202,31 +207,77 @@
 </div>
 <script>
 
+
+    //    function deselectForEachCatalog() {
+    //        var isAny = false;
+    //
+    //        $('[type=checkbox]').each(function () {
+    //            if ($(this).prop('checked')){
+    //                isAny=true;
+    //            }
+    //        });
+    //
+    //        if(isAny==false){
+    //
+    //        }
+    //    }
     var typeEl = document.getElementById('type');
-
-    function change_type(comp) {
-        typeEl.setAttribute('value', comp.id);
-    }
-
     var searchForm = document.getElementById("searcher");
     var from_page_input = document.getElementById("from-p");
     var till_page_input = document.getElementById("till-p");
+    var collapse = $('#collapseOne');
+    var extend = $('#extend-search');
+
     var search_input = document.getElementById("query");
+    var query = getParameterByName('q');
+    search_input.value = query;
+
+    updateParams();
+    extendedSearchUpdate();
+
+    $('#extra').click(function () {
+        collapse.show();
+    });
+
+    collapse.on('shown', function () {
+        extend.val('true');
+    });
+
+    collapse.on('hidden', function () {
+        extend.val('false');
+    });
+
+
+    function extendedSearchUpdate() {
+        var isExtended = getParameterByName('extended');
+        var collapse = $('#collapseOne');
+        if (isExtended != null) {
+            if (isExtended == 'true') {
+                collapse.show();
+                collapse.collapse('show');
+                extend.val('true');
+            } else {
+                collapse.hide();
+                collapse.collapse('hide');
+                extend.val('false');
+            }
+        }
+    }
+
+    function nextPage(from) {
+        from_page_input.value = from;
+        till_page_input.value = '${pageSize}';
+        search_input.value = "${query}";
+        searchForm.submit();
+    }
 
     function updateParams() {
-        var isAny = false;
-
         $('[type=checkbox]').each(function () {
             var param = getParameterByName((this).name);
             if (param == this.value) {
                 $(this).prop('checked', true);
-                isAny = true;
             }
         });
-
-        if (isAny == false) {
-            $('#all-cat').prop('checked', true);
-        }
 
         var field = getParameterByName('field');
         var filedEmpty = true;
@@ -241,45 +292,7 @@
             $('#all-field').prop('checked', true);
         }
 
-        var query = getParameterByName('q');
-        search_input.value = query;
-
     }
-
-
-    function nextPage(from) {
-        from_page_input.value = from;
-        till_page_input.value = '${pageSize}';
-        search_input.value = "${query}";
-        searchForm.submit();
-    }
-
-//    function deselectForEachCatalog() {
-//        var isAny = false;
-//
-//        $('[type=checkbox]').each(function () {
-//            if ($(this).prop('checked')){
-//                isAny=true;
-//            }
-//        });
-//
-//        if(isAny==false){
-//
-//        }
-//    }
-
-    $('#extra').click(function () {
-        $('#collapseOne').show();
-    })
-    $('#collapseOne').hide();
-    $('#collapseOne').collapse();
-
-    function changeCatalog() {
-        $('#all-cat').prop('checked', false);
-    }
-
-    updateParams();
-
 
     function getParameterByName(name) {
         name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");

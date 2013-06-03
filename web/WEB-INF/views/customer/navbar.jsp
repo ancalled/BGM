@@ -21,10 +21,10 @@
             <li class="${param.index}"><a href="/customer/view/index">Главная</a></li>
             <li class="${param.reports}"><a href="../../in_developing.html">Отчеты</a></li>
             <li class="${param.search}"><a href="/customer/view/search-result">Поиск</a></li>
-            <li><a href="/customer/action/logout">Выход</a></li>
             <li class="${param.user-catalog}"><a
                     href="/customer/view/user-catalog">(<%=tracksIdList.size()%>)
                 <i class="icon-shopping-cart"></i></a></li>
+            <li><a href="/customer/action/logout">Выход</a></li>
         </ul>
     </div>
 </div>

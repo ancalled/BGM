@@ -39,7 +39,9 @@ public class SearchServlet extends HttpServlet {
 
         String query = req.getParameter("q");
         String field = req.getParameter("field");
+        String extended = req.getParameter("extend");
         List<Long> catalogIdList = getCatalogsId(req);
+
 
 //for pagination
 //        String strFrom = req.getParameter("from");
@@ -69,8 +71,6 @@ public class SearchServlet extends HttpServlet {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
         //todo убрать этот session
         HttpSession session = req.getSession();
 
@@ -78,9 +78,9 @@ public class SearchServlet extends HttpServlet {
         session.setAttribute("query", query);
         session.setAttribute("type", field);
 
-        String pathWithParams = getPathWithParams(req);
+        String pathWithParams = getReqParams(req);
 
-        resp.sendRedirect(pathWithParams);
+        resp.sendRedirect(pathWithParams + "extended=" + extended);
 
     }
 
@@ -123,7 +123,7 @@ public class SearchServlet extends HttpServlet {
         return found;
     }
 
-    private String getPathWithParams(HttpServletRequest req) {
+    private String getReqParams(HttpServletRequest req) {
         StringBuilder respPath = new StringBuilder();
         respPath.append("/customer/view/search-result");
         Map<String, String[]> paramMap = req.getParameterMap();

@@ -28,8 +28,9 @@
     <form id="searcher" action="/customer/action/search" method="post">
         <input type="hidden" name="from" id="from-p">
         <input type="hidden" name="pageSize" id="till-p">
+        <input type="hidden" name="extend" id="extend-search" value=" ">
 
-        <%--<div class="hero-unit" style="padding: 10px">--%>
+    <%--<div class="hero-unit" style="padding: 10px">--%>
         <div class="row" style="margin-bottom: 0px">
             <div class="span8" style="margin-right: 4px">
 
@@ -224,31 +225,77 @@
 </div>
 <script>
 
+
+    //    function deselectForEachCatalog() {
+    //        var isAny = false;
+    //
+    //        $('[type=checkbox]').each(function () {
+    //            if ($(this).prop('checked')){
+    //                isAny=true;
+    //            }
+    //        });
+    //
+    //        if(isAny==false){
+    //
+    //        }
+    //    }
     var typeEl = document.getElementById('type');
-
-    function change_type(comp) {
-        typeEl.setAttribute('value', comp.id);
-    }
-
     var searchForm = document.getElementById("searcher");
     var from_page_input = document.getElementById("from-p");
     var till_page_input = document.getElementById("till-p");
+    var collapse = $('#collapseOne');
+    var extend = $('#extend-search');
+
     var search_input = document.getElementById("query");
+    var query = getParameterByName('q');
+    search_input.value = query;
+
+    updateParams();
+    extendedSearchUpdate();
+
+    $('#extra').click(function () {
+        collapse.show();
+    });
+
+    collapse.on('shown', function () {
+        extend.val('true');
+    });
+
+    collapse.on('hidden', function () {
+        extend.val('false');
+    });
+
+
+    function extendedSearchUpdate() {
+        var isExtended = getParameterByName('extended');
+        var collapse = $('#collapseOne');
+        if (isExtended != null) {
+            if (isExtended == 'true') {
+                collapse.show();
+                collapse.collapse('show');
+                extend.val('true');
+            } else {
+                collapse.hide();
+                collapse.collapse('hide');
+                extend.val('false');
+            }
+        }
+    }
+
+    function nextPage(from) {
+        from_page_input.value = from;
+        till_page_input.value = '${pageSize}';
+        search_input.value = "${query}";
+        searchForm.submit();
+    }
 
     function updateParams() {
-        var isAny = false;
-
         $('[type=checkbox]').each(function () {
             var param = getParameterByName((this).name);
             if (param == this.value) {
                 $(this).prop('checked', true);
-                isAny = true;
             }
         });
-
-        if (isAny == false) {
-            $('#all-cat').prop('checked', true);
-        }
 
         var field = getParameterByName('field');
         var filedEmpty = true;
@@ -263,45 +310,7 @@
             $('#all-field').prop('checked', true);
         }
 
-        var query = getParameterByName('q');
-        search_input.value = query;
-
     }
-
-
-    function nextPage(from) {
-        from_page_input.value = from;
-        till_page_input.value = '${pageSize}';
-        search_input.value = "${query}";
-        searchForm.submit();
-    }
-
-//    function deselectForEachCatalog() {
-//        var isAny = false;
-//
-//        $('[type=checkbox]').each(function () {
-//            if ($(this).prop('checked')){
-//                isAny=true;
-//            }
-//        });
-//
-//        if(isAny==false){
-//
-//        }
-//    }
-
-    $('#extra').click(function () {
-        $('#collapseOne').show();
-    })
-    $('#collapseOne').hide();
-    $('#collapseOne').collapse();
-
-    function changeCatalog() {
-        $('#all-cat').prop('checked', false);
-    }
-
-    updateParams();
-
 
     function getParameterByName(name) {
         name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
@@ -312,23 +321,6 @@
             return "";
         else
             return decodeURIComponent(results[1].replace(/\+/g, " "));
-    }
-
-
-    var elForm = document.getElementById("chooser")
-
-    function addTrackToBasket(checkbox) {
-        if (checkbox.checked) {
-            var input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = checkbox.name;
-            input.id = checkbox.value;
-            input.value = checkbox.value;
-            elForm.appendChild(input);
-        } else {
-            var oldInput = document.getElementById(checkbox.value);
-            elForm.removeChild(oldInput);
-        }
     }
 
 

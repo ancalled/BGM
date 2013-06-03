@@ -1127,6 +1127,20 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
+    public void removeTrackFromUserCatalog(final long trackId, final long userId) {
+        queryVoid(new VoidAction() {
+            public void execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "DELETE FROM user_catalog WHERE track_id = ? and user_id= ?");
+
+                stmt.setLong(1, trackId);
+                stmt.setLong(2, userId);
+                stmt.executeUpdate();
+            }
+        });
+    }
+
+    @Override
     public void removeUser(final long id) {
         queryVoid(new VoidAction() {
             public void execute(Connection con) throws SQLException {

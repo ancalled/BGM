@@ -39,7 +39,9 @@ public class SearchServlet extends HttpServlet {
 
         String query = req.getParameter("q");
         String field = req.getParameter("field");
+        String extended = req.getParameter("extend");
         List<Long> catalogIdList = getCatalogsId(req);
+
 
 //for pagination
 //        String strFrom = req.getParameter("from");
@@ -78,7 +80,7 @@ public class SearchServlet extends HttpServlet {
 
         String pathWithParams = getReqParams(req);
 
-        resp.sendRedirect(pathWithParams);
+        resp.sendRedirect(pathWithParams + "extended=" + extended);
 
     }
 

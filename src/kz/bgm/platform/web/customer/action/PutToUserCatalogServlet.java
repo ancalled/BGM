@@ -37,7 +37,7 @@ public class PutToUserCatalogServlet extends HttpServlet {
         if (user != null) {
 
 
-            log.info("Adding track in basket of user \n" +
+            log.info("Adding tracks in user catalog of user \n" +
                     "    login :" + user.getLogin() + "\n" +
                     "    id    :" + user.getId());
 
@@ -46,8 +46,11 @@ public class PutToUserCatalogServlet extends HttpServlet {
             for (Long id : idList) {
                 UserCatalogItem item = new UserCatalogItem();
 
+                log.info(id);
+
                 item.setTrackId(id);
                 item.setUserId(user.getId());
+
                 storage.saveUserCatalogItem(item);
             }
 

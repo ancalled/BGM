@@ -121,4 +121,7 @@ public interface CatalogStorage {
     List<Long> getUserTracksId(long userId);
 
     void saveUserCatalogItem(UserCatalogItem item);
+
+    void removeTrackFromUserCatalog(long trackId,long userId);
 }
+
