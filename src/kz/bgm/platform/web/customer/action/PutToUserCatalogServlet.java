@@ -1,11 +1,10 @@
 package kz.bgm.platform.web.customer.action;
 
 
-import kz.bgm.platform.model.domain.Track;
 import kz.bgm.platform.model.domain.User;
+import kz.bgm.platform.model.domain.UserCatalogItem;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
-import kz.bgm.platform.model.service.TrackBasket;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -18,10 +17,10 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-public class PutToBasketServlet extends HttpServlet {
+public class PutToUserCatalogServlet extends HttpServlet {
 
     CatalogStorage storage;
-    private static final Logger log = Logger.getLogger(PutToBasketServlet.class);
+    private static final Logger log = Logger.getLogger(PutToUserCatalogServlet.class);
 
     @Override
     public void init() throws ServletException {
@@ -36,25 +35,22 @@ public class PutToBasketServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
 
         if (user != null) {
-            TrackBasket basket = (TrackBasket) session.getAttribute("basket");
 
-            if (basket != null) {
-                log.info("Adding track in basket of user \n" +
-                        "    login :" + user.getLogin() + "\n" +
-                        "    id    :" + user.getId());
 
-                List<Track> trackList = getTracks(req);
+            log.info("Adding track in basket of user \n" +
+                    "    login :" + user.getLogin() + "\n" +
+                    "    id    :" + user.getId());
 
-                log.info("Track ids :");
-                for (Track t : trackList) {
-                    log.info(t.getId());
-                }
+            List<Long> idList = getTrackIdList(req);
 
-                basket.addTracks(trackList);
+            for (Long id : idList) {
+                UserCatalogItem item = new UserCatalogItem();
 
-            } else {
-                log.warn("Basket is not found");
+                item.setTrackId(id);
+                item.setUserId(user.getId());
+                storage.saveUserCatalogItem(item);
             }
+
         } else {
             log.warn("User not found");
         }
@@ -63,22 +59,18 @@ public class PutToBasketServlet extends HttpServlet {
 
     }
 
-    private List<Track> getTracks(HttpServletRequest req) {
+    private List<Long> getTrackIdList(HttpServletRequest req) {
         Enumeration<String> names = req.getParameterNames();
-        List<Track> trackList = new ArrayList<>();
+        List<Long> idList = new ArrayList<>();
         while (names.hasMoreElements()) {
             String elName = names.nextElement();
             String strId = (String) req.getParameter(elName);
 
             if (strId != null) {
                 Long id = Long.parseLong(strId);
-                Track track = storage.getTrack(id);
-
-                if (track != null) {
-                    trackList.add(track);
-                }
+                idList.add(id);
             }
         }
-        return trackList;
+        return idList;
     }
 }

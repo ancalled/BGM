@@ -1,10 +1,17 @@
+<%@ page import="kz.bgm.platform.model.domain.User" %>
+<%@ page import="kz.bgm.platform.model.service.CatalogFactory" %>
+<%@ page import="kz.bgm.platform.model.service.CatalogStorage" %>
+<%@ page import="java.util.List" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%--<%--%>
-<%--TrackBasket basket = (TrackBasket) request.getSession().getAttribute("basket");--%>
-<%--request.setAttribute("basket", basket);--%>
-<%--%>--%>
+<%
+    CatalogStorage storage = CatalogFactory.getStorage();
+
+    User user = (User) session.getAttribute("user");
+
+    List<Long> tracksIdList = storage.getUserTracksId(user.getId());
+%>
 
 
 <div class="navbar">
@@ -15,7 +22,8 @@
             <li class="${param.reports}"><a href="../../in_developing.html">Отчеты</a></li>
             <li class="${param.search}"><a href="/customer/view/search-result">Поиск</a></li>
             <li><a href="/customer/action/logout">Выход</a></li>
-            <li class="${param.basket}"><a href="/customer/view/basket">(${fn:length(sessionScope.basket.tracks)})
+            <li class="${param.user-catalog}"><a
+                    href="/customer/view/user-catalog">(<%=tracksIdList.size()%>)
                 <i class="icon-shopping-cart"></i></a></li>
         </ul>
     </div>

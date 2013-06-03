@@ -85,7 +85,6 @@ ALTER TABLE comp_tmp ADD done TINYINT NULL;
 ALTER TABLE comp_tmp ADD update_id INT NULL;
 
 
-
 CREATE TABLE catalog_update (
   id          INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   whenUpdated DATETIME,
@@ -99,13 +98,18 @@ CREATE TABLE catalog_update (
 );
 
 
-
 CREATE TABLE report_item_track (
-  id             INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  item_id      INT,
-  track_id       INT,
-  score          FLOAT,
-  matched        BOOL
+  id       INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  item_id  INT,
+  track_id INT,
+  score    FLOAT,
+  matched  BOOL
+);
+
+CREATE TABLE user_catalog (
+  id       INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  user_id  INT,
+  track_id INT
 );
 
 

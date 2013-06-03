@@ -63,7 +63,6 @@
                         </div>
 
                         <%--<h4>Платформа</h4>--%>
-                        <%--//todo добавить поиск по всем каталогам--%>
                         <%--<li>--%>
                         <%--<input id="all-cat" type="checkbox" onchange="deselectForEachCatalog()"--%>
                         <%--value="-1"--%>
@@ -71,6 +70,7 @@
                         <%--style="margin-right: 10px;font-size: 11pt">--%>
                         <%--Все--%>
                         <%--</li>--%>
+
                         <div class="span4">
                         <c:forEach var="p" items="${platforms}">
                             <div class=" pull-left" >
@@ -82,7 +82,7 @@
 
                                         <c:forEach var="c" items="${p.catalogs}">
                                             <li style="font-size: 11pt">
-                                                <input type="checkbox" value="${c.id}" onchange="deselectAllCatalogs()"
+                                                <input type="checkbox" value="${c.id}"
                                                        name="catalog${c.id}" style="margin-right: 10px;font-size: 11pt;margin-top: -2px">
                                                     ${c.name}
                                             </li>
@@ -254,20 +254,19 @@
         searchForm.submit();
     }
 
-    function deselectForEachCatalog() {
-        var count = 0;
-
-        $('[type=checkbox]').each(function () {
-            if ($(this).prop('checked') && (this).id !== "all-cat") {
-                $(this).prop('checked', false);
-                count++;
-            }
-
-        });
-        if (count == 0) {
-            $('#all-cat').prop('checked', true);
-        }
-    }
+//    function deselectForEachCatalog() {
+//        var isAny = false;
+//
+//        $('[type=checkbox]').each(function () {
+//            if ($(this).prop('checked')){
+//                isAny=true;
+//            }
+//        });
+//
+//        if(isAny==false){
+//
+//        }
+//    }
 
     $('#extra').click(function () {
         $('#collapseOne').show();
@@ -275,7 +274,7 @@
     $('#collapseOne').hide();
     $('#collapseOne').collapse();
 
-    function deselectAllCatalogs() {
+    function changeCatalog() {
         $('#all-cat').prop('checked', false);
     }
 

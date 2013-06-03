@@ -25,17 +25,17 @@ public interface CatalogStorage {
 
     int getTrackCount();
 
-    List<Track> getTracks(int from,int size);
+    List<Track> getTracks(int from, int size);
 
     List<Track> getTracks(List<Long> ids);
 
-    List<Track> getTracks(List<Long> ids,List<Long> catalogIds);
+    List<Track> getTracks(List<Long> ids, List<Long> catalogIds);
 
-    List<Track> getTracks(List<Long> ids,long catalogId);
+    List<Track> getTracks(List<Long> ids, long catalogId);
 
     List<Track> searchTracks(String value);
 
-    List<Track> searchTracks(String field,String value,List<Long> catalogIds);
+    List<Track> searchTracks(String field, String value, List<Long> catalogIds);
 
     List<Track> searchTracksByName(String songName);
 
@@ -59,7 +59,7 @@ public interface CatalogStorage {
 
     AdminUser getAdmin(String name, String pass);
 
-    List<User>getUsersByCustomerId(long customerId);
+    List<User> getUsersByCustomerId(long customerId);
 
     long saveCustomerReport(CustomerReport report);
 
@@ -118,5 +118,7 @@ public interface CatalogStorage {
 
     void updateCatalogsStat();
 
+    List<Long> getUserTracksId(long userId);
 
+    void saveUserCatalogItem(UserCatalogItem item);
 }

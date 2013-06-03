@@ -16,7 +16,7 @@
 </head>
 
 <c:import url="navbar.jsp">
-    <c:param name="basket" value="active"/>
+    <c:param name="user-catalog" value="active"/>
 </c:import>
 
 
@@ -28,7 +28,7 @@
     </legend>
     <div class="row span4">
         <ul align="right" style="list-style-type: none">
-            <c:forEach var="t" items="${basket.tracks}">
+            <c:forEach var="t" items="${tracks}">
                 <li>
                         ${t.name} <i class="icon-remove-circle"></i>
                 </li>

@@ -3,7 +3,6 @@ package kz.bgm.platform.web.customer;
 import kz.bgm.platform.model.domain.*;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
-import kz.bgm.platform.model.service.TrackBasket;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -46,6 +45,14 @@ public class DispatcherServlet extends HttpServlet {
 
                         HttpSession ses = req.getSession();
 
+
+                        User user = (User) ses.getAttribute("user");
+                        if (user != null) {
+                            List<Long> idList = catalogStorage.getUserTracksId(user.getId());
+                            if (!idList.isEmpty()) {
+                                req.setAttribute("user_track_ids", idList);
+                            }
+                        }
 //                        int from = 0;
 //                        String strFrom = req.getParameter("from");
 //
@@ -133,19 +140,21 @@ public class DispatcherServlet extends HttpServlet {
                     }
                 };
                 break;
-            case "/basket":
+            case "/user-catalog":
                 action = new Action() {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
 
                         HttpSession session = req.getSession();
-                        TrackBasket basket = (TrackBasket) session.getAttribute("basket");
 
-                        if (basket != null) {
-                            req.setAttribute("tracks", basket);
+                        User user = (User) session.getAttribute("user");
+                        if (user != null) {
+                            List<Long> idList = catalogStorage.getUserTracksId(user.getId());
+                            List<Track> trackList = catalogStorage.getTracks(idList);
+
+                            req.setAttribute("tracks", trackList);
                         }
-
-                        return "basket";
+                        return "user-catalog";
                     }
                 };
                 break;

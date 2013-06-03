@@ -1375,6 +1375,46 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
+    public List<Long> getUserTracksId(final long userId) {
+        return query(new Action<List<Long>>() {
+            @Override
+            public List<Long> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM user_catalog WHERE user_id = ?");
+                stmt.setLong(1, userId);
+
+                ResultSet rs = stmt.executeQuery();
+
+                List<Long> trackIdList = new ArrayList<>();
+                while (rs.next()) {
+                    trackIdList.add(rs.getLong("track_id"));
+                }
+                return trackIdList;
+            }
+        });
+    }
+
+    @Override
+    public void saveUserCatalogItem(final UserCatalogItem item) {
+        if (item == null) return;
+
+        query(new Action<Object>() {
+            @Override
+            public Object execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "INSERT INTO user_catalog (user_id,track_id)" +
+                                "VALUES (?,?)"
+                );
+                stmt.setLong(1, item.getUserId());
+                stmt.setLong(2, item.getTrackId());
+
+                stmt.executeUpdate();
+                return null;
+            }
+        });
+    }
+
+    @Override
     public List<Track> getNewTracks(final long updateId, final int from, final int size) {
         return query(new Action<List<Track>>() {
             @Override

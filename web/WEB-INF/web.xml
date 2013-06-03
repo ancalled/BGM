@@ -197,7 +197,7 @@
     </servlet>
     <servlet>
         <servlet-name>putToBasketServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.customer.action.PutToBasketServlet</servlet-class>
+        <servlet-class>kz.bgm.platform.web.customer.action.PutToUserCatalogServlet</servlet-class>
     </servlet>
 
 
