@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 
         if (login != null && pass != null) {
             User user = service.getUser(login, pass);
-            if (user != null && user.getId() > 0) {
+            if (user != null) {
                 HttpSession session = req.getSession();
                 session.setAttribute("user", user);
 
@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
 
             } else {
                 log.info("user '" + login + "' was not found or pass incorrect");
-                resp.sendRedirect("/customer/admin-customer-login.html?er=no-user-found");
+                resp.sendRedirect("/customer-login.html?er=no-user-found");
                 return;
             }
         }
