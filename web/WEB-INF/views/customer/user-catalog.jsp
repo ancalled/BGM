@@ -17,7 +17,7 @@
 </head>
 
 <c:import url="navbar.jsp">
-    <c:param name="user-catalog" value="active"/>
+    <c:param name="user_catalog" value="active"/>
 </c:import>
 
 
@@ -29,9 +29,6 @@
             Каталог ваших треков
         </legend>
     <c:if test="${not empty tracks}">
-    <span class="label">
-            Количество треков: ${fn:length(tracks)}
-    </span>
 
         <table class="table">
             <thead>

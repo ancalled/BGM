@@ -46,7 +46,7 @@
                     <dl class="dl-horizontal">
                         <c:forEach var="c" items="${p.catalogs}">
                             <dt>
-                                        ${c.name}
+                                    ${c.name}
                             </dt>
                             <dd>
                                 <ul class="inline">
@@ -61,20 +61,22 @@
                                         </c:choose>
                                     </li>
                                     <li>
+                                                                    <span class="small">
+                                 <fmt:formatNumber type="number" maxFractionDigits="3" value="${c.tracks}"/>
+                            </span>
                             <span class="small">
                                  <i class="icon-music"></i>
                             </span>
-                            <span class="small">
-                                 <fmt:formatNumber type="number" maxFractionDigits="3" value="${c.tracks}"/>
-                            </span>
+
                                     </li>
                                     <li>
+                                          <span class="small">
+                                 <fmt:formatNumber type="number" maxFractionDigits="3" value="${c.artists}"/>
+                            </span>
                             <span class="small">
                                  <i class="icon-user"></i>
                             </span>
-                            <span class="small">
-                                 <fmt:formatNumber type="number" maxFractionDigits="3" value="${c.artists}"/>
-                            </span>
+
                                     </li>
                                 </ul>
 
@@ -94,7 +96,7 @@
                 <dl class="dl-horizontal">
                     <c:forEach items="${reports}" var="r">
                         <dt>
-                                    ${r.customer}
+                                ${r.customer}
                         </dt>
                         <dd>
                             <ul class="inline">

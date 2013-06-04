@@ -1394,7 +1394,7 @@ public class DbStorage implements CatalogStorage {
             @Override
             public List<Long> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM user_catalog WHERE user_id = ?");
+                        "SELECT track_id FROM user_catalog WHERE user_id = ?");
                 stmt.setLong(1, userId);
 
                 ResultSet rs = stmt.executeQuery();
