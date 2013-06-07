@@ -10,6 +10,17 @@
     <link rel="stylesheet" type="text/css" href="/css/csv-preview.css" media="screen"/>
 
     <style>
+        #random-tracks {
+            margin-top: 100px;
+            padding: 10px 20px 10px 30px;
+            background-color: #edf9f9;
+        }
+
+        #random-tracks li {
+            padding-bottom: 7px;
+        }
+
+
         .dragtable-sortable {
             list-style-type: none;
             margin: 0;
@@ -100,7 +111,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="span10">
+        <div class="span7">
 
             <section>
                 <legend>
@@ -135,54 +146,78 @@
                     </dd>
                 </dl>
 
+
+
             </section>
 
-            <section>
+        </div>
 
-                <legend>
-                    Обновления
-                </legend>
+        <%--<div class="span4">--%>
+            <%--<div id="random-tracks">--%>
+                <%--<h4>Случайно всплыло:</h4>--%>
 
+                <%--<ul class="unstyled">--%>
+                    <%--<c:forEach var="t" items="${randomTracks}">--%>
+                        <%--<li>--%>
+                            <%--<a href="#">--%>
+                                    <%--${t.name}<c:if test="${not empty t.artist}">: ${t.artist}</c:if>--%>
+                            <%--</a>--%>
+                        <%--</li>--%>
+                    <%--</c:forEach>--%>
+                <%--</ul>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    </div>
 
-                <p>
-                    <c:forEach items="${updates}" var="u">
-                        <c:if test="${u.applied}">
-                            <dd>
+    <div class="row">
+        <div class="span10"/>
 
-                            </dd>
+        <section>
 
-                        </c:if>
-                    </c:forEach>
-                </p>
-
-
-                    <%--<c:if test="${u.applied}">--%>
-                <%--<dl class="dl-horizontal">--%>
-                    <%--<dt>Обновлен</dt>--%>
-                    <%--<dd>${u.whenUpdated}</dd>--%>
-
-                    <%--<dt>Файл</dt>--%>
-                    <%--<dd>${u.fileName}</dd>--%>
-
-                    <%--<dt>Новых треков</dt>--%>
-                    <%--<dd>${u.tracks - u.crossing}</dd>--%>
-
-                    <%--<dt>Измененных</dt>--%>
-                    <%--<dd>${u.crossing}</dd>--%>
-                <%--</dl>--%>
-                <%--</c:if>--%>
-
-                <%--</c:forEach>--%>
+            <legend>
+                Обновления
+            </legend>
 
 
-                <form class="form-horizontal" action="../action/update-catalog" method="post"
-                      enctype="multipart/form-data">
-                    <div class="fileupload fileupload-new" data-provides="fileupload">
-                        <div class="input-append">
-                            <div class="uneditable-input span3">
-                                <i class="icon-file fileupload-exists"></i>
-                                <span class="fileupload-preview"></span>
-                            </div>
+            <p>
+                <c:forEach items="${updates}" var="u">
+                <c:if test="${u.applied}">
+            <dd>
+
+            </dd>
+
+            </c:if>
+            </c:forEach>
+            </p>
+
+
+            <%--<c:if test="${u.applied}">--%>
+            <%--<dl class="dl-horizontal">--%>
+            <%--<dt>Обновлен</dt>--%>
+            <%--<dd>${u.whenUpdated}</dd>--%>
+
+            <%--<dt>Файл</dt>--%>
+            <%--<dd>${u.fileName}</dd>--%>
+
+            <%--<dt>Новых треков</dt>--%>
+            <%--<dd>${u.tracks - u.crossing}</dd>--%>
+
+            <%--<dt>Измененных</dt>--%>
+            <%--<dd>${u.crossing}</dd>--%>
+            <%--</dl>--%>
+            <%--</c:if>--%>
+
+            <%--</c:forEach>--%>
+
+
+            <form class="form-horizontal" action="../action/update-catalog" method="post"
+                  enctype="multipart/form-data">
+                <div class="fileupload fileupload-new" data-provides="fileupload">
+                    <div class="input-append">
+                        <div class="uneditable-input span3">
+                            <i class="icon-file fileupload-exists"></i>
+                            <span class="fileupload-preview"></span>
+                        </div>
 
 
                 <span class="btn btn-fileName">
@@ -192,45 +227,45 @@
                     <input name="file" type="file" id="fileinput" accept=".csv" data-url="../action/update-catalog"/>
                 </span>
 
-                            <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Убрать</a>
-                        </div>
+                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Убрать</a>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+
+                    <div id="progress" class="progress progress-success progress-striped">
+                        <div class="bar" style="width: 0%;"></div>
                     </div>
 
-                    <div class="row-fluid">
+                    <input class="btn btn-primary"
+                           type="submit"
+                           value="Загрузить"
+                           id="sbmtBtn"
+                           disabled="disabled">
 
-                        <div id="progress" class="progress progress-success progress-striped">
-                            <div class="bar" style="width: 0%;"></div>
-                        </div>
+                    <div id="status-bar"></div>
+                </div>
 
-                        <input class="btn btn-primary"
-                               type="submit"
-                               value="Загрузить"
-                               id="sbmtBtn"
-                               disabled="disabled">
-
-                        <div id="status-bar"></div>
-                    </div>
-
-                    <input type="hidden" name="catId" value="${catalog.id}">
+                <input type="hidden" name="catId" value="${catalog.id}">
 
 
-                    <%--<div id="upload-options">--%>
-                    <%--<div class="control-group">--%>
-                    <%--<label class="control-label" for="inputEmail">Email</label>--%>
-                    <%--<div class="controls">--%>
-                    <%--<input type="text" id="inputEmail" placeholder="Email">--%>
-                    <%--</div>--%>
-                    <%--</div>--%>
+                <%--<div id="upload-options">--%>
+                <%--<div class="control-group">--%>
+                <%--<label class="control-label" for="inputEmail">Email</label>--%>
+                <%--<div class="controls">--%>
+                <%--<input type="text" id="inputEmail" placeholder="Email">--%>
+                <%--</div>--%>
+                <%--</div>--%>
 
-                    <%--</div>--%>
-                </form>
+                <%--</div>--%>
+            </form>
 
 
-                <div id="preview-container"></div>
-            </section>
+            <div id="preview-container"></div>
+        </section>
 
-        </div>
     </div>
+</div>
 
 </div>
 

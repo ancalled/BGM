@@ -12,6 +12,9 @@ INSERT INTO catalog (platform_id, name, royalty, copyright) VALUES (1, 'PMI rela
 INSERT INTO catalog (platform_id, name, royalty, copyright) VALUES (2, 'Sony ATV', 90.000, 'AUTHOR');
 INSERT INTO catalog (platform_id, name, royalty, copyright) VALUES (2, 'MSG_MCS', 90.000, 'AUTHOR');
 
+INSERT INTO catalog (platform_id, name, royalty, copyright) VALUES (2, 'KOBALT', 90.000, 'AUTHOR');
+
+
 INSERT INTO composition (catalog_id, code, name, artist, composer, shareMobile, sharePublic) VALUES (1, '37009', '#1 Da Woman', 'Tricky', 'Norman Gimbel, Charles Fox, Adrian Thaws, John Frusciante', 75.0, 75.0);
 INSERT INTO composition (catalog_id, code, name, artist, composer, shareMobile, sharePublic) VALUES (1, '56984', 'Hot Potato', 'NAUGHTY BY NATURE', 'Criss, A/Gist, Kaygee/Brown, Vinnie?', 100.0, 100.0);
 INSERT INTO composition (catalog_id, code, name, artist, composer, shareMobile, sharePublic) VALUES (1, '40313', 'MORE THAN I CAN BEAR', 'Various', 'REILLY, MARK VINCENT/WHITE, DANNY', 100.0, 100.0);

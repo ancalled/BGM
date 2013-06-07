@@ -512,6 +512,63 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+
+    @Override
+    public List<Track> getRandomTracks(final int num) {
+        return query(new Action<List<Track>>() {
+            @Override
+            public List<Track> execute(Connection con) throws SQLException {
+
+                List<Track> tracks = new ArrayList<>();
+
+                for (int i = 0; i < num; i++) {
+                    PreparedStatement stmt = con.prepareStatement(
+                            "SELECT * FROM composition AS c JOIN\n" +
+                                    "  (SELECT (RAND() * (SELECT MAX(id)  FROM composition)) AS id) r\n" +
+                                    "WHERE c.id >= r.id\n" +
+                                    "ORDER BY c.id ASC\n" +
+                                    "LIMIT 1;");
+
+                    ResultSet rs = stmt.executeQuery();
+
+                    while (rs.next()) {
+                        tracks.add(parseTrack(rs));
+                    }
+                }
+                return tracks;
+            }
+        });
+    }
+
+    @Override
+    public List<Track> getRandomTracks(final long catalogId, final int num) {
+        return query(new Action<List<Track>>() {
+            @Override
+            public List<Track> execute(Connection con) throws SQLException {
+
+                List<Track> tracks = new ArrayList<>();
+
+                for (int i = 0; i < num; i++) {
+                    PreparedStatement stmt = con.prepareStatement(
+                            "SELECT * FROM composition AS c JOIN\n" +
+                                    "  (SELECT (RAND() * (SELECT MAX(id)  FROM composition)) AS id) r\n" +
+                                    "WHERE c.id >= r.id\n" +
+                                    "AND catalog_id = ?\n" +
+                                    "ORDER BY c.id ASC\n" +
+                                    "LIMIT 1;");
+                    stmt.setLong(1, catalogId);
+
+                    ResultSet rs = stmt.executeQuery();
+
+                    while (rs.next()) {
+                        tracks.add(parseTrack(rs));
+                    }
+                }
+                return tracks;
+            }
+        });
+    }
+
     @Override
     public List<Customer> getAllCustomers() {
         return query(new Action<List<Customer>>() {
@@ -1131,7 +1188,7 @@ public class DbStorage implements CatalogStorage {
         queryVoid(new VoidAction() {
             public void execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "DELETE FROM user_catalog WHERE track_id = ? and user_id= ?");
+                        "DELETE FROM user_catalog WHERE track_id = ? AND user_id= ?");
 
                 stmt.setLong(1, trackId);
                 stmt.setLong(2, userId);

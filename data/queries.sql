@@ -186,3 +186,5 @@ SET artists = (SELECT
                  count(DISTINCT t.artist)
                FROM composition t
                WHERE t.catalog_id = c.id);
+
+

@@ -47,6 +47,10 @@ public interface CatalogStorage {
 
     List<Track> searchTrackByArtistLike(String artist);
 
+    List<Track> getRandomTracks(int num);
+
+    List<Track> getRandomTracks(long catalogId, int num);
+
     List<Customer> getAllCustomers();
 
     Customer getCustomer(String name);

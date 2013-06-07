@@ -14,6 +14,9 @@
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-datetimepicker.min.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" media="screen"/>
+
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
     <title>Главная</title>
 </head>
 
@@ -21,6 +24,53 @@
     span.small {
         font-size: 10px;
     }
+
+    #random-tracks {
+        margin-top: 100px;
+        padding: 10px 20px 10px 30px;
+        background-color: #edf9f9;
+    }
+
+    #random-tracks li {
+        padding-bottom: 7px;
+    }
+
+    #total-tracks {
+        margin: 0 0 30px 185px;
+        text-decoration: underline;
+    }
+
+    #total-tracks strong {
+        font-size: 13pt;
+    }
+
+
+
+    .add-button a {
+        text-decoration: none;
+    }
+
+    .add-button a:link {
+        color: #cccccc;
+    }
+
+    .add-button a:visited {
+        color: #cccccc;
+    }
+
+    .add-button a:hover {
+        color: #747474;
+    }
+
+    .add-platform {
+        margin-left: 20px;
+    }
+
+    .add-catalog {
+        margin-left: 10px;
+    }
+
+
 </style>
 
 
@@ -33,33 +83,37 @@
 <div class="container">
 
     <div class="row">
-        <div class="span8">
+        <div class="span7">
             <section>
                 <legend>
                     Каталоги
+                    <span class="add-button add-platform">
+                        <a href="#add-platform"><i class="icon-plus-sign icon-large"></i> </a>
+                    </span>
                 </legend>
+
 
                 <c:forEach var="p" items="${platforms}">
 
-                    <h4>${p.name}</h4>
+                    <h4>
+                    ${p.name}
+
+                    <span class="add-button add-catalog">
+                        <a href="#add-catalog?platformId=${p.id}"><i class="icon-plus-sign"></i> </a>
+                    </span>
+                    </h4>
 
                     <dl class="dl-horizontal">
                         <c:forEach var="c" items="${p.catalogs}">
                             <dt>
-                                <a href="catalog?catId=${c.id}">
-                                        ${c.name}
-                                </a>
+                                <a href="catalog?catId=${c.id}">${c.name}</a>
                             </dt>
                             <dd>
                                 <ul class="inline">
                                     <li>
                                         <c:choose>
-                                            <c:when test="${c.copyright eq 'AUTHOR'}">
-                                                Авторские
-                                            </c:when>
-                                            <c:otherwise>
-                                                Смежные
-                                            </c:otherwise>
+                                            <c:when test="${c.copyright eq 'AUTHOR'}">Авторские</c:when>
+                                            <c:otherwise>Смежные</c:otherwise>
                                         </c:choose>
                                     </li>
                                     <li>
@@ -82,8 +136,19 @@
 
                             </dd>
                         </c:forEach>
+
                     </dl>
+
+
                 </c:forEach>
+
+                <div id="total-tracks">
+                    Всего
+                    <strong>
+                        <fmt:formatNumber type="number" maxFractionDigits="3" value="${totalTracks}"/>
+                    </strong>
+                    треков
+                </div>
 
             </section>
 
@@ -97,7 +162,7 @@
                     <c:forEach items="${reports}" var="r">
                         <dt>
                             <a href="customer-detail?customer_id=${r.customerId}">
-                                ${r.customer}
+                                    ${r.customer}
                             </a>
                         </dt>
                         <dd>
@@ -148,6 +213,22 @@
                     Исходящие отчеты
                 </legend>
             </section>
+        </div>
+
+        <div class="span4">
+            <div id="random-tracks">
+                <h4>Случайно всплыло:</h4>
+
+                <ul class="unstyled">
+                    <c:forEach var="t" items="${randomTracks}">
+                        <li>
+                            <a href="#">
+                                    ${t.name}<c:if test="${not empty t.artist}">: ${t.artist}</c:if>
+                            </a>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
         </div>
 
     </div>

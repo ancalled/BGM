@@ -27,6 +27,9 @@ public class DispatcherServlet extends HttpServlet {
     public static final String USERS = "users";
     public static final String CUSTOMER_ID = "customer_id";
 
+    public static final int RANDOM_TRACKS_ON_INDEX_PAGE = 10;
+    public static final int RANDOM_TRACK_ON_CATALOG_PAGE = 5;
+
 
     private CatalogStorage catalogStorage;
 
@@ -52,7 +55,19 @@ public class DispatcherServlet extends HttpServlet {
                         List<Platform> platforms = catalogStorage.getAllPlatforms();
                         req.setAttribute("platforms", platforms);
 
+                        int totalTracks = 0;
+                        for (Platform p : platforms) {
+                            for (Catalog c : p.getCatalogs()) {
+                                totalTracks += c.getTracks();
+                            }
+                        }
+                        req.setAttribute("totalTracks", totalTracks);
+
+
                         List<CustomerReport> reports = catalogStorage.getAllCustomerReports();
+
+                        List<Track> randomTracks = catalogStorage.getRandomTracks(RANDOM_TRACKS_ON_INDEX_PAGE);
+                        req.setAttribute("randomTracks", randomTracks);
 
                         List<CustomerReportStatistic> reportStatistics = new ArrayList<>();
 
@@ -98,7 +113,7 @@ public class DispatcherServlet extends HttpServlet {
 //                        if (strFrom != null) {
 //                            from = Integer.parseInt(strFrom);
 //                        }
-                 //todo закончить пагинацию
+                        //todo закончить пагинацию
                         List<Platform> platforms = catalogStorage.getAllPlatforms();
 
                         req.setAttribute("platforms", platforms);
@@ -164,8 +179,14 @@ public class DispatcherServlet extends HttpServlet {
                             Catalog catalog = catalogStorage.getCatalog(catId);
                             req.setAttribute("catalog", catalog);
 
+
                             List<CatalogUpdate> updates = catalogStorage.getCatalogUpdates(catId);
                             req.setAttribute("updates", updates);
+
+//                            if (updates == null || updates.isEmpty()) {
+//                            List<Track> randomTracks = catalogStorage.getRandomTracks(catId, RANDOM_TRACK_ON_CATALOG_PAGE);
+//                            req.setAttribute("randomTracks", randomTracks);
+//                            }
 
                         }
 
