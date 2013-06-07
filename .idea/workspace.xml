@@ -43,21 +43,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/DispatcherServlet.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/DispatcherServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ant.xml" afterPath="$PROJECT_DIR$/.idea/ant.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.properties" afterPath="$PROJECT_DIR$/db.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/index.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/queries.sql" afterPath="$PROJECT_DIR$/data/queries.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/sample-data.sql" afterPath="$PROJECT_DIR$/data/sample-data.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bgm-platform.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1370529563355" ignored="false" />
+    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1370570479088" ignored="false" />
     <file path="/CatalogStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1370534206255" ignored="false" />
     <file path="/fragment.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1370311510883" ignored="false" />
     <file path="db-console:/b524fb0f/bd8e1b6e-fe0f-401f-a88d-0e81e53c8907/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363032963765" ignored="false" />
@@ -1688,7 +1678,11 @@
       <created>1369275032280</created>
       <updated>1369275032280</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="- Случайные треки&#10;- Кнопочки для нового каталога и платформы">
+      <created>1370570481151</created>
+      <updated>1370570481151</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1791,7 +1785,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Поправки по обновлению каталогов" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Случайные треки&#10;- Кнопочки для нового каталога и платформы" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1805,7 +1799,6 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="брал кирилицу из коммента" />
     <MESSAGE value="начал делаь простенький импорт отчета." />
     <MESSAGE value="добавил табличку customer и сделал главную страничку с меню, добавил лпарочку скриптов которые ранее забыл (js-ки буутстраповские )" />
     <MESSAGE value="merge" />
@@ -1830,6 +1823,7 @@
     <MESSAGE value="Доделал обновление каталога" />
     <MESSAGE value="Предпросмотр csv" />
     <MESSAGE value="Поправки по обновлению каталогов" />
+    <MESSAGE value="- Случайные треки&#10;- Кнопочки для нового каталога и платформы" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
