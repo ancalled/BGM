@@ -50,7 +50,7 @@
                             мобильный агрегатор
                         </c:when>
                         <c:when test="${c.customerType eq 'PUBLIC_RIGHTS_SOCIETY'}">
-                            общество по смежным правам
+                            организация по коллективному управлению
                         </c:when>
                         <c:otherwise>
                             не задан
