@@ -54,6 +54,13 @@
             text-align: center;
         }
 
+        label.separated {
+            margin-top: 15px;
+        }
+
+
+
+
     </style>
 </head>
 <body>
@@ -69,7 +76,7 @@
             Поиск композиций
         </legend>
 
-        <div class="span8">
+        <div class="span10">
 
             <form id="searcher" action="/customer/action/search" method="post" class="form-search">
 
@@ -93,38 +100,55 @@
                 <div id="collapseOne" class="search-params collapse in">
                     <div class="container search-params">
 
-                        <div class="span3">
-                            <h4>Поиск по</h4>
+                        <div class="span4">
+                            <h4>Поиск</h4>
                             <fieldset>
                                 <label for="field-all" class="radio">
                                     <input type="radio" name="field" value="all" id="field-all">
-                                    всем полям
-                                </label>
-
-                                <label for="field-code" class="radio">
-                                    <input type="radio" name="field" value="code" id="field-code">
-                                    коду
-                                </label>
-
-                                <label for="field-artist" class="radio">
-                                    <input type="radio" name="field" value="artist" id="field-artist">
-                                    артисту
-                                </label>
-
-                                <label for="field-composer" class="radio">
-                                    <input type="radio" name="field" value="composer" id="field-composer">
-                                    автору
+                                    по всем полям
                                 </label>
 
                                 <label for="field-name" class="radio">
                                     <input type="radio" name="field" value="track" id="field-name">
-                                    композиции
+                                    по названию трека
                                 </label>
+
+                                <label for="field-code" class="radio">
+                                    <input type="radio" name="field" value="code" id="field-code">
+                                    по коду
+                                </label>
+
+                                <label for="field-artist-track" class="radio separated">
+                                    <input type="radio" name="field" value="artist_track" id="field-artist-track">
+                                    по артисту и треку (через ';')
+                                </label>
+
+                                <label for="field-composer-track" class="radio">
+                                    <input type="radio" name="field" value="composer_track" id="field-composer-track">
+                                    по композитору и треку (через ';')
+                                </label>
+
+                                <%--<label for="field-artist-composer-track" class="radio">--%>
+                                    <%--<input type="radio" name="field" value="artist_composer_track" id="field-artist-composer-track">--%>
+                                    <%--композитору и треку (через ';')--%>
+                                <%--</label>--%>
+
+                                <label for="field-artist" class="radio separated">
+                                    <input type="radio" name="field" value="artist" id="field-artist">
+                                    все треки артиста
+                                </label>
+
+                                <label for="field-composer" class="radio">
+                                    <input type="radio" name="field" value="composer" id="field-composer">
+                                    все треки композитора
+                                </label>
+
+
                             </fieldset>
                         </div>
 
 
-                        <div class="span8">
+                        <div class="span6">
                             <h4>Фильтр по каталогам</h4>
 
                             <div class="row">

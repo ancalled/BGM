@@ -268,6 +268,29 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
+    public List<Track> getTracksBySearchResult(final List<LuceneSearch.SearchResult> ids, final List<Long> catalogIds) {
+        if (ids == null || catalogIds == null || ids.isEmpty() || catalogIds.isEmpty()) return null;
+
+        return query(new Action<List<Track>>() {
+            @Override
+            public List<Track> execute(Connection con) throws SQLException {
+
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM composition WHERE id IN (" + asStringBySearchResults(ids) + ") AND catalog_id IN (" + asString(catalogIds) +")");
+
+                ResultSet rs = stmt.executeQuery();
+
+                List<Track> result = new ArrayList<>();
+                while (rs.next()) {
+                    result.add(parseTrack(rs));
+                }
+
+                return result;
+            }
+        });
+    }
+
+    @Override
     public List<Track> getTracks(final List<Long> ids) {
 
         if (ids.isEmpty()) {
@@ -421,12 +444,13 @@ public class DbStorage implements CatalogStorage {
 
 
     @Override
-    public List<Track> searchTracksByCode(final String code) {
+    public List<Track> searchTracksByCode(final String code, final List<Long> catalogs) {
         return query(new Action<List<Track>>() {
             @Override
             public List<Track> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM composition WHERE code=?");
+                        "SELECT * FROM composition WHERE code=? AND catalog_id " +
+                                "IN (" + asString(catalogs) + ")");
                 stmt.setString(1, code);
 
                 ResultSet rs = stmt.executeQuery();
@@ -1936,6 +1960,19 @@ public class DbStorage implements CatalogStorage {
         for (int i = 0; i < ids.size(); i++) {
             long id = ids.get(i);
             buf.append(id);
+            if (i < ids.size() - 1) {
+                buf.append(", ");
+            }
+        }
+
+        return buf.toString();
+    }
+
+    public static String asStringBySearchResults(List<LuceneSearch.SearchResult> ids) {
+        StringBuilder buf = new StringBuilder();
+        for (int i = 0; i < ids.size(); i++) {
+            LuceneSearch.SearchResult r = ids.get(i);
+            buf.append(r.getTrackId());
             if (i < ids.size() - 1) {
                 buf.append(", ");
             }

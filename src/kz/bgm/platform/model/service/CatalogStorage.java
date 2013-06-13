@@ -31,6 +31,8 @@ public interface CatalogStorage {
 
     List<Track> getTracks(List<Long> ids, List<Long> catalogIds);
 
+    List<Track> getTracksBySearchResult( List<LuceneSearch.SearchResult> ids, List<Long> catalogIds);
+
     List<Track> getTracks(List<Long> ids, long catalogId);
 
     List<Track> searchTracks(String value);
@@ -39,7 +41,7 @@ public interface CatalogStorage {
 
     List<Track> searchTracksByName(String songName);
 
-    List<Track> searchTracksByCode(String code);
+    List<Track> searchTracksByCode(String code, List<Long> catalogs);
 
     List<Track> searchTracksByComposer(String composer);
 

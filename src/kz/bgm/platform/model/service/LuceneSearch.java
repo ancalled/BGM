@@ -249,7 +249,6 @@ public class LuceneSearch {
 
         List<SearchResult> result = new ArrayList<>();
 
-
         for (ScoreDoc hit : hits.scoreDocs) {
             if (hit.score < threshold) {
                 continue;

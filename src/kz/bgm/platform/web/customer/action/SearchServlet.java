@@ -27,6 +27,8 @@ public class SearchServlet extends HttpServlet {
     public static final String CODE = "code";
     public static final String NAME = "name";
     public static final String COMPOSER = "composer";
+    public static final int LIMIT = 100;
+    public static final double THRESHOLD = 0.8;
 
     private CatalogStorage catalogService;
     private LuceneSearch luceneSearch;
@@ -47,17 +49,17 @@ public class SearchServlet extends HttpServlet {
         String query = req.getParameter("q");
         String fieldStr = req.getParameter("field");
 
-        SearchType searchType;
+        SearchType searchType = SearchType.ALL;
         if (fieldStr != null) {
-            searchType = SearchType.valueOf(fieldStr);
-        } else {
-            searchType = SearchType.ALL;
+            try {
+                searchType = SearchType.valueOf(fieldStr.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            }
         }
 
         HttpSession ses = req.getSession();
         User user = (User) ses.getAttribute("user");
-
-
 
         List<Long> available = catalogService.getAvailableCatalogs(user.getCustomerId());
         List<Long> requested = getCatalogsId(req);
@@ -72,23 +74,71 @@ public class SearchServlet extends HttpServlet {
             }
         }
 
-        log.debug("Got query: " + query + ", search type: " + searchType);
-        List<Track> found = Collections.emptyList();
+
+        List<Track> result = Collections.emptyList();
+        String[] fields;
+        List<LuceneSearch.SearchResult> sr;
         try {
-            if (query.contains(";")) {
-                found = separatedFieldsSearch(query, catalogs);
 
-            } else {
-                found = search(query, searchType, catalogs);
+            switch (searchType) {
+                case ALL:
+                    List<Long> tracks = luceneSearch.search(query);
+                    result = catalogService.getTracks(tracks, catalogs);
+                    break;
+
+                case CODE:
+                    result = catalogService.searchTracksByCode(query, catalogs);
+                    break;
+
+                case TRACK:
+                    sr = luceneSearch.search(null, null, query, LIMIT, THRESHOLD);
+                    result = catalogService.getTracksBySearchResult(sr, catalogs);
+                    break;
+
+
+                case ARTIST_TRACK:
+                    fields = query.split(";");
+                    sr = luceneSearch.search(fields[0], null, fields[1], LIMIT, THRESHOLD);
+                    result = catalogService.getTracksBySearchResult(sr, catalogs);
+                    break;
+
+                case COMPOSER_TRACK:
+                    fields = query.split(";");
+                    sr = luceneSearch.search(null, fields[0], fields[1], LIMIT, THRESHOLD);
+                    result = catalogService.getTracksBySearchResult(sr, catalogs);
+                    break;
+
+                case ARTIST:
+                    break;
+
+
+                case COMPOSER:
+                    break;
+
+
             }
-
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+
+//        log.debug("Got query: " + query + ", search type: " + searchType);
+//        List<Track> result = Collections.emptyList();
+//        try {
+//            if (query.contains(";")) {
+//                result = separatedFieldsSearch(query, catalogs);
+//
+//            } else {
+//                result = search(query, searchType, catalogs);
+//            }
+//
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
         //todo убрать этот session
         HttpSession session = req.getSession();
 
-        session.setAttribute("tracks", found);
+        session.setAttribute("tracks", result);
         session.setAttribute("query", query);
         session.setAttribute("searchType", searchType);
 
