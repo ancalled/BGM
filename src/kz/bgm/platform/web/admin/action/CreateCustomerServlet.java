@@ -2,6 +2,7 @@ package kz.bgm.platform.web.admin.action;
 
 
 import kz.bgm.platform.model.domain.Customer;
+import kz.bgm.platform.model.domain.RightType;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import org.apache.log4j.Logger;
@@ -32,7 +33,7 @@ public class CreateCustomerServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         String name = req.getParameter("name");
-        String right = req.getParameter("right");
+        String right = req.getParameter("rights");
         String share = req.getParameter("share");
         String contract = req.getParameter("contract");
 
@@ -44,8 +45,9 @@ public class CreateCustomerServlet extends HttpServlet {
 
         customer.setContract(contract);
         customer.setName(name);
-        customer.setRightType(right);
+        customer.setRightType(RightType.valueOf(right));
         customer.setRoyalty(Float.parseFloat(share));
+
         long id = storage.createCustomer(customer);
 
         if (id == -1L) {

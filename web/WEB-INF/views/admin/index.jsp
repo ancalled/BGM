@@ -112,7 +112,7 @@
                                 <ul class="inline">
                                     <li>
                                         <c:choose>
-                                            <c:when test="${c.copyright eq 'AUTHOR'}">Авторские</c:when>
+                                            <c:when test="${c.rightType eq 'AUTHOR'}">Авторские</c:when>
                                             <c:otherwise>Смежные</c:otherwise>
                                         </c:choose>
                                     </li>

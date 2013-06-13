@@ -40,7 +40,6 @@ public class DispatcherServlet extends HttpServlet {
         Customer customer = catalogStorage.getCustomer(user.getCustomerId());
         req.setAttribute("customer", customer);
 
-
         String pth = req.getPathInfo();
 
         Action action = null;
@@ -102,6 +101,7 @@ public class DispatcherServlet extends HttpServlet {
                     }
                 };
                 break;
+
             case "/index":
                 action = new Action() {
                     @Override
@@ -114,31 +114,11 @@ public class DispatcherServlet extends HttpServlet {
                         List<CustomerReport> reports = catalogStorage.getAllCustomerReports();
                         req.setAttribute("reports", reports);
 
-//                        List<CustomerReportStatistic> reportStatistics = new ArrayList<>();
-//
-//                        for (CustomerReport rep : reports) {
-//                            List<CustomerReportItem> repItemList = catalogStorage.getCustomerReportsItems(rep.getId());
-//                            CustomerReportStatistic crs = new CustomerReportStatistic();
-//                            crs.setReportDate(rep.getStartDate());
-//                            crs.setSendDate(rep.getUploadDate());
-//                            crs.setReportPeriod(rep.getPeriodOrdinal());
-//                            crs.setReportType(rep.getTypeOrdinal());
-//
-//                            crs.setCustomerId(rep.getCustomerId());
-//                            if (repItemList.size() > 0) {
-//                                crs.setCalculated(true);
-//                            } else {
-//                                crs.setCalculated(false);
-//                            }
-//                            reportStatistics.add(crs);
-//                        }
-//
-//                        req.setAttribute("reports", reportStatistics);
-
                         return "index";
                     }
                 };
                 break;
+
             case "/basket":
                 action = new Action() {
                     @Override

@@ -37,18 +37,41 @@
             <h4>${customer.name}</h4>
             <ul class="unstyled">
                 <li>
+                    Тип организации:
+                    <strong>
+                        <c:choose>
+                            <c:when test="${customer.customerType eq 'MOBILE_AGGREGATOR'}">
+                                мобильный агрегатор
+                            </c:when>
+                            <c:when test="${customer.customerType eq 'PUBLIC_RIGHTS_SOCIETY'}">
+                                общество по смежным правам
+                            </c:when>
+                            <c:otherwise>
+                                не задан
+                            </c:otherwise>
+                        </c:choose>
+                    </strong>
+                </li>
+                <li>
                     Тип прав:
                     <strong>
                         <c:choose>
                             <c:when test="${customer.rightType eq 'AUTHOR'}">
                                 авторские
                             </c:when>
-                            <c:otherwise>
+                            <c:when test="${customer.rightType eq 'RELATED'}">
                                 смежные
+                            </c:when>
+                            <c:when test="${customer.rightType eq 'AUTHOR_RELATED'}">
+                                авторские и смежные
+                            </c:when>
+                            <c:otherwise>
+                                отсутствует
                             </c:otherwise>
                         </c:choose>
                     </strong>
                 </li>
+
             </ul>
         </div>
     </div>
@@ -61,13 +84,15 @@
                     Доступные каталоги
                 </legend>
 
+
+
                 <c:forEach var="p" items="${platforms}">
 
                     <h4>${p.name}</h4>
 
                     <dl class="dl-horizontal">
                         <c:forEach var="c" items="${p.catalogs}">
-                            <c:if test="${c.copyright == customer.rightType}">
+                            <c:if test="${c.rightType eq customer.rightType or customer.rightType eq 'AUTHOR_RELATED'}">
                                 <dt>${c.name}</dt>
                                 <dd>
                                     <ul class="inline">

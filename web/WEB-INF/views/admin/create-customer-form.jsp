@@ -42,6 +42,7 @@
                     <select id="rights" name="rights" class="input-block-level">
                         <option value="AUTHOR">Авторские</option>
                         <option value="RELATED">Публичка</option>
+                        <option value="AUTHOR_RELATED">Все</option>
                     </select>
                 </div>
             </div>

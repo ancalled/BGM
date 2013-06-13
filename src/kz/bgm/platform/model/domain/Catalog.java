@@ -6,7 +6,7 @@ public class Catalog {
     private long id;
     private String name;
     private float royalty;
-    private String copyright;
+    private RightType rightType;
     private long platformId;
     private int tracks;
     private int artists;
@@ -20,8 +20,8 @@ public class Catalog {
         this.platformId = platformId;
     }
 
-    public void setCopyright(String copyright) {
-        this.copyright = copyright;
+    public void setRightType(RightType rightType) {
+        this.rightType = rightType;
     }
 
     public void setRoyalty(float royalty) {
@@ -32,8 +32,8 @@ public class Catalog {
         return royalty;
     }
 
-    public String getCopyright() {
-        return copyright;
+    public RightType getRightType() {
+        return rightType;
     }
 
     public long getId() {

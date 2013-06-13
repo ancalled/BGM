@@ -14,7 +14,7 @@ CREATE TABLE catalog (
   platform_id INT,
   name        VARCHAR(200),
   royalty     DECIMAL(6, 3),
-  copyright   VARCHAR(50),
+  right_type  INT,
   tracks      INT,
   artists     INT
 );
@@ -36,7 +36,8 @@ CREATE INDEX code_index ON composition (code) USING BTREE;
 CREATE TABLE customer (
   id         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name       VARCHAR(200),
-  right_type VARCHAR(50),
+  customer_type INT,
+  right_type INT,
   royalty    DECIMAL(6, 3),
   contract   VARCHAR(100)
 );
@@ -104,6 +105,13 @@ CREATE TABLE report_item_track (
   track_id INT,
   score    FLOAT,
   matched  BOOL
+);
+
+
+CREATE TABLE customer_catalog (
+  id       INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  customer_id  INT,
+  catalog_id INT
 );
 
 CREATE TABLE customer_basket_item (

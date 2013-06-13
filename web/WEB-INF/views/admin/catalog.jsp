@@ -123,7 +123,7 @@
                     <dt>Тип прав</dt>
                     <dd>
                         <c:choose>
-                            <c:when test="${catalog.copyright eq 'AUTHOR'}">
+                            <c:when test="${catalog.rightType eq 'AUTHOR'}">
                                 Авторские
                             </c:when>
                             <c:otherwise>

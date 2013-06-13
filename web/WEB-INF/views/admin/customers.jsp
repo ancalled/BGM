@@ -47,7 +47,7 @@
                 </td>
                 <td>
                     <c:choose>
-                        <c:when test="${c.rightType eq 'copyright'}">
+                        <c:when test="${c.rightType eq 'rightType'}">
                             авторские
                         </c:when>
                         <c:otherwise>

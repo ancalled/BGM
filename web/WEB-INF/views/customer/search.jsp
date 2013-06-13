@@ -87,7 +87,7 @@
                                         <ul class="nav nav-list bs-docs-sidenav">
 
                                             <c:forEach var="c" items="${p.catalogs}">
-                                                <c:if test="${c.copyright == customer.rightType}">
+                                                <c:if test="${c.rightType eq customer.rightType or customer.rightType eq 'AUTHOR_RELATED'}">
                                                     <li style="font-size: 11pt">
                                                         <input type="checkbox" value="${c.id}"
                                                                name="catalog${c.id}"
@@ -126,16 +126,15 @@
                         <th>Композиция</th>
                         <th>Исполнитель</th>
                         <th>Авторы</th>
-                        <th>
-                            <c:choose>
-                                <c:when test="${customer.rightType eq 'AUTHOR'}">
-                                    Мобильный контент
-                                </c:when>
-                                <c:otherwise>
-                                    Публичка
-                                </c:otherwise>
-                            </c:choose>
-                        </th>
+                        <c:choose>
+                            <c:when test="${customer.customerType eq 'MOBILE_AGGREGATOR'}">
+                                <th>Мобильный контент</th>
+                            </c:when>
+                            <c:when test="${customer.customerType eq 'PUBLIC_RIGHTS_SOCIETY'}">
+                                <th>Публичка</th>
+                            </c:when>
+                        </c:choose>
+
                         <th>Каталог</th>
                         <th><input type="submit" value="В корзину" class="btn"></th>
                     </tr>
@@ -149,16 +148,16 @@
                             <td>${t.name}</td>
                             <td>${t.artist}</td>
                             <td>${t.composer}</td>
-                            <td>
-                                <c:choose>
-                                    <c:when test="${customer.rightType eq 'AUTHOR'}">
-                                        ${t.mobileShare}
-                                    </c:when>
-                                    <c:otherwise>
-                                        ${t.publicShare}
-                                    </c:otherwise>
-                                </c:choose>
-                            </td>
+
+                            <c:choose>
+                                <c:when test="${customer.customerType eq 'MOBILE_AGGREGATOR'}">
+                                    <td>${t.mobileShare}</td>
+                                </c:when>
+                                <c:when test="${customer.customerType eq 'PUBLIC_RIGHTS_SOCIETY'}">
+                                    <td> ${t.publicShare}</td>
+                                </c:when>
+                            </c:choose>
+
                             <td>${t.catalog}</td>
                             <c:set var="contains" value="false"/>
                             <c:forEach var="uc" items="${customer_tracks}">

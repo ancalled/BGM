@@ -887,7 +887,7 @@ public class DbStorage implements CatalogStorage {
                 CalculatedReportItem report = null;
                 System.out.println("Composition id" + reportItem.getCompositionId());
                 PreparedStatement ps = con.prepareStatement("SELECT\n" +
-                        "  copyright,\n" +
+                        "  right_type,\n" +
                         "  cat.name catalog,\n" +
                         "  composition.shareMobile,\n" +
                         "  composition.code,\n" +
@@ -900,9 +900,9 @@ public class DbStorage implements CatalogStorage {
                         "    ON (cat.id = catalog_id)\n" +
                         "\n" +
                         "WHERE composition.id =" + reportItem.getCompositionId() + "\n" +
-                        "and cat.copyright='AUTHOR'\n" +
+                        "and cat.right_type=?\n" +
                         "GROUP BY composition.id;");
-
+                ps.setInt(1, RightType.AUTHOR.ordinal());
                 ResultSet rs = ps.executeQuery();
 
 
@@ -915,7 +915,7 @@ public class DbStorage implements CatalogStorage {
                     report.setComposer(rs.getString("composer"));
                     report.setShareMobile(rs.getFloat("shareMobile"));
                     report.setCatalog(rs.getString("catalog"));
-                    report.setCopyright(rs.getString("copyright"));
+                    report.setCopyright(rs.getString("right_type"));
                     report.setQty(reportItem.getQty());
                     report.setPrice(reportItem.getPrice());
                 }
@@ -933,7 +933,7 @@ public class DbStorage implements CatalogStorage {
                 CalculatedReportItem report = null;
                 System.out.println("Composition id" + reportItem.getCompositionId());
                 PreparedStatement ps = con.prepareStatement("SELECT\n" +
-                        "  copyright,\n" +
+                        "  right_type,\n" +
                         "  cat.name catalog,\n" +
                         "  composition.shareMobile,\n" +
                         "  composition.code,\n" +
@@ -946,8 +946,9 @@ public class DbStorage implements CatalogStorage {
                         "    ON (cat.id = catalog_id)\n" +
                         "\n" +
                         "WHERE composition.id =" + reportItem.getCompositionId() + "\n" +
-                        "and cat.copyright='RELATED'\n" +
+                        "and cat.right_type=?\n" +
                         "GROUP BY composition.id;");
+                ps.setInt(1, RightType.RELATED.ordinal());
 
                 ResultSet rs = ps.executeQuery();
 
@@ -961,7 +962,7 @@ public class DbStorage implements CatalogStorage {
                     report.setComposer(rs.getString("composer"));
                     report.setShareMobile(rs.getFloat("shareMobile"));
                     report.setCatalog(rs.getString("catalog"));
-                    report.setCopyright(rs.getString("copyright"));
+                    report.setCopyright(rs.getString("right_type"));
                     report.setQty(reportItem.getQty());
                     report.setPrice(reportItem.getPrice());
                 }
@@ -1009,7 +1010,7 @@ public class DbStorage implements CatalogStorage {
                         "  replace(c.name, CHAR(9), ' ') name,\n" +
                         "  replace(c.artist, CHAR(9), ' ') artist,\n" +
                         "  replace(c.composer, CHAR(9), ' ') composer,\n" +
-                        "  cat.copyright copyright,\n" +
+                        "  cat.right_type right_type,\n" +
                         "  p.name platform,\n" +
                         "  cat.name catalog,\n" +
                         "\n" +
@@ -1076,7 +1077,7 @@ public class DbStorage implements CatalogStorage {
                         "  replace(c.name, CHAR(9), ' ') name,\n" +
                         "  replace(c.artist, CHAR(9), ' ') artist,\n" +
                         "  replace(c.composer, CHAR(9), ' ') composer,\n" +
-                        "  cat.copyright copyright,\n" +
+                        "  cat.right_type right_type,\n" +
                         "  p.name platform,\n" +
                         "  cat.name catalog,\n" +
                         "\n" +
@@ -1102,10 +1103,11 @@ public class DbStorage implements CatalogStorage {
                         "WHERE\n" +
                         "  cat.platform_id = 1\n" +
                         "      AND r.type = 1\n" +
-                        "      AND cat.copyright = 'AUTHOR'\n" +
+                        "      AND cat.right_type = ?\n" +
                         "      AND i.composition_id > 0\n" +
                         "\n" +
                         "GROUP BY i.composition_id\n;");
+                ps.setInt(1, RightType.AUTHOR.ordinal());
 
                 ResultSet rs = ps.executeQuery();
 
@@ -1130,12 +1132,13 @@ public class DbStorage implements CatalogStorage {
             @Override
             public Long execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "INSERT INTO customer(contract, name, right_type, royalty) VALUES(?,?,?,?)",
+                        "INSERT INTO customer(name, customer_type, right_type, royalty, contract) VALUES(?,?,?,?,?)",
                         Statement.RETURN_GENERATED_KEYS);
-                stmt.setString(1, customer.getContract());
-                stmt.setString(2, customer.getName());
-                stmt.setString(3, customer.getRightType());
+                stmt.setString(1, customer.getName());
+                stmt.setInt(2, customer.getCustomerType().ordinal());
+                stmt.setInt(3, customer.getRightType().ordinal());
                 stmt.setFloat(4, customer.getRoyalty());
+                stmt.setString(5, customer.getContract());
 
                 stmt.executeUpdate();
 
@@ -1193,9 +1196,12 @@ public class DbStorage implements CatalogStorage {
             public List<Long> execute(Connection con) throws SQLException {
                 PreparedStatement ps = con.prepareStatement(
                         "SELECT cat.id FROM catalog cat LEFT JOIN customer c " +
-                                "ON c.right_type = cat.copyright WHERE c.id = ?",
+                                "ON c.right_type = cat.right_type " +
+                                "OR c.right_type=? " +
+                                "WHERE c.id = ?",
                         Statement.RETURN_GENERATED_KEYS);
-                ps.setLong(1, customerId);
+                ps.setInt(1, RightType.AUTHOR_RELATED.ordinal());
+                ps.setLong(2, customerId);
 
                 ResultSet rs = ps.executeQuery();
 
@@ -1705,7 +1711,8 @@ public class DbStorage implements CatalogStorage {
         catalog.setId(rs.getLong("id"));
         catalog.setName(rs.getString("name"));
         catalog.setRoyalty(rs.getFloat("royalty"));
-        catalog.setCopyright(rs.getString("copyright"));
+        int rightType = rs.getInt("right_type");
+        catalog.setRightType(RightType.values()[rightType]);
         catalog.setTracks(rs.getInt("tracks"));
         catalog.setPlatformId(rs.getLong("platform_id"));
         catalog.setArtists(rs.getInt("artists"));
@@ -1734,9 +1741,11 @@ public class DbStorage implements CatalogStorage {
         Customer customer = new Customer();
         customer.setId(rs.getLong("id"));
         customer.setName(rs.getString("name"));
-        customer.setContract(rs.getString("contract"));
-        customer.setRightType(rs.getString("right_type"));
+        customer.setCustomerType(CustomerType.values()[rs.getInt("customer_type")]);
+        customer.setRightType(RightType.values()[rs.getInt("right_type")]);
         customer.setRoyalty(rs.getFloat("royalty"));
+        customer.setContract(rs.getString("contract"));
+
         return customer;
     }
 
@@ -1826,7 +1835,7 @@ public class DbStorage implements CatalogStorage {
         report.setCatalogRoyalty(rs.getFloat("cat_royalty"));
         report.setRevenue(rs.getFloat("revenue"));
         report.setCatalog(rs.getString("catalog"));
-        report.setCopyright(rs.getString("copyright"));
+        report.setCopyright(rs.getString("right_type"));
         return report;
     }
 
@@ -1838,9 +1847,7 @@ public class DbStorage implements CatalogStorage {
         report.setCompositionName(rs.getString("name"));
         report.setArtist(rs.getString("artist"));
         report.setQty(rs.getInt("totalQty"));
-        String catalog = rs.getString("catalog");
-        System.out.println("Catalog is " + catalog);
-        report.setCatalog(catalog);
+        report.setCatalog(rs.getString("catalog"));
         report.setSharePublic(rs.getFloat("sharePublic"));
         return report;
     }
