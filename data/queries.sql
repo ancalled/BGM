@@ -188,3 +188,23 @@ SET artists = (SELECT
                WHERE t.catalog_id = c.id);
 
 
+SELECT
+  'id',
+  'code',
+  'name',
+  'artist',
+  'composer',
+  'shareMobile'
+UNION
+SELECT
+  id,
+  code,
+  name,
+  artist,
+  composer,
+  shareMobile
+INTO OUTFILE 'nmi.csv' FIELDS TERMINATED BY ','
+  OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n'
+FROM composition
+WHERE catalog_id IN (2, 3);
+

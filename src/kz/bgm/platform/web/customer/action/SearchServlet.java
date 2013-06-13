@@ -1,6 +1,7 @@
 package kz.bgm.platform.web.customer.action;
 
 import kz.bgm.platform.model.domain.Track;
+import kz.bgm.platform.model.domain.User;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import kz.bgm.platform.model.service.LuceneSearch;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.*;
 
 
@@ -37,37 +40,38 @@ public class SearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+
         String query = req.getParameter("q");
         String field = req.getParameter("field");
-        String extended = req.getParameter("extend");
-        List<Long> catalogIdList = getCatalogsId(req);
 
+        HttpSession ses = req.getSession();
+        User user = (User) ses.getAttribute("user");
 
-//for pagination
-//        String strFrom = req.getParameter("from");
-//        String strPageSize = req.getParameter("pageSize");
-//        int from = 0;
-//        int pageSize = 50;
-//        if (strFrom != null&&!"".equals(strFrom)) {
-//            from = Integer.parseInt(strFrom);
-//        }
-//
-//        if (strPageSize != null&&!"".equals(strPageSize)) {
-//            pageSize = Integer.parseInt(strPageSize);
-//        }
+        List<Long> available = catalogService.getAvailableCatalogs(user.getCustomerId());
+        List<Long> requested = getCatalogsId(req);
+        List<Long> catalogs = new ArrayList<>();
+        if (requested.isEmpty()) {
+            catalogs.addAll(available);
+        } else {
+            for (Long id : requested) {
+                if (available.contains(id)) {
+                    catalogs.add(id);
+                }
+            }
+        }
 
         log.debug("Got query: " + query + ", search type: " + field);
         List<Track> found = Collections.emptyList();
         try {
             if (query.contains(";")) {
-
-                found = compoundSearch(query, catalogIdList);
+                found = complexSearch(query, catalogs);
 
             } else {
-
-                found = easySearch(query, field, catalogIdList);
-
+                found = quickSearch(query, field, catalogs);
             }
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -78,73 +82,79 @@ public class SearchServlet extends HttpServlet {
         session.setAttribute("query", query);
         session.setAttribute("type", field);
 
-        String pathWithParams = getReqParams(req);
-
-        resp.sendRedirect(pathWithParams + "extended=" + extended);
-
+        resp.sendRedirect(buildResponseUrl(req));
     }
 
-    private List<Track> easySearch(String query, String field, List<Long> catalogIdList) throws IOException, ParseException {
+
+    private List<Track> quickSearch(String query, String field, List<Long> catalogs)
+            throws IOException, ParseException {
         List<Track> found;
         switch (field) {
             case "all":
-                List<Long> trackIdList = luceneSearch.search(query/*from,pageSize*/);
-
-                if (!catalogIdList.isEmpty()) {
-                    found = catalogService.getTracks(trackIdList, catalogIdList);
-                } else {
-                    found = catalogService.getTracks(trackIdList);
-                }
+                List<Long> tracks = luceneSearch.search(query);
+                found = catalogService.getTracks(tracks, catalogs);
 
                 break;
             default:
-                found = catalogService.searchTracks(field, query, catalogIdList);
+                found = catalogService.searchTracks(field, query, catalogs);
                 break;
         }
         return found;
     }
 
-    private List<Track> compoundSearch(String query, List<Long> catalogIdList) throws IOException, ParseException {
-        List<Track> found;
+    private List<Track> complexSearch(String query, List<Long> catalogs)
+            throws IOException, ParseException {
         String[] fields = query.split(";");
-        List<Long> trackIdList = new ArrayList<Long>();
+        List<Long> tracks = new ArrayList<>();
 
         if (fields.length == 2) {
-            trackIdList = luceneSearch.searchByAuthor(fields[0], fields[1], 100, 3);
+            tracks = luceneSearch.searchByAuthor(fields[0], fields[1], 100, 3);
+
         } else if (fields.length >= 3) {
-            List<LuceneSearch.SearchResult> resultList = luceneSearch.search(fields[2], fields[1], fields[0], 100, 3);
-            trackIdList = LuceneSearch.parseSearchResult(resultList);
+            tracks = LuceneSearch.parseSearchResult(
+                    luceneSearch.search(fields[2], fields[1], fields[0], 100, 3));
         }
-        if (!catalogIdList.isEmpty()) {
-            found = catalogService.getTracks(trackIdList, catalogIdList);
-        } else {
-            found = catalogService.getTracks(trackIdList);
-        }
-        return found;
+
+        return catalogService.getTracks(tracks, catalogs);
     }
 
-    private String getReqParams(HttpServletRequest req) {
-        StringBuilder respPath = new StringBuilder();
-        respPath.append("/customer/view/search-result");
-        Map<String, String[]> paramMap = req.getParameterMap();
-        if (!paramMap.keySet().isEmpty()) {
-            respPath.append("?");
 
-            for (String paramName : paramMap.keySet()) {
-                respPath.append(paramName);
-                respPath.append("=");
-                respPath.append(paramMap.get(paramName)[0]);
-                respPath.append("&");
+    private String buildResponseUrl(HttpServletRequest req) {
+
+        StringBuilder buf = new StringBuilder();
+        buf.append("/customer/view/search");
+
+        Map<String, String[]> params = req.getParameterMap();
+        if (!params.isEmpty()) {
+            buf.append("?");
+            int i = 0;
+            for (String key : params.keySet()) {
+
+                buf.append(key);
+                buf.append("=");
+                String value = params.get(key)[0];
+                if ("q".equals(key)) {
+                    try {
+                        buf.append(URLEncoder.encode(value, "UTF-8"));
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    buf.append(value);
+                }
+                if (i++ < params.size() - 1) {
+                    buf.append("&");
+                }
             }
 
         }
-        return respPath.toString();
+        return buf.toString();
     }
 
 
     private List<Long> getCatalogsId(HttpServletRequest req) {
         Enumeration<String> paramNames = req.getParameterNames();
-        List<Long> idList = new ArrayList<Long>();
+        List<Long> idList = new ArrayList<>();
 
         while (paramNames.hasMoreElements()) {
             String param = paramNames.nextElement();

@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class RemoveFromUserCatalogServlet extends HttpServlet {
+public class RemoveFromBasketServlet extends HttpServlet {
 
     private CatalogStorage service;
-    private static final Logger log = Logger.getLogger(RemoveFromUserCatalogServlet.class);
+    private static final Logger log = Logger.getLogger(RemoveFromBasketServlet.class);
 
     @Override
     public void init() throws ServletException {
@@ -34,16 +34,15 @@ public class RemoveFromUserCatalogServlet extends HttpServlet {
 
         if (user != null) {
 
-
             log.info("\nRemoving track " + trackId + " from user catalog \n" +
                     "Owner of catalog \n" +
                     "user id    : " + user.getId() + "\n" +
                     "user login : " + user.getLogin());
 
-            service.removeTrackFromUserCatalog(trackId,user.getId());
+            service.removeItemFromBasket(trackId, user.getCustomerId());
 
             log.info("track removed");
-            resp.sendRedirect("/customer/view/user-catalog");
+            resp.sendRedirect("/customer/view/basket");
         }
     }
 }

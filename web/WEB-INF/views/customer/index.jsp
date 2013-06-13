@@ -34,9 +34,31 @@
 
     <div class="row">
         <div class="span8">
+            <h4>${customer.name}</h4>
+            <ul class="unstyled">
+                <li>
+                    Тип прав:
+                    <strong>
+                        <c:choose>
+                            <c:when test="${customer.rightType eq 'AUTHOR'}">
+                                авторские
+                            </c:when>
+                            <c:otherwise>
+                                смежные
+                            </c:otherwise>
+                        </c:choose>
+                    </strong>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="span8">
             <section>
                 <legend>
-                    Каталоги
+                    Доступные каталоги
                 </legend>
 
                 <c:forEach var="p" items="${platforms}">
@@ -45,31 +67,20 @@
 
                     <dl class="dl-horizontal">
                         <c:forEach var="c" items="${p.catalogs}">
-                            <dt>
-                                    ${c.name}
-                            </dt>
-                            <dd>
-                                <ul class="inline">
-                                    <li>
-                                        <c:choose>
-                                            <c:when test="${c.copyright eq 'AUTHOR'}">
-                                                Авторские
-                                            </c:when>
-                                            <c:otherwise>
-                                                Смежные
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </li>
-                                    <li>
-                                                                    <span class="small">
+                            <c:if test="${c.copyright == customer.rightType}">
+                                <dt>${c.name}</dt>
+                                <dd>
+                                    <ul class="inline">
+                                        <li>
+                            <span class="small">
                                  <fmt:formatNumber type="number" maxFractionDigits="3" value="${c.tracks}"/>
                             </span>
                             <span class="small">
                                  <i class="icon-music"></i>
                             </span>
 
-                                    </li>
-                                    <li>
+                                        </li>
+                                        <li>
                                           <span class="small">
                                  <fmt:formatNumber type="number" maxFractionDigits="3" value="${c.artists}"/>
                             </span>
@@ -77,10 +88,11 @@
                                  <i class="icon-user"></i>
                             </span>
 
-                                    </li>
-                                </ul>
+                                        </li>
+                                    </ul>
 
-                            </dd>
+                                </dd>
+                            </c:if>
                         </c:forEach>
                     </dl>
                 </c:forEach>
@@ -90,62 +102,43 @@
 
             <section>
                 <legend>
-                    Входящие отчеты
+                    Отправленные отчеты
                 </legend>
 
-                <dl class="dl-horizontal">
+                <ul class="unstyled">
                     <c:forEach items="${reports}" var="r">
-                        <dt>
-                                ${r.customer}
-                        </dt>
-                        <dd>
+
+                        <li>
                             <ul class="inline">
-                                    <%--<li>${r.sendDate}</li>--%>
-                                <li>${r.reportDate}</li>
+                                <li>${r.startDate}</li>
                                 <li>
                                     <c:choose>
-                                        <c:when test="${r.reportType ==1}">
-                                            Публичка
-                                        </c:when>
-                                        <c:otherwise>
+                                        <c:when test="${r.type == 'MOBILE'}">
                                             Мобильный
+                                        </c:when>
+                                        <c:otherwise>
+                                            Публичка
                                         </c:otherwise>
                                     </c:choose>
                                 </li>
                                 <li>
                                     <c:choose>
-                                        <c:when test="${r.reportPeriod ==1}">
-                                            Квартальный
-                                        </c:when>
-                                        <c:otherwise>
+                                        <c:when test="${r.period == 'MONTH'}">
                                             Ежемесячный
-                                        </c:otherwise>
-                                    </c:choose>
-                                </li>
-                                <li>
-                                    <c:choose>
-                                        <c:when test="${r.calculated ==true}">
-                                            <i class="icon-ok"></i>
                                         </c:when>
                                         <c:otherwise>
-                                            <i class="icon-remove"></i>
+                                            Квартальный
                                         </c:otherwise>
                                     </c:choose>
                                 </li>
                             </ul>
-                        </dd>
-
+                        </li>
                     </c:forEach>
-                </dl>
+                </ul>
 
             </section>
 
 
-            <section>
-                <legend>
-                    Исходящие отчеты
-                </legend>
-            </section>
         </div>
 
     </div>

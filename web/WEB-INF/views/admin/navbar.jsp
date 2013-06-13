@@ -9,7 +9,7 @@
             <%--<li class="${param.catalogs}"><a href="/admin/view/catalogs">Каталоги</a></li>--%>
             <li class="${param.reports}"><a href="/admin/view/reports">Отчеты</a></li>
             <li class="${param.search}"><a href="/admin/view/search-result">Поиск</a></li>
-            <li class="${param.customers}"><a href="/admin/view/customers">Клиенты</a></li>
+            <li class="${param.customers}"><a href="/admin/view/customers">Пользователи</a></li>
             <li><a href="/admin/action/logout">Выход</a></li>
         </ul>
     </div>

@@ -106,9 +106,9 @@ CREATE TABLE report_item_track (
   matched  BOOL
 );
 
-CREATE TABLE user_catalog (
+CREATE TABLE customer_basket_item (
   id       INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  user_id  INT,
+  customer_id  INT,
   track_id INT
 );
 

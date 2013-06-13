@@ -2,7 +2,6 @@ package kz.bgm.platform.web.customer.action;
 
 
 import kz.bgm.platform.model.domain.User;
-import kz.bgm.platform.model.domain.UserCatalogItem;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import org.apache.log4j.Logger;
@@ -17,10 +16,10 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-public class PutToUserCatalogServlet extends HttpServlet {
+public class AddTrackToBasketServlet extends HttpServlet {
 
     CatalogStorage storage;
-    private static final Logger log = Logger.getLogger(PutToUserCatalogServlet.class);
+    private static final Logger log = Logger.getLogger(AddTrackToBasketServlet.class);
 
     @Override
     public void init() throws ServletException {
@@ -36,44 +35,34 @@ public class PutToUserCatalogServlet extends HttpServlet {
 
         if (user != null) {
 
-
-            log.info("Adding tracks in user catalog of user \n" +
+            log.info("Add tracks to basket \n" +
                     "    login :" + user.getLogin() + "\n" +
                     "    id    :" + user.getId());
 
-            List<Long> idList = getTrackIdList(req);
+            List<Long> tracks = getTrackIds(req);
 
-            for (Long id : idList) {
-                UserCatalogItem item = new UserCatalogItem();
-
-                log.info(id);
-
-                item.setTrackId(id);
-                item.setUserId(user.getId());
-
-                storage.saveUserCatalogItem(item);
+            for (Long trackId : tracks) {
+                storage.addItemToBasket(user.getCustomerId(), trackId);
             }
 
         } else {
             log.warn("User not found");
         }
 
-        resp.sendRedirect("/customer/view/search-result");
+        resp.sendRedirect("/customer/view/basket");
 
     }
 
-    private List<Long> getTrackIdList(HttpServletRequest req) {
+    private List<Long> getTrackIds(HttpServletRequest req) {
         Enumeration<String> names = req.getParameterNames();
-        List<Long> idList = new ArrayList<>();
+        List<Long> res = new ArrayList<>();
         while (names.hasMoreElements()) {
             String elName = names.nextElement();
-            String strId = (String) req.getParameter(elName);
-
+            String strId = req.getParameter(elName);
             if (strId != null) {
-                Long id = Long.parseLong(strId);
-                idList.add(id);
+                res.add(Long.parseLong(strId));
             }
         }
-        return idList;
+        return res;
     }
 }

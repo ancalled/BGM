@@ -201,11 +201,11 @@
     </servlet>
     <servlet>
         <servlet-name>putToBasketServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.customer.action.PutToUserCatalogServlet</servlet-class>
+        <servlet-class>kz.bgm.platform.web.customer.action.AddTrackToBasketServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>removeUserTrack</servlet-name>
-        <servlet-class>kz.bgm.platform.web.customer.action.RemoveFromUserCatalogServlet</servlet-class>
+        <servlet-class>kz.bgm.platform.web.customer.action.RemoveFromBasketServlet</servlet-class>
     </servlet>
 
 

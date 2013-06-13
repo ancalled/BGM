@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -34,24 +33,26 @@ public class DispatcherServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
+        final HttpSession ses = req.getSession();
+        final User user = (User) ses.getAttribute("user");
+        req.setAttribute("user", user);
+
+        Customer customer = catalogStorage.getCustomer(user.getCustomerId());
+        req.setAttribute("customer", customer);
+
+
         String pth = req.getPathInfo();
 
         Action action = null;
         switch (pth) {
-            case "/search-result":
+            case "/search":
                 action = new Action() {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
 
-                        HttpSession ses = req.getSession();
-
-
-                        User user = (User) ses.getAttribute("user");
-                        if (user != null) {
-                            List<Long> idList = catalogStorage.getUserTracksId(user.getId());
-                            if (!idList.isEmpty()) {
-                                req.setAttribute("user_track_ids", idList);
-                            }
+                        List<Long> tracks = catalogStorage.getCustomerBasket(user.getCustomerId());
+                        if (!tracks.isEmpty()) {
+                            req.setAttribute("customer_tracks", tracks);
                         }
 //                        int from = 0;
 //                        String strFrom = req.getParameter("from");
@@ -67,7 +68,8 @@ public class DispatcherServlet extends HttpServlet {
                         req.setAttribute("tracks", ses.getAttribute("tracks"));
 //                        req.setAttribute("from", from);
                         req.setAttribute("pageSize", TRACKS_PER_PAGE);
-                        return "search-result";
+
+                        return "search";
                     }
                 };
                 break;
@@ -105,56 +107,47 @@ public class DispatcherServlet extends HttpServlet {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
 
+
                         List<Platform> platforms = catalogStorage.getAllPlatforms();
                         req.setAttribute("platforms", platforms);
 
                         List<CustomerReport> reports = catalogStorage.getAllCustomerReports();
+                        req.setAttribute("reports", reports);
 
-                        List<CustomerReportStatistic> reportStatistics = new ArrayList<>();
-
-                        for (CustomerReport rep : reports) {
-                            Customer customer = catalogStorage.getCustomer(rep.getCustomerId());
-                            List<CustomerReportItem> repItemList = catalogStorage.
-                                    getCustomerReportsItems(rep.getId());
-                            CustomerReportStatistic crs = new CustomerReportStatistic();
-                            crs.setReportDate(rep.getStartDate());
-                            crs.setSendDate(rep.getUploadDate());
-                            crs.setReportPeriod(rep.getPeriodOrdinal());
-                            crs.setReportType(rep.getTypeOrdinal());
-
-                            crs.setCustomerId(rep.getCustomerId());
-                            if (customer != null) {
-                                crs.setCustomer(customer.getName());
-                            }
-                            if (repItemList.size() > 0) {
-                                crs.setCalculated(true);
-                            } else {
-                                crs.setCalculated(false);
-                            }
-                            reportStatistics.add(crs);
-                        }
-
-                        req.setAttribute("reports", reportStatistics);
+//                        List<CustomerReportStatistic> reportStatistics = new ArrayList<>();
+//
+//                        for (CustomerReport rep : reports) {
+//                            List<CustomerReportItem> repItemList = catalogStorage.getCustomerReportsItems(rep.getId());
+//                            CustomerReportStatistic crs = new CustomerReportStatistic();
+//                            crs.setReportDate(rep.getStartDate());
+//                            crs.setSendDate(rep.getUploadDate());
+//                            crs.setReportPeriod(rep.getPeriodOrdinal());
+//                            crs.setReportType(rep.getTypeOrdinal());
+//
+//                            crs.setCustomerId(rep.getCustomerId());
+//                            if (repItemList.size() > 0) {
+//                                crs.setCalculated(true);
+//                            } else {
+//                                crs.setCalculated(false);
+//                            }
+//                            reportStatistics.add(crs);
+//                        }
+//
+//                        req.setAttribute("reports", reportStatistics);
 
                         return "index";
                     }
                 };
                 break;
-            case "/user-catalog":
+            case "/basket":
                 action = new Action() {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
+                        List<Long> idList = catalogStorage.getCustomerBasket(user.getCustomerId());
+                        List<Track> trackList = catalogStorage.getTracks(idList);
 
-                        HttpSession session = req.getSession();
-
-                        User user = (User) session.getAttribute("user");
-                        if (user != null) {
-                            List<Long> idList = catalogStorage.getUserTracksId(user.getId());
-                            List<Track> trackList = catalogStorage.getTracks(idList);
-
-                            req.setAttribute("tracks", trackList);
-                        }
-                        return "user-catalog";
+                        req.setAttribute("tracks", trackList);
+                        return "basket";
                     }
                 };
                 break;

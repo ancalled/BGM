@@ -17,16 +17,15 @@
 </head>
 
 <c:import url="navbar.jsp">
-    <c:param name="user_catalog" value="active"/>
+    <c:param name="basket" value="active"/>
 </c:import>
-
 
 <body>
 
 <div class="container span8">
 
         <legend>
-            Каталог ваших треков
+            Список композиций
         </legend>
     <c:if test="${not empty tracks}">
 
@@ -37,8 +36,16 @@
                 <th>Композиция</th>
                 <th>Исполнитель</th>
                 <th>Авторы</th>
-                <th>Мобильный контент</th>
-                <th>Публичка</th>
+                <th>
+                    <c:choose>
+                        <c:when test="${customer.rightType eq 'AUTHOR'}">
+                            Мобильный контент
+                        </c:when>
+                        <c:otherwise>
+                            Публичка
+                        </c:otherwise>
+                    </c:choose>
+                </th>
                 <th>Каталог</th>
             </tr>
             </thead>
@@ -50,8 +57,16 @@
                     <td>${t.name}</td>
                     <td>${t.artist}</td>
                     <td>${t.composer}</td>
-                    <td>${t.mobileShare}</td>
-                    <td>${t.publicShare}</td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${customer.rightType eq 'AUTHOR'}">
+                                ${t.mobileShare}
+                            </c:when>
+                            <c:otherwise>
+                                ${t.publicShare}
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
                     <td>${t.catalog}</td>
                     <td><i id="${t.id}" class="icon-remove-circle"></i></td>
                 </tr>

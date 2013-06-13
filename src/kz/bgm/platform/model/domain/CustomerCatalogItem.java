@@ -1,11 +1,11 @@
 package kz.bgm.platform.model.domain;
 
-public class UserCatalogItem {
+public class CustomerCatalogItem {
     private long id;
     private long userId;
     private long trackId;
 
-    public UserCatalogItem() {
+    public CustomerCatalogItem() {
     }
 
     public long getId() {

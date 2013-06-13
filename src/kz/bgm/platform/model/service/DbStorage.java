@@ -242,30 +242,18 @@ public class DbStorage implements CatalogStorage {
     }
 
 
+
+
     @Override
     public List<Track> getTracks(final List<Long> ids, final List<Long> catalogIds) {
+        if (ids == null || catalogIds == null || ids.isEmpty() || catalogIds.isEmpty()) return null;
 
         return query(new Action<List<Track>>() {
             @Override
             public List<Track> execute(Connection con) throws SQLException {
 
-                String catalogsPart = "";
-                if (catalogIds != null) {
-                    for (Long cat : catalogIds) {
-                        if (catalogIds.indexOf(cat) == 0) {
-                            catalogsPart = catalogsPart.concat("AND (");
-                        }
-                        catalogsPart = catalogsPart.concat("catalog_id=" + cat);
-                        if (catalogIds.indexOf(cat) != catalogIds.size() - 1) {
-                            catalogsPart = catalogsPart.concat(" OR ");
-                        } else {
-                            catalogsPart = catalogsPart.concat(")");
-                        }
-                    }
-                }
-
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM composition WHERE id IN (" + DbStorage.asString(ids) + ") " + catalogsPart);
+                        "SELECT * FROM composition WHERE id IN (" + asString(ids) + ") AND catalog_id IN (" + asString(catalogIds) +")");
 
                 ResultSet rs = stmt.executeQuery();
 
@@ -1184,15 +1172,40 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
-    public void removeTrackFromUserCatalog(final long trackId, final long userId) {
+    public void removeItemFromBasket(final long trackId, final long customerId) {
         queryVoid(new VoidAction() {
             public void execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "DELETE FROM user_catalog WHERE track_id = ? AND user_id= ?");
+                        "DELETE FROM customer_basket_item WHERE track_id = ? AND customer_id= ?");
 
                 stmt.setLong(1, trackId);
-                stmt.setLong(2, userId);
+                stmt.setLong(2, customerId);
                 stmt.executeUpdate();
+            }
+        });
+    }
+
+
+    @Override
+    public List<Long> getAvailableCatalogs(final long customerId) {
+        return query(new Action<List<Long>>() {
+            @Override
+            public List<Long> execute(Connection con) throws SQLException {
+                PreparedStatement ps = con.prepareStatement(
+                        "SELECT cat.id FROM catalog cat LEFT JOIN customer c " +
+                                "ON c.right_type = cat.copyright WHERE c.id = ?",
+                        Statement.RETURN_GENERATED_KEYS);
+                ps.setLong(1, customerId);
+
+                ResultSet rs = ps.executeQuery();
+
+                List<Long> result = new ArrayList<>();
+
+                while (rs.next()) {
+                    result.add(rs.getLong("id"));
+                }
+
+                return result;
             }
         });
     }
@@ -1446,13 +1459,13 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
-    public List<Long> getUserTracksId(final long userId) {
+    public List<Long> getCustomerBasket(final long customerId) {
         return query(new Action<List<Long>>() {
             @Override
             public List<Long> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT track_id FROM user_catalog WHERE user_id = ?");
-                stmt.setLong(1, userId);
+                        "SELECT track_id FROM customer_basket_item WHERE customer_id = ?");
+                stmt.setLong(1, customerId);
 
                 ResultSet rs = stmt.executeQuery();
 
@@ -1466,18 +1479,17 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
-    public void saveUserCatalogItem(final UserCatalogItem item) {
-        if (item == null) return;
+    public void addItemToBasket(final long customerId, final long trackId) {
 
         query(new Action<Object>() {
             @Override
             public Object execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "INSERT INTO user_catalog (user_id,track_id)" +
+                        "INSERT INTO customer_basket_item (customer_id, track_id)" +
                                 "VALUES (?,?)"
                 );
-                stmt.setLong(1, item.getUserId());
-                stmt.setLong(2, item.getTrackId());
+                stmt.setLong(1, customerId);
+                stmt.setLong(2, trackId);
 
                 stmt.executeUpdate();
                 return null;

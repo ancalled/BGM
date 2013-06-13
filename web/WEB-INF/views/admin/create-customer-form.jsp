@@ -10,8 +10,7 @@
     <script src="/js/plugin-parser.js"></script>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" media="screen"/>
-    <title>Создание Организации</title>
+    <title>Новый пользователь</title>
 </head>
 <body>
 
@@ -22,30 +21,47 @@
 <div class="container">
     <div class="row text-left">
         <legend>
-            Создание Организации
+            Новый пользователь
         </legend>
     </div>
     <div class="span4">
 
-        <form action="/admin/action/create-customer" method="post">
-            <label>
-                Наименование
-                <input type="text" name="name" class="input-block-level" required="true">
-            </label>
-            <label>
-               Тип прав
-                <input type="text" name="right" class="input-block-level" required="true">
-            </label>
-            <label>
-               Ставка
-                <input type="text" name="share" class="input-block-level" required="true">
-            </label>
-            <label>
-                Параметры договра
-                <input type="text" name="contract" class="input-block-level" required="true">
-            </label>
+        <form action="/admin/action/create-customer" method="post"  class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label" for="name">Наименование</label>
 
-            <button class="btn" type="submit">Создать</button>
+                <div class="controls">
+                    <input type="text" id="name" name="name" placeholder="ТОО 'Рога и копыта'">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="rights">Тип прав</label>
+
+                <div class="controls">
+                    <select id="rights" name="rights" class="input-block-level">
+                        <option value="AUTHOR">Авторские</option>
+                        <option value="RELATED">Публичка</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="share">Ставка</label>
+
+                <div class="controls">
+                    <input type="number" id="share" name="share" placeholder="20">
+                    <span class="add-on">%</span>
+                </div>
+            </div>
+
+
+            <div class="control-group">
+                <div class="controls">
+
+                    <button type="submit" class="btn">Создать</button>
+                </div>
+            </div>
         </form>
     </div>
 

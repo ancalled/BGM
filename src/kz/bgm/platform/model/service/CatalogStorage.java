@@ -122,10 +122,12 @@ public interface CatalogStorage {
 
     void updateCatalogsStat();
 
-    List<Long> getUserTracksId(long userId);
+    List<Long> getCustomerBasket(long userId);
 
-    void saveUserCatalogItem(UserCatalogItem item);
+    void addItemToBasket(long customerId, long trackId);
 
-    void removeTrackFromUserCatalog(long trackId,long userId);
+    void removeItemFromBasket(long trackId, long userId);
+
+    List<Long> getAvailableCatalogs(long customerId);
 }
 
