@@ -1,9 +1,6 @@
 package kz.bgm.platform.web.admin.action;
 
-import kz.bgm.platform.model.domain.Customer;
-import kz.bgm.platform.model.domain.CustomerReport;
-import kz.bgm.platform.model.domain.CustomerReportItem;
-import kz.bgm.platform.model.domain.ReportItemTrack;
+import kz.bgm.platform.model.domain.*;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import kz.bgm.platform.model.service.LuceneSearch;
@@ -36,7 +33,6 @@ public class UploadReportMobileServlet extends HttpServlet {
     public static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     public static final String FILE = "file";
-    public static final double THRESHOLD = 3.0;
     public static final int LIMIT = 10;
 
     private ServletFileUpload fileUploader;
@@ -87,10 +83,9 @@ public class UploadReportMobileServlet extends HttpServlet {
 
                 long itemId = catalogService.saveCustomerReportItem(i);
 
-                List<LuceneSearch.SearchResult> found = luceneSearch.search(i.getArtist(), i.getAuthors(), i.getTrack(),
-                        LIMIT, THRESHOLD);
+                List<SearchResult> found = luceneSearch.search(i.getArtist(), i.getAuthors(), i.getTrack(), LIMIT);
 
-                for (LuceneSearch.SearchResult r: found) {
+                for (SearchResult r: found) {
                     tracks.add(new ReportItemTrack(itemId, r.getTrackId(), r.getScore()));
                 }
             }

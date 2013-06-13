@@ -17,11 +17,7 @@ public interface CatalogStorage {
 
     List<Platform> getAllPlatforms();
 
-    List<Catalog> getAllCatalogs();
-
     List<Catalog> getCatalogsByPlatform(long catId);
-
-    List<Track> getAllTracks();
 
     int getTrackCount();
 
@@ -29,19 +25,13 @@ public interface CatalogStorage {
 
     List<Track> getTracks(List<Long> ids);
 
-    List<Track> getTracks(List<Long> ids, List<Long> catalogIds);
-
-    List<Track> getTracksBySearchResult( List<LuceneSearch.SearchResult> ids, List<Long> catalogIds);
-
-    List<Track> getTracks(List<Long> ids, long catalogId);
-
-    List<Track> searchTracks(String value);
+    List<SearchResult> getTracks(List<SearchResult> ids, List<Long> catalogIds);
 
     List<Track> searchTracks(String field, String value, List<Long> catalogIds);
 
     List<Track> searchTracksByName(String songName);
 
-    List<Track> searchTracksByCode(String code, List<Long> catalogs);
+    List<SearchResult> searchTracksByCode(String code, List<Long> catalogs);
 
     List<Track> searchTracksByComposer(String composer);
 
@@ -54,8 +44,6 @@ public interface CatalogStorage {
     List<Track> getRandomTracks(long catalogId, int num);
 
     List<Customer> getAllCustomers();
-
-    Customer getCustomer(String name);
 
     Customer getCustomer(long id);
 
@@ -98,10 +86,6 @@ public interface CatalogStorage {
     void removeCustomer(long id);
 
     CalculatedReportItem calculateMReportRelated(CustomerReportItem reportItems);
-
-    int getCompositionCount(long catalogId);
-
-    int getArtistCount(long catalogId);
 
 
     void resetTempTrackTable();

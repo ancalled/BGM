@@ -1,5 +1,6 @@
 package kz.bgm.platform.test.lucene;
 
+import kz.bgm.platform.model.domain.SearchResult;
 import kz.bgm.platform.model.domain.Track;
 import kz.bgm.platform.model.service.LuceneSearch;
 import org.junit.Before;
@@ -37,9 +38,8 @@ public class LuceneSearchTest {
     @Test
     public void test() throws Exception {
 //        Stayin Alive	Bee Gees
-//        List<Long> ids = luceneSearch.search("Братья Грим", "Кустурица");
-        List<Long> ids = luceneSearch.search("Bee Gees", "Stayin Alive");
-//        List<Long> ids = luceneSearch.search("Братья Грим, Кустрица");
+        List<SearchResult> ids = luceneSearch.search("Bee Gees", null, "Stayin Alive", 100);
+
 
         System.out.println(Arrays.toString(ids.toArray()));
     }

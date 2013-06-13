@@ -181,22 +181,7 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
-    @Override
-    public List<Catalog> getAllCatalogs() {
-        return query(new Action<List<Catalog>>() {
-            @Override
-            public List<Catalog> execute(Connection con) throws SQLException {
-                PreparedStatement stmt = con.prepareStatement("SELECT * FROM catalog");
-                ResultSet rs = stmt.executeQuery();
 
-                List<Catalog> catalogs = new ArrayList<>();
-                while (rs.next()) {
-                    catalogs.add(parseCatalog(rs));
-                }
-                return catalogs;
-            }
-        });
-    }
 
 
     @Override
@@ -223,66 +208,31 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-    @Override
-    public List<Track> getAllTracks() {
-        return query(new Action<List<Track>>() {
-            @Override
-            public List<Track> execute(Connection con) throws SQLException {
-                PreparedStatement stmt = con.prepareStatement("SELECT * FROM composition");
-                ResultSet rs = stmt.executeQuery();
-
-                List<Track> tracks = new ArrayList<>();
-                while (rs.next()) {
-                    tracks.add(parseTrack(rs));
-                }
-                return tracks;
-            }
-        });
-
-    }
 
 
 
 
     @Override
-    public List<Track> getTracks(final List<Long> ids, final List<Long> catalogIds) {
-        if (ids == null || catalogIds == null || ids.isEmpty() || catalogIds.isEmpty()) return null;
+    public List<SearchResult> getTracks(final List<SearchResult> result, final List<Long> catalogIds) {
+        if (result == null || catalogIds == null || result.isEmpty() || catalogIds.isEmpty()) return null;
 
-        return query(new Action<List<Track>>() {
+        return query(new Action<List<SearchResult>>() {
             @Override
-            public List<Track> execute(Connection con) throws SQLException {
+            public List<SearchResult> execute(Connection con) throws SQLException {
 
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM composition WHERE id IN (" + asString(ids) + ") AND catalog_id IN (" + asString(catalogIds) +")");
+                        "SELECT * FROM composition WHERE id IN (" + asStringBySearchResults(result) + ") AND catalog_id IN (" + asString(catalogIds) +")");
 
                 ResultSet rs = stmt.executeQuery();
 
-                List<Track> result = new ArrayList<>();
                 while (rs.next()) {
-                    result.add(parseTrack(rs));
-                }
-
-                return result;
-            }
-        });
-    }
-
-    @Override
-    public List<Track> getTracksBySearchResult(final List<LuceneSearch.SearchResult> ids, final List<Long> catalogIds) {
-        if (ids == null || catalogIds == null || ids.isEmpty() || catalogIds.isEmpty()) return null;
-
-        return query(new Action<List<Track>>() {
-            @Override
-            public List<Track> execute(Connection con) throws SQLException {
-
-                PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM composition WHERE id IN (" + asStringBySearchResults(ids) + ") AND catalog_id IN (" + asString(catalogIds) +")");
-
-                ResultSet rs = stmt.executeQuery();
-
-                List<Track> result = new ArrayList<>();
-                while (rs.next()) {
-                    result.add(parseTrack(rs));
+                    Track track = parseTrack(rs);
+                    for (SearchResult sr: result) {
+                        if (sr.getTrackId() == track.getId()) {
+                            sr.setTrack(track);
+                            break;
+                        }
+                    }
                 }
 
                 return result;
@@ -316,28 +266,7 @@ public class DbStorage implements CatalogStorage {
 
     }
 
-    @Override
-    public List<Track> getTracks(final List<Long> ids, final long catalogId) {
-        return query(new Action<List<Track>>() {
-            @Override
-            public List<Track> execute(Connection con) throws SQLException {
-                PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM composition WHERE id IN (" + DbStorage.asString(ids) + ") AND catalog_id=?");
 
-                stmt.setLong(1, catalogId);
-
-                ResultSet rs = stmt.executeQuery();
-
-                List<Track> result = new ArrayList<>();
-                while (rs.next()) {
-                    result.add(parseTrack(rs));
-                }
-
-                return result;
-            }
-        });
-
-    }
 
     @Override
     public List<Track> searchTracks(final String field, final String value, final List<Long> catalogIds) {
@@ -390,36 +319,6 @@ public class DbStorage implements CatalogStorage {
 
 
 
-    public List<Track> searchTracks(final String value) {
-        return query(new Action<List<Track>>() {
-            @Override
-            public List<Track> execute(Connection con) throws SQLException {
-                PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM composition WHERE " +
-                                "name LIKE ? OR " +
-                                "composer LIKE ? OR " +
-                                "artist LIKE ? OR " +
-                                "code LIKE ? ");
-
-                stmt.setString(1, "%" + value + "%");
-                stmt.setString(2, "%" + value + "%");
-                stmt.setString(3, "%" + value + "%");
-                stmt.setString(4, "%" + value + "%");
-
-                stmt.setMaxRows(100);
-
-                ResultSet rs = stmt.executeQuery();
-
-                List<Track> tracks = new ArrayList<>();
-                while (rs.next()) {
-                    tracks.add(parseTrack(rs));
-                }
-                return tracks;
-            }
-        });
-
-
-    }
 
     @Override
     public List<Track> searchTracksByName(final String name) {
@@ -444,10 +343,10 @@ public class DbStorage implements CatalogStorage {
 
 
     @Override
-    public List<Track> searchTracksByCode(final String code, final List<Long> catalogs) {
-        return query(new Action<List<Track>>() {
+    public List<SearchResult> searchTracksByCode(final String code, final List<Long> catalogs) {
+        return query(new Action<List<SearchResult>>() {
             @Override
-            public List<Track> execute(Connection con) throws SQLException {
+            public List<SearchResult> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
                         "SELECT * FROM composition WHERE code=? AND catalog_id " +
                                 "IN (" + asString(catalogs) + ")");
@@ -455,9 +354,9 @@ public class DbStorage implements CatalogStorage {
 
                 ResultSet rs = stmt.executeQuery();
 
-                List<Track> tracks = new ArrayList<>();
+                List<SearchResult> tracks = new ArrayList<>();
                 while (rs.next()) {
-                    tracks.add(parseTrack(rs));
+                    tracks.add(new SearchResult(parseTrack(rs)));
                 }
                 return tracks;
             }
@@ -602,20 +501,7 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-    @Override
-    public Customer getCustomer(final String name) {
-        return query(new Action<Customer>() {
-            @Override
-            public Customer execute(Connection con) throws SQLException {
-                PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM customer WHERE name=?");
-                stmt.setString(1, name);
 
-                ResultSet rs = stmt.executeQuery();
-                return rs.next() ? parseCustomer(rs) : null;
-            }
-        });
-    }
 
 
     @Override
@@ -805,21 +691,7 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-    @Override
-    public int getArtistCount(final long catalogId) {
-        return query(new Action<Integer>() {
-            @Override
-            public Integer execute(Connection con) throws SQLException {
-                PreparedStatement stmt = con.prepareStatement(
-                        "SELECT count(DISTINCT artist)cnt FROM composition WHERE catalog_id=?");
-                stmt.setLong(1, catalogId);
 
-                ResultSet rs = stmt.executeQuery();
-
-                return rs.next() ? rs.getInt("cnt") : -1;
-            }
-        });
-    }
 
     @Override
     public List<CustomerReport> getAllCustomerReports() {
@@ -998,23 +870,8 @@ public class DbStorage implements CatalogStorage {
 
     }
 
-    @Override
-    public int getCompositionCount(final long catalogId) {
-        return query(new Action<Integer>() {
-            @Override
-            public Integer execute(Connection con) throws SQLException {
-                PreparedStatement stmt = con.prepareStatement(
-                        "SELECT COUNT(*) cnt FROM composition WHERE catalog_id= ?");
-
-                stmt.setLong(1, catalogId);
-
-                ResultSet rs = stmt.executeQuery();
 
 
-                return rs.next() ? rs.getInt("cnt") : null;
-            }
-        });
-    }
 
 
     @Override
@@ -1968,10 +1825,10 @@ public class DbStorage implements CatalogStorage {
         return buf.toString();
     }
 
-    public static String asStringBySearchResults(List<LuceneSearch.SearchResult> ids) {
+    public static String asStringBySearchResults(List<SearchResult> ids) {
         StringBuilder buf = new StringBuilder();
         for (int i = 0; i < ids.size(); i++) {
-            LuceneSearch.SearchResult r = ids.get(i);
+            SearchResult r = ids.get(i);
             buf.append(r.getTrackId());
             if (i < ids.size() - 1) {
                 buf.append(", ");

@@ -1,6 +1,7 @@
 package kz.bgm.platform.test.lucene;
 
 
+import kz.bgm.platform.model.domain.SearchResult;
 import kz.bgm.platform.model.domain.Track;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
@@ -91,12 +92,12 @@ public class LuceneTest {
             buf.append(artist).append(": ").append(track).append("\t\t");
 
             try {
-                List<LuceneSearch.SearchResult> res = luceneSearch.searchWithResult(artist, track, 100, 8.0);
+                List<SearchResult> res = luceneSearch.search(artist, null, track, 100);
                 if (res.isEmpty()) {
                     buf.append("[Not Found]");
 
                 } else {
-                    for (LuceneSearch.SearchResult r : res) {
+                    for (SearchResult r : res) {
                         buf.append("[score: " + r.getScore() + ", id: " + r.getTrackId());
                         Track t = catalogStorage.getTrack(r.getTrackId());
                         if (t != null) {

@@ -2,6 +2,7 @@ package kz.bgm.platform.utils;
 
 import kz.bgm.platform.model.domain.CalculatedReportItem;
 import kz.bgm.platform.model.domain.CustomerReportItem;
+import kz.bgm.platform.model.domain.SearchResult;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import kz.bgm.platform.model.service.LuceneSearch;
@@ -61,10 +62,10 @@ public class MobileReportUtil {
         List<CustomerReportItem> found = new ArrayList<>();
         for (CustomerReportItem i : reports) {
             List<Long> ids = new ArrayList<>();
-            List<LuceneSearch.SearchResult> results = luceneSearch.search(i.getArtist(), i.getAuthors(), i.getTrack(), 100, 7);
+            List<SearchResult> results = luceneSearch.search(i.getArtist(), i.getAuthors(), i.getTrack(), 100);
 
             if (results.size() > 0) {
-                for (LuceneSearch.SearchResult res : results) {
+                for (SearchResult res : results) {
                     ids.add(res.getTrackId());
                     detected++;
                 }

@@ -4,7 +4,6 @@ package kz.bgm.platform.utils;
 import kz.bgm.platform.model.domain.Track;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
-import kz.bgm.platform.model.service.LuceneSearch;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -22,24 +21,13 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
+import static kz.bgm.platform.BgmServer.*;
+import static kz.bgm.platform.model.service.LuceneSearch.*;
+
 public class LuceneIndexRebuildUtil {
 
-    public static final String APP_DIR = System.getProperty("user.dir");
-    public static final String INDEX_DIR = APP_DIR + "/lucen-indexes";
-
-    public static final String BASE_NAME = "base.name";
-    public static final String BASE_LOGIN = "base.login";
-    public static final String BASE_PASS = "base.pass";
-    public static final String BASE_HOST = "base.host";
-    public static final String BASE_PORT = "base.port";
-
-    public static final String FIELD_ID = "id";
-    public static final String FIELD_NAME = "name";
-    public static final String FIELD_ARTIST = "artist";
-    public static final String FIELD_COMPOSER = "composer";
 
     private final CatalogStorage catalogStorage;
-    private final LuceneSearch luceneSearch;
 
 
     public LuceneIndexRebuildUtil() throws IOException {
@@ -50,7 +38,6 @@ public class LuceneIndexRebuildUtil {
         }
 
         catalogStorage = CatalogFactory.getStorage();
-        luceneSearch = LuceneSearch.getInstance();
     }
 
 
@@ -58,8 +45,10 @@ public class LuceneIndexRebuildUtil {
         System.out.println("Rebuilding index");
 
         int trackCount = catalogStorage.getTrackCount();
+        System.out.printf("Found %d tracks to reindex\n", trackCount);
 
         File indexDir = new File(INDEX_DIR);
+        System.out.println("Index dir is: " + INDEX_DIR);
 
         if (!indexDir.exists()) {
             boolean dirCreated = indexDir.mkdir();
@@ -70,12 +59,9 @@ public class LuceneIndexRebuildUtil {
         }
 
         FSDirectory index = FSDirectory.open(indexDir);
-
         StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_41);
         IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_41, analyzer);
         IndexWriter writer = new IndexWriter(index, config);
-
-
 
         int from = 0;
         int size = 100000;
@@ -83,7 +69,9 @@ public class LuceneIndexRebuildUtil {
             if (from >= trackCount) break;
 
             List<Track> tracks = catalogStorage.getTracks(from, size);
-            System.out.println("Got tracks from " + from + " size " + size);
+
+            System.out.printf("Indexing tracks from %d to %d\n", from, from + size);
+
             for (Track t : tracks) {
                 Document doc = new Document();
                 doc.add(new LongField(FIELD_ID, t.getId(), Field.Store.YES));

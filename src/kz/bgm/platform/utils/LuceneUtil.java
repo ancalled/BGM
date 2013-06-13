@@ -1,6 +1,7 @@
 package kz.bgm.platform.utils;
 
 
+import kz.bgm.platform.model.domain.SearchResult;
 import kz.bgm.platform.model.domain.Track;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
@@ -42,9 +43,9 @@ public class LuceneUtil {
 
 
     public void search(String artist, String authors, String track) throws IOException, ParseException {
-        List<LuceneSearch.SearchResult> res = luceneSearch.search(artist, authors, track, 100, 3.0);
+        List<SearchResult> res = luceneSearch.search(artist, authors, track, 100);
 
-        for (LuceneSearch.SearchResult r : res) {
+        for (SearchResult r : res) {
             System.out.println("[" + r.getScore() + "] id: " + r.getTrackId());
             Track t = catalogStorage.getTrack(r.getTrackId());
             if (t != null) {

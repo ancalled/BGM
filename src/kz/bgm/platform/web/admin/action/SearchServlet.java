@@ -87,44 +87,48 @@ public class SearchServlet extends HttpServlet {
     }
 
     private List<Track> search(String query, String field, List<Long> catalogs) throws IOException, ParseException {
-        List<Track> found;
-        switch (field) {
-            case "all":
-                List<Long> trackIdList = luceneSearch.search(query/*from,pageSize*/);
+//        List<Track> found;
+//        switch (field) {
+//            case "all":
+//                List<Long> trackIdList = luceneSearch.search(query/*from,pageSize*/);
+//
+//                if (!catalogs.isEmpty()) {
+//                    found = catalogService.getTracks(trackIdList, catalogs);
+//                } else {
+//                    found = catalogService.getTracks(trackIdList);
+//                }
+//
+//                break;
+//            default:
+//                found = catalogService.searchTracks(field, query, catalogs);
+//                break;
+//        }
+//        return found;
 
-                if (!catalogs.isEmpty()) {
-                    found = catalogService.getTracks(trackIdList, catalogs);
-                } else {
-                    found = catalogService.getTracks(trackIdList);
-                }
-
-                break;
-            default:
-                found = catalogService.searchTracks(field, query, catalogs);
-                break;
-        }
-        return found;
+        return null;
     }
 
     private List<Track> complexSearch(String query, List<Long> catalogs) throws IOException, ParseException {
-        List<Track> found;
-        String[] fields = query.split(";");
+//        List<Track> found;
+//        String[] fields = query.split(";");
+//
+//        List<Long> tracks = new ArrayList<>();
+//
+//        if (fields.length == 2) {
+//            tracks = luceneSearch.searchByAuthor(fields[0], fields[1], 100, 3);
+//        } else if (fields.length >= 3) {
+//            tracks = LuceneSearch.parseSearchResult(
+//                    luceneSearch.search(fields[2], fields[1], fields[0], 100, 3));
+//        }
+//
+//        if (!catalogs.isEmpty()) {
+//            found = catalogService.getTracks(tracks, catalogs);
+//        } else {
+//            found = catalogService.getTracks(tracks);
+//        }
+//        return found;
 
-        List<Long> tracks = new ArrayList<>();
-
-        if (fields.length == 2) {
-            tracks = luceneSearch.searchByAuthor(fields[0], fields[1], 100, 3);
-        } else if (fields.length >= 3) {
-            tracks = LuceneSearch.parseSearchResult(
-                    luceneSearch.search(fields[2], fields[1], fields[0], 100, 3));
-        }
-
-        if (!catalogs.isEmpty()) {
-            found = catalogService.getTracks(tracks, catalogs);
-        } else {
-            found = catalogService.getTracks(tracks);
-        }
-        return found;
+        return null;
     }
 
     private String buildResponseUrl(HttpServletRequest req) {

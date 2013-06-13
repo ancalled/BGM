@@ -2,6 +2,7 @@ package kz.bgm.platform.web.admin.action;
 
 import kz.bgm.platform.model.domain.CustomerReport;
 import kz.bgm.platform.model.domain.CustomerReportItem;
+import kz.bgm.platform.model.domain.SearchResult;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import kz.bgm.platform.model.service.LuceneSearch;
@@ -100,9 +101,9 @@ public class UploadReportPublicServlet extends HttpServlet {
 
             for (CustomerReportItem i : allItems) {
                 i.setReportId(reportId);
-                List<Long> ids = luceneSearch.search(i.getArtist(), i.getTrack());
+                List<SearchResult> ids = luceneSearch.search(i.getArtist(), null, i.getTrack(), 100);
                 if (ids.size() > 0) {
-                    i.setCompositionId(ids.get(0));
+                    i.setCompositionId(ids.get(0).getTrackId());
                     detected++;
                 }
             }

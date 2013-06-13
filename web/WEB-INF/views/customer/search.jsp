@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <html>
@@ -54,12 +55,15 @@
             text-align: center;
         }
 
-        label.separated {
-            margin-top: 15px;
+
+        td.score {
+            color: #8f6e5f;
         }
 
 
-
+        label.separated {
+            margin-top: 15px;
+        }
 
     </style>
 </head>
@@ -120,12 +124,12 @@
 
                                 <label for="field-artist-track" class="radio separated">
                                     <input type="radio" name="field" value="artist_track" id="field-artist-track">
-                                    по артисту и треку (через ';')
+                                    по артисту и треку (через «;»)
                                 </label>
 
                                 <label for="field-composer-track" class="radio">
                                     <input type="radio" name="field" value="composer_track" id="field-composer-track">
-                                    по композитору и треку (через ';')
+                                    по композитору и треку (через «;»)
                                 </label>
 
                                 <%--<label for="field-artist-composer-track" class="radio">--%>
@@ -188,7 +192,7 @@
         <c:if test="${not empty query}">
 
             <legend>
-                Результат поиска (${fn:length(tracks)} треков)
+                Результат поиска (${fn:length(tracks) gt 99 ? 'больше 100' : '${fn:length(tracks)}'} треков)
             </legend>
 
             <div id="search-result">
@@ -199,7 +203,8 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>#</th>
+                            <%--<th>#</th>--%>
+                            <th></th>
                             <th>Код</th>
                             <th>Композиция</th>
                             <th>Исполнитель</th>
@@ -224,27 +229,28 @@
                         </thead>
                         <tbody>
 
-                        <c:forEach var="t" items="${tracks}" varStatus="s">
+                        <c:forEach var="r" items="${tracks}" varStatus="s">
                             <tr>
-                                <td>${s.index + 1}</td>
-                                <td>${t.code}</td>
-                                <td>${t.name}</td>
-                                <td>${t.artist}</td>
-                                <td>${t.composer}</td>
+                                <%--<td>${s.index + 1}</td>--%>
+                                <td class="score"><fmt:formatNumber type="number" pattern="##.##" value="${r.score}"/></td>
+                                <td>${r.track.code}</td>
+                                <td>${r.track.name}</td>
+                                <td>${r.track.artist}</td>
+                                <td>${r.track.composer}</td>
 
                                 <c:choose>
                                     <c:when test="${customer.customerType eq 'MOBILE_AGGREGATOR'}">
-                                        <td>${t.mobileShare}</td>
+                                        <td>${r.track.mobileShare}</td>
                                     </c:when>
                                     <c:when test="${customer.customerType eq 'PUBLIC_RIGHTS_SOCIETY'}">
-                                        <td> ${t.publicShare}</td>
+                                        <td> ${r.track.publicShare}</td>
                                     </c:when>
                                 </c:choose>
 
-                                <td>${t.catalog}</td>
+                                <td>${r.track.catalog}</td>
                                 <c:set var="contains" value="false"/>
                                 <c:forEach var="uc" items="${customer_tracks}">
-                                    <c:if test="${uc eq t.id}">
+                                    <c:if test="${uc eq r.track.id}">
                                         <td><i class="icon-shopping-cart"></i></td>
                                         <c:set var="contains" value="true"/>
                                     </c:if>
@@ -253,7 +259,7 @@
                                 <c:choose>
                                     <c:when test="${not contains}">
                                         <td class="centered">
-                                            <input type="checkbox" name="check_${t.id}" value="${t.id}"/>
+                                            <input type="checkbox" name="check_${r.track.id}" value="${r.track.id}"/>
                                         </td>
                                     </c:when>
                                     <c:otherwise>
@@ -272,6 +278,8 @@
 
         </c:if>
     </div>
+
+    <hr/>
 </div>
 
 
