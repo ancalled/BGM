@@ -23,7 +23,7 @@
             display: block;
         }
 
-        #search-result  table.table {
+        .search-result  table.table {
             font-size: 10pt;
         }
 
@@ -53,11 +53,9 @@
             text-align: center;
         }
 
-
         td.score {
             color: #8f6e5f;
         }
-
 
         label.separated {
             margin-top: 15px;
@@ -72,159 +70,158 @@
 
 <div class="container">
 
-<div class="row">
+    <div class="row">
 
-    <legend>
-        Поиск композиций
-    </legend>
+        <legend>
+            Поиск композиций
+        </legend>
 
-    <div class="span10">
+        <div class="span10">
 
-        <form id="searcher" action="/admin/action/search" method="post" class="form-search">
+            <form id="searcher" action="/admin/action/search" method="post" class="form-search">
 
-            <input type="hidden" name="from" id="from-p">
-            <input type="hidden" name="pageSize" id="till-p">
-            <input type="hidden" name="extend" id="extend-search" value="">
+                <input type="hidden" name="from" id="from-p">
+                <input type="hidden" name="pageSize" id="till-p">
+                <input type="hidden" name="extend" id="extend-search" value="">
 
-            <input type="text" name="q" id="query" class="input-block-level">
-            <input type="submit" value="Поиск" class="btn">
+                <input type="text" name="q" id="query" class="input-block-level">
+                <input type="submit" value="Поиск" class="btn">
 
-            <div class="toggler">
-                <a class="accordion-toggle"
-                   data-toggle="collapse"
-                   data-parent="#accordion2"
-                   id="extra"
-                   href="#">
-                    Дополнительно
-                </a>
-            </div>
+                <div class="toggler">
+                    <a class="accordion-toggle"
+                       data-toggle="collapse"
+                       data-parent="#accordion2"
+                       id="extra"
+                       href="#">
+                        Дополнительно
+                    </a>
+                </div>
 
-            <div id="collapseOne" class="search-params collapse in">
-                <div class="container search-params">
+                <div id="collapseOne" class="search-params collapse in">
+                    <div class="container search-params">
 
-                    <div class="span4">
-                        <h4>Поиск</h4>
-                        <fieldset>
-                            <label for="field-all" class="radio">
-                                <input type="radio" name="field" value="all" id="field-all">
-                                по всем полям
-                            </label>
+                        <div class="span4">
+                            <h4>Поиск</h4>
+                            <fieldset>
+                                <label for="field-all" class="radio">
+                                    <input type="radio" name="field" value="all" id="field-all">
+                                    по всем полям
+                                </label>
 
-                            <label for="field-name" class="radio">
-                                <input type="radio" name="field" value="track" id="field-name">
-                                по названию трека
-                            </label>
+                                <label for="field-name" class="radio">
+                                    <input type="radio" name="field" value="track" id="field-name">
+                                    по названию трека
+                                </label>
 
-                            <label for="field-code" class="radio">
-                                <input type="radio" name="field" value="code" id="field-code">
-                                по коду
-                            </label>
+                                <label for="field-code" class="radio">
+                                    <input type="radio" name="field" value="code" id="field-code">
+                                    по коду
+                                </label>
 
-                            <label for="field-artist-track" class="radio separated">
-                                <input type="radio" name="field" value="artist_track" id="field-artist-track">
-                                по артисту и треку (через «;»)
-                            </label>
+                                <label for="field-artist-track" class="radio separated">
+                                    <input type="radio" name="field" value="artist_track" id="field-artist-track">
+                                    по артисту и треку (через «;»)
+                                </label>
 
-                            <label for="field-composer-track" class="radio">
-                                <input type="radio" name="field" value="composer_track" id="field-composer-track">
-                                по композитору и треку (через «;»)
-                            </label>
+                                <label for="field-composer-track" class="radio">
+                                    <input type="radio" name="field" value="composer_track" id="field-composer-track">
+                                    по композитору и треку (через «;»)
+                                </label>
 
-                            <%--<label for="field-artist" class="radio separated">--%>
-                            <%--<input type="radio" name="field" value="artist" id="field-artist">--%>
-                            <%--все треки артиста--%>
-                            <%--</label>--%>
+                                <%--<label for="field-artist" class="radio separated">--%>
+                                <%--<input type="radio" name="field" value="artist" id="field-artist">--%>
+                                <%--все треки артиста--%>
+                                <%--</label>--%>
 
-                            <%--<label for="field-composer" class="radio">--%>
-                            <%--<input type="radio" name="field" value="composer" id="field-composer">--%>
-                            <%--все треки композитора--%>
-                            <%--</label>--%>
-                        </fieldset>
-                    </div>
-
-
-                    <div class="span6">
-                        <h4>Фильтр по каталогам</h4>
-
-                        <div class="row">
-                            <c:forEach var="p" items="${platforms}">
-                                <div class="span2">
-                                    <div class="catalog-title">${p.name}</div>
-                                    <fieldset>
-                                        <c:forEach var="c" items="${p.catalogs}" varStatus="loop">
-
-                                            <label for="checkbox-${loop.index}" class="checkbox">
-                                                <input type="checkbox" value="${c.id}"
-                                                       name="catalog-${c.id}"
-                                                       id="checkbox-${loop.index}">
-                                                    ${c.name}
-                                            </label>
-                                        </c:forEach>
-                                    </fieldset>
-                                </div>
-                            </c:forEach>
+                                <%--<label for="field-composer" class="radio">--%>
+                                <%--<input type="radio" name="field" value="composer" id="field-composer">--%>
+                                <%--все треки композитора--%>
+                                <%--</label>--%>
+                            </fieldset>
                         </div>
+
+
+                        <div class="span6">
+                            <h4>Фильтр по каталогам</h4>
+
+                            <div class="row">
+                                <c:forEach var="p" items="${platforms}">
+                                    <div class="span2">
+                                        <div class="catalog-title">${p.name}</div>
+                                        <fieldset>
+                                            <c:forEach var="c" items="${p.catalogs}" varStatus="loop">
+
+                                                <label for="checkbox-${loop.index}" class="checkbox">
+                                                    <input type="checkbox" value="${c.id}"
+                                                           name="catalog-${c.id}"
+                                                           id="checkbox-${loop.index}">
+                                                        ${c.name}
+                                                </label>
+                                            </c:forEach>
+                                        </fieldset>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
-
-            </div>
-        </form>
-    </div>
-
-</div>
-
-
-<div class="row">
-
-
-    <c:if test="${not empty query}">
-
-        <legend>
-            Результат поиска (${fn:length(tracks) gt 99 ? 'больше 100' : fn:length(tracks)} треков)
-        </legend>
-
-        <div id="search-result">
-
-            <table class="table">
-                <thead>
-                <tr>
-                        <%--<th>#</th>--%>
-                    <th></th>
-                    <th>Код</th>
-                    <th>Композиция</th>
-                    <th>Исполнитель</th>
-                    <th>Авторы</th>
-                    <th>Мобильный контент</th>
-                    <th>Публичка</th>
-                    <th>Каталог</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                <c:forEach var="r" items="${tracks}" varStatus="s">
-                    <tr>
-                            <%--<td>${s.index + 1}</td>--%>
-                        <td class="score"><fmt:formatNumber type="number" pattern="##.##" value="${r.score}"/></td>
-                        <td>${r.track.code}</td>
-                        <td>${r.track.name}</td>
-                        <td>${r.track.artist}</td>
-                        <td>${r.track.composer}</td>
-                        <td>${r.track.mobileShare}</td>
-                        <td> ${r.track.publicShare}</td>
-                        <td>${r.track.catalog}</td>
-                    </tr>
-                </c:forEach>
-
-                </tbody>
-            </table>
-
+            </form>
         </div>
 
-    </c:if>
-</div>
+    </div>
 
-<hr/>
+
+    <div class="row">
+
+        <div class="span10 search-result">
+            <c:if test="${not empty query}">
+
+                <legend>
+                    Результат поиска (${fn:length(tracks) gt 99 ? 'больше 100' : fn:length(tracks)} треков)
+                </legend>
+
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                            <%--<th>#</th>--%>
+                        <th></th>
+                        <th>Код</th>
+                        <th>Композиция</th>
+                        <th>Исполнитель</th>
+                        <th>Авторы</th>
+                        <th>Мобильный контент</th>
+                        <th>Публичка</th>
+                        <th>Каталог</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <c:forEach var="r" items="${tracks}" varStatus="s">
+                        <tr>
+                                <%--<td>${s.index + 1}</td>--%>
+                            <td class="score"><fmt:formatNumber type="number" pattern="##.##"
+                                                                value="${r.score}"/></td>
+                            <td>${r.track.code}</td>
+                            <td>${r.track.name}</td>
+                            <td>${r.track.artist}</td>
+                            <td>${r.track.composer}</td>
+                            <td>${r.track.mobileShare}</td>
+                            <td> ${r.track.publicShare}</td>
+                            <td>${r.track.catalog}</td>
+                        </tr>
+                    </c:forEach>
+
+                    </tbody>
+                </table>
+
+            </c:if>
+        </div>
+    </div>
+
+    <hr/>
 </div>
 
 

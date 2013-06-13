@@ -42,23 +42,15 @@
     </treeState>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/js/bootstrap.min.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/search-result.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/search.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/DispatcherServlet.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/DispatcherServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/web/customer/DispatcherServlet.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/customer/DispatcherServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/SearchServlet.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/SearchServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/web/customer/action/SearchServlet.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/customer/action/SearchServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/customer/basket.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/customer/basket.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/navbar.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/navbar.jsp" />
+    <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="Улучшаем поиск 2">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/search.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/search.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/customer/search.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/customer/search.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bgm-platform.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1371141434497" ignored="false" />
+    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1371146733790" ignored="false" />
     <file path="/CatalogStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1371145402959" ignored="false" />
     <file path="/fragment.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1371131531608" ignored="false" />
     <file path="db-console:/b524fb0f/bd8e1b6e-fe0f-401f-a88d-0e81e53c8907/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1363032963765" ignored="false" />
@@ -108,7 +100,7 @@
     <file path="/ReportServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365120544625" ignored="false" />
     <file path="db-console:/b7405297/0b3a3eb9-be4a-404b-833f-801c635b33d2/" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364422520796" ignored="false" />
     <file path="$USER_HOME$/My Documents/GitHub/BGM/.idea/workspace.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1364423129656" ignored="false" />
-    <file path="/search.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1371145672406" ignored="false" />
+    <file path="/search.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1371147000828" ignored="false" />
     <file path="/a.dummy" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1371131060394" ignored="false" />
     <file path="/index.html" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367164896830" ignored="false" />
     <file path="/Customer.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365112075562" ignored="false" />
@@ -116,7 +108,7 @@
     <file path="/CustomerReportItem.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367064981121" ignored="false" />
     <file path="/CustomerReportServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1365125970078" ignored="false" />
     <file path="/DispatcherServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1371145644456" ignored="false" />
-    <file path="/LuceneSearch.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1371133718061" ignored="false" />
+    <file path="/LuceneSearch.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1371146723993" ignored="false" />
     <file path="/UploadReportMobileServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1371133476950" ignored="false" />
     <file path="/ReindexUtil.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1367078063466" ignored="false" />
     <file path="/UploadReportPublicServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1371133498495" ignored="false" />
@@ -470,7 +462,16 @@
       <file leaf-file-name="search.jsp" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/customer/search.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="186" column="0" selection-start="6707" selection-end="6707" vertical-scroll-proportion="0.2991453">
+            <state line="188" column="0" selection-start="6788" selection-end="6788" vertical-scroll-proportion="-1.7927928">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LuceneSearch.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="67" column="53" selection-start="2399" selection-end="2399" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -563,7 +564,7 @@
       <file leaf-file-name="search.jsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/search.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="184" column="0" selection-start="6131" selection-end="6131" vertical-scroll-proportion="-14.875">
+            <state line="218" column="0" selection-start="7965" selection-end="7965" vertical-scroll-proportion="-13.632653">
               <folding />
             </state>
           </provider>
@@ -658,7 +659,6 @@
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UploadReportMobileServlet.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UploadReportPublicServlet.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/customer/action/UploadReportMobileServlet.java" />
-        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/views/customer/basket.jsp" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" />
@@ -667,6 +667,7 @@
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/DispatcherServlet.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/SearchServlet.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/customer/action/SearchServlet.java" />
+        <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/search.jsp" />
         <option value="$PROJECT_DIR$/web/WEB-INF/views/customer/search.jsp" />
       </list>
@@ -1054,6 +1055,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1675,7 +1680,11 @@
       <created>1371141436639</created>
       <updated>1371141436639</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="Улучшаем поиск 2">
+      <created>1371146198879</created>
+      <updated>1371146198879</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1724,7 +1733,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26398852" sideWeight="0.43633953" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26398852" sideWeight="0.4244032" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5755968" sideWeight="0.47082657" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1778,7 +1787,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Улучшаем поиск" />
+    <option name="LAST_COMMIT_MESSAGE" value="Улучшаем поиск 2" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1792,7 +1801,6 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="добавил табличку customer и сделал главную страничку с меню, добавил лпарочку скриптов которые ранее забыл (js-ки буутстраповские )" />
     <MESSAGE value="merge" />
     <MESSAGE value="Еще рефакторинг" />
     <MESSAGE value="Убрал lucene из DbStorage" />
@@ -1817,6 +1825,7 @@
     <MESSAGE value="Поправки по обновлению каталогов" />
     <MESSAGE value="- Случайные треки&#10;- Кнопочки для нового каталога и платформы" />
     <MESSAGE value="Улучшаем поиск" />
+    <MESSAGE value="Улучшаем поиск 2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1850,13 +1859,6 @@
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/customer/action/UploadReportMobileServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="86" column="58" selection-start="2953" selection-end="2953" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="26" selection-start="3537" selection-end="3537" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -2021,16 +2023,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/LuceneSearch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="53" selection-start="2399" selection-end="2399" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/search.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="184" column="0" selection-start="6131" selection-end="6131" vertical-scroll-proportion="-14.875">
+        <state line="218" column="0" selection-start="7965" selection-end="7965" vertical-scroll-proportion="-13.632653">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/customer/search.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="186" column="0" selection-start="6707" selection-end="6707" vertical-scroll-proportion="0.2991453">
+        <state line="188" column="0" selection-start="6788" selection-end="6788" vertical-scroll-proportion="-1.7927928">
           <folding />
         </state>
       </provider>

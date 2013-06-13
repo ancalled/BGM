@@ -65,7 +65,7 @@ public class LuceneSearch {
 
         log.info("Found " + totalHits + " tracks id.");
 
-        for (int k = 0; k < limit; k++) {
+        for (int k = 0; k < Math.min(totalHits, limit); k++) {
             ScoreDoc hit = hits[k];
             Document d = searcher.doc(hit.doc);
             long id = Long.parseLong(d.get(FIELD_ID));

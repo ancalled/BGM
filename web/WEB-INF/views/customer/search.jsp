@@ -23,7 +23,7 @@
             display: block;
         }
 
-        #search-result  table.table {
+        .search-result  table.table {
             font-size: 10pt;
         }
 
@@ -178,23 +178,20 @@
 
 
     <div class="row">
+        <div class="span10 search-result">
 
+            <c:if test="${not empty query}">
 
-        <c:if test="${not empty query}">
+                <legend>
+                    Результат поиска (${fn:length(tracks) gt 99 ? 'больше 100' : fn:length(tracks)} треков)
+                </legend>
 
-            <legend>
-                Результат поиска (${fn:length(tracks) gt 99 ? 'больше 100' : fn:length(tracks)} треков)
-            </legend>
-
-            <div id="search-result">
-
-                <%--<div class="label">По запросу '${query}' найдено ${fn:length(tracks)} композиций</div>--%>
 
                 <form id="chooser" action="/customer/action/add-to-basket" method="post">
                     <table class="table">
                         <thead>
                         <tr>
-                            <%--<th>#</th>--%>
+                                <%--<th>#</th>--%>
                             <th></th>
                             <th>Код</th>
                             <th>Композиция</th>
@@ -211,8 +208,9 @@
 
                             <th>Каталог</th>
                             <th>
-                                <button class="btn btn-block" type="submit" style="width: 30px"><i class="icon-shopping-cart"></i></button>
-                                <%--<input type="submit" value="В корзину" class="btn">--%>
+                                <button class="btn btn-block" type="submit" style="width: 30px"><i
+                                        class="icon-shopping-cart"></i></button>
+                                    <%--<input type="submit" value="В корзину" class="btn">--%>
 
                                 </input>
                             </th>
@@ -222,8 +220,9 @@
 
                         <c:forEach var="r" items="${tracks}" varStatus="s">
                             <tr>
-                                <%--<td>${s.index + 1}</td>--%>
-                                <td class="score"><fmt:formatNumber type="number" pattern="##.##" value="${r.score}"/></td>
+                                    <%--<td>${s.index + 1}</td>--%>
+                                <td class="score"><fmt:formatNumber type="number" pattern="##.##"
+                                                                    value="${r.score}"/></td>
                                 <td>${r.track.code}</td>
                                 <td>${r.track.name}</td>
                                 <td>${r.track.artist}</td>
@@ -265,9 +264,9 @@
                     </table>
                 </form>
 
-            </div>
 
-        </c:if>
+            </c:if>
+        </div>
     </div>
 
     <hr/>
