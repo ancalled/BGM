@@ -1,5 +1,6 @@
 package kz.bgm.platform.web.customer.action;
 
+import kz.bgm.platform.model.domain.SearchType;
 import kz.bgm.platform.model.domain.Track;
 import kz.bgm.platform.model.domain.User;
 import kz.bgm.platform.model.service.CatalogFactory;
@@ -44,10 +45,19 @@ public class SearchServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
 
         String query = req.getParameter("q");
-        String field = req.getParameter("field");
+        String fieldStr = req.getParameter("field");
+
+        SearchType searchType;
+        if (fieldStr != null) {
+            searchType = SearchType.valueOf(fieldStr);
+        } else {
+            searchType = SearchType.ALL;
+        }
 
         HttpSession ses = req.getSession();
         User user = (User) ses.getAttribute("user");
+
+
 
         List<Long> available = catalogService.getAvailableCatalogs(user.getCustomerId());
         List<Long> requested = getCatalogsId(req);
@@ -62,14 +72,14 @@ public class SearchServlet extends HttpServlet {
             }
         }
 
-        log.debug("Got query: " + query + ", search type: " + field);
+        log.debug("Got query: " + query + ", search type: " + searchType);
         List<Track> found = Collections.emptyList();
         try {
             if (query.contains(";")) {
-                found = complexSearch(query, catalogs);
+                found = separatedFieldsSearch(query, catalogs);
 
             } else {
-                found = quickSearch(query, field, catalogs);
+                found = search(query, searchType, catalogs);
             }
 
         } catch (ParseException e) {
@@ -80,29 +90,32 @@ public class SearchServlet extends HttpServlet {
 
         session.setAttribute("tracks", found);
         session.setAttribute("query", query);
-        session.setAttribute("type", field);
+        session.setAttribute("searchType", searchType);
 
         resp.sendRedirect(buildResponseUrl(req));
     }
 
 
-    private List<Track> quickSearch(String query, String field, List<Long> catalogs)
+    private List<Track> search(String query, SearchType searchType, List<Long> catalogs)
             throws IOException, ParseException {
         List<Track> found;
-        switch (field) {
-            case "all":
+        switch (searchType) {
+            case ALL:
                 List<Long> tracks = luceneSearch.search(query);
                 found = catalogService.getTracks(tracks, catalogs);
 
                 break;
+
+//            case "";
             default:
-                found = catalogService.searchTracks(field, query, catalogs);
+//                found = catalogService.searchTracks(searchType, query, catalogs);
+                found = null;
                 break;
         }
         return found;
     }
 
-    private List<Track> complexSearch(String query, List<Long> catalogs)
+    private List<Track> separatedFieldsSearch(String query, List<Long> catalogs)
             throws IOException, ParseException {
         String[] fields = query.split(";");
         List<Long> tracks = new ArrayList<>();

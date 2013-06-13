@@ -13,14 +13,47 @@
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" media="screen"/>
     <title>Поиск</title>
     <style>
-        #search-panel  table.table {
+
+        div.search-params {
+            background: #edf9f9;
+            margin-left: 0;
+            padding: 5px 0 10px 0;
+        }
+
+        .search-params label {
+            display: block;
+        }
+
+        #search-result  table.table {
             font-size: 10pt;
         }
 
-        /*a.toggler {*/
-            /*text-decoration: none;*/
-            /*border-bottom: 1px dotted;*/
-        /*}*/
+        div.catalog-title {
+            font-weight: bold;
+            margin: 5px 0 8px 0;
+            color: #8f6e5f;
+        }
+
+        div.toggler {
+            margin: 10px 0 5px 0
+        }
+
+        .toggler a {
+            text-decoration: none;
+            color: #008ace;
+            border-bottom: 1px dotted #008ace;
+            margin: 0 2px 0 2px;
+            cursor: pointer;
+        }
+
+        .input-block-level {
+            width: 540px;
+        }
+
+        td.centered {
+            text-align: center;
+        }
+
     </style>
 </head>
 <body>
@@ -30,176 +63,199 @@
 
 <div class="container">
 
-    <div class="row text-left">
+    <div class="row">
+
         <legend>
             Поиск композиций
         </legend>
-    </div>
-    <form id="searcher" action="/customer/action/search" method="post">
-        <input type="hidden" name="from" id="from-p">
-        <input type="hidden" name="pageSize" id="till-p">
-        <input type="hidden" name="extend" id="extend-search" value=" ">
 
-        <%--<div class="hero-unit" style="padding: 10px">--%>
-        <div class="row" style="margin-bottom: 0px">
-            <div class="span8" style="margin-right: 4px">
+        <div class="span8">
 
-                <label for="query"></label><input type="text" name="q" id="query" class="input-block-level"
-                                                  style="margin-top: 0px">
-            </div>
-            <input type="submit" value="Поиск" class="btn" style="margin-top: 4px">
+            <form id="searcher" action="/customer/action/search" method="post" class="form-search">
 
+                <input type="hidden" name="from" id="from-p">
+                <input type="hidden" name="pageSize" id="till-p">
+                <input type="hidden" name="extend" id="extend-search" value="">
 
-        </div>
-        <div class="row" style="margin-top: -5px">
-            <div class="accordion-heading" style="margin-left: 5px">
-                <a class="accordion-toggle toggler"
-                   data-toggle="collapse"
-                   data-parent="#accordion2"
-                   id="extra"
-                   href="#collapseOne">Дополнительно</a>
-            </div>
-            <div id="collapseOne" class="accordion-body collapse in span9" style="margin-left: 5px">
-                <div class="accordion-inner">
-                    <div class="container" style="background: #edf9f9; margin-left: 0">
+                <input type="text" name="q" id="query" class="input-block-level">
+                <input type="submit" value="Поиск" class="btn">
 
-                        <div class=" span3 pull-left">
+                <div class="toggler">
+                    <a class="accordion-toggle"
+                       data-toggle="collapse"
+                       data-parent="#accordion2"
+                       id="extra"
+                       href="#">
+                        Дополнительно
+                    </a>
+                </div>
+
+                <div id="collapseOne" class="search-params collapse in">
+                    <div class="container search-params">
+
+                        <div class="span3">
                             <h4>Поиск по</h4>
-                            <input type="radio" style="margin-right: 10px;margin-top: -2px" value="all" id="all-field"
-                                   name="field">всем полям<br>
-                            <input type="radio" style="margin-right: 10px;margin-top: -2px" value="code" name="field">коду
-                            <br>
-                            <input type="radio" style="margin-right: 10px;margin-top: -2px" value="artist" name="field">артисту
-                            <br>
-                            <input type="radio" style="margin-right: 10px;margin-top: -2px" value="composer"
-                                   name="field">автору <br>
-                            <input type="radio" style="margin-right: 10px;margin-top: -2px" value="name" name="field">композиции
-                            <br>
+                            <fieldset>
+                                <label for="field-all" class="radio">
+                                    <input type="radio" name="field" value="all" id="field-all">
+                                    всем полям
+                                </label>
+
+                                <label for="field-code" class="radio">
+                                    <input type="radio" name="field" value="code" id="field-code">
+                                    коду
+                                </label>
+
+                                <label for="field-artist" class="radio">
+                                    <input type="radio" name="field" value="artist" id="field-artist">
+                                    артисту
+                                </label>
+
+                                <label for="field-composer" class="radio">
+                                    <input type="radio" name="field" value="composer" id="field-composer">
+                                    автору
+                                </label>
+
+                                <label for="field-name" class="radio">
+                                    <input type="radio" name="field" value="track" id="field-name">
+                                    композиции
+                                </label>
+                            </fieldset>
                         </div>
 
-                        <div class="span4">
-                            <c:forEach var="p" items="${platforms}">
-                                <div class=" pull-left">
 
-                                    <h4>${p.name}</h4>
+                        <div class="span8">
+                            <h4>Фильтр по каталогам</h4>
 
-                                    <div style="height:145px;width:140px;overflow:auto;padding: 5px">
-                                        <ul class="nav nav-list bs-docs-sidenav">
+                            <div class="row">
+                                <c:forEach var="p" items="${platforms}">
+                                    <div class="span2">
+                                        <div class="catalog-title">${p.name}</div>
 
-                                            <c:forEach var="c" items="${p.catalogs}">
+                                        <fieldset>
+                                            <c:forEach var="c" items="${p.catalogs}" varStatus="loop">
                                                 <c:if test="${c.rightType eq customer.rightType or customer.rightType eq 'AUTHOR_RELATED'}">
-                                                    <li style="font-size: 11pt">
+                                                    <label for="checkbox-${loop.index}" class="checkbox">
                                                         <input type="checkbox" value="${c.id}"
-                                                               name="catalog${c.id}"
-                                                               style="margin-right: 10px;font-size: 11pt;margin-top: -2px">
+                                                               name="catalog-${c.id}"
+                                                               id="checkbox-${loop.index}">
                                                             ${c.name}
-                                                    </li>
-
+                                                    </label>
                                                 </c:if>
                                             </c:forEach>
-
-                                        </ul>
+                                        </fieldset>
                                     </div>
-                                </div>
-                            </c:forEach>
+                                </c:forEach>
+                            </div>
                         </div>
 
                     </div>
 
                 </div>
-            </div>
-        </div>
-
-
-    </form>
-
-    <div id="search-panel">
-        <c:if test="${not empty query}">
-            <div class="label">По запросу '${query}' найдено ${fn:length(tracks)} композиций</div>
-
-            <form id="chooser" action="/customer/action/add-to-basket" method="post">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Код</th>
-                        <th>Композиция</th>
-                        <th>Исполнитель</th>
-                        <th>Авторы</th>
-                        <c:choose>
-                            <c:when test="${customer.customerType eq 'MOBILE_AGGREGATOR'}">
-                                <th>Мобильный контент</th>
-                            </c:when>
-                            <c:when test="${customer.customerType eq 'PUBLIC_RIGHTS_SOCIETY'}">
-                                <th>Публичка</th>
-                            </c:when>
-                        </c:choose>
-
-                        <th>Каталог</th>
-                        <th><input type="submit" value="В корзину" class="btn"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    <c:forEach var="t" items="${tracks}" varStatus="s">
-                        <tr>
-                            <td>${s.index + 1}</td>
-                            <td>${t.code}</td>
-                            <td>${t.name}</td>
-                            <td>${t.artist}</td>
-                            <td>${t.composer}</td>
-
-                            <c:choose>
-                                <c:when test="${customer.customerType eq 'MOBILE_AGGREGATOR'}">
-                                    <td>${t.mobileShare}</td>
-                                </c:when>
-                                <c:when test="${customer.customerType eq 'PUBLIC_RIGHTS_SOCIETY'}">
-                                    <td> ${t.publicShare}</td>
-                                </c:when>
-                            </c:choose>
-
-                            <td>${t.catalog}</td>
-                            <c:set var="contains" value="false"/>
-                            <c:forEach var="uc" items="${customer_tracks}">
-                                <c:if test="${uc eq t.id}">
-                                    <td><i class="icon-shopping-cart"></i></td>
-                                    <c:set var="contains" value="true"/>
-                                </c:if>
-                            </c:forEach>
-
-                            <c:choose>
-                                <c:when test="${not contains}">
-                                    <td>
-                                        <input type="checkbox" name="check_${t.id}" value="${t.id}"/>
-                                    </td>
-                                </c:when>
-                                <c:otherwise>
-
-                                </c:otherwise>
-                            </c:choose>
-
-                        </tr>
-                    </c:forEach>
-
-                    </tbody>
-                </table>
             </form>
-
-        </c:if>
+        </div>
 
     </div>
 
 
+    <div class="row">
 
+
+        <c:if test="${not empty query}">
+
+            <legend>
+                Результат поиска (${fn:length(tracks)} треков)
+            </legend>
+
+            <div id="search-result">
+
+                <%--<div class="label">По запросу '${query}' найдено ${fn:length(tracks)} композиций</div>--%>
+
+                <form id="chooser" action="/customer/action/add-to-basket" method="post">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Код</th>
+                            <th>Композиция</th>
+                            <th>Исполнитель</th>
+                            <th>Авторы</th>
+                            <c:choose>
+                                <c:when test="${customer.customerType eq 'MOBILE_AGGREGATOR'}">
+                                    <th>Мобильный контент</th>
+                                </c:when>
+                                <c:when test="${customer.customerType eq 'PUBLIC_RIGHTS_SOCIETY'}">
+                                    <th>Публичка</th>
+                                </c:when>
+                            </c:choose>
+
+                            <th>Каталог</th>
+                            <th>
+                                <button class="btn btn-block" type="submit" style="width: 30px"><i class="icon-shopping-cart"></i></button>
+                                <%--<input type="submit" value="В корзину" class="btn">--%>
+
+                                </input>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <c:forEach var="t" items="${tracks}" varStatus="s">
+                            <tr>
+                                <td>${s.index + 1}</td>
+                                <td>${t.code}</td>
+                                <td>${t.name}</td>
+                                <td>${t.artist}</td>
+                                <td>${t.composer}</td>
+
+                                <c:choose>
+                                    <c:when test="${customer.customerType eq 'MOBILE_AGGREGATOR'}">
+                                        <td>${t.mobileShare}</td>
+                                    </c:when>
+                                    <c:when test="${customer.customerType eq 'PUBLIC_RIGHTS_SOCIETY'}">
+                                        <td> ${t.publicShare}</td>
+                                    </c:when>
+                                </c:choose>
+
+                                <td>${t.catalog}</td>
+                                <c:set var="contains" value="false"/>
+                                <c:forEach var="uc" items="${customer_tracks}">
+                                    <c:if test="${uc eq t.id}">
+                                        <td><i class="icon-shopping-cart"></i></td>
+                                        <c:set var="contains" value="true"/>
+                                    </c:if>
+                                </c:forEach>
+
+                                <c:choose>
+                                    <c:when test="${not contains}">
+                                        <td class="centered">
+                                            <input type="checkbox" name="check_${t.id}" value="${t.id}"/>
+                                        </td>
+                                    </c:when>
+                                    <c:otherwise>
+
+                                    </c:otherwise>
+                                </c:choose>
+
+                            </tr>
+                        </c:forEach>
+
+                        </tbody>
+                    </table>
+                </form>
+
+            </div>
+
+        </c:if>
+    </div>
 </div>
 
 
 <script>
 
 
-
     var typeEl = document.getElementById('type');
-    var searchForm = document.getElementById("searcher");
+    //    var searchForm = document.getElementById("searcher");
     var from_page_input = document.getElementById("from-p");
     var till_page_input = document.getElementById("till-p");
     var collapse = $('#collapseOne');
@@ -213,40 +269,37 @@
     extendedSearchUpdate();
 
     $('#extra').click(function () {
-        collapse.show();
-    });
+        if (collapse.is(":visible")) {
+            collapse.hide();
+            extend.val('false');
+        } else {
+            collapse.show();
+            extend.val('true');
+        }
 
-    collapse.on('shown', function () {
-        extend.val('true');
-    });
-
-    collapse.on('hidden', function () {
-        extend.val('false');
     });
 
 
     function extendedSearchUpdate() {
-        var isExtended = getParameterByName('extended');
+        var isExtended = getParameterByName('extend');
         var collapse = $('#collapseOne');
         if (isExtended != null) {
             if (isExtended == 'true') {
                 collapse.show();
-                collapse.collapse('show');
                 extend.val('true');
             } else {
                 collapse.hide();
-                collapse.collapse('hide');
                 extend.val('false');
             }
         }
     }
 
-    function nextPage(from) {
-        from_page_input.value = from;
-        till_page_input.value = '${pageSize}';
-        search_input.value = "${query}";
-        searchForm.submit();
-    }
+    <%--function nextPage(from) {--%>
+    <%--from_page_input.value = from;--%>
+    <%--till_page_input.value = '${pageSize}';--%>
+    <%--search_input.value = "${query}";--%>
+    <%--searchForm.submit();--%>
+    <%--}--%>
 
     function updateParams() {
         $('[type=checkbox]').each(function () {

@@ -44,7 +44,6 @@ public class SearchServlet extends HttpServlet {
 
         String query = req.getParameter("q");
         String field = req.getParameter("field");
-        String extended = req.getParameter("extend");
         List<Long> catalogIdList = getCatalogsId(req);
 
 
@@ -70,7 +69,7 @@ public class SearchServlet extends HttpServlet {
 
             } else {
 
-                found = qutickSearch(query, field, catalogIdList);
+                found = search(query, field, catalogIdList);
 
             }
         } catch (ParseException e) {
@@ -87,7 +86,7 @@ public class SearchServlet extends HttpServlet {
 
     }
 
-    private List<Track> qutickSearch(String query, String field, List<Long> catalogs) throws IOException, ParseException {
+    private List<Track> search(String query, String field, List<Long> catalogs) throws IOException, ParseException {
         List<Track> found;
         switch (field) {
             case "all":
