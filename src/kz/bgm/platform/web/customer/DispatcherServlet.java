@@ -53,13 +53,7 @@ public class DispatcherServlet extends HttpServlet {
                         if (!tracks.isEmpty()) {
                             req.setAttribute("customer_tracks", tracks);
                         }
-//                        int from = 0;
-//                        String strFrom = req.getParameter("from");
-//
-//                        if (strFrom != null) {
-//                            from = Integer.parseInt(strFrom);
-//                        }
-                        //todo закончить пагинацию
+
                         List<Platform> platforms = catalogStorage.getAllPlatforms();
 
                         req.setAttribute("platforms", platforms);

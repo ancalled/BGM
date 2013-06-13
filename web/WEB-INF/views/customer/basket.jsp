@@ -5,15 +5,18 @@
 <html>
 <head>
     <script src="/js/jquery.js"></script>
-    <script src="/js/bootstrap.js"></script>
-    <script src="/js/bootstrap-fileupload.js"></script>
-    <script src="/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-datetimepicker.min.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" media="screen"/>
     <title>Каталог пользователя</title>
+    <style>
+        #basket  table.table {
+            font-size: 10pt;
+        }
+    </style>
 </head>
 
 <c:import url="navbar.jsp">
@@ -22,107 +25,97 @@
 
 <body>
 
-<div class="container span8">
+<div class="container">
 
+    <div class="span10">
         <legend>
-            Список композиций
+            Доступные композиции
         </legend>
-    <c:if test="${not empty tracks}">
 
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Код</th>
-                <th>Композиция</th>
-                <th>Исполнитель</th>
-                <th>Авторы</th>
-                <th>
-                    <c:choose>
-                        <c:when test="${customer.rightType eq 'AUTHOR'}">
-                            Мобильный контент
-                        </c:when>
-                        <c:otherwise>
-                            Публичка
-                        </c:otherwise>
-                    </c:choose>
-                </th>
-                <th>Каталог</th>
-            </tr>
-            </thead>
-            <tbody>
+        <c:if test="${not empty tracks}">
 
-            <c:forEach var="t" items="${tracks}">
+            <table class="table" id="basket">
+                <thead>
                 <tr>
-                    <td>${t.code}</td>
-                    <td>${t.name}</td>
-                    <td>${t.artist}</td>
-                    <td>${t.composer}</td>
-                    <td>
+                    <th>Код</th>
+                    <th>Композиция</th>
+                    <th>Исполнитель</th>
+                    <th>Авторы</th>
+                    <c:choose>
+                        <c:when test="${customer.customerType eq 'MOBILE_AGGREGATOR'}">
+                            <th>Мобильный контент</th>
+                        </c:when>
+                        <c:when test="${customer.customerType eq 'PUBLIC_RIGHTS_SOCIETY'}">
+                            <th>Публичка</th>
+                        </c:when>
+                    </c:choose>
+                    <th>Каталог</th>
+                    <th>Удалить</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <c:forEach var="t" items="${tracks}">
+                    <tr>
+                        <td>${t.code}</td>
+                        <td>${t.name}</td>
+                        <td>${t.artist}</td>
+                        <td>${t.composer}</td>
                         <c:choose>
                             <c:when test="${customer.rightType eq 'AUTHOR'}">
-                                ${t.mobileShare}
+                                <td>${t.mobileShare}</td>
                             </c:when>
                             <c:otherwise>
-                                ${t.publicShare}
+                                <td>${t.publicShare}</td>
                             </c:otherwise>
                         </c:choose>
-                    </td>
-                    <td>${t.catalog}</td>
-                    <td><i id="${t.id}" class="icon-remove-circle"></i></td>
-                </tr>
-            </c:forEach>
+                        <td>${t.catalog}</td>
+                        <td>
+                            <a href="#" class="remove-track" id="${t.id}" title="Удалить">
+                                <i class="icon-remove"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </c:forEach>
 
-            </tbody>
-        </table>
-    </c:if>
+                </tbody>
+            </table>
+        </c:if>
+    </div>
 </div>
 
 
-<form method="post" action="/customer/action/remove-user-track" id="track-remove">
-
-    <input type="hidden" id="track_rem" name="track_id">
-
+<form method="post" action="/customer/action/remove-user-track" id="track-remove-form">
+    <input type="hidden" id="track-to-remove" name="track_id">
 </form>
 
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="track-remove-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">Удаление трека</h3>
     </div>
     <div class="modal-body">
-        <p>Вы действительно хотите удалить трек ?</p>
+        <p>Вы действительно хотите удалить трек?</p>
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal">Нет</button>
-        <button class="btn btn-primary" id="remove-btn" aria-hidden="true">Да</button>
+        <button class="btn btn-primary" id="modal-remove-btn" aria-hidden="true">Да</button>
     </div>
 </div>
 
 <script>
-    var delButtons = document.getElementsByTagName('i');
-    for (var i = 0; i < delButtons.length; ++i) {
-        var but = delButtons[i];
-        $(but).mouseenter(function () {
-            $(this).css('opacity', '0.3');
+    $(document).ready(function() {
+        $('#modal-remove-btn').click(function() {
+             $('#track-remove-form').submit();
         });
-        $(but).mouseout(function () {
-            $(this).css('opacity', '1');
+
+        $('a.remove-track').click(function() {
+            var a = $(this);
+            $('#track-to-remove').val(a.attr('id'));
+
+            $('#track-remove-modal').modal('show');
         });
-        $(but).click(function () {
-               $('#track_rem').val(this.id);
-               $('#remove-btn').click(function () {
-
-                  submitRemover();
-               });
-               $('#myModal').modal('show');
-
-        });
-    }
-
-    function submitRemover() {
-        document.getElementById("track-remove").submit();
-    }
-
+    });
 </script>
 
 </body>

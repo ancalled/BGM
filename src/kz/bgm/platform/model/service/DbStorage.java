@@ -97,6 +97,8 @@ public class DbStorage implements CatalogStorage {
         return 0;
     }
 
+
+
     @Override
     public Platform getPlatform(final long id) {
         return query(new Action<Platform>() {
@@ -181,7 +183,22 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+    @Override
+    public List<Long> getAllCatalogIds() {
+        return query(new Action<List<Long>>() {
+            @Override
+            public List<Long> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement("SELECT id FROM catalog");
+                ResultSet rs = stmt.executeQuery();
 
+                List<Long> catalogs = new ArrayList<>();
+                while (rs.next()) {
+                    catalogs.add(rs.getLong("id"));
+                }
+                return catalogs;
+            }
+        });
+    }
 
 
     @Override
@@ -208,28 +225,29 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-
-
-
-
     @Override
-    public List<SearchResult> getTracks(final List<SearchResult> result, final List<Long> catalogIds) {
-        if (result == null || catalogIds == null || result.isEmpty() || catalogIds.isEmpty()) return null;
+    public List<SearchResult> getTracks(final List<SearchResult> found, final List<Long> catalogIds) {
+
+        if (found == null || catalogIds == null || found.isEmpty() || catalogIds.isEmpty()) return null;
 
         return query(new Action<List<SearchResult>>() {
             @Override
             public List<SearchResult> execute(Connection con) throws SQLException {
 
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM composition WHERE id IN (" + asStringBySearchResults(result) + ") AND catalog_id IN (" + asString(catalogIds) +")");
+                        "SELECT * FROM composition WHERE id IN (" + asStringBySearchResults(found) +
+                                ") AND catalog_id IN (" + asString(catalogIds) + ")");
 
                 ResultSet rs = stmt.executeQuery();
 
+                List<SearchResult> result = new ArrayList<>();
+
                 while (rs.next()) {
                     Track track = parseTrack(rs);
-                    for (SearchResult sr: result) {
+                    for (SearchResult sr : found) {
                         if (sr.getTrackId() == track.getId()) {
                             sr.setTrack(track);
+                            result.add(sr);
                             break;
                         }
                     }
@@ -265,7 +283,6 @@ public class DbStorage implements CatalogStorage {
         });
 
     }
-
 
 
     @Override
@@ -316,8 +333,6 @@ public class DbStorage implements CatalogStorage {
             }
         });
     }
-
-
 
 
     @Override
@@ -499,9 +514,6 @@ public class DbStorage implements CatalogStorage {
             }
         });
     }
-
-
-
 
 
     @Override
@@ -691,8 +703,6 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-
-
     @Override
     public List<CustomerReport> getAllCustomerReports() {
         return query(new Action<List<CustomerReport>>() {
@@ -869,9 +879,6 @@ public class DbStorage implements CatalogStorage {
         });
 
     }
-
-
-
 
 
     @Override
@@ -1374,8 +1381,7 @@ public class DbStorage implements CatalogStorage {
             @Override
             public Object execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "INSERT INTO customer_basket_item (customer_id, track_id)" +
-                                "VALUES (?,?)"
+                        "INSERT INTO customer_basket_item (customer_id, track_id) VALUES (?,?)"
                 );
                 stmt.setLong(1, customerId);
                 stmt.setLong(2, trackId);

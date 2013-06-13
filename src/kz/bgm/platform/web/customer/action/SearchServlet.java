@@ -88,8 +88,9 @@ public class SearchServlet extends HttpServlet {
 
             switch (searchType) {
                 case ALL:
-                    result = luceneSearch.search(query, limit);
-                    catalogService.getTracks(result, catalogs);
+                    result = catalogService.getTracks(
+                            luceneSearch.search(query, limit),
+                            catalogs);
                     break;
 
                 case CODE:
@@ -97,18 +98,21 @@ public class SearchServlet extends HttpServlet {
                     break;
 
                 case TRACK:
-                    result = luceneSearch.search(null, null, query, limit);
-                    catalogService.getTracks(result, catalogs);
+                    result = catalogService.getTracks(
+                            luceneSearch.search(null, null, query, limit),
+                            catalogs);
                     break;
 
                 case ARTIST_TRACK:
-                    result = luceneSearch.search(first, null, second, limit);
-                    catalogService.getTracks(result, catalogs);
+                    result = catalogService.getTracks(
+                            luceneSearch.search(first, null, second, limit),
+                            catalogs);
                     break;
 
                 case COMPOSER_TRACK:
-                    result = luceneSearch.search(null, first, second, limit);
-                    catalogService.getTracks(result, catalogs);
+                    result = catalogService.getTracks(
+                            luceneSearch.search(null, first, second, limit),
+                            catalogs);
                     break;
 
                 case ARTIST:
@@ -141,6 +145,12 @@ public class SearchServlet extends HttpServlet {
         //todo убрать этот session
         HttpSession session = req.getSession();
 
+        Collections.sort(result, new Comparator<SearchResult>() {
+            @Override
+            public int compare(SearchResult o1, SearchResult o2) {
+                return Double.compare(o2.getScore(), o1.getScore());
+            }
+        });
         session.setAttribute("tracks", result);
         session.setAttribute("query", query);
         session.setAttribute("searchType", searchType);

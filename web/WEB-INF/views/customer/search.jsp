@@ -7,11 +7,9 @@
 <html>
 <head>
     <script src="/js/jquery.js"></script>
-    <script src="/js/bootstrap.js"></script>
-    <script src="/js/bootstrap-fileupload.js"></script>
+    <%--<script src="/js/bootstrap.js"></script>--%>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" media="screen"/>
     <title>Поиск</title>
     <style>
 
@@ -132,22 +130,15 @@
                                     по композитору и треку (через «;»)
                                 </label>
 
-                                <%--<label for="field-artist-composer-track" class="radio">--%>
-                                    <%--<input type="radio" name="field" value="artist_composer_track" id="field-artist-composer-track">--%>
-                                    <%--композитору и треку (через ';')--%>
+                                <%--<label for="field-artist" class="radio separated">--%>
+                                    <%--<input type="radio" name="field" value="artist" id="field-artist">--%>
+                                    <%--все треки артиста--%>
                                 <%--</label>--%>
 
-                                <label for="field-artist" class="radio separated">
-                                    <input type="radio" name="field" value="artist" id="field-artist">
-                                    все треки артиста
-                                </label>
-
-                                <label for="field-composer" class="radio">
-                                    <input type="radio" name="field" value="composer" id="field-composer">
-                                    все треки композитора
-                                </label>
-
-
+                                <%--<label for="field-composer" class="radio">--%>
+                                    <%--<input type="radio" name="field" value="composer" id="field-composer">--%>
+                                    <%--все треки композитора--%>
+                                <%--</label>--%>
                             </fieldset>
                         </div>
 
@@ -192,7 +183,7 @@
         <c:if test="${not empty query}">
 
             <legend>
-                Результат поиска (${fn:length(tracks) gt 99 ? 'больше 100' : '${fn:length(tracks)}'} треков)
+                Результат поиска (${fn:length(tracks) gt 99 ? 'больше 100' : fn:length(tracks)} треков)
             </legend>
 
             <div id="search-result">
@@ -251,7 +242,7 @@
                                 <c:set var="contains" value="false"/>
                                 <c:forEach var="uc" items="${customer_tracks}">
                                     <c:if test="${uc eq r.track.id}">
-                                        <td><i class="icon-shopping-cart"></i></td>
+                                        <td class="centered"><i class="icon-ok"></i></td>
                                         <c:set var="contains" value="true"/>
                                     </c:if>
                                 </c:forEach>

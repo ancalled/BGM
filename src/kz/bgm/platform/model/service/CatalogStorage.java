@@ -17,6 +17,8 @@ public interface CatalogStorage {
 
     List<Platform> getAllPlatforms();
 
+    List<Long> getAllCatalogIds();
+
     List<Catalog> getCatalogsByPlatform(long catId);
 
     int getTrackCount();

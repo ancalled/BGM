@@ -45,6 +45,9 @@ public class DispatcherServlet extends HttpServlet {
 
         String pth = req.getPathInfo();
 
+        final HttpSession ses = req.getSession();
+
+
         Action action = null;
         switch (pth) {
             case "/index":
@@ -100,20 +103,10 @@ public class DispatcherServlet extends HttpServlet {
                 };
                 break;
 
-            case "/search-result":
+            case "/search":
                 action = new Action() {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-
-                        HttpSession ses = req.getSession();
-
-//                        int from = 0;
-//                        String strFrom = req.getParameter("from");
-//
-//                        if (strFrom != null) {
-//                            from = Integer.parseInt(strFrom);
-//                        }
-                        //todo закончить пагинацию
                         List<Platform> platforms = catalogStorage.getAllPlatforms();
 
                         req.setAttribute("platforms", platforms);
@@ -121,7 +114,7 @@ public class DispatcherServlet extends HttpServlet {
                         req.setAttribute("tracks", ses.getAttribute("tracks"));
 //                        req.setAttribute("from", from);
                         req.setAttribute("pageSize", TRACKS_PER_PAGE);
-                        return "search-result";
+                        return "search";
                     }
                 };
                 break;
