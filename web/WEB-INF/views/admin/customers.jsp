@@ -29,7 +29,8 @@
         <tr>
             <th>Название</th>
             <th>Ставка</th>
-            <th>Договор</th>
+            <%--<th>Договор</th>--%>
+            <th>Тит организации</th>
             <th>Тип прав</th>
         </tr>
         </thead>
@@ -41,17 +42,34 @@
             <tr>
                 <td><a href="customer-detail?customer_id=${c.id}">${c.name} </a>
                 </td>
-                <td>${c.royalty}
-                </td>
-                <td>${c.contract}
+                <td>${c.royalty}</td>
+                <%--<td>${c.contract}</td>--%>
+                <td>
+                    <c:choose>
+                        <c:when test="${c.customerType eq 'MOBILE_AGGREGATOR'}">
+                            мобильный агрегатор
+                        </c:when>
+                        <c:when test="${c.customerType eq 'PUBLIC_RIGHTS_SOCIETY'}">
+                            общество по смежным правам
+                        </c:when>
+                        <c:otherwise>
+                            не задан
+                        </c:otherwise>
+                    </c:choose>
                 </td>
                 <td>
                     <c:choose>
-                        <c:when test="${c.rightType eq 'rightType'}">
+                        <c:when test="${c.rightType eq 'AUTHOR'}">
                             авторские
                         </c:when>
-                        <c:otherwise>
+                        <c:when test="${c.rightType eq 'RELATED'}">
                             смежные
+                        </c:when>
+                        <c:when test="${c.rightType eq 'AUTHOR_RELATED'}">
+                            авторские и смежные
+                        </c:when>
+                        <c:otherwise>
+                            отсутствует
                         </c:otherwise>
                     </c:choose>
                 </td>
