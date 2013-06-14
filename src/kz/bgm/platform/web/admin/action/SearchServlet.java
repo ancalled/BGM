@@ -123,12 +123,14 @@ public class SearchServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
 
-        Collections.sort(result, new Comparator<SearchResult>() {
-            @Override
-            public int compare(SearchResult o1, SearchResult o2) {
-                return Double.compare(o2.getScore(), o1.getScore());
-            }
-        });
+        if (result != null) {
+            Collections.sort(result, new Comparator<SearchResult>() {
+                @Override
+                public int compare(SearchResult o1, SearchResult o2) {
+                    return Double.compare(o2.getScore(), o1.getScore());
+                }
+            });
+        }
         session.setAttribute("tracks", result);
         session.setAttribute("query", query);
         session.setAttribute("searchType", searchType);
