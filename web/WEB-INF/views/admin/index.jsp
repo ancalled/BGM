@@ -143,11 +143,11 @@
                 </c:forEach>
 
                 <div id="total-tracks">
-                    Всего
+                    Всего треков:
                     <strong>
                         <fmt:formatNumber type="number" maxFractionDigits="3" value="${totalTracks}"/>
                     </strong>
-                    треков
+
                 </div>
 
             </section>

@@ -7,9 +7,18 @@ import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import kz.bgm.platform.model.service.LuceneSearch;
 import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.queryparser.classic.QueryParser;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
@@ -24,6 +33,10 @@ public class LuceneUtil {
     public static final String BASE_HOST = "base.host";
     public static final String BASE_PORT = "base.port";
 
+    public static final int RESULT_LIMIT = 3;
+    public static final float RESULT_MIN_SCORE = 2.8f;
+    public static final String IN_FIELD_SEP = ",";
+    public static final String OUT_FIELD_SEP = ";";
 
     private final CatalogStorage catalogStorage;
     private final LuceneSearch luceneSearch;
@@ -62,6 +75,76 @@ public class LuceneUtil {
     }
 
 
+    public void bulkSearch(String infile, String outfile) throws IOException {
+        List<String> lines = readFilesByLines(Paths.get(infile));
+
+
+        StringBuilder buf = new StringBuilder();
+
+        for (String line : lines) {
+            String[] fields = line.split(IN_FIELD_SEP);
+
+            String sourceCode = fields[0];
+            String track = fields[1].replace("'", "");
+            String artist = fields[2];
+
+            List<SearchResult> res = null;
+            try {
+                res = luceneSearch.search(artist, artist, track, 100);
+            } catch (ParseException e) {
+                System.err.println(e.getMessage());
+            }
+
+
+            buf.append(sourceCode)
+                    .append(OUT_FIELD_SEP)
+                    .append(wrap(track))
+                    .append(OUT_FIELD_SEP)
+                    .append(wrap(artist))
+                    .append(OUT_FIELD_SEP);
+
+            System.out.println(artist + ": " + track);
+
+            if (res != null) {
+
+                for (SearchResult r : filterByHighScore(res, RESULT_LIMIT)) {
+                    if (r.getScore() < RESULT_MIN_SCORE) continue;
+
+                    Track t = catalogStorage.getTrack(r.getTrackId());
+                    if (t != null) {
+                        buf.append(wrap(t.getArtist())).append(": ")
+                                .append(wrap(t.getName()))
+                                .append(OUT_FIELD_SEP)
+                                .append(t.getCode())
+                                .append(OUT_FIELD_SEP)
+                                .append(t.getCatalog())
+                                .append(OUT_FIELD_SEP)
+                        ;
+
+                        System.out.println("[" + r.getScore() + "] id: " + r.getTrackId());
+                        System.out.println("\tartist: '" + t.getArtist() + "'" +
+                                "\n\ttrack: '" + t.getName() + "'" +
+                                "\n\tcomposer: '" + t.getComposer() + "'" +
+                                "\n\tcatalog: '" + t.getCatalog() + "'" +
+                                "\n\tcode: '" + t.getCode() + "'" +
+                                "\n\tmobileShare: '" + t.getMobileShare() + "'"
+                        );
+                        System.out.println();
+                    }
+                }
+            }
+
+            System.out.println("----------------------------------------------------");
+
+            buf.append("\n")/*.append("\r")*/;
+        }
+
+
+        writeToFile(outfile, buf.toString());
+
+    }
+
+
     public static void initDatabase(String propsFile) throws IOException {
         Properties props = new Properties();
         props.load(new FileInputStream(propsFile));
@@ -77,7 +160,53 @@ public class LuceneUtil {
     }
 
 
-    public static void main(String[] args) throws IOException, ParseException {
+    public static List<String> readFilesByLines(Path path) throws IOException {
+
+        List<String> res = new ArrayList<>();
+        BufferedReader reader =
+                Files.newBufferedReader(path, Charset.forName("utf-8"));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            res.add(line);
+        }
+        return res;
+    }
+
+
+    public static List<SearchResult> filterByHighScore(List<SearchResult> results, int limit) {
+        if (results == null) return null;
+        if (results.isEmpty()) return Collections.emptyList();
+
+        List<SearchResult> filtered = new ArrayList<>();
+
+        SearchResult first = results.get(0);
+
+        filtered.add(first);
+
+        for (int i = 1; i < Math.min(results.size(), limit); i++) {
+            SearchResult sr = results.get(i);
+            if (sr.getScore() < first.getScore()) {
+                break;
+            }
+            filtered.add(sr);
+        }
+
+        return filtered;
+    }
+
+    public static void writeToFile(String oufile, String content) throws IOException {
+
+        BufferedWriter writer = Files.newBufferedWriter(Paths.get(oufile), Charset.forName("utf-8"));
+        writer.append(content);
+        writer.flush();
+    }
+
+    public static String wrap(String value) {
+        return "'" + value.replace("'", "").replace(OUT_FIELD_SEP, "") + "'";
+    }
+
+
+    public static void main1(String[] args) throws IOException, ParseException {
 
         if (args.length < 1) {
             System.out.println("Expected:\nsearch-track.sh artist: composition");
@@ -103,6 +232,22 @@ public class LuceneUtil {
         util.search(artist, authors, track);
 
 //        new LuceneUtil().rebuildIndex();
+
+    }
+
+
+    public static void main(String[] args) throws IOException {
+        if (args.length < 2) {
+            System.err.println("Not enough params!");
+            System.out.println("Expected: $IN_FILE $OUT_FILE");
+            return;
+        }
+
+        String infile = args[0];
+        String outfile = args[1];
+
+        LuceneUtil util = new LuceneUtil();
+        util.bulkSearch(infile, outfile);
 
     }
 }

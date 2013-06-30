@@ -113,16 +113,6 @@
                                     по названию трека
                                 </label>
 
-                                <label for="field-artist" class="radio separated">
-                                    <input type="radio" name="field" value="artist" id="field-artist">
-                                    по артисту
-                                </label>
-
-                                <label for="field-composer" class="radio">
-                                    <input type="radio" name="field" value="composer" id="field-composer">
-                                    по композитору
-                                </label>
-
                                 <label for="field-code" class="radio">
                                     <input type="radio" name="field" value="code" id="field-code">
                                     по коду
@@ -138,9 +128,15 @@
                                     по композитору и треку (через «;»)
                                 </label>
 
+                                <%--<label for="field-artist" class="radio separated">--%>
+                                <%--<input type="radio" name="field" value="artist" id="field-artist">--%>
+                                <%--все треки артиста--%>
+                                <%--</label>--%>
 
-
-
+                                <%--<label for="field-composer" class="radio">--%>
+                                <%--<input type="radio" name="field" value="composer" id="field-composer">--%>
+                                <%--все треки композитора--%>
+                                <%--</label>--%>
                             </fieldset>
                         </div>
 

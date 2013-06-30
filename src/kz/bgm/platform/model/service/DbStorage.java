@@ -75,7 +75,9 @@ public class DbStorage implements CatalogStorage {
         try {
             connection = pool.getConnection();
             PreparedStatement ps =
-                    connection.prepareStatement("SELECT id FROM catalog WHERE name=?");
+                    connection.prepareStatement("SELECT id FROM catalog WHERE name=?",
+                            ResultSet.TYPE_FORWARD_ONLY,
+                            ResultSet.CONCUR_READ_ONLY);
 
             ps.setString(1, catalogName);
             ResultSet rs = ps.executeQuery();
@@ -105,7 +107,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public Platform execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM platform WHERE id=?");
+                        "SELECT * FROM platform WHERE id=?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 stmt.setLong(1, id);
 
                 ResultSet rs = stmt.executeQuery();
@@ -126,7 +130,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public Catalog execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM catalog WHERE id=?");
+                        "SELECT * FROM catalog WHERE id=?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 stmt.setLong(1, id);
 
                 ResultSet rs = stmt.executeQuery();
@@ -146,7 +152,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public Track execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM composition WHERE id=?");
+                        "SELECT * FROM composition WHERE id=?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 stmt.setLong(1, id);
 
                 ResultSet rs = stmt.executeQuery();
@@ -165,7 +173,9 @@ public class DbStorage implements CatalogStorage {
         return query(new Action<List<Platform>>() {
             @Override
             public List<Platform> execute(Connection con) throws SQLException {
-                PreparedStatement stmt = con.prepareStatement("SELECT * FROM platform");
+                PreparedStatement stmt = con.prepareStatement("SELECT * FROM platform",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
 
                 ResultSet rs = stmt.executeQuery();
 
@@ -188,7 +198,9 @@ public class DbStorage implements CatalogStorage {
         return query(new Action<List<Long>>() {
             @Override
             public List<Long> execute(Connection con) throws SQLException {
-                PreparedStatement stmt = con.prepareStatement("SELECT id FROM catalog");
+                PreparedStatement stmt = con.prepareStatement("SELECT id FROM catalog",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 ResultSet rs = stmt.executeQuery();
 
                 List<Long> catalogs = new ArrayList<>();
@@ -207,7 +219,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public List<Catalog> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM  catalog WHERE platform_id = ?"
+                        "SELECT * FROM  catalog WHERE platform_id = ?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY
                 );
                 stmt.setLong(1, platformId);
 
@@ -236,7 +250,9 @@ public class DbStorage implements CatalogStorage {
 
                 PreparedStatement stmt = con.prepareStatement(
                         "SELECT * FROM composition WHERE id IN (" + asStringBySearchResults(found) +
-                                ") AND catalog_id IN (" + asString(catalogIds) + ")");
+                                ") AND catalog_id IN (" + asString(catalogIds) + ")",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
 
                 ResultSet rs = stmt.executeQuery();
 
@@ -269,7 +285,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public List<Track> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM composition WHERE id IN (" + DbStorage.asString(ids) + ")");
+                        "SELECT * FROM composition WHERE id IN (" + DbStorage.asString(ids) + ")",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
 
                 ResultSet rs = stmt.executeQuery();
 
@@ -309,7 +327,9 @@ public class DbStorage implements CatalogStorage {
                 PreparedStatement stmt = con.prepareStatement(
                         "SELECT * FROM composition WHERE " +
                                 field + "= ? " +
-                                catalogsPart);
+                                catalogsPart,
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 if ("code".equals(field)) {
                     try {
                         stmt.setLong(1, Long.parseLong(value));
@@ -341,7 +361,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public List<Track> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM composition WHERE name=?");
+                        "SELECT * FROM composition WHERE name=?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 stmt.setString(1, name);
 
                 ResultSet rs = stmt.executeQuery();
@@ -364,7 +386,9 @@ public class DbStorage implements CatalogStorage {
             public List<SearchResult> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
                         "SELECT * FROM composition WHERE code=? AND catalog_id " +
-                                "IN (" + asString(catalogs) + ")");
+                                "IN (" + asString(catalogs) + ")",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 stmt.setString(1, code);
 
                 ResultSet rs = stmt.executeQuery();
@@ -385,7 +409,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public List<Track> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM composition WHERE composer=?");
+                        "SELECT * FROM composition WHERE composer=?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 stmt.setString(1, composer);
 
                 ResultSet rs = stmt.executeQuery();
@@ -406,7 +432,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public List<Track> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM composition WHERE artist=?");
+                        "SELECT * FROM composition WHERE artist=?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 stmt.setString(1, artist);
 
                 ResultSet rs = stmt.executeQuery();
@@ -426,7 +454,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public List<Track> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM composition WHERE artist LIKE?");
+                        "SELECT * FROM composition WHERE artist LIKE?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 stmt.setString(1, artist);
 
                 ResultSet rs = stmt.executeQuery();
@@ -455,7 +485,9 @@ public class DbStorage implements CatalogStorage {
                                     "  (SELECT (RAND() * (SELECT MAX(id)  FROM composition)) AS id) r\n" +
                                     "WHERE c.id >= r.id\n" +
                                     "ORDER BY c.id ASC\n" +
-                                    "LIMIT 1;");
+                                    "LIMIT 1;",
+                            ResultSet.TYPE_FORWARD_ONLY,
+                            ResultSet.CONCUR_READ_ONLY);
 
                     ResultSet rs = stmt.executeQuery();
 
@@ -483,7 +515,9 @@ public class DbStorage implements CatalogStorage {
                                     "WHERE c.id >= r.id\n" +
                                     "AND catalog_id = ?\n" +
                                     "ORDER BY c.id ASC\n" +
-                                    "LIMIT 1;");
+                                    "LIMIT 1;",
+                            ResultSet.TYPE_FORWARD_ONLY,
+                            ResultSet.CONCUR_READ_ONLY);
                     stmt.setLong(1, catalogId);
 
                     ResultSet rs = stmt.executeQuery();
@@ -503,7 +537,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public List<Customer> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM customer");
+                        "SELECT * FROM customer",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 ResultSet rs = stmt.executeQuery();
 
                 List<Customer> customers = new ArrayList<>();
@@ -522,7 +558,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public Customer execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM customer WHERE id=?");
+                        "SELECT * FROM customer WHERE id=?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 stmt.setLong(1, id);
 
                 ResultSet rs = stmt.executeQuery();
@@ -537,7 +575,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public AdminUser execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM user_admin WHERE login = ? AND password = ?");
+                        "SELECT * FROM user_admin WHERE login = ? AND password = ?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 stmt.setString(1, name);
                 stmt.setString(2, pass);
 
@@ -553,7 +593,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public User execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM user WHERE login = ? AND password = ?");
+                        "SELECT * FROM user WHERE login = ? AND password = ?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 stmt.setString(1, name);
                 stmt.setString(2, pass);
 
@@ -569,7 +611,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public User execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM user WHERE login = ?");
+                        "SELECT * FROM user WHERE login = ?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 stmt.setString(1, name);
 
                 ResultSet rs = stmt.executeQuery();
@@ -709,7 +753,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public List<CustomerReport> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM customer_report");
+                        "SELECT * FROM customer_report",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
 
                 ResultSet rs = stmt.executeQuery();
 
@@ -731,7 +777,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public CustomerReport execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM customer_report WHERE id = ?");
+                        "SELECT * FROM customer_report WHERE id = ?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 stmt.setLong(1, id);
 
                 ResultSet rs = stmt.executeQuery();
@@ -747,7 +795,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public List<CustomerReport> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM customer_report WHERE customer_id = ? AND start_date BETWEEN ? AND ?");
+                        "SELECT * FROM customer_report WHERE customer_id = ? AND start_date BETWEEN ? AND ?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 stmt.setLong(1, customerId);
                 stmt.setDate(2, new java.sql.Date(from.getTime()));
                 stmt.setDate(3, new java.sql.Date(to.getTime()));
@@ -771,7 +821,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public List<CustomerReportItem> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM customer_report_item WHERE report_id = ?");
+                        "SELECT * FROM customer_report_item WHERE report_id = ?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 stmt.setLong(1, reportId);
 
                 ResultSet rs = stmt.executeQuery();
@@ -809,7 +861,9 @@ public class DbStorage implements CatalogStorage {
                         "\n" +
                         "WHERE composition.id =" + reportItem.getCompositionId() + "\n" +
                         "and cat.right_type=?\n" +
-                        "GROUP BY composition.id;");
+                        "GROUP BY composition.id;",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 ps.setInt(1, RightType.AUTHOR.ordinal());
                 ResultSet rs = ps.executeQuery();
 
@@ -855,7 +909,9 @@ public class DbStorage implements CatalogStorage {
                         "\n" +
                         "WHERE composition.id =" + reportItem.getCompositionId() + "\n" +
                         "and cat.right_type=?\n" +
-                        "GROUP BY composition.id;");
+                        "GROUP BY composition.id;",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 ps.setInt(1, RightType.RELATED.ordinal());
 
                 ResultSet rs = ps.executeQuery();
@@ -936,7 +992,9 @@ public class DbStorage implements CatalogStorage {
                         "      AND r.type = 0\n" +
                         "      AND i.composition_id > 0\n" +
                         "\n" +
-                        "GROUP BY i.composition_id");
+                        "GROUP BY i.composition_id",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
 
                 ResultSet rs = ps.executeQuery();
 
@@ -996,7 +1054,9 @@ public class DbStorage implements CatalogStorage {
                         "      AND cat.right_type = ?\n" +
                         "      AND i.composition_id > 0\n" +
                         "\n" +
-                        "GROUP BY i.composition_id\n;");
+                        "GROUP BY i.composition_id\n;",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 ps.setInt(1, RightType.AUTHOR.ordinal());
 
                 ResultSet rs = ps.executeQuery();
@@ -1139,7 +1199,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public List<User> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM user WHERE customer_id = ?");
+                        "SELECT * FROM user WHERE customer_id = ?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 stmt.setLong(1, id);
 
                 ResultSet rs = stmt.executeQuery();
@@ -1360,7 +1422,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public List<Long> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT track_id FROM customer_basket_item WHERE customer_id = ?");
+                        "SELECT track_id FROM customer_basket_item WHERE customer_id = ?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 stmt.setLong(1, customerId);
 
                 ResultSet rs = stmt.executeQuery();
@@ -1381,7 +1445,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public Object execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "INSERT INTO customer_basket_item (customer_id, track_id) VALUES (?,?)"
+                        "INSERT INTO customer_basket_item (customer_id, track_id) VALUES (?,?)",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY
                 );
                 stmt.setLong(1, customerId);
                 stmt.setLong(2, trackId);
@@ -1469,7 +1535,9 @@ public class DbStorage implements CatalogStorage {
         return query(new Action<List<Track>>() {
             @Override
             public List<Track> execute(Connection con) throws SQLException {
-                PreparedStatement stmt = con.prepareStatement("SELECT * FROM composition LIMIT " + from + "," + size);
+                PreparedStatement stmt = con.prepareStatement("SELECT * FROM composition LIMIT " + from + "," + size,
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 ResultSet rs = stmt.executeQuery();
 
                 List<Track> tracks = new ArrayList<>();
@@ -1487,7 +1555,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public Integer execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT COUNT(*)cnt FROM composition");
+                        "SELECT COUNT(*)cnt FROM composition",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
 
                 ResultSet rs = stmt.executeQuery();
                 if (rs.next()) {
@@ -1503,7 +1573,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public List<Track> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM comp_tmp WHERE id = ?");
+                        "SELECT * FROM comp_tmp WHERE id = ?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 stmt.setLong(1, updateId);
 
                 ResultSet rs = stmt.executeQuery();
@@ -1524,7 +1596,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public CatalogUpdate execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM catalog_update WHERE id = ?");
+                        "SELECT * FROM catalog_update WHERE id = ?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 stmt.setLong(1, updateId);
 
                 ResultSet rs = stmt.executeQuery();
@@ -1544,7 +1618,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public List<CatalogUpdate> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM catalog_update WHERE catalog_id = ?");
+                        "SELECT * FROM catalog_update WHERE catalog_id = ?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
                 stmt.setLong(1, catalogId);
 
                 ResultSet rs = stmt.executeQuery();

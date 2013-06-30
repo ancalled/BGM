@@ -91,10 +91,7 @@ public class LuceneSearch {
             query.add(sq, Occur.MUST);
 
         } else if (artist != null) {
-            BooleanQuery sq = new BooleanQuery();
-            sq.add(createTermQuery(FIELD_ARTIST, artist, 1), Occur.SHOULD);
-            sq.add(createTermQuery(FIELD_COMPOSER, artist, 1), Occur.SHOULD);
-            query.add(sq, Occur.MUST);
+           query.add(createTermQuery(FIELD_ARTIST, artist, 1), Occur.MUST);
 
         } else if (authors != null) {
             query.add(createTermQuery(FIELD_COMPOSER, authors, 1), Occur.MUST);
@@ -115,7 +112,7 @@ public class LuceneSearch {
     }
 
     private Query createTermQuery(String field, String value, float boost) throws ParseException {
-        Query parse = new QueryParser(Version.LUCENE_41, field, analyzer).parse(value);
+        Query parse = new QueryParser(Version.LUCENE_41, field, analyzer).parse(QueryParser.escape(value));
         parse.setBoost(boost);
         return parse;
     }

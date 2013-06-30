@@ -96,6 +96,18 @@ public class SearchServlet extends HttpServlet {
                             catalogs);
                     break;
 
+                case ARTIST :
+                    result = catalogService.getTracks(
+                            luceneSearch.search(query, null, null, limit),
+                            catalogs);
+                    break;
+
+                case COMPOSER:
+                    result = catalogService.getTracks(
+                            luceneSearch.search(null, query, null, limit),
+                            catalogs);
+                    break;
+
                 case ARTIST_TRACK:
                     result = catalogService.getTracks(
                             luceneSearch.search(first, null, second, limit),
@@ -108,12 +120,9 @@ public class SearchServlet extends HttpServlet {
                             catalogs);
                     break;
 
-                case ARTIST:
-                    break;
 
 
-                case COMPOSER:
-                    break;
+
 
 
             }

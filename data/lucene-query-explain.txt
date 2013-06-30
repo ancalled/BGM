@@ -1,0 +1,97 @@
+artist = 'madonna'
+-----------------------------
+
+9.259217 = (MATCH) weight(artist:madonna in 292) [DefaultSimilarity], result of:
+  9.259217 = fieldWeight in 292, product of:
+    1.0 = tf(freq=1.0), with freq of:
+      1.0 = termFreq=1.0
+    9.259217 = idf(docFreq=184, maxDocs=714668)
+    1.0 = fieldNorm(doc=292)
+
+-----------------------------
+
+
+artist = 'shade'
+-----------------------------
+7.929883 = (MATCH) weight(artist:shade in 1561) [DefaultSimilarity], result of:
+  7.929883 = score(doc=1561,freq=1.0 = termFreq=1.0), product of:
+    0.99999994 = queryWeight, product of:
+      12.687814 = idf(docFreq=5, maxDocs=714668)
+      0.07881578 = queryNorm
+    7.9298835 = fieldWeight in 1561, product of:
+      1.0 = tf(freq=1.0), with freq of:
+        1.0 = termFreq=1.0
+      12.687814 = idf(docFreq=5, maxDocs=714668)
+      0.625 = fieldNorm(doc=1561)
+
+-----------------------------      
+
+
+
+artist = 'stevie wonder'
+-----------------------------
+8.815923 = (MATCH) sum of:
+
+  3.7473574 = (MATCH) weight(artist:stevie in 66368) [DefaultSimilarity], result of:
+    3.7473574 = score(doc=66368,freq=1.0 = termFreq=1.0), product of:
+
+      0.6519716 = queryWeight, product of:
+        9.19637 = idf(docFreq=196, maxDocs=714668)
+        0.07089445 = queryNorm
+
+      5.747731 = fieldWeight in 66368, product of:
+        1.0 = tf(freq=1.0), with freq of: 
+          1.0 = termFreq=1.0
+        9.19637 = idf(docFreq=196, maxDocs=714668)
+        0.625 = fieldNorm(doc=66368)
+
+  5.0685654 = (MATCH) weight(artist:wonder in 66368) [DefaultSimilarity], result of:
+    5.0685654 = score(doc=66368,freq=1.0 = termFreq=1.0), product of:
+
+      0.7582434 = queryWeight, product of:
+        10.695384 = idf(docFreq=43, maxDocs=714668)
+        0.07089445 = queryNorm
+
+      6.684615 = fieldWeight in 66368, product of:
+        1.0 = tf(freq=1.0), with freq of: 
+          1.0 = termFreq=1.0
+        10.695384 = idf(docFreq=43, maxDocs=714668)
+        0.625 = fieldNorm(doc=66368)
+
+-----------------------------
+
+
+---------------------------------------------------------
+
+http://www.gossamer-threads.com/lists/lucene/java-user/104729
+
+1. tf = term frequency in document = measure of how often a term appears in the document 
+  - Implementation: sqrt(freq) 
+  - Implication: the more frequent a term occurs in a document, the greater its score 
+  - Rationale: documents which contains more of a term are generally more relevant 
+
+2. idf = inverse document frequency = measure of how often the term appears across the index 
+  - Implementation: log(numDocs/(docFreq+1)) + 1 
+  - Implication: the greater the occurrence of a term in different documents, the lower its score 
+  - Rationale: common terms are less important than uncommon ones 
+
+3. coord = number of terms in the query that were found in the document 
+  - Implementation: overlap / maxOverlap
+  - Implication: of the terms in the query, a document that contains more terms will have a higher score 
+  - Rationale: self-explanatory 
+
+4. fieldNorm 
+  - lengthNorm = measure of the importance of a term according to the total number of terms in the field 
+    - Implementation: 1/sqrt(numTerms) 
+    - Implication: a term matched in fields with less terms have a higher score 
+    - Rationale: a term in a field with less terms is more important than one with more 
+  
+  - boost (index) = boost of the field at index-time 
+    - Index time boost specified. The fieldNorm value in the score would include the same. 
+  
+  - boost (query) = boost of the field at query-time 
+
+5. queryNorm = normalization factor so that queries can be compared 
+  - queryNorm is not related to the relevance of the document, but rather tries to make scores between different queries comparable. 
+  It is implemented as 1/sqrt(sumOfSquaredWeights) 
+
