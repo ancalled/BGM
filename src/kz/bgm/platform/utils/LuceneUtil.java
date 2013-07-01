@@ -7,7 +7,6 @@ import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import kz.bgm.platform.model.service.LuceneSearch;
 import org.apache.lucene.queryparser.classic.ParseException;
-import org.apache.lucene.queryparser.classic.QueryParser;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -75,33 +74,47 @@ public class LuceneUtil {
     }
 
 
-    public void bulkSearch(String infile, String outfile) throws IOException {
-        List<String> lines = readFilesByLines(Paths.get(infile));
+    public void bulkSearch(String infile, String outfile, boolean withHeader, int artistRow, int trackRow) throws IOException {
+        if (infile == null || outfile == null || artistRow < 0 || trackRow < 0) return;
 
+        List<String> lines = readFilesByLines(Paths.get(infile));
 
         StringBuilder buf = new StringBuilder();
 
+        int idx = 0;
         for (String line : lines) {
-            String[] fields = line.split(IN_FIELD_SEP);
 
-            String sourceCode = fields[0];
-            String track = fields[1].replace("'", "");
-            String artist = fields[2];
-
-            List<SearchResult> res = null;
-            try {
-                res = luceneSearch.search(artist, artist, track, 100);
-            } catch (ParseException e) {
-                System.err.println(e.getMessage());
+            String[] sourceFields = line.split(IN_FIELD_SEP);
+            if (sourceFields.length <= trackRow || sourceFields.length <= artistRow) {
+                continue;
             }
 
+            String track = sourceFields[trackRow];
+            String artist = sourceFields[artistRow];
 
-            buf.append(sourceCode)
-                    .append(OUT_FIELD_SEP)
-                    .append(wrap(track))
-                    .append(OUT_FIELD_SEP)
-                    .append(wrap(artist))
-                    .append(OUT_FIELD_SEP);
+            List<SearchResult> res = null;
+            if (idx > 0 || !withHeader) {
+                try {
+                    res = luceneSearch.search(artist, artist, track, RESULT_LIMIT * 3);
+                } catch (ParseException e) {
+                    System.err.println(e.getMessage());
+                }
+            }
+
+            if (withHeader && idx == 0) {
+                buf.append(toRow(sourceFields))
+                        .append(toRow(
+                                "Detected Artist: Track",
+                                "Code",
+                                "Mobile Share",
+                                "Public Share",
+                                "Catalog"
+                        ));
+
+            } else {
+                buf.append(toRowWrapped(sourceFields));
+            }
+
 
             System.out.println(artist + ": " + track);
 
@@ -112,14 +125,12 @@ public class LuceneUtil {
 
                     Track t = catalogStorage.getTrack(r.getTrackId());
                     if (t != null) {
-                        buf.append(wrap(t.getArtist())).append(": ")
-                                .append(wrap(t.getName()))
-                                .append(OUT_FIELD_SEP)
-                                .append(t.getCode())
-                                .append(OUT_FIELD_SEP)
-                                .append(t.getCatalog())
-                                .append(OUT_FIELD_SEP)
-                        ;
+                        buf.append(toRowWrapped(
+                                t.getArtist() + ": " + t.getName(),
+                                t.getCode(),
+                                t.getMobileShare(),
+                                t.getPublicShare(),
+                                t.getCatalog()));
 
                         System.out.println("[" + r.getScore() + "] id: " + r.getTrackId());
                         System.out.println("\tartist: '" + t.getArtist() + "'" +
@@ -137,6 +148,7 @@ public class LuceneUtil {
             System.out.println("----------------------------------------------------");
 
             buf.append("\n")/*.append("\r")*/;
+            idx++;
         }
 
 
@@ -205,6 +217,31 @@ public class LuceneUtil {
         return "'" + value.replace("'", "").replace(OUT_FIELD_SEP, "") + "'";
     }
 
+    public static String toRow(String... fields) {
+        StringBuilder buf = new StringBuilder();
+        for (String field : fields) {
+            buf.append(field).append(OUT_FIELD_SEP);
+        }
+        return buf.toString();
+    }
+
+    public static String toRowWrapped(Object... fields) {
+        StringBuilder buf = new StringBuilder();
+        for (Object field : fields) {
+            String val;
+            if (field instanceof String) {
+                val = wrap((String)field);
+            } else if (field instanceof Number) {
+                val = field.toString();
+            } else {
+                val = "";
+            }
+
+            buf.append(val).append(OUT_FIELD_SEP);
+        }
+        return buf.toString();
+    }
+
 
     public static void main1(String[] args) throws IOException, ParseException {
 
@@ -245,9 +282,13 @@ public class LuceneUtil {
 
         String infile = args[0];
         String outfile = args[1];
+        boolean withHeader = true;
+        int artistRow = 2;
+        int trackRow = 1;
+
 
         LuceneUtil util = new LuceneUtil();
-        util.bulkSearch(infile, outfile);
+        util.bulkSearch(infile, outfile, withHeader, artistRow, trackRow);
 
     }
 }
