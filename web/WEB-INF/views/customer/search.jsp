@@ -210,9 +210,7 @@
                             <th>
                                 <button class="btn btn-block" type="submit" style="width: 30px"><i
                                         class="icon-shopping-cart"></i></button>
-                                    <%--<input type="submit" value="В корзину" class="btn">--%>
 
-                                </input>
                             </th>
                         </tr>
                         </thead>

@@ -59,20 +59,14 @@ public class SearchServlet extends HttpServlet {
 
         int limit = LIMIT;
 
-        HttpSession ses = req.getSession();
-        User user = (User) ses.getAttribute("user");
 
-        List<Long> available = catalogService.getAvailableCatalogs(user.getCustomerId());
         List<Long> requested = getCatalogsId(req);
         List<Long> catalogs = new ArrayList<>();
         if (requested.isEmpty()) {
+            List<Long> available = catalogService.getAllCatalogIds();
             catalogs.addAll(available);
         } else {
-            for (Long id : requested) {
-                if (available.contains(id)) {
-                    catalogs.add(id);
-                }
-            }
+            catalogs.addAll(requested);
         }
 
 
@@ -103,6 +97,18 @@ public class SearchServlet extends HttpServlet {
                             catalogs);
                     break;
 
+                case ARTIST :
+                    result = catalogService.getTracks(
+                            luceneSearch.search(query, null, null, limit),
+                            catalogs);
+                    break;
+
+                case COMPOSER:
+                    result = catalogService.getTracks(
+                            luceneSearch.search(null, query, null, limit),
+                            catalogs);
+                    break;
+
                 case ARTIST_TRACK:
                     result = catalogService.getTracks(
                             luceneSearch.search(first, null, second, limit),
@@ -115,12 +121,9 @@ public class SearchServlet extends HttpServlet {
                             catalogs);
                     break;
 
-                case ARTIST:
-                    break;
 
 
-                case COMPOSER:
-                    break;
+
 
 
             }
@@ -128,21 +131,6 @@ public class SearchServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-
-//        log.debug("Got query: " + query + ", search type: " + searchType);
-//        List<Track> result = Collections.emptyList();
-//        try {
-//            if (query.contains(";")) {
-//                result = separatedFieldsSearch(query, catalogs);
-//
-//            } else {
-//                result = search(query, searchType, catalogs);
-//            }
-//
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-        //todo убрать этот session
         HttpSession session = req.getSession();
 
         if (result != null) {
@@ -214,6 +202,5 @@ public class SearchServlet extends HttpServlet {
         return idList;
 
     }
-
 
 }

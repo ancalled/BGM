@@ -13,8 +13,12 @@
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" media="screen"/>
     <title>Каталог пользователя</title>
     <style>
-        #basket  table.table {
+        #basket {
             font-size: 10pt;
+        }
+
+        #right-align {
+            margin-left: 95%;
         }
     </style>
 </head>
@@ -33,7 +37,12 @@
         </legend>
 
         <c:if test="${not empty tracks}">
-
+            <div class="row">
+                <form id="right-align">
+                    <button class="btn btn-block" type="submit" style="width: 30px">
+                        <i class="icon-print"></i></button>
+                </form>
+            </div>
             <table class="table" id="basket">
                 <thead>
                 <tr>
@@ -89,7 +98,8 @@
     <input type="hidden" id="track-to-remove" name="track_id">
 </form>
 
-<div id="track-remove-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="track-remove-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">Удаление трека</h3>
@@ -104,12 +114,12 @@
 </div>
 
 <script>
-    $(document).ready(function() {
-        $('#modal-remove-btn').click(function() {
-             $('#track-remove-form').submit();
+    $(document).ready(function () {
+        $('#modal-remove-btn').click(function () {
+            $('#track-remove-form').submit();
         });
 
-        $('a.remove-track').click(function() {
+        $('a.remove-track').click(function () {
             var a = $(this);
             $('#track-to-remove').val(a.attr('id'));
 

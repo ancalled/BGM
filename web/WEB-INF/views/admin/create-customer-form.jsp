@@ -65,9 +65,12 @@
             </div>
         </form>
     </div>
+    <style type="text/css">
+input#share{
+  height: 27
+    }
 
-
-
+</style>
 </div>
 </body>
 </html>
