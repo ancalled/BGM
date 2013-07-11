@@ -2,6 +2,8 @@ package kz.bgm.platform.model.domain;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Track implements Serializable {
 
@@ -15,11 +17,9 @@ public class Track implements Serializable {
     private float publicShare = 0F;
     private float mobileShare = 0F;
 
-
     public void setMobileShare(float mobileShare) {
         this.mobileShare = mobileShare;
     }
-
     public void setPublicShare(float publicShare) {
         this.publicShare = publicShare;
     }

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="basket-report" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="277484a5-f1cd-46de-89b4-7fa5b2c34c1c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="f81cf49b-9272-4d62-ac91-3576669046b8">
+		<field name="code" class="java.lang.String"/>
+		<field name="artist" class="java.lang.String"/>
+		<field name="catalog" class="java.lang.String"/>
+		<field name="mobileShare" class="java.lang.Float"/>
+		<field name="composer" class="java.lang.String"/>
+		<field name="name" class="java.lang.String"/>
+	</subDataset>
+	<field name="data" class="java.util.List"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="375f3ca6-5c67-4220-9fb8-a15fea453754" x="0" y="55" width="146" height="24"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="18" pdfFontName="lib\jasperreports\font\Arial.ttf" pdfEncoding="Cp1251" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Каталог клиента]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="34" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="121855e9-0490-4c1d-b889-44b936fd392d" x="0" y="41" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" pdfFontName="lib\jasperreports\font\Arial.ttf" pdfEncoding="Cp1251" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Код]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7dfe2eaa-ae03-43af-b98d-290b8b67c3b3" x="100" y="41" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" pdfFontName="lib\jasperreports\font\Arial.ttf" pdfEncoding="Cp1251" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Композиция]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c1a48841-b2c2-412b-bda6-db693fe6f157" x="200" y="41" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" pdfFontName="lib\jasperreports\font\Arial.ttf" pdfEncoding="Cp1251" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Исполнитель]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="024a14d9-0abf-4393-b93e-4c49c8243d8c" x="300" y="41" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" pdfFontName="lib\jasperreports\font\Arial.ttf" pdfEncoding="Cp1251" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Автор]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="747da630-5ce9-4fab-a90b-d3f743a949fe" x="400" y="41" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" pdfFontName="lib\jasperreports\font\Arial.ttf" pdfEncoding="Cp1251" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Моб.контент]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="aadf4161-1e0a-4a19-8a4c-9d7ac8af8f09" x="500" y="41" width="55" height="20"/>
+				<textElement>
+					<font fontName="Arial" pdfFontName="lib\jasperreports\font\Arial.ttf" pdfEncoding="Cp1251" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Каталог]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="121" splitType="Stretch">
+			<componentElement>
+				<reportElement uuid="c4044d2a-967a-4c35-aee6-a68f5c054f4e" x="0" y="11" width="555" height="22"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="dataset1" uuid="abc86251-99bd-42ff-8a3e-8230ac137d7b">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{data})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="22" width="555">
+						<textField>
+							<reportElement uuid="a19b14cb-d2df-4e63-aa90-f950b021bf4d" x="0" y="0" width="100" height="22"/>
+							<textElement>
+								<font fontName="Arial" isBold="false"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{code}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement uuid="5c0c264f-beb0-4651-b6bc-24085407620f" x="200" y="0" width="100" height="22"/>
+							<textElement>
+								<font fontName="Arial" isBold="false"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{artist}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement uuid="cff437b4-f50c-4555-97c1-3165a6b91c4d" x="300" y="0" width="100" height="22"/>
+							<textElement>
+								<font fontName="Arial" isBold="false"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{composer}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement uuid="c3ab88dd-b3ac-4b17-a584-4e138dd9b80a" x="400" y="0" width="100" height="22"/>
+							<textElement>
+								<font fontName="Arial" isBold="false"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{mobileShare}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement uuid="458208da-fd23-4685-9115-8472b67214dc" x="500" y="0" width="55" height="22"/>
+							<textElement>
+								<font fontName="Arial" isBold="false"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{catalog}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement uuid="e78ea8eb-b740-4520-8ac2-f0c1202b7cb2" x="100" y="0" width="100" height="22"/>
+							<textElement>
+								<font fontName="Arial" isBold="false"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<line>
+				<reportElement uuid="dc376aa4-91f6-46f3-bdf1-132557bcfd13" x="0" y="1" width="555" height="1"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

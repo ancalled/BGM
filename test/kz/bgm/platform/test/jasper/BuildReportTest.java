@@ -17,30 +17,63 @@ public class BuildReportTest {
             throws JRException {
         JasperReport jasperReport;
 
-        HashMap<String, Object> parameters = new HashMap<String, Object>();
+        HashMap<String, Object> parameters = new HashMap<>();
 
-        parameters.put("user_name","Maximus");
         jasperReport = JasperCompileManager
                 .compileReport("basket-report.jrxml");
+//        .compileReport("report-basket-new.jrxml");
 
-        JRField[] fields = jasperReport.getFields();
-        Track track =new Track();
+        Track track = new Track();
         track.setCode("343443");
-        List<Track> tracks= new ArrayList();
+        track.setArtist("ABBA");
+        track.setCatalog("Wch");
+        track.setComposer("EMINEM");
+        track.setName("Camone");
+        track.setMobileShare(344.4f);
+        Track track2 = new Track();
+        track2.setCode("99999");
+        track2.setArtist("MADONNA");
+        track2.setCatalog("SONY");
+        track2.setComposer("HZ");
+        track2.setName("Fuck you");
+        track2.setMobileShare(464.4f);
+
+        List<Track> tracks = new ArrayList<>();
         tracks.add(track);
-        JRDataSource datasource = new JRBeanCollectionDataSource(tracks, true);
+        tracks.add(track2);
 
-        for(JRField f :fields){
+        MyBean bean = new MyBean();
+        bean.setTraks(tracks);
 
-        }
+        List<MyBean> beans = new ArrayList<>();
+        beans.add(bean);
+
+        JRDataSource dataSource = new JRBeanCollectionDataSource(beans);
         JasperPrint print = JasperFillManager.fillReport(jasperReport, parameters,
-               datasource);
+                dataSource);
         JasperExportManager.exportReportToPdfFile(print,
                 "Example.pdf");
 
         JasperViewer.viewReport(print);
 
 
+    }
+
+    public static class MyBean {
+        private List <Track> traks;
+        private String code;
+        public MyBean() {
+        }
+
+
+
+        public List<Track> getTraks() {
+            return traks;
+        }
+
+        public void setTraks(List<Track> traks) {
+            this.traks = traks;
+        }
     }
 
 

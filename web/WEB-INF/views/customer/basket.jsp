@@ -37,11 +37,9 @@
         </legend>
 
         <c:if test="${not empty tracks}">
-            <div class="row">
-                <form id="right-align">
-                    <button class="btn btn-block" type="submit" style="width: 30px">
+            <div class="row" id="right-align">
+                    <button class="btn btn-block" id="report" style="width: 30px">
                         <i class="icon-print"></i></button>
-                </form>
             </div>
             <table class="table" id="basket">
                 <thead>
@@ -98,6 +96,16 @@
     <input type="hidden" id="track-to-remove" name="track_id">
 </form>
 
+<form method="post" action="/customer/action/basket-report" id="download-pdf-report">
+    <c:if test="${not empty tracks}">
+        <c:forEach var="t" items="${tracks}">
+
+            <input type="hidden" name="track_${t.id}" value="${t.id}">
+
+        </c:forEach>
+    </c:if>
+</form>
+
 <div id="track-remove-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
     <div class="modal-header">
@@ -119,6 +127,10 @@
             $('#track-remove-form').submit();
         });
 
+        $('#report').click(function () {
+            $('#download-pdf-report').submit();
+        });
+
         $('a.remove-track').click(function () {
             var a = $(this);
             $('#track-to-remove').val(a.attr('id'));
@@ -126,6 +138,7 @@
             $('#track-remove-modal').modal('show');
         });
     });
+
 </script>
 
 </body>
