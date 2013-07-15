@@ -8,11 +8,15 @@ import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.log4j.Logger;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -22,6 +26,10 @@ public class DownloadBasketReportServlet extends HttpServlet {
 
 
     private static final Logger log = Logger.getLogger(DownloadBasketReportServlet.class);
+
+    private static final String appDir = System.getProperty("user.dir");
+    public static final String REPORT_FILE_PATH = appDir + "/data/basket-reports/basket-report.pdf";
+    public static final String BASKET_PATH = "/WEB-INF/views/customer/basket.jsp";
 
     private CatalogStorage catalogService;
 
@@ -40,36 +48,63 @@ public class DownloadBasketReportServlet extends HttpServlet {
 
         if (!tracksId.isEmpty()) {
             try {
+                log.info("Creating report with " + tracksId.size() + " tracks");
+
                 List<Track> tracks = catalogService.getTracks(tracksId);
                 List<BasketReport> reportsList = getBasketReports(tracks);
 
-                JasperReport jasperReport;
-                jasperReport = JasperCompileManager
+                JasperReport jasperReport = JasperCompileManager
                         .compileReport("data/jasper-reports-skeletons/basket-report.jrxml");
-
 
                 JRDataSource dataSource =
                         new JRBeanCollectionDataSource(reportsList);
 
                 JasperPrint print = JasperFillManager.fillReport(jasperReport,
-                        new HashMap<String,Object>(), dataSource);
+                        new HashMap<String, Object>(), dataSource);
 
                 JasperExportManager.exportReportToPdfFile(print,
-                        "Example.pdf"); //todo поправить путь
+                        REPORT_FILE_PATH);
 
-            } catch (JRException e) {
+                sendFileToClient(resp);
+            } catch (Exception e) {
                 e.printStackTrace();
+                log.info("Cant save file " + REPORT_FILE_PATH);
+                RequestDispatcher rd =
+                        req.getRequestDispatcher(BASKET_PATH);
+                rd.forward(req, resp);
             }
         } else {
-
+            log.info("No tracks was in request");
+            RequestDispatcher rd =
+                    req.getRequestDispatcher(BASKET_PATH);
+            rd.forward(req, resp);
         }
 
 
     }
 
+    private void sendFileToClient(HttpServletResponse resp)
+            throws IOException {
+        resp.setContentType("application/pdf");
+
+        File reportFile = new File(REPORT_FILE_PATH);
+        FileInputStream fis = new FileInputStream(reportFile);
+        OutputStream out = resp.getOutputStream();
+
+        int read = 0;
+        byte[] bytes = new byte[1024];
+
+        while ((read = fis.read(bytes)) != -1) {
+            out.write(bytes, 0, read);
+        }
+
+        out.flush();
+        fis.close();
+        out.close();
+    }
+
     private List<BasketReport> getBasketReports(List<Track> tracks) {
         BasketReport rep = new BasketReport();
-
         //noinspection unchecked
         rep.setData(tracks);
         List<BasketReport> reportsList = new ArrayList<>();

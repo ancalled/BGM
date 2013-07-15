@@ -11,10 +11,6 @@ public class BasketReport<Track> extends JasReport {
 
     private List<Track> tracks;
 
-    public void setTracks(List<Track> tracks) {
-        this.tracks = tracks;
-    }
-
     public void setData(List<Track> data) {
         tracks = data;
     }
