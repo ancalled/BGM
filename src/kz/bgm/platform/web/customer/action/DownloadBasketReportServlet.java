@@ -4,8 +4,8 @@ import kz.bgm.platform.model.domain.Track;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import kz.bgm.platform.utils.jasperreports.BasketReport;
-import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+//import net.sf.jasperreports.engine.*;
+//import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -53,17 +53,17 @@ public class DownloadBasketReportServlet extends HttpServlet {
                 List<Track> tracks = catalogService.getTracks(tracksId);
                 List<BasketReport> reportsList = getBasketReports(tracks);
 
-                JasperReport jasperReport = JasperCompileManager
-                        .compileReport("data/jasper-reports-skeletons/basket-report.jrxml");
-
-                JRDataSource dataSource =
-                        new JRBeanCollectionDataSource(reportsList);
-
-                JasperPrint print = JasperFillManager.fillReport(jasperReport,
-                        new HashMap<String, Object>(), dataSource);
-
-                JasperExportManager.exportReportToPdfFile(print,
-                        REPORT_FILE_PATH);
+//                JasperReport jasperReport = JasperCompileManager
+//                        .compileReport("data/jasper-reports-skeletons/basket-report.jrxml");
+//
+//                JRDataSource dataSource =
+//                        new JRBeanCollectionDataSource(reportsList);
+//
+//                JasperPrint print = JasperFillManager.fillReport(jasperReport,
+//                        new HashMap<String, Object>(), dataSource);
+//
+//                JasperExportManager.exportReportToPdfFile(print,
+//                        REPORT_FILE_PATH);
 
                 sendFileToClient(resp);
             } catch (Exception e) {

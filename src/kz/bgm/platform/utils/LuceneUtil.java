@@ -33,7 +33,7 @@ public class LuceneUtil {
     public static final String BASE_PORT = "base.port";
 
     public static final int RESULT_LIMIT = 3;
-    public static final float RESULT_MIN_SCORE = 2.8f;
+    public static final float RESULT_MIN_SCORE = 1.0f;
     public static final String IN_FIELD_SEP = ",";
     public static final String OUT_FIELD_SEP = ";";
 
