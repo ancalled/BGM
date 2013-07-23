@@ -161,6 +161,7 @@ public class DispatcherServlet extends HttpServlet {
                 };
                 break;
 
+
             case "/catalog":
                 action = new Action() {
                     @Override
