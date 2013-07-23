@@ -49,7 +49,11 @@ CREATE TABLE customer_report (
   start_date  DATE,
   upload_date DATE,
   type        INT,
-  period      INT
+  period      INT,
+  tracks      INT,
+  detected    INT,
+  revenue     INT,
+  accepted    BOOL
 );
 
 
@@ -61,7 +65,9 @@ CREATE TABLE customer_report_item (
   artist         VARCHAR(200),
   content_type   VARCHAR(100),
   qty            INT,
-  price          DECIMAL(6, 3)
+  price          DECIMAL(6, 3),
+  detected       BOOL,
+  number         INT
 );
 
 CREATE TABLE user (

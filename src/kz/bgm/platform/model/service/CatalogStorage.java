@@ -59,6 +59,8 @@ public interface CatalogStorage {
 
     long saveCustomerReport(CustomerReport report);
 
+    long updateCustomerReport(long id, int detected);
+
     long saveCustomerReportItem(CustomerReportItem item);
 
     void saveReportItemTracks(List<ReportItemTrack> reportItemList);
@@ -72,6 +74,8 @@ public interface CatalogStorage {
     List<CustomerReport> getCustomerReports(long customerId, Date from, Date to);
 
     List<CustomerReportItem> getCustomerReportsItems(long reportId);
+
+    List<CustomerReportItem> getCustomerReportsItems(long reportId, int from, int size);
 
     List<CalculatedReportItem> calculatePublicReport(String catalog);
 

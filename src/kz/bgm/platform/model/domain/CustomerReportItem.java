@@ -4,6 +4,8 @@ package kz.bgm.platform.model.domain;
 public class CustomerReportItem {
 
     private Long id;
+    private int number;
+
     private Long reportId;
     private Long compositionId;
 
@@ -13,6 +15,28 @@ public class CustomerReportItem {
     private String contentType;
     private int qty;
     private float price;
+    private boolean detected = false;
+
+    private Track foundTrack;
+
+
+    public CustomerReportItem() {
+    }
+
+    public CustomerReportItem(CustomerReportItem item) {
+        this.id = item.id;
+        this.reportId = item.reportId;
+        this.compositionId = item.compositionId;
+        this.track = item.track;
+        this.artist = item.artist;
+        this.authors = item.authors;
+        this.contentType = item.contentType;
+        this.qty = item.qty;
+        this.price = item.price;
+        this.number = item.number;
+    }
+
+
 
     public Long getId() {
         return id;
@@ -20,6 +44,14 @@ public class CustomerReportItem {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public Long getReportId() {
@@ -84,5 +116,21 @@ public class CustomerReportItem {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public boolean isDetected() {
+        return detected;
+    }
+
+    public void setDetected(boolean detected) {
+        this.detected = detected;
+    }
+
+    public Track getFoundTrack() {
+        return foundTrack;
+    }
+
+    public void setFoundTrack(Track foundTrack) {
+        this.foundTrack = foundTrack;
     }
 }

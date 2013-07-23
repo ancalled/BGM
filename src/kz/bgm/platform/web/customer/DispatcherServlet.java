@@ -21,6 +21,7 @@ public class DispatcherServlet extends HttpServlet {
     public static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     public static final int TRACKS_PER_PAGE = 50;
+    public static final int DEFAULT_REPORTS_PER_PAGE = 100;
     private CatalogStorage catalogStorage;
 
     @Override
@@ -44,6 +45,24 @@ public class DispatcherServlet extends HttpServlet {
 
         Action action = null;
         switch (pth) {
+
+            case "/index":
+                action = new Action() {
+                    @Override
+                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+
+
+                        List<Platform> platforms = catalogStorage.getAllPlatforms();
+                        req.setAttribute("platforms", platforms);
+
+                        List<CustomerReport> reports = catalogStorage.getAllCustomerReports();
+                        req.setAttribute("reports", reports);
+
+                        return "index";
+                    }
+                };
+                break;
+
             case "/search":
                 action = new Action() {
                     @Override
@@ -66,52 +85,62 @@ public class DispatcherServlet extends HttpServlet {
                     }
                 };
                 break;
-            case "/report-upload-result":
+
+            case "/send-report":
+                action = new Action() {
+                    @Override
+                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+                        return "send-report";
+                    }
+                };
+                break;
+
+            case "/reports":
+                action = new Action() {
+                    @Override
+                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+                        List<CustomerReport> reports = catalogStorage.getAllCustomerReports();
+                        req.setAttribute("reports", reports);
+                        return "reports";
+                    }
+                };
+                break;
+
+            case "/report":
                 action = new Action() {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
 
-                        String repIdStr = req.getParameter("rid");
+                        String repIdStr = req.getParameter("id");
                         if (repIdStr == null) return null;
                         long reportId = Long.parseLong(repIdStr);
 
-//                    CustomerReport report = catalogStorage.getCustomerReport(reportId);
-//                    List<CustomerReportItem> items = catalogStorage.getCustomerReportsItems(reportId);
-//                    Customer customer = catalogStorage.getCustomer(report.getCustomerId());
-//
-//                    req.setAttribute("report", report);
-//                    req.setAttribute("items", items);
-//                    req.setAttribute("customer", customer);
+                        String fromStr = req.getParameter("from");
+                        int from = fromStr != null ? Integer.parseInt(fromStr) : 0;
+                        String sizeStr = req.getParameter("size");
+                        int size = sizeStr != null ? Integer.parseInt(sizeStr) : DEFAULT_REPORTS_PER_PAGE;
 
-                        HttpSession ses = req.getSession();
-                        if (ses == null) return null;
+                        CustomerReport report = catalogStorage.getCustomerReport(reportId);
+                        List<CustomerReportItem> items = catalogStorage.getCustomerReportsItems(reportId, from, size);
 
-                        CustomerReport report = (CustomerReport) ses.getAttribute("report-" + reportId);
-                        if (report != null) {
-                            req.setAttribute("report", report);
+                        for (CustomerReportItem i: items) {
+                            Track t = catalogStorage.getTrack(i.getId());
+                            i.setFoundTrack(t);
                         }
 
-                        return "report-upload-result";
+                        Customer customer = catalogStorage.getCustomer(report.getCustomerId());
+//
+                        req.setAttribute("report", report);
+                        req.setAttribute("items", items);
+                        req.setAttribute("customer", customer);
+                        req.setAttribute("from", from);
+                        req.setAttribute("size", size);
+
+                        return "report";
                     }
                 };
                 break;
 
-            case "/index":
-                action = new Action() {
-                    @Override
-                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
-
-
-                        List<Platform> platforms = catalogStorage.getAllPlatforms();
-                        req.setAttribute("platforms", platforms);
-
-                        List<CustomerReport> reports = catalogStorage.getAllCustomerReports();
-                        req.setAttribute("reports", reports);
-
-                        return "index";
-                    }
-                };
-                break;
 
             case "/basket":
                 action = new Action() {

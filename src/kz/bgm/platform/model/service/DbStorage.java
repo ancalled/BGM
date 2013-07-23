@@ -631,7 +631,8 @@ public class DbStorage implements CatalogStorage {
             @Override
             public Long execute(Connection con) throws SQLException {
                 PreparedStatement ps =
-                        con.prepareStatement("INSERT INTO customer_report(customer_id, start_date, upload_date, type, period) VALUES (?,?,?,?,?)",
+                        con.prepareStatement("INSERT INTO customer_report(customer_id, start_date, upload_date, type, " +
+                                "period, tracks, detected, revenue, accepted) VALUES (?,?,?,?,?,?,?,?,?)",
                                 Statement.RETURN_GENERATED_KEYS);
 
                 ps.setLong(1, report.getCustomerId());
@@ -639,6 +640,32 @@ public class DbStorage implements CatalogStorage {
                 ps.setDate(3, new java.sql.Date(report.getUploadDate().getTime()));
                 ps.setInt(4, report.getType().ordinal());
                 ps.setInt(5, report.getPeriod().ordinal());
+                ps.setInt(6, report.getTracks());
+                ps.setInt(7, report.getDetected());
+                ps.setLong(8, report.getRevenue());
+                ps.setBoolean(9, report.isAccepted());
+
+                ps.executeUpdate();
+
+                ResultSet rs = ps.getGeneratedKeys();
+                return rs.next() ? rs.getLong(1) : -1;
+            }
+        });
+    }
+
+    @Override
+    public long updateCustomerReport(final long id, final int detected) {
+        return query(new Action<Long>() {
+            @Override
+            public Long execute(Connection con) throws SQLException {
+                PreparedStatement ps =
+                        con.prepareStatement("UPDATE customer_report SET " +
+                                "detected = ? " +
+                                "WHERE id = ?",
+                                Statement.RETURN_GENERATED_KEYS);
+
+                ps.setInt(1, detected);
+                ps.setLong(2, id);
 
                 ps.executeUpdate();
 
@@ -656,8 +683,8 @@ public class DbStorage implements CatalogStorage {
                 PreparedStatement ps =
                         con.prepareStatement("INSERT INTO " +
                                 "customer_report_item(report_id,composition_id,name," +
-                                "artist,content_type,qty,price) " +
-                                "VALUES (?,?,?,?,?,?,?)",
+                                "artist,content_type,qty,price, number) " +
+                                "VALUES (?,?,?,?,?,?,?,?)",
                                 Statement.RETURN_GENERATED_KEYS);
 
                 ps.setLong(1, item.getReportId());
@@ -672,6 +699,7 @@ public class DbStorage implements CatalogStorage {
                 ps.setString(5, item.getContentType());
                 ps.setInt(6, item.getQty());
                 ps.setFloat(7, item.getPrice());
+                ps.setInt(8, item.getNumber());
 
                 ps.executeUpdate();
 
@@ -717,8 +745,8 @@ public class DbStorage implements CatalogStorage {
                 PreparedStatement ps =
                         con.prepareStatement("INSERT INTO " +
                                 "customer_report_item(report_id,composition_id,name," +
-                                "artist,content_type,qty,price) " +
-                                "VALUES (?,?,?,?,?,?,?)");
+                                "artist,content_type,qty,price,detected,number) " +
+                                "VALUES (?,?,?,?,?,?,?,?,?)");
 
                 for (CustomerReportItem cr : items) {
                     ps.setLong(1, cr.getReportId());
@@ -733,6 +761,8 @@ public class DbStorage implements CatalogStorage {
                     ps.setString(5, cr.getContentType());
                     ps.setInt(6, cr.getQty());
                     ps.setFloat(7, cr.getPrice());
+                    ps.setBoolean(8, cr.isDetected());
+                    ps.setInt(9, cr.getNumber());
 
                     ps.addBatch();
                 }
@@ -753,7 +783,7 @@ public class DbStorage implements CatalogStorage {
             @Override
             public List<CustomerReport> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM customer_report",
+                        "SELECT * FROM customer_report ORDER BY start_date",
                         ResultSet.TYPE_FORWARD_ONLY,
                         ResultSet.CONCUR_READ_ONLY);
 
@@ -838,6 +868,31 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+
+    @Override
+    public List<CustomerReportItem> getCustomerReportsItems(final long reportId, final int from, final int size) {
+        return query(new Action<List<CustomerReportItem>>() {
+            @Override
+            public List<CustomerReportItem> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM customer_report_item WHERE report_id = ? LIMIT ?, ?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
+                stmt.setLong(1, reportId);
+                stmt.setInt(2, from);
+                stmt.setInt(3, size);
+
+                ResultSet rs = stmt.executeQuery();
+
+                List<CustomerReportItem> reports = new ArrayList<>();
+                while (rs.next()) {
+                    reports.add(parseCustomerReportItem(rs));
+                }
+
+                return reports;
+            }
+        });
+    }
 
     @Override
     public CalculatedReportItem calculateMReportAuthor(final CustomerReportItem reportItem) {
@@ -1750,6 +1805,11 @@ public class DbStorage implements CatalogStorage {
         report.setPeriod(CustomerReport.Period.values()[period]);
         report.setUploadDate(rs.getDate("upload_date"));
 
+        report.setTracks(rs.getInt("tracks"));
+        report.setDetected(rs.getInt("detected"));
+        report.setRevenue(rs.getLong("revenue"));
+        report.setAccepted(rs.getBoolean("accepted"));
+
         return report;
     }
 
@@ -1765,6 +1825,8 @@ public class DbStorage implements CatalogStorage {
         item.setContentType(rs.getString("content_type"));
         item.setQty(rs.getInt("qty"));
         item.setPrice(rs.getFloat("price"));
+        item.setDetected(rs.getBoolean("detected"));
+        item.setNumber(rs.getInt("number"));
 
         return item;
     }

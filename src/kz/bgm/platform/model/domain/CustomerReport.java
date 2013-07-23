@@ -22,6 +22,9 @@ public class CustomerReport {
 
     private int tracks;
     private int detected;
+    private long revenue;
+    private boolean accepted;
+
 
     public CustomerReport() {
     }
@@ -33,6 +36,8 @@ public class CustomerReport {
     public void setId(long id) {
         this.id = id;
     }
+
+
 
     public long getCustomerId() {
         return customerId;
@@ -97,4 +102,22 @@ public class CustomerReport {
     public int getPeriodOrdinal() {
         return period.ordinal();
     }
+
+    public long getRevenue() {
+        return revenue;
+    }
+
+    public void setRevenue(long revenue) {
+        this.revenue = revenue;
+    }
+
+    public boolean isAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
+    }
+
+
 }

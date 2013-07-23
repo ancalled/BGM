@@ -9,6 +9,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,35 +79,35 @@ public class ReportParser {
 
         List<CustomerReportItem> items = new ArrayList<>();
 
-        Sheet sheet = wb.getSheetAt(0);
+        Sheet sheet = wb.getSheetAt(1);
 
         int rows = sheet.getPhysicalNumberOfRows();
 
         //todo use templates instead of hardcoded cell numbers
-        int startRow = 7;
+        int startRow = 6;
+        int number = 1;
         for (int i = startRow; i < rows; i++) {
-            Row row = sheet.getRow(i);
-            String num = ExcelUtils.getCellVal(row, 0);
+            try {
+                Row row = sheet.getRow(i);
 
-            if (num == null || "".equals(num.trim())) continue;
+                CustomerReportItem item = new CustomerReportItem();
 
-            CustomerReportItem item = new CustomerReportItem();
+                String name = ExcelUtils.getCellVal(row, 1);
 
-            String name = ExcelUtils.getCellVal(row, 2);
-            String artist = ExcelUtils.getCellVal(row, 3);
+                if (name == null || "".equals(name.trim())) continue;
 
-            item.setTrack(name);
-            item.setArtist(artist);
-            item.setContentType(ExcelUtils.getCellVal(row, 4));
+                item.setNumber(number);
+                item.setTrack(name);
+                item.setArtist(ExcelUtils.getCellVal(row, 2));
+                item.setContentType(ExcelUtils.getCellVal(row, 3));
+                item.setQty(Integer.parseInt(ExcelUtils.getCellVal(row, 4).trim()));
+                item.setPrice(Integer.parseInt(ExcelUtils.getCellVal(row, 7).trim()));
 
-            String priceStr = ExcelUtils.getCellVal(row, 8);
-
-            if (priceStr == null || "".equals(priceStr.trim())) continue;
-
-            item.setPrice(Integer.parseInt(priceStr.trim()));
-
-            item.setQty(Integer.parseInt(ExcelUtils.getCellVal(row, 5).trim()));
-            items.add(item);
+                items.add(item);
+                number++;
+            } catch (Exception e) {
+                log.warn("Got exception: " + e.getMessage());
+            }
         }
         log.info("Mobile report parsed done, tracks count: " + items.size());
         return items;
@@ -120,7 +121,7 @@ public class ReportParser {
 
         Workbook wb = ExcelUtils.openFile(new File(fileName));
 
-        List<CustomerReportItem> items = new ArrayList<CustomerReportItem>();
+        List<CustomerReportItem> items = new ArrayList<>();
 
         Sheet sheet = wb.getSheetAt(0);
         int rows = sheet.getPhysicalNumberOfRows();
@@ -142,6 +143,12 @@ public class ReportParser {
         }
 
         return items;
+    }
+
+
+    public static void main(String[] args) throws IOException, InvalidFormatException {
+        String filepath = "/home/ancalled/Documents/tmp/25/bgm/gsm_tech/2013-april.xlsx";
+        ReportParser.parseMobileReport(filepath);
     }
 
 

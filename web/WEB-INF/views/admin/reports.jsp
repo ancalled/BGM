@@ -66,15 +66,15 @@
                         <!--</div>-->
 
 
-                            Дата отчета <br>
-                            <div id="date" class="input-append">
-                                <input data-format="yyyy-MM-dd" id="dt" class="input-block-level" name="dt" type="text">
+                        Дата отчета <br>
+
+                        <div id="date" class="input-append">
+                            <input data-format="yyyy-MM-dd" id="dt" class="input-block-level" name="dt" type="text">
                               <span class="add-on">
                                  <i data-time-icon="icon-time" data-whenUpdated-icon="icon-calendar">
                                  </i>
                                   </span>
-                            </div>
-
+                        </div>
 
 
                         <label>
@@ -122,9 +122,9 @@
                         <div class="alert alert-block">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                             <h4>Формат отчета</h4>
-                            № |	 Вид произведения |	Название |	Исполнитель	| Вид контента|
+                            № | Вид произведения | Название | Исполнитель | Вид контента|
                             Кол-во | Авторская доля % | Сумма сбора за авторские права |
-                            Стоимость за единицу | Кол-во	| Смежная доля % | 	Сумма сбора за смежные права | ОБЩАЯ СУММА
+                            Стоимость за единицу | Кол-во | Смежная доля % | Сумма сбора за смежные права | ОБЩАЯ СУММА
 
 
                         </div>
@@ -228,9 +228,7 @@
     //    });
 
 
-
-        $('#report-tab a:first').tab('show');
-
+    $('#report-tab a:first').tab('show');
 
 
 </script>
