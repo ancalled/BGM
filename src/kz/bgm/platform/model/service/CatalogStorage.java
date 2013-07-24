@@ -81,9 +81,8 @@ public interface CatalogStorage {
 
     List<CalculatedReportItem> calculatePublicReport(String catalog);
 
-    List<CalculatedReportItem> calculateMobileReport(String catalog);
+    List<CalculatedReportItem> calculateMobileReport(String platform, Date from, Date to);
 
-    CalculatedReportItem calculateMReportAuthor(CustomerReportItem reportItems);
 
     long createUser(User user);
 
@@ -92,8 +91,6 @@ public interface CatalogStorage {
     void removeUser(long id);
 
     void removeCustomer(long id);
-
-    CalculatedReportItem calculateMReportRelated(CustomerReportItem reportItems);
 
 
     void resetTempTrackTable();

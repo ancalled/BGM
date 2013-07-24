@@ -966,124 +966,25 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
-    @Override
-    public CalculatedReportItem calculateMReportAuthor(final CustomerReportItem reportItem) {
-        return query(new Action<CalculatedReportItem>() {
-            @Override
-            public CalculatedReportItem execute(Connection con) throws SQLException {
-                CalculatedReportItem report = null;
-                System.out.println("Composition id" + reportItem.getCompositionId());
-                PreparedStatement ps = con.prepareStatement("SELECT\n" +
-                        "  right_type,\n" +
-                        "  cat.name catalog,\n" +
-                        "  composition.shareMobile,\n" +
-                        "  composition.code,\n" +
-                        "  composition.artist,\n" +
-                        "  composition.name name,\n" +
-                        "  composition.composer\n" +
-                        "FROM composition\n" +
-                        "\n" +
-                        "  LEFT JOIN catalog cat\n" +
-                        "    ON (cat.id = catalog_id)\n" +
-                        "\n" +
-                        "WHERE composition.id =" + reportItem.getCompositionId() + "\n" +
-                        "and cat.right_type=?\n" +
-                        "GROUP BY composition.id;",
-                        ResultSet.TYPE_FORWARD_ONLY,
-                        ResultSet.CONCUR_READ_ONLY);
-                ps.setInt(1, RightType.AUTHOR.ordinal());
-                ResultSet rs = ps.executeQuery();
-
-
-                while (rs.next()) {
-                    report = new CalculatedReportItem();
-//                    report.setReportItemId(rs.getLong("id"));
-                    report.setCompositionCode(rs.getString("code"));
-                    report.setCompositionName(rs.getString("name"));
-                    report.setArtist(rs.getString("artist"));
-                    report.setComposer(rs.getString("composer"));
-                    report.setShareMobile(rs.getFloat("shareMobile"));
-                    report.setCatalog(rs.getString("catalog"));
-                    report.setCopyright(rs.getString("right_type"));
-                    report.setQty(reportItem.getQty());
-                    report.setPrice(reportItem.getPrice());
-                }
-                return report;
-            }
-        });
-
-    }
-
-    @Override
-    public CalculatedReportItem calculateMReportRelated(final CustomerReportItem reportItem) {
-        return query(new Action<CalculatedReportItem>() {
-            @Override
-            public CalculatedReportItem execute(Connection con) throws SQLException {
-                CalculatedReportItem report = null;
-                System.out.println("Composition id" + reportItem.getCompositionId());
-                PreparedStatement ps = con.prepareStatement("SELECT\n" +
-                        "  right_type,\n" +
-                        "  cat.name catalog,\n" +
-                        "  composition.shareMobile,\n" +
-                        "  composition.code,\n" +
-                        "  composition.artist,\n" +
-                        "  composition.name name,\n" +
-                        "  composition.composer\n" +
-                        "FROM composition\n" +
-                        "\n" +
-                        "  LEFT JOIN catalog cat\n" +
-                        "    ON (cat.id = catalog_id)\n" +
-                        "\n" +
-                        "WHERE composition.id =" + reportItem.getCompositionId() + "\n" +
-                        "and cat.right_type=?\n" +
-                        "GROUP BY composition.id;",
-                        ResultSet.TYPE_FORWARD_ONLY,
-                        ResultSet.CONCUR_READ_ONLY);
-                ps.setInt(1, RightType.RELATED.ordinal());
-
-                ResultSet rs = ps.executeQuery();
-
-
-                while (rs.next()) {
-                    report = new CalculatedReportItem();
-                    //                    report.setReportItemId(rs.getLong("id"));
-                    report.setCompositionCode(rs.getString("code"));
-                    report.setCompositionName(rs.getString("name"));
-                    report.setArtist(rs.getString("artist"));
-                    report.setComposer(rs.getString("composer"));
-                    report.setShareMobile(rs.getFloat("shareMobile"));
-                    report.setCatalog(rs.getString("catalog"));
-                    report.setCopyright(rs.getString("right_type"));
-                    report.setQty(reportItem.getQty());
-                    report.setPrice(reportItem.getPrice());
-                }
-                return report;
-            }
-        });
-
-    }
 
 
     @Override
-    public List<CalculatedReportItem> calculateMobileReport(final String catalogName) {
+    public List<CalculatedReportItem> calculateMobileReport(final String platform, final Date from, final Date to) {
 
-        if (catalogName == null) return null;
 
-        final String extraQuery = "".equals(catalogName) ? "" :
-                "and cat.name='" + catalogName + "'";
 
         return query(new Action<List<CalculatedReportItem>>() {
             @Override
             public List<CalculatedReportItem> execute(Connection con) throws SQLException {
 
-                PreparedStatement ps = con.prepareStatement("SELECT\n" +
+                PreparedStatement stmt = con.prepareStatement("SELECT\n" +
                         "  i.id,\n" +
                         "  c.code,\n" +
                         "  i.content_type,\n" +
                         "  replace(c.name, CHAR(9), ' ') name,\n" +
                         "  replace(c.artist, CHAR(9), ' ') artist,\n" +
                         "  replace(c.composer, CHAR(9), ' ') composer,\n" +
-                        "  cat.right_type right_type,\n" +
+                        "  IF(cat.right_type = 1, 'author', 'related') right_type,\n" +
                         "  p.name platform,\n" +
                         "  cat.name catalog,\n" +
                         "\n" +
@@ -1104,7 +1005,7 @@ public class DbStorage implements CatalogStorage {
                         "    ON (i.composition_id = c.id)\n" +
                         "\n" +
                         "  LEFT JOIN catalog cat\n" +
-                        "    ON (cat.id = c.catalog_id " + extraQuery + ")\n" +
+                        "    ON (cat.id = c.catalog_id)\n" +
                         "\n" +
                         "  LEFT JOIN platform p\n" +
                         "    ON (cat.platform_id = p.id)\n" +
@@ -1115,15 +1016,23 @@ public class DbStorage implements CatalogStorage {
                         "  LEFT JOIN customer cm\n" +
                         "    ON (r.customer_id = cm.id)\n" +
                         "\n" +
-                        "WHERE cat.platform_id = 1\n" +
+                        "WHERE p.name = ?\n" +
+                        "      AND r.accepted=true \n" +
                         "      AND r.type = 0\n" +
-                        "      AND i.composition_id > 0\n" +
+                        "      AND r.start_date BETWEEN ? AND ?\n" +
+                        "      AND i.detected = true\n" +
+                        "      AND (i.deleted IS NULL OR NOT i.deleted)\n" +
                         "\n" +
                         "GROUP BY i.composition_id",
                         ResultSet.TYPE_FORWARD_ONLY,
                         ResultSet.CONCUR_READ_ONLY);
 
-                ResultSet rs = ps.executeQuery();
+                stmt.setString(1, platform);
+                stmt.setDate(2, new java.sql.Date(from.getTime()));
+                stmt.setDate(3, new java.sql.Date(to.getTime()));
+
+
+                ResultSet rs = stmt.executeQuery();
 
                 List<CalculatedReportItem> result = new ArrayList<>();
 

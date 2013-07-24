@@ -11,13 +11,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 public class DownloadReportPublicServlet extends HttpServlet {
 
 
     private static final Logger log = Logger.getLogger(DownloadReportPublicServlet.class);
+
     public static final String PUBLIC_TEMPLATE = "./data/report-templates/public.xlsx";
+    public static final String PUBLIC_OUTPUTNAME = "./data/report-templates/public-%s.xlsx";
+
     private CatalogStorage storage;
 
     @Override
@@ -43,7 +47,10 @@ public class DownloadReportPublicServlet extends HttpServlet {
 
         log.info("Calculated reports built at size " + reportsList.size());
 
-        ReportBuilder.buildReportExcelFile(PUBLIC_TEMPLATE, reportsList);
+
+        String output = String.format(PUBLIC_OUTPUTNAME, new Date());
+
+        ReportBuilder.buildReport(PUBLIC_TEMPLATE, output, reportsList);
 
         req.setAttribute("reports", reportsList);
 

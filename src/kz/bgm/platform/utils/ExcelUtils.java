@@ -34,11 +34,10 @@ public class ExcelUtils {
         }
     }
 
-    public static final String COMP_REPS_PATH = System.getProperty("user.dir") + "/computed-reports";
 
-    public static boolean saveFile(Workbook wb, String fileName) throws IOException {
-        if (wb == null || fileName == null) return false;
-        FileOutputStream fout = new FileOutputStream(COMP_REPS_PATH + "/" + fileName);
+    public static boolean saveFile(Workbook wb, String filePath) throws IOException {
+        if (wb == null || filePath == null) return false;
+        FileOutputStream fout = new FileOutputStream(filePath);
         wb.write(fout);
 
         fout.close();

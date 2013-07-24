@@ -91,6 +91,10 @@
             padding: 0 4px 0 4px;
             background: #e6e6e6;
         }
+
+        .action-panel {
+            padding-top: 10px;
+        }
     </style>
 </head>
 
@@ -116,29 +120,36 @@
 
 <div class="container">
     <section>
-        <h4>Отчет загружен</h4>
+        <div class="row">
+            <div class="span3">
+                <h4>Мобильный отчет.
+                    <fmt:formatDate pattern="MMMMM yyyy" value="${report.startDate}"/>
+                </h4>
 
-        <dl class="dl-horizontal">
-            <dt>Номер</dt>
-            <dd>${report.id}</dd>
-            <dt>Дата отчета</dt>
-            <dd>
-                <fmt:formatDate pattern="yyyy MMMMM" value="${report.startDate}"/>
-            </dd>
-            <dt>Период отчета</dt>
-            <dd>${report.period}</dd>
-            <%--<dt>Тип</dt>--%>
-            <%--<dd>${report.type}</dd>--%>
-            <%--<dt>Компания</dt>--%>
-            <%--<dd>${customer.name}</dd>--%>
-            <dt>Треков</dt>
-            <dd>${report.tracks} / ${report.detected}</dd>
-            <c:if test="${report.accepted}">
-                <dt></dt>
-                <dd><strong>Подтвержден</strong></dd>
-            </c:if>
+                <dl class="dl-horizontal">
+                    <dt>Треков</dt>
+                    <dd>${report.tracks} / ${report.detected}</dd>
+                </dl>
+            </div>
 
-        </dl>
+            <div class="span4">
+                <div class="btn-group action-panel">
+                    <c:choose>
+                        <c:when test="${report.accepted}">
+                            <strong>Подтвержден</strong
+                        </c:when>
+                        <c:otherwise>
+                            <button class="btn btn-primary">Отправить</button>
+                            <%--<a href="#" class="btn btn-primary">Отправить</a>--%>
+                        </c:otherwise>
+                    </c:choose>
+                    <button class="btn">Оптимизировать</button>
+                    <button class="btn disabled">Отменить удаление</button>
+
+                </div>
+            </div>
+
+        </div>
 
     </section>
 
@@ -179,11 +190,11 @@
             <thead>
             <tr>
                 <th>Код</th>
-                <th>Композиция</th>
-                <th>Исполнитель</th>
+                <th>Исполнитель &mdash; трек</th>
+                <%--<th>Исполнитель</th>--%>
                 <th>Цена</th>
                 <th class="nonwrapped">Кол-во</th>
-                <th>Определилось</th>
+                <th>Что определилось (исполнитель &mdash; трек и код)</th>
                 <th class="nonwrapped">Каталог</th>
                 <th>Доля</th>
             </tr>
@@ -201,14 +212,14 @@
                     </td>
                     <td>
                         <c:if test="${lastNum != i.number}">
-                            ${i.track}
+                            ${i.artist} &mdash; ${i.track}
                         </c:if>
                     </td>
-                    <td>
-                        <c:if test="${lastNum != i.number}">
-                            ${i.artist}
-                        </c:if>
-                    </td>
+                        <%--<td>--%>
+                        <%--<c:if test="${lastNum != i.number}">--%>
+                        <%--${i.artist}--%>
+                        <%--</c:if>--%>
+                        <%--</td>--%>
                     <td class="number">
                         <c:if test="${lastNum != i.number}">
                             ${i.price}
@@ -223,7 +234,8 @@
                         <c:if test="${i.detected}">
                             <span>${i.foundTrack.artist} &mdash; </span>
                             <span>${i.foundTrack.name}</span>
-                            <span class="nonwrapped" style="padding-left: 10px; font-style: italic">#${i.foundTrack.code}</span>
+                            <span class="nonwrapped"
+                                  style="padding-left: 10px; font-style: italic">#${i.foundTrack.code}</span>
                         </c:if>
                     </td>
                         <%--<td class="centered">--%>
@@ -245,7 +257,8 @@
                     </td>
                     <td>
                         <c:if test="${i.detected}">
-                            <a href="#_" class="remove-track" id="${i.id}" title="Этот трек определился неверно, убрать">
+                            <a href="#_" class="remove-track" id="${i.id}"
+                               title="Этот трек определился неверно, убрать">
                                 <i class="icon-remove"></i>
                             </a>
                         </c:if>
@@ -308,7 +321,6 @@
 </div>
 
 
-
 <script>
     $(document).ready(function () {
 
@@ -322,7 +334,7 @@
                     }, function (data) {
                         console.log(data);
                         if (data.status == 'ok') {
-                            $('#' + itemId).parent().parent().remove()
+                            $('#' + itemId).parent().parent().hide();
                         }
                     });
         });

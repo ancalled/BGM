@@ -74,7 +74,8 @@ public class LuceneUtil {
     }
 
 
-    public void bulkSearch(String infile, String outfile, boolean withHeader, int artistRow, int trackRow) throws IOException {
+    public void bulkSearch(String infile, String outfile, boolean withHeader, int artistRow, int trackRow)
+            throws IOException {
         if (infile == null || outfile == null || artistRow < 0 || trackRow < 0) return;
 
         List<String> lines = readFilesByLines(Paths.get(infile));

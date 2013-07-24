@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="2298090822">
+  <component name="DataSourceManagerImpl" format="xml" hash="424275529">
     <data-source source="LOCAL" name="BGM-platform" product="MySQL" version="5.6.11" jdbc-version="4.0" driver-name="MySQL-AB JDBC Driver" driver-version="mysql-connector-java-5.1.23 ( Revision: ${bzr.revision-id} )" uuid="36b914c0-fa2a-44b4-bd9f-ee69f64b7e71">
       <extra-name-characters>#@</extra-name-characters>
       <identifier-quote-string>`</identifier-quote-string>

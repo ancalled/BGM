@@ -2,6 +2,8 @@ package kz.bgm.platform.utils;
 
 
 import kz.bgm.platform.model.domain.CalculatedReportItem;
+import kz.bgm.platform.model.service.CatalogFactory;
+import kz.bgm.platform.model.service.CatalogStorage;
 import org.apache.log4j.Logger;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
@@ -9,10 +11,16 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static kz.bgm.platform.BgmServer.*;
 
 public class ReportBuilder {
 
@@ -55,17 +63,17 @@ public class ReportBuilder {
     }
 
 
-    public static void buildReportExcelFile(String templFilePath,
-                                            List<CalculatedReportItem> finishReps) {
+    public static void buildReport(String template, String output,
+                                   List<CalculatedReportItem> items) {
         try {
-            log.info("Making Excel file report from file: " + templFilePath);
+            log.info("Making Excel file report from file: " + template);
 
-            File reportBlank = new File(templFilePath);
+            File reportBlank = new File(template);
             Workbook wb = ExcelUtils.openFile(reportBlank);
             Sheet sheet = wb.getSheetAt(1);
             log.info("Parsing sheet '" + sheet.getSheetName() + "'");
 
-            Map<String, Integer> fieldsMap = new HashMap<String, Integer>();
+            Map<String, Integer> fieldsMap = new HashMap<>();
 
             int startRow = 0;
             for (int r = 0; r < 50; r++) {
@@ -78,15 +86,15 @@ public class ReportBuilder {
                 }
             }
             log.info("filling data report");
-            fillExcelBlank(sheet, startRow, fieldsMap, finishReps);
+            fillExcelBlank(sheet, startRow, fieldsMap, items);
             log.info("data filled");
 
-            String fileName = reportBlank.getName() + new Date().getTime();
 
-            log.info("saving in file " + fileName);
-            ExcelUtils.saveFile(wb, fileName);
+            log.info("saving in file " + output);
+            ExcelUtils.saveFile(wb, output);
 
             log.info("saved");
+
         } catch (IOException | InvalidFormatException e) {
             e.printStackTrace();
             log.error(e.getMessage());
@@ -98,7 +106,7 @@ public class ReportBuilder {
                                        int rowIdx, Map<String, Integer> fields,
                                        List<CalculatedReportItem> reports) {
         if (rowIdx <= 0 || fields == null ||
-                reports == null || sheet == null){
+                reports == null || sheet == null) {
 //            System.out.println("reports "+reports);
 //            System.out.println(" fields "+fields);
 //            System.out.println("sheet "+sheet);
@@ -134,7 +142,7 @@ public class ReportBuilder {
                 Type type = null;
                 Object val = null;
                 for (Method m : fields) {
-                    String methodName = m.getName().toLowerCase().replaceFirst("get","");   //think rabbit
+                    String methodName = m.getName().toLowerCase().replaceFirst("get", "");   //think rabbit
 
                     if (methodName.equals(field.toLowerCase())) {
                         type = m.getGenericReturnType();
@@ -176,7 +184,7 @@ public class ReportBuilder {
     private static Map<String, Integer> getFields(Row row) {
         if (row == null) return null;
 
-        Map<String, Integer> columnMap = new HashMap<String, Integer>();
+        Map<String, Integer> columnMap = new HashMap<>();
 
         for (String field : fieldList) {
 
@@ -218,6 +226,55 @@ public class ReportBuilder {
 
 //    public static void main(String[] args) {
 //    }
+
+
+    public static void initDatabase(String propsFile) throws IOException {
+        Properties props = new Properties();
+        props.load(new FileInputStream(propsFile));
+
+        String dbHost = props.getProperty(BASE_HOST);
+        String dbPort = props.getProperty(BASE_PORT);
+        String dbName = props.getProperty(BASE_NAME);
+        String dbLogin = props.getProperty(BASE_LOGIN);
+        String dbPass = props.getProperty(BASE_PASS);
+
+        System.out.println("Initializing data storage...");
+        CatalogFactory.initDBStorage(dbHost, dbPort, dbName, dbLogin, dbPass);
+    }
+
+    public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
+
+    public static void main(String[] args) throws ParseException {
+
+        if (args.length < 3) {
+            System.err.println("Not enough params!");
+            return;
+        }
+
+        String platform = args[0];
+        Date from = DATE_FORMAT.parse(args[1]);
+        Date to = DATE_FORMAT.parse(args[2]);
+
+        String template = "./data/report-templates/" + platform + ".xlsx";
+        String output = "/Users/ancalled/Documents/tmp/12/bgm/tmp-" + platform + "res.xlsx";
+
+
+        try {
+            initDatabase("db.properties");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        CatalogStorage storage = CatalogFactory.getStorage();
+
+
+        List<CalculatedReportItem> items = storage.calculateMobileReport(platform, from, to);
+
+        System.out.println("Got " + items.size() + " items.");
+
+        buildReport(template, output, items);
+    }
 
 }
 
