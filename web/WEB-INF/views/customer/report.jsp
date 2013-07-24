@@ -170,6 +170,7 @@
                         <li class="disabled"><a href="#">&raquo;</a></li>
                     </c:otherwise>
                 </c:choose>
+
             </ul>
         </div>
 
