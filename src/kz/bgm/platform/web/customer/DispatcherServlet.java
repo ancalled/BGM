@@ -117,16 +117,12 @@ public class DispatcherServlet extends HttpServlet {
 
                         String fromStr = req.getParameter("from");
                         int from = fromStr != null ? Integer.parseInt(fromStr) : 0;
+
                         String sizeStr = req.getParameter("size");
                         int size = sizeStr != null ? Integer.parseInt(sizeStr) : DEFAULT_REPORTS_PER_PAGE;
 
                         CustomerReport report = catalogStorage.getCustomerReport(reportId);
                         List<CustomerReportItem> items = catalogStorage.getCustomerReportsItems(reportId, from, size);
-
-                        for (CustomerReportItem i: items) {
-                            Track t = catalogStorage.getTrack(i.getCompositionId());
-                            i.setFoundTrack(t);
-                        }
 
                         Customer customer = catalogStorage.getCustomer(report.getCustomerId());
 //

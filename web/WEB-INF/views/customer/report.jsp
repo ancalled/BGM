@@ -69,8 +69,27 @@
             padding-right: 20px;
         }
 
+        td.centered {
+            text-align: center;
+        }
+
         .nonwrapped {
             white-space: nowrap;
+        }
+
+        .author {
+            padding: 0 4px 0 4px;
+            background: #ffe9c9;
+        }
+
+        .related {
+            padding: 0 4px 0 4px;
+            background: #cdfef9;
+        }
+
+        .author_related {
+            padding: 0 4px 0 4px;
+            background: #e6e6e6;
         }
     </style>
 </head>
@@ -113,9 +132,12 @@
             <%--<dt>Компания</dt>--%>
             <%--<dd>${customer.name}</dd>--%>
             <dt>Треков</dt>
-            <dd>${report.tracks}</dd>
-            <dt>Определилось</dt>
-            <dd>${report.detected}</dd>
+            <dd>${report.tracks} / ${report.detected}</dd>
+            <c:if test="${report.accepted}">
+                <dt></dt>
+                <dd><strong>Подтвержден</strong></dd>
+            </c:if>
+
         </dl>
 
     </section>
@@ -155,19 +177,14 @@
         <table class="table smallcaps">
             <thead>
             <tr>
-                <%--<th>#</th>--%>
                 <th>Код</th>
                 <th>Композиция</th>
                 <th>Исполнитель</th>
                 <th>Цена</th>
-                <th  class="nonwrapped">Кол-во</th>
+                <th class="nonwrapped">Кол-во</th>
                 <th>Определилось</th>
-                <th>Каталог / код</th>
+                <th class="nonwrapped">Каталог</th>
                 <th>Доля</th>
-                <%--<th>Авторы</th>--%>
-                <%--<th>Тип контента</th>--%>
-
-                <%--<th>Определилось</th>--%>
             </tr>
             </thead>
             <tbody>
@@ -176,7 +193,7 @@
             <c:forEach items="${items}" var="i" varStatus="loop">
                 <tr class="${i.detected ? '' : 'not-found'} ${lastNum == i.number ? 'same-track' : ''}">
                         <%--<td class="invariant">${loop.index + start}</td>--%>
-                    <td class="invariant">
+                    <td class="invariant number">
                         <c:if test="${lastNum != i.number}">
                             ${i.number}
                         </c:if>
@@ -203,14 +220,20 @@
                     </td>
                     <td>
                         <c:if test="${i.detected}">
-                            <span>${i.foundTrack.artist} - </span>
+                            <span>${i.foundTrack.artist} &mdash; </span>
                             <span>${i.foundTrack.name}</span>
+                            <span class="nonwrapped" style="padding-left: 10px; font-style: italic">#${i.foundTrack.code}</span>
                         </c:if>
                     </td>
+                        <%--<td class="centered">--%>
                     <td>
                         <c:if test="${i.detected}">
-                            <span class="nonwrapped">${i.foundTrack.catalog}</span>
-                            <span class="nonwrapped">${i.foundTrack.code}</span>
+
+                            <span class="nonwrapped ${fn:toLowerCase(i.foundTrack.foundCatalog.rightType)}">
+                                    ${i.foundTrack.catalog}
+                            </span>
+                            <%--<br/>--%>
+                            <%--<span class="nonwrapped">${i.foundTrack.code}</span>--%>
 
                         </c:if>
                     </td>
@@ -221,7 +244,7 @@
                     </td>
                     <td>
                         <c:if test="${i.detected}">
-                            <a href="#" class="remove-track" id="${i.id}" title="Этот трек определился неверно, убрать">
+                            <a href="#_" class="remove-track" id="${i.id}" title="Этот трек определился неверно, убрать">
                                 <i class="icon-remove"></i>
                             </a>
                         </c:if>
@@ -284,21 +307,25 @@
 </div>
 
 
-<form method="post" action="/customer/action/remove-from-report" id="item-remove-form">
-    <input type="hidden" name="report_id" value="${report.id}">
-    <input type="hidden" name="from" value="${from}">
-    <input type="hidden" id="item-to-remove" name="item_id">
-</form>
 
 <script>
     $(document).ready(function () {
 
         $('a.remove-track').click(function () {
             var a = $(this);
-            $('#item-to-remove').val(a.attr('id'));
+            var itemId = a.attr('id');
 
-            $('#item-remove-form').submit();
+            $.post('/customer/api/remove-from-report',
+                    {report_id: "${report.id}",
+                        item_id: itemId
+                    }, function (data) {
+                        console.log(data);
+                        if (data.status == 'ok') {
+                            $('#' + itemId).parent().parent().remove()
+                        }
+                    });
         });
+
     });
 
 </script>

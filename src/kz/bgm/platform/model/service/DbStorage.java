@@ -892,8 +892,57 @@ public class DbStorage implements CatalogStorage {
         return query(new Action<List<CustomerReportItem>>() {
             @Override
             public List<CustomerReportItem> execute(Connection con) throws SQLException {
+//                PreparedStatement stmt = con.prepareStatement(
+//                        "SELECT * FROM customer_report_item WHERE report_id = ? LIMIT ?, ?",
+//                        ResultSet.TYPE_FORWARD_ONLY,
+//                        ResultSet.CONCUR_READ_ONLY);
+//                stmt.setLong(1, reportId);
+//                stmt.setInt(2, from);
+//                stmt.setInt(3, size);
+//
+//                ResultSet rs = stmt.executeQuery();
+//
+//                List<CustomerReportItem> reports = new ArrayList<>();
+//                while (rs.next()) {
+//                    reports.add(parseCustomerReportItem(rs));
+//                }
+//
+//                return reports;
+
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM customer_report_item WHERE report_id = ? LIMIT ?, ?",
+                        "SELECT\n" +
+                                "  i.id item_id,\n" +
+                                "  i.report_id item_report_id,\n" +
+                                "  i.composition_id item_composition_id,\n" +
+                                "  i.name item_name,\n" +
+                                "  i.artist item_artist,\n" +
+                                "  i.content_type item_content_type,\n" +
+                                "  i.qty item_qty,\n" +
+                                "  i.price item_price,\n" +
+                                "  i.detected item_detected,\n" +
+                                "  i.number item_number,\n" +
+                                "  i.deleted item_deleted,\n" +
+                                "  t.id track_id,\n" +
+                                "  t.catalog_id track_catalog_id,\n" +
+                                "  t.code track_code,\n" +
+                                "  t.name track_name,\n" +
+                                "  t.artist track_artist,\n" +
+                                "  t.composer track_composer,\n" +
+                                "  t.shareMobile track_shareMobile,\n" +
+                                "  t.sharePublic track_sharePublic,  \n" +
+                                "  c.id cat_id,\n" +
+                                "  c.name cat_name,\n" +
+                                "  c.right_type cat_right_type,\n" +
+                                "  c.platform_id cat_platform_id,\n" +
+                                "  c.royalty cat_royalty,\n" +
+                                "  c.tracks cat_tracks,\n" +
+                                "  c.artists cat_artists\n" +
+                                "FROM customer_report_item i\n" +
+                                "  LEFT JOIN composition t ON (i.composition_id = t.id)\n" +
+                                "  LEFT JOIN catalog c ON (t.catalog_id = c.id)\n" +
+                                "WHERE report_id = ? AND t.shareMobile > 0 AND (deleted IS NULL OR NOT deleted) \n" +
+                                "  ORDER BY item_number, cat_right_type, track_shareMobile DESC \n" +
+                                "LIMIT ?, ?",
                         ResultSet.TYPE_FORWARD_ONLY,
                         ResultSet.CONCUR_READ_ONLY);
                 stmt.setLong(1, reportId);
@@ -904,7 +953,12 @@ public class DbStorage implements CatalogStorage {
 
                 List<CustomerReportItem> reports = new ArrayList<>();
                 while (rs.next()) {
-                    reports.add(parseCustomerReportItem(rs));
+                    CustomerReportItem i = parseCustomerReportItem(rs, "item_");
+                    Track t = parseTrack(rs, "track_");
+                    Catalog c = parseCatalog(rs, "cat_");
+                    t.setFoundCatalog(c);
+                    i.setFoundTrack(t);
+                    reports.add(i);
                 }
 
                 return reports;
@@ -1216,7 +1270,7 @@ public class DbStorage implements CatalogStorage {
         queryVoid(new VoidAction() {
             public void execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "DELETE FROM customer_report_item WHERE id = ?");
+                        "UPDATE customer_report_item SET deleted=true WHERE id = ?");
 
                 stmt.setLong(1, itemId);
                 stmt.executeUpdate();
@@ -1757,15 +1811,19 @@ public class DbStorage implements CatalogStorage {
     }
 
     private static Catalog parseCatalog(ResultSet rs) throws SQLException {
+        return parseCatalog(rs, "");
+    }
+
+    private static Catalog parseCatalog(ResultSet rs, String tblPrefix) throws SQLException {
         Catalog catalog = new Catalog();
-        catalog.setId(rs.getLong("id"));
-        catalog.setName(rs.getString("name"));
-        catalog.setRoyalty(rs.getFloat("royalty"));
-        int rightType = rs.getInt("right_type");
+        catalog.setId(rs.getLong(tblPrefix + "id"));
+        catalog.setName(rs.getString(tblPrefix + "name"));
+        catalog.setRoyalty(rs.getFloat(tblPrefix + "royalty"));
+        int rightType = rs.getInt(tblPrefix + "right_type");
         catalog.setRightType(RightType.values()[rightType]);
-        catalog.setTracks(rs.getInt("tracks"));
-        catalog.setPlatformId(rs.getLong("platform_id"));
-        catalog.setArtists(rs.getInt("artists"));
+        catalog.setTracks(rs.getInt(tblPrefix + "tracks"));
+        catalog.setPlatformId(rs.getLong(tblPrefix + "platform_id"));
+        catalog.setArtists(rs.getInt(tblPrefix + "artists"));
         return catalog;
     }
 
@@ -1845,18 +1903,22 @@ public class DbStorage implements CatalogStorage {
 
 
     private static CustomerReportItem parseCustomerReportItem(ResultSet rs) throws SQLException {
+        return parseCustomerReportItem(rs, "");
+    }
+
+    private static CustomerReportItem parseCustomerReportItem(ResultSet rs, String tablePrefix) throws SQLException {
 
         CustomerReportItem item = new CustomerReportItem();
-        item.setId(rs.getLong("id"));
-        item.setReportId(rs.getLong("report_id"));
-        item.setCompositionId(rs.getLong("composition_id"));
-        item.setTrack(rs.getString("name"));
-        item.setArtist(rs.getString("artist"));
-        item.setContentType(rs.getString("content_type"));
-        item.setQty(rs.getInt("qty"));
-        item.setPrice(rs.getFloat("price"));
-        item.setDetected(rs.getBoolean("detected"));
-        item.setNumber(rs.getInt("number"));
+        item.setId(rs.getLong(tablePrefix + "id"));
+        item.setReportId(rs.getLong(tablePrefix + "report_id"));
+        item.setCompositionId(rs.getLong(tablePrefix + "composition_id"));
+        item.setTrack(rs.getString(tablePrefix + "name"));
+        item.setArtist(rs.getString(tablePrefix + "artist"));
+        item.setContentType(rs.getString(tablePrefix + "content_type"));
+        item.setQty(rs.getInt(tablePrefix + "qty"));
+        item.setPrice(rs.getFloat(tablePrefix + "price"));
+        item.setDetected(rs.getBoolean(tablePrefix + "detected"));
+        item.setNumber(rs.getInt(tablePrefix + "number"));
 
         return item;
     }

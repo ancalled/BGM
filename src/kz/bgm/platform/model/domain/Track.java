@@ -16,6 +16,7 @@ public class Track implements Serializable {
     private String composer = "";
     private float publicShare = 0F;
     private float mobileShare = 0F;
+    private Catalog foundCatalog;
 
     public void setMobileShare(float mobileShare) {
         this.mobileShare = mobileShare;
@@ -101,6 +102,14 @@ public class Track implements Serializable {
 
     public void setCatalog(String catalog) {
         this.catalog = catalog;
+    }
+
+    public Catalog getFoundCatalog() {
+        return foundCatalog;
+    }
+
+    public void setFoundCatalog(Catalog foundCatalog) {
+        this.foundCatalog = foundCatalog;
     }
 
     @Override

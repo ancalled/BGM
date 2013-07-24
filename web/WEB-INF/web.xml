@@ -214,9 +214,14 @@
         <servlet-name>removeFromReport</servlet-name>
         <servlet-class>kz.bgm.platform.web.customer.action.RemoveFromReportServlet</servlet-class>
     </servlet>
+    
     <servlet>
         <servlet-name>downloadBasketReportServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.customer.action.DownloadBasketReportServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>jsonRemoveFromReportServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.customer.api.JsonRemoveFromReportServlet</servlet-class>
     </servlet>
 
 
@@ -260,6 +265,10 @@
     <servlet-mapping>
         <servlet-name>downloadBasketReportServlet</servlet-name>
         <url-pattern>/customer/action/basket-report</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>jsonRemoveFromReportServlet</servlet-name>
+        <url-pattern>/customer/api/remove-from-report</url-pattern>
     </servlet-mapping>
 
 </web-app>
