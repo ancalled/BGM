@@ -92,7 +92,7 @@
 </div>
 
 
-<form method="post" action="/customer/action/remove-user-track" id="track-remove-form">
+<form method="post" action="/customer/action/remove-from-basket" id="track-remove-form">
     <input type="hidden" id="track-to-remove" name="track_id">
 </form>
 

@@ -124,7 +124,7 @@ public class DispatcherServlet extends HttpServlet {
                         List<CustomerReportItem> items = catalogStorage.getCustomerReportsItems(reportId, from, size);
 
                         for (CustomerReportItem i: items) {
-                            Track t = catalogStorage.getTrack(i.getId());
+                            Track t = catalogStorage.getTrack(i.getCompositionId());
                             i.setFoundTrack(t);
                         }
 

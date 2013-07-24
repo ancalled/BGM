@@ -26,9 +26,7 @@ public class DbStorage implements CatalogStorage {
     public DbStorage(String host, String port,
                      String base, String user, String pass) {
         pool = initPool(host, port, base, user, pass);
-
         prepareCatalogsMap(catalogMap);
-
     }
 
 
@@ -846,6 +844,26 @@ public class DbStorage implements CatalogStorage {
 
 
     @Override
+    public CustomerReportItem getCustomerReportsItem(final long id) {
+        return query(new Action<CustomerReportItem>() {
+            @Override
+            public CustomerReportItem execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT * FROM customer_report_item WHERE id = ?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
+                stmt.setLong(1, id);
+
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    return parseCustomerReportItem(rs);
+                }
+                return null;
+            }
+        });
+    }
+
+    @Override
     public List<CustomerReportItem> getCustomerReportsItems(final long reportId) {
         return query(new Action<List<CustomerReportItem>>() {
             @Override
@@ -1193,6 +1211,18 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+    @Override
+    public void removeItemFromReport(final long itemId) {
+        queryVoid(new VoidAction() {
+            public void execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "DELETE FROM customer_report_item WHERE id = ?");
+
+                stmt.setLong(1, itemId);
+                stmt.executeUpdate();
+            }
+        });
+    }
 
     @Override
     public List<Long> getAvailableCatalogs(final long customerId) {
@@ -1908,7 +1938,7 @@ public class DbStorage implements CatalogStorage {
                                                   String base,
                                                   String user,
                                                   String pass) {
-        String url = "jdbc:mysql://" + host + ":" + port + "/" + base;
+        String url = "jdbc:mysql://" + host + ":" + port + "/" + base + "?characterEncoding=UTF-8";
 
         ComboPooledDataSource pool = new ComboPooledDataSource();
         try {

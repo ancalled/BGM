@@ -206,8 +206,13 @@
         <servlet-class>kz.bgm.platform.web.customer.action.AddTrackToBasketServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>removeUserTrack</servlet-name>
+        <servlet-name>removeFromBasket</servlet-name>
         <servlet-class>kz.bgm.platform.web.customer.action.RemoveFromBasketServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>removeFromReport</servlet-name>
+        <servlet-class>kz.bgm.platform.web.customer.action.RemoveFromReportServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>downloadBasketReportServlet</servlet-name>
@@ -245,8 +250,12 @@
         <url-pattern>/customer/action/add-to-basket</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>removeUserTrack</servlet-name>
-        <url-pattern>/customer/action/remove-user-track</url-pattern>
+        <servlet-name>removeFromBasket</servlet-name>
+        <url-pattern>/customer/action/remove-from-basket</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>removeFromReport</servlet-name>
+        <url-pattern>/customer/action/remove-from-report</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>downloadBasketReportServlet</servlet-name>

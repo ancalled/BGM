@@ -36,6 +36,7 @@ public class UploadReportMobileServlet extends HttpServlet {
     public static final int RESULT_LIMIT = 10;
 
     public static final double SIMILARITY = 7.5 / 100; //7.5%
+    public static final double SCORE_THRESHOLD = 3.0;
 
     private ServletFileUpload fileUploader;
     private CatalogStorage catalogService;
@@ -53,6 +54,9 @@ public class UploadReportMobileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+
+        req.setCharacterEncoding("UTF-8");
+//        resp.setCharacterEncoding("UTF-8");
 
         try {
             List<FileItem> fields = fileUploader.parseRequest(req);
@@ -99,15 +103,19 @@ public class UploadReportMobileServlet extends HttpServlet {
 
                 if (res != null && res.size() > 0) {
                     double maxScore = res.get(0).getScore();
-                    for (SearchResult sr : res) {
+                    if (maxScore > SCORE_THRESHOLD) {
+                        for (SearchResult sr : res) {
 
-                        if (Math.abs(sr.getScore() - maxScore) / maxScore > SIMILARITY) break;
+                            if (Math.abs(sr.getScore() - maxScore) / maxScore > SIMILARITY) break;
 
-                        CustomerReportItem pi = new CustomerReportItem(i);
-                        pi.setCompositionId(sr.getTrackId());
-                        pi.setDetected(true);
-                        processed.add(pi);
-                        detected++;
+                            CustomerReportItem pi = new CustomerReportItem(i);
+                            pi.setCompositionId(sr.getTrackId());
+                            pi.setDetected(true);
+                            processed.add(pi);
+                            detected++;
+                        }
+                    } else {
+                        processed.add(i);
                     }
                 } else {
                    processed.add(i);

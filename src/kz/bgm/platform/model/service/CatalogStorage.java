@@ -73,6 +73,8 @@ public interface CatalogStorage {
 
     List<CustomerReport> getCustomerReports(long customerId, Date from, Date to);
 
+    CustomerReportItem getCustomerReportsItem(long id);
+
     List<CustomerReportItem> getCustomerReportsItems(long reportId);
 
     List<CustomerReportItem> getCustomerReportsItems(long reportId, int from, int size);
@@ -119,6 +121,8 @@ public interface CatalogStorage {
     void addItemToBasket(long customerId, long trackId);
 
     void removeItemFromBasket(long trackId, long userId);
+
+    void removeItemFromReport(long itemId);
 
     List<Long> getAvailableCatalogs(long customerId);
 }

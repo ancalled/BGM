@@ -7,8 +7,8 @@
 <head>
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.js"></script>
-    <script src="/js/bootstrap-fileupload.js"></script>
-    <script src="/js/bootstrap-datetimepicker.min.js"></script>
+    <%--<script src="/js/bootstrap-fileupload.js"></script>--%>
+    <%--<script src="/js/bootstrap-datetimepicker.min.js"></script>--%>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" media="screen"/>
@@ -58,13 +58,27 @@
             background: #fbfee1;
         }
 
+        tr.same-track td {
+            border-top: none;
+            /*padding: 5px 0 0 0;*/
+            line-height: 15px;
+        }
+
+        td.number {
+            text-align: right;
+            padding-right: 20px;
+        }
+
+        .nonwrapped {
+            white-space: nowrap;
+        }
     </style>
 </head>
 
 <body>
 
 <%--<c:import url="navbar.jsp">--%>
-    <%--<c:param name="reports" value="active"/>--%>
+<%--<c:param name="reports" value="active"/>--%>
 <%--</c:import>--%>
 
 <div class="navbar">
@@ -90,7 +104,7 @@
             <dd>${report.id}</dd>
             <dt>Дата отчета</dt>
             <dd>
-                <fmt:formatDate pattern="yyyy MMMMM" value="${report.startDate}" />
+                <fmt:formatDate pattern="yyyy MMMMM" value="${report.startDate}"/>
             </dd>
             <dt>Период отчета</dt>
             <dd>${report.period}</dd>
@@ -141,46 +155,85 @@
         <table class="table smallcaps">
             <thead>
             <tr>
-                <th>#</th>
+                <%--<th>#</th>--%>
                 <th>Код</th>
                 <th>Композиция</th>
                 <th>Исполнитель</th>
+                <th>Цена</th>
+                <th  class="nonwrapped">Кол-во</th>
                 <th>Определилось</th>
+                <th>Каталог / код</th>
+                <th>Доля</th>
                 <%--<th>Авторы</th>--%>
                 <%--<th>Тип контента</th>--%>
-                <th>Цена</th>
-                <th>Количество</th>
+
                 <%--<th>Определилось</th>--%>
             </tr>
             </thead>
             <tbody>
 
+            <c:set var="lastNum" value="0"/>
             <c:forEach items="${items}" var="i" varStatus="loop">
-                <tr class="${i.detected ? '' : 'not-found'}">
-                    <td class="invariant">${loop.index + start}</td>
-                    <td class="invariant">${i.number}</td>
-                    <td>${i.track}</td>
-                    <td>${i.artist}</td>
-                    <td>
-                        <c:if test="${i.detected}">
-                            <span>${i.foundTrack.name}</span>
-                            <span>${i.foundTrack.artist}</span>
+                <tr class="${i.detected ? '' : 'not-found'} ${lastNum == i.number ? 'same-track' : ''}">
+                        <%--<td class="invariant">${loop.index + start}</td>--%>
+                    <td class="invariant">
+                        <c:if test="${lastNum != i.number}">
+                            ${i.number}
                         </c:if>
                     </td>
+                    <td>
+                        <c:if test="${lastNum != i.number}">
+                            ${i.track}
+                        </c:if>
+                    </td>
+                    <td>
+                        <c:if test="${lastNum != i.number}">
+                            ${i.artist}
+                        </c:if>
+                    </td>
+                    <td class="number">
+                        <c:if test="${lastNum != i.number}">
+                            ${i.price}
+                        </c:if>
+                    </td>
+                    <td class="number">
+                        <c:if test="${lastNum != i.number}">
+                            ${i.qty}
+                        </c:if>
+                    </td>
+                    <td>
+                        <c:if test="${i.detected}">
+                            <span>${i.foundTrack.artist} - </span>
+                            <span>${i.foundTrack.name}</span>
+                        </c:if>
+                    </td>
+                    <td>
+                        <c:if test="${i.detected}">
+                            <span class="nonwrapped">${i.foundTrack.catalog}</span>
+                            <span class="nonwrapped">${i.foundTrack.code}</span>
 
-                <%--<td>${i.authors}</td>--%>
-                    <%--<td>${i.contentType}</td>--%>
-                    <td>${i.price}</td>
-                    <td>${i.qty}</td>
-                    <%--<td>${i.detected ? "да" : "нет"}</td>--%>
+                        </c:if>
+                    </td>
+                    <td class="number">
+                        <c:if test="${i.detected}">
+                            ${i.foundTrack.mobileShare}%
+                        </c:if>
+                    </td>
+                    <td>
+                        <c:if test="${i.detected}">
+                            <a href="#" class="remove-track" id="${i.id}" title="Этот трек определился неверно, убрать">
+                                <i class="icon-remove"></i>
+                            </a>
+                        </c:if>
+                    </td>
                 </tr>
-            </c:forEach>
 
+                <c:set var="lastNum" value="${i.number}"/>
+            </c:forEach>
 
 
             </tbody>
         </table>
-
 
 
         <div class="pagination pagination-centered">
@@ -213,7 +266,42 @@
         </div>
     </section>
 
+    <div id="track-remove-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Удаление трека</h3>
+        </div>
+        <div class="modal-body">
+            <p>Удалить строку?</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal">Нет</button>
+            <button class="btn btn-primary" id="modal-remove-btn" aria-hidden="true">Да</button>
+        </div>
+    </div>
+
 </div>
+
+
+<form method="post" action="/customer/action/remove-from-report" id="item-remove-form">
+    <input type="hidden" name="report_id" value="${report.id}">
+    <input type="hidden" name="from" value="${from}">
+    <input type="hidden" id="item-to-remove" name="item_id">
+</form>
+
+<script>
+    $(document).ready(function () {
+
+        $('a.remove-track').click(function () {
+            var a = $(this);
+            $('#item-to-remove').val(a.attr('id'));
+
+            $('#item-remove-form').submit();
+        });
+    });
+
+</script>
 
 
 </body>

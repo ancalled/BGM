@@ -76,35 +76,33 @@ public class ReportParser {
         log.info("Parsing mobile report from: " + fileName + "... ");
 
         Workbook wb = ExcelUtils.openFile(new File(fileName));
+        Sheet sheet = wb.getSheetAt(1);
 
         List<CustomerReportItem> items = new ArrayList<>();
 
-        Sheet sheet = wb.getSheetAt(1);
-
-        int rows = sheet.getPhysicalNumberOfRows();
-
         //todo use templates instead of hardcoded cell numbers
+        int rows = sheet.getPhysicalNumberOfRows();
         int startRow = 6;
         int number = 1;
         for (int i = startRow; i < rows; i++) {
             try {
                 Row row = sheet.getRow(i);
 
-                CustomerReportItem item = new CustomerReportItem();
 
                 String name = ExcelUtils.getCellVal(row, 1);
 
                 if (name == null || "".equals(name.trim())) continue;
 
+                CustomerReportItem item = new CustomerReportItem();
                 item.setNumber(number);
                 item.setTrack(name);
                 item.setArtist(ExcelUtils.getCellVal(row, 2));
                 item.setContentType(ExcelUtils.getCellVal(row, 3));
                 item.setQty(Integer.parseInt(ExcelUtils.getCellVal(row, 4).trim()));
                 item.setPrice(Integer.parseInt(ExcelUtils.getCellVal(row, 7).trim()));
-
                 items.add(item);
                 number++;
+
             } catch (Exception e) {
                 log.warn("Got exception: " + e.getMessage());
             }
