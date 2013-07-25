@@ -98,7 +98,8 @@ public class ReportParser {
                 item.setArtist(ExcelUtils.getCellVal(row, 2));
                 item.setContentType(ExcelUtils.getCellVal(row, 3));
                 item.setQty(Integer.parseInt(ExcelUtils.getCellVal(row, 4).trim()));
-                item.setPrice(Integer.parseInt(ExcelUtils.getCellVal(row, 7).trim()));
+                int price = Math.round(Float.parseFloat(ExcelUtils.getCellVal(row, 7).trim()));
+                item.setPrice(price);
                 items.add(item);
                 number++;
 
@@ -149,7 +150,7 @@ public class ReportParser {
 
 
     public static void main(String[] args) throws IOException, InvalidFormatException {
-        String filepath = "/home/ancalled/Documents/tmp/25/bgm/gsm_tech/2013-april.xlsx";
+        String filepath = "/home/ancalled/Documents/tmp/25/bgm/mul_lab/april.xls";
         ReportParser.parseMobileReport(filepath);
     }
 
