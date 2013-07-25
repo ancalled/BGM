@@ -129,6 +129,8 @@
                 <dl class="dl-horizontal">
                     <dt>Треков</dt>
                     <dd>${report.tracks} / ${report.detected}</dd>
+                    <dt>Пользователь</dt>
+                    <dd>${customer.customerType}</dd>
                 </dl>
             </div>
 
@@ -191,8 +193,9 @@
             <tr>
                 <th>Код</th>
                 <th>Исполнитель &mdash; трек</th>
-                <%--<th>Исполнитель</th>--%>
-                <th>Цена</th>
+                <c:if test="${customer.customerType eq 'MOBILE_AGGREGATOR'}">
+                    <th>Цена</th>
+                </c:if>
                 <th class="nonwrapped">Кол-во</th>
                 <th>Что определилось (исполнитель &mdash; трек и код)</th>
                 <th class="nonwrapped">Каталог</th>
@@ -204,7 +207,6 @@
             <c:set var="lastNum" value="0"/>
             <c:forEach items="${items}" var="i" varStatus="loop">
                 <tr class="${i.detected ? '' : 'not-found'} ${lastNum == i.number ? 'same-track' : ''}">
-                        <%--<td class="invariant">${loop.index + start}</td>--%>
                     <td class="invariant number">
                         <c:if test="${lastNum != i.number}">
                             ${i.number}
@@ -215,21 +217,21 @@
                             ${i.artist} &mdash; ${i.track}
                         </c:if>
                     </td>
-                        <%--<td>--%>
-                        <%--<c:if test="${lastNum != i.number}">--%>
-                        <%--${i.artist}--%>
-                        <%--</c:if>--%>
-                        <%--</td>--%>
-                    <td class="number">
-                        <c:if test="${lastNum != i.number}">
-                            ${i.price}
-                        </c:if>
-                    </td>
+
+                    <c:if test="${customer.customerType eq 'MOBILE_AGGREGATOR'}">
+                        <td class="number">
+                            <c:if test="${lastNum != i.number}">
+                                ${i.price}
+                            </c:if>
+                        </td>
+                    </c:if>
+
                     <td class="number">
                         <c:if test="${lastNum != i.number}">
                             ${i.qty}
                         </c:if>
                     </td>
+
                     <td>
                         <c:if test="${i.detected}">
                             <span>${i.foundTrack.artist} &mdash; </span>
@@ -238,21 +240,26 @@
                                   style="padding-left: 10px; font-style: italic">#${i.foundTrack.code}</span>
                         </c:if>
                     </td>
-                        <%--<td class="centered">--%>
                     <td>
                         <c:if test="${i.detected}">
 
                             <span class="nonwrapped ${fn:toLowerCase(i.foundTrack.foundCatalog.rightType)}">
                                     ${i.foundTrack.catalog}
                             </span>
-                            <%--<br/>--%>
-                            <%--<span class="nonwrapped">${i.foundTrack.code}</span>--%>
 
                         </c:if>
                     </td>
                     <td class="number">
                         <c:if test="${i.detected}">
-                            ${i.foundTrack.mobileShare}%
+                            <c:choose>
+                                <c:when test="${customer.customerType eq 'MOBILE_AGGREGATOR'}">
+                                    ${i.foundTrack.mobileShare}%
+                                </c:when>
+                                <c:when test="${customer.customerType eq 'PUBLIC_RIGHTS_SOCIETY'}">
+                                    ${i.foundTrack.publicShare}%
+                                </c:when>
+                            </c:choose>
+
                         </c:if>
                     </td>
                     <td>

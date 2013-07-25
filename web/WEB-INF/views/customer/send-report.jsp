@@ -27,13 +27,13 @@
     <div class="container text-center">
         <div class="row text-left">
             <legend>
-                Загрузка мобильного отчета
+                Загрузка отчета
             </legend>
         </div>
 
         <div class="row text-left">
 
-            <form action="/customer/action/upload-mobile-report"
+            <form action="/customer/action/upload-report"
                   method="post" enctype="multipart/form-data">
 
 

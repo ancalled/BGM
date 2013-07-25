@@ -88,7 +88,6 @@ public class ReportParser {
             try {
                 Row row = sheet.getRow(i);
 
-
                 String name = ExcelUtils.getCellVal(row, 1);
 
                 if (name == null || "".equals(name.trim())) continue;
@@ -125,6 +124,7 @@ public class ReportParser {
         int rows = sheet.getPhysicalNumberOfRows();
 
         int startRow = 0;
+        int number = 1;
         for (int i = startRow; i < rows; i++) {
             Row row = sheet.getRow(i);
 
@@ -134,10 +134,14 @@ public class ReportParser {
             String qrtStr = ExcelUtils.getCellVal(row, 2);
             int qty = Integer.parseInt(qrtStr.trim());
 
+            if (qty == 0) continue;
+
             item.setArtist(artist);
             item.setTrack(name);
             item.setQty(qty);
+            item.setNumber(number);
             items.add(item);
+            number++;
         }
 
         return items;

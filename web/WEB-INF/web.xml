@@ -190,8 +190,8 @@
         <servlet-class>kz.bgm.platform.web.customer.action.SearchServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>uploadReportMobileServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.customer.action.UploadReportMobileServlet</servlet-class>
+        <servlet-name>uploadReportServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.customer.action.UploadReportServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>customerLogoutServlet</servlet-name>
@@ -238,8 +238,8 @@
         <url-pattern>/customer/action/search</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>uploadReportMobileServlet</servlet-name>
-        <url-pattern>/customer/action/upload-mobile-report</url-pattern>
+        <servlet-name>uploadReportServlet</servlet-name>
+        <url-pattern>/customer/action/upload-report</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>customerLogoutServlet</servlet-name>

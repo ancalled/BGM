@@ -23,9 +23,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class UploadReportMobileServlet extends HttpServlet {
+public class UploadReportServlet extends HttpServlet {
 
-    public static final Logger log = Logger.getLogger(UploadReportMobileServlet.class);
+    public static final Logger log = Logger.getLogger(UploadReportServlet.class);
 
     public static final String APP_HOME = System.getProperty("user.dir");
     public static final String REPORTS_HOME = APP_HOME + "/reports";
@@ -66,23 +66,51 @@ public class UploadReportMobileServlet extends HttpServlet {
                 return;
             }
 
-            CustomerReport report = new CustomerReport();
-
-            List<CustomerReportItem> parsed = new ArrayList<>();
-            fillItems(fields, report, parsed);
-
-            Date now = new Date();
 
             HttpSession session = req.getSession();
             User user = (User) session.getAttribute("user");
 
-            if (user != null) {
-                report.setCustomerId(user.getCustomerId());
+            if (user == null) {
+                System.err.println("User not found");
+                resp.sendRedirect("/customer/view/send-reports?er=user-not-found");
+                return;
             }
+
+            Customer customer = catalogService.getCustomer(user.getCustomerId());
+
+            if (customer == null) {
+                System.err.println("Customer not found");
+                resp.sendRedirect("/customer/view/send-reports?er=customer-not-found");
+                return;
+            }
+
+
+            CustomerReport.Type reportType;
+            switch (customer.getCustomerType()) {
+                case MOBILE_AGGREGATOR:
+                    reportType = CustomerReport.Type.MOBILE;
+                    break;
+                case PUBLIC_RIGHTS_SOCIETY:
+                    reportType = CustomerReport.Type.PUBLIC;
+                    break;
+                default:
+                    System.err.println("Unknown customer type: " + customer.getCustomerType());
+                    resp.sendRedirect("/customer/view/send-reports?er=unknown-customer-type");
+                    return;
+            }
+
+            CustomerReport report = new CustomerReport();
+
+            List<CustomerReportItem> parsed = new ArrayList<>();
+            fillItems(fields, report, parsed, reportType);
+
+            Date now = new Date();
+
+            report.setCustomerId(user.getCustomerId());
 
             report.setUploadDate(now);
             report.setTracks(parsed.size());
-            report.setType(CustomerReport.Type.MOBILE);
+            report.setType(reportType);
 
             long reportId = catalogService.saveCustomerReport(report);
             report.setId(reportId);
@@ -118,7 +146,7 @@ public class UploadReportMobileServlet extends HttpServlet {
                         processed.add(i);
                     }
                 } else {
-                   processed.add(i);
+                    processed.add(i);
                 }
             }
 
@@ -134,7 +162,9 @@ public class UploadReportMobileServlet extends HttpServlet {
         }
     }
 
-    private void fillItems(List<FileItem> formFields, CustomerReport report, List<CustomerReportItem> items) throws Exception {
+    private void fillItems(List<FileItem> formFields, CustomerReport report,
+                           List<CustomerReportItem> items,
+                           CustomerReport.Type type) throws Exception {
 
         for (FileItem item : formFields) {
             if (item.isFormField()) {
@@ -146,7 +176,12 @@ public class UploadReportMobileServlet extends HttpServlet {
                 String reportFile = REPORTS_HOME + "/" + item.getName();
                 saveToFile(item, reportFile);
 
-                items.addAll(ReportParser.parseMobileReport(reportFile));
+                if (type == CustomerReport.Type.MOBILE) {
+                    items.addAll(ReportParser.parseMobileReport(reportFile));
+
+                } if (type == CustomerReport.Type.PUBLIC) {
+                    items.addAll(ReportParser.parsePublicReport(reportFile));
+                }
             }
         }
     }

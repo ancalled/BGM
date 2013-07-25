@@ -940,8 +940,10 @@ public class DbStorage implements CatalogStorage {
                                 "FROM customer_report_item i\n" +
                                 "  LEFT JOIN composition t ON (i.composition_id = t.id)\n" +
                                 "  LEFT JOIN catalog c ON (t.catalog_id = c.id)\n" +
-                                "WHERE report_id = ? AND t.shareMobile > 0 AND (deleted IS NULL OR NOT deleted) \n" +
-                                "  ORDER BY item_number, cat_right_type, track_shareMobile DESC \n" +
+                                "WHERE report_id = ? " +
+//                                "AND t.shareMobile > 0 " +
+                                "AND (deleted IS NULL OR NOT deleted) \n" +
+                                "  ORDER BY item_number, cat_right_type, track_shareMobile, track_sharePublic DESC \n" +
                                 "LIMIT ?, ?",
                         ResultSet.TYPE_FORWARD_ONLY,
                         ResultSet.CONCUR_READ_ONLY);

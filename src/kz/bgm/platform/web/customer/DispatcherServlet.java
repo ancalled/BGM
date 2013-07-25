@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -96,10 +97,14 @@ public class DispatcherServlet extends HttpServlet {
                 break;
 
             case "/reports":
+                final Date from = new Date(0);
+                final Date to = new Date();
+
                 action = new Action() {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-                        List<CustomerReport> reports = catalogStorage.getAllCustomerReports();
+                        List<CustomerReport> reports = catalogStorage
+                                .getCustomerReports(user.getCustomerId(), from, to);
                         req.setAttribute("reports", reports);
                         return "reports";
                     }
@@ -124,11 +129,8 @@ public class DispatcherServlet extends HttpServlet {
                         CustomerReport report = catalogStorage.getCustomerReport(reportId);
                         List<CustomerReportItem> items = catalogStorage.getCustomerReportsItems(reportId, from, size);
 
-                        Customer customer = catalogStorage.getCustomer(report.getCustomerId());
-//
                         req.setAttribute("report", report);
                         req.setAttribute("items", items);
-                        req.setAttribute("customer", customer);
                         req.setAttribute("from", from);
                         req.setAttribute("size", size);
 
