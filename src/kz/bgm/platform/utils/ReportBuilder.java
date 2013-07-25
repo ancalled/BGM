@@ -247,24 +247,26 @@ public class ReportBuilder {
 
     public static void main(String[] args) throws ParseException {
 
-//        if (args.length < 5) {
-//            System.err.println("Not enough params!");
-//            System.out.println("Expected: $PLATFORM $TEMPLATE $OUTPUT $FROM_DATE $TO_DATE");
-//            return;
-//        }
-//
-//        String platform = args[0];
-//        String template = args[1];
-//        String output = args[2];
-//
-//        Date from = DATE_FORMAT.parse(args[3]);
-//        Date to = DATE_FORMAT.parse(args[4]);
+        if (args.length < 6) {
+            System.err.println("Not enough params!");
+            System.out.println("Expected: $TYPE $PLATFORM $TEMPLATE $OUTPUT $FROM_DATE $TO_DATE");
+            return;
+        }
 
-        String platform = "1mp";
-        String template = "./data/report-templates/" + platform + ".xlsx";
-        String output = "/home/ancalled/Documents/tmp/25/bgm/tmp-" + platform + "res.xlsx";
-        Date from = DATE_FORMAT.parse("2013-04-01");
-        Date to = DATE_FORMAT.parse("2013-08-01");
+        String type = args[0];
+        String platform = args[1];
+        String template = args[2];
+        String output = args[3];
+
+        Date from = DATE_FORMAT.parse(args[4]);
+        Date to = DATE_FORMAT.parse(args[5]);
+
+
+//        String platform = "1mp";
+//        String template = "./data/report-templates/" + platform + ".xlsx";
+//        String output = "/home/ancalled/Documents/tmp/25/bgm/tmp-" + platform + "res.xlsx";
+//        Date from = DATE_FORMAT.parse("2013-04-01");
+//        Date to = DATE_FORMAT.parse("2013-08-01");
 
         try {
             initDatabase("db.properties");
@@ -274,9 +276,20 @@ public class ReportBuilder {
 
         CatalogStorage storage = CatalogFactory.getStorage();
 
+        List<CalculatedReportItem> items;
+        switch (type) {
+            case "mobile":
+                items = storage.calculateMobileReport(platform, from, to);
 
-//        List<CalculatedReportItem> items = storage.calculateMobileReport(platform, from, to);
-        List<CalculatedReportItem> items = storage.calculatePublicReport(platform, from, to);
+                break;
+            case "public":
+                items = storage.calculatePublicReport(platform, from, to);
+                break;
+            default:
+                System.err.println("Unknown report type: " + type);
+                return;
+        }
+
 
         System.out.println("Got " + items.size() + " items.");
 
