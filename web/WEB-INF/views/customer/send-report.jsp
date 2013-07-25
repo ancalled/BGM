@@ -72,7 +72,7 @@
 
 
                 <div class="row-fluid">
-                    <input class="btn" type="submit" value="Отправить">
+                    <input class="btn" type="submit" value="Загрузить">
                 </div>
             </form>
 
