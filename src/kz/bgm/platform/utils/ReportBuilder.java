@@ -247,23 +247,24 @@ public class ReportBuilder {
 
     public static void main(String[] args) throws ParseException {
 
-        if (args.length < 5) {
-            System.err.println("Not enough params!");
-            System.out.println("Expected: $PLATFORM $TEMPLATE $OUTPUT $FROM_DATE $TO_DATE");
-            return;
-        }
-
+//        if (args.length < 5) {
+//            System.err.println("Not enough params!");
+//            System.out.println("Expected: $PLATFORM $TEMPLATE $OUTPUT $FROM_DATE $TO_DATE");
+//            return;
+//        }
+//
 //        String platform = args[0];
-//        String template = "./data/report-templates/" + platform + ".xlsx";
-//        String output = "/Users/ancalled/Documents/tmp/12/bgm/tmp-" + platform + "res.xlsx";
+//        String template = args[1];
+//        String output = args[2];
+//
+//        Date from = DATE_FORMAT.parse(args[3]);
+//        Date to = DATE_FORMAT.parse(args[4]);
 
-        String platform = args[0];
-        String template = args[1];
-        String output = args[2];
-
-        Date from = DATE_FORMAT.parse(args[3]);
-        Date to = DATE_FORMAT.parse(args[4]);
-
+        String platform = "1mp";
+        String template = "./data/report-templates/" + platform + ".xlsx";
+        String output = "/home/ancalled/Documents/tmp/25/bgm/tmp-" + platform + "res.xlsx";
+        Date from = DATE_FORMAT.parse("2013-04-01");
+        Date to = DATE_FORMAT.parse("2013-08-01");
 
         try {
             initDatabase("db.properties");
