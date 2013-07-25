@@ -163,8 +163,8 @@
     <!--================= Customer =======================-->
 
 
-    
-    
+
+
 
     <filter>
         <filter-name>customerAuthFilter</filter-name>
@@ -214,7 +214,7 @@
         <servlet-name>removeFromReport</servlet-name>
         <servlet-class>kz.bgm.platform.web.customer.action.RemoveFromReportServlet</servlet-class>
     </servlet>
-    
+
     <servlet>
         <servlet-name>downloadBasketReportServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.customer.action.DownloadBasketReportServlet</servlet-class>
@@ -222,6 +222,10 @@
     <servlet>
         <servlet-name>jsonRemoveFromReportServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.customer.api.JsonRemoveFromReportServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>acceptReportServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.customer.action.AcceptReportServlet</servlet-class>
     </servlet>
 
 
@@ -269,6 +273,10 @@
     <servlet-mapping>
         <servlet-name>jsonRemoveFromReportServlet</servlet-name>
         <url-pattern>/customer/api/remove-from-report</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>acceptReportServlet</servlet-name>
+        <url-pattern>/customer/action/accept-report</url-pattern>
     </servlet-mapping>
 
 </web-app>

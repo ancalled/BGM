@@ -56,7 +56,8 @@ public class DispatcherServlet extends HttpServlet {
                         List<Platform> platforms = catalogStorage.getAllPlatforms();
                         req.setAttribute("platforms", platforms);
 
-                        List<CustomerReport> reports = catalogStorage.getAllCustomerReports();
+                        List<CustomerReport> reports = catalogStorage
+                                .getCustomerReports(user.getCustomerId(), new Date(0), new Date());
                         req.setAttribute("reports", reports);
 
                         return "index";
@@ -97,14 +98,13 @@ public class DispatcherServlet extends HttpServlet {
                 break;
 
             case "/reports":
-                final Date from = new Date(0);
-                final Date to = new Date();
+
 
                 action = new Action() {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
                         List<CustomerReport> reports = catalogStorage
-                                .getCustomerReports(user.getCustomerId(), from, to);
+                                .getCustomerReports(user.getCustomerId(), new Date(0), new Date());
                         req.setAttribute("reports", reports);
                         return "reports";
                     }

@@ -8,7 +8,9 @@ public class Customer {
     private CustomerType customerType;
     private RightType rightType;
 
-    private float royalty;
+    private float authorRoyalty;
+    private float relatedRoyalty;
+
     private String contract;
 
 
@@ -44,12 +46,20 @@ public class Customer {
         this.rightType = rightType;
     }
 
-    public float getRoyalty() {
-        return royalty;
+    public float getAuthorRoyalty() {
+        return authorRoyalty;
     }
 
-    public void setRoyalty(float royalty) {
-        this.royalty = royalty;
+    public void setAuthorRoyalty(float authorRoyalty) {
+        this.authorRoyalty = authorRoyalty;
+    }
+
+    public float getRelatedRoyalty() {
+        return relatedRoyalty;
+    }
+
+    public void setRelatedRoyalty(float relatedRoyalty) {
+        this.relatedRoyalty = relatedRoyalty;
     }
 
     public String getContract() {

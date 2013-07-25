@@ -34,10 +34,11 @@ public class CreateCustomerServlet extends HttpServlet {
 
         String name = req.getParameter("name");
         String right = req.getParameter("rights");
-        String share = req.getParameter("share");
+        String authorRoyaltyStr = req.getParameter("authorRoyalty");
+        String relatedRoyaltyStr = req.getParameter("relatedRoyalty");
         String contract = req.getParameter("contract");
 
-        share = share.replace(",", ".");
+        authorRoyaltyStr = authorRoyaltyStr.replace(",", ".");
 
         log.info("Got request to create customer" + name);
 
@@ -46,7 +47,8 @@ public class CreateCustomerServlet extends HttpServlet {
         customer.setContract(contract);
         customer.setName(name);
         customer.setRightType(RightType.valueOf(right));
-        customer.setRoyalty(Float.parseFloat(share));
+        customer.setAuthorRoyalty(Float.parseFloat(authorRoyaltyStr));
+        customer.setAuthorRoyalty(Float.parseFloat(relatedRoyaltyStr));
 
         long id = storage.createCustomer(customer);
 

@@ -63,7 +63,6 @@ public interface CatalogStorage {
 
     long saveCustomerReportItem(CustomerReportItem item);
 
-    void saveReportItemTracks(List<ReportItemTrack> reportItemList);
 
     void saveCustomerReportItems(List<CustomerReportItem> reportItemList);
 
@@ -74,6 +73,8 @@ public interface CatalogStorage {
     List<CustomerReport> getCustomerReports(long customerId, Date from, Date to);
 
     CustomerReportItem getCustomerReportsItem(long id);
+
+    boolean acceptReport(long reportId);
 
     List<CustomerReportItem> getCustomerReportsItems(long reportId);
 

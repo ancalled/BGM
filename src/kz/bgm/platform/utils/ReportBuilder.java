@@ -42,7 +42,7 @@ public class ReportBuilder {
     private static final String COPYRIGHT = "{copyright}";
     private static final String SHARE_PUBLIC = "{sharePublic}";
 
-    private static List<String> fieldList = new ArrayList<String>();
+    private static List<String> fieldList = new ArrayList<>();
 
     static {
         fieldList.add(COMPOSITION_CODE);
@@ -129,18 +129,18 @@ public class ReportBuilder {
         try {
 
             Class reportClass = report.getClass();
-            CalculatedReportItem instance = (CalculatedReportItem) reportClass.newInstance();
+//            CalculatedReportItem instance = (CalculatedReportItem) reportClass.newInstance();
             List<Method> fields = getReportFields(reportClass);
-            String field = null;
+            String field;
 
             for (String fieldName : fieldMap.keySet()) {
 
                 field = fieldName.replaceAll("}", "");
                 field = field.replaceAll("\\{", "");
 
-                int colIdx = 0;
-                Type type = null;
-                Object val = null;
+                int colIdx;
+                Type type;
+                Object val;
                 for (Method m : fields) {
                     String methodName = m.getName().toLowerCase().replaceFirst("get", "");   //think rabbit
 
@@ -171,7 +171,7 @@ public class ReportBuilder {
 
     private static List<Method> getReportFields(Class cls) {
         Method[] metMass = cls.getMethods();
-        List<Method> methodList = new ArrayList<Method>();
+        List<Method> methodList = new ArrayList<>();
 
         for (Method m : metMass) {
             if (m.getName().startsWith("get")) {
@@ -216,16 +216,7 @@ public class ReportBuilder {
         }
     }
 
-    public void addField(String field) {
-        fieldList.add(field);
-    }
 
-    public List<String> getFields() {
-        return fieldList;
-    }
-
-//    public static void main(String[] args) {
-//    }
 
 
     public static void initDatabase(String propsFile) throws IOException {

@@ -9,7 +9,7 @@
         <ul class="nav">
             <li class="${param.index}"><a href="/customer/view/index">Главная</a></li>
             <li class="${param.send-report}"><a href="/customer/view/send-report">Отправить отчет</a></li>
-            <li class="${param.reports}"><a href="/customer/view/reports">Отчеты</a></li>
+            <%--<li class="${param.reports}"><a href="/customer/view/reports">Отчеты</a></li>--%>
             <li class="${param.search}"><a href="/customer/view/search">Поиск</a></li>
             <li class="${param.basket}"><a href="/customer/view/basket">Корзина</a></li>
             <li><a href="/customer/action/logout">Выход</a></li>

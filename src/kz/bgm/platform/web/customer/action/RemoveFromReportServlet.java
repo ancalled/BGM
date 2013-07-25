@@ -1,5 +1,6 @@
 package kz.bgm.platform.web.customer.action;
 
+import kz.bgm.platform.model.domain.CustomerReport;
 import kz.bgm.platform.model.domain.CustomerReportItem;
 import kz.bgm.platform.model.domain.User;
 import kz.bgm.platform.model.service.CatalogFactory;
@@ -39,29 +40,43 @@ public class RemoveFromReportServlet extends HttpServlet {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
 
-        if (user != null) {
-
-            CustomerReportItem item = service.getCustomerReportsItem(itemId);
-            if (item == null) {
-                log.warn("Could not find item!");
-                resp.sendRedirect("/customer/view/report?id=" + reportId + "&from=" + fromStr);
-                return;
-            }
-
-            if (item.getReportId() != reportId) {
-                log.warn("Wrong report item!");
-                resp.sendRedirect("/customer/view/report?id=" + reportId + "&from=" + fromStr);
-                return;
-            }
-
-            log.info("\nRemove item " + itemId + " from user catalog \n" +
-                    "user id    : " + user.getId() + "\n" +
-                    "user login : " + user.getLogin());
-
-            service.removeItemFromReport(itemId);
-
-            log.info("Item has been removed");
-            resp.sendRedirect("/customer/view/report?id=" + reportId + "&from=" + fromStr);
+        if (user == null) {
+            log.warn("Could not find user!");
+            resp.sendRedirect("/customer/view/report?id=" + reportId + "&from=" + fromStr + "&er=user-not-found");
+            return;
         }
+
+        CustomerReport report = service.getCustomerReport(reportId);
+        if (report == null) {
+            log.warn("Could not find report!");
+            resp.sendRedirect("/customer/view/report?id=" + reportId + "&from=" + fromStr+ "&er=report-not-found");
+            return;
+        }
+
+        if (report.isAccepted()) {
+            log.warn("Report is already sent!");
+            resp.sendRedirect("/customer/view/report?id=" + reportId + "&from=" + fromStr+ "&er=report-is-accepted");
+            return;
+        }
+
+        CustomerReportItem item = service.getCustomerReportsItem(itemId);
+        if (item == null) {
+            log.warn("Could not find item!");
+            resp.sendRedirect("/customer/view/report?id=" + reportId + "&from=" + fromStr+ "&er=item-not-found");
+            return;
+        }
+
+        if (item.getReportId() != reportId) {
+            log.warn("Wrong report item!");
+            resp.sendRedirect("/customer/view/report?id=" + reportId + "&from=" + fromStr+ "&er=wrong-item");
+            return;
+        }
+
+        log.info("\nRemove item " + itemId + " from report " + reportId);
+
+        service.removeItemFromReport(itemId);
+
+        log.info("Item has been removed");
+        resp.sendRedirect("/customer/view/report?id=" + reportId + "&from=" + fromStr);
     }
 }

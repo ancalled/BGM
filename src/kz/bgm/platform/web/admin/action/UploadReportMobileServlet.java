@@ -90,7 +90,6 @@ public class UploadReportMobileServlet extends HttpServlet {
                 }
             }
 
-            catalogService.saveReportItemTracks(tracks);
 
             HttpSession ses = req.getSession(true);
             ses.setAttribute("report-" + reportId, report);

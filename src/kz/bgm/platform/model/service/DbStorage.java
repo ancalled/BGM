@@ -98,7 +98,6 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-
     @Override
     public Platform getPlatform(final long id) {
         return query(new Action<Platform>() {
@@ -709,33 +708,6 @@ public class DbStorage implements CatalogStorage {
 
 
     @Override
-    public void saveReportItemTracks(final List<ReportItemTrack> items) {
-        query(new Action<Boolean>() {
-            @Override
-            public Boolean execute(Connection con) throws SQLException {
-                PreparedStatement ps =
-                        con.prepareStatement("INSERT INTO " +
-                                "report_item_track(item_id, track_id, score, matched) " +
-                                "VALUES (?,?,?,?)");
-
-                for (ReportItemTrack cr : items) {
-                    ps.setLong(1, cr.getItemId());
-                    ps.setLong(2, cr.getTrackId());
-                    ps.setFloat(3, cr.getScore());
-                    ps.setBoolean(4, cr.isMatched());
-                    ps.addBatch();
-                }
-
-                con.setAutoCommit(false);
-                ps.executeBatch();
-                con.commit();
-
-                return true;
-            }
-        });
-    }
-
-    @Override
     public void saveCustomerReportItems(final List<CustomerReportItem> items) {
         query(new Action<Boolean>() {
             @Override
@@ -863,6 +835,24 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+
+
+    public boolean acceptReport(final long reportId) {
+        return query(new Action<Boolean>() {
+            @Override
+            public Boolean execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "UPDATE customer_report SET accepted=true WHERE id=?",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
+                stmt.setLong(1, reportId);
+
+                return stmt.executeUpdate() > 0;
+            }
+        });
+    }
+
+
     @Override
     public List<CustomerReportItem> getCustomerReportsItems(final long reportId) {
         return query(new Action<List<CustomerReportItem>>() {
@@ -969,10 +959,8 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-
     @Override
     public List<CalculatedReportItem> calculateMobileReport(final String platform, final Date from, final Date to) {
-
 
 
         return query(new Action<List<CalculatedReportItem>>() {
@@ -992,13 +980,13 @@ public class DbStorage implements CatalogStorage {
                         "\n" +
                         "  c.shareMobile,\n" +
                         "  cat.royalty cat_royalty,\n" +
-                        "  cm.royalty,\n" +
+                        "  IF(cat.right_type = 1, cm.authorRoyalty, cm.relatedRoyalty) royalty,\n" +
                         "\n" +
                         "  price,\n" +
                         "  sum(qty) totalQty,\n" +
                         "  (price * sum(qty)) vol,\n" +
                         "\n" +
-                        "  round((sum(qty) * price * (shareMobile / 100) * (cm.royalty / 100) * (cat.royalty / 100)), 3) revenue\n" +
+                        "  round((sum(qty) * price * (shareMobile / 100) * (IF(cat.right_type = 1, cm.authorRoyalty, cm.relatedRoyalty) / 100) * (cat.royalty / 100)), 3) revenue\n" +
                         "\n" +
                         "\n" +
                         "FROM customer_report_item i\n" +
@@ -1019,10 +1007,10 @@ public class DbStorage implements CatalogStorage {
                         "    ON (r.customer_id = cm.id)\n" +
                         "\n" +
                         "WHERE p.name = ?\n" +
-                        "      AND r.accepted=true \n" +
+                        "      AND r.accepted=TRUE \n" +
                         "      AND r.type = 0\n" +
                         "      AND r.start_date BETWEEN ? AND ?\n" +
-                        "      AND i.detected = true\n" +
+                        "      AND i.detected = TRUE\n" +
                         "      AND (i.deleted IS NULL OR NOT i.deleted)\n" +
                         "\n" +
                         "GROUP BY i.composition_id",
@@ -1087,10 +1075,10 @@ public class DbStorage implements CatalogStorage {
                         "\n" +
                         "\n" +
                         "WHERE p.name = ?\n" +
-                        "      AND r.accepted=true \n" +
+                        "      AND r.accepted=TRUE \n" +
                         "      AND r.type = 1\n" +
                         "      AND r.start_date BETWEEN ? AND ?\n" +
-                        "      AND i.detected = true\n" +
+                        "      AND i.detected = TRUE\n" +
                         "      AND (i.deleted IS NULL OR NOT i.deleted)\n" +
                         "\n" +
                         "GROUP BY i.composition_id\n;",
@@ -1124,13 +1112,15 @@ public class DbStorage implements CatalogStorage {
             @Override
             public Long execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "INSERT INTO customer(name, customer_type, right_type, royalty, contract) VALUES(?,?,?,?,?)",
+                        "INSERT INTO customer(name, customer_type, right_type, authorRoyalty, " +
+                                "relatedRoyalty, contract) VALUES(?,?,?,?,?,?)",
                         Statement.RETURN_GENERATED_KEYS);
                 stmt.setString(1, customer.getName());
                 stmt.setInt(2, customer.getCustomerType().ordinal());
                 stmt.setInt(3, customer.getRightType().ordinal());
-                stmt.setFloat(4, customer.getRoyalty());
-                stmt.setString(5, customer.getContract());
+                stmt.setFloat(4, customer.getAuthorRoyalty());
+                stmt.setFloat(5, customer.getRelatedRoyalty());
+                stmt.setString(6, customer.getContract());
 
                 stmt.executeUpdate();
 
@@ -1185,7 +1175,7 @@ public class DbStorage implements CatalogStorage {
         queryVoid(new VoidAction() {
             public void execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "UPDATE customer_report_item SET deleted=true WHERE id = ?");
+                        "UPDATE customer_report_item SET deleted=TRUE WHERE id = ?");
 
                 stmt.setLong(1, itemId);
                 stmt.executeUpdate();
@@ -1766,7 +1756,8 @@ public class DbStorage implements CatalogStorage {
         customer.setName(rs.getString("name"));
         customer.setCustomerType(CustomerType.values()[rs.getInt("customer_type")]);
         customer.setRightType(RightType.values()[rs.getInt("right_type")]);
-        customer.setRoyalty(rs.getFloat("royalty"));
+        customer.setAuthorRoyalty(rs.getFloat("authorRoyalty"));
+        customer.setRelatedRoyalty(rs.getFloat("relatedRoyalty"));
         customer.setContract(rs.getString("contract"));
 
         return customer;
@@ -1839,19 +1830,6 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-    private static ReportItemTrack parseReportItemTrack(ResultSet rs) throws SQLException {
-
-        ReportItemTrack item = new ReportItemTrack();
-        item.setId(rs.getLong("id"));
-        item.setItemId(rs.getLong("item_id"));
-        item.setTrackId(rs.getLong("track_id"));
-        item.setScore(rs.getInt("score"));
-        item.setMatched(rs.getBoolean("matched"));
-
-        return item;
-    }
-
-
     private static CalculatedReportItem parseCalculatedReport(ResultSet rs) throws SQLException {
 
         CalculatedReportItem report = new CalculatedReportItem();
@@ -1917,7 +1895,6 @@ public class DbStorage implements CatalogStorage {
     public void closeConnection() {
         pool.close();
     }
-
 
 
     private static ComboPooledDataSource initPool(String host,

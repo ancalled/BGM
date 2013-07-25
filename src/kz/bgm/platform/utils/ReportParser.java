@@ -98,8 +98,7 @@ public class ReportParser {
                 item.setArtist(ExcelUtils.getCellVal(row, 2));
                 item.setContentType(ExcelUtils.getCellVal(row, 3));
                 item.setQty(Integer.parseInt(ExcelUtils.getCellVal(row, 4).trim()));
-                int price = Math.round(Float.parseFloat(ExcelUtils.getCellVal(row, 7).trim()));
-                item.setPrice(price);
+                item.setPrice(Float.parseFloat(ExcelUtils.getCellVal(row, 7).trim()));
                 items.add(item);
                 number++;
 

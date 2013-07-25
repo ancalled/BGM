@@ -21,6 +21,26 @@
     span.small {
         font-size: 10px;
     }
+
+    li.report a {
+        text-decoration: underline;
+    }
+
+    li.sent {
+        color: #114713;
+    }
+
+    li.sent a {
+        color: #114713;
+    }
+
+    li.edit {
+        color: #8f8e8e;
+    }
+
+    li.edit a {
+        color: #8f8e8e;
+    }
 </style>
 
 
@@ -127,34 +147,27 @@
 
             <section>
                 <legend>
-                    Отправленные отчеты
+                    Отчеты
                 </legend>
 
                 <ul class="unstyled">
                     <c:forEach items="${reports}" var="r">
-
                         <li>
                             <ul class="inline">
-                                <li>${r.startDate}</li>
-                                <li>
-                                    <c:choose>
-                                        <c:when test="${r.type == 'MOBILE'}">
-                                            Мобильный
-                                        </c:when>
-                                        <c:otherwise>
-                                            Публичка
-                                        </c:otherwise>
-                                    </c:choose>
-                                </li>
-                                <li>
-                                    <c:choose>
-                                        <c:when test="${r.period == 'MONTH'}">
-                                            Ежемесячный
-                                        </c:when>
-                                        <c:otherwise>
-                                            Квартальный
-                                        </c:otherwise>
-                                    </c:choose>
+                                <li class="report ${r.accepted ? 'sent' : 'edit'}">
+                                    <a href="report?id=${r.id}">
+                                        <fmt:formatDate pattern="MMMMM yyyy" value="${r.startDate}"/>
+                                    </a>
+                                    <span>
+                                        <c:choose>
+                                            <c:when test="${r.accepted}">
+                                                (отправлен)
+                                            </c:when>
+                                            <c:otherwise>
+                                                (редактируется)
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </span>
                                 </li>
                             </ul>
                         </li>
