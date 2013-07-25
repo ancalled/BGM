@@ -79,7 +79,7 @@ public interface CatalogStorage {
 
     List<CustomerReportItem> getCustomerReportsItems(long reportId, int from, int size);
 
-    List<CalculatedReportItem> calculatePublicReport(String catalog);
+    List<CalculatedReportItem> calculatePublicReport(String platform, Date from, Date to);
 
     List<CalculatedReportItem> calculateMobileReport(String platform, Date from, Date to);
 

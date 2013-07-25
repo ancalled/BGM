@@ -1050,20 +1050,20 @@ public class DbStorage implements CatalogStorage {
 
 
     @Override
-    public List<CalculatedReportItem> calculatePublicReport(final String catalogName) {
-        if (catalogName == null) return null;
+    public List<CalculatedReportItem> calculatePublicReport(final String platform, final Date from, final Date to) {
+        if (platform == null) return null;
 
         return query(new Action<List<CalculatedReportItem>>() {
             @Override
             public List<CalculatedReportItem> execute(Connection con) throws SQLException {
 
-                PreparedStatement ps = con.prepareStatement("SELECT\n" +
+                PreparedStatement stmt = con.prepareStatement("SELECT\n" +
                         "  i.id,\n" +
                         "  c.code,\n" +
                         "  replace(c.name, CHAR(9), ' ') name,\n" +
                         "  replace(c.artist, CHAR(9), ' ') artist,\n" +
                         "  replace(c.composer, CHAR(9), ' ') composer,\n" +
-                        "  cat.right_type right_type,\n" +
+                        "  IF(cat.right_type = 1, 'author', 'related') right_type,\n" +
                         "  p.name platform,\n" +
                         "  cat.name catalog,\n" +
                         "\n" +
@@ -1086,18 +1086,22 @@ public class DbStorage implements CatalogStorage {
                         "    ON (i.report_id = r.id)\n" +
                         "\n" +
                         "\n" +
-                        "WHERE\n" +
-                        "  cat.platform_id = 1\n" +
+                        "WHERE p.name = ?\n" +
+                        "      AND r.accepted=true \n" +
                         "      AND r.type = 1\n" +
-                        "      AND cat.right_type = ?\n" +
-                        "      AND i.composition_id > 0\n" +
+                        "      AND r.start_date BETWEEN ? AND ?\n" +
+                        "      AND i.detected = true\n" +
+                        "      AND (i.deleted IS NULL OR NOT i.deleted)\n" +
                         "\n" +
                         "GROUP BY i.composition_id\n;",
                         ResultSet.TYPE_FORWARD_ONLY,
                         ResultSet.CONCUR_READ_ONLY);
-                ps.setInt(1, RightType.AUTHOR.ordinal());
 
-                ResultSet rs = ps.executeQuery();
+                stmt.setString(1, platform);
+                stmt.setDate(2, new java.sql.Date(from.getTime()));
+                stmt.setDate(3, new java.sql.Date(to.getTime()));
+
+                ResultSet rs = stmt.executeQuery();
 
                 List<CalculatedReportItem> result = new ArrayList<>();
 
@@ -1871,14 +1875,23 @@ public class DbStorage implements CatalogStorage {
 
     private static CalculatedReportItem parseCalculatedPublicReport(ResultSet rs) throws SQLException {
 
+
         CalculatedReportItem report = new CalculatedReportItem();
         report.setReportItemId(rs.getLong("id"));
         report.setCompositionCode(rs.getString("code"));
         report.setCompositionName(rs.getString("name"));
         report.setArtist(rs.getString("artist"));
+        report.setComposer(rs.getString("composer"));
+        report.setPrice(rs.getFloat("price"));
         report.setQty(rs.getInt("totalQty"));
+        report.setContentType(rs.getString("content_type"));
+        report.setVol(rs.getFloat("vol"));
+        report.setShareMobile(rs.getFloat("sharePublic"));
+        report.setCustomerRoyalty(rs.getFloat("royalty"));
+        report.setCatalogRoyalty(rs.getFloat("cat_royalty"));
+        report.setRevenue(rs.getFloat("revenue"));
         report.setCatalog(rs.getString("catalog"));
-        report.setSharePublic(rs.getFloat("sharePublic"));
+        report.setCopyright(rs.getString("right_type"));
         return report;
     }
 

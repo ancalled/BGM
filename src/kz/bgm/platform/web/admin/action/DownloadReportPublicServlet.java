@@ -38,24 +38,24 @@ public class DownloadReportPublicServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
-        String catalogName = req.getParameter("catalog");
-        //todo finish gui part of calculated catalog downloading
-
-        log.info("LoadPublicReportServlet.doPost building reports");
-
-        List<CalculatedReportItem> reportsList = storage.calculatePublicReport(catalogName);
-
-        log.info("Calculated reports built at size " + reportsList.size());
-
-
-        String output = String.format(PUBLIC_OUTPUTNAME, new Date());
-
-        ReportBuilder.buildReport(PUBLIC_TEMPLATE, output, reportsList);
-
-        req.setAttribute("reports", reportsList);
-
-        //todo make try catch
-        req.getRequestDispatcher("/admin/reports.html").forward(req, resp);
+//        String catalogName = req.getParameter("catalog");
+//        //todo finish gui part of calculated catalog downloading
+//
+//        log.info("LoadPublicReportServlet.doPost building reports");
+//
+//        List<CalculatedReportItem> reportsList = storage.calculatePublicReport(catalogName);
+//
+//        log.info("Calculated reports built at size " + reportsList.size());
+//
+//
+//        String output = String.format(PUBLIC_OUTPUTNAME, new Date());
+//
+//        ReportBuilder.buildReport(PUBLIC_TEMPLATE, output, reportsList);
+//
+//        req.setAttribute("reports", reportsList);
+//
+//        //todo make try catch
+//        req.getRequestDispatcher("/admin/reports.html").forward(req, resp);
 
 
     }

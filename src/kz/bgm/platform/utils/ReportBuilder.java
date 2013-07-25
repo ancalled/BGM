@@ -274,7 +274,8 @@ public class ReportBuilder {
         CatalogStorage storage = CatalogFactory.getStorage();
 
 
-        List<CalculatedReportItem> items = storage.calculateMobileReport(platform, from, to);
+//        List<CalculatedReportItem> items = storage.calculateMobileReport(platform, from, to);
+        List<CalculatedReportItem> items = storage.calculatePublicReport(platform, from, to);
 
         System.out.println("Got " + items.size() + " items.");
 
