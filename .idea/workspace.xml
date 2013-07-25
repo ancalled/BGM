@@ -25,7 +25,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/patch2.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/patch2.sql" afterPath="$PROJECT_DIR$/data/patch2.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bgm-platform.iws" />
@@ -188,10 +188,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="patch2.sql" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="patch2.sql" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/patch2.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="58" selection-start="187" selection-end="187" vertical-scroll-proportion="0.06726457" vertical-offset="0" max-vertical-offset="669">
+            <state line="3" column="49" selection-start="112" selection-end="161" vertical-scroll-proportion="-1.5517242" vertical-offset="0" max-vertical-offset="180">
               <folding />
             </state>
           </provider>
@@ -213,15 +213,17 @@
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/customer/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
             <state line="37" column="23" selection-start="1265" selection-end="1265" vertical-scroll-proportion="-16.833334" vertical-offset="151" max-vertical-offset="2925">
-              <folding />
+              <folding>
+                <marker date="1374746161572" expanded="true" signature="5820:5943" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BGM datasource" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="BGM datasource" pinned="false" current="true" current-in-tab="true">
         <entry file="dbDummy://db-console:/4e802f14/b1ed7fcf-b56a-49b0-a869-b1a4c75c3585/">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="151" column="0" selection-start="3335" selection-end="3522" vertical-scroll-proportion="-8.275862" vertical-offset="2025" max-vertical-offset="4050">
+            <state line="262" column="13" selection-start="4799" selection-end="5961" vertical-scroll-proportion="2.6493506" vertical-offset="3726" max-vertical-offset="4110">
               <folding />
             </state>
           </provider>
@@ -269,7 +271,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="db-console:/4e802f14/b1ed7fcf-b56a-49b0-a869-b1a4c75c3585/" />
         <option value="dbtable:/4e802f14/b1ed7fcf-b56a-49b0-a869-b1a4c75c3585/bgm_db..customer" />
         <option value="dbtable:/4e802f14/b1ed7fcf-b56a-49b0-a869-b1a4c75c3585/bgm_db..user" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/utils/ReportParser.java" />
@@ -285,6 +286,7 @@
         <option value="$PROJECT_DIR$/web/WEB-INF/views/customer/index.jsp" />
         <option value="$PROJECT_DIR$/web/WEB-INF/views/customer/report.jsp" />
         <option value="$PROJECT_DIR$/data/patch2.sql" />
+        <option value="db-console:/4e802f14/b1ed7fcf-b56a-49b0-a869-b1a4c75c3585/" />
       </list>
     </option>
   </component>
@@ -1368,9 +1370,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="53" y="24" width="1547" height="876" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5285525" sideWeight="0.493517" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.7861886" sideWeight="0.493517" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5444887" sideWeight="0.49713057" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1392,7 +1394,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.250501" sideWeight="0.6719788" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.250501" sideWeight="0.6719788" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5139442" sideWeight="0.45137763" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1801,7 +1803,9 @@
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/customer/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="37" column="23" selection-start="1265" selection-end="1265" vertical-scroll-proportion="-16.833334" vertical-offset="151" max-vertical-offset="2925">
-          <folding />
+          <folding>
+            <marker date="1374746161572" expanded="true" signature="5820:5943" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1812,21 +1816,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://db-console:/4e802f14/b1ed7fcf-b56a-49b0-a869-b1a4c75c3585/">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="151" column="0" selection-start="3335" selection-end="3522" vertical-scroll-proportion="-8.275862" vertical-offset="2025" max-vertical-offset="4050">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/patch2.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="58" selection-start="187" selection-end="187" vertical-scroll-proportion="0.06726457" vertical-offset="0" max-vertical-offset="669">
+        <state line="3" column="49" selection-start="112" selection-end="161" vertical-scroll-proportion="-1.5517242" vertical-offset="0" max-vertical-offset="180">
           <folding />
         </state>
       </provider>
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
+      </provider>
+    </entry>
+    <entry file="dbDummy://db-console:/4e802f14/b1ed7fcf-b56a-49b0-a869-b1a4c75c3585/">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="262" column="13" selection-start="4799" selection-end="5961" vertical-scroll-proportion="2.6493506" vertical-offset="3726" max-vertical-offset="4110">
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>
