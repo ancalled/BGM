@@ -4,8 +4,8 @@ import kz.bgm.platform.model.domain.Track;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import kz.bgm.platform.utils.jasperreports.BasketReport;
-//import net.sf.jasperreports.engine.*;
-//import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -22,13 +22,18 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 
+//import net.sf.jasperreports.engine.*;
+//import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+
 public class DownloadBasketReportServlet extends HttpServlet {
 
 
     private static final Logger log = Logger.getLogger(DownloadBasketReportServlet.class);
 
     private static final String appDir = System.getProperty("user.dir");
-    public static final String REPORT_FILE_PATH = appDir + "/data/basket-reports/basket-report.pdf";
+    public static final String REPORT_DIR_PATH = appDir + "/data/basket-reports";
+    public static final String REPORT_FILE_PATH = REPORT_DIR_PATH +
+            "/basket-report.pdf";
     public static final String BASKET_PATH = "/WEB-INF/views/customer/basket.jsp";
 
     private CatalogStorage catalogService;
@@ -86,7 +91,6 @@ public class DownloadBasketReportServlet extends HttpServlet {
     private void sendFileToClient(HttpServletResponse resp)
             throws IOException {
         resp.setContentType("application/pdf");
-
         File reportFile = new File(REPORT_FILE_PATH);
         FileInputStream fis = new FileInputStream(reportFile);
         OutputStream out = resp.getOutputStream();

@@ -28,6 +28,8 @@
         <thead>
         <tr>
             <th>Название</th>
+            <th>Авторские</th>
+            <th>Смежные</th>
             <th>Ставка</th>
             <%--<th>Договор</th>--%>
             <th>Тит организации</th>
@@ -42,7 +44,8 @@
             <tr>
                 <td><a href="customer-detail?customer_id=${c.id}">${c.name} </a>
                 </td>
-                <td>${c.royalty}</td>
+                <td>${c.authorRoyalty}</td>
+                <td>${c.relatedRoyalty}</td>
                 <%--<td>${c.contract}</td>--%>
                 <td>
                     <c:choose>
