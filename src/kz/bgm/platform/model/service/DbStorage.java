@@ -836,13 +836,12 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-
     public boolean acceptReport(final long reportId) {
         return query(new Action<Boolean>() {
             @Override
             public Boolean execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "UPDATE customer_report SET accepted=true WHERE id=?",
+                        "UPDATE customer_report SET accepted=TRUE WHERE id=?",
                         ResultSet.TYPE_FORWARD_ONLY,
                         ResultSet.CONCUR_READ_ONLY);
                 stmt.setLong(1, reportId);
@@ -1309,7 +1308,6 @@ public class DbStorage implements CatalogStorage {
                 long updateId = rs.getLong(1);
 
                 update.setId(updateId);
-
 
                 //create a clone structure as composition
                 PreparedStatement stmt = con.prepareStatement(

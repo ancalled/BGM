@@ -59,10 +59,7 @@ public class UpdateCatalogServlet extends HttpServlet {
             if (fields == null) {
 //                resp.sendRedirect(RESULT_URL + "?er=no-file-reports-uploaded");
                 log.warn("No multipart fields found");
-                jsonObj.put("status", "error");
-                jsonObj.put("er", "no-file-reports-uploaded");
-                jsonObj.writeJSONString(out);
-
+                errorNoFileReport(out, jsonObj);
                 return;
             }
 
@@ -72,9 +69,7 @@ public class UpdateCatalogServlet extends HttpServlet {
 
             if (catalogId == null || item == null) {
 //                resp.sendRedirect(RESULT_URL + "?er=no-file-reports-uploaded");
-                jsonObj.put("status", "error");
-                jsonObj.put("er", "no-file-reports-uploaded");
-                jsonObj.writeJSONString(out);
+                errorNoFileReport(out, jsonObj);
                 return;
             }
 
@@ -136,6 +131,12 @@ public class UpdateCatalogServlet extends HttpServlet {
             jsonObj.writeJSONString(out);
 
         }
+    }
+
+    private void errorNoFileReport(PrintWriter out, JSONObject jsonObj) throws IOException {
+        jsonObj.put("status", "error");
+        jsonObj.put("er", "no-file-reports-uploaded");
+        jsonObj.writeJSONString(out);
     }
 
 

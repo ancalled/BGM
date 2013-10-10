@@ -20,7 +20,6 @@
             padding-bottom: 7px;
         }
 
-
         .dragtable-sortable {
             list-style-type: none;
             margin: 0;
@@ -147,25 +146,24 @@
                 </dl>
 
 
-
             </section>
 
         </div>
 
         <%--<div class="span4">--%>
-            <%--<div id="random-tracks">--%>
-                <%--<h4>Случайно всплыло:</h4>--%>
+        <%--<div id="random-tracks">--%>
+        <%--<h4>Случайно всплыло:</h4>--%>
 
-                <%--<ul class="unstyled">--%>
-                    <%--<c:forEach var="t" items="${randomTracks}">--%>
-                        <%--<li>--%>
-                            <%--<a href="#">--%>
-                                    <%--${t.name}<c:if test="${not empty t.artist}">: ${t.artist}</c:if>--%>
-                            <%--</a>--%>
-                        <%--</li>--%>
-                    <%--</c:forEach>--%>
-                <%--</ul>--%>
-            <%--</div>--%>
+        <%--<ul class="unstyled">--%>
+        <%--<c:forEach var="t" items="${randomTracks}">--%>
+        <%--<li>--%>
+        <%--<a href="#">--%>
+        <%--${t.name}<c:if test="${not empty t.artist}">: ${t.artist}</c:if>--%>
+        <%--</a>--%>
+        <%--</li>--%>
+        <%--</c:forEach>--%>
+        <%--</ul>--%>
+        <%--</div>--%>
         <%--</div>--%>
     </div>
 
@@ -247,6 +245,7 @@
                 </div>
 
                 <input type="hidden" name="catId" value="${catalog.id}">
+                <input type="button" id="test" value="TEST">
 
 
                 <%--<div id="upload-options">--%>
@@ -331,7 +330,6 @@
             }
         });
 
-
         $("#fileinput").on('change', function (e) {
             var f = this.files[0];
             if (this.files && f) {
@@ -345,7 +343,27 @@
             }
         });
 
+
     });
+
+    $("#test").click(askForDone());
+    function askForDone() {
+        for (; ;) {
+            $.ajax({
+                url: "../action/dbActivityServlet",
+                dataType: 'json',
+                error: function () {
+
+                    alert("Error Occured");
+                },
+                success: function (data) {
+                    alert(data.status);
+                }
+            });
+        }
+        ;
+
+    }
 
 
     function processContents(contents, delim) {

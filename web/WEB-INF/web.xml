@@ -35,6 +35,8 @@
         <servlet-class>kz.bgm.platform.web.admin.DispatcherServlet</servlet-class>
     </servlet>
 
+    
+    
 
     <servlet>
         <servlet-name>adminSearchServlet</servlet-name>
@@ -227,6 +229,10 @@
         <servlet-name>acceptReportServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.customer.action.AcceptReportServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>activityServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.DBActivityServlet</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -277,6 +283,10 @@
     <servlet-mapping>
         <servlet-name>acceptReportServlet</servlet-name>
         <url-pattern>/customer/action/accept-report</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>activityServlet</servlet-name>
+        <url-pattern>admin/action/dbActivityServlet</url-pattern>
     </servlet-mapping>
 
 </web-app>
