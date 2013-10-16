@@ -210,6 +210,7 @@
 
             <form class="form-horizontal" action="../action/update-catalog" method="post"
                   enctype="multipart/form-data">
+
                 <div class="fileupload fileupload-new" data-provides="fileupload">
                     <div class="input-append">
                         <div class="uneditable-input span3">
@@ -221,7 +222,6 @@
                 <span class="btn btn-fileName">
                     <span class="fileupload-new">Выбрать обновление</span>
                     <span class="fileupload-exists">Изменить</span>
-
                     <input name="file" type="file" id="fileinput" accept=".csv" data-url="../action/update-catalog"/>
                 </span>
 
@@ -245,8 +245,10 @@
                 </div>
 
                 <input type="hidden" name="catId" value="${catalog.id}">
-                <input type="button" id="test" value="TEST">
+                <%--<input type="button" id="test" onclick="askForDone()" value="TEST">--%>
 
+                <br>
+                <span id="example">Файл csv должен содержать следующие поля</span>
 
                 <%--<div id="upload-options">--%>
                 <%--<div class="control-group">--%>
@@ -283,6 +285,9 @@
     var fileData;
     var delimiter = ';';
     var headers = ['#', 'code', 'name', 'composer', 'artist', 'share mobile', 'share public'];
+    var testData = [
+        ['1', 'Код композиции', 'Название песни', 'Имя автора','Имя исполнителя', 'Моб.контент', 'Публичка']
+    ];
 
 
     $(document).ready(function () {
@@ -346,23 +351,24 @@
 
     });
 
-    $("#test").click(askForDone());
+    var tbl_test = buildTable(testData, headers, 0, 1, "preview-table", 'table table-bordered preview');
+
+    var $preview = $("#preview-container");
+    $preview.addClass('csv-preview');
+    $preview.html(tbl_test);
+
     function askForDone() {
-        for (; ;) {
-            $.ajax({
-                url: "../action/dbActivityServlet",
-                dataType: 'json',
-                error: function () {
 
-                    alert("Error Occured");
-                },
-                success: function (data) {
-                    alert(data.status);
-                }
-            });
-        }
-        ;
-
+        $.ajax({
+            url: "../action/dbActivityServlet",
+            dataType: 'json',
+            error: function () {
+                alert("Error Occured");
+            },
+            success: function (data) {
+                alert(data.status);
+            }
+        });
     }
 
 
@@ -377,6 +383,8 @@
         }
 
         var tbl = buildTable(data, headers, 0, rowsOnPreview, "preview-table", 'table table-bordered preview');
+
+        $('#example').html('');
 
         var $preview = $("#preview-container");
         $preview.addClass('csv-preview');
