@@ -170,7 +170,7 @@
 <section>
 
     <div class="pagination pagination-centered">
-        <ul>
+        <ul id="pages">
             <c:choose>
                 <c:when test="${from >= size}">
                     <li><a href="report?id=${report.id}&from=${from - size}">&laquo;</a></li>
@@ -179,14 +179,12 @@
                     <li class="disabled"><a href="#">&laquo;</a></li>
                 </c:otherwise>
             </c:choose>
-
             <c:forEach var="i" begin="1" end="${(report.detected / size) + 1}" step="1"
                        varStatus="status">
-                <li class="${from == (i - 1) * size ? 'active' : ''}">
-                    <a href="report?id=${report.id}&from=${(i - 1) * size}">${i}</a>
-                </li>
+            <li class="${from == (i - 1) * size ? 'active' : ''}">
+                <a href="report?id=${report.id}&from=${(i - 1) * size}">${i}</a>
+            </li>
             </c:forEach>
-
             <c:choose>
                 <c:when test="${from + size < update.crossing}">
                     <li><a href="report?id=${report.id}&from=${from + size}">&raquo;</a></li>
@@ -359,6 +357,8 @@
                         }
                     });
         });
+
+//        alert($('#pages li').eq(-2).remove());
 
     });
 
