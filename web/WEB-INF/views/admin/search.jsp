@@ -72,6 +72,14 @@
             margin-top: 15px;
         }
 
+        .light {
+            opacity: 0.4;
+        }
+
+        .dark {
+            opacity: 1;
+        }
+
     </style>
 </head>
 <body>
@@ -200,7 +208,6 @@
                     <thead>
                     <tr>
                             <%--<th>#</th>--%>
-                        <th></th>
                         <th>Код</th>
                         <th>Композиция</th>
                         <th>Исполнитель</th>
@@ -208,6 +215,7 @@
                         <th>Мобильный контент</th>
                         <th>Публичка</th>
                         <th>Каталог</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -227,7 +235,6 @@
                     <c:forEach var="r" items="${tracks}" varStatus="s">
                         <tr class="${fn:toLowerCase(lastComposer)eq fn:toLowerCase(r.track.composer) &&
                         fn:toLowerCase(lastName)eq fn:toLowerCase(r.track.name)? 'same-track' : ''}">
-                                <%--<td>${s.index + 1}</td>--%>
                             <td class="score"><fmt:formatNumber type="number" pattern="##.##"
                                                                 value="${r.score}"/></td>
                             <td>${r.track.code}</td>
@@ -241,7 +248,9 @@
                                         ${r.track.catalog}
                                 </span>
                             </td>
+                            <td class="light"><i class="icon-wrench"></i></td>
                         </tr>
+
                         <c:set var="lastComposer" value="${r.track.composer}"/>
                         <c:set var="lastName" value="${r.track.name}"/>
                     </c:forEach>
@@ -328,6 +337,7 @@
             $('#all-field').prop('checked', true);
         }
 
+
     }
 
     function getParameterByName(name) {
@@ -339,6 +349,24 @@
             return "";
         else
             return decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+    var lightElements = document.getElementsByClassName("light");
+
+    for (var i = 0; i < lightElements.length; i++) {
+
+        lightElements[i].onmouseover = function () {
+            this.className = 'dark';
+
+        };
+
+        lightElements[i].onmouseout = function () {
+            this.className = 'light';
+        };
+
+        lightElements[i].onmousedown = function(){
+            window.location.replace("/admin/view/edit-track");
+        }
     }
 
 

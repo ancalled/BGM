@@ -11,6 +11,8 @@
 
 
 
+
+
     <filter>
         <filter-name>adminAuthFilter</filter-name>
         <filter-class>kz.bgm.platform.web.admin.AuthFilter</filter-class>
@@ -233,6 +235,10 @@
         <servlet-name>activityServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.DBActivityServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>editTrackServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.EditTrackServlet</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -287,6 +293,10 @@
     <servlet-mapping>
         <servlet-name>activityServlet</servlet-name>
         <url-pattern>admin/action/dbActivityServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>editTrackServlet</servlet-name>
+        <url-pattern>admin/action/edit-track</url-pattern>
     </servlet-mapping>
 
 </web-app>
