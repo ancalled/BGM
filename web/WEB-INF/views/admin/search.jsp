@@ -23,6 +23,11 @@
             display: block;
         }
 
+        span.catalog {
+            border-radius: 3;
+            padding: 0 4px 0 4px;
+        }
+
         .search-result  table.table {
             font-size: 10pt;
         }
@@ -51,6 +56,12 @@
 
         td.centered {
             text-align: center;
+        }
+
+        tr.same-track td {
+            border-top: none;
+            /*padding: 5px 0 0 0;*/
+            line-height: 15px;
         }
 
         td.score {
@@ -139,8 +150,6 @@
                                 </label>
 
 
-
-
                             </fieldset>
                         </div>
 
@@ -203,8 +212,21 @@
                     </thead>
                     <tbody>
 
+                    <c:set var="lastComposer" value="none"/>
+                    <c:set var="lastName" value="none"/>
+
+                    <jsp:useBean id="colorRandom" class="kz.bgm.platform.utils.ColorRandom" scope="application"/>
+                    <jsp:useBean id="colors" class="java.util.HashMap" scope="request"/>
+                    <c:forEach var="p" items="${platforms}">
+
+                        <c:forEach var="catalog" items="${p.catalogs}">
+                            <c:set target="${colors}" property="${catalog.name}" value="${colorRandom.colorName}"/>
+                        </c:forEach>
+                    </c:forEach>
+
                     <c:forEach var="r" items="${tracks}" varStatus="s">
-                        <tr>
+                        <tr class="${fn:toLowerCase(lastComposer)eq fn:toLowerCase(r.track.composer) &&
+                        fn:toLowerCase(lastName)eq fn:toLowerCase(r.track.name)? 'same-track' : ''}">
                                 <%--<td>${s.index + 1}</td>--%>
                             <td class="score"><fmt:formatNumber type="number" pattern="##.##"
                                                                 value="${r.score}"/></td>
@@ -214,8 +236,14 @@
                             <td>${r.track.composer}</td>
                             <td>${r.track.mobileShare}</td>
                             <td> ${r.track.publicShare}</td>
-                            <td>${r.track.catalog}</td>
+                            <td>
+                                <span class="catalog" style="background: ${colors[r.track.catalog]}">
+                                        ${r.track.catalog}
+                                </span>
+                            </td>
                         </tr>
+                        <c:set var="lastComposer" value="${r.track.composer}"/>
+                        <c:set var="lastName" value="${r.track.name}"/>
                     </c:forEach>
 
                     </tbody>

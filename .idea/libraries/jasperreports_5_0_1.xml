@@ -2,6 +2,11 @@
   <library name="jasperreports-5.0.1">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/jasperreports/jasperreports-5.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jasperreports/commons-digester-2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jasperreports/commons-collections-2.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jasperreports/commons-beanutils-1.8.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jasperreports/groovy-all-2.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jasperreports/iText-2.1.7.js2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

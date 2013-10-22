@@ -27,6 +27,11 @@
             font-size: 10pt;
         }
 
+        span.catalog {
+            border-radius: 3;
+            padding: 0 4px 0 4px;
+        }
+
         div.catalog-title {
             font-weight: bold;
             margin: 5px 0 8px 0;
@@ -59,21 +64,6 @@
 
         label.separated {
             margin-top: 15px;
-        }
-
-        .author {
-            padding: 0 4px 0 4px;
-            background: #ffe9c9;
-        }
-
-        .related {
-            padding: 0 4px 0 4px;
-            background: #cdfef9;
-        }
-
-        .author_related {
-            padding: 0 4px 0 4px;
-            background: #e6e6e6;
         }
 
         tr.same-track td {
@@ -269,7 +259,7 @@
                             </c:choose>
 
                             <td>
-                                <span style="background: ${colors[r.track.catalog]}">
+                                <span class="catalog" style="background: ${colors[r.track.catalog]}">
                                         ${r.track.catalog}
                                 </span>
                             </td>
