@@ -706,6 +706,11 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+    @Override
+    public long getUpdateCatalogQueryId() {
+        return 0;
+    }
+
 
     @Override
     public void saveCustomerReportItems(final List<CustomerReportItem> items) {
@@ -1323,8 +1328,7 @@ public class DbStorage implements CatalogStorage {
                                 "SET update_id=?,\n" +
                                 "  catalog_id=?,\n" +
                                 "  shareMobile=IF(@shareMobile != '', @shareMobile, 0),\n" +
-                                "  sharePublic=IF(@sharePublic != '', @sharePublic, 0)"
-                );
+                                "  sharePublic=IF(@sharePublic != '', @sharePublic, 0)");
 
                 stmt.setString(1, update.getFilePath());
                 stmt.setString(2, update.getEncoding());
@@ -1375,6 +1379,24 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+
+    public String getQueryProcessTime(final long queryProcessId) {
+        return query(new Action<String>() {
+            @Override
+            public String execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT time FROM INFORMATION_SCHEMA.PROCESSLIST WHERE info LIKE '%id" + queryProcessId + "%'");
+
+                stmt.execute();
+                ResultSet rs = stmt.getResultSet();
+                if (rs.next()) {
+                    return rs.getString(1);
+                }
+
+                return null;
+            }
+        });
+    }
 
     public Long saveCatalogUpdate(final CatalogUpdate update) {
         return query(new Action<Long>() {

@@ -318,7 +318,23 @@ public class DispatcherServlet extends HttpServlet {
                 action = new Action() {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
+                        String idStr = req.getParameter("id");
+                        long id = 0;
+                        if (idStr != null) {
 
+                            try {
+                                id = Long.parseLong(idStr);
+                            } catch (NumberFormatException ne) {
+                                ne.printStackTrace();
+                                return "edit-track";
+                            }
+
+                            Track track = catalogStorage.getTrack(id);
+                            List<Platform> platforms = catalogStorage.getAllPlatforms();
+
+                            req.setAttribute("track", track);
+                            req.setAttribute("platforms", platforms);
+                        }
                         return "edit-track";
                     }
                 };

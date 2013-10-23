@@ -63,6 +63,9 @@ public interface CatalogStorage {
 
     long saveCustomerReportItem(CustomerReportItem item);
 
+    long getUpdateCatalogQueryId();
+
+    String getQueryProcessTime(long processId);
 
     void saveCustomerReportItems(List<CustomerReportItem> reportItemList);
 

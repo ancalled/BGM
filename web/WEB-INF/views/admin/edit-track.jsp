@@ -27,67 +27,98 @@
 
     <div class="row text-left">
         <legend>
-            Корректировка трека
+            Редактирование композиции
         </legend>
     </div>
     <div class="span4">
-        <%--  private long id = 0L;
-          private int catalogId = 0;
-          private String catalog = "";
-          private String code = "";
-          private String artist = "";
-          private String name = "";
-          private String composer = "";
-          private float publicShare = 0F;
-          private float mobileShare = 0F;
-          private Catalog foundCatalog;--%>
 
         <form action="admin/action/edit-track" method="post" enctype="">
             <label>
                 Код
-                <input type="text" name="code" class="input-block-level" required="true">
+                <input type="text" name="code" class="input-block-level" value="${track.code}" required="true">
             </label>
             <label>
                 Имя
-                <input type="text" name="name" class="input-block-level" required="true">
+                <input type="text" name="name" class="input-block-level" value="${track.name}" required="true">
             </label>
             <label>
                 Артист
-                <input type="text" name="artist" class="input-block-level" required="true">
+                <input type="text" name="artist" class="input-block-level" value="${track.artist}" required="true">
             </label>
             <label>
                 Автор
-                <input type="text" name="composer" class="input-block-level" required="true">
+                <input type="text" name="composer" class="input-block-level" value="${track.composer}" required="true">
             </label>
             <label>
                 Мобильный контент
-                <input type="text" name="mobile-share" class="input-block-level" required="true">
+                <input type="text" name="mobile-share" class="input-block-level" value="${track.mobileShare}"
+                       required="true">
             </label>
             <label>
                 Публичка
-                <input type="text" name="public-share" class="input-block-level" required="true">
+                <input type="text" name="public-share" class="input-block-level" value="${track.publicShare}"
+                       required="true">
             </label>
             <label>
-                Каталог
-                <select name="catalog" id="Select1" size="4" multiple="multiple">
+                Платформа
+                <select id="platforms">
+                    <c:forEach var="pl" items="${platforms}" varStatus="s">
+                        <option value="${pl.name}">${pl.name}</option>
+                    </c:forEach>
 
-                    <option value="1">item 1</option>
+                </select>
+            </label>
 
-                    <option value="2">item 2</option>
+            <label>
+                Каталог <br>
+                <select name="catalog" id="catalogs">
+                    <c:forEach var="pl" items="${platforms}" varStatus="s">
 
-                    <option value="3">item 3</option>
+                        <c:forEach var="cat" items="${pl.catalogs}" varStatus="s">
+                            <option class="${pl.name}" value="3">${cat.name}</option>
+                        </c:forEach>
 
+                    </c:forEach>
 
                 </select>
             </label>
 
             <input type="hidden" name="track-id">
-             <br>
+            <br>
             <button class="btn" type="submit">Изменить</button>
         </form>
     </div>
 
-
 </div>
+
+<script>
+    var platformSelect = document.getElementById("platforms")
+
+    platformSelect.selectedIndex = 1;
+
+
+    platformSelect.onchange = function () {
+        var platformName = this.value;
+        var catalogSelect = document.getElementById("catalogs")
+        var catalogs = catalogSelect.getElementsByTagName('*');
+        var firstSelected = false;
+
+        for (var i = 0; i < catalogs.length; i++) {
+            if (catalogs[i].className.toLowerCase() != platformName.toLowerCase()) {
+                catalogs[i].style.display = 'none';
+            } else {
+                catalogs[i].style.display = 'block';
+
+                if (firstSelected == false) {
+                    catalogSelect.selectedIndex = i;
+                    firstSelected = true;
+                }
+            }
+        }
+
+
+    }
+</script>
+
 </body>
 </html>

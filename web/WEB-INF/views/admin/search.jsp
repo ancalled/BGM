@@ -208,6 +208,7 @@
                     <thead>
                     <tr>
                             <%--<th>#</th>--%>
+                        <th></th>
                         <th>Код</th>
                         <th>Композиция</th>
                         <th>Исполнитель</th>
@@ -248,7 +249,7 @@
                                         ${r.track.catalog}
                                 </span>
                             </td>
-                            <td class="light"><i class="icon-wrench"></i></td>
+                            <td class="light" id=${r.track.id}><i class="icon-wrench"></i></td>
                         </tr>
 
                         <c:set var="lastComposer" value="${r.track.composer}"/>
@@ -364,8 +365,8 @@
             this.className = 'light';
         };
 
-        lightElements[i].onmousedown = function(){
-            window.location.replace("/admin/view/edit-track");
+        lightElements[i].onmousedown = function () {
+            window.location.replace("/admin/view/edit-track?id=" + this.id);
         }
     }
 
