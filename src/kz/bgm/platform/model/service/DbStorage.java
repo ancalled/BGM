@@ -1215,6 +1215,29 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
+    public Integer updateTrack(final Track track) {
+        return query(new Action<Integer>() {
+            public Integer execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "UPDATE composition SET catalog_id=?, code=?," +
+                                "name=?,artist=?,composer=?," +
+                                "shareMobile=?,sharePublic=? WHERE id = ?");
+
+                stmt.setLong(1, track.getCatalogId());
+                stmt.setString(2, track.getCode());
+                stmt.setString(3, track.getName());
+                stmt.setString(4, track.getArtist());
+                stmt.setString(5, track.getComposer());
+                stmt.setFloat(6, track.getMobileShare());
+                stmt.setFloat(7, track.getPublicShare());
+                stmt.setFloat(8, track.getId());
+                return stmt.executeUpdate();
+            }
+        });
+
+    }
+
+    @Override
     public void removeUser(final long id) {
         queryVoid(new VoidAction() {
             public void execute(Connection con) throws SQLException {

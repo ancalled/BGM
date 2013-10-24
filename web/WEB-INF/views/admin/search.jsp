@@ -269,7 +269,6 @@
 
 <script>
 
-
     var typeEl = document.getElementById('type');
     //    var searchForm = document.getElementById("searcher");
     var from_page_input = document.getElementById("from-p");
@@ -370,6 +369,11 @@
         }
     }
 
+
+    var submitParam = getParameterByName('submit');
+    if (submitParam == 'true') {
+        document.getElementById('searcher').submit();
+    }
 
 </script>
 </body>

@@ -296,7 +296,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>editTrackServlet</servlet-name>
-        <url-pattern>admin/action/edit-track</url-pattern>
+        <url-pattern>admin/action/update-track</url-pattern>
     </servlet-mapping>
 
 </web-app>

@@ -126,5 +126,8 @@ public interface CatalogStorage {
     void removeItemFromReport(long itemId);
 
     List<Long> getAvailableCatalogs(long customerId);
+
+    Integer updateTrack(Track track);
+
 }
 

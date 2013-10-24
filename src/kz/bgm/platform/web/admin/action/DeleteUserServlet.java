@@ -17,6 +17,7 @@ public class DeleteUserServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
+        super.init();
         storage = CatalogFactory.getStorage();
     }
 

@@ -32,7 +32,8 @@
     </div>
     <div class="span4">
 
-        <form action="admin/action/edit-track" method="post" enctype="">
+        <form action="/admin/action/update-track" method="post">
+            <input type="hidden" name="track-id" value="${track.id}">
             <label>
                 Код
                 <input type="text" name="code" class="input-block-level" value="${track.code}" required="true">
@@ -75,15 +76,14 @@
                     <c:forEach var="pl" items="${platforms}" varStatus="s">
 
                         <c:forEach var="cat" items="${pl.catalogs}" varStatus="s">
-                            <option class="${pl.name}" value="3">${cat.name}</option>
+                            <option class="${pl.name}" id="${cat.id}">${cat.name}</option>
                         </c:forEach>
 
                     </c:forEach>
 
                 </select>
             </label>
-
-            <input type="hidden" name="track-id">
+            <input type=hidden id="cat-id" name="cat-id">
             <br>
             <button class="btn" type="submit">Изменить</button>
         </form>
@@ -92,14 +92,21 @@
 </div>
 
 <script>
-    var platformSelect = document.getElementById("platforms")
+    var catalogSelect = document.getElementById("catalogs");
+    var catIdEL = document.getElementById("cat-id");
+
+    catalogSelect.onchange = function () {
+        $('#cat-id').val(this.options[this.selectedIndex].id);
+    }
+
+
+    var platformSelect = document.getElementById("platforms");
 
     platformSelect.selectedIndex = 1;
 
-
     platformSelect.onchange = function () {
         var platformName = this.value;
-        var catalogSelect = document.getElementById("catalogs")
+
         var catalogs = catalogSelect.getElementsByTagName('*');
         var firstSelected = false;
 
