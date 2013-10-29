@@ -1312,12 +1312,14 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+    private int queryId=0;
 
     public CatalogUpdate updateCatalog(final CatalogUpdate update) {
         return query(new Action<CatalogUpdate>() {
             @Override
             public CatalogUpdate execute(Connection con) throws SQLException {
 
+                queryId++;
 
                 PreparedStatement ps =
                         con.prepareStatement(
@@ -1339,7 +1341,7 @@ public class DbStorage implements CatalogStorage {
 
                 //create a clone structure as composition
                 PreparedStatement stmt = con.prepareStatement(
-                        "LOAD DATA LOCAL INFILE ?\n" +
+                        "@proc_id = " + queryId + " LOAD DATA LOCAL INFILE ?\n" +
                                 "INTO TABLE comp_tmp\n" +
                                 "CHARACTER SET ?\n" +
                                 "FIELDS TERMINATED BY ?\n" +
@@ -1408,7 +1410,7 @@ public class DbStorage implements CatalogStorage {
             @Override
             public String execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT time FROM INFORMATION_SCHEMA.PROCESSLIST WHERE info LIKE '%id" + queryProcessId + "%'");
+                        "SELECT time FROM INFORMATION_SCHEMA.PROCESSLIST WHERE info LIKE '%@proc_id = " + queryId + "%'");
 
                 stmt.execute();
                 ResultSet rs = stmt.getResultSet();

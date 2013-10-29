@@ -88,23 +88,46 @@ public class DownloadBasketReportServlet extends HttpServlet {
 
     }
 
-    private void sendFileToClient(HttpServletResponse resp)
-            throws IOException {
-        resp.setContentType("application/pdf");
-        File reportFile = new File(REPORT_FILE_PATH);
-        FileInputStream fis = new FileInputStream(reportFile);
-        OutputStream out = resp.getOutputStream();
+    private void sendFileToClient(HttpServletResponse resp) {
+        FileInputStream fis = null;
+        OutputStream out = null;
 
-        int read = 0;
-        byte[] bytes = new byte[1024];
+        try {
+            resp.setContentType("application/pdf");
 
-        while ((read = fis.read(bytes)) != -1) {
-            out.write(bytes, 0, read);
+            File reportFile = new File(REPORT_FILE_PATH);
+            if (!reportFile.exists()) {
+                boolean created = reportFile.createNewFile();
+                if (!created) {
+                    log.warn("Cant create file " + REPORT_FILE_PATH);
+                    return;
+                }
+            }
+
+            fis = new FileInputStream(reportFile);
+            out = resp.getOutputStream();
+
+            int read;
+            byte[] bytes = new byte[1024];
+
+            while ((read = fis.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
+            }
+
+        } catch (IOException ie) {
+            try {
+                if (fis != null) {
+                    fis.close();
+                }
+                if (out != null) {
+                    out.flush();
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
-
-        out.flush();
-        fis.close();
-        out.close();
     }
 
     private List<BasketReport> getBasketReports(List<Track> tracks) {

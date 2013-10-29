@@ -50,6 +50,22 @@
             cursor: pointer;
         }
 
+        .author {
+            padding: 0 4px 0 4px;
+            background: #ffe9c9;
+        }
+
+        .related {
+            padding: 0 4px 0 4px;
+            background: #cdfef9;
+        }
+
+        .author_related {
+            padding: 0 4px 0 4px;
+            background: #e6e6e6;
+        }
+
+
         .input-block-level {
             width: 540px;
         }
@@ -223,19 +239,23 @@
 
                     <c:set var="lastComposer" value="none"/>
                     <c:set var="lastName" value="none"/>
+                    <c:set var="lastArtist" value="none"/>
+                    <c:set var="lastCode" value="none"/>
 
                     <jsp:useBean id="colorRandom" class="kz.bgm.platform.utils.ColorRandom" scope="application"/>
                     <jsp:useBean id="colors" class="java.util.HashMap" scope="request"/>
-                    <c:forEach var="p" items="${platforms}">
+                    <%--<c:forEach var="p" items="${platforms}">--%>
 
-                        <c:forEach var="catalog" items="${p.catalogs}">
-                            <c:set target="${colors}" property="${catalog.name}" value="${colorRandom.colorName}"/>
-                        </c:forEach>
-                    </c:forEach>
+                        <%--<c:forEach var="catalog" items="${p.catalogs}">--%>
+                            <%--<c:set target="${colors}" property="${catalog.name}" value="${colorRandom.colorName}"/>--%>
+                        <%--</c:forEach>--%>
+                    <%--</c:forEach>--%>
 
                     <c:forEach var="r" items="${tracks}" varStatus="s">
                         <tr class="${fn:toLowerCase(lastComposer)eq fn:toLowerCase(r.track.composer) &&
-                        fn:toLowerCase(lastName)eq fn:toLowerCase(r.track.name)? 'same-track' : ''}">
+                        fn:toLowerCase(lastName)eq fn:toLowerCase(r.track.name)||
+                        fn:toLowerCase(lastArtist)eq fn:toLowerCase(r.track.artist&&
+                        fn:toLowerCase(lastCode)eq fn:toLowerCase(r.track.code))? 'same-track' : ''}">
                             <td class="score"><fmt:formatNumber type="number" pattern="##.##"
                                                                 value="${r.score}"/></td>
                             <td>${r.track.code}</td>
@@ -245,7 +265,7 @@
                             <td>${r.track.mobileShare}</td>
                             <td> ${r.track.publicShare}</td>
                             <td>
-                                <span class="catalog" style="background: ${colors[r.track.catalog]}">
+                                <span class="catalog ${fn:toLowerCase(r.track.foundCatalog.rightType)}" <%--style="background: ${colors[r.track.catalog]}"--%>>
                                         ${r.track.catalog}
                                 </span>
                             </td>
@@ -254,6 +274,8 @@
 
                         <c:set var="lastComposer" value="${r.track.composer}"/>
                         <c:set var="lastName" value="${r.track.name}"/>
+                        <c:set var="lastArtist" value="${r.track.artist}"/>
+                        <c:set var="lastCode" value="${r.track.code}"/>
                     </c:forEach>
 
                     </tbody>
