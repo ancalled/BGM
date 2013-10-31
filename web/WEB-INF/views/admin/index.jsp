@@ -70,6 +70,9 @@
         margin-left: 10px;
     }
 
+    .enemy-platform {
+        color: #4a0b00;
+    }
 
 </style>
 
@@ -96,7 +99,18 @@
                 <c:forEach var="p" items="${platforms}">
 
                     <h4>
-                    ${p.name}
+                    <c:choose>
+                        <c:when test="${p.rights == true}">
+                            ${p.name}
+                        </c:when>
+                        <c:otherwise>
+                            <span class="enemy-platform">
+                                    ${p.name}
+                            </span>
+                        </c:otherwise>
+                    </c:choose>
+
+
 
                     <span class="add-button add-catalog">
                         <a href="#add-catalog?platformId=${p.id}"><i class="icon-plus-sign"></i> </a>
