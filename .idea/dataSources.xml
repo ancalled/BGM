@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="1140503598">
-    <data-source source="LOCAL" name="BGM datasource" product="MySQL" version="5.5.31-0ubuntu0.12.04.2" jdbc-version="4.0" driver-name="MySQL-AB JDBC Driver" driver-version="mysql-connector-java-5.1.23 ( Revision: ${bzr.revision-id} )" uuid="b1ed7fcf-b56a-49b0-a869-b1a4c75c3585">
+  <component name="DataSourceManagerImpl" format="xml" hash="2803524811">
+    <data-source source="LOCAL" name="BGM datasource" product="MySQL" version="5.6.11" jdbc-version="4.0" driver-name="MySQL-AB JDBC Driver" driver-version="mysql-connector-java-5.1.23 ( Revision: ${bzr.revision-id} )" uuid="b1ed7fcf-b56a-49b0-a869-b1a4c75c3585">
       <extra-name-characters>#@</extra-name-characters>
       <identifier-quote-string>`</identifier-quote-string>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/bgm_db</jdbc-url>
       <user-name>root</user-name>
-      <user-password>dfc7dfcfdfc6dfc1dfc5dfd8</user-password>
+      <user-password>dfd8dfc5dfc5dfde</user-password>
       <schema-pattern>bgm_db.*</schema-pattern>
       <default-schemas>bgm_db.*</default-schemas>
       <default-dialect>MySQL</default-dialect>

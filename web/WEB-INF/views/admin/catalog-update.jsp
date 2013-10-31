@@ -6,6 +6,7 @@
 <head>
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.js"></script>
+    <script src="/js/bootstrap-tab.js"></script>
     <script src="/js/bootstrap-fileupload.js"></script>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" media="screen"/>
@@ -59,65 +60,80 @@
 </c:import>
 
 <div class="container">
-    <div class="row">
-        <div class="span12">
+<div class="row">
+<div class="span12">
 
-            <section>
-                <legend>Обновления по каталогу ${catalog.name}</legend>
+<section>
+    <legend>Обновления по каталогу ${catalog.name}</legend>
 
-                <div class="apply-pane">
+    <div class="apply-pane">
 
-                    <dl class="unstyled dl-horizontal">
-                        <dt>Файл</dt>
-                        <dd>${update.fileName}</dd>
-                        <dt>Всего треков</dt>
-                        <dd><fmt:formatNumber type="number" maxFractionDigits="3" value="${update.tracks}"/></dd>
-                        <dt>Новых / измененных</dt>
-                        <dd><fmt:formatNumber type="number" maxFractionDigits="3" value="${update.tracks - update.crossing}"/> /
-                            <fmt:formatNumber type="number" maxFractionDigits="3" value="${update.crossing}"/></dd>
-                        <dt></dt>
-                        <dd>
-                            <c:choose>
-                                <c:when test="${update.applied}">
-                                    <strong>Применен</strong>
-                                </c:when>
-                                <c:otherwise>
-                                    <%--<c:if test="${update.status == 'OK'}">--%>
-                                        <form action="../action/appy-catalog-update" method="post">
-                                            <input class="btn btn-small btn-primary apply-btn" type="submit"
-                                                   value="Применить!">
-                                            <input type="hidden" name="id" value="${update.id}">
-                                        </form>
-                                    <%--</c:if>--%>
-                                </c:otherwise>
-                            </c:choose>
+        <dl class="unstyled dl-horizontal">
+            <dt>Файл</dt>
+            <dd>${update.fileName}</dd>
+            <dt>Всего треков</dt>
+            <dd><fmt:formatNumber type="number" maxFractionDigits="3" value="${update.tracks}"/></dd>
+            <dt>Новых / измененных</dt>
+            <dd><fmt:formatNumber type="number" maxFractionDigits="3"
+                                  value="${update.tracks - update.crossing}"/> /
+                <fmt:formatNumber type="number" maxFractionDigits="3" value="${update.crossing}"/></dd>
+            <dt></dt>
+            <dd>
+                <c:choose>
+                    <c:when test="${update.applied}">
+                        <strong>Применен</strong>
+                    </c:when>
+                    <c:otherwise>
+                        <%--<c:if test="${update.status == 'OK'}">--%>
+                        <form action="../action/appy-catalog-update" method="post">
+                            <input class="btn btn-small btn-primary apply-btn" type="submit"
+                                   value="Применить!">
+                            <input type="hidden" name="id" value="${update.id}">
+                        </form>
+                        <%--</c:if>--%>
+                    </c:otherwise>
+                </c:choose>
 
-                        </dd>
-                    </dl>
+            </dd>
+        </dl>
 
-                </div>
+    </div>
 
-            </section>
+</section>
 
-            <c:if test="${!update.applied}">
-                <section>
-                    <c:if test="${update.status == 'HAS_WARNINGS'}">
-                        <h4>Ошибки (${fn:length(update.warnings)}):</h4>
+<c:if test="${!update.applied}">
+    <section>
+        <c:if test="${update.status == 'HAS_WARNINGS'}">
+            <h4>Ошибки (${fn:length(update.warnings)}):</h4>
 
-                        <ul class="unstyled warnings">
-                            <c:forEach items="${update.warnings}" var="w">
-                                <li>Строка <strong>${w.row}</strong> поле <strong>${w.column}</strong>: ${w.message}</li>
-                            </c:forEach>
-                        </ul>
+            <ul class="unstyled warnings">
+                <c:forEach items="${update.warnings}" var="w">
+                    <li>Строка <strong>${w.row}</strong> поле <strong>${w.column}</strong>: ${w.message}
+                    </li>
+                </c:forEach>
+            </ul>
 
-                    </c:if>
-                    <h4>Изменения ${from + 1} &ndash; ${from + pageSize}</h4>
+        </c:if>
+
+        <h4>Изменения ${from + 1} &ndash; ${from + pageSize}</h4>
+
+        <br>
+
+        <div class="tabbable" style="margin-bottom: 18px;">
+            <ul class="nav nav-tabs">
+                <li class=""><a href="#tab1" data-toggle="tab">Пересекающиеся композиции</a></li>
+                <li class="active"><a href="#tab2" data-toggle="tab">Все композиции</a></li>
+            </ul>
+            <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+                <div class="tab-pane active" id="tab1">
 
                     <div class="pagination pagination-centered">
                         <ul>
                             <c:choose>
                                 <c:when test="${from >= pageSize}">
-                                    <li><a href="catalog-update?id=${update.id}&from=${from - pageSize}">&laquo;</a></li>
+                                    <li>
+                                        <a href="catalog-update?id=${update.id}&from=${from - pageSize}">&laquo;</a>
+                                    </li>
                                 </c:when>
                                 <c:otherwise>
                                     <li class="disabled"><a href="#">&laquo;</a></li>
@@ -133,7 +149,9 @@
 
                             <c:choose>
                                 <c:when test="${from + pageSize < update.crossing}">
-                                    <li><a href="catalog-update?id=${update.id}&from=${from + pageSize}">&raquo;</a></li>
+                                    <li>
+                                        <a href="catalog-update?id=${update.id}&from=${from + pageSize}">&raquo;</a>
+                                    </li>
                                 </c:when>
                                 <c:otherwise>
                                     <li class="disabled"><a href="#">&raquo;</a></li>
@@ -210,7 +228,9 @@
                         <ul>
                             <c:choose>
                                 <c:when test="${from >= pageSize}">
-                                    <li><a href="catalog-update?id=${update.id}&from=${from - pageSize}">&laquo;</a></li>
+                                    <li>
+                                        <a href="catalog-update?id=${update.id}&from=${from - pageSize}">&laquo;</a>
+                                    </li>
                                 </c:when>
                                 <c:otherwise>
                                     <li class="disabled"><a href="#">&laquo;</a></li>
@@ -226,7 +246,9 @@
 
                             <c:choose>
                                 <c:when test="${from + pageSize < update.crossing}">
-                                    <li><a href="catalog-update?id=${update.id}&from=${from + pageSize}">&raquo;</a></li>
+                                    <li>
+                                        <a href="catalog-update?id=${update.id}&from=${from + pageSize}">&raquo;</a>
+                                    </li>
                                 </c:when>
                                 <c:otherwise>
                                     <li class="disabled"><a href="#">&raquo;</a></li>
@@ -235,20 +257,134 @@
                         </ul>
                     </div>
 
+                </div>
+                <div class="tab-pane" id="tab2">
 
-                    </p>
+                    <H4>Все загруженные композиции</H4>
 
-                </section>
+                    <div class="pagination pagination-centered">
+                        <ul>
+                            <c:choose>
+                                <c:when test="${fromNew >= pageSize}">
+                                    <li>
+                                        <a href="catalog-update?id=${update.id}&from-new=${fromNew - pageSize}">&laquo;</a>
+                                    </li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li class="disabled"><a href="#">&laquo;</a></li>
+                                </c:otherwise>
+                            </c:choose>
 
-            </c:if>
+                            <c:forEach var="i" begin="1" end="${(fn:length(tracks) / pageSize) + 1}" step="1"
+                                       varStatus="status">
+                                <li class="${fromNew == (i - 1) * pageSize ? 'active' : ''}">
+                                    <a href="catalog-update?id=${update.id}&from-new=${(i - 1) * pageSize}">${i}</a>
+                                </li>
+                            </c:forEach>
 
-            <hr/>
+                            <c:choose>
+                                <c:when test="${fromNew + pageSize < fn:length(tracks)}">
+                                    <li>
+                                        <a href="catalog-update?id=${update.id}&from=${fromNew + pageSize}">&raquo;</a>
+                                    </li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li class="disabled"><a href="#">&raquo;</a></li>
+                                </c:otherwise>
+                            </c:choose>
+                        </ul>
+                    </div>
 
-        </div>
-    </div>
+                    <table class="table smallcaps">
+                        <thead>
+                        <tr>
+                            <%--<th>#</th>--%>
+                            <th>Код</th>
+                            <th>Композиция</th>
+                            <th>Исполнитель</th>
+                            <th>Авторы</th>
+                            <th>Мобильный контент</th>
+                            <th>Публичка</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <c:forEach items="${tracks}" var="d">
+                            <tr>
+                                <%--<td class="invariant">${d.number + 1}</td>--%>
+                                <td class="invariant">${d.code}</td>
+                                <td>
+                                 ${d.name}
+                                </td>
+                                <td>
+                                   ${d.artist}
+                                </td>
+                                <td>
+                                   ${d.composer}
+                                </td>
+                                <td>
+                                ${d.mobileShare}
+                                </td>
+                                <td>
+                                  ${d.publicShare}
+                                </td>
+                            </tr>
+                        </c:forEach>
+
+                        </tbody>
+                    </table>
+
+                    <div class="pagination pagination-centered">
+                        <ul>
+                            <c:choose>
+                                <c:when test="${fromNew >= pageSize}">
+                                    <li>
+                                        <a href="catalog-update?id=${update.id}&from-new=${fromNew - pageSize}">&laquo;</a>
+                                    </li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li class="disabled"><a href="#">&laquo;</a></li>
+                                </c:otherwise>
+                            </c:choose>
+
+                            <c:forEach var="i" begin="1" end="${(fn:length(tracks) / pageSize) + 1}" step="1"
+                                       varStatus="status">
+                                <li class="${fromNew == (i - 1) * pageSize ? 'active' : ''}">
+                                    <a href="catalog-update?id=${update.id}&from-new=${(i - 1) * pageSize}">${i}</a>
+                                </li>
+                            </c:forEach>
+
+                            <c:choose>
+                                <c:when test="${fromNew + pageSize < fn:length(tracks)}">
+                                    <li>
+                                        <a href="catalog-update?id=${update.id}&from=${fromNew + pageSize}">&raquo;</a>
+                                    </li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li class="disabled"><a href="#">&raquo;</a></li>
+                                </c:otherwise>
+                            </c:choose>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div> <!-- /tabbable -->
+
+
+
+
+
+    </section>
+
+</c:if>
+
+<hr/>
 
 </div>
+</div>
 
+</div>
 
 </body>
 </html>

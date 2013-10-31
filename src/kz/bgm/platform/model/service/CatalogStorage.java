@@ -31,6 +31,8 @@ public interface CatalogStorage {
 
     List<Track> getTracks(long catalogId, int from, int size);
 
+    List<Track> getTempTracks(long catalogId, int from, int size);
+
     List<Track> getTracks(List<Long> ids);
 
     List<SearchResult> getTracks(List<SearchResult> ids, List<Long> catalogIds);

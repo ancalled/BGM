@@ -1686,6 +1686,27 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
+    public List<Track> getTempTracks(final long catalogId, final int from, final int size) {
+        return query(new Action<List<Track>>() {
+            @Override
+            public List<Track> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement("SELECT * FROM comp_tmp WHERE catalog_id=" +
+                        catalogId + " LIMIT " + from + "," + size,
+
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
+                ResultSet rs = stmt.executeQuery();
+
+                List<Track> tracks = new ArrayList<>();
+                while (rs.next()) {
+                    tracks.add(parseTrack(rs));
+                }
+                return tracks;
+            }
+        });
+    }
+
+    @Override
     public List<Track> getTracks(final long catalogId, final int from, final int size) {
         return query(new Action<List<Track>>() {
             @Override
