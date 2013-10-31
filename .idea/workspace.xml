@@ -25,11 +25,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bgm-platform.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1383221945369" ignored="false" />
+    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1383222189504" ignored="false" />
     <file path="/BGM Datasource" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1374688996787" ignored="false" />
     <file path="/report.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1382712150997" ignored="false" />
     <file path="/ReportBuilder.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1374717233097" ignored="false" />
@@ -37,7 +38,7 @@
     <file path="/DownloadReportPublicServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1374685077090" ignored="false" />
     <file path="/fragment.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1374717897480" ignored="false" />
     <file path="/ExcelUtils.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1374685212727" ignored="false" />
-    <file path="/DbStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1383221909036" ignored="false" />
+    <file path="/DbStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1383223346808" ignored="false" />
     <file path="/CatalogStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1383221613428" ignored="false" />
     <file path="/send-report.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1374712449496" ignored="false" />
     <file path="$APPLICATION_HOME_DIR$/plugins/jsp/lib/jsp-impl.jar!/standardSchemas/jspxml2_1.xsd" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1381852984550" ignored="false" />
@@ -186,87 +187,87 @@
       <file leaf-file-name="DbStorage.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="217" column="6" selection-start="6762" selection-end="6762" vertical-scroll-proportion="0.6115942">
+            <state line="1808" column="41" selection-start="68623" selection-end="68623" vertical-scroll-proportion="0.4225564">
               <folding>
                 <element signature="e#6841#7432#0" expanded="true" />
                 <element signature="e#7421#7422#0" expanded="true" />
-                <marker date="1383221927000" expanded="true" signature="1236:1459" placeholder="INSERT INTO ..." />
-                <marker date="1383221927000" expanded="true" signature="2328:2363" placeholder="SELECT id FR..catalog..." />
-                <marker date="1383221927000" expanded="true" signature="3286:3319" placeholder="SELECT * FRO..platform..." />
-                <marker date="1383221927000" expanded="true" signature="3969:4001" placeholder="SELECT * FRO..catalog..." />
-                <marker date="1383221927000" expanded="true" signature="4641:4677" placeholder="SELECT * FRO..composition..." />
-                <marker date="1383221927000" expanded="true" signature="5311:5333" placeholder="SELECT * FRO..platform..." />
-                <marker date="1383221927000" expanded="true" signature="6164:6210" placeholder="SELECT * FRO..platform..." />
-                <marker date="1383221927000" expanded="true" signature="7029:7051" placeholder="SELECT id FR..catalog..." />
-                <marker date="1383221927000" expanded="true" signature="7709:7891" placeholder="SELECT c.id ..catalog..." />
-                <marker date="1383221927000" expanded="true" signature="8609:8653" placeholder="SELECT * FRO..catalog..." />
-                <marker date="1383221927000" expanded="true" signature="9626:9785" placeholder="SELECT * FRO..composition..." />
-                <marker date="1383221927000" expanded="true" signature="10864:10935" placeholder="SELECT * FRO..composition..." />
-                <marker date="1383221927000" expanded="true" signature="12376:12457" placeholder="SELECT * FRO..composition..." />
-                <marker date="1383221927000" expanded="true" signature="13664:13702" placeholder="SELECT * FRO..composition..." />
-                <marker date="1383221927000" expanded="true" signature="14491:14613" placeholder="SELECT * FRO..composition..." />
-                <marker date="1383221927000" expanded="true" signature="15386:15428" placeholder="SELECT * FRO..composition..." />
-                <marker date="1383221927000" expanded="true" signature="16176:16216" placeholder="SELECT * FRO..composition..." />
-                <marker date="1383221927000" expanded="true" signature="16964:17008" placeholder="SELECT * FRO..composition..." />
-                <marker date="1383221927000" expanded="true" signature="17857:18170" placeholder="SELECT * FRO..composition..." />
-                <marker date="1383221927000" expanded="true" signature="17938:17996" placeholder="SELECT (RAND..." />
-                <marker date="1383221927000" expanded="true" signature="17956:17988" placeholder="SELECT MAX(i..composition..." />
-                <marker date="1383221927000" expanded="true" signature="18984:19358" placeholder="SELECT * FRO..composition..." />
-                <marker date="1383221927000" expanded="true" signature="19065:19123" placeholder="SELECT (RAND..." />
-                <marker date="1383221927000" expanded="true" signature="19083:19115" placeholder="SELECT MAX(i..composition..." />
-                <marker date="1383221927000" expanded="true" signature="20080:20102" placeholder="SELECT * FRO..customer..." />
-                <marker date="1383221927000" expanded="true" signature="20795:20828" placeholder="SELECT * FRO..customer..." />
-                <marker date="1383221927000" expanded="true" signature="21437:21494" placeholder="SELECT * FRO..user_admin..." />
-                <marker date="1383221927000" expanded="true" signature="22129:22180" placeholder="SELECT * FRO..user..." />
-                <marker date="1383221927000" expanded="true" signature="22795:22829" placeholder="SELECT * FRO..user..." />
-                <marker date="1383221927000" expanded="true" signature="23518:23698" placeholder="INSERT INTO ..." />
-                <marker date="1383221927000" expanded="true" signature="24804:24930" placeholder="UPDATE custo..." />
-                <marker date="1383221927000" expanded="true" signature="25560:25797" placeholder="INSERT INTO ..." />
-                <marker date="1383221927000" expanded="true" signature="27002:27249" placeholder="INSERT INTO ..." />
-                <marker date="1383221927000" expanded="true" signature="28504:28553" placeholder="SELECT * FRO..customer_report..." />
-                <marker date="1383221927000" expanded="true" signature="29288:29330" placeholder="SELECT * FRO..customer_report..." />
-                <marker date="1383221927000" expanded="true" signature="30006:30088" placeholder="SELECT * FRO..customer_report..." />
-                <marker date="1383221927000" expanded="true" signature="31009:31056" placeholder="SELECT * FRO..customer_report_item..." />
-                <marker date="1383221927000" expanded="true" signature="31708:31759" placeholder="UPDATE custo..." />
-                <marker date="1383221927000" expanded="true" signature="32354:32408" placeholder="SELECT * FRO..customer_report_item..." />
-                <marker date="1383221927000" expanded="true" signature="33945:36219" placeholder="SELECT\n i.i..customer_report_item..." />
-                <marker date="1383221927000" expanded="true" signature="37380:39876" placeholder="SELECT\n i.i..customer_report_item..." />
-                <marker date="1383221927000" expanded="true" signature="40889:42749" placeholder="SELECT\n i.i..customer_report_item..." />
-                <marker date="1383221927000" expanded="true" signature="43690:43841" placeholder="INSERT INTO ..." />
-                <marker date="1383221927000" expanded="true" signature="44787:44869" placeholder="INSERT INTO ..." />
-                <marker date="1383221927000" expanded="true" signature="45671:45741" placeholder="DELETE FROM ..." />
-                <marker date="1383221927000" expanded="true" signature="46171:46228" placeholder="UPDATE custo..." />
-                <marker date="1383221927000" expanded="true" signature="46659:46887" placeholder="SELECT cat.i..catalog..." />
-                <marker date="1383221927000" expanded="true" signature="47606:47791" placeholder="UPDATE compo..." />
-                <marker date="1383221927000" expanded="true" signature="48562:48591" placeholder="DELETE FROM ..." />
-                <marker date="1383221927000" expanded="true" signature="48961:48994" placeholder="DELETE FROM ..." />
-                <marker date="1383221927000" expanded="true" signature="49416:49456" placeholder="SELECT * FRO..user..." />
-                <marker date="1383221927000" expanded="true" signature="50590:50610" placeholder="DELETE FROM ..." />
-                <marker date="1383221927000" expanded="true" signature="51090:51228" placeholder="INSERT INTO ..." />
-                <marker date="1383221927000" expanded="true" signature="53330:53343" placeholder="SHOW WARNING..." />
-                <marker date="1383221927000" expanded="true" signature="53959:54565" placeholder="UPDATE catal..." />
-                <marker date="1383221927000" expanded="true" signature="54082:54134" placeholder="SELECT count..comp_tmp..." />
-                <marker date="1383221927000" expanded="true" signature="54186:54515" placeholder="SELECT count..composition..." />
-                <marker date="1383221927000" expanded="true" signature="55054:55148" placeholder="SELECT time ..PROCESSLIST..." />
-                <marker date="1383221927000" expanded="true" signature="55711:55887" placeholder="INSERT INTO ..." />
-                <marker date="1383221927000" expanded="true" signature="56951:58243" placeholder="SELECT c.cod..comp_tmp..." />
-                <marker date="1383221927000" expanded="true" signature="59246:59309" placeholder="SELECT track..customer_basket_item..." />
-                <marker date="1383221927000" expanded="true" signature="60072:60141" placeholder="INSERT INTO ..." />
-                <marker date="1383221927000" expanded="true" signature="60796:60840" placeholder="SELECT * FRO..composition..." />
-                <marker date="1383221927000" expanded="true" signature="61458:62284" placeholder="UPDATE compo..." />
-                <marker date="1383221927000" expanded="true" signature="62479:63110" placeholder="INSERT INTO ..." />
-                <marker date="1383221927000" expanded="true" signature="62612:63110" placeholder="SELECT\n cod..comp_tmp..." />
-                <marker date="1383221927000" expanded="true" signature="63304:63358" placeholder="UPDATE catal..." />
-                <marker date="1383221927000" expanded="true" signature="63819:63864" placeholder="SELECT * FRO..composition..." />
-                <marker date="1383221927000" expanded="true" signature="64530:64565" placeholder="SELECT COUNT..composition..." />
-                <marker date="1383221927000" expanded="true" signature="65178:65213" placeholder="SELECT * FRO..comp_tmp..." />
-                <marker date="1383221927000" expanded="true" signature="65961:66002" placeholder="SELECT * FRO..catalog_update..." />
-                <marker date="1383221927000" expanded="true" signature="66712:66761" placeholder="SELECT * FRO..catalog_update..." />
-                <marker date="1383221927000" expanded="true" signature="67474:67774" placeholder="UPDATE catal..." />
-                <marker date="1383221927000" expanded="true" signature="67543:67773" placeholder="SELECT\n cou..composition..." />
-                <marker date="1383221927000" expanded="true" signature="67874:68179" placeholder="UPDATE catal..." />
-                <marker date="1383221927000" expanded="true" signature="67944:68178" placeholder="SELECT\n cou..composition..." />
-                <marker date="1383221927000" expanded="true" signature="77434:77455" placeholder="SELECT * FRO..catalog..." />
+                <marker date="1383223350000" expanded="true" signature="1236:1459" placeholder="INSERT INTO ..." />
+                <marker date="1383223350000" expanded="true" signature="2328:2363" placeholder="SELECT id FR..catalog..." />
+                <marker date="1383223350000" expanded="true" signature="3286:3319" placeholder="SELECT * FRO..platform..." />
+                <marker date="1383223350000" expanded="true" signature="3969:4001" placeholder="SELECT * FRO..catalog..." />
+                <marker date="1383223350000" expanded="true" signature="4641:4677" placeholder="SELECT * FRO..composition..." />
+                <marker date="1383223350000" expanded="true" signature="5311:5333" placeholder="SELECT * FRO..platform..." />
+                <marker date="1383223350000" expanded="true" signature="6164:6210" placeholder="SELECT * FRO..platform..." />
+                <marker date="1383223350000" expanded="true" signature="7029:7051" placeholder="SELECT id FR..catalog..." />
+                <marker date="1383223350000" expanded="true" signature="7709:7891" placeholder="SELECT c.id ..catalog..." />
+                <marker date="1383223350000" expanded="true" signature="8609:8653" placeholder="SELECT * FRO..catalog..." />
+                <marker date="1383223350000" expanded="true" signature="9626:9785" placeholder="SELECT * FRO..composition..." />
+                <marker date="1383223350000" expanded="true" signature="10864:10935" placeholder="SELECT * FRO..composition..." />
+                <marker date="1383223350000" expanded="true" signature="12376:12457" placeholder="SELECT * FRO..composition..." />
+                <marker date="1383223350000" expanded="true" signature="13664:13702" placeholder="SELECT * FRO..composition..." />
+                <marker date="1383223350000" expanded="true" signature="14491:14613" placeholder="SELECT * FRO..composition..." />
+                <marker date="1383223350000" expanded="true" signature="15386:15428" placeholder="SELECT * FRO..composition..." />
+                <marker date="1383223350000" expanded="true" signature="16176:16216" placeholder="SELECT * FRO..composition..." />
+                <marker date="1383223350000" expanded="true" signature="16964:17008" placeholder="SELECT * FRO..composition..." />
+                <marker date="1383223350000" expanded="true" signature="17857:18170" placeholder="SELECT * FRO..composition..." />
+                <marker date="1383223350000" expanded="true" signature="17938:17996" placeholder="SELECT (RAND..." />
+                <marker date="1383223350000" expanded="true" signature="17956:17988" placeholder="SELECT MAX(i..composition..." />
+                <marker date="1383223350000" expanded="true" signature="18984:19358" placeholder="SELECT * FRO..composition..." />
+                <marker date="1383223350000" expanded="true" signature="19065:19123" placeholder="SELECT (RAND..." />
+                <marker date="1383223350000" expanded="true" signature="19083:19115" placeholder="SELECT MAX(i..composition..." />
+                <marker date="1383223350000" expanded="true" signature="20080:20102" placeholder="SELECT * FRO..customer..." />
+                <marker date="1383223350000" expanded="true" signature="20795:20828" placeholder="SELECT * FRO..customer..." />
+                <marker date="1383223350000" expanded="true" signature="21437:21494" placeholder="SELECT * FRO..user_admin..." />
+                <marker date="1383223350000" expanded="true" signature="22129:22180" placeholder="SELECT * FRO..user..." />
+                <marker date="1383223350000" expanded="true" signature="22795:22829" placeholder="SELECT * FRO..user..." />
+                <marker date="1383223350000" expanded="true" signature="23518:23698" placeholder="INSERT INTO ..." />
+                <marker date="1383223350000" expanded="true" signature="24804:24930" placeholder="UPDATE custo..." />
+                <marker date="1383223350000" expanded="true" signature="25560:25797" placeholder="INSERT INTO ..." />
+                <marker date="1383223350000" expanded="true" signature="27002:27249" placeholder="INSERT INTO ..." />
+                <marker date="1383223350000" expanded="true" signature="28504:28553" placeholder="SELECT * FRO..customer_report..." />
+                <marker date="1383223350000" expanded="true" signature="29288:29330" placeholder="SELECT * FRO..customer_report..." />
+                <marker date="1383223350000" expanded="true" signature="30006:30088" placeholder="SELECT * FRO..customer_report..." />
+                <marker date="1383223350000" expanded="true" signature="31009:31056" placeholder="SELECT * FRO..customer_report_item..." />
+                <marker date="1383223350000" expanded="true" signature="31708:31759" placeholder="UPDATE custo..." />
+                <marker date="1383223350000" expanded="true" signature="32354:32408" placeholder="SELECT * FRO..customer_report_item..." />
+                <marker date="1383223350000" expanded="true" signature="33945:36219" placeholder="SELECT\n i.i..customer_report_item..." />
+                <marker date="1383223350000" expanded="true" signature="37380:39876" placeholder="SELECT\n i.i..customer_report_item..." />
+                <marker date="1383223350000" expanded="true" signature="40889:42749" placeholder="SELECT\n i.i..customer_report_item..." />
+                <marker date="1383223350000" expanded="true" signature="43690:43841" placeholder="INSERT INTO ..." />
+                <marker date="1383223350000" expanded="true" signature="44787:44869" placeholder="INSERT INTO ..." />
+                <marker date="1383223350000" expanded="true" signature="45671:45741" placeholder="DELETE FROM ..." />
+                <marker date="1383223350000" expanded="true" signature="46171:46228" placeholder="UPDATE custo..." />
+                <marker date="1383223350000" expanded="true" signature="46659:46887" placeholder="SELECT cat.i..catalog..." />
+                <marker date="1383223350000" expanded="true" signature="47606:47791" placeholder="UPDATE compo..." />
+                <marker date="1383223350000" expanded="true" signature="48562:48591" placeholder="DELETE FROM ..." />
+                <marker date="1383223350000" expanded="true" signature="48961:48994" placeholder="DELETE FROM ..." />
+                <marker date="1383223350000" expanded="true" signature="49416:49456" placeholder="SELECT * FRO..user..." />
+                <marker date="1383223350000" expanded="true" signature="50590:50610" placeholder="DELETE FROM ..." />
+                <marker date="1383223350000" expanded="true" signature="51090:51228" placeholder="INSERT INTO ..." />
+                <marker date="1383223350000" expanded="true" signature="53330:53343" placeholder="SHOW WARNING..." />
+                <marker date="1383223350000" expanded="true" signature="53959:54565" placeholder="UPDATE catal..." />
+                <marker date="1383223350000" expanded="true" signature="54082:54134" placeholder="SELECT count..comp_tmp..." />
+                <marker date="1383223350000" expanded="true" signature="54186:54515" placeholder="SELECT count..composition..." />
+                <marker date="1383223350000" expanded="true" signature="55054:55148" placeholder="SELECT time ..PROCESSLIST..." />
+                <marker date="1383223350000" expanded="true" signature="55711:55887" placeholder="INSERT INTO ..." />
+                <marker date="1383223350000" expanded="true" signature="56951:58243" placeholder="SELECT c.cod..comp_tmp..." />
+                <marker date="1383223350000" expanded="true" signature="59246:59309" placeholder="SELECT track..customer_basket_item..." />
+                <marker date="1383223350000" expanded="true" signature="60072:60141" placeholder="INSERT INTO ..." />
+                <marker date="1383223350000" expanded="true" signature="60796:60840" placeholder="SELECT * FRO..composition..." />
+                <marker date="1383223350000" expanded="true" signature="61458:62284" placeholder="UPDATE compo..." />
+                <marker date="1383223350000" expanded="true" signature="62479:63110" placeholder="INSERT INTO ..." />
+                <marker date="1383223350000" expanded="true" signature="62612:63110" placeholder="SELECT\n cod..comp_tmp..." />
+                <marker date="1383223350000" expanded="true" signature="63304:63358" placeholder="UPDATE catal..." />
+                <marker date="1383223350000" expanded="true" signature="63819:63864" placeholder="SELECT * FRO..composition..." />
+                <marker date="1383223350000" expanded="true" signature="64530:64565" placeholder="SELECT COUNT..composition..." />
+                <marker date="1383223350000" expanded="true" signature="65178:65213" placeholder="SELECT * FRO..comp_tmp..." />
+                <marker date="1383223350000" expanded="true" signature="65961:66002" placeholder="SELECT * FRO..catalog_update..." />
+                <marker date="1383223350000" expanded="true" signature="66712:66761" placeholder="SELECT * FRO..catalog_update..." />
+                <marker date="1383223350000" expanded="true" signature="67474:67774" placeholder="UPDATE catal..." />
+                <marker date="1383223350000" expanded="true" signature="67543:67773" placeholder="SELECT\n cou..composition..." />
+                <marker date="1383223350000" expanded="true" signature="67874:68179" placeholder="UPDATE catal..." />
+                <marker date="1383223350000" expanded="true" signature="67944:68178" placeholder="SELECT\n cou..composition..." />
+                <marker date="1383223350000" expanded="true" signature="77485:77506" placeholder="SELECT * FRO..catalog..." />
               </folding>
             </state>
           </provider>
@@ -1379,7 +1380,11 @@
       <created>1383221947569</created>
       <updated>1383221947569</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Свои/ вражеские каталоги (на самом деле платформы)">
+      <created>1383222193132</created>
+      <updated>1383222193132</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1404,7 +1409,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.54376656" sideWeight="0.49713057" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1621,13 +1626,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/domain/Platform.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="26" selection-start="156" selection-end="162" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="52.25">
@@ -1649,89 +1647,96 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/domain/Platform.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="26" selection-start="156" selection-end="162" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="217" column="6" selection-start="6762" selection-end="6762" vertical-scroll-proportion="0.6115942">
+        <state line="1808" column="41" selection-start="68623" selection-end="68623" vertical-scroll-proportion="0.4225564">
           <folding>
             <element signature="e#6841#7432#0" expanded="true" />
             <element signature="e#7421#7422#0" expanded="true" />
-            <marker date="1383221927000" expanded="true" signature="1236:1459" placeholder="INSERT INTO ..." />
-            <marker date="1383221927000" expanded="true" signature="2328:2363" placeholder="SELECT id FR..catalog..." />
-            <marker date="1383221927000" expanded="true" signature="3286:3319" placeholder="SELECT * FRO..platform..." />
-            <marker date="1383221927000" expanded="true" signature="3969:4001" placeholder="SELECT * FRO..catalog..." />
-            <marker date="1383221927000" expanded="true" signature="4641:4677" placeholder="SELECT * FRO..composition..." />
-            <marker date="1383221927000" expanded="true" signature="5311:5333" placeholder="SELECT * FRO..platform..." />
-            <marker date="1383221927000" expanded="true" signature="6164:6210" placeholder="SELECT * FRO..platform..." />
-            <marker date="1383221927000" expanded="true" signature="7029:7051" placeholder="SELECT id FR..catalog..." />
-            <marker date="1383221927000" expanded="true" signature="7709:7891" placeholder="SELECT c.id ..catalog..." />
-            <marker date="1383221927000" expanded="true" signature="8609:8653" placeholder="SELECT * FRO..catalog..." />
-            <marker date="1383221927000" expanded="true" signature="9626:9785" placeholder="SELECT * FRO..composition..." />
-            <marker date="1383221927000" expanded="true" signature="10864:10935" placeholder="SELECT * FRO..composition..." />
-            <marker date="1383221927000" expanded="true" signature="12376:12457" placeholder="SELECT * FRO..composition..." />
-            <marker date="1383221927000" expanded="true" signature="13664:13702" placeholder="SELECT * FRO..composition..." />
-            <marker date="1383221927000" expanded="true" signature="14491:14613" placeholder="SELECT * FRO..composition..." />
-            <marker date="1383221927000" expanded="true" signature="15386:15428" placeholder="SELECT * FRO..composition..." />
-            <marker date="1383221927000" expanded="true" signature="16176:16216" placeholder="SELECT * FRO..composition..." />
-            <marker date="1383221927000" expanded="true" signature="16964:17008" placeholder="SELECT * FRO..composition..." />
-            <marker date="1383221927000" expanded="true" signature="17857:18170" placeholder="SELECT * FRO..composition..." />
-            <marker date="1383221927000" expanded="true" signature="17938:17996" placeholder="SELECT (RAND..." />
-            <marker date="1383221927000" expanded="true" signature="17956:17988" placeholder="SELECT MAX(i..composition..." />
-            <marker date="1383221927000" expanded="true" signature="18984:19358" placeholder="SELECT * FRO..composition..." />
-            <marker date="1383221927000" expanded="true" signature="19065:19123" placeholder="SELECT (RAND..." />
-            <marker date="1383221927000" expanded="true" signature="19083:19115" placeholder="SELECT MAX(i..composition..." />
-            <marker date="1383221927000" expanded="true" signature="20080:20102" placeholder="SELECT * FRO..customer..." />
-            <marker date="1383221927000" expanded="true" signature="20795:20828" placeholder="SELECT * FRO..customer..." />
-            <marker date="1383221927000" expanded="true" signature="21437:21494" placeholder="SELECT * FRO..user_admin..." />
-            <marker date="1383221927000" expanded="true" signature="22129:22180" placeholder="SELECT * FRO..user..." />
-            <marker date="1383221927000" expanded="true" signature="22795:22829" placeholder="SELECT * FRO..user..." />
-            <marker date="1383221927000" expanded="true" signature="23518:23698" placeholder="INSERT INTO ..." />
-            <marker date="1383221927000" expanded="true" signature="24804:24930" placeholder="UPDATE custo..." />
-            <marker date="1383221927000" expanded="true" signature="25560:25797" placeholder="INSERT INTO ..." />
-            <marker date="1383221927000" expanded="true" signature="27002:27249" placeholder="INSERT INTO ..." />
-            <marker date="1383221927000" expanded="true" signature="28504:28553" placeholder="SELECT * FRO..customer_report..." />
-            <marker date="1383221927000" expanded="true" signature="29288:29330" placeholder="SELECT * FRO..customer_report..." />
-            <marker date="1383221927000" expanded="true" signature="30006:30088" placeholder="SELECT * FRO..customer_report..." />
-            <marker date="1383221927000" expanded="true" signature="31009:31056" placeholder="SELECT * FRO..customer_report_item..." />
-            <marker date="1383221927000" expanded="true" signature="31708:31759" placeholder="UPDATE custo..." />
-            <marker date="1383221927000" expanded="true" signature="32354:32408" placeholder="SELECT * FRO..customer_report_item..." />
-            <marker date="1383221927000" expanded="true" signature="33945:36219" placeholder="SELECT\n i.i..customer_report_item..." />
-            <marker date="1383221927000" expanded="true" signature="37380:39876" placeholder="SELECT\n i.i..customer_report_item..." />
-            <marker date="1383221927000" expanded="true" signature="40889:42749" placeholder="SELECT\n i.i..customer_report_item..." />
-            <marker date="1383221927000" expanded="true" signature="43690:43841" placeholder="INSERT INTO ..." />
-            <marker date="1383221927000" expanded="true" signature="44787:44869" placeholder="INSERT INTO ..." />
-            <marker date="1383221927000" expanded="true" signature="45671:45741" placeholder="DELETE FROM ..." />
-            <marker date="1383221927000" expanded="true" signature="46171:46228" placeholder="UPDATE custo..." />
-            <marker date="1383221927000" expanded="true" signature="46659:46887" placeholder="SELECT cat.i..catalog..." />
-            <marker date="1383221927000" expanded="true" signature="47606:47791" placeholder="UPDATE compo..." />
-            <marker date="1383221927000" expanded="true" signature="48562:48591" placeholder="DELETE FROM ..." />
-            <marker date="1383221927000" expanded="true" signature="48961:48994" placeholder="DELETE FROM ..." />
-            <marker date="1383221927000" expanded="true" signature="49416:49456" placeholder="SELECT * FRO..user..." />
-            <marker date="1383221927000" expanded="true" signature="50590:50610" placeholder="DELETE FROM ..." />
-            <marker date="1383221927000" expanded="true" signature="51090:51228" placeholder="INSERT INTO ..." />
-            <marker date="1383221927000" expanded="true" signature="53330:53343" placeholder="SHOW WARNING..." />
-            <marker date="1383221927000" expanded="true" signature="53959:54565" placeholder="UPDATE catal..." />
-            <marker date="1383221927000" expanded="true" signature="54082:54134" placeholder="SELECT count..comp_tmp..." />
-            <marker date="1383221927000" expanded="true" signature="54186:54515" placeholder="SELECT count..composition..." />
-            <marker date="1383221927000" expanded="true" signature="55054:55148" placeholder="SELECT time ..PROCESSLIST..." />
-            <marker date="1383221927000" expanded="true" signature="55711:55887" placeholder="INSERT INTO ..." />
-            <marker date="1383221927000" expanded="true" signature="56951:58243" placeholder="SELECT c.cod..comp_tmp..." />
-            <marker date="1383221927000" expanded="true" signature="59246:59309" placeholder="SELECT track..customer_basket_item..." />
-            <marker date="1383221927000" expanded="true" signature="60072:60141" placeholder="INSERT INTO ..." />
-            <marker date="1383221927000" expanded="true" signature="60796:60840" placeholder="SELECT * FRO..composition..." />
-            <marker date="1383221927000" expanded="true" signature="61458:62284" placeholder="UPDATE compo..." />
-            <marker date="1383221927000" expanded="true" signature="62479:63110" placeholder="INSERT INTO ..." />
-            <marker date="1383221927000" expanded="true" signature="62612:63110" placeholder="SELECT\n cod..comp_tmp..." />
-            <marker date="1383221927000" expanded="true" signature="63304:63358" placeholder="UPDATE catal..." />
-            <marker date="1383221927000" expanded="true" signature="63819:63864" placeholder="SELECT * FRO..composition..." />
-            <marker date="1383221927000" expanded="true" signature="64530:64565" placeholder="SELECT COUNT..composition..." />
-            <marker date="1383221927000" expanded="true" signature="65178:65213" placeholder="SELECT * FRO..comp_tmp..." />
-            <marker date="1383221927000" expanded="true" signature="65961:66002" placeholder="SELECT * FRO..catalog_update..." />
-            <marker date="1383221927000" expanded="true" signature="66712:66761" placeholder="SELECT * FRO..catalog_update..." />
-            <marker date="1383221927000" expanded="true" signature="67474:67774" placeholder="UPDATE catal..." />
-            <marker date="1383221927000" expanded="true" signature="67543:67773" placeholder="SELECT\n cou..composition..." />
-            <marker date="1383221927000" expanded="true" signature="67874:68179" placeholder="UPDATE catal..." />
-            <marker date="1383221927000" expanded="true" signature="67944:68178" placeholder="SELECT\n cou..composition..." />
-            <marker date="1383221927000" expanded="true" signature="77434:77455" placeholder="SELECT * FRO..catalog..." />
+            <marker date="1383223350000" expanded="true" signature="1236:1459" placeholder="INSERT INTO ..." />
+            <marker date="1383223350000" expanded="true" signature="2328:2363" placeholder="SELECT id FR..catalog..." />
+            <marker date="1383223350000" expanded="true" signature="3286:3319" placeholder="SELECT * FRO..platform..." />
+            <marker date="1383223350000" expanded="true" signature="3969:4001" placeholder="SELECT * FRO..catalog..." />
+            <marker date="1383223350000" expanded="true" signature="4641:4677" placeholder="SELECT * FRO..composition..." />
+            <marker date="1383223350000" expanded="true" signature="5311:5333" placeholder="SELECT * FRO..platform..." />
+            <marker date="1383223350000" expanded="true" signature="6164:6210" placeholder="SELECT * FRO..platform..." />
+            <marker date="1383223350000" expanded="true" signature="7029:7051" placeholder="SELECT id FR..catalog..." />
+            <marker date="1383223350000" expanded="true" signature="7709:7891" placeholder="SELECT c.id ..catalog..." />
+            <marker date="1383223350000" expanded="true" signature="8609:8653" placeholder="SELECT * FRO..catalog..." />
+            <marker date="1383223350000" expanded="true" signature="9626:9785" placeholder="SELECT * FRO..composition..." />
+            <marker date="1383223350000" expanded="true" signature="10864:10935" placeholder="SELECT * FRO..composition..." />
+            <marker date="1383223350000" expanded="true" signature="12376:12457" placeholder="SELECT * FRO..composition..." />
+            <marker date="1383223350000" expanded="true" signature="13664:13702" placeholder="SELECT * FRO..composition..." />
+            <marker date="1383223350000" expanded="true" signature="14491:14613" placeholder="SELECT * FRO..composition..." />
+            <marker date="1383223350000" expanded="true" signature="15386:15428" placeholder="SELECT * FRO..composition..." />
+            <marker date="1383223350000" expanded="true" signature="16176:16216" placeholder="SELECT * FRO..composition..." />
+            <marker date="1383223350000" expanded="true" signature="16964:17008" placeholder="SELECT * FRO..composition..." />
+            <marker date="1383223350000" expanded="true" signature="17857:18170" placeholder="SELECT * FRO..composition..." />
+            <marker date="1383223350000" expanded="true" signature="17938:17996" placeholder="SELECT (RAND..." />
+            <marker date="1383223350000" expanded="true" signature="17956:17988" placeholder="SELECT MAX(i..composition..." />
+            <marker date="1383223350000" expanded="true" signature="18984:19358" placeholder="SELECT * FRO..composition..." />
+            <marker date="1383223350000" expanded="true" signature="19065:19123" placeholder="SELECT (RAND..." />
+            <marker date="1383223350000" expanded="true" signature="19083:19115" placeholder="SELECT MAX(i..composition..." />
+            <marker date="1383223350000" expanded="true" signature="20080:20102" placeholder="SELECT * FRO..customer..." />
+            <marker date="1383223350000" expanded="true" signature="20795:20828" placeholder="SELECT * FRO..customer..." />
+            <marker date="1383223350000" expanded="true" signature="21437:21494" placeholder="SELECT * FRO..user_admin..." />
+            <marker date="1383223350000" expanded="true" signature="22129:22180" placeholder="SELECT * FRO..user..." />
+            <marker date="1383223350000" expanded="true" signature="22795:22829" placeholder="SELECT * FRO..user..." />
+            <marker date="1383223350000" expanded="true" signature="23518:23698" placeholder="INSERT INTO ..." />
+            <marker date="1383223350000" expanded="true" signature="24804:24930" placeholder="UPDATE custo..." />
+            <marker date="1383223350000" expanded="true" signature="25560:25797" placeholder="INSERT INTO ..." />
+            <marker date="1383223350000" expanded="true" signature="27002:27249" placeholder="INSERT INTO ..." />
+            <marker date="1383223350000" expanded="true" signature="28504:28553" placeholder="SELECT * FRO..customer_report..." />
+            <marker date="1383223350000" expanded="true" signature="29288:29330" placeholder="SELECT * FRO..customer_report..." />
+            <marker date="1383223350000" expanded="true" signature="30006:30088" placeholder="SELECT * FRO..customer_report..." />
+            <marker date="1383223350000" expanded="true" signature="31009:31056" placeholder="SELECT * FRO..customer_report_item..." />
+            <marker date="1383223350000" expanded="true" signature="31708:31759" placeholder="UPDATE custo..." />
+            <marker date="1383223350000" expanded="true" signature="32354:32408" placeholder="SELECT * FRO..customer_report_item..." />
+            <marker date="1383223350000" expanded="true" signature="33945:36219" placeholder="SELECT\n i.i..customer_report_item..." />
+            <marker date="1383223350000" expanded="true" signature="37380:39876" placeholder="SELECT\n i.i..customer_report_item..." />
+            <marker date="1383223350000" expanded="true" signature="40889:42749" placeholder="SELECT\n i.i..customer_report_item..." />
+            <marker date="1383223350000" expanded="true" signature="43690:43841" placeholder="INSERT INTO ..." />
+            <marker date="1383223350000" expanded="true" signature="44787:44869" placeholder="INSERT INTO ..." />
+            <marker date="1383223350000" expanded="true" signature="45671:45741" placeholder="DELETE FROM ..." />
+            <marker date="1383223350000" expanded="true" signature="46171:46228" placeholder="UPDATE custo..." />
+            <marker date="1383223350000" expanded="true" signature="46659:46887" placeholder="SELECT cat.i..catalog..." />
+            <marker date="1383223350000" expanded="true" signature="47606:47791" placeholder="UPDATE compo..." />
+            <marker date="1383223350000" expanded="true" signature="48562:48591" placeholder="DELETE FROM ..." />
+            <marker date="1383223350000" expanded="true" signature="48961:48994" placeholder="DELETE FROM ..." />
+            <marker date="1383223350000" expanded="true" signature="49416:49456" placeholder="SELECT * FRO..user..." />
+            <marker date="1383223350000" expanded="true" signature="50590:50610" placeholder="DELETE FROM ..." />
+            <marker date="1383223350000" expanded="true" signature="51090:51228" placeholder="INSERT INTO ..." />
+            <marker date="1383223350000" expanded="true" signature="53330:53343" placeholder="SHOW WARNING..." />
+            <marker date="1383223350000" expanded="true" signature="53959:54565" placeholder="UPDATE catal..." />
+            <marker date="1383223350000" expanded="true" signature="54082:54134" placeholder="SELECT count..comp_tmp..." />
+            <marker date="1383223350000" expanded="true" signature="54186:54515" placeholder="SELECT count..composition..." />
+            <marker date="1383223350000" expanded="true" signature="55054:55148" placeholder="SELECT time ..PROCESSLIST..." />
+            <marker date="1383223350000" expanded="true" signature="55711:55887" placeholder="INSERT INTO ..." />
+            <marker date="1383223350000" expanded="true" signature="56951:58243" placeholder="SELECT c.cod..comp_tmp..." />
+            <marker date="1383223350000" expanded="true" signature="59246:59309" placeholder="SELECT track..customer_basket_item..." />
+            <marker date="1383223350000" expanded="true" signature="60072:60141" placeholder="INSERT INTO ..." />
+            <marker date="1383223350000" expanded="true" signature="60796:60840" placeholder="SELECT * FRO..composition..." />
+            <marker date="1383223350000" expanded="true" signature="61458:62284" placeholder="UPDATE compo..." />
+            <marker date="1383223350000" expanded="true" signature="62479:63110" placeholder="INSERT INTO ..." />
+            <marker date="1383223350000" expanded="true" signature="62612:63110" placeholder="SELECT\n cod..comp_tmp..." />
+            <marker date="1383223350000" expanded="true" signature="63304:63358" placeholder="UPDATE catal..." />
+            <marker date="1383223350000" expanded="true" signature="63819:63864" placeholder="SELECT * FRO..composition..." />
+            <marker date="1383223350000" expanded="true" signature="64530:64565" placeholder="SELECT COUNT..composition..." />
+            <marker date="1383223350000" expanded="true" signature="65178:65213" placeholder="SELECT * FRO..comp_tmp..." />
+            <marker date="1383223350000" expanded="true" signature="65961:66002" placeholder="SELECT * FRO..catalog_update..." />
+            <marker date="1383223350000" expanded="true" signature="66712:66761" placeholder="SELECT * FRO..catalog_update..." />
+            <marker date="1383223350000" expanded="true" signature="67474:67774" placeholder="UPDATE catal..." />
+            <marker date="1383223350000" expanded="true" signature="67543:67773" placeholder="SELECT\n cou..composition..." />
+            <marker date="1383223350000" expanded="true" signature="67874:68179" placeholder="UPDATE catal..." />
+            <marker date="1383223350000" expanded="true" signature="67944:68178" placeholder="SELECT\n cou..composition..." />
+            <marker date="1383223350000" expanded="true" signature="77485:77506" placeholder="SELECT * FRO..catalog..." />
           </folding>
         </state>
       </provider>

@@ -1806,6 +1806,7 @@ public class DbStorage implements CatalogStorage {
         Platform platform = new Platform();
         platform.setId(rs.getLong("id"));
         platform.setName(rs.getString("name"));
+        platform.setRights(rs.getBoolean("name"));
         return platform;
     }
 
