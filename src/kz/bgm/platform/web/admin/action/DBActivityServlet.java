@@ -30,16 +30,16 @@ public class DBActivityServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
-        String queryTime = storage.getQueryProcessTime(1);
-
-        resp.setContentType("application/json;charset=utf-8");
-
-        JSONObject json = new JSONObject();
-        json.put("status", queryTime);
-
-        PrintWriter pw = resp.getWriter();
-        pw.print(json.toString());
-        pw.close();
+//        String queryTime = storage.getQueryProcessTime(1);
+//
+//        resp.setContentType("application/json;charset=utf-8");
+//
+//        JSONObject json = new JSONObject();
+//        json.put("status", queryTime);
+//
+//        PrintWriter pw = resp.getWriter();
+//        pw.print(json.toString());
+//        pw.close();
 //        SELECT * FROM INFORMATION_SCHEMA.PROCESSLIST   -!!!
     }
 
