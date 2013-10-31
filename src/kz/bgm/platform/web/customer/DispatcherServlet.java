@@ -53,7 +53,7 @@ public class DispatcherServlet extends HttpServlet {
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
 
 
-                        List<Platform> platforms = catalogStorage.getAllPlatforms();
+                        List<Platform> platforms = catalogStorage.getOwnPlatforms();
                         req.setAttribute("platforms", platforms);
 
                         List<CustomerReport> reports = catalogStorage
@@ -75,7 +75,7 @@ public class DispatcherServlet extends HttpServlet {
                             req.setAttribute("customer_tracks", tracks);
                         }
 
-                        List<Platform> platforms = catalogStorage.getAllPlatforms();
+                        List<Platform> platforms = catalogStorage.getOwnPlatforms();
 
                         req.setAttribute("platforms", platforms);
                         req.setAttribute("query", ses.getAttribute("query"));
