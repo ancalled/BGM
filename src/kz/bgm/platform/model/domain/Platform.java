@@ -8,6 +8,9 @@ public class Platform {
     private long id;
     private String name;
 
+    private boolean rights = true;
+
+
     private List<Catalog> catalogs;
 
     public long getId() {
@@ -34,4 +37,11 @@ public class Platform {
         this.catalogs = catalogs;
     }
 
+    public boolean isRights() {
+        return rights;
+    }
+
+    public void setRights(boolean rights) {
+        this.rights = rights;
+    }
 }

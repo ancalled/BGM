@@ -63,7 +63,7 @@ public class SearchServlet extends HttpServlet {
         List<Long> requested = getCatalogsId(req);
         List<Long> catalogs = new ArrayList<>();
         if (requested.isEmpty()) {
-            List<Long> available = catalogService.getAllCatalogIds();
+            List<Long> available = catalogService.getOwnCatalogIds();
             catalogs.addAll(available);
         } else {
             catalogs.addAll(requested);

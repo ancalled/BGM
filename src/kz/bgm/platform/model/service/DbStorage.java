@@ -190,12 +190,61 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+
+    @Override
+    public List<Platform> getOwnPlatforms() {
+        return query(new Action<List<Platform>>() {
+            @Override
+            public List<Platform> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement("SELECT * FROM platform p WHERE p.rights = TRUE",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
+
+                ResultSet rs = stmt.executeQuery();
+
+                List<Platform> tracks = new ArrayList<>();
+                while (rs.next()) {
+                    Platform p = parsePlatform(rs);
+                    tracks.add(p);
+
+                    List<Catalog> catalogs = getCatalogsByPlatform(p.getId());
+                    p.setCatalogs(catalogs);
+                }
+
+                return tracks;
+            }
+        });
+    }
+
     @Override
     public List<Long> getAllCatalogIds() {
         return query(new Action<List<Long>>() {
             @Override
             public List<Long> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement("SELECT id FROM catalog",
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
+                ResultSet rs = stmt.executeQuery();
+
+                List<Long> catalogs = new ArrayList<>();
+                while (rs.next()) {
+                    catalogs.add(rs.getLong("id"));
+                }
+                return catalogs;
+            }
+        });
+    }
+
+
+    @Override
+    public List<Long> getOwnCatalogIds() {
+        return query(new Action<List<Long>>() {
+            @Override
+            public List<Long> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement("SELECT c.id FROM catalog c " +
+                        "LEFT JOIN platform p " +
+                        "ON (c.platform_id = p.id) " +
+                        "WHERE p.rights = TRUE",
                         ResultSet.TYPE_FORWARD_ONLY,
                         ResultSet.CONCUR_READ_ONLY);
                 ResultSet rs = stmt.executeQuery();

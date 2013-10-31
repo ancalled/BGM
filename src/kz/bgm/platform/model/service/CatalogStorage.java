@@ -17,6 +17,10 @@ public interface CatalogStorage {
 
     List<Platform> getAllPlatforms();
 
+    List<Platform> getOwnPlatforms();
+
+    List<Long> getOwnCatalogIds();
+
     List<Long> getAllCatalogIds();
 
     List<Catalog> getCatalogsByPlatform(long catId);
