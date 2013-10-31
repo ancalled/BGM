@@ -29,6 +29,8 @@ public interface CatalogStorage {
 
     List<Track> getTracks(int from, int size);
 
+    List<Track> getTracks(long catalogId, int from, int size);
+
     List<Track> getTracks(List<Long> ids);
 
     List<SearchResult> getTracks(List<SearchResult> ids, List<Long> catalogIds);
@@ -69,7 +71,7 @@ public interface CatalogStorage {
 
     long getUpdateCatalogQueryId();
 
-    String getQueryProcessTime(long processId);
+//    String getQueryProcessTime(long processId);
 
     void saveCustomerReportItems(List<CustomerReportItem> reportItemList);
 

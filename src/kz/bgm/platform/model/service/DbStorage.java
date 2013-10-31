@@ -1361,14 +1361,12 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
-    private int queryId=0;
 
     public CatalogUpdate updateCatalog(final CatalogUpdate update) {
         return query(new Action<CatalogUpdate>() {
             @Override
             public CatalogUpdate execute(Connection con) throws SQLException {
 
-                queryId++;
 
                 PreparedStatement ps =
                         con.prepareStatement(
@@ -1390,7 +1388,7 @@ public class DbStorage implements CatalogStorage {
 
                 //create a clone structure as composition
                 PreparedStatement stmt = con.prepareStatement(
-                        "@proc_id = " + queryId + " LOAD DATA LOCAL INFILE ?\n" +
+                        "LOAD DATA LOCAL INFILE ?\n" +
                                 "INTO TABLE comp_tmp\n" +
                                 "CHARACTER SET ?\n" +
                                 "FIELDS TERMINATED BY ?\n" +
@@ -1454,23 +1452,23 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-    public String getQueryProcessTime(final long queryProcessId) {
-        return query(new Action<String>() {
-            @Override
-            public String execute(Connection con) throws SQLException {
-                PreparedStatement stmt = con.prepareStatement(
-                        "SELECT time FROM INFORMATION_SCHEMA.PROCESSLIST WHERE info LIKE '%@proc_id = " + queryId + "%'");
-
-                stmt.execute();
-                ResultSet rs = stmt.getResultSet();
-                if (rs.next()) {
-                    return rs.getString(1);
-                }
-
-                return null;
-            }
-        });
-    }
+//    public String getQueryProcessTime(final long queryProcessId) {
+//        return query(new Action<String>() {
+//            @Override
+//            public String execute(Connection con) throws SQLException {
+//                PreparedStatement stmt = con.prepareStatement(
+//                        "SELECT time FROM INFORMATION_SCHEMA.PROCESSLIST WHERE info LIKE '%@proc_id = " + queryId + "%'");
+//
+//                stmt.execute();
+//                ResultSet rs = stmt.getResultSet();
+//                if (rs.next()) {
+//                    return rs.getString(1);
+//                }
+//
+//                return null;
+//            }
+//        });
+//    }
 
     public Long saveCatalogUpdate(final CatalogUpdate update) {
         return query(new Action<Long>() {
@@ -1674,6 +1672,27 @@ public class DbStorage implements CatalogStorage {
             @Override
             public List<Track> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement("SELECT * FROM composition LIMIT " + from + "," + size,
+                        ResultSet.TYPE_FORWARD_ONLY,
+                        ResultSet.CONCUR_READ_ONLY);
+                ResultSet rs = stmt.executeQuery();
+
+                List<Track> tracks = new ArrayList<>();
+                while (rs.next()) {
+                    tracks.add(parseTrack(rs));
+                }
+                return tracks;
+            }
+        });
+    }
+
+    @Override
+    public List<Track> getTracks(final long catalogId, final int from, final int size) {
+        return query(new Action<List<Track>>() {
+            @Override
+            public List<Track> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement("SELECT * FROM composition WHERE catalog_id=" +
+                        catalogId + " LIMIT " + from + "," + size,
+
                         ResultSet.TYPE_FORWARD_ONLY,
                         ResultSet.CONCUR_READ_ONLY);
                 ResultSet rs = stmt.executeQuery();
