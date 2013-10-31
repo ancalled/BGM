@@ -227,8 +227,10 @@
 
                     <c:set var="lastComposer" value="none"/>
                     <c:set var="lastName" value="none"/>
+                    <c:set var="lastArtist" value="none"/>
+                    <c:set var="lastCode" value="none"/>
 
-                    <jsp:useBean id="colorRandom" class="kz.bgm.platform.utils.ColorRandom" scope="application" />
+                    <jsp:useBean id="colorRandom" class="kz.bgm.platform.utils.ColorRandom" scope="application"/>
                     <jsp:useBean id="colors" class="java.util.HashMap" scope="request"/>
                     <c:forEach var="p" items="${platforms}">
 
@@ -239,7 +241,9 @@
 
                     <c:forEach var="r" items="${tracks}" varStatus="s">
                         <tr class="${fn:toLowerCase(lastComposer)eq fn:toLowerCase(r.track.composer) &&
-                        fn:toLowerCase(lastName)eq fn:toLowerCase(r.track.name)? 'same-track' : ''}">
+                        fn:toLowerCase(lastName)eq fn:toLowerCase(r.track.name)||
+                        fn:toLowerCase(lastArtist)eq fn:toLowerCase(r.track.artist&&
+                        fn:toLowerCase(lastCode)eq fn:toLowerCase(r.track.code))? 'same-track' : ''}">
 
                                 <%--<td>${s.index + 1}</td>--%>
                             <td class="score"><fmt:formatNumber type="number" pattern="##.##"
@@ -285,6 +289,9 @@
                         </tr>
                         <c:set var="lastComposer" value="${r.track.composer}"/>
                         <c:set var="lastName" value="${r.track.name}"/>
+                        <c:set var="lastArtist" value="${r.track.artist}"/>
+                        <c:set var="lastCode" value="${r.track.code}"/>
+
                     </c:forEach>
 
                     </tbody>
