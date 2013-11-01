@@ -126,11 +126,14 @@ public class LuceneUtil {
 
                     Track t = catalogStorage.getTrack(r.getTrackId());
                     if (t != null) {
+//                        buf.append(toRowWrapped(
+//                                t.getArtist() + ": " + t.getName(),
+//                                t.getCode(),
+//                                t.getMobileShare(),
+//                                t.getPublicShare(),
+//                                t.getCatalog()));
                         buf.append(toRowWrapped(
-                                t.getArtist() + ": " + t.getName(),
                                 t.getCode(),
-                                t.getMobileShare(),
-                                t.getPublicShare(),
                                 t.getCatalog()));
 
                         System.out.println("[" + r.getScore() + "] id: " + r.getTrackId());
