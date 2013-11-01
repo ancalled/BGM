@@ -222,6 +222,7 @@
                 <span class="btn btn-fileName">
                     <span class="fileupload-new">Выбрать обновление</span>
                     <span class="fileupload-exists">Изменить</span>
+
                     <input name="file" type="file" id="fileinput" accept=".csv" data-url="../action/update-catalog"/>
                 </span>
 
@@ -245,7 +246,7 @@
                 </div>
 
                 <input type="hidden" name="catId" value="${catalog.id}">
-                <%--<input type="button" id="test" onclick="askForDone()" value="TEST">--%>
+                <input type="button" id="test" onclick="askForDone()" value="TEST">
 
                 <br>
                 <span id="example">Файл csv должен содержать следующие поля</span>
@@ -285,8 +286,9 @@
     var fileData;
     var delimiter = ';';
     var headers = ['#', 'code', 'name', 'composer', 'artist', 'share mobile', 'share public'];
+    var empty = ['', '', '', '', '', '', ''];
     var testData = [
-        ['1', 'Код композиции', 'Название песни', 'Имя автора','Имя исполнителя', 'Моб.контент', 'Публичка']
+        ['Номер', 'Код композиции', 'Название песни', 'Имя автора','Имя исполнителя', 'Моб.контент', 'Публичка']
     ];
 
 
@@ -334,6 +336,7 @@
                 $('#progress .bar').css('width', progress + '%');
             }
         });
+
 
         $("#fileinput").on('change', function (e) {
             var f = this.files[0];
@@ -397,6 +400,21 @@
         if ($('#preview-table').width() > $preview.width() || $('#preview-table').height() > $preview.height()) {
             $preview.css('overflow', 'scroll');
         }
+
+        function askForDone() {
+
+            $.ajax({
+                url: "../action/dbActivityServlet",
+                dataType: 'json',
+                error: function () {
+                    alert("Error Occured");
+                },
+                success: function (data) {
+                    alert(data.status);
+                }
+            });
+        }
+
 
 
     }

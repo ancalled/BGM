@@ -212,7 +212,16 @@ public class DispatcherServlet extends HttpServlet {
                                 req.setAttribute("catalog", catalog);
 
                                 String fromStr = req.getParameter("from");
+                                String fromNewStr = req.getParameter("from-new");
+
+                                int fromNew = fromNewStr != null ? Integer.parseInt(fromNewStr) : 0;
                                 int from = fromStr != null ? Integer.parseInt(fromStr) : 0;
+
+
+                                if (fromNew < 0) {
+                                    fromNew = 0;
+                                }
+
                                 if (from < 0) {
                                     from = 0;
                                 }
@@ -221,6 +230,11 @@ public class DispatcherServlet extends HttpServlet {
                                 }
 
                                 List<TrackDiff> diffs = catalogStorage.geChangedTracks(updateId, from, TRACKS_PER_PAGE);
+
+                                List<Track> allNewTracks = catalogStorage.getTempTracks(catalog.getId(), fromNew, TRACKS_PER_PAGE);
+
+                                req.setAttribute("fromNew", fromNew);
+                                req.setAttribute("tracks", allNewTracks);
                                 req.setAttribute("diffs", diffs);
                                 req.setAttribute("from", from);
                                 req.setAttribute("pageSize", TRACKS_PER_PAGE);
