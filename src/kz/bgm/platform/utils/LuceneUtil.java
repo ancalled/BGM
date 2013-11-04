@@ -134,7 +134,8 @@ public class LuceneUtil {
 //                                t.getCatalog()));
                         buf.append(toRowWrapped(
                                 t.getCode(),
-                                t.getCatalog()));
+                                t.getCatalog(),
+                                t.getMobileShare()));
 
                         System.out.println("[" + r.getScore() + "] id: " + r.getTrackId());
                         System.out.println("\tartist: '" + t.getArtist() + "'" +
