@@ -229,7 +229,15 @@ public class DispatcherServlet extends HttpServlet {
                                     from = update.getCrossing();
                                 }
 
-                                List<TrackDiff> diffs = catalogStorage.geChangedTracks(updateId, from, TRACKS_PER_PAGE);
+                                String activeTabStr = req.getParameter("active-tab");
+
+                                if ("tab1".equals(activeTabStr)) {
+                                    req.setAttribute("tab1", "active");
+                                } else if ("tab2".equals(activeTabStr)){
+                                    req.setAttribute("tab2", "active");
+                                }
+
+                                    List<TrackDiff> diffs = catalogStorage.geChangedTracks(updateId, from, TRACKS_PER_PAGE);
 
                                 List<Track> allNewTracks = catalogStorage.getTempTracks(catalog.getId(), fromNew, TRACKS_PER_PAGE);
 
