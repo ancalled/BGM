@@ -93,15 +93,23 @@
 
 <script>
     var catalogSelect = document.getElementById("catalogs");
+    var catalogs = catalogSelect.getElementsByTagName('*');
     var catIdEL = document.getElementById("cat-id");
 
     catalogSelect.onchange = function () {
         $('#cat-id').val(this.options[this.selectedIndex].id);
     }
 
+    for (var i = 0; i < catalogs.length; i++) {
+        if (catalogs[i].textContent == getParameterByName('catalog')) {
+            catalogs[i].selected = true;
+            $('#cat-id').val(catalogs[i].id);
+            break;
+        }
+    }
+
 
     var platformSelect = document.getElementById("platforms");
-
     platformSelect.selectedIndex = 1;
 
     platformSelect.onchange = function () {
@@ -124,6 +132,17 @@
         }
 
 
+    }
+
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regexS = "[\\?&]" + name + "=([^&#]*)";
+        var regex = new RegExp(regexS);
+        var results = regex.exec(window.location.search);
+        if (results == null)
+            return "";
+        else
+            return decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 </script>
 

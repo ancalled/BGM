@@ -65,7 +65,6 @@
             background: #e6e6e6;
         }
 
-
         .input-block-level {
             width: 540px;
         }
@@ -244,12 +243,12 @@
 
                     <jsp:useBean id="colorRandom" class="kz.bgm.platform.utils.ColorRandom" scope="application"/>
                     <jsp:useBean id="colors" class="java.util.HashMap" scope="request"/>
-                    <%--<c:forEach var="p" items="${platforms}">--%>
+                        <%--<c:forEach var="p" items="${platforms}">--%>
 
                         <%--<c:forEach var="catalog" items="${p.catalogs}">--%>
-                            <%--<c:set target="${colors}" property="${catalog.name}" value="${colorRandom.colorName}"/>--%>
+                        <%--<c:set target="${colors}" property="${catalog.name}" value="${colorRandom.colorName}"/>--%>
                         <%--</c:forEach>--%>
-                    <%--</c:forEach>--%>
+                        <%--</c:forEach>--%>
 
                     <c:forEach var="r" items="${tracks}" varStatus="s">
                         <tr class="${fn:toLowerCase(lastComposer)eq fn:toLowerCase(r.track.composer) &&
@@ -265,7 +264,8 @@
                             <td>${r.track.mobileShare}</td>
                             <td> ${r.track.publicShare}</td>
                             <td>
-                                <span class="catalog ${fn:toLowerCase(r.track.foundCatalog.rightType)}" <%--style="background: ${colors[r.track.catalog]}"--%>>
+                                <span id="catalog-${r.track.id}"
+                                      class="catalog ${fn:toLowerCase(r.track.foundCatalog.rightType)}" <%--style="background: ${colors[r.track.catalog]}"--%>>
                                         ${r.track.catalog}
                                 </span>
                             </td>
@@ -386,8 +386,11 @@
             this.className = 'light';
         };
 
+
         lightElements[i].onmousedown = function () {
-            window.location.replace("/admin/view/edit-track?id=" + this.id);
+            var catalogElement = document.getElementById("catalog-" + this.id);
+            window.location.replace(
+                    "/admin/view/edit-track?id=" + this.id + "&catalog=" + $.trim(catalogElement.textContent));
         }
     }
 

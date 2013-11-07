@@ -233,11 +233,11 @@ public class DispatcherServlet extends HttpServlet {
 
                                 if ("tab1".equals(activeTabStr)) {
                                     req.setAttribute("tab1", "active");
-                                } else if ("tab2".equals(activeTabStr)){
+                                } else if ("tab2".equals(activeTabStr)) {
                                     req.setAttribute("tab2", "active");
                                 }
 
-                                    List<TrackDiff> diffs = catalogStorage.geChangedTracks(updateId, from, TRACKS_PER_PAGE);
+                                List<TrackDiff> diffs = catalogStorage.geChangedTracks(updateId, from, TRACKS_PER_PAGE);
 
                                 List<Track> allNewTracks = catalogStorage.getTempTracks(catalog.getId(), fromNew, TRACKS_PER_PAGE);
 
@@ -341,6 +341,7 @@ public class DispatcherServlet extends HttpServlet {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
                         String idStr = req.getParameter("id");
+//                        String catalog = req.getParameter("catalog");
                         long id = 0;
                         if (idStr != null) {
 
