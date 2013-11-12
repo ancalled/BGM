@@ -95,6 +95,7 @@ public interface CatalogStorage {
 
     List<CalculatedReportItem> calculateMobileReport(String platform, Date from, Date to);
 
+    long getLastCatalogUpdateId();
 
     long createUser(User user);
 
@@ -104,6 +105,7 @@ public interface CatalogStorage {
 
     void removeCustomer(long id);
 
+    int getTempCompCount();
 
     void resetTempTrackTable();
 

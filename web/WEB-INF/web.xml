@@ -239,6 +239,10 @@
         <servlet-name>editTrackServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.EditTrackServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>catalogIdServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.GetTempCompCountServlet</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -297,6 +301,10 @@
     <servlet-mapping>
         <servlet-name>editTrackServlet</servlet-name>
         <url-pattern>admin/action/update-track</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>catalogIdServlet</servlet-name>
+        <url-pattern>admin/action/get-id</url-pattern>
     </servlet-mapping>
 
 </web-app>

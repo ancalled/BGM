@@ -242,11 +242,11 @@
                            id="sbmtBtn"
                            disabled="disabled">
 
-                    <div id="status-bar"></div>
+                    <span id="status">Загружено <span id="load-status"></span></span>
                 </div>
 
                 <input type="hidden" name="catId" value="${catalog.id}">
-                <input type="button" id="test" onclick="askForDone()" value="TEST">
+                <%--<input type="button" id="test" onclick="getLoadStatus()" value="TEST">--%>
 
                 <br>
                 <span id="example">Файл csv должен содержать следующие поля</span>
@@ -269,8 +269,6 @@
     </div>
 </div>
 
-</div>
-
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="/js/bootstrap.js"></script>
@@ -281,6 +279,8 @@
 <script src="/js/jquery.fileupload.js"></script>
 <script type="text/javascript">
 
+    $("#status").hide();
+
     //    var rowsOnPreview = 10;
     var rowsOnPreview = 100;
     var fileData;
@@ -288,7 +288,7 @@
     var headers = ['#', 'code', 'name', 'composer', 'artist', 'share mobile', 'share public'];
     var empty = ['', '', '', '', '', '', ''];
     var testData = [
-        ['Номер', 'Код композиции', 'Название песни', 'Имя автора','Имя исполнителя', 'Моб.контент', 'Публичка']
+        ['Номер', 'Код композиции', 'Название песни', 'Имя автора', 'Имя исполнителя', 'Моб.контент', 'Публичка']
     ];
 
 
@@ -326,6 +326,8 @@
 
             add: function (e, data) {
                 $("#sbmtBtn").click(function () {
+                    $("#status").show();
+                    getLoadStatus();
                     data.context = $('<p/>').text('Загрузка...').replaceAll($(this));
                     data.submit();
                 });
@@ -401,24 +403,36 @@
             $preview.css('overflow', 'scroll');
         }
 
-        function askForDone() {
-
-            $.ajax({
-                url: "../action/dbActivityServlet",
-                dataType: 'json',
-                error: function () {
-                    alert("Error Occured");
-                },
-                success: function (data) {
-                    alert(data.status);
-                }
-            });
-        }
-
-
 
     }
 
+    function getLoadRowsCount() {
+
+        $.ajax({
+            url: "../action/get-id",
+            dataType: 'json',
+            method: 'post',
+            async: 'true',
+            error: function () {
+                alert("Error Occured");
+            },
+            success: function (data) {
+                $('#load-status').html(data.rows);
+            }
+        });
+    }
+
+
+    var i = 0;
+    var stop = false;
+
+    function getLoadStatus() {
+        setInterval(getLoadRowsCount, 30);
+
+        while (stop) {
+            getLoadStatus();
+        }
+    }
 
 </script>
 

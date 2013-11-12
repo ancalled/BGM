@@ -1361,6 +1361,23 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+    @Override
+    public long getLastCatalogUpdateId() {
+       return query(new Action<Long>() {
+            @Override
+            public Long execute(Connection con) throws SQLException {
+
+                PreparedStatement ps =
+                        con.prepareStatement("select max(id)id from catalog_update");
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    return rs.getLong("id");
+                }
+                return null;
+            }
+        });
+
+    }
 
     public CatalogUpdate updateCatalog(final CatalogUpdate update) {
         return query(new Action<CatalogUpdate>() {
@@ -1451,6 +1468,22 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+
+    public int getTempCompCount(){
+        return query(new Action<Integer>() {
+            @Override
+            public Integer execute(Connection con) throws SQLException {
+
+                PreparedStatement ps =
+                        con.prepareStatement("select count(*)c from comp_tmp");
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("c");
+                }
+                return null;
+            }
+        });
+    }
 
 //    public String getQueryProcessTime(final long queryProcessId) {
 //        return query(new Action<String>() {
