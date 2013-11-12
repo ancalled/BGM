@@ -52,23 +52,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="Доделал заливку в плане нормального отображения пагинации всего catalog update (вторая вкладка);&#10;Сделал статус загрузки каталога - не гнушаясь в процессы mysql, а просто орагнизовал вывод количества строк загруженных в temp_comp;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/GetTempCompCountServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/css/bootstrap-fileupload.css" afterPath="$PROJECT_DIR$/web/css/bootstrap-fileupload.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.properties" afterPath="$PROJECT_DIR$/db.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/jquery.fileupload.js" afterPath="$PROJECT_DIR$/web/js/jquery.fileupload.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bgm-platform.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1384276717140" ignored="false" />
+    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1384276792703" ignored="false" />
     <file path="/customers.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1381422504208" ignored="false" />
     <file path="/DownloadBasketReportServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1383065095224" ignored="false" />
     <file path="/DbStorage.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1384273294127" ignored="false" />
     <file path="/BGM datasource" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1384273283824" ignored="false" />
-    <file path="/catalog.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1384276472669" ignored="false" />
+    <file path="/catalog.jsp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1384279203164" ignored="false" />
     <file path="/DBActivityServlet.java" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1381645089220" ignored="false" />
     <file path="/web.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1383849337433" ignored="false" />
     <file path="/a.regexp" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1383848551627" ignored="false" />
@@ -226,24 +223,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DispatcherServlet.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/DispatcherServlet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="243" column="0" selection-start="10154" selection-end="10154" vertical-scroll-proportion="-2.6">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CatalogUpdate.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/model/domain/CatalogUpdate.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="13" selection-start="128" selection-end="128" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="BGM datasource" pinned="false" current="false" current-in-tab="false">
         <entry file="dbDummy://db-console:/196d5ff2/b1ed7fcf-b56a-49b0-a869-b1a4c75c3585/">
           <provider selected="true" editor-type-id="text-editor">
@@ -359,19 +338,30 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="catalog.jsp" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="catalog.jsp" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="329" column="36" selection-start="9782" selection-end="9782" vertical-scroll-proportion="-6.576923">
+            <state line="224" column="37" selection-start="6327" selection-end="6327" vertical-scroll-proportion="0.37804878">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="catalog-update.jsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp">
+      <file leaf-file-name="jquery.fileupload.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/js/jquery.fileupload.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="349" column="72" selection-start="12073" selection-end="12073" vertical-scroll-proportion="-12.576923">
+            <state line="169" column="0" selection-start="6252" selection-end="6252" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bootstrap-fileupload.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/css/bootstrap-fileupload.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -380,28 +370,46 @@
       <file leaf-file-name="UpdateCatalogServlet.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="138" column="21" selection-start="5098" selection-end="5098" vertical-scroll-proportion="0.0">
+            <state line="25" column="13" selection-start="917" selection-end="917" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GetTempCompCountServlet.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="catalog-update.jsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="349" column="72" selection-start="12073" selection-end="12073" vertical-scroll-proportion="-83.19231">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="web.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
+          <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorProvider">
+            <state />
+          </provider>
+          <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleGeneralEditorProvider">
+            <state />
+          </provider>
+          <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorReferencesProvider">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="86" column="65" selection-start="2956" selection-end="2956" vertical-scroll-proportion="-2.36">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GetTempCompCountServlet.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/GetTempCompCountServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="24" selection-start="470" selection-end="470" vertical-scroll-proportion="0.3916914">
+            <state line="15" column="24" selection-start="470" selection-end="470" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DBActivityServlet.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/DBActivityServlet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="13" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -431,8 +439,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/web/js/csv-helper.js" />
-        <option value="$PROJECT_DIR$/web/js/bootstrap-tab.js" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/Track.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/search.jsp" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/utils/StringWrapperJSTL.java" />
@@ -444,9 +450,11 @@
         <option value="db-console:/196d5ff2/b1ed7fcf-b56a-49b0-a869-b1a4c75c3585/" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/LastUpdateCatalogIdServlet.java" />
         <option value="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/GetTempCompCountServlet.java" />
+        <option value="$PROJECT_DIR$/web/js/jquery.fileupload.js" />
+        <option value="$PROJECT_DIR$/web/css/bootstrap-fileupload.css" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" />
       </list>
     </option>
   </component>
@@ -593,6 +601,10 @@
               <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="customer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -617,6 +629,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bgm-platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BGM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1349,7 +1379,11 @@
       <created>1383847051102</created>
       <updated>1383847051102</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Доделал заливку в плане нормального отображения пагинации всего catalog update (вторая вкладка);&#10;Сделал статус загрузки каталога - не гнушаясь процесами mysql, а просто орагнизовал вывод количества строк загруженных в temp_comp;">
+      <created>1384276804702</created>
+      <updated>1384276804702</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1376,7 +1410,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34358975" sideWeight="0.493517" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34358975" sideWeight="0.493517" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24786325" sideWeight="0.48712122" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1392,14 +1426,14 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32478634" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32478634" sideWeight="0.49621212" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19772728" sideWeight="0.094017096" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26439393" sideWeight="0.082051285" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32820514" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39848486" sideWeight="0.5641932" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2651515" sideWeight="0.6564103" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31452993" sideWeight="0.48030302" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26363635" sideWeight="0.6854701" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31452993" sideWeight="0.48030302" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1451,7 +1485,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Доработал изменени каталога (почему-то перестал сохранять каталог - поправил), теперь каталог выбирается тот по умолчанию какому принадлежит трек" />
+    <option name="LAST_COMMIT_MESSAGE" value="Доделал заливку в плане нормального отображения пагинации всего catalog update (вторая вкладка);&#10;Сделал статус загрузки каталога - не гнушаясь процесами mysql, а просто орагнизовал вывод количества строк загруженных в temp_comp;" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1465,7 +1499,6 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Поправил страницу поиска у пользователя" />
     <MESSAGE value="Улучшения в поиске" />
     <MESSAGE value="проверка на null перед сортировкой результатов&#10;" />
     <MESSAGE value="Мобильный отчет" />
@@ -1490,6 +1523,7 @@
     <MESSAGE value="Добавил после загрузки на страницу треков таб со всеми загружаемыми композициями" />
     <MESSAGE value="Дработал страницу заруженного каталога , теперь нужный таб активизируется после переключение страниц;&#10;Выяснил из-за чего так долго грузится каталог - все дело в большом обьеме песен в каталоге comp_temp;" />
     <MESSAGE value="Доработал изменени каталога (почему-то перестал сохранять каталог - поправил), теперь каталог выбирается тот по умолчанию какому принадлежит трек" />
+    <MESSAGE value="Доделал заливку в плане нормального отображения пагинации всего catalog update (вторая вкладка);&#10;Сделал статус загрузки каталога - не гнушаясь процесами mysql, а просто орагнизовал вывод количества строк загруженных в temp_comp;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1516,18 +1550,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/EditTrackServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="0" selection-start="1360" selection-end="1360" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files (x86)/Java/jdk1.7.0_21/src.zip!/java/sql/Statement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="707" column="14" selection-start="31133" selection-end="31133" vertical-scroll-proportion="0.91136366" />
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/apache-commons/commons-fileupload-1.3.jar!/org/apache/commons/fileupload/servlet/ServletFileUpload.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="13" selection-start="180" selection-end="180" vertical-scroll-proportion="0.17" />
@@ -1538,32 +1560,9 @@
         <state line="15" column="16" selection-start="615" selection-end="615" vertical-scroll-proportion="-8.08" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
-      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorProvider">
-        <state />
-      </provider>
-      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleGeneralEditorProvider">
-        <state />
-      </provider>
-      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorReferencesProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="235" column="63" selection-start="8176" selection-end="8176" vertical-scroll-proportion="-7.52">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/DBActivityServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="13" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="138" column="21" selection-start="5098" selection-end="5098" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1691,20 +1690,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="349" column="72" selection-start="12073" selection-end="12073" vertical-scroll-proportion="-12.576923">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="329" column="36" selection-start="9782" selection-end="9782" vertical-scroll-proportion="-6.576923">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="dbDummy://db-console:/196d5ff2/b1ed7fcf-b56a-49b0-a869-b1a4c75c3585/">
       <provider selected="true" editor-type-id="text-editor">
         <state line="37" column="9" selection-start="764" selection-end="787" vertical-scroll-proportion="-8.379311">
@@ -1714,10 +1699,63 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/GetTempCompCountServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="24" selection-start="470" selection-end="470" vertical-scroll-proportion="0.3916914">
+        <state line="15" column="24" selection-start="470" selection-end="470" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/bootstrap-fileupload.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/jquery.fileupload.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="169" column="0" selection-start="6252" selection-end="6252" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
+      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleGeneralEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorReferencesProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="86" column="65" selection-start="2956" selection-end="2956" vertical-scroll-proportion="-2.36">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="13" selection-start="917" selection-end="917" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="349" column="72" selection-start="12073" selection-end="12073" vertical-scroll-proportion="-83.19231">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="224" column="37" selection-start="6327" selection-end="6327" vertical-scroll-proportion="0.37804878">
+          <folding />
         </state>
       </provider>
     </entry>
