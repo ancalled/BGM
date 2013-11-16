@@ -151,7 +151,7 @@ public class UploadReportServlet extends HttpServlet {
             }
 
             catalogService.saveCustomerReportItems(processed);
-            catalogService.updateCustomerReport(report.getId(), detected);
+            catalogService.updtDetectedTracksInCustomerReport(report.getId(), detected);
 
             resp.sendRedirect("/customer/view/report?id=" + reportId);
 

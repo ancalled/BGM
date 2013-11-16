@@ -158,7 +158,7 @@
 
     <servlet-mapping>
         <servlet-name>applyUpdateCatalog</servlet-name>
-        <url-pattern>/admin/action/appy-catalog-update</url-pattern>
+        <url-pattern>/admin/action/apply-catalog-update</url-pattern>
     </servlet-mapping>
 
 

@@ -85,7 +85,7 @@
                     </c:when>
                     <c:otherwise>
                         <%--<c:if test="${update.status == 'OK'}">--%>
-                        <form action="../action/appy-catalog-update" method="post">
+                        <form action="../action/apply-catalog-update" method="post">
                             <input class="btn btn-small btn-primary apply-btn" type="submit"
                                    value="Применить!">
                             <input type="hidden" name="id" value="${update.id}">

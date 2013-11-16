@@ -354,14 +354,18 @@
         $('a.remove-track').click(function () {
             var a = $(this);
             var itemId = a.attr('id');
-
+            var tr = a.closest('tr');
+            var clazz = tr.attr('class');
             $.post('/customer/api/remove-from-report',
                     {report_id: "${report.id}",
-                        item_id: itemId
+                        item_id: itemId,
+                        found_track: clazz
+
                     }, function (data) {
                         console.log(data);
                         if (data.status == 'ok') {
                             $('#' + itemId).parent().parent().hide();
+                            window.location.reload();
                         }
                     });
         });

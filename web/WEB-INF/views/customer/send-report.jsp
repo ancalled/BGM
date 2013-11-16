@@ -37,18 +37,37 @@
                   method="post" enctype="multipart/form-data">
 
 
-                <div class="fileupload fileupload-new" data-provides="fileupload">
-                    <div class="input-append">
-                        <div class="uneditable-input span3">
-                            <i class="icon-file fileupload-exists"></i>
-                            <span class="fileupload-preview"></span></div>
-                                <span class="btn btn-fileName">
-                                    <span class="fileupload-new">Выбрать отчет</span>
-                                    <span class="fileupload-exists">Изменить</span><input name="file" type="file"/>
-                                </span>
-                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Удалить</a>
+                <div class="form-group">
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                        <div class="input-group">
+                            <div class="form-control uneditable-input"><i class="icon-file fileupload-exists"></i>
+                                <span class="fileupload-preview"></span>
+                            </div>
+                            <div class="input-group-btn">
+                                <a class="btn btn-default btn-file">
+                                    <span class="fileupload-new">Выбрать бновление</span>
+                                    <span class="fileupload-exists">Изменить</span>
+                                    <input type="file" name="file"/></a>
+                                <a href="#" class="btn btn-default fileupload-exists"
+                                   data-dismiss="fileupload">Убрать</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+
+            <%--<div class="fileupload fileupload-new" data-provides="fileupload">--%>
+                    <%--<div class="input-append">--%>
+                        <%--<div class="uneditable-input span3">--%>
+                            <%--<i class="icon-file fileupload-exists"></i>--%>
+                            <%--<span class="fileupload-preview"></span></div>--%>
+                                <%--<span class="btn btn-fileName">--%>
+                                    <%--<span class="fileupload-new">Выбрать отчет</span>--%>
+                                    <%--<span class="fileupload-exists">Изменить</span><input name="file" type="file"/>--%>
+                                <%--</span>--%>
+                        <%--<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Удалить</a>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
 
 
                 Дата отчета <br>

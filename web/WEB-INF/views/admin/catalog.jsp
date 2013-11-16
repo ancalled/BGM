@@ -212,43 +212,43 @@
                   enctype="multipart/form-data">
 
                 <%--test--%>
-                <%--<div class="form-group">--%>
-                    <%--<div class="fileupload fileupload-new" data-provides="fileupload">--%>
-                        <%--<div class="input-group">--%>
-                            <%--<div class="form-control uneditable-input"><i class="icon-file fileupload-exists"></i>--%>
-                                <%--<span class="fileupload-preview"></span>--%>
-                            <%--</div>--%>
-                            <%--<div class="input-group-btn">--%>
-                                <%--<a class="btn btn-default btn-file">--%>
-                                    <%--<span class="fileupload-new">Выбрать бновление</span>--%>
-                                    <%--<span class="fileupload-exists">Изменить</span>--%>
-                                    <%--<input type="file" name="file" class="file-input" id="fileinput" accept=".csv"--%>
-                                           <%--data-url="../action/update-catalog"/></a>--%>
-                                <%--<a href="#" class="btn btn-default fileupload-exists"--%>
-                                   <%--data-dismiss="fileupload">Убрать</a>--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--test--%>
-
-                <div class="fileupload fileupload-new" data-provides="fileupload">
-                    <div class="input-append">
-                        <div class="uneditable-input span3">
-                            <i class="icon-file fileupload-exists"></i>
-                            <span class="fileupload-preview"></span>
+                <div class="form-group">
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                        <div class="input-group">
+                            <div class="form-control uneditable-input"><i class="icon-file fileupload-exists"></i>
+                                <span class="fileupload-preview"></span>
+                            </div>
+                            <div class="input-group-btn">
+                                <a class="btn btn-default btn-file">
+                                    <span class="fileupload-new">Выбрать бновление</span>
+                                    <span class="fileupload-exists">Изменить</span>
+                                    <input type="file" name="file" class="file-input" id="file-input" accept=".csv"
+                                           data-url="../action/update-catalog"/></a>
+                                <a href="#" class="btn btn-default fileupload-exists"
+                                   data-dismiss="fileupload">Убрать</a>
+                            </div>
                         </div>
-
-                <span class="btn btn-fileName">
-                    <span class="fileupload-new">Выбрать обновление</span>
-                    <span class="fileupload-exists">Изменить</span>
-
-                    <input name="file" type="file" id="fileinput" accept=".csv" data-url="../action/update-catalog"/>
-                </span>
-
-                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Убрать</a>
                     </div>
                 </div>
+                <%--test--%>
+
+                <%--<div class="fileupload fileupload-new" data-provides="fileupload">--%>
+                    <%--<div class="input-append">--%>
+                        <%--<div class="uneditable-input span3">--%>
+                            <%--<i class="icon-file fileupload-exists"></i>--%>
+                            <%--<span class="fileupload-preview"></span>--%>
+                        <%--</div>--%>
+
+                <%--<span class="btn btn-fileName">--%>
+                    <%--<span class="fileupload-new">Выбрать обновление</span>--%>
+                    <%--<span class="fileupload-exists">Изменить</span>--%>
+
+                    <%--<input name="file" type="file" id="file-input" accept=".csv" data-url="../action/update-catalog"/>--%>
+                <%--</span>--%>
+
+                        <%--<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Убрать</a>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
 
                 <div class="row-fluid">
 
@@ -290,7 +290,7 @@
 </div>
 
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="/js/bootstrap.js"></script>
 <script src="/js/bootstrap-fileupload.js"></script>
 <script src="/js/csv-helper.js"></script>
@@ -314,9 +314,9 @@
 
     $(document).ready(function () {
 
-        $('#fileinput').fileupload({
+        $('#file-input').fileupload({
             dataType: 'json',
-            method: 'post',
+
             done: function (e, data) {
 
                 $('#progress').html("");
@@ -360,7 +360,7 @@
         });
 
 
-        $("#fileinput").on('change', function (e) {
+        $("#file-input").on('change', function (e) {
             var f = this.files[0];
             if (this.files && f) {
                 var reader = new FileReader();
@@ -447,7 +447,7 @@
     var stop = false;
 
     function getLoadStatus() {
-        setInterval(getLoadRowsCount, 30);
+        setTimeout(getLoadRowsCount, 30);
 
         while (stop) {
             getLoadStatus();

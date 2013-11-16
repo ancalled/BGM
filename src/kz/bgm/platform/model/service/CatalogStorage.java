@@ -23,6 +23,8 @@ public interface CatalogStorage {
 
     List<Long> getAllCatalogIds();
 
+    boolean isCatalogLoading();
+
     List<Catalog> getCatalogsByPlatform(long catId);
 
     int getTrackCount();
@@ -67,7 +69,9 @@ public interface CatalogStorage {
 
     long saveCustomerReport(CustomerReport report);
 
-    long updateCustomerReport(long id, int detected);
+    long updtDetectedTracksInCustomerReport(long id, int detected);
+
+    long updtTracksInCustomerReport(long id, int tracks);
 
     long saveCustomerReportItem(CustomerReportItem item);
 

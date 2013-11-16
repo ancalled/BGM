@@ -1,5 +1,6 @@
 package kz.bgm.platform.web.customer.api;
 
+import kz.bgm.platform.model.domain.CustomerReport;
 import kz.bgm.platform.model.domain.CustomerReportItem;
 import kz.bgm.platform.model.domain.User;
 import kz.bgm.platform.model.service.CatalogFactory;
@@ -31,6 +32,7 @@ public class JsonRemoveFromReportServlet extends HttpServlet {
 
         String reportIdStr = req.getParameter("report_id");
         String itemIdStr = req.getParameter("item_id");
+        String trackFound = req.getParameter("found_track");
 
         if (reportIdStr == null || itemIdStr == null) return;
 
@@ -65,6 +67,24 @@ public class JsonRemoveFromReportServlet extends HttpServlet {
                     "user login : " + user.getLogin());
 
             service.removeItemFromReport(itemId);
+
+
+            CustomerReport report = service.getCustomerReport(reportId);
+            if (report != null) {
+
+
+                StringBuilder logBuff = new StringBuilder();
+                logBuff.append("Remove one ");
+                if ("same-track".equalsIgnoreCase(trackFound.trim())) {
+                    logBuff.append("detected ");
+                    service.updtDetectedTracksInCustomerReport(reportId, report.getDetected() - 1);
+                } else if ("not-found".equalsIgnoreCase(trackFound.trim())) {
+                    service.updtTracksInCustomerReport(reportId, report.getTracks() - 1);
+                }
+                logBuff.append("track count from Customer report with id:").append(reportId);
+                log.info(logBuff.toString());
+
+            }
 
             //todo save to session history
 
