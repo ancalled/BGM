@@ -75,12 +75,12 @@ public class JsonRemoveFromReportServlet extends HttpServlet {
 
                 StringBuilder logBuff = new StringBuilder();
                 logBuff.append("Remove one ");
-                if ("same-track".equalsIgnoreCase(trackFound.trim())) {
-                    logBuff.append("detected ");
+//                if ("same-track".equalsIgnoreCase(trackFound.trim())) {
+//                    logBuff.append("detected ");
                     service.updtDetectedTracksInCustomerReport(reportId, report.getDetected() - 1);
-                } else if ("not-found".equalsIgnoreCase(trackFound.trim())) {
-                    service.updtTracksInCustomerReport(reportId, report.getTracks() - 1);
-                }
+//                } else if ("not-found".equalsIgnoreCase(trackFound.trim())) {
+//                    service.updtTracksInCustomerReport(reportId, report.getTracks() - 1);
+//                }
                 logBuff.append("track count from Customer report with id:").append(reportId);
                 log.info(logBuff.toString());
 

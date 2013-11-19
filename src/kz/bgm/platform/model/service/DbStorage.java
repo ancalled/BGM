@@ -1493,6 +1493,7 @@ public class DbStorage implements CatalogStorage {
 
                 ps.executeUpdate();
 
+                catalogLoading.set(false);
                 return update;
             }
         });
@@ -1722,7 +1723,15 @@ public class DbStorage implements CatalogStorage {
                 stmt3.setLong(1, updateId);
                 stmt3.executeUpdate();
 
+                PreparedStatement stmt4 = con.prepareStatement("UPDATE catalog cat,\n" +
+                        "(SELECT * FROM catalog_update WHERE id =?)cat_upd\n" +
+                        "SET cat.tracks = (SELECT count(*) FROM composition WHERE catalog_id=cat_upd.catalog_id),\n" +
+                        "cat.artists=(SELECT count(distinct (artist)) from composition where catalog_id=cat_upd.catalog_id)\n" +
+                        "                         WHERE cat.id=cat_upd.catalog_id;");
 
+                stmt4.setLong(1, updateId);
+
+                stmt4.executeUpdate();
                 return null;
             }
         });

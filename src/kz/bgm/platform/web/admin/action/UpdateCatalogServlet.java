@@ -54,11 +54,6 @@ public class UpdateCatalogServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         JSONObject jsonObj = new JSONObject();
 
-        if(storage.isCatalogLoading()){
-            errorCatalogAlreadyLoading(out,jsonObj);
-            return;
-        }
-
         try {
             List<FileItem> fields = fileUploader.parseRequest(req);
             if (fields == null) {
@@ -141,12 +136,6 @@ public class UpdateCatalogServlet extends HttpServlet {
     private void errorNoFileReport(PrintWriter out, JSONObject jsonObj) throws IOException {
         jsonObj.put("status", "error");
         jsonObj.put("er", "no-file-reports-uploaded");
-        jsonObj.writeJSONString(out);
-    }
-
-    private void errorCatalogAlreadyLoading(PrintWriter out, JSONObject jsonObj) throws IOException {
-        jsonObj.put("status", "error");
-        jsonObj.put("er", "Catalogs already loading by someone");
         jsonObj.writeJSONString(out);
     }
 
