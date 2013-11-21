@@ -206,8 +206,6 @@
             <%--</c:if>--%>
 
             <%--</c:forEach>--%>
-
-
             <form class="form-horizontal" action="../action/update-catalog" method="post"
                   enctype="multipart/form-data">
 
