@@ -10,7 +10,16 @@ public class Catalog {
     private long platformId;
     private int tracks;
     private int artists;
+    private String color;
 
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 
     public long getPlatformId() {
         return platformId;

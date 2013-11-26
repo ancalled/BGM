@@ -151,7 +151,7 @@
                         </fieldset>
                     </div>
 
-
+                    <jsp:useBean id="colorMap" class="java.util.HashMap"/>
                     <div class="span6">
                         <h4>Фильтр по каталогам</h4>
 
@@ -162,6 +162,7 @@
 
                                     <fieldset>
                                         <c:forEach var="c" items="${p.catalogs}" varStatus="loop">
+                                            <c:set target="${colorMap}" property="${c.name}" value="${c.color}"/>
                                             <c:if test="${c.rightType eq customer.rightType or customer.rightType eq 'AUTHOR_RELATED'}">
                                                 <label for="checkbox-${loop.index}" class="checkbox">
                                                     <input type="checkbox" value="${c.id}"
@@ -230,15 +231,6 @@
                     <c:set var="lastArtist" value="none"/>
                     <c:set var="lastCode" value="none"/>
 
-                    <jsp:useBean id="colorRandom" class="kz.bgm.platform.utils.ColorRandom" scope="application"/>
-                    <jsp:useBean id="colors" class="java.util.HashMap" scope="request"/>
-                    <c:forEach var="p" items="${platforms}">
-
-                        <c:forEach var="catalog" items="${p.catalogs}">
-                            <c:set target="${colors}" property="${catalog.name}" value="${colorRandom.colorName}"/>
-                        </c:forEach>
-                    </c:forEach>
-
                     <c:forEach var="r" items="${tracks}" varStatus="s">
                         <tr class="${fn:toLowerCase(lastComposer)eq fn:toLowerCase(r.track.composer) &&
                         fn:toLowerCase(lastName)eq fn:toLowerCase(r.track.name)||
@@ -263,7 +255,7 @@
                             </c:choose>
 
                             <td>
-                                <span class="catalog" style="background: ${colors[r.track.catalog]}">
+                                <span class="catalog"  style="background: <c:out value="${colorMap[r.track.catalog]}"/>">
                                         ${r.track.catalog}
                                 </span>
                             </td>

@@ -16,7 +16,8 @@ CREATE TABLE catalog (
   royalty     DECIMAL(6, 3),
   right_type  INT,
   tracks      INT,
-  artists     INT
+  artists     INT,
+  color       varchar(10)
 );
 
 CREATE TABLE composition (

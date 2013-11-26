@@ -351,20 +351,20 @@
             },
 
             progressall: function (e, data) {
-//                var progress = parseInt(data.loaded / data.total * 100, 10);
-//                $('#progress .bar').css('width', progress + '%');
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress .bar').css('width', progress + '%');
             }
         });
 
 
         $("#fileinput").on('change', function (e) {
             var f = this.files[0];
+            this.setAttribute('text',f.name);
             if (this.files && f) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     processContents(event.target.result, delimiter);
                 };
-
 //                reader.readAsText(f, "UTF8");
                 reader.readAsText(f.slice(0, 1024 * 100), "UTF8");
             }

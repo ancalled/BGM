@@ -284,7 +284,6 @@ public class DbStorage implements CatalogStorage {
                 List<Catalog> catalogs = new ArrayList<>();
                 while (rs.next()) {
                     Catalog cat = parseCatalog(rs);
-
                     catalogs.add(cat);
                 }
                 return catalogs;
@@ -1936,6 +1935,7 @@ public class DbStorage implements CatalogStorage {
         catalog.setTracks(rs.getInt(tblPrefix + "tracks"));
         catalog.setPlatformId(rs.getLong(tblPrefix + "platform_id"));
         catalog.setArtists(rs.getInt(tblPrefix + "artists"));
+        catalog.setColor(rs.getString(tblPrefix + "color"));
         return catalog;
     }
 

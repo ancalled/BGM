@@ -23,183 +23,83 @@
 </c:import>
 
 
-<div class="tabbable">
-    <ul class="nav nav-tabs" id="report-tab">
-        <li><a href="#tab1" data-toggle="tab">Загрузка мобильного отчета</a></li>
-        <li><a href="#tab2" data-toggle="tab">Загрузка публичного отчета</a></li>
-        <li><a href="#tab3" data-toggle="tab">Квартальный отчет</a></li>
-        <li><a href="#tab4" data-toggle="tab">Список всех отчетов</a></li>
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane " id="tab1">
-            <div class="container text-center">
-                <div class="row text-left">
-                    <legend>
-                        Загрузка мобильного отчета
-                    </legend>
-                </div>
+<div class="container text-center">
+    <div class="row text-left">
+        <legend>
+            Загрузка мобильного отчета
+        </legend>
+    </div>
 
-                <div class="row text-left">
+    <div class="row text-left">
 
-                    <form action="/admin/action/upload-mobile-report"
-                          method="post" enctype="multipart/form-data">
+        <form action="/admin/action/upload-report"
+              method="post" enctype="multipart/form-data">
 
+            <label>
+                Пользователь <br>
+                <select name="selector" id="customer">
 
-                        <div class="fileupload fileupload-new" data-provides="fileupload">
-                            <div class="input-append">
-                                <div class="uneditable-input span3">
-                                    <i class="icon-file fileupload-exists"></i>
-                                    <span class="fileupload-preview"></span></div>
+                    <c:forEach var="c" items="${customers}" varStatus="s">
+                        <option class="${c.name}" id="${c.id}">${c.name}</option>
+
+                    </c:forEach>
+
+                </select>
+            </label>
+
+            <input type="hidden" name="customer-id" id="customer-id"/>
+
+            <div class="fileupload fileupload-new" data-provides="fileupload">
+                <div class="input-append">
+                    <div class="uneditable-input span3">
+                        <i class="icon-file fileupload-exists"></i>
+                        <span class="fileupload-preview"></span></div>
                                 <span class="btn btn-fileName">
                                     <span class="fileupload-new">Выбрать отчет</span>
                                     <span class="fileupload-exists">Изменить</span><input name="file" type="file"/>
                                 </span>
-                                <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Удалить</a>
-                            </div>
-                        </div>
+                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Удалить</a>
+                </div>
+            </div>
 
-                        <!--<div class="alert alert-block">-->
-                        <!--<button type="button" class="close" data-dismiss="alert">&times;</button>-->
-                        <!--<h4>Формат отчета</h4>-->
-                        <!--Формат клиентского отчета Должна быть в Excel таки ;)-->
+            <!--<div class="alert alert-block">-->
+            <!--<button type="button" class="close" data-dismiss="alert">&times;</button>-->
+            <!--<h4>Формат отчета</h4>-->
+            <!--Формат клиентского отчета Должна быть в Excel таки ;)-->
 
-                        <!--</div>-->
+            <!--</div>-->
 
 
-                        Дата отчета <br>
+            Дата отчета <br>
 
-                        <div id="date" class="input-append">
-                            <input data-format="yyyy-MM-dd" id="dt" class="input-block-level" name="dt" type="text">
+            <div id="date" class="input-append">
+                <input data-format="yyyy-MM-dd" id="dt" class="input-block-level" name="dt" type="text">
                               <span class="add-on">
                                  <i data-time-icon="icon-time" data-whenUpdated-icon="icon-calendar">
                                  </i>
                                   </span>
-                        </div>
-
-
-                        <label>
-                            Период<br>
-                            <select name="period">
-                                <option value="0">Месячный</option>
-                                <option value="1">Квартальный</option>
-                            </select>
-                        </label>
-
-
-                        <div class="row-fluid">
-                            <input class="btn" type="submit" value="Отправить">
-                        </div>
-                    </form>
-
-                </div>
-
             </div>
-        </div>
-        <div class="tab-pane" id="tab2">
-            <div class="container text-center">
-                <div class="row text-left">
-                    <legend>
-                        Загрузка публичного отчета
-                    </legend>
-                </div>
-
-                <div class="row text-left">
-
-                    <form action="/admin/action/upload-public-report" method="post" enctype="multipart/form-data">
-                        <div class="fileupload fileupload-new" data-provides="fileupload">
-                            <div class="input-append">
-                                <div class="uneditable-input span3">
-                                    <i class="icon-file fileupload-exists"></i>
-                                    <span class="fileupload-preview"></span></div>
-                                <span class="btn btn-fileName">
-                                    <span class="fileupload-new">Выбрать отчет</span>
-                                    <span class="fileupload-exists">Изменить</span><input name="file" type="file"/>
-                                </span>
-                                <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Удалить</a>
-                            </div>
-                        </div>
-
-                        <div class="alert alert-block">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <h4>Формат отчета</h4>
-                            № | Вид произведения | Название | Исполнитель | Вид контента|
-                            Кол-во | Авторская доля % | Сумма сбора за авторские права |
-                            Стоимость за единицу | Кол-во | Смежная доля % | Сумма сбора за смежные права | ОБЩАЯ СУММА
 
 
-                        </div>
+            <label>
+                Период<br>
+                <select name="period">
+                    <option value="0">Месячный</option>
+                    <option value="1">Квартальный</option>
+                </select>
+            </label>
 
-                        <div class="row-fluid">
-                            <input class="btn" type="submit" value="Отправить">
-                        </div>
-                    </form>
 
-                </div>
-
+            <div class="row-fluid">
+                <input class="btn" type="submit" value="Отправить">
             </div>
-        </div>
-        <div class="tab-pane" id="tab3">
-            <div class="container text-center">
-                <div class="row text-left">
-                    <legend>
-                        Выгрузка расчитаных отчетов
-                    </legend>
-                </div>
-                <div class="row text-left">
+        </form>
 
-                    <label for="type-report-change">Тип отчета</label>
-                    <select id="type-report-change">
-
-                        <option value="1">Публичный</option>
-                        <option value="2">Мобильный</option>
-                    </select>
-
-                    <form action="/admin/action/load-mobile-reports" id="report-load-form" method="post">
-
-                        <label for="catalog">Каталог</label>
-                        <select name="catalog" id="catalog">
-                            <option value="WCh">WCh</option>
-                            <option value="NMI_WEST">NMI_WEST</option>
-                            <option value="NMI">NMI</option>
-                            <option value="PMI_WEST">PMI_WEST</option>
-                            <option value="PMI">PMI</option>
-                            <option value="NMI related">NMI related</option>
-                            <option value="PMI related">PMI related</option>
-                            <option value="Sony ATV">Sony ATV</option>
-                            <option value="MSG_MCS">MSG_MCS</option>
-                        </select>
-
-                        <div class="row-fluid">
-                            <input class="btn" type="submit" value="Загрузить отчеты">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane" id="tab4">
-            <div class="container text-center">
-                <div class="row text-left">
-                    <legend>
-                        Список всех клиентских отчетов
-                    </legend>
-                </div>
-                <div class="row text-left">
-
-                    <form action="/admin/view/report-calculator" method="post">
-
-
-                        <div class="row-fluid">
-                            <input class="btn" type="submit" value="Загрузить отчеты">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
+
 </div>
 
-
-<script type="text/javascript">
+<script>
 
     $('#type-report-change').change(function () {
         var v = $(this).val();
@@ -220,6 +120,11 @@
 
     });
 
+
+    $('#customer').change(function () {
+        $('#customer-id').val(this.options[this.selectedIndex].id);
+    });
+
     var el = document.getElementById('date');
 
     //    el.on('changeDate', function (e) {
@@ -228,7 +133,7 @@
     //    });
 
 
-    $('#report-tab a:first').tab('show');
+    //    $('#report-tab a:first').tab('show');
 
 
 </script>

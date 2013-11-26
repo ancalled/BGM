@@ -331,7 +331,11 @@ public class DispatcherServlet extends HttpServlet {
                 action = new Action() {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
+                        List<Customer> customers = catalogStorage.getAllCustomers();
 
+                        if (customers != null) {
+                            req.setAttribute("customers", customers);
+                        }
                         return "reports";
                     }
                 };

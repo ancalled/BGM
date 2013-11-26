@@ -39,6 +39,7 @@
 
     
     
+    
 
     <servlet>
         <servlet-name>adminSearchServlet</servlet-name>
@@ -243,6 +244,10 @@
         <servlet-name>catalogIdServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.GetTempCompCountServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>uploadReports</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.UploadReportServlet</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -305,6 +310,10 @@
     <servlet-mapping>
         <servlet-name>catalogIdServlet</servlet-name>
         <url-pattern>admin/action/get-id</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>uploadReports</servlet-name>
+        <url-pattern>admin/action/upload-report</url-pattern>
     </servlet-mapping>
 
 </web-app>
