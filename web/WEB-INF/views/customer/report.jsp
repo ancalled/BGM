@@ -181,26 +181,64 @@
         <ul id="pages">
             <c:choose>
                 <c:when test="${from >= size}">
-                    <li><a href="report?id=${report.id}&from=${from - size}">&laquo;</a></li>
+                    <li><a href="report?id=${report.id}&from=0&page=0">&laquo;</a></li>
                 </c:when>
                 <c:otherwise>
                     <li class="disabled"><a href="#">&laquo;</a></li>
                 </c:otherwise>
             </c:choose>
+
+            <c:set var="left" value="4"/>
+            <c:set var="right" value="5"/>
+
+            <c:if test="${page}==0">
+                <c:set var="page" value="1"/>
+            </c:if>
+
             <c:forEach var="i" begin="1" end="${(report.detected / size) + 1}" step="1"
                        varStatus="status">
-                <li class="${from == (i - 1) * size ? 'active' : ''}">
-                    <a href="report?id=${report.id}&from=${(i - 1) * size}">${i}</a>
-                </li>
+
+
+                <c:choose>
+                    <c:when test="${from == (i - 1) * size}">
+                        <li class="active">
+                            <a href="report?id=${report.id}&from=${(i - 1) * size}&page=${i}">${i}</a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+
+                        <c:forEach var="leftIdx" begin="1" end="${left}" step="1"
+                                   varStatus="status">
+
+                            <c:set var="decr" value="${right-leftIdx}"/>
+                            <c:if test="${page-decr==i}">
+                                <li>
+                                    <a href="report?id=${report.id}&from=${(i - 1) * size}&page=${i}">${i}</a>
+                                </li>
+                            </c:if>
+                        </c:forEach>
+
+                        <c:forEach var="rightIdx" begin="1" end="${right}" step="1"
+                                   varStatus="status">
+
+                            <c:if test="${page+rightIdx==i}">
+                                <li>
+                                    <a href="report?id=${report.id}&from=${(i - 1) * size}&page=${i}">${i}</a>
+                                </li>
+                            </c:if>
+                        </c:forEach>
+
+                    </c:otherwise>
+                </c:choose>
+
+
             </c:forEach>
-            <c:choose>
-                <c:when test="${from + size < update.crossing}">
-                    <li><a href="report?id=${report.id}&from=${from + size}">&raquo;</a></li>
-                </c:when>
-                <c:otherwise>
-                    <li class="disabled"><a href="#">&raquo;</a></li>
-                </c:otherwise>
-            </c:choose>
+            <fmt:formatNumber var="last"
+                              value="${report.detected/size}"
+                              maxFractionDigits="0" />
+            <li>
+                <a href="report?id=${report.id}&from=${report.detected}&page=${last}">&raquo;</a>
+            </li>
 
         </ul>
     </div>
@@ -299,35 +337,99 @@
         </tbody>
     </table>
 
-
     <div class="pagination pagination-centered">
         <ul>
             <c:choose>
                 <c:when test="${from >= size}">
-                    <li><a href="report?id=${report.id}&from=${from - size}">&laquo;</a></li>
+                    <li><a href="report?id=${report.id}&from=0&page=0">&laquo;</a></li>
                 </c:when>
                 <c:otherwise>
                     <li class="disabled"><a href="#">&laquo;</a></li>
                 </c:otherwise>
             </c:choose>
 
+            <c:set var="left" value="4"/>
+            <c:set var="right" value="5"/>
+
+            <c:if test="${page}==0">
+                <c:set var="page" value="1"/>
+            </c:if>
+
             <c:forEach var="i" begin="1" end="${(report.detected / size) + 1}" step="1"
                        varStatus="status">
-                <li class="${from == (i - 1) * size ? 'active' : ''}">
-                    <a href="report?id=${report.id}&from=${(i - 1) * size}">${i}</a>
-                </li>
-            </c:forEach>
 
-            <c:choose>
-                <c:when test="${from + size < update.crossing}">
-                    <li><a href="report?id=${report.id}&from=${from + size}">&raquo;</a></li>
-                </c:when>
-                <c:otherwise>
-                    <li class="disabled"><a href="#">&raquo;</a></li>
-                </c:otherwise>
-            </c:choose>
+
+                <c:choose>
+                    <c:when test="${from == (i - 1) * size}">
+                        <li class="active">
+                            <a href="report?id=${report.id}&from=${(i - 1) * size}&page=${i}">${i}</a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+
+                        <c:forEach var="leftIdx" begin="1" end="${left}" step="1"
+                                   varStatus="status">
+
+                            <c:set var="decr" value="${right-leftIdx}"/>
+                            <c:if test="${page-decr==i}">
+                                <li>
+                                    <a href="report?id=${report.id}&from=${(i - 1) * size}&page=${i}">${i}</a>
+                                </li>
+                            </c:if>
+                        </c:forEach>
+
+                        <c:forEach var="rightIdx" begin="1" end="${right}" step="1"
+                                   varStatus="status">
+
+                            <c:if test="${page+rightIdx==i}">
+                                <li>
+                                    <a href="report?id=${report.id}&from=${(i - 1) * size}&page=${i}">${i}</a>
+                                </li>
+                            </c:if>
+                        </c:forEach>
+
+                    </c:otherwise>
+                </c:choose>
+
+
+            </c:forEach>
+            <fmt:formatNumber var="last"
+                              value="${report.detected/size}"
+                              maxFractionDigits="0" />
+            <li>
+                <a href="report?id=${report.id}&from=${report.detected}&page=${last}">&raquo;</a>
+            </li>
+
         </ul>
     </div>
+    <%--<div class="pagination pagination-centered">--%>
+        <%--<ul>--%>
+            <%--<c:choose>--%>
+                <%--<c:when test="${from >= size}">--%>
+                    <%--<li><a href="report?id=${report.id}&from=${from - size}">&laquo;</a></li>--%>
+                <%--</c:when>--%>
+                <%--<c:otherwise>--%>
+                    <%--<li class="disabled"><a href="#">&laquo;</a></li>--%>
+                <%--</c:otherwise>--%>
+            <%--</c:choose>--%>
+
+            <%--<c:forEach var="i" begin="1" end="${(report.detected / size) + 1}" step="1"--%>
+                       <%--varStatus="status">--%>
+                <%--<li class="${from == (i - 1) * size ? 'active' : ''}">--%>
+                    <%--<a href="report?id=${report.id}&from=${(i - 1) * size}">${i}</a>--%>
+                <%--</li>--%>
+            <%--</c:forEach>--%>
+
+            <%--<c:choose>--%>
+                <%--<c:when test="${from + size < update.crossing}">--%>
+                    <%--<li><a href="report?id=${report.id}&from=${from + size}">&raquo;</a></li>--%>
+                <%--</c:when>--%>
+                <%--<c:otherwise>--%>
+                    <%--<li class="disabled"><a href="#">&raquo;</a></li>--%>
+                <%--</c:otherwise>--%>
+            <%--</c:choose>--%>
+        <%--</ul>--%>
+    <%--</div>--%>
 </section>
 
 <div id="track-remove-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"

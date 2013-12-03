@@ -1008,7 +1008,8 @@ public class DbStorage implements CatalogStorage {
                                 "  c.platform_id cat_platform_id,\n" +
                                 "  c.royalty cat_royalty,\n" +
                                 "  c.tracks cat_tracks,\n" +
-                                "  c.artists cat_artists\n" +
+                                "  c.artists cat_artists,\n" +
+                                "  c.color cat_color\n" +
                                 "FROM customer_report_item i\n" +
                                 "  LEFT JOIN composition t ON (i.composition_id = t.id)\n" +
                                 "  LEFT JOIN catalog c ON (t.catalog_id = c.id)\n" +

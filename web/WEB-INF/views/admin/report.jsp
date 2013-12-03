@@ -187,11 +187,27 @@
                     <li class="disabled"><a href="#">&laquo;</a></li>
                 </c:otherwise>
             </c:choose>
+
+            <c:set var="left" value="4"/>
+            <c:set var="right" value="5"/>
+
             <c:forEach var="i" begin="1" end="${(report.detected / size) + 1}" step="1"
                        varStatus="status">
-                <li class="${from == (i - 1) * size ? 'active' : ''}">
-                    <a href="report?id=${report.id}&from=${(i - 1) * size}">${i}</a>
-                </li>
+
+                <c:choose>
+                    <c:when test="${from == (i - 1) * size}">
+                        <li class="active">
+                            <a href="report?id=${report.id}&from=${(i - 1) * size}">${i}</a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="${(from-i)<5 && (from-i)>=0 ? 'visible' : 'invisible'}">
+                            <a href="report?id=${report.id}&from=${(i - 1) * size}">${i}</a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
+
+
             </c:forEach>
             <c:choose>
                 <c:when test="${from + size < update.crossing}">

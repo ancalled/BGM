@@ -121,6 +121,7 @@ public class DispatcherServlet extends HttpServlet {
                         long reportId = Long.parseLong(repIdStr);
 
                         String fromStr = req.getParameter("from");
+
                         int from = fromStr != null ? Integer.parseInt(fromStr) : 0;
 
                         String sizeStr = req.getParameter("size");
@@ -129,10 +130,15 @@ public class DispatcherServlet extends HttpServlet {
                         CustomerReport report = catalogStorage.getCustomerReport(reportId);
                         List<CustomerReportItem> items = catalogStorage.getCustomerReportsItems(reportId, from, size);
 
+
+                        String page = req.getParameter("page");
+                        if (page == null) page = "0";
+
                         req.setAttribute("report", report);
                         req.setAttribute("items", items);
                         req.setAttribute("from", from);
                         req.setAttribute("size", size);
+                        req.setAttribute("page", page);
 
                         return "report";
                     }
