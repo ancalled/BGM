@@ -140,10 +140,10 @@
                 </c:otherwise>
             </c:choose>
 
-            <c:forEach var="i" begin="1" end="${(update.crossing / pageSize) + 1}" step="1"
+            <c:forEach var="page_idx" begin="1" end="${(update.crossing / pageSize) + 1}" step="1"
                        varStatus="status">
-                <li class="${from == (i - 1) * pageSize ? 'active' : ''}">
-                    <a href="catalog-update?id=${update.id}&from=${(i - 1) * pageSize}&active-tab=tab1">${i}</a>
+                <li class="${from == (page_idx - 1) * pageSize ? 'active' : ''}">
+                    <a href="catalog-update?id=${update.id}&from=${(page_idx - 1) * pageSize}&active-tab=tab1">${page_idx}</a>
                 </li>
             </c:forEach>
 
@@ -237,10 +237,10 @@
                 </c:otherwise>
             </c:choose>
 
-            <c:forEach var="i" begin="1" end="${(update.crossing / pageSize) + 1}" step="1"
+            <c:forEach var="page_idx" begin="1" end="${(update.crossing / pageSize) + 1}" step="1"
                        varStatus="status">
-                <li class="${from == (i - 1) * pageSize ? 'active' : ''}">
-                    <a href="catalog-update?id=${update.id}&from=${(i - 1) * pageSize}&active-tab=tab1">${i}</a>
+                <li class="${from == (page_idx - 1) * pageSize ? 'active' : ''}">
+                    <a href="catalog-update?id=${update.id}&from=${(page_idx - 1) * pageSize}&active-tab=tab1">${page_idx}</a>
                 </li>
             </c:forEach>
 
@@ -275,10 +275,10 @@
                 </c:otherwise>
             </c:choose>
 
-            <c:forEach var="i" begin="1" end="${update.tracks / pageSize + 1}" step="1"
+            <c:forEach var="page_idx" begin="1" end="${update.tracks / pageSize + 1}" step="1"
                        varStatus="status">
-                <li class="${fromNew == (i - 1) * pageSize ? 'active' : ''}">
-                    <a href="catalog-update?id=${update.id}&from-new=${(i - 1) * pageSize}&active-tab=tab2">${i}</a>
+                <li class="${fromNew == (page_idx - 1) * pageSize ? 'active' : ''}">
+                    <a href="catalog-update?id=${update.id}&from-new=${(page_idx - 1) * pageSize}&active-tab=tab2">${page_idx}</a>
                 </li>
             </c:forEach>
 
@@ -347,10 +347,10 @@
                 </c:otherwise>
             </c:choose>
 
-            <c:forEach var="i" begin="1" end="${update.tracks / pageSize + 1}" step="1"
+            <c:forEach var="page_idx" begin="1" end="${update.tracks / pageSize + 1}" step="1"
                        varStatus="status">
-                <li class="${fromNew == (i - 1) * pageSize ? 'active' : ''}">
-                    <a href="catalog-update?id=${update.id}&from-new=${(i - 1) * pageSize}&active-tab=tab2">${i}</a>
+                <li class="${fromNew == (page_idx - 1) * pageSize ? 'active' : ''}">
+                    <a href="catalog-update?id=${update.id}&from-new=${(page_idx - 1) * pageSize}&active-tab=tab2">${page_idx}</a>
                 </li>
             </c:forEach>
 

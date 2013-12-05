@@ -181,7 +181,7 @@
         <ul id="pages">
             <c:choose>
                 <c:when test="${from >= size}">
-                    <li><a href="report?id=${report.id}&from=${from - size}">&laquo;</a></li>
+                    <li><a href="report?id=${report.id}&from=0&page=0">&laquo;</a></li>
                 </c:when>
                 <c:otherwise>
                     <li class="disabled"><a href="#">&laquo;</a></li>
@@ -189,38 +189,62 @@
             </c:choose>
 
             <c:set var="left" value="4"/>
-            <c:set var="right" value="5"/>
+            <c:set var="right" value="6"/>
+            <c:set var="idx_right" value="0"/>
 
-            <c:forEach var="i" begin="1" end="${(report.detected / size) + 1}" step="1"
+            <c:if test="${page}==0">
+                <c:set var="page" value="1"/>
+            </c:if>
+
+            <c:set var="pages_end" value="${(report.detected / size)+1}"/>
+
+            <c:forEach var="page_idx" begin="1" end="${pages_end}" step="1"
                        varStatus="status">
 
                 <c:choose>
-                    <c:when test="${from == (i - 1) * size}">
+                    <c:when test="${from == (page_idx - 1) * size}">
                         <li class="active">
-                            <a href="report?id=${report.id}&from=${(i - 1) * size}">${i}</a>
+                            <a href="report?id=${report.id}&from=${(page_idx - 1) * size}&page=${page_idx}">${page_idx}</a>
                         </li>
                     </c:when>
                     <c:otherwise>
-                        <li class="${(from-i)<5 && (from-i)>=0 ? 'visible' : 'invisible'}">
-                            <a href="report?id=${report.id}&from=${(i - 1) * size}">${i}</a>
-                        </li>
+
+                        <c:if test="${pages_end - page<right}">
+                            <c:set var="right" value="${right-1}"/>
+                            <c:set var="left" value="${left+1}"/>
+                        </c:if>
+
+                        <c:if test="${page-page_idx<=left&&page-page_idx>0}">
+                            <li>
+                                <a href="report?id=${report.id}&from=${(page_idx - 1) * size}&page=${page_idx}">${page_idx}</a>
+                            </li>
+                        </c:if>
+
+                        <c:if test="${page<=left}">
+                            <c:set var="right" value="${right+1}"/>
+                            <c:set var="left" value="${left-1}"/>
+                        </c:if>
+
+                        <c:if test="${page_idx-page<right&&page_idx-page>0}">
+                            <li>
+                                <a href="report?id=${report.id}&from=${(page_idx - 1) * size}&page=${page_idx}">${page_idx}</a>
+                            </li>
+                        </c:if>
+
                     </c:otherwise>
                 </c:choose>
 
 
             </c:forEach>
-            <c:choose>
-                <c:when test="${from + size < update.crossing}">
-                    <li><a href="report?id=${report.id}&from=${from + size}">&raquo;</a></li>
-                </c:when>
-                <c:otherwise>
-                    <li class="disabled"><a href="#">&raquo;</a></li>
-                </c:otherwise>
-            </c:choose>
+            <fmt:formatNumber var="pages_end"
+                              value="${pages_end}"
+                              maxFractionDigits="0"/>
+            <li>
+                <a href="report?id=${report.id}&from=${report.detected}&page=${pages_end}">&raquo;</a>
+            </li>
 
         </ul>
     </div>
-
 
     <table class="table smallcaps">
         <thead>
@@ -239,58 +263,58 @@
         <tbody>
 
         <c:set var="lastNum" value="0"/>
-        <c:forEach items="${items}" var="i" varStatus="loop">
-            <tr class="${i.detected ? '' : 'not-found'} ${lastNum == i.number ? 'same-track' : ''}">
+        <c:forEach items="${items}" var="page_idx" varStatus="loop">
+            <tr class="${page_idx.detected ? '' : 'not-found'} ${lastNum == page_idx.number ? 'same-track' : ''}">
                 <td class="invariant number">
-                    <c:if test="${lastNum != i.number}">
-                        ${i.number}
+                    <c:if test="${lastNum != page_idx.number}">
+                        ${page_idx.number}
                     </c:if>
                 </td>
                 <td>
-                    <c:if test="${lastNum != i.number}">
-                        ${i.artist} &mdash; ${i.track}
+                    <c:if test="${lastNum != page_idx.number}">
+                        ${page_idx.artist} &mdash; ${page_idx.track}
                     </c:if>
                 </td>
 
                 <c:if test="${customer.customerType eq 'MOBILE_AGGREGATOR'}">
                     <td class="number">
-                        <c:if test="${lastNum != i.number}">
-                            ${i.price}
+                        <c:if test="${lastNum != page_idx.number}">
+                            ${page_idx.price}
                         </c:if>
                     </td>
                 </c:if>
 
                 <td class="number">
-                    <c:if test="${lastNum != i.number}">
-                        ${i.qty}
+                    <c:if test="${lastNum != page_idx.number}">
+                        ${page_idx.qty}
                     </c:if>
                 </td>
 
                 <td>
-                    <c:if test="${i.detected}">
-                        <span>${i.foundTrack.artist} &mdash; </span>
-                        <span>${i.foundTrack.name}</span>
+                    <c:if test="${page_idx.detected}">
+                        <span>${page_idx.foundTrack.artist} &mdash; </span>
+                        <span>${page_idx.foundTrack.name}</span>
                             <span class="nonwrapped"
-                                  style="padding-left: 10px; font-style: italic">#${i.foundTrack.code}</span>
+                                  style="padding-left: 10px; font-style: italic">#${page_idx.foundTrack.code}</span>
                     </c:if>
                 </td>
                 <td>
-                    <c:if test="${i.detected}">
+                    <c:if test="${page_idx.detected}">
 
-                            <span class="nonwrapped ${fn:toLowerCase(i.foundTrack.foundCatalog.rightType)}">
-                                    ${i.foundTrack.catalog}
+                            <span class="nonwrapped ${fn:toLowerCase(page_idx.foundTrack.foundCatalog.rightType)}">
+                                    ${page_idx.foundTrack.catalog}
                             </span>
 
                     </c:if>
                 </td>
                 <td class="number">
-                    <c:if test="${i.detected}">
+                    <c:if test="${page_idx.detected}">
                         <c:choose>
                             <c:when test="${customer.customerType eq 'MOBILE_AGGREGATOR'}">
-                                ${i.foundTrack.mobileShare}%
+                                ${page_idx.foundTrack.mobileShare}%
                             </c:when>
                             <c:when test="${customer.customerType eq 'PUBLIC_RIGHTS_SOCIETY'}">
-                                ${i.foundTrack.publicShare}%
+                                ${page_idx.foundTrack.publicShare}%
                             </c:when>
                         </c:choose>
 
@@ -298,8 +322,8 @@
                 </td>
                 <c:if test="${not report.accepted}">
                     <td>
-                        <c:if test="${i.detected}">
-                            <a href="#_" class="remove-track" id="${i.id}"
+                        <c:if test="${page_idx.detected}">
+                            <a href="#_" class="remove-track" id="${page_idx.id}"
                                title="Этот трек определился неверно, убрать">
                                 <i class="icon-remove"></i>
                             </a>
@@ -308,7 +332,7 @@
                 </c:if>
             </tr>
 
-            <c:set var="lastNum" value="${i.number}"/>
+            <c:set var="lastNum" value="${page_idx.number}"/>
         </c:forEach>
 
 
@@ -317,31 +341,71 @@
 
 
     <div class="pagination pagination-centered">
-        <ul>
+        <ul id="pages-2">
             <c:choose>
                 <c:when test="${from >= size}">
-                    <li><a href="report?id=${report.id}&from=${from - size}">&laquo;</a></li>
+                    <li><a href="report?id=${report.id}&from=0&page=0">&laquo;</a></li>
                 </c:when>
                 <c:otherwise>
                     <li class="disabled"><a href="#">&laquo;</a></li>
                 </c:otherwise>
             </c:choose>
 
-            <c:forEach var="i" begin="1" end="${(report.detected / size) + 1}" step="1"
-                       varStatus="status">
-                <li class="${from == (i - 1) * size ? 'active' : ''}">
-                    <a href="report?id=${report.id}&from=${(i - 1) * size}">${i}</a>
-                </li>
-            </c:forEach>
+            <c:set var="left" value="4"/>
+            <c:set var="right" value="6"/>
+            <c:set var="idx_right" value="0"/>
 
-            <c:choose>
-                <c:when test="${from + size < update.crossing}">
-                    <li><a href="report?id=${report.id}&from=${from + size}">&raquo;</a></li>
-                </c:when>
-                <c:otherwise>
-                    <li class="disabled"><a href="#">&raquo;</a></li>
-                </c:otherwise>
-            </c:choose>
+            <c:if test="${page}==0">
+                <c:set var="page" value="1"/>
+            </c:if>
+
+            <c:set var="pages_end" value="${(report.detected / size) + 1}"/>
+
+            <c:forEach var="page_idx" begin="1" end="${pages_end}" step="1"
+                       varStatus="status">
+
+                <c:choose>
+                    <c:when test="${from == (page_idx - 1) * size}">
+                        <li class="active">
+                            <a href="report?id=${report.id}&from=${(page_idx - 1) * size}&page=${page_idx}">${page_idx}</a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+
+                        <c:if test="${pages_end - page<right}">
+                            <c:set var="right" value="${right-1}"/>
+                            <c:set var="left" value="${left+1}"/>
+                        </c:if>
+
+                        <c:if test="${page-page_idx<=left&&page-page_idx>0}">
+                            <li>
+                                <a href="report?id=${report.id}&from=${(page_idx - 1) * size}&page=${page_idx}">${page_idx}</a>
+                            </li>
+                        </c:if>
+
+                        <c:if test="${page<=left}">
+                            <c:set var="right" value="${right+1}"/>
+                            <c:set var="left" value="${left-1}"/>
+                        </c:if>
+
+                        <c:if test="${page_idx-page<right&&page_idx-page>0}">
+                            <li>
+                                <a href="report?id=${report.id}&from=${(page_idx - 1) * size}&page=${page_idx}">${page_idx}</a>
+                            </li>
+                        </c:if>
+
+                    </c:otherwise>
+                </c:choose>
+
+
+            </c:forEach>
+            <fmt:formatNumber var="last"
+                              value="${report.detected/size}"
+                              maxFractionDigits="0"/>
+            <li>
+                <a href="report?id=${report.id}&from=${report.detected}&page=${last}">&raquo;</a>
+            </li>
+
         </ul>
     </div>
 </section>
