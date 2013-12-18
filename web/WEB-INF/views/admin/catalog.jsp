@@ -302,10 +302,10 @@
     var rowsOnPreview = 100;
     var fileData;
     var delimiter = ';';
-    var headers = ['#', 'code', 'name', 'composer', 'artist', 'share mobile', 'share public'];
+    var headers = ['#', 'Код', 'Композиция', 'Автор произведения', 'Исполнитель', 'Доля / моб. контент', 'Доля / публичка'];
     var empty = ['', '', '', '', '', '', ''];
     var testData = [
-        ['Номер', 'Код композиции', 'Название песни', 'Имя автора', 'Имя исполнителя', 'Моб.контент', 'Публичка']
+        ['1', '4235', 'Ramble On', 'Robert Plant', 'Led Zeppelin', '70', '100']
     ];
 
 
@@ -438,6 +438,9 @@
     }
 
 </script>
+
+
+<c:import url="footer.jsp"/>
 
 </body>
 </html>

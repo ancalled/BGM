@@ -231,7 +231,7 @@
 
         <div class="span4">
             <div id="random-tracks">
-                <h4>Случайно всплыло:</h4>
+                <h4>Случайные треки:</h4>
 
                 <ul class="unstyled">
                     <c:forEach var="t" items="${randomTracks}">
@@ -249,7 +249,7 @@
 
 </div>
 
-</div>
+<c:import url="footer.jsp"/>
 
 
 </body>

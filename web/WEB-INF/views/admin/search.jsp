@@ -106,20 +106,16 @@
 
     <div class="row">
 
-        <legend>
-            Поиск композиций
-        </legend>
-
         <div class="span10">
 
-            <form id="searcher" action="/admin/action/search" method="post" class="form-search">
+            <form id="searcher" action="/admin/action/search" method="post" class="form-search"
 
                 <input type="hidden" name="from" id="from-p">
                 <input type="hidden" name="pageSize" id="till-p">
                 <input type="hidden" name="extend" id="extend-search" value="">
 
                 <input type="text" name="q" id="query" class="input-block-level">
-                <input type="submit" value="Поиск" class="btn">
+                <input type="submit" value="Найти" class="btn">
 
                 <div class="toggler">
                     <a class="accordion-toggle"
@@ -127,7 +123,7 @@
                        data-parent="#accordion2"
                        id="extra"
                        href="#">
-                        Дополнительно
+                        Параметры поиска
                     </a>
                 </div>
 
@@ -223,7 +219,7 @@
                     <thead>
                     <tr>
                             <%--<th>#</th>--%>
-                        <th></th>
+                        <th class="score"></th>
                         <th>Код</th>
                         <th>Композиция</th>
                         <th>Исполнитель</th>
@@ -242,7 +238,6 @@
                     <c:set var="lastCode" value="none"/>
 
 
-
                     <c:forEach var="r" items="${tracks}" varStatus="s">
                         <tr class="${fn:toLowerCase(lastComposer)eq fn:toLowerCase(r.track.composer) &&
                         fn:toLowerCase(lastName)eq fn:toLowerCase(r.track.name)||
@@ -255,7 +250,7 @@
                             <td>${r.track.artist}</td>
                             <td>${r.track.composer}</td>
                             <td>${r.track.mobileShare}</td>
-                            <td> ${r.track.publicShare}</td>
+                            <td>${r.track.publicShare}</td>
                             <td>
                                 <span id="catalog-${r.track.id}"
                                       class="catalog ${fn:toLowerCase(r.track.foundCatalog.rightType)}"
@@ -395,5 +390,7 @@
     }
 
 </script>
+<%--<c:import url="footer.jsp"/>--%>
+
 </body>
 </html>

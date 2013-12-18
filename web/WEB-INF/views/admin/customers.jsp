@@ -10,6 +10,12 @@
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" media="screen"/>
     <title>Клиенты</title>
+    <style>
+        table td.decimal {
+            text-align: right;
+            padding-right: 30px;
+        }
+    </style>
 </head>
 <body>
 
@@ -20,20 +26,21 @@
 <div class="container">
     <div class="row text-left">
         <legend>
-            Компании
+            Компании &mdash; пользователи авторских и смежных прав
         </legend>
     </div>
 
     <table class="table">
         <thead>
         <tr>
-            <th>Название</th>
-            <th>Авторские</th>
-            <th>Смежные</th>
-            <th>Ставка</th>
-            <%--<th>Договор</th>--%>
-            <th>Тит организации</th>
+            <th>Организация</th>
+            <th>Вид деятельности</th>
             <th>Тип прав</th>
+
+            <th>Доля по авторским правам</th>
+            <th>Доля по смежным правам</th>
+            <%--<th>Ставка</th>--%>
+            <th>Убрать</th>
         </tr>
         </thead>
         <tbody>
@@ -42,44 +49,46 @@
         <c:forEach var="c" items="${customers}">
 
             <tr>
-                <td><a href="customer-detail?customer_id=${c.id}">${c.name} </a>
-                </td>
-                <td>${c.authorRoyalty}</td>
-                <td>${c.relatedRoyalty}</td>
-                <%--<td>${c.contract}</td>--%>
+                <td><a href="customer-detail?customer_id=${c.id}">${c.name}</a></td>
                 <td>
                     <c:choose>
                         <c:when test="${c.customerType eq 'MOBILE_AGGREGATOR'}">
-                            мобильный агрегатор
+                            Мобильный агрегатор
                         </c:when>
                         <c:when test="${c.customerType eq 'PUBLIC_RIGHTS_SOCIETY'}">
-                            организация по коллективному управлению
+                            Организация по коллективному управлению
                         </c:when>
-                        <c:otherwise>
-                            не задан
-                        </c:otherwise>
+                        <c:otherwise>Другое</c:otherwise>
                     </c:choose>
                 </td>
                 <td>
                     <c:choose>
                         <c:when test="${c.rightType eq 'AUTHOR'}">
-                            авторские
+                            Авторские
                         </c:when>
                         <c:when test="${c.rightType eq 'RELATED'}">
-                            смежные
+                            Смежные
                         </c:when>
                         <c:when test="${c.rightType eq 'AUTHOR_RELATED'}">
-                            авторские и смежные
+                            Авторские и смежные
                         </c:when>
-                        <c:otherwise>
-                            отсутствует
-                        </c:otherwise>
+                        <c:otherwise>&mdash;</c:otherwise>
+                    </c:choose>
+                </td>
+                <td class="decimal">
+                    <c:choose>
+                        <c:when test="${c.rightType eq 'RELATED'}">&mdash;</c:when>
+                        <c:otherwise>${c.authorRoyalty}%</c:otherwise>
+                    </c:choose>
+                </td>
+                <td class="decimal">
+                    <c:choose>
+                        <c:when test="${c.rightType eq 'AUTHOR'}">&mdash;</c:when>
+                        <c:otherwise> ${c.relatedRoyalty}%</c:otherwise>
                     </c:choose>
                 </td>
                 <td>
-
                     <i class="icon-trash" id="${c.id}"></i>
-
                         <%--<a href="/admin/action/delete-customer?customer-id=${c.id}">--%>
                         <%--<i class="icon-trash"></i>--%>
                         <%--</a>--%>
@@ -87,15 +96,16 @@
             </tr>
             </a>
 
-
         </c:forEach>
 
         </tbody>
     </table>
 
+    <hr/>
+
     <form action="create-customer-form" method="get">
         <input type="hidden" name="cid" value="${customer.id}">
-        <input class="btn" type="submit" value="Создать">
+        <input class="btn" type="submit" value="Добавить компанию">
 
     </form>
 
@@ -150,6 +160,8 @@
     }
 
 </script>
+
+<c:import url="footer.jsp"/>
 
 </body>
 </html>

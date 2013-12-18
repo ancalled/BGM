@@ -49,4 +49,7 @@
 
 
 </body>
+
+<c:import url="footer.jsp"/>
+
 </html>

@@ -208,3 +208,4 @@ INTO OUTFILE 'nmi.csv' FIELDS TERMINATED BY ','
 FROM composition
 WHERE catalog_id IN (2, 3);
 
+

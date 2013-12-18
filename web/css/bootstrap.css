@@ -230,6 +230,10 @@ body {
     background-color: #ffffff;
 }
 
+table {
+    font-size: 14px;
+}
+
 a {
     color: #0088cc;
     text-decoration: none;

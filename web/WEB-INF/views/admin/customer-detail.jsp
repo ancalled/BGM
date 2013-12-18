@@ -21,7 +21,7 @@
 
     <div class="row text-left">
     <legend>
-            Информация по компании ${customer.name}
+            Пользователи компании ${customer.name}
         </legend>
     </div>
 
@@ -34,11 +34,9 @@
     <table class="table">
         <thead>
         <tr>
-            <th>#</th>
-            <th>Имя</th>
-            <th>Пароль</th>
-            <th>Полное имя</th>
-            <th>Почта</th>
+            <th>Логин</th>
+            <th>Ф.И.О.</th>
+            <th>e-mail</th>
         </tr>
         </thead>
         <tbody>
@@ -46,11 +44,7 @@
 
         <c:forEach var="u" items="${users}" varStatus="status">
             <tr>
-                <td>${status.index}
-                </td>
                 <td>${u.login}
-                </td>
-                <td>${u.pass}
                 </td>
                 <td>${u.fullName}
                 </td>
@@ -58,7 +52,6 @@
                 </td>
                 <td>
                     <i class="icon-trash" id="${u.id}"></i>
-
                 </td>
             </tr>
 
@@ -122,6 +115,8 @@
         document.getElementById("user-remove").submit();
     }
 </script>
+
+<c:import url="footer.jsp"/>
 
 </body>
 </html>

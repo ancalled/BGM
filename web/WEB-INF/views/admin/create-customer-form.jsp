@@ -10,7 +10,7 @@
     <script src="/js/plugin-parser.js"></script>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" media="screen"/>
-    <title>Новый пользователь</title>
+    <title>Новая компания</title>
 </head>
 <body>
 
@@ -18,20 +18,33 @@
     <c:param name="customers" value="active"/>
 </c:import>
 
-<div class="container">
+<div class="container" style="height: 80%">
     <div class="row text-left">
         <legend>
-            Новый пользователь
+            Новая компания
         </legend>
     </div>
     <div class="span4">
 
         <form action="/admin/action/create-customer" method="post"  class="form-horizontal">
+
             <div class="control-group">
                 <label class="control-label" for="name">Наименование</label>
 
                 <div class="controls">
-                    <input type="text" id="name" name="name" placeholder="ТОО 'Рога и копыта'">
+                    <input type="text" id="name" name="name">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="rights">Вид деятельности</label>
+
+                <div class="controls">
+                    <select id="type" name="type" class="input-block-level">
+                        <option value="MOBILE_AGGREGATOR">Мобильный агрегатор</option>
+                        <option value="PUBLIC_RIGHTS_SOCIETY">Организация по коллективному управлению</option>
+                        <option value="OTHER">Другое</option>
+                    </select>
                 </div>
             </div>
 
@@ -42,17 +55,26 @@
                     <select id="rights" name="rights" class="input-block-level">
                         <option value="AUTHOR">Авторские</option>
                         <option value="RELATED">Публичка</option>
-                        <option value="AUTHOR_RELATED">Все</option>
+                        <option value="AUTHOR_RELATED">Авторские и смежные</option>
                     </select>
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="share">Ставка</label>
+                <label class="control-label" for="share-author">Доля по авторским правам</label>
 
                 <div class="controls">
-                    <input type="number" id="share" name="share" placeholder="20">
-                    <span class="add-on">%</span>
+                    <input type="number" id="share-author" name="share" placeholder="0">
+                    <%--<span class="add-on">%</span>--%>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="share-related">Доля по смежным правам</label>
+
+                <div class="controls">
+                    <input type="number" id="share-related" name="share" placeholder="0">
+                    <%--<span class="add-on">%</span>--%>
                 </div>
             </div>
 
@@ -72,5 +94,8 @@ input#share{
 
 </style>
 </div>
+
+<c:import url="footer.jsp"/>
+
 </body>
 </html>
