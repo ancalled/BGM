@@ -33,29 +33,12 @@
     </treeState>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="Интерфейс загрузки клиентского отчета 7">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/footer.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/css/bootstrap.css" afterPath="$PROJECT_DIR$/web/css/bootstrap.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog-update.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/create-customer-form.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/create-customer-form.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/create-user-form.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/create-user-form.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/customer-detail.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/customer-detail.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/customers.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/customers.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/edit-track.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/edit-track.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/index.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/queries.sql" afterPath="$PROJECT_DIR$/data/queries.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/report-upload-result.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/report-upload-result.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/report.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/report.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/reports.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/reports.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/search.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/search.jsp" />
+    <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bgm-platform.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1387361662745" ignored="false" />
+    <file path="/Dummy.txt" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1387367715202" ignored="false" />
     <file path="$PROJECT_DIR$/../../Next/NewTS/.idea/workspace.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1385005998777" ignored="false" />
     <file path="$PROJECT_DIR$/../../Next/GameBot/.idea/workspace.xml" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1382338729719" ignored="false" />
     <file path="/db.properties" changelist="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" time="1382671141047" ignored="false" />
@@ -1326,7 +1309,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Тестовый комит" />
+    <option name="LAST_COMMIT_MESSAGE" value="Поправочки" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1340,7 +1323,6 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="еще поправил парсинг отчета , при запрос к db" />
     <MESSAGE value="Утилита для поиска треков из консоли" />
     <MESSAGE value="Тесты и настройка поиска" />
     <MESSAGE value="Обновление каталогов" />
@@ -1365,6 +1347,7 @@
     <MESSAGE value="Интерфейс загрузки клиентского отчета 7" />
     <MESSAGE value="Утилита для формирования отчетов: добавил долю по мобильному контенту" />
     <MESSAGE value="Тестовый комит" />
+    <MESSAGE value="Поправочки" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
