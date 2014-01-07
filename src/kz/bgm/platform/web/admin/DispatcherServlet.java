@@ -29,6 +29,7 @@ public class DispatcherServlet extends HttpServlet {
 
     public static final int RANDOM_TRACKS_ON_INDEX_PAGE = 10;
     public static final int RANDOM_TRACK_ON_CATALOG_PAGE = 5;
+    public static final int DEFAULT_REPORTS_PER_PAGE = 100;
 
 
     private CatalogStorage catalogStorage;
@@ -157,6 +158,40 @@ public class DispatcherServlet extends HttpServlet {
                         req.setAttribute("customers", customers);
 
                         return "customers";
+                    }
+                };
+                break;
+
+            case "/report":
+                action = new Action() {
+                    @Override
+                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+                        String repIdStr = req.getParameter("id");
+                        if (repIdStr == null) return null;
+                        long reportId = Long.parseLong(repIdStr);
+
+                        String fromStr = req.getParameter("from");
+
+                        int from = fromStr != null ? Integer.parseInt(fromStr) : 0;
+
+                        String sizeStr = req.getParameter("size");
+                        int size = sizeStr != null ? Integer.parseInt(sizeStr) : DEFAULT_REPORTS_PER_PAGE;
+
+                        CustomerReport report = catalogStorage.getCustomerReport(reportId);
+                        List<CustomerReportItem> items = catalogStorage.getCustomerReportsItems(reportId, from, size);
+
+
+                        String page = req.getParameter("page");
+                        if (page == null) page = "0";
+
+                        req.setAttribute("report", report);
+                        req.setAttribute("items", items);
+                        req.setAttribute("from", from);
+                        req.setAttribute("size", size);
+                        req.setAttribute("page", page);
+
+
+                        return "report";
                     }
                 };
                 break;
