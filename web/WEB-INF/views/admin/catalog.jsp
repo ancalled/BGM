@@ -80,6 +80,14 @@
             height: 40%;
         }
 
+        #loading-gif {
+            margin: 0px 40px 0px 0px;
+        }
+
+        #file-link {
+            margin: 20px 20px 15px 0px;
+        }
+
         .table, .preview {
             max-width: none;
         }
@@ -95,6 +103,9 @@
         .bar {
             height: 10px;
             background: green;
+        }
+        .fileDt {
+            margin: 20px 20px 0px 0px;
         }
 
 
@@ -115,40 +126,54 @@
             <section>
                 <legend>
                     Каталог ${catalog.name}
+
                 </legend>
 
+                    <dl class="dl-horizontal">
+                        <dt>Тип прав</dt>
+                        <dd>
+                            <c:choose>
+                                <c:when test="${catalog.rightType eq 'AUTHOR'}">
+                                    Авторские
+                                </c:when>
+                                <c:otherwise>
+                                    Смежные
+                                </c:otherwise>
+                            </c:choose>
+                        </dd>
 
-                <dl class="dl-horizontal">
-                    <dt>Тип прав</dt>
-                    <dd>
-                        <c:choose>
-                            <c:when test="${catalog.rightType eq 'AUTHOR'}">
-                                Авторские
-                            </c:when>
-                            <c:otherwise>
-                                Смежные
-                            </c:otherwise>
-                        </c:choose>
-                    </dd>
+                        <dt>Роялти</dt>
+                        <dd>${catalog.royalty}%</dd>
 
-                    <dt>Роялти</dt>
-                    <dd>${catalog.royalty}%</dd>
+                        <dt>Композиций</dt>
+                        <dd>
+                            <fmt:formatNumber type="number" maxFractionDigits="3" value="${catalog.tracks}"/>
+                        </dd>
 
-                    <dt>Композиций</dt>
-                    <dd>
-                        <fmt:formatNumber type="number" maxFractionDigits="3" value="${catalog.tracks}"/>
-                    </dd>
+                        <dt>Артистов</dt>
+                        <dd>
+                            <fmt:formatNumber type="number" maxFractionDigits="3" value="${catalog.artists}"/>
+                        </dd>
+                        <dt class="fileDt">Файл каталога</dt>
+                        <dd>
+                            <div id="file-link"></div>
+                                              <input class="btn btn-primary"
+                                                     type="button"
+                                                     onclick="downloadCatalog()"
+                                                     value="Выгрузить каталог в csv"
+                                                     id="downloadBtn">
 
-                    <dt>Артистов</dt>
-                    <dd>
-                        <fmt:formatNumber type="number" maxFractionDigits="3" value="${catalog.artists}"/>
-                    </dd>
-                </dl>
+                                  <img id="loading-gif" src="../../../img/loading.GIF" style="visibility: hidden">
+                        </dd>
 
+
+                    </dl>
 
             </section>
 
+
         </div>
+
 
         <%--<div class="span4">--%>
         <%--<div id="random-tracks">--%>
@@ -167,7 +192,14 @@
         <%--</div>--%>
     </div>
 
+    <input type="hidden" id="catId" name="catalog_id" value="${catalog.id}">
+    <input type="hidden" id="catName" name="catalog_name" value="${catalog.name}">
+
+    <br>
+
     <div class="row">
+
+
         <div class="span10"/>
 
         <section>
@@ -278,13 +310,11 @@
                 <%--</div>--%>
             </form>
 
-
             <div id="preview-container"></div>
         </section>
 
     </div>
 </div>
-
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -356,10 +386,9 @@
             }
         });
 
-
         $("#fileinput").on('change', function (e) {
             var f = this.files[0];
-            this.setAttribute('text',f.name);
+            this.setAttribute('text', f.name);
             if (this.files && f) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
@@ -406,7 +435,6 @@
             $preview.css('overflow', 'scroll');
         }
 
-
     }
 
     function getLoadRowsCount() {
@@ -436,6 +464,33 @@
             getLoadStatus();
         }
     }
+
+    function downloadCatalog() {
+        $('#downloadBtn').remove();
+        $('#loading-gif').css('visibility', 'visible');
+
+        $.ajax({
+            url: "../action/download-catalog",
+            dataType: 'json',
+            method: 'post',
+            async: 'true',
+
+            data: {
+                'catalog_id': $('#catId').val(),
+                'catalog_name': $('#catName').val()
+            },
+            error: function () {
+                alert("Неудалось выгрузить каталог в файл" + $('#catName').val() + " .csv");
+            },
+            success: function (data) {
+                $("#file-link").append("<a href='" + "../../catalog-csv/" + data.path + "'>" +
+                        "<i class='icon-download-alt'></i>" + "Скачать " +
+                        $('#catName').val() + ".csv</a>");
+                $('#loading-gif').css('visibility', 'hidden');
+            }
+        });
+    }
+
 
 </script>
 

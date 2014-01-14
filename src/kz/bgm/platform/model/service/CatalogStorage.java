@@ -143,5 +143,7 @@ public interface CatalogStorage {
 
     Integer updateTrack(Track track);
 
+    void downloadCatalogInCsv(long catalogId, String catalogName);
+
 }
 

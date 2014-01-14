@@ -1726,7 +1726,7 @@ public class DbStorage implements CatalogStorage {
                 PreparedStatement stmt4 = con.prepareStatement("UPDATE catalog cat,\n" +
                         "(SELECT * FROM catalog_update WHERE id =?)cat_upd\n" +
                         "SET cat.tracks = (SELECT count(*) FROM composition WHERE catalog_id=cat_upd.catalog_id),\n" +
-                        "cat.artists=(SELECT count(distinct (artist)) from composition where catalog_id=cat_upd.catalog_id)\n" +
+                        "cat.artists=(SELECT count(DISTINCT (artist)) FROM composition WHERE catalog_id=cat_upd.catalog_id)\n" +
                         "                         WHERE cat.id=cat_upd.catalog_id;");
 
                 stmt4.setLong(1, updateId);
@@ -2207,6 +2207,41 @@ public class DbStorage implements CatalogStorage {
         return null;
     }
 
+    @Override
+    public void downloadCatalogInCsv(final long catalogId, final String path) {
+        queryVoid(new VoidAction() {
+            @Override
+            public void execute(Connection con) throws SQLException {
+
+                PreparedStatement ps =
+                        con.prepareStatement("SELECT\n" +
+                                "            'code',\n" +
+                                "            'track',\n" +
+                                "            'artist',\n" +
+                                "            'composer',\n" +
+                                "            'shareMobile',\n" +
+                                "            'sharePublic'\n" +
+                                "          UNION ALL\n" +
+                                "          SELECT\n" +
+                                "            code,\n" +
+                                "            name,\n" +
+                                "            artist,\n" +
+                                "            composer,\n" +
+                                "            shareMobile,\n" +
+                                "            sharePublic\n" +
+                                "          FROM composition\n" +
+                                "          WHERE catalog_id = ?\n" +
+                                "        INTO OUTFILE ?\n" +
+                                "        FIELDS TERMINATED BY ';'\n" +
+                                "          ENCLOSED BY '|'\n" +
+                                "        LINES TERMINATED BY '\\n';\n");
+
+                ps.setLong(1, catalogId);
+                ps.setString(2, path);
+                ResultSet rs = ps.executeQuery();
+            }
+        });
+    }
 
     private void queryVoid(VoidAction action) {
 

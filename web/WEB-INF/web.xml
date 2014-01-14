@@ -9,8 +9,23 @@
     <!--================= Admin  =======================-->
 
 
+    <env-entry>
+        <env-entry-name>tp_csv_path</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>C:/tmp/</env-entry-value>
+    </env-entry>
 
+    <env-entry>
+        <env-entry-name>csv_path</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>./data</env-entry-value>
+    </env-entry>
 
+    <env-entry>
+        <env-entry-name>csv_ext</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>.csv</env-entry-value>
+    </env-entry>
 
 
     <filter>
@@ -22,6 +37,8 @@
         <filter-name>adminAuthFilter</filter-name>
         <url-pattern>/admin/*</url-pattern>
     </filter-mapping>
+
+
 
 
     <servlet>
@@ -37,9 +54,9 @@
         <servlet-class>kz.bgm.platform.web.admin.DispatcherServlet</servlet-class>
     </servlet>
 
-    
-    
-    
+
+
+
 
     <servlet>
         <servlet-name>adminSearchServlet</servlet-name>
@@ -248,6 +265,10 @@
         <servlet-name>uploadReports</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.UploadReportServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>downloadCatalogInCsv</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.DownloadCatalogCsv</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -314,6 +335,10 @@
     <servlet-mapping>
         <servlet-name>uploadReports</servlet-name>
         <url-pattern>admin/action/upload-report</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>downloadCatalogInCsv</servlet-name>
+        <url-pattern>admin/action/download-catalog</url-pattern>
     </servlet-mapping>
 
 </web-app>

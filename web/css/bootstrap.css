@@ -874,7 +874,7 @@ dd {
 
 .dl-horizontal:before,
 .dl-horizontal:after {
-    display: table;
+    display: block;
     line-height: 0;
     content: "";
 }

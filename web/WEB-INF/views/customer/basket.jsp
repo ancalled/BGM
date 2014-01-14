@@ -38,8 +38,8 @@
 
         <c:if test="${not empty tracks}">
             <div class="row" id="right-align">
-                    <button class="btn btn-block" id="report" style="width: 30px">
-                        <i class="icon-print"></i></button>
+                <button class="btn btn-block" id="report" style="width: 30px">
+                    <i class="icon-print"></i></button>
             </div>
             <table class="table" id="basket">
                 <thead>
@@ -90,7 +90,6 @@
         </c:if>
     </div>
 </div>
-
 
 <form method="post" action="/customer/action/remove-from-basket" id="track-remove-form">
     <input type="hidden" id="track-to-remove" name="track_id">
