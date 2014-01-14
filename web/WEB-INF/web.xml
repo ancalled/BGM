@@ -341,4 +341,11 @@
         <url-pattern>admin/action/download-catalog</url-pattern>
     </servlet-mapping>
 
+
+
+    <context-param>
+        <param-name>tmp-sql-file</param-name>
+        <param-value>/tmp</param-value>
+    </context-param>
+
 </web-app>

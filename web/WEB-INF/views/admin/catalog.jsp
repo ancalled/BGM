@@ -154,7 +154,8 @@
                         <dd>
                             <fmt:formatNumber type="number" maxFractionDigits="3" value="${catalog.artists}"/>
                         </dd>
-                        <dt class="fileDt">Файл каталога</dt>
+                        <%--<dt class="fileDt">Файл каталога</dt>--%>
+                        <dt class="fileDt"></dt>
                         <dd>
                             <div id="file-link"></div>
                                               <input class="btn btn-primary"
@@ -476,16 +477,19 @@
             async: 'true',
 
             data: {
-                'catalog_id': $('#catId').val(),
-                'catalog_name': $('#catName').val()
+                'cid': $('#catId').val(),
+                'ft': ';',
+//                'eb': '\\\'',
+                'lt': '\\n'
             },
             error: function () {
                 alert("Неудалось выгрузить каталог в файл" + $('#catName').val() + " .csv");
             },
             success: function (data) {
-                $("#file-link").append("<a href='" + "../../catalog-csv/" + data.path + "'>" +
+                $("#file-link").append("<a href='" + data.path + "'>" +
                         "<i class='icon-download-alt'></i>" + "Скачать " +
-                        $('#catName').val() + ".csv</a>");
+                        $('#catName').val() + ".csv (" + Math.round(data.size / 1024 / 1024) + " Мб)" +
+                        "</a>");
                 $('#loading-gif').css('visibility', 'hidden');
             }
         });

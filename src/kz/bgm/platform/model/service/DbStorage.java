@@ -2,6 +2,7 @@ package kz.bgm.platform.model.service;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import kz.bgm.platform.model.domain.*;
+import org.apache.log4j.Logger;
 
 import java.beans.PropertyVetoException;
 import java.sql.*;
@@ -12,6 +13,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static kz.bgm.platform.model.domain.CatalogUpdate.Status;
 
 public class DbStorage implements CatalogStorage {
+
+
+    private static final Logger log = Logger.getLogger(DbStorage.class);
 
 
     public static final int MAX_STATEMENTS = 200;
@@ -2208,37 +2212,41 @@ public class DbStorage implements CatalogStorage {
     }
 
     @Override
-    public void downloadCatalogInCsv(final long catalogId, final String path) {
+    public void exportCatalogToCSV(final long catalogId, final String path,
+                                   final String fieldTerminator,
+                                   final String enclosedBy,
+                                   final String linesTerminator) {
         queryVoid(new VoidAction() {
             @Override
             public void execute(Connection con) throws SQLException {
 
+                String sql = "SELECT " +
+                        "            'code', " +
+                        "            'track', " +
+                        "            'artist', " +
+                        "            'composer', " +
+                        "            'shareMobile', " +
+                        "            'sharePublic' " +
+                        "          UNION ALL " +
+                        "          SELECT " +
+                        "            code, " +
+                        "            replace(replace(name, '" + fieldTerminator + "', ''), '" + enclosedBy + "', ''), " +
+                        "            replace(replace(artist, '" + fieldTerminator + "', ''), '" + enclosedBy + "', ''), " +
+                        "            replace(replace(composer, '" + fieldTerminator + "', ''), '" + enclosedBy + "', ''), " +
+                        "            shareMobile, " +
+                        "            sharePublic " +
+                        "          FROM composition " +
+                        "          WHERE catalog_id = ? " +
+                        "        INTO OUTFILE ? " +
+                        "        FIELDS TERMINATED BY '" + fieldTerminator + "' " +
+                        (enclosedBy != null ? "          ENCLOSED BY '" + enclosedBy + "' " : "") +
+                        "        LINES TERMINATED BY '" + linesTerminator + "';";
                 PreparedStatement ps =
-                        con.prepareStatement("SELECT\n" +
-                                "            'code',\n" +
-                                "            'track',\n" +
-                                "            'artist',\n" +
-                                "            'composer',\n" +
-                                "            'shareMobile',\n" +
-                                "            'sharePublic'\n" +
-                                "          UNION ALL\n" +
-                                "          SELECT\n" +
-                                "            code,\n" +
-                                "            name,\n" +
-                                "            artist,\n" +
-                                "            composer,\n" +
-                                "            shareMobile,\n" +
-                                "            sharePublic\n" +
-                                "          FROM composition\n" +
-                                "          WHERE catalog_id = ?\n" +
-                                "        INTO OUTFILE ?\n" +
-                                "        FIELDS TERMINATED BY ';'\n" +
-                                "          ENCLOSED BY '|'\n" +
-                                "        LINES TERMINATED BY '\\n';\n");
+                        con.prepareStatement(sql);
 
                 ps.setLong(1, catalogId);
                 ps.setString(2, path);
-                ResultSet rs = ps.executeQuery();
+                ps.executeQuery();
             }
         });
     }
@@ -2251,7 +2259,8 @@ public class DbStorage implements CatalogStorage {
             action.execute(connection);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            log.error(e);
         } finally {
             if (connection != null) {
                 try {

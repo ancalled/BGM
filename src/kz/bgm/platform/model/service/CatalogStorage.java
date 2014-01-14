@@ -143,7 +143,9 @@ public interface CatalogStorage {
 
     Integer updateTrack(Track track);
 
-    void downloadCatalogInCsv(long catalogId, String catalogName);
+    void exportCatalogToCSV(long catalogId, String catalogName,
+                            String fieldTerminator,
+                            String enclosedBy, String linesTerminator);
 
 }
 
