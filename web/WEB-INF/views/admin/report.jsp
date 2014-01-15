@@ -108,23 +108,23 @@
 
 <body>
 
-<%--<c:import url="navbar.jsp">--%>
-<%--<c:param name="reports" value="active"/>--%>
-<%--</c:import>--%>
+<c:import url="navbar.jsp">
+<c:param name="reports" value="active"/>
+</c:import>
 
-<div class="navbar">
-    <div class="navbar-inner">
-        <a class="brand" href="/customer/view/index">BGM Platform</a>
-        <ul class="nav">
-            <li class=""><a href="/customer/view/index">Главная</a></li>
-            <li class=""><a href="/customer/view/send-report">Отправить отчет</a></li>
-            <li class="active"><a href="/customer/view/reports">Отчеты</a></li>
-            <li class=""><a href="/customer/view/search">Поиск</a></li>
-            <li class=""><a href="/customer/view/basket">Корзина</a></li>
-            <li><a href="/customer/action/logout">Выход</a></li>
-        </ul>
-    </div>
-</div>
+<%--<div class="navbar">--%>
+    <%--<div class="navbar-inner">--%>
+        <%--<a class="brand" href="/admin/view/index">BGM Platform</a>--%>
+        <%--<ul class="nav">--%>
+            <%--<li class=""><a href="/admin/view/index">Главная</a></li>--%>
+            <%--<li class=""><a href="/admin/view/send-report">Отправить отчет</a></li>--%>
+            <%--<li class="active"><a href="/admin/view/reports">Отчеты</a></li>--%>
+            <%--<li class=""><a href="/admin/view/search">Поиск</a></li>--%>
+            <%--<li class=""><a href="/admin/view/basket">Корзина</a></li>--%>
+            <%--<li><a href="/admin/action/logout">Выход</a></li>--%>
+        <%--</ul>--%>
+    <%--</div>--%>
+<%--</div>--%>
 
 <div class="container">
 <section>
@@ -160,7 +160,7 @@
         </div>
 
         <div class="span4">
-            <form action="/customer/action/accept-report" method="post">
+            <form action="/admin/action/accept-report" method="post">
                 <c:if test="${not report.accepted}">
                     <div class="btn-group action-panel">
                         <input type="hidden" name="reportId" value="${report.id}">

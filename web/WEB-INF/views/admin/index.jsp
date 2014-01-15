@@ -113,7 +113,7 @@
 
 
                     <span class="add-button add-catalog">
-                        <a href="#add-catalog?platformId=${p.id}"><i class="icon-plus-sign"></i> </a>
+                        <a href="add-catalog?platformId=${p.id}"><i class="icon-plus-sign"></i> </a>
                     </span>
                     </h4>
 

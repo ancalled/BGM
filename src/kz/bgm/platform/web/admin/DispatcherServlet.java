@@ -224,6 +224,23 @@ public class DispatcherServlet extends HttpServlet {
                 };
                 break;
 
+            case "/add-catalog":
+                action = new Action() {
+                    @Override
+                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+
+                        String platformIdStr = req.getParameter("platformId");
+                        if (platformIdStr != null) {
+                            long platId = Long.parseLong(platformIdStr);
+                            Platform platform = catalogStorage.getPlatform(platId);
+                            req.setAttribute("platform", platform);
+
+                        }
+                        return "add-catalog";
+                    }
+                };
+                break;
+
 
             case "/catalog-update":
                 action = new Action() {
