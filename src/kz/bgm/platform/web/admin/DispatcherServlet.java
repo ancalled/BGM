@@ -120,6 +120,15 @@ public class DispatcherServlet extends HttpServlet {
                 };
                 break;
 
+            case "/mass-search":
+                action = new Action() {
+                    @Override
+                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+                        return "mass-search";
+                    }
+                };
+                break;
+
             case "/report-upload-result":
                 action = new Action() {
                     @Override

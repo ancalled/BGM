@@ -1567,6 +1567,8 @@ public class DbStorage implements CatalogStorage {
     }
 
 
+
+
     public List<TrackDiff> geChangedTracks(final long updateId, final int from, final int size) {
 
         return query(new Action<List<TrackDiff>>() {
@@ -1830,6 +1832,13 @@ public class DbStorage implements CatalogStorage {
                         "SELECT * FROM comp_tmp WHERE id = ?",
                         ResultSet.TYPE_FORWARD_ONLY,
                         ResultSet.CONCUR_READ_ONLY);
+
+//                PreparedStatement stmt = con.prepareStatement(
+//                        "SELECT * FROM composition c " +
+//                                "INNER JOIN comp_tmp t " +
+//                                "ON c.code = t.code " +
+//                                "AND c.catalog_id = t.catalog_id " +
+//                                "WHERE t.update_id = ?");
                 stmt.setLong(1, updateId);
 
                 ResultSet rs = stmt.executeQuery();

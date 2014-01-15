@@ -79,6 +79,7 @@ public class BgmServer {
     }
 
 
+
     public static void initDatabase(String propsFile) throws IOException {
         Properties props = new Properties();
         props.load(new FileInputStream(propsFile));

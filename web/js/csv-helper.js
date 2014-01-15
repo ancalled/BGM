@@ -66,8 +66,6 @@ function buildTable(data, headers, from, size, tableId, tableClassName) {
         thCon += thRow.format(headers[i]);
     }
 
-
-
     th = th.format(tr.format(thCon));
 
     for (i = from; i < Math.min(size, data.length); i++) {

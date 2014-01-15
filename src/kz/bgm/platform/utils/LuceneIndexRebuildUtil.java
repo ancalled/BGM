@@ -26,9 +26,7 @@ import static kz.bgm.platform.model.service.LuceneSearch.*;
 
 public class LuceneIndexRebuildUtil {
 
-
     private final CatalogStorage catalogStorage;
-
 
     public LuceneIndexRebuildUtil() throws IOException {
         try {
@@ -88,6 +86,27 @@ public class LuceneIndexRebuildUtil {
     }
 
 
+    public static void rebuildIndex(List<Track> tracks) throws IOException {
+
+        File indexDir = new File(INDEX_DIR);
+
+        FSDirectory index = FSDirectory.open(indexDir);
+        StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_41);
+        IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_41, analyzer);
+        IndexWriter writer = new IndexWriter(index, config);
+
+        for (Track t : tracks) {
+            Document doc = new Document();
+            doc.add(new LongField(FIELD_ID, t.getId(), Field.Store.YES));
+            doc.add(new TextField(FIELD_NAME, t.getName(), Field.Store.YES));
+            doc.add(new TextField(FIELD_ARTIST, t.getArtist(), Field.Store.YES));
+            doc.add(new TextField(FIELD_COMPOSER, t.getComposer(), Field.Store.YES));
+            writer.addDocument(doc);
+        }
+        writer.close();
+    }
+
+
     public static void initDatabase(String propsFile) throws IOException {
         Properties props = new Properties();
         props.load(new FileInputStream(propsFile));
@@ -106,6 +125,6 @@ public class LuceneIndexRebuildUtil {
     public static void main(String[] args) throws IOException, ParseException {
         LuceneIndexRebuildUtil util = new LuceneIndexRebuildUtil();
         util.rebuildIndex();
-
     }
+
 }

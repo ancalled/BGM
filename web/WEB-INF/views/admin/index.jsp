@@ -236,9 +236,11 @@
                 <ul class="unstyled">
                     <c:forEach var="t" items="${randomTracks}">
                         <li>
-                            <a href="#">
+                            <a href="edit-track?id=${t.id}">
                                     ${t.name}<c:if test="${not empty t.artist}">: ${t.artist}</c:if>
                             </a>
+                            ${t.catalog}
+
                         </li>
                     </c:forEach>
                 </ul>

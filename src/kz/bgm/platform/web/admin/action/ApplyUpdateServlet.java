@@ -1,5 +1,6 @@
 package kz.bgm.platform.web.admin.action;
 
+import kz.bgm.platform.BgmServer;
 import kz.bgm.platform.model.domain.CatalogUpdate;
 import kz.bgm.platform.model.domain.Track;
 import kz.bgm.platform.model.service.CatalogFactory;
@@ -39,7 +40,6 @@ public class ApplyUpdateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-
         String idStr = req.getParameter("id");
         if (idStr != null) {
             long id = Long.parseLong(idStr);
@@ -48,9 +48,19 @@ public class ApplyUpdateServlet extends HttpServlet {
 
             storage.applyCatalogUpdate(id);
 
-//            List<Track> tracks = storage.getUpdates(id);
-//            luceneSearch.index(tracks, LuceneIndexRebuildUtil.INDEX_DIR);
+            log.info("Get all new tracks for reindex");
 
+            List<Track> updatedTracks = storage.getUpdates(id);
+
+            log.info("Found " + updatedTracks.size() + " indexes. Rebuilding index for this tracks");
+
+            LuceneIndexRebuildUtil.rebuildIndex(updatedTracks);
+
+            log.info("Done. Reinitializing searcher");
+            //reinit searcher after index update
+            LuceneSearch.getInstance().initSearcher(BgmServer.INDEX_DIR);
+
+//            luceneSearch.index(tracks, LuceneIndexRebuildUtil.INDEX_DIR);
 
             log.info("Applied.");
 

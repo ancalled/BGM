@@ -31,7 +31,6 @@ public class UpdateCatalogServlet extends HttpServlet {
     public static final String RESULT_URL = VIEWS_HOME_URL + "/catalog-update";
 
 
-
     private static final Logger log = Logger.getLogger(UpdateCatalogServlet.class);
 
     private ServletFileUpload fileUploader;
@@ -120,7 +119,6 @@ public class UpdateCatalogServlet extends HttpServlet {
             jsonObj.put("status", update.getStatus() == Status.OK ? "ok" : "warn");
             jsonObj.put("redirect", RESULT_URL + "?id=" + update.getId());
             jsonObj.writeJSONString(out);
-
 
 
         } catch (Exception e) {

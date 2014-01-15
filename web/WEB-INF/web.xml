@@ -9,8 +9,23 @@
     <!--================= Admin  =======================-->
 
 
-    
+    <env-entry>
+        <env-entry-name>tp_csv_path</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>C:/tmp/</env-entry-value>
+    </env-entry>
 
+    <env-entry>
+        <env-entry-name>csv_path</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>./data</env-entry-value>
+    </env-entry>
+
+    <env-entry>
+        <env-entry-name>csv_ext</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>.csv</env-entry-value>
+    </env-entry>
 
 
     <filter>
@@ -26,8 +41,6 @@
 
 
 
-    
-    
     <servlet>
         <servlet-name>adminLoginServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.LoginServlet</servlet-class>
@@ -43,7 +56,6 @@
 
 
 
-    
 
 
     <servlet>
@@ -258,12 +270,8 @@
         <servlet-class>kz.bgm.platform.web.admin.action.DownloadCatalogCsv</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>catalogServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.admin.action.CreateCatalogServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>createPlatformServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.admin.action.CreatePlatformServlet</servlet-class>
+        <servlet-name>massSearch</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.MassSearchServlet</servlet-class>
     </servlet>
 
 
@@ -337,13 +345,10 @@
         <url-pattern>admin/action/download-catalog</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>catalogServlet</servlet-name>
-        <url-pattern>admin/action/create-catalog</url-pattern>
+        <servlet-name>massSearch</servlet-name>
+        <url-pattern>admin/action/mass-search</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>createPlatformServlet</servlet-name>
-        <url-pattern>admin/action/create-platform</url-pattern>
-    </servlet-mapping>
+
 
 
     <context-param>

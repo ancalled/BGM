@@ -238,7 +238,7 @@
             <%--</dl>--%>
             <%--</c:if>--%>
             <%--</c:forEach>--%>
-            <form class="form-horizontal" action="../action/update-catalog" method="post"
+            <form class="form-horizontal" action="/admin/action/update-catalog" method="post"
                   enctype="multipart/form-data">
 
                 <%--test--%>
@@ -253,7 +253,7 @@
                                     <span class="fileupload-new">Выбрать бновление</span>
                                     <span class="fileupload-exists">Изменить</span>
                                     <input type="file" name="file" class="file-input" id="fileinput" accept=".csv"
-                                           data-url="../action/update-catalog"/></a>
+                                           data-url="/admin/action/update-catalog"/></a>
                                 <a href="#" class="btn btn-default fileupload-exists"
                                    data-dismiss="fileupload">Убрать</a>
                             </div>
@@ -350,12 +350,12 @@
                 $('#progress').html("");
 
                 if (data.result.status == 'ok') {
-                    console.log('Redirect url: ' + data.result.redirect)
+//                    console.log('Redirect url: ' + data.result.redirect)
                     $('#status-bar').html("<strong>Загружено</strong>");
                     window.location.href = data.result.redirect;
 
                 } else if (data.result.status == 'warn') {
-                    console.log('Got uplaod waringns: ');
+//                    console.log('Got uplaod waringns: ');
                     $.each(data.result.warningsList, function (index, wrn) {
                         console.log(wrn);
                     });
@@ -367,7 +367,7 @@
                 } else if (data.result.status == 'error') {
                     $('#status-bar').html("<strong>Ошибка!</strong>");
 
-                    console.log('Got uplaod error: ' + data.result.er);
+//                    console.log('Got uplaod error: ' + data.result.er);
                 }
 
             },
@@ -471,7 +471,7 @@
         $('#loading-gif').css('visibility', 'visible');
 
         $.ajax({
-            url: "../action/download-catalog",
+            url: "/admin/action/download-catalog",
             dataType: 'json',
             method: 'post',
             async: 'true',
