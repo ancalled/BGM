@@ -246,168 +246,168 @@
     </ul>
 </div>
 
-    <table class="table smallcaps">
-        <thead>
-        <tr>
-            <th>Код</th>
-            <th>Исполнитель &mdash; трек</th>
-            <c:if test="${customer.customerType eq 'MOBILE_AGGREGATOR'}">
-                <th>Цена</th>
-            </c:if>
-            <th class="nonwrapped">Кол-во</th>
-            <th>Что определилось (исполнитель &mdash; трек и код)</th>
-            <th class="nonwrapped">Каталог</th>
-            <th>Доля</th>
-        </tr>
-        </thead>
-        <tbody>
+<table class="table smallcaps">
+    <thead>
+    <tr>
+        <th>Код</th>
+        <th>Исполнитель &mdash; трек</th>
+        <c:if test="${customer.customerType eq 'MOBILE_AGGREGATOR'}">
+            <th>Цена</th>
+        </c:if>
+        <th class="nonwrapped">Кол-во</th>
+        <th>Что определилось (исполнитель &mdash; трек и код)</th>
+        <th class="nonwrapped">Каталог</th>
+        <th>Доля</th>
+    </tr>
+    </thead>
+    <tbody>
 
-        <c:set var="lastNum" value="0"/>
-        <c:forEach items="${items}" var="page_idx" varStatus="loop">
-            <tr class="${page_idx.detected ? '' : 'not-found'} ${lastNum == page_idx.number ? 'same-track' : ''}">
-                <td class="invariant number">
-                    <c:if test="${lastNum != page_idx.number}">
-                        ${page_idx.number}
-                    </c:if>
-                </td>
-                <td>
-                    <c:if test="${lastNum != page_idx.number}">
-                        ${page_idx.artist} &mdash; ${page_idx.track}
-                    </c:if>
-                </td>
-
-                <c:if test="${customer.customerType eq 'MOBILE_AGGREGATOR'}">
-                    <td class="number">
-                        <c:if test="${lastNum != page_idx.number}">
-                            ${page_idx.price}
-                        </c:if>
-                    </td>
+    <c:set var="lastNum" value="0"/>
+    <c:forEach items="${items}" var="page_idx" varStatus="loop">
+        <tr class="${page_idx.detected ? '' : 'not-found'} ${lastNum == page_idx.number ? 'same-track' : ''}">
+            <td class="invariant number">
+                <c:if test="${lastNum != page_idx.number}">
+                    ${page_idx.number}
                 </c:if>
+            </td>
+            <td>
+                <c:if test="${lastNum != page_idx.number}">
+                    ${page_idx.artist} &mdash; ${page_idx.track}
+                </c:if>
+            </td>
 
+            <c:if test="${customer.customerType eq 'MOBILE_AGGREGATOR'}">
                 <td class="number">
                     <c:if test="${lastNum != page_idx.number}">
-                        ${page_idx.qty}
+                        ${page_idx.price}
                     </c:if>
                 </td>
+            </c:if>
 
-                <td>
-                    <c:if test="${page_idx.detected}">
-                        <span>${page_idx.foundTrack.artist} &mdash; </span>
-                        <span>${page_idx.foundTrack.name}</span>
+            <td class="number">
+                <c:if test="${lastNum != page_idx.number}">
+                    ${page_idx.qty}
+                </c:if>
+            </td>
+
+            <td>
+                <c:if test="${page_idx.detected}">
+                    <span>${page_idx.foundTrack.artist} &mdash; </span>
+                    <span>${page_idx.foundTrack.name}</span>
                             <span class="nonwrapped"
                                   style="padding-left: 10px; font-style: italic">#${page_idx.foundTrack.code}</span>
-                    </c:if>
-                </td>
-                <td>
-                    <c:if test="${page_idx.detected}">
+                </c:if>
+            </td>
+            <td>
+                <c:if test="${page_idx.detected}">
 
                             <span class="nonwrapped ${fn:toLowerCase(page_idx.foundTrack.foundCatalog.rightType)}">
                                     ${page_idx.foundTrack.catalog}
                             </span>
 
-                    </c:if>
-                </td>
-                <td class="number">
-                    <c:if test="${page_idx.detected}">
-                        <c:choose>
-                            <c:when test="${customer.customerType eq 'MOBILE_AGGREGATOR'}">
-                                ${page_idx.foundTrack.mobileShare}%
-                            </c:when>
-                            <c:when test="${customer.customerType eq 'PUBLIC_RIGHTS_SOCIETY'}">
-                                ${page_idx.foundTrack.publicShare}%
-                            </c:when>
-                        </c:choose>
-
-                    </c:if>
-                </td>
-                <c:if test="${not report.accepted}">
-                    <td>
-                        <c:if test="${page_idx.detected}">
-                            <a href="#_" class="remove-track" id="${page_idx.id}"
-                               title="Этот трек определился неверно, убрать">
-                                <i class="icon-remove"></i>
-                            </a>
-                        </c:if>
-                    </td>
                 </c:if>
-            </tr>
+            </td>
+            <td class="number">
+                <c:if test="${page_idx.detected}">
+                    <c:choose>
+                        <c:when test="${customer.customerType eq 'MOBILE_AGGREGATOR'}">
+                            ${page_idx.foundTrack.mobileShare}%
+                        </c:when>
+                        <c:when test="${customer.customerType eq 'PUBLIC_RIGHTS_SOCIETY'}">
+                            ${page_idx.foundTrack.publicShare}%
+                        </c:when>
+                    </c:choose>
 
-            <c:set var="lastNum" value="${page_idx.number}"/>
-        </c:forEach>
+                </c:if>
+            </td>
+            <c:if test="${not report.accepted}">
+                <td>
+                    <c:if test="${page_idx.detected}">
+                        <a href="#_" class="remove-track" id="${page_idx.id}"
+                           title="Этот трек определился неверно, убрать">
+                            <i class="icon-remove"></i>
+                        </a>
+                    </c:if>
+                </td>
+            </c:if>
+        </tr>
+
+        <c:set var="lastNum" value="${page_idx.number}"/>
+    </c:forEach>
 
 
-        </tbody>
-    </table>
+    </tbody>
+</table>
 
 
-    <div class="pagination pagination-centered">
-        <ul id="pages-2">
+<div class="pagination pagination-centered">
+    <ul id="pages-2">
+        <c:choose>
+            <c:when test="${from >= size}">
+                <li><a href="report?id=${report.id}&from=0&page=0">&laquo;</a></li>
+            </c:when>
+            <c:otherwise>
+                <li class="disabled"><a href="#">&laquo;</a></li>
+            </c:otherwise>
+        </c:choose>
+
+        <c:set var="left" value="4"/>
+        <c:set var="right" value="6"/>
+        <c:set var="idx_right" value="0"/>
+
+        <c:if test="${page}==0">
+            <c:set var="page" value="1"/>
+        </c:if>
+
+        <c:set var="pages_end" value="${(report.detected / size) + 1}"/>
+
+        <c:forEach var="page_idx" begin="1" end="${pages_end}" step="1"
+                   varStatus="status">
+
             <c:choose>
-                <c:when test="${from >= size}">
-                    <li><a href="report?id=${report.id}&from=0&page=0">&laquo;</a></li>
+                <c:when test="${from == (page_idx - 1) * size}">
+                    <li class="active">
+                        <a href="report?id=${report.id}&from=${(page_idx - 1) * size}&page=${page_idx}">${page_idx}</a>
+                    </li>
                 </c:when>
                 <c:otherwise>
-                    <li class="disabled"><a href="#">&laquo;</a></li>
+
+                    <c:if test="${pages_end - page<right}">
+                        <c:set var="right" value="${right-1}"/>
+                        <c:set var="left" value="${left+1}"/>
+                    </c:if>
+
+                    <c:if test="${page-page_idx<=left&&page-page_idx>0}">
+                        <li>
+                            <a href="report?id=${report.id}&from=${(page_idx - 1) * size}&page=${page_idx}">${page_idx}</a>
+                        </li>
+                    </c:if>
+
+                    <c:if test="${page<=left}">
+                        <c:set var="right" value="${right+1}"/>
+                        <c:set var="left" value="${left-1}"/>
+                    </c:if>
+
+                    <c:if test="${page_idx-page<right&&page_idx-page>0}">
+                        <li>
+                            <a href="report?id=${report.id}&from=${(page_idx - 1) * size}&page=${page_idx}">${page_idx}</a>
+                        </li>
+                    </c:if>
+
                 </c:otherwise>
             </c:choose>
 
-            <c:set var="left" value="4"/>
-            <c:set var="right" value="6"/>
-            <c:set var="idx_right" value="0"/>
 
-            <c:if test="${page}==0">
-                <c:set var="page" value="1"/>
-            </c:if>
+        </c:forEach>
+        <fmt:formatNumber var="last"
+                          value="${report.detected/size}"
+                          maxFractionDigits="0"/>
+        <li>
+            <a href="report?id=${report.id}&from=${report.detected}&page=${last}">&raquo;</a>
+        </li>
 
-            <c:set var="pages_end" value="${(report.detected / size) + 1}"/>
-
-            <c:forEach var="page_idx" begin="1" end="${pages_end}" step="1"
-                       varStatus="status">
-
-                <c:choose>
-                    <c:when test="${from == (page_idx - 1) * size}">
-                        <li class="active">
-                            <a href="report?id=${report.id}&from=${(page_idx - 1) * size}&page=${page_idx}">${page_idx}</a>
-                        </li>
-                    </c:when>
-                    <c:otherwise>
-
-                        <c:if test="${pages_end - page<right}">
-                            <c:set var="right" value="${right-1}"/>
-                            <c:set var="left" value="${left+1}"/>
-                        </c:if>
-
-                        <c:if test="${page-page_idx<=left&&page-page_idx>0}">
-                            <li>
-                                <a href="report?id=${report.id}&from=${(page_idx - 1) * size}&page=${page_idx}">${page_idx}</a>
-                            </li>
-                        </c:if>
-
-                        <c:if test="${page<=left}">
-                            <c:set var="right" value="${right+1}"/>
-                            <c:set var="left" value="${left-1}"/>
-                        </c:if>
-
-                        <c:if test="${page_idx-page<right&&page_idx-page>0}">
-                            <li>
-                                <a href="report?id=${report.id}&from=${(page_idx - 1) * size}&page=${page_idx}">${page_idx}</a>
-                            </li>
-                        </c:if>
-
-                    </c:otherwise>
-                </c:choose>
-
-
-            </c:forEach>
-            <fmt:formatNumber var="last"
-                              value="${report.detected/size}"
-                              maxFractionDigits="0"/>
-            <li>
-                <a href="report?id=${report.id}&from=${report.detected}&page=${last}">&raquo;</a>
-            </li>
-
-        </ul>
-    </div>
+    </ul>
+</div>
 </section>
 
 <div id="track-remove-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"

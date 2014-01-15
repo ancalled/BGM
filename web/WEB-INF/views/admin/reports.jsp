@@ -26,12 +26,14 @@
 <div class="container text-center">
     <div class="row text-left">
         <legend>
-            Загрузка мобильного отчета
+            Загрузка отчета
         </legend>
     </div>
 
     <div class="row text-left">
-
+        <c:forEach var="c" items="${customers}" varStatus="s">
+            <input type="hidden" id="customer-${c.id}" value="${c.customerType}">
+        </c:forEach>
         <form action="/admin/action/upload-report"
               method="post" enctype="multipart/form-data">
 
@@ -39,15 +41,26 @@
                 Пользователь <br>
                 <select name="selector" id="customer">
 
-                    <c:forEach var="c" items="${customers}" varStatus="s">
-                        <option class="${c.name}" id="${c.id}">${c.name}</option>
-
+                    <c:forEach var="c" items="${customers}" varStatus="s" >
+                        <option class="${c.name}" value="${s.index}" id="${c.id}">${c.name}</option>
                     </c:forEach>
 
                 </select>
             </label>
 
+
+            <label>
+                Тип отчета <br>
+                <select id="repType" name="repType">
+
+                    <option id="MOBILE_AGGREGATOR" value="MOBILE_AGGREGATOR">Мобильный</option>
+                    <option value="PUBLIC_RIGHTS_SOCIETY" value="PUBLIC_RIGHTS_SOCIETY">Публичный</option>
+
+                </select>
+            </label>
+
             <input type="hidden" name="customer-id" id="customer-id"/>
+            <%--<input type="hidden" name="report-type" id="report-type"/>--%>
 
             <div class="fileupload fileupload-new" data-provides="fileupload">
                 <div class="input-append">
@@ -61,14 +74,6 @@
                     <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Удалить</a>
                 </div>
             </div>
-
-            <!--<div class="alert alert-block">-->
-            <!--<button type="button" class="close" data-dismiss="alert">&times;</button>-->
-            <!--<h4>Формат отчета</h4>-->
-            <!--Формат клиентского отчета Должна быть в Excel таки ;)-->
-
-            <!--</div>-->
-
 
             Дата отчета <br>
 
@@ -122,8 +127,20 @@
 
 
     $('#customer').change(function () {
-        $('#customer-id').val(this.options[this.selectedIndex].id);
-    });
+                $('#customer-id').val(this.options[this.selectedIndex].id);
+                var customerType = $('#customer-' + this.options[this.selectedIndex].id).val();
+                if (customerType == 'MOBILE_AGGREGATOR') {
+                    $('#repType').val('MOBILE_AGGREGATOR');
+                } else if (customerType = 'PUBLIC_RIGHTS_SOCIETY') {
+                    $('#repType').val('PUBLIC_RIGHTS_SOCIETY');
+                }
+            }
+    );
+//
+//    $('#repType').change(function(){
+//        $('#report-type').val(this.options[this.selectedIndex].id);
+//    });
+
 
     var el = document.getElementById('date');
 

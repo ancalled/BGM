@@ -72,6 +72,7 @@ public class UploadReportServlet extends HttpServlet {
             AdminUser admin = (AdminUser) session.getAttribute("admin");
             String customerIdStr = getSimpleParameter("customer-id", fields);
             String dateStr = getSimpleParameter("dt", fields);
+            String repType = getSimpleParameter("repType", fields);
 
             long customerId = Long.parseLong(customerIdStr);
 
@@ -91,17 +92,15 @@ public class UploadReportServlet extends HttpServlet {
 
 
             CustomerReport.Type reportType;
-            switch (customer.getCustomerType()) {
-                case MOBILE_AGGREGATOR:
-                    reportType = CustomerReport.Type.MOBILE;
-                    break;
-                case PUBLIC_RIGHTS_SOCIETY:
-                    reportType = CustomerReport.Type.PUBLIC;
-                    break;
-                default:
-                    System.err.println("Unknown customer type: " + customer.getCustomerType());
-                    resp.sendRedirect("/admin/view/reports?er=unknown-customer-type");
-                    return;
+            if (repType.equalsIgnoreCase("MOBILE_AGGREGATOR")) {
+                reportType = CustomerReport.Type.MOBILE;
+            } else if (repType.equalsIgnoreCase("PUBLIC_RIGHTS_SOCIETY")) {
+                reportType = CustomerReport.Type.PUBLIC;
+
+            } else {
+                System.err.println("Unknown customer type: " + customer.getCustomerType());
+                resp.sendRedirect("/admin/view/reports?er=unknown-customer-type");
+                return;
             }
 
             CustomerReport report = new CustomerReport();

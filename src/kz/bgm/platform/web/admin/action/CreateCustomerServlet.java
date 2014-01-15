@@ -2,6 +2,7 @@ package kz.bgm.platform.web.admin.action;
 
 
 import kz.bgm.platform.model.domain.Customer;
+import kz.bgm.platform.model.domain.CustomerType;
 import kz.bgm.platform.model.domain.RightType;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
@@ -37,18 +38,30 @@ public class CreateCustomerServlet extends HttpServlet {
         String authorRoyaltyStr = req.getParameter("authorRoyalty");
         String relatedRoyaltyStr = req.getParameter("relatedRoyalty");
         String contract = req.getParameter("contract");
+        String companyType = req.getParameter("type");
 
         authorRoyaltyStr = authorRoyaltyStr.replace(",", ".");
 
-        log.info("Got request to create customer" + name);
+        log.info("Got request to create customer " + name);
+
+
+        CustomerType type;
+        if (companyType.equalsIgnoreCase("MOBILE_AGGREGATOR")) {
+            type = CustomerType.MOBILE_AGGREGATOR;
+        } else if (companyType.equalsIgnoreCase("PUBLIC_RIGHTS_SOCIETY")) {
+            type = CustomerType.PUBLIC_RIGHTS_SOCIETY;
+        } else {
+            type = CustomerType.NONE;
+        }
+
 
         Customer customer = new Customer();
-
         customer.setContract(contract);
         customer.setName(name);
         customer.setRightType(RightType.valueOf(right));
         customer.setAuthorRoyalty(Float.parseFloat(authorRoyaltyStr));
         customer.setAuthorRoyalty(Float.parseFloat(relatedRoyaltyStr));
+        customer.setCustomerType(type);
 
         long id = storage.createCustomer(customer);
 

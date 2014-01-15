@@ -37,7 +37,7 @@
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="rights">Вид деятельности</label>
+                <label class="control-label" for="type">Вид деятельности</label>
 
                 <div class="controls">
                     <select id="type" name="type" class="input-block-level">
@@ -47,6 +47,7 @@
                     </select>
                 </div>
             </div>
+
 
             <div class="control-group">
                 <label class="control-label" for="rights">Тип прав</label>
@@ -64,7 +65,7 @@
                 <label class="control-label" for="share-author">Доля по авторским правам</label>
 
                 <div class="controls">
-                    <input type="number" id="share-author" name="share" placeholder="0">
+                    <input type="number" id="share-author" name="authorRoyalty" placeholder="0">
                     <%--<span class="add-on">%</span>--%>
                 </div>
             </div>
@@ -73,7 +74,7 @@
                 <label class="control-label" for="share-related">Доля по смежным правам</label>
 
                 <div class="controls">
-                    <input type="number" id="share-related" name="share" placeholder="0">
+                    <input type="number" id="share-related" name="relatedRoyalty" placeholder="0">
                     <%--<span class="add-on">%</span>--%>
                 </div>
             </div>
