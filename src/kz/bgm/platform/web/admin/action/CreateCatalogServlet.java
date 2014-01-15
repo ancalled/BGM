@@ -34,7 +34,7 @@ public class CreateCatalogServlet extends HttpServlet {
 
         if (isParamEmpty(name) || isParamEmpty(royalStr) ||
                 isParamEmpty(rights) || isParamEmpty(platformIdStr)) {
-            resp.sendRedirect("/admin/view/add-catalog.jsp?err=not_all_params");
+            resp.sendRedirect("/admin/view/add-catalog?err=not_all_params");
         } else {
 
             float royal = Float.parseFloat(royalStr);
@@ -58,7 +58,7 @@ public class CreateCatalogServlet extends HttpServlet {
             catalog.setPlatformId(platformId);
 
             storage.createCatalog(catalog);
-            resp.sendRedirect("/admin/view/index.jsp");
+            resp.sendRedirect("/admin/view/index");
         }
 
     }
