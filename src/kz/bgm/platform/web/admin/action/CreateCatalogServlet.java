@@ -34,6 +34,7 @@ public class CreateCatalogServlet extends HttpServlet {
 
         if (isParamEmpty(name) || isParamEmpty(royalStr) ||
                 isParamEmpty(rights) || isParamEmpty(platformIdStr)) {
+            log.warn("Some of params are empty");
             resp.sendRedirect("/admin/view/add-catalog?err=not_all_params");
         } else {
 
@@ -64,7 +65,7 @@ public class CreateCatalogServlet extends HttpServlet {
     }
 
     private boolean isParamEmpty(String param) {
-        return param == null && "".equals(param);
+        return param == null || "".equals(param);
     }
 
 }

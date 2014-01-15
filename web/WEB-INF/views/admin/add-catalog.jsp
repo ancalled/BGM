@@ -30,13 +30,20 @@
             <label for="name">Название каталога </label>
             <input type="text" id="name" name="name">
 
-        <input type="hidden" name="platformId" value="${platform.id}">
+            <input type="hidden" name="platformId" value="${platformId}">
+
+            <label for="type">Платформа</label>
+            <select id="platform" name="platform" class="input-block-level">
+                <c:forEach items="${platforms}" var="p" varStatus="loop">
+                    <option value="${p.id}" ${platformId==p.id ? "selected":""}>${p.name}</option>
+                </c:forEach>
+            </select>
+
 
             <label for="type">Тип прав</label>
             <select id="type" name="rights" class="input-block-level">
                 <option value="AUTHOR">Авторские</option>
                 <option value="RELATED">Смежные</option>
-                <option value="AUTHOR_RELATED">Авторские и смежные</option>
             </select>
 
             <label for="name">Роялити </label>
@@ -44,7 +51,7 @@
 
             <input type="submit" value="Создать каталог">
 
-        <c:import url="footer.jsp"/>
+            <c:import url="footer.jsp"/>
 
         </form>
     </div>

@@ -91,7 +91,7 @@
                 <legend>
                     Каталоги
                     <span class="add-button add-platform">
-                        <a href="#add-platform"><i class="icon-plus-sign icon-large"></i> </a>
+                        <a href="add-platform"><i class="icon-plus-sign icon-large"></i> </a>
                     </span>
                 </legend>
 

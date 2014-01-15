@@ -2273,6 +2273,28 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+    @Override
+
+
+    public void createPlatform(final Platform plat) {
+        queryVoid(new VoidAction() {
+            @Override
+            public void execute(Connection con) throws SQLException {
+
+                String sql = "INSERT INTO platform (name,rights) " +
+                        "VALUES (?,?)";
+
+                PreparedStatement ps =
+                        con.prepareStatement(sql);
+
+
+                ps.setString(1, plat.getName());
+                ps.setInt(2, plat.isRights() ? 1 : 0);
+                ps.executeUpdate();
+            }
+        });
+    }
+
     private void queryVoid(VoidAction action) {
 
         Connection connection = null;

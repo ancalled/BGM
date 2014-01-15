@@ -145,6 +145,8 @@ public interface CatalogStorage {
 
     void createCatalog(Catalog catalog);
 
+    void createPlatform(Platform platform);
+
     void exportCatalogToCSV(long catalogId, String catalogName,
                             String fieldTerminator,
                             String enclosedBy, String linesTerminator);

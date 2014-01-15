@@ -26,6 +26,8 @@
 
 
 
+    
+    
     <servlet>
         <servlet-name>adminLoginServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.LoginServlet</servlet-class>
@@ -259,6 +261,10 @@
         <servlet-name>catalogServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.CreateCatalogServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>createPlatformServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.CreatePlatformServlet</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -333,6 +339,10 @@
     <servlet-mapping>
         <servlet-name>catalogServlet</servlet-name>
         <url-pattern>admin/action/create-catalog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createPlatformServlet</servlet-name>
+        <url-pattern>admin/action/create-platform</url-pattern>
     </servlet-mapping>
 
 

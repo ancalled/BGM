@@ -232,11 +232,22 @@ public class DispatcherServlet extends HttpServlet {
                         String platformIdStr = req.getParameter("platformId");
                         if (platformIdStr != null) {
                             long platId = Long.parseLong(platformIdStr);
-                            Platform platform = catalogStorage.getPlatform(platId);
-                            req.setAttribute("platform", platform);
+                            List<Platform> platforms = catalogStorage.getAllPlatforms();
+                            req.setAttribute("platforms", platforms);
+                            req.setAttribute("platformId", platId);
+
 
                         }
                         return "add-catalog";
+                    }
+                };
+                break;
+
+            case "/add-platform":
+                action = new Action() {
+                    @Override
+                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+                        return "add-platform";
                     }
                 };
                 break;
