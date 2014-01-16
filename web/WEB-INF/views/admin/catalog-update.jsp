@@ -121,251 +121,439 @@
 
 <div class="tabbable" style="margin-bottom: 18px;">
 <ul class="nav nav-tabs">
-    <li class="${tab1 == 'active'? 'active' : ''}"><a href="#tab1" data-toggle="tab">Пересекающиеся композиции</a></li>
-    <li class="${tab2 == 'active'? 'active' : ''}"><a href="#tab2" data-toggle="tab">Все композиции</a></li>
+    <c:choose>
+        <c:when test="${tab1!='active'&&tab2!='active'}">
+            <li class=""><a href="#tab1" data-toggle="tab">Пересекающиеся композиции</a></li>
+            <li class=""><a href="#tab2" data-toggle="tab">Все композиции</a></li>
+        </c:when>
+        <c:otherwise>
+            <li class="${tab1 == 'active'? 'active' : ''}"><a href="#tab1" data-toggle="tab">Пересекающиеся
+                композиции</a></li>
+            <li class="${tab2 == 'active'? 'active' : ''}"><a href="#tab2" data-toggle="tab">Все композиции</a></li>
+        </c:otherwise>
+    </c:choose>
+
+
 </ul>
 <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
 <div class="tab-pane ${tab1 == 'active'? 'active' : ''}" id="tab1">
 
-    <div class="pagination pagination-centered">
-        <ul>
+<div class="pagination pagination-centered">
+    <ul>
+        <c:choose>
+            <c:when test="${from >= pageSize}">
+                <li><a href="catalog-update?id=${update.id}&from=0&page=0&active-tab=tab1">&laquo;</a></li>
+            </c:when>
+            <c:otherwise>
+                <li class="disabled"><a href="#">&laquo;</a></li>
+            </c:otherwise>
+        </c:choose>
+
+        <c:set var="left" value="4"/>
+        <c:set var="right" value="6"/>
+        <c:set var="idx_right" value="0"/>
+
+        <c:if test="${page}==0">
+            <c:set var="page" value="1"/>
+        </c:if>
+
+        <c:set var="pages_end" value="${(update.crossing / pageSize) + 1}"/>
+
+        <c:forEach var="page_idx" begin="1" end="${pages_end}" step="1"
+                   varStatus="status">
+
             <c:choose>
-                <c:when test="${from >= pageSize}">
-                    <li>
-                        <a href="catalog-update?id=${update.id}&from=${from - pageSize}">&laquo;</a>
+                <c:when test="${from == (page_idx - 1) * pageSize}">
+                    <li class="active">
+                        <a href="catalog-update?id=${update.id}&from=${(page_idx - 1) * pageSize}&page=${page_idx}&active-tab=tab1">${page_idx}</a>
                     </li>
                 </c:when>
                 <c:otherwise>
-                    <li class="disabled"><a href="#">&laquo;</a></li>
+
+                    <c:if test="${pages_end - page<=right}">
+                        <c:set var="right" value="${right-1}"/>
+                        <c:set var="left" value="${left+1}"/>
+                    </c:if>
+
+                    <c:if test="${page-page_idx<=left&&page-page_idx>0}">
+                        <li>
+                            <a href="catalog-update?id=${update.id}&from=${(page_idx - 1) * pageSize}&page=${page_idx}&active-tab=tab1">${page_idx}</a>
+                        </li>
+                    </c:if>
+
+                    <c:if test="${page<=left}">
+                        <c:set var="right" value="${right+1}"/>
+                        <c:set var="left" value="${left-1}"/>
+                    </c:if>
+
+                    <c:if test="${page_idx-page<right&&page_idx-page>0}">
+                        <li>
+                            <a href="catalog-update?id=${update.id}&from=${(page_idx - 1) * pageSize}&page=${page_idx}&active-tab=tab1">${page_idx}</a>
+                        </li>
+                    </c:if>
+
                 </c:otherwise>
             </c:choose>
 
-            <c:forEach var="page_idx" begin="1" end="${(update.crossing / pageSize) + 1}" step="1"
-                       varStatus="status">
-                <li class="${from == (page_idx - 1) * pageSize ? 'active' : ''}">
-                    <a href="catalog-update?id=${update.id}&from=${(page_idx - 1) * pageSize}&active-tab=tab1">${page_idx}</a>
-                </li>
-            </c:forEach>
 
-            <c:choose>
-                <c:when test="${from + pageSize < update.crossing}">
-                    <li>
-                        <a href="catalog-update?id=${update.id}&from=${from + pageSize}&active-tab=tab1">&raquo;</a>
-                    </li>
-                </c:when>
-                <c:otherwise>
-                    <li class="disabled"><a href="#">&raquo;</a></li>
-                </c:otherwise>
-            </c:choose>
-        </ul>
-    </div>
-
-    <table class="table smallcaps">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Код</th>
-            <th>Композиция</th>
-            <th>Исполнитель</th>
-            <th>Авторы</th>
-            <th>Мобильный контент</th>
-            <th>Публичка</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        <c:forEach items="${diffs}" var="d">
-            <tr>
-                <td class="invariant">${d.number + 1}</td>
-                <td class="invariant">${d.code}</td>
-                <td>
-                    <c:if test="${d.oldTrack.name != d.newTrack.name}">
-                        <ul class="unstyled">
-                            <li class="deleted">${d.oldTrack.name}</li>
-                            <li>${d.newTrack.name}</li>
-                        </ul>
-                    </c:if>
-                </td>
-                <td>
-                    <c:if test="${d.oldTrack.artist != d.newTrack.artist}">
-                        <ul class="unstyled">
-                            <li class="deleted">${d.oldTrack.artist}</li>
-                            <li>${d.newTrack.artist}</li>
-                        </ul>
-                    </c:if>
-                </td>
-                <td>
-                    <c:if test="${d.oldTrack.composer != d.newTrack.composer}">
-                        <ul class="unstyled">
-                            <li class="deleted">${d.oldTrack.composer}</li>
-                            <li>${d.newTrack.composer}</li>
-                        </ul>
-                    </c:if>
-                </td>
-                <td>
-                    <c:if test="${d.oldTrack.mobileShare != d.newTrack.mobileShare}">
-                        <ul class="unstyled">
-                            <li class="deleted">${d.oldTrack.mobileShare}</li>
-                            <li>${d.newTrack.mobileShare}</li>
-                        </ul>
-                    </c:if>
-                </td>
-                <td>
-                    <c:if test="${d.oldTrack.publicShare != d.newTrack.publicShare}">
-                        <ul class="unstyled">
-                            <li class="deleted">${d.oldTrack.publicShare}</li>
-                            <li>${d.newTrack.publicShare}</li>
-                        </ul>
-                    </c:if>
-                </td>
-            </tr>
         </c:forEach>
+        <fmt:formatNumber var="pages_end"
+                          value="${update.tracks/pageSize}"
+                          maxFractionDigits="0"/>
+        <li>
+            <a href="catalog-update?id=${update.id}&from=${update.crossing}&page=${pages_end}&active-tab=tab1">&raquo;</a>
+        </li>
 
-        </tbody>
-    </table>
+    </ul>
+</div>
+<table class="table smallcaps">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Код</th>
+        <th>Композиция</th>
+        <th>Исполнитель</th>
+        <th>Авторы</th>
+        <th>Мобильный контент</th>
+        <th>Публичка</th>
+    </tr>
+    </thead>
+    <tbody>
 
-    <div class="pagination pagination-centered">
-        <ul>
+    <c:forEach items="${diffs}" var="d">
+        <tr>
+            <td class="invariant">${d.number + 1}</td>
+            <td class="invariant">${d.code}</td>
+            <td>
+                <c:if test="${d.oldTrack.name != d.newTrack.name}">
+                    <ul class="unstyled">
+                        <li class="deleted">${d.oldTrack.name}</li>
+                        <li>${d.newTrack.name}</li>
+                    </ul>
+                </c:if>
+            </td>
+            <td>
+                <c:if test="${d.oldTrack.artist != d.newTrack.artist}">
+                    <ul class="unstyled">
+                        <li class="deleted">${d.oldTrack.artist}</li>
+                        <li>${d.newTrack.artist}</li>
+                    </ul>
+                </c:if>
+            </td>
+            <td>
+                <c:if test="${d.oldTrack.composer != d.newTrack.composer}">
+                    <ul class="unstyled">
+                        <li class="deleted">${d.oldTrack.composer}</li>
+                        <li>${d.newTrack.composer}</li>
+                    </ul>
+                </c:if>
+            </td>
+            <td>
+                <c:if test="${d.oldTrack.mobileShare != d.newTrack.mobileShare}">
+                    <ul class="unstyled">
+                        <li class="deleted">${d.oldTrack.mobileShare}</li>
+                        <li>${d.newTrack.mobileShare}</li>
+                    </ul>
+                </c:if>
+            </td>
+            <td>
+                <c:if test="${d.oldTrack.publicShare != d.newTrack.publicShare}">
+                    <ul class="unstyled">
+                        <li class="deleted">${d.oldTrack.publicShare}</li>
+                        <li>${d.newTrack.publicShare}</li>
+                    </ul>
+                </c:if>
+            </td>
+        </tr>
+    </c:forEach>
+
+    </tbody>
+</table>
+
+<div class="pagination pagination-centered">
+    <ul>
+        <c:choose>
+            <c:when test="${from >= pageSize}">
+                <li><a href="catalog-update?id=${update.id}&from=0&page=0&active-tab=tab1">&laquo;</a></li>
+            </c:when>
+            <c:otherwise>
+                <li class="disabled"><a href="#">&laquo;</a></li>
+            </c:otherwise>
+        </c:choose>
+
+        <c:set var="left" value="4"/>
+        <c:set var="right" value="6"/>
+        <c:set var="idx_right" value="0"/>
+
+        <c:if test="${page}==0">
+            <c:set var="page" value="1"/>
+        </c:if>
+
+        <c:set var="pages_end" value="${(update.crossing / pageSize) + 1}"/>
+
+        <c:forEach var="page_idx" begin="1" end="${pages_end}" step="1"
+                   varStatus="status">
+
             <c:choose>
-                <c:when test="${from >= pageSize}">
-                    <li>
-                        <a href="catalog-update?id=${update.id}&from=${from - pageSize}">&laquo;</a>
+                <c:when test="${from == (page_idx - 1) * pageSize}">
+                    <li class="active">
+                        <a href="catalog-update?id=${update.id}&from=${(page_idx - 1) * pageSize}&page=${page_idx}&active-tab=tab1">${page_idx}</a>
                     </li>
                 </c:when>
                 <c:otherwise>
-                    <li class="disabled"><a href="#">&laquo;</a></li>
+
+                    <c:if test="${pages_end - page<=right}">
+                        <c:set var="right" value="${right-1}"/>
+                        <c:set var="left" value="${left+1}"/>
+                    </c:if>
+
+                    <c:if test="${page-page_idx<=left&&page-page_idx>0}">
+                        <li>
+                            <a href="catalog-update?id=${update.id}&from=${(page_idx - 1) * pageSize}&page=${page_idx}&active-tab=tab1">${page_idx}</a>
+                        </li>
+                    </c:if>
+
+                    <c:if test="${page<=left}">
+                        <c:set var="right" value="${right+1}"/>
+                        <c:set var="left" value="${left-1}"/>
+                    </c:if>
+
+                    <c:if test="${page_idx-page<right&&page_idx-page>0}">
+                        <li>
+                            <a href="catalog-update?id=${update.id}&from=${(page_idx - 1) * pageSize}&page=${page_idx}&active-tab=tab1">${page_idx}</a>
+                        </li>
+                    </c:if>
+
                 </c:otherwise>
             </c:choose>
 
-            <c:forEach var="page_idx" begin="1" end="${(update.crossing / pageSize) + 1}" step="1"
-                       varStatus="status">
-                <li class="${from == (page_idx - 1) * pageSize ? 'active' : ''}">
-                    <a href="catalog-update?id=${update.id}&from=${(page_idx - 1) * pageSize}&active-tab=tab1">${page_idx}</a>
-                </li>
-            </c:forEach>
 
-            <c:choose>
-                <c:when test="${from + pageSize < update.crossing}">
-                    <li>
-                        <a href="catalog-update?id=${update.id}&from=${from + pageSize}&active-tab=tab1">&raquo;</a>
-                    </li>
-                </c:when>
-                <c:otherwise>
-                    <li class="disabled"><a href="#">&raquo;</a></li>
-                </c:otherwise>
-            </c:choose>
-        </ul>
-    </div>
+        </c:forEach>
+        <fmt:formatNumber var="pages_end"
+                          value="${update.tracks/pageSize}"
+                          maxFractionDigits="0"/>
+        <li>
+            <a href="catalog-update?id=${update.id}&from=${update.crossing}&page=${pages_end}&active-tab=tab1">&raquo;</a>
+        </li>
+
+    </ul>
+</div>
 
 </div>
 <div class="tab-pane ${tab2 == 'active'? 'active' : ''}" id="tab2">
 
-    <H4>Все загруженные композиции</H4>
+<H4>Все загруженные композиции</H4>
 
-    <div class="pagination pagination-centered">
-        <ul>
+    <%--<div class="pagination pagination-centered">--%>
+    <%--<ul>--%>
+    <%--<c:choose>--%>
+    <%--<c:when test="${fromNew >= pageSize}">--%>
+    <%--<li>--%>
+    <%--<a href="catalog-update?id=${update.id}&from-new=${fromNew - pageSize}&active-tab=tab2">&laquo;</a>--%>
+    <%--</li>--%>
+    <%--</c:when>--%>
+    <%--<c:otherwise>--%>
+    <%--<li class="disabled"><a href="#">&laquo;</a></li>--%>
+    <%--</c:otherwise>--%>
+    <%--</c:choose>--%>
+    <%----%>
+    <%--<c:forEach var="page_idx" begin="1" end="${update.tracks / pageSize + 1}" step="1"--%>
+    <%--varStatus="status">--%>
+    <%--<li class="${fromNew == (page_idx - 1) * pageSize ? 'active' : ''}">--%>
+    <%--<a href="catalog-update?id=${update.id}&from-new=${(page_idx - 1) * pageSize}&active-tab=tab2">${page_idx}</a>--%>
+    <%--</li>--%>
+    <%--</c:forEach>--%>
+    <%----%>
+    <%--<c:choose>--%>
+    <%--<c:when test="${fromNew + pageSize < fn:length(tracks)}">--%>
+    <%--<li>--%>
+    <%--<a href="catalog-update?id=${update.id}&from-new=${fromNew + pageSize}">&raquo;</a>--%>
+    <%--</li>--%>
+    <%--</c:when>--%>
+    <%--<c:otherwise>--%>
+    <%--<li class="disabled"><a href="#">&raquo;</a></li>--%>
+    <%--</c:otherwise>--%>
+    <%--</c:choose>--%>
+    <%--</ul>--%>
+    <%--</div>--%>
+
+<div class="pagination pagination-centered">
+    <ul>
+        <c:choose>
+            <c:when test="${fromNew >= pageSize}">
+                <li><a href="catalog-update?id=${update.id}&from-new=0&page=0&active-tab=tab2">&laquo;</a></li>
+            </c:when>
+            <c:otherwise>
+                <li class="disabled"><a href="#">&laquo;</a></li>
+            </c:otherwise>
+        </c:choose>
+
+        <c:set var="left" value="4"/>
+        <c:set var="right" value="6"/>
+        <c:set var="idx_right" value="0"/>
+
+        <c:if test="${page}==0">
+            <c:set var="page" value="1"/>
+        </c:if>
+
+        <c:set var="pages_end" value="${(update.tracks / pageSize) + 1}"/>
+
+        <c:forEach var="page_idx" begin="1" end="${pages_end}" step="1"
+                   varStatus="status">
+
             <c:choose>
-                <c:when test="${fromNew >= pageSize}">
-                    <li>
-                        <a href="catalog-update?id=${update.id}&from-new=${fromNew - pageSize}&active-tab=tab2">&laquo;</a>
+                <c:when test="${fromNew == (page_idx - 1) * pageSize}">
+                    <li class="active">
+                        <a href="catalog-update?id=${update.id}&from-new=${(page_idx - 1) * pageSize}&page=${page_idx}&active-tab=tab2">${page_idx}</a>
                     </li>
                 </c:when>
                 <c:otherwise>
-                    <li class="disabled"><a href="#">&laquo;</a></li>
+
+                    <c:if test="${pages_end - page<=right}">
+                        <c:set var="right" value="${right-1}"/>
+                        <c:set var="left" value="${left+1}"/>
+                    </c:if>
+
+                    <c:if test="${page-page_idx<=left&&page-page_idx>0}">
+                        <li>
+                            <a href="catalog-update?id=${update.id}&from-new=${(page_idx - 1) * pageSize}&page=${page_idx}&active-tab=tab2">${page_idx}</a>
+                        </li>
+                    </c:if>
+
+                    <c:if test="${page<=left}">
+                        <c:set var="right" value="${right+1}"/>
+                        <c:set var="left" value="${left-1}"/>
+                    </c:if>
+
+                    <c:if test="${page_idx-page<right&&page_idx-page>0}">
+                        <li>
+                            <a href="catalog-update?id=${update.id}&from-new=${(page_idx - 1) * pageSize}&page=${page_idx}&active-tab=tab2">${page_idx}</a>
+                        </li>
+                    </c:if>
+
                 </c:otherwise>
             </c:choose>
 
-            <c:forEach var="page_idx" begin="1" end="${update.tracks / pageSize + 1}" step="1"
-                       varStatus="status">
-                <li class="${fromNew == (page_idx - 1) * pageSize ? 'active' : ''}">
-                    <a href="catalog-update?id=${update.id}&from-new=${(page_idx - 1) * pageSize}&active-tab=tab2">${page_idx}</a>
-                </li>
-            </c:forEach>
 
-            <c:choose>
-                <c:when test="${fromNew + pageSize < fn:length(tracks)}">
-                    <li>
-                        <a href="catalog-update?id=${update.id}&from-new=${fromNew + pageSize}">&raquo;</a>
-                    </li>
-                </c:when>
-                <c:otherwise>
-                    <li class="disabled"><a href="#">&raquo;</a></li>
-                </c:otherwise>
-            </c:choose>
-        </ul>
-    </div>
-
-    <table class="table smallcaps">
-        <thead>
-        <tr>
-                <%--<th>#</th>--%>
-            <th>Код</th>
-            <th>Композиция</th>
-            <th>Исполнитель</th>
-            <th>Авторы</th>
-            <th>Мобильный контент</th>
-            <th>Публичка</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        <c:forEach items="${tracks}" var="d">
-            <tr>
-                    <%--<td class="invariant">${d.number + 1}</td>--%>
-                <td class="invariant">${d.code}</td>
-                <td>
-                        ${d.name}
-                </td>
-                <td>
-                        ${d.artist}
-                </td>
-                <td>
-                        ${d.composer}
-                </td>
-                <td>
-                        ${d.mobileShare}
-                </td>
-                <td>
-                        ${d.publicShare}
-                </td>
-            </tr>
         </c:forEach>
+        <fmt:formatNumber var="pages_end"
+                          value="${update.tracks/pageSize}"
+                          maxFractionDigits="0"/>
+        <li>
+            <a href="catalog-update?id=${update.id}&from-new=${update.tracks}&page=${pages_end}&active-tab=tab2">&raquo;</a>
+        </li>
 
-        </tbody>
-    </table>
+    </ul>
+</div>
 
-    <div class="pagination pagination-centered">
-        <ul>
+
+<table class="table smallcaps">
+    <thead>
+    <tr>
+            <%--<th>#</th>--%>
+        <th>Код</th>
+        <th>Композиция</th>
+        <th>Исполнитель</th>
+        <th>Авторы</th>
+        <th>Мобильный контент</th>
+        <th>Публичка</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <c:forEach items="${tracks}" var="d">
+        <tr>
+                <%--<td class="invariant">${d.number + 1}</td>--%>
+            <td class="invariant">${d.code}</td>
+            <td>
+                    ${d.name}
+            </td>
+            <td>
+                    ${d.artist}
+            </td>
+            <td>
+                    ${d.composer}
+            </td>
+            <td>
+                    ${d.mobileShare}
+            </td>
+            <td>
+                    ${d.publicShare}
+            </td>
+        </tr>
+    </c:forEach>
+
+    </tbody>
+</table>
+
+<div class="pagination pagination-centered">
+    <ul>
+        <c:choose>
+            <c:when test="${fromNew >= pageSize}">
+                <li><a href="catalog-update?id=${update.id}&from-new=0&page=0&active-tab=tab2">&laquo;</a></li>
+            </c:when>
+            <c:otherwise>
+                <li class="disabled"><a href="#">&laquo;</a></li>
+            </c:otherwise>
+        </c:choose>
+
+        <c:set var="left" value="4"/>
+        <c:set var="right" value="6"/>
+        <c:set var="idx_right" value="0"/>
+
+        <c:if test="${page}==0">
+            <c:set var="page" value="1"/>
+        </c:if>
+
+        <c:set var="pages_end" value="${(update.tracks / pageSize) + 1}"/>
+
+        <c:forEach var="page_idx" begin="1" end="${pages_end}" step="1"
+                   varStatus="status">
+
             <c:choose>
-                <c:when test="${fromNew >= pageSize}">
-                    <li>
-                        <a href="catalog-update?id=${update.id}&from-new=${fromNew - pageSize}&active-tab=tab2">&laquo;</a>
+                <c:when test="${fromNew == (page_idx - 1) * pageSize}">
+                    <li class="active">
+                        <a href="catalog-update?id=${update.id}&from-new=${(page_idx - 1) * pageSize}&page=${page_idx}&active-tab=tab2">${page_idx}</a>
                     </li>
                 </c:when>
                 <c:otherwise>
-                    <li class="disabled"><a href="#">&laquo;</a></li>
+
+                    <c:if test="${pages_end - page<=right}">
+                        <c:set var="right" value="${right-1}"/>
+                        <c:set var="left" value="${left+1}"/>
+                    </c:if>
+
+                    <c:if test="${page-page_idx<=left&&page-page_idx>0}">
+                        <li>
+                            <a href="catalog-update?id=${update.id}&from-new=${(page_idx - 1) * pageSize}&page=${page_idx}&active-tab=tab2">${page_idx}</a>
+                        </li>
+                    </c:if>
+
+                    <c:if test="${page<=left}">
+                        <c:set var="right" value="${right+1}"/>
+                        <c:set var="left" value="${left-1}"/>
+                    </c:if>
+
+                    <c:if test="${page_idx-page<right&&page_idx-page>0}">
+                        <li>
+                            <a href="catalog-update?id=${update.id}&from-new=${(page_idx - 1) * pageSize}&page=${page_idx}&active-tab=tab2">${page_idx}</a>
+                        </li>
+                    </c:if>
+
                 </c:otherwise>
             </c:choose>
 
-            <c:forEach var="page_idx" begin="1" end="${update.tracks / pageSize + 1}" step="1"
-                       varStatus="status">
-                <li class="${fromNew == (page_idx - 1) * pageSize ? 'active' : ''}">
-                    <a href="catalog-update?id=${update.id}&from-new=${(page_idx - 1) * pageSize}&active-tab=tab2">${page_idx}</a>
-                </li>
-            </c:forEach>
 
-            <c:choose>
-                <c:when test="${fromNew + pageSize < fn:length(tracks)}">
-                    <li>
-                        <a href="catalog-update?id=${update.id}&from-new=${fromNew + pageSize}">&raquo;</a>
-                    </li>
-                </c:when>
-                <c:otherwise>
-                    <li class="disabled"><a href="#">&raquo;</a></li>
-                </c:otherwise>
-            </c:choose>
-        </ul>
-    </div>
+        </c:forEach>
+        <fmt:formatNumber var="pages_end"
+                          value="${update.tracks/pageSize}"
+                          maxFractionDigits="0"/>
+        <li>
+            <a href="catalog-update?id=${update.id}&from-new=${update.tracks}&page=${pages_end}&active-tab=tab2">&raquo;</a>
+        </li>
+
+    </ul>
+</div>
 
 </div>
 </div>

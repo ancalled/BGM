@@ -304,19 +304,45 @@ public class DispatcherServlet extends HttpServlet {
                                 String activeTabStr = req.getParameter("active-tab");
 
                                 if ("tab1".equals(activeTabStr)) {
+
                                     req.setAttribute("tab1", "active");
+
+                                    List<TrackDiff> diffs =
+                                            catalogStorage.
+                                                    geChangedTracks(updateId, from, TRACKS_PER_PAGE);
+                                    req.setAttribute("diffs", diffs);
+
                                 } else if ("tab2".equals(activeTabStr)) {
+
                                     req.setAttribute("tab2", "active");
+
+                                    List<Track> allNewTracks =
+                                            catalogStorage.
+                                                    getTempTracks(catalog.getId(), fromNew, TRACKS_PER_PAGE);
+                                    req.setAttribute("tracks", allNewTracks);
+
+                                } else {
+
+                                    req.setAttribute("tab1", "active");
+
+                                    List<TrackDiff> diffs =
+                                            catalogStorage.
+                                                    geChangedTracks(updateId, from, TRACKS_PER_PAGE);
+                                    req.setAttribute("diffs", diffs);
+
+                                    List<Track> allNewTracks =
+                                            catalogStorage.
+                                                    getTempTracks(catalog.getId(), fromNew, TRACKS_PER_PAGE);
+                                    req.setAttribute("tracks", allNewTracks);
+
                                 }
 
-                                List<TrackDiff> diffs = catalogStorage.geChangedTracks(updateId, from, TRACKS_PER_PAGE);
-
-                                List<Track> allNewTracks = catalogStorage.getTempTracks(catalog.getId(), fromNew, TRACKS_PER_PAGE);
+                                String page = req.getParameter("page");
+                                if (page == null) page = "0";
 
                                 req.setAttribute("fromNew", fromNew);
-                                req.setAttribute("tracks", allNewTracks);
-                                req.setAttribute("diffs", diffs);
                                 req.setAttribute("from", from);
+                                req.setAttribute("page", page);
                                 req.setAttribute("pageSize", TRACKS_PER_PAGE);
                             }
                         }
