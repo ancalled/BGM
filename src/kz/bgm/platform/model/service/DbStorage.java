@@ -1510,6 +1510,11 @@ public class DbStorage implements CatalogStorage {
                                 "ON c.code = t.code " +
                                 "AND c.catalog_id = t.catalog_id " +
                                 "WHERE t.update_id = ? " +
+                                " AND (c.name != t.name OR \n" +
+                                "       c.artist != t.artist OR \n" +
+                                "       c.composer != t.composer OR \n" +
+                                "       c.shareMobile != t.shareMobile OR \n" +
+                                "       c.sharePublic != t.sharePublic) " +
                                 "LIMIT ?, ?"
                 );
                 stmt.setLong(1, updateId);
@@ -1583,14 +1588,31 @@ public class DbStorage implements CatalogStorage {
             @Override
             public List<Track> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM composition WHERE artist LIKE?");
-//                stmt.setString(1, artist);
+                        "SELECT   \n" +
+                                "t.id t_id,  \n" +
+                                "t.code t_code,  \n" +
+                                "t.catalog_id t_catalog_id,  \n" +
+                                "t.name t_name,  \n" +
+                                "t.artist t_artist,  \n" +
+                                "t.composer t_composer,  \n" +
+                                "t.shareMobile t_shareMobile,  \n" +
+                                "t.sharePublic t_sharePublic  \n" +
+                                "FROM comp_tmp t  \n" +
+                                "LEFT JOIN composition c  \n" +
+                                "ON c.code = t.code  \n" +
+                                "AND c.catalog_id = t.catalog_id  \n" +
+                                "WHERE t.update_id = ?\n" +
+                                "     AND c.id IS NULL\n" +
+                                "LIMIT ?, ?;");
+                stmt.setLong(1, updateId);
+                stmt.setInt(2, from);
+                stmt.setInt(3, size);
 
                 ResultSet rs = stmt.executeQuery();
 
                 List<Track> tracks = new ArrayList<>();
                 while (rs.next()) {
-                    tracks.add(parseTrack(rs));
+                    tracks.add(parseTrack(rs, "t_"));
                 }
                 return tracks;
             }

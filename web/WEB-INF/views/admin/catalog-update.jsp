@@ -123,13 +123,12 @@
 <ul class="nav nav-tabs">
     <c:choose>
         <c:when test="${tab1!='active'&&tab2!='active'}">
-            <li class=""><a href="#tab1" data-toggle="tab">Пересекающиеся композиции</a></li>
-            <li class=""><a href="#tab2" data-toggle="tab">Все композиции</a></li>
+            <li class=""><a href="#tab1" data-toggle="tab">Имзененные треки</a></li>
+            <li class=""><a href="#tab2" data-toggle="tab">Новые треки</a></li>
         </c:when>
         <c:otherwise>
-            <li class="${tab1 == 'active'? 'active' : ''}"><a href="#tab1" data-toggle="tab">Пересекающиеся
-                композиции</a></li>
-            <li class="${tab2 == 'active'? 'active' : ''}"><a href="#tab2" data-toggle="tab">Все композиции</a></li>
+            <li class="${tab1 == 'active'? 'active' : ''}"><a href="#tab1" data-toggle="tab">Имзененные треки</a></li>
+            <li class="${tab2 == 'active'? 'active' : ''}"><a href="#tab2" data-toggle="tab">Новые треки</a></li>
         </c:otherwise>
     </c:choose>
 

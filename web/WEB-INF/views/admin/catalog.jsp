@@ -266,8 +266,9 @@
                 <input type="hidden" name="catId" value="${catalog.id}">
 
                 <br>
-                <span id="example">Файл csv должен поля, как указано в таблице ниже.
-                    Разделитель <i>';'</i>, кодировка <i>'UTF-8'</i></span>
+                <span id="example">Файл обновления должен быть в формате <strong><i>csv</i></strong> и содержать поля, как указано в таблице ниже.
+                    Разделитель '<strong>;</strong>', кодировка <strong>utf-8</strong>
+                </span>
 
 
             </form>
@@ -318,7 +319,7 @@ $(document).ready(function () {
             $('#progress').html("");
 
             if (data.result.status == 'ok') {
-                $('#status-bar').html("<strong>Файл загружен, идет обработка</strong>");
+                $('#status-bar').html("<strong>Файл загружен на сервер, идет обработка...</strong>");
 
 //                    if (!(typeof data.result.uid === "undefined")) {
                 var updateId = data.result.uid;
@@ -426,10 +427,10 @@ function startTaskStatusChecker(updateId) {
                     if (taskStatus == 'FILE_UPLOADED') {
 
                     } else if (taskStatus == 'SQL_LOAD_COMPLETE') {
-                        $('#status-bar').html("<strong>Обновление загружено, идет пересчет статистики</strong>");
+                        $('#status-bar').html("<strong>Обновление загружено, идет пересчет статистики...</strong>");
                         $('#progress .bar').css('width', '75%');
                     } else if (taskStatus == 'UPDATE_STATISTICS_FINISHED') {
-                        $('#status-bar').html("<strong>Загрузка окончена</strong>");
+                        $('#status-bar').html("<strong>Загрузка окончена.</strong>");
                         stop = true;
                         $('#progress .bar').css('width', '100%');
                         window.location.href = '/admin/view/catalog-update?id=' + updateId;

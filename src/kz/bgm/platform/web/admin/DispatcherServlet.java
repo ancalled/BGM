@@ -318,7 +318,8 @@ public class DispatcherServlet extends HttpServlet {
 
                                     List<Track> allNewTracks =
                                             catalogStorage.
-                                                    getTempTracks(catalog.getId(), fromNew, TRACKS_PER_PAGE);
+                                                    getNewTracks(catalog.getId(), fromNew, TRACKS_PER_PAGE);
+//                                                    getTempTracks(catalog.getId(), fromNew, TRACKS_PER_PAGE);
                                     req.setAttribute("tracks", allNewTracks);
 
                                 } else {
