@@ -436,7 +436,7 @@
             var itemId = a.attr('id');
             var tr = a.closest('tr');
             var clazz = tr.attr('class');
-            $.post('/customer/api/remove-from-report',
+            $.post('/admin/api/remove-from-report',
                     {report_id: "${report.id}",
                         item_id: itemId,
                         found_track: clazz
@@ -446,6 +446,8 @@
                         if (data.status == 'ok') {
                             $('#' + itemId).parent().parent().hide();
                             window.location.reload();
+                        }else if(data.status=='error'){
+                            alert(data.error);
                         }
                     });
         });
@@ -453,6 +455,8 @@
 //        alert($('#pages li').eq(-2).remove());
 
     });
+
+
 
 </script>
 

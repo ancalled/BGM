@@ -70,9 +70,9 @@ public class UploadReportServlet extends HttpServlet {
 
             HttpSession session = req.getSession();
             AdminUser admin = (AdminUser) session.getAttribute("admin");
-            String customerIdStr = getSimpleParameter("customer-id", fields);
-            String dateStr = getSimpleParameter("dt", fields);
-            String repType = getSimpleParameter("repType", fields);
+            String customerIdStr = getParam(fields, "customer-id");
+            String dateStr = getParam(fields, "dt");
+            String repType = getParam(fields, "repType");
 
             long customerId = Long.parseLong(customerIdStr);
 
@@ -106,12 +106,14 @@ public class UploadReportServlet extends HttpServlet {
             CustomerReport report = new CustomerReport();
 
             List<CustomerReportItem> parsed = new ArrayList<>();
-            fillItems(fields, report, parsed, reportType);
+
+                fillItems(fields, report, parsed, reportType);
+
 
             Date now = new Date();
 
             report.setCustomerId(customerId);
-
+            report.setStartDate(FORMAT.parse(dateStr));
             report.setUploadDate(now);
             report.setTracks(parsed.size());
             report.setType(reportType);
@@ -159,6 +161,8 @@ public class UploadReportServlet extends HttpServlet {
 
             resp.sendRedirect("/admin/view/report?id=" + reportId);
 
+        }catch (NumberFormatException ne){
+            resp.sendRedirect("/admin/view/reports?er=Wrong type");
         } catch (Exception e) {
             e.printStackTrace();
             resp.sendRedirect("/admin/view/reports?er=" + e.getMessage());
@@ -248,19 +252,21 @@ public class UploadReportServlet extends HttpServlet {
         item.write(reportFile);
     }
 
-    private String getSimpleParameter(String paramName, List<FileItem> fields) {
-        for (FileItem field : fields) {
+    private String getParam(List<FileItem> fields, String name) {
+        return getParam(fields, name, null);
+    }
 
-            if (field.isFormField()) {
 
-                String name = field.getFieldName();
-
-                if (name.equalsIgnoreCase(paramName)) {
-                    return field.getString();
+    private String getParam(List<FileItem> fields, String name, String defaultValue) {
+        for (FileItem item : fields) {
+            if (item.isFormField()) {
+                if (name.equals(item.getFieldName())) {
+                    return item.getString();
                 }
             }
         }
-        return "";
+
+        return defaultValue;
     }
 
 }

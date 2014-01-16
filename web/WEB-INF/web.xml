@@ -58,6 +58,7 @@
 
 
 
+
     <servlet>
         <servlet-name>adminSearchServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.SearchServlet</servlet-class>
@@ -198,6 +199,7 @@
         <url-pattern>/customer/*</url-pattern>
     </filter-mapping>
 
+    
 
     <servlet>
         <servlet-name>customerLoginServlet</servlet-name>
@@ -272,6 +274,14 @@
     <servlet>
         <servlet-name>checkUpdateStatus</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.CheckUpdateStatus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveFromReportServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.api.JsonRemoveFromReportServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>accReportServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.AcceptReportServlet</servlet-class>
     </servlet>
 
 
@@ -348,7 +358,14 @@
         <servlet-name>checkUpdateStatus</servlet-name>
         <url-pattern>admin/action/check-update-status</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>RemoveFromReportServlet</servlet-name>
+        <url-pattern>admin/api/remove-from-report</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>accReportServlet</servlet-name>
+        <url-pattern>admin/action/accept-report</url-pattern>
+    </servlet-mapping>
 
 
     <context-param>
