@@ -34,14 +34,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/CheckUpdateStatus.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/utils/TaskRunner.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/GetTempCompCountServlet.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/CatalogStorage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/UpdateCatalogServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/catalog.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bgm-platform.iws" />
@@ -1585,7 +1577,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Обновление каталогов" />
     <MESSAGE value="Потерялись js-ы" />
     <MESSAGE value="Поправки в утилите по поиску, добавлен поиск по авторам" />
     <MESSAGE value="Поправка в поиске, автор ИЛИ артист" />
@@ -1610,7 +1601,8 @@
     <MESSAGE value="Поправочки" />
     <MESSAGE value="Доработал выгрузка каталога в csv" />
     <MESSAGE value="Обновления каталога&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Обновления каталога&#10;" />
+    <MESSAGE value="Обновления каталога в бэкграунде&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Обновления каталога в бэкграунде&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
