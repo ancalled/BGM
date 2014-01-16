@@ -39,6 +39,7 @@
     </filter-mapping>
 
 
+    
 
 
     <servlet>
@@ -277,6 +278,10 @@
         <servlet-name>checkApplyStatus</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.CheckApplyUpdateStatus</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>calculateReportServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.CalculateReportServlet</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -356,7 +361,10 @@
         <servlet-name>checkApplyStatus</servlet-name>
         <url-pattern>admin/action/check-apply-status</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>calculateReportServlet</servlet-name>
+        <url-pattern>admin/action/calculate-report</url-pattern>
+    </servlet-mapping>
 
 
     <context-param>

@@ -129,6 +129,18 @@ public class DispatcherServlet extends HttpServlet {
                 };
                 break;
 
+            case "/report-calculator":
+                action = new Action() {
+                    @Override
+                    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+                        List<Platform> platforms = catalogStorage.getAllPlatforms();
+                        req.setAttribute("platforms",platforms);
+
+                        return "report-calculator";
+                    }
+                };
+                break;
+
             case "/report-upload-result":
                 action = new Action() {
                     @Override

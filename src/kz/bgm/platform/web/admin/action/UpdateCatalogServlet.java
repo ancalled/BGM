@@ -3,6 +3,7 @@ package kz.bgm.platform.web.admin.action;
 import kz.bgm.platform.model.domain.CatalogUpdate;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
+import kz.bgm.platform.utils.JsonUtils;
 import kz.bgm.platform.utils.TaskRunner;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -65,7 +66,7 @@ public class UpdateCatalogServlet extends HttpServlet {
                 return;
             }
 
-            String catIdStr = getParam(fields, "catId");
+            String catIdStr = JsonUtils.getParam(fields, "catId");
             if (catIdStr == null) {
                 errorNoFileReport(out, jsonObj);
                 return;
@@ -90,11 +91,11 @@ public class UpdateCatalogServlet extends HttpServlet {
             update.setCatalogId(catalogId);
             update.setFilePath(updateFile.getAbsolutePath());
             update.setFileName(updateFile.getName());
-            update.setEncoding(getParam(fields, "enc", DEFAULT_ENCODING));
-            update.setSeparator(getParam(fields, "fs", DEFAULT_FIELD_SEPARATOR));
-            update.setEnclosedBy(getParam(fields, "eb", DEFAULT_ENCLOSED_BY));
-            update.setNewline(getParam(fields, "nl", DEFAULT_NEWLINE));
-            update.setFromLine(Integer.parseInt(getParam(fields, "fl",
+            update.setEncoding(JsonUtils.getParam(fields, "enc", DEFAULT_ENCODING));
+            update.setSeparator(JsonUtils.getParam(fields, "fs", DEFAULT_FIELD_SEPARATOR));
+            update.setEnclosedBy(JsonUtils.getParam(fields, "eb", DEFAULT_ENCLOSED_BY));
+            update.setNewline(JsonUtils.getParam(fields, "nl", DEFAULT_NEWLINE));
+            update.setFromLine(Integer.parseInt(JsonUtils.getParam(fields, "fl",
                     Integer.toString(DEFAULT_FROM_LINE))));
 
             log.info("Got catalog updates " + fileItem.getName());
@@ -134,26 +135,6 @@ public class UpdateCatalogServlet extends HttpServlet {
 
         return null;
     }
-
-
-
-    private String getParam(List<FileItem> fields, String name) {
-        return getParam(fields, name, null);
-    }
-
-
-    private String getParam(List<FileItem> fields, String name, String defaultValue) {
-        for (FileItem item : fields) {
-            if (item.isFormField()) {
-                if (name.equals(item.getFieldName())) {
-                    return item.getString();
-                }
-            }
-        }
-
-        return defaultValue;
-    }
-
 
     private void saveToFile(FileItem item, File reportFile) throws Exception {
         log.info("Saving upload to " + reportFile.getAbsolutePath());
