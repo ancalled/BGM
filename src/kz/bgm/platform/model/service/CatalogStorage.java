@@ -120,7 +120,11 @@ public interface CatalogStorage {
 
     List<Track> getNewTracks(long updateId, int from, final int size);
 
-    void applyCatalogUpdate(long updateId);
+    void applyCatalogUpdateStep1(long updateId);
+
+    void applyCatalogUpdateStep2(long updateId);
+
+    void applyCatalogUpdateStep3(long updateId);
 
     List<Track> getUpdates(final long updateId);
 

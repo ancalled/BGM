@@ -60,7 +60,6 @@ public class UpdateCatalogServlet extends HttpServlet {
         try {
             List<FileItem> fields = fileUploader.parseRequest(req);
             if (fields == null) {
-//                resp.sendRedirect(RESULT_URL + "?er=no-file-reports-uploaded");
                 log.warn("No multipart fields found");
                 errorNoFileReport(out, jsonObj);
                 return;
@@ -76,7 +75,6 @@ public class UpdateCatalogServlet extends HttpServlet {
             FileItem fileItem = getFileItem(fields);
 
             if (fileItem == null) {
-//                resp.sendRedirect(RESULT_URL + "?er=no-file-reports-uploaded");
                 errorNoFileReport(out, jsonObj);
                 return;
             }
@@ -101,42 +99,9 @@ public class UpdateCatalogServlet extends HttpServlet {
 
             log.info("Got catalog updates " + fileItem.getName());
 
-//            log.debug("Resetting temp table");
-//            storage.resetTempTrackTable();
             update = storage.saveCatalogUpdate(update);
 
             taskRunner.submit("update-task-" + update.getId(), new UpdateTask(update, storage));
-
-//            log.debug("Loading csv to temp table...");
-//            update = storage.updateCatalog(update);
-//
-//            log.debug("Got result: " + update.getStatus());
-//
-//            if (update.getStatus() == Status.HAS_WARNINGS) {
-//                int i = 0;
-//                JSONArray jsonAr = new JSONArray();
-//                for (UpdateWarning wrn : update.getWarnings()) {
-//                    JSONObject jsnWrn = new JSONObject();
-//                    jsnWrn.put("number", wrn.getNumber());
-//                    jsnWrn.put("column", wrn.getColumn());
-//                    jsnWrn.put("row", wrn.getRow());
-//                    jsnWrn.put("message", wrn.getMessage());
-//                    jsonAr.add(jsnWrn);
-//
-//                    if (i++ < 10) {
-//                        log.warn("#" + wrn.getRow() + " at " + wrn.getColumn() + ": " + wrn.getMessage());
-//                    }
-//                }
-//
-//                jsonObj.put("warningsList", jsonAr);
-//            }
-//
-////            resp.sendRedirect(RESULT_URL);
-//            jsonObj.put("id", update.getId());
-//            jsonObj.put("status", update.getStatus() == Status.OK ? "ok" : "warn");
-//            jsonObj.put("redirect", RESULT_URL + "?id=" + update.getId());
-//            jsonObj.writeJSONString(out);
-
 
             jsonObj.put("status", "ok");
             jsonObj.put("uid", update.getId());

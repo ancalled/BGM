@@ -320,13 +320,8 @@ $(document).ready(function () {
 
             if (data.result.status == 'ok') {
                 $('#status-bar').html("<strong>Файл загружен на сервер, идет обработка...</strong>");
-
-//                    if (!(typeof data.result.uid === "undefined")) {
                 var updateId = data.result.uid;
-//                    console.log('File uploaded. Starting periodical updates, updateId: ' + updateId)
                 startTaskStatusChecker(updateId);
-//                    }
-//                    window.location.href = data.result.redirect;
 
             } else if (data.result.status == 'warn') {
                 $.each(data.result.warningsList, function (index, wrn) {
@@ -419,7 +414,6 @@ function startTaskStatusChecker(updateId) {
             data: {'uid': updateId},
 
             success: function (data) {
-                console.log(data);
                 if (data.status == 'found') {
                     var taskStatus = data.taskStatus;
                     console.log('Got task-status: ' + taskStatus);

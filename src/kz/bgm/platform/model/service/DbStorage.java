@@ -1621,7 +1621,7 @@ public class DbStorage implements CatalogStorage {
 
 
     @Override
-    public void applyCatalogUpdate(final long updateId) {
+    public void applyCatalogUpdateStep1(final long updateId) {
         query(new Action<Object>() {
             @Override
             public Object execute(Connection con) throws SQLException {
@@ -1640,9 +1640,19 @@ public class DbStorage implements CatalogStorage {
                 );
                 stmt1.setLong(1, updateId);
                 stmt1.executeUpdate();
+                return null;
+            }
+        });
+
+    }
 
 
-                PreparedStatement stmt2 = con.prepareStatement(
+    @Override
+    public void applyCatalogUpdateStep2(final long updateId) {
+        query(new Action<Object>() {
+            @Override
+            public Object execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
                         "INSERT INTO composition (code, name, composer, artist, shareMobile, sharePublic, catalog_id)\n" +
                                 "  SELECT\n" +
                                 "    code,\n" +
@@ -1655,11 +1665,22 @@ public class DbStorage implements CatalogStorage {
                                 "  FROM comp_tmp\n" +
                                 "  WHERE done IS null AND update_id = ?"
                 );
-                stmt2.setLong(1, updateId);
-                stmt2.executeUpdate();
+                stmt.setLong(1, updateId);
+                stmt.executeUpdate();
+                return null;
+            }
+        });
+
+    }
+
+    @Override
+    public void applyCatalogUpdateStep3(final long updateId) {
+        query(new Action<Object>() {
+            @Override
+            public Object execute(Connection con) throws SQLException {
 
                 PreparedStatement stmt3 = con.prepareStatement(
-                        "UPDATE  catalog_update SET applied = TRUE WHERE id = ?"
+                        "UPDATE catalog_update SET applied = TRUE WHERE id = ?"
                 );
                 stmt3.setLong(1, updateId);
                 stmt3.executeUpdate();

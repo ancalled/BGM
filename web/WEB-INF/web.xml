@@ -273,6 +273,10 @@
         <servlet-name>checkUpdateStatus</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.CheckUpdateStatus</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>checkApplyStatus</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.CheckApplyUpdateStatus</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -347,6 +351,10 @@
     <servlet-mapping>
         <servlet-name>checkUpdateStatus</servlet-name>
         <url-pattern>admin/action/check-update-status</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>checkApplyStatus</servlet-name>
+        <url-pattern>admin/action/check-apply-status</url-pattern>
     </servlet-mapping>
 
 

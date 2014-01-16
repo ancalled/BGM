@@ -51,6 +51,15 @@
             overflow: scroll;
         }
 
+
+        #progress {
+            width: 300px;
+        }
+
+        .bar {
+            height: 10px;
+            background: green;
+        }
     </style>
 </head>
 <body>
@@ -85,11 +94,17 @@
                     </c:when>
                     <c:otherwise>
                         <%--<c:if test="${update.status == 'OK'}">--%>
-                        <form action="../action/apply-catalog-update" method="post">
-                            <input class="btn btn-small btn-primary apply-btn" type="submit"
-                                   value="Применить!">
+                        <%--<form action="../action/apply-catalog-update" method="post">--%>
+                            <%--<input class="btn btn-small btn-primary apply-btn" type="submit"--%>
+                                   <%--value="Применить!"> --%>
+                            <button id="apply-submit-btn" class="btn btn-small btn-primary apply-btn">Применить!</button>
                             <input type="hidden" name="id" value="${update.id}">
-                        </form>
+
+                            <div id="progress" class="progress progress-success progress-striped">
+                                <div class="bar" style="width: 0%;"></div>
+                            </div>
+                            <div id="status-bar"></div>
+                        <%--</form>--%>
                         <%--</c:if>--%>
                     </c:otherwise>
                 </c:choose>
@@ -464,21 +479,11 @@
         <tr>
                 <%--<td class="invariant">${d.number + 1}</td>--%>
             <td class="invariant">${d.code}</td>
-            <td>
-                    ${d.name}
-            </td>
-            <td>
-                    ${d.artist}
-            </td>
-            <td>
-                    ${d.composer}
-            </td>
-            <td>
-                    ${d.mobileShare}
-            </td>
-            <td>
-                    ${d.publicShare}
-            </td>
+            <td>${d.name}</td>
+            <td>${d.artist}</td>
+            <td>${d.composer}</td>
+            <td>${d.mobileShare}</td>
+            <td>${d.publicShare}</td>
         </tr>
     </c:forEach>
 
@@ -573,6 +578,95 @@
 
 <c:import url="footer.jsp"/>
 
+
+<script>
+    var updateId = ${update.id}; //inline during page generation
+
+    $(document).ready(function () {
+        $('#apply-submit-btn').click(function() {
+            $.ajax({
+                url: '/admin/action/apply-catalog-update',
+                dataType: 'json',
+                method: 'post',
+                async: 'true',
+                data: {'uid': updateId},
+
+                success: function (data) {
+                    if (data.status = 'ok') {
+                        $('#status-bar').html("<strong>Загруженные изменения применяются к каталогу...</strong>");
+                        startTaskStatusChecker(updateId);
+                    }
+                },
+
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('Got error: ' + textStatus + ', ' + errorThrown);
+                    $('#status-bar').html("<strong>Ошибка!</strong>");
+                }
+            });
+        });
+
+    });
+
+
+
+    function startTaskStatusChecker(updateId) {
+        var stop = false;
+        (function worker() {
+            $.ajax({
+                url: '/admin/action/check-apply-status',
+                dataType: 'json',
+                method: 'get',
+                async: 'true',
+                data: {'uid': updateId},
+
+                success: function (data) {
+                    if (data.status == 'found') {
+                        var taskStatus = data.taskStatus;
+                        console.log('Got task-status: ' + taskStatus);
+
+                        if (taskStatus == 'APPLY_CATALOG_STEP1') {
+
+                        } else if (taskStatus == 'APPLY_CATALOG_STEP2') {
+                            $('#status-bar').html("<strong>Загруженные изменения применяются к каталогу...</strong>");
+                            $('#progress .bar').css('width', '25%');
+
+                        } else if (taskStatus == 'APPLY_CATALOG_STEP3') {
+                            $('#status-bar').html("<strong>Загруженные изменения применяются к каталогу...</strong>");
+                            $('#progress .bar').css('width', '50%');
+
+                        } else if (taskStatus == 'INDEX_REBUILD') {
+                            $('#status-bar').html("<strong>Загруженные изменения применяются к каталогу...</strong>");
+                            $('#progress .bar').css('width', '75%');
+
+                        } else if (taskStatus == 'FINISHED') {
+                            $('#status-bar').html("<strong>Обновление закончено.</strong>");
+                            stop = true;
+                            $('#progress .bar').css('width', '100%');
+                            $('#apply-submit-btn').remove();
+
+//                            window.location.href = '/admin/view/catalog?id=' + catId;
+                        }
+                    } else {
+                        $('#status-bar').html("<strong>Задача " + updateId + " не найдена!</strong>");
+                        stop = true;
+                    }
+
+                },
+                complete: function () {
+                    // Schedule the next request when the current one's complete
+                    if (!stop) {
+                        setTimeout(worker, 2000);
+                    }
+                },
+
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                    stop = true;
+                }
+            });
+        })();
+    }
+</script>
 
 </body>
 </html>
