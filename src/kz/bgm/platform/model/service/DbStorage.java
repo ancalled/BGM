@@ -1,6 +1,7 @@
 package kz.bgm.platform.model.service;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import javafx.stage.Stage;
 import kz.bgm.platform.model.domain.*;
 import org.apache.log4j.Logger;
 
@@ -24,7 +25,6 @@ public class DbStorage implements CatalogStorage {
     public static final int MAX_POOL_SIZE = 10;
 
 
-    public static final AtomicBoolean catalogLoading = new AtomicBoolean(false);
 
     private final ComboPooledDataSource pool;
 
@@ -38,9 +38,6 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-    public boolean isCatalogLoading() {
-        return catalogLoading.get();
-    }
 
     public void saveTracks(final List<Track> tracks, final String catalog) {
         final int catId = getCatalogId(catalog);
@@ -1370,54 +1367,10 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-    public void resetTempTrackTable() {
-        query(new Action<Object>() {
-            @Override
-            public Object execute(Connection con) throws SQLException {
-
-                //create a clone structure as composition
-//                con.createStatement().executeUpdate(
-//                        "CREATE TABLE IF NOT EXISTS comp_tmp LIKE composition"
-//                );
-//
-//                //add additional `done`-field
-//                con.createStatement().executeUpdate(
-//                        "ALTER TABLE comp_tmp ADD done TINYINT NULL"
-//                );
-
-                //clear all data if remain
-                con.createStatement().executeUpdate(
-                        "DELETE FROM comp_tmp"
-                );
-
-                return null;
-            }
-        });
-    }
-
-    @Override
-    public long getLastCatalogUpdateId() {
-        return query(new Action<Long>() {
-            @Override
-            public Long execute(Connection con) throws SQLException {
-
-                PreparedStatement ps =
-                        con.prepareStatement("SELECT max(id)id FROM catalog_update");
-                ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    return rs.getLong("id");
-                }
-                return null;
-            }
-        });
-
-    }
-
-    public CatalogUpdate updateCatalog(final CatalogUpdate update) {
+    public CatalogUpdate saveCatalogUpdate(final CatalogUpdate update) {
         return query(new Action<CatalogUpdate>() {
             @Override
             public CatalogUpdate execute(Connection con) throws SQLException {
-                catalogLoading.set(true);
 
                 PreparedStatement ps =
                         con.prepareStatement(
@@ -1436,6 +1389,20 @@ public class DbStorage implements CatalogStorage {
                 long updateId = rs.getLong(1);
 
                 update.setId(updateId);
+
+
+                return update;
+            }
+        });
+    }
+
+
+
+
+    public CatalogUpdate loadCatalogUpdateIntoTmpTable(final CatalogUpdate update) {
+        return query(new Action<CatalogUpdate>() {
+            @Override
+            public CatalogUpdate execute(Connection con) throws SQLException {
 
                 //create a clone structure as composition
                 PreparedStatement stmt = con.prepareStatement(
@@ -1459,14 +1426,14 @@ public class DbStorage implements CatalogStorage {
                 stmt.setString(4, update.getEnclosedBy());
                 stmt.setString(5, update.getNewline());
                 stmt.setInt(6, update.getFromLine());
-                stmt.setLong(7, updateId);
+                stmt.setLong(7, update.getId());
                 stmt.setLong(8, update.getCatalogId());
 
                 stmt.execute();
 
                 // Check for errors...
 
-                rs = con.createStatement().executeQuery("SHOW WARNINGS");
+                ResultSet rs = con.createStatement().executeQuery("SHOW WARNINGS");
 
                 Status st = Status.OK;
                 while (rs.next()) {
@@ -1481,7 +1448,18 @@ public class DbStorage implements CatalogStorage {
                 }
                 update.setStatus(st);
 
-                ps = con.prepareStatement(
+                return update;
+            }
+        });
+    }
+
+
+    public CatalogUpdate caclCatalogUpdateStats(final long updateId, final Status st) {
+        return query(new Action<CatalogUpdate>() {
+            @Override
+            public CatalogUpdate execute(Connection con) throws SQLException {
+
+                PreparedStatement ps = con.prepareStatement(
                         "UPDATE catalog_update u " +
                                 "SET status = ?," +
                                 "tracks = (SELECT count(*) FROM comp_tmp WHERE update_id = u.id), " +
@@ -1496,72 +1474,7 @@ public class DbStorage implements CatalogStorage {
                 ps.setLong(2, updateId);
 
                 ps.executeUpdate();
-
-                catalogLoading.set(false);
-                return update;
-            }
-        });
-    }
-
-
-    public int getTempCompCount() {
-        return query(new Action<Integer>() {
-            @Override
-            public Integer execute(Connection con) throws SQLException {
-
-                PreparedStatement ps =
-                        con.prepareStatement("SELECT count(*)c FROM comp_tmp");
-                ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    return rs.getInt("c");
-                }
                 return null;
-            }
-        });
-    }
-
-//    public String getQueryProcessTime(final long queryProcessId) {
-//        return query(new Action<String>() {
-//            @Override
-//            public String execute(Connection con) throws SQLException {
-//                PreparedStatement stmt = con.prepareStatement(
-//                        "SELECT time FROM INFORMATION_SCHEMA.PROCESSLIST WHERE info LIKE '%@proc_id = " + queryId + "%'");
-//
-//                stmt.execute();
-//                ResultSet rs = stmt.getResultSet();
-//                if (rs.next()) {
-//                    return rs.getString(1);
-//                }
-//
-//                return null;
-//            }
-//        });
-//    }
-
-    public Long saveCatalogUpdate(final CatalogUpdate update) {
-        return query(new Action<Long>() {
-            @Override
-            public Long execute(Connection con) throws SQLException {
-                PreparedStatement ps =
-                        con.prepareStatement(
-                                "INSERT INTO catalog_update(whenUpdated, catalog_id, status, tracks, crossing, applied, filepath, filename) " +
-                                        "VALUES (?,?,?,?,?,?,?,?)",
-                                Statement.RETURN_GENERATED_KEYS);
-
-                ps.setDate(1, new java.sql.Date(update.getWhenUpdated().getTime()));
-                ps.setLong(2, update.getCatalogId());
-                ps.setString(3, update.getStatus().toString());
-                ps.setInt(4, update.getTracks());
-                ps.setInt(5, update.getCrossing());
-                ps.setBoolean(6, update.isApplied());
-                ps.setString(7, update.getFilePath());
-                ps.setString(8, update.getFileName());
-
-
-                ps.executeUpdate();
-
-                ResultSet rs = ps.getGeneratedKeys();
-                return rs.next() ? rs.getLong(1) : -1;
             }
         });
     }

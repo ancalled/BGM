@@ -258,10 +258,6 @@
         <servlet-class>kz.bgm.platform.web.admin.action.EditTrackServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>catalogIdServlet</servlet-name>
-        <servlet-class>kz.bgm.platform.web.admin.action.GetTempCompCountServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>uploadReports</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.UploadReportServlet</servlet-class>
     </servlet>
@@ -272,6 +268,10 @@
     <servlet>
         <servlet-name>massSearch</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.MassSearchServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>checkUpdateStatus</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.CheckUpdateStatus</servlet-class>
     </servlet>
 
 
@@ -333,10 +333,6 @@
         <url-pattern>admin/action/update-track</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>catalogIdServlet</servlet-name>
-        <url-pattern>admin/action/get-id</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>uploadReports</servlet-name>
         <url-pattern>admin/action/upload-report</url-pattern>
     </servlet-mapping>
@@ -347,6 +343,10 @@
     <servlet-mapping>
         <servlet-name>massSearch</servlet-name>
         <url-pattern>admin/action/mass-search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>checkUpdateStatus</servlet-name>
+        <url-pattern>admin/action/check-update-status</url-pattern>
     </servlet-mapping>
 
 

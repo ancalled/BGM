@@ -23,7 +23,7 @@ public interface CatalogStorage {
 
     List<Long> getAllCatalogIds();
 
-    boolean isCatalogLoading();
+
 
     List<Catalog> getCatalogsByPlatform(long catId);
 
@@ -99,8 +99,6 @@ public interface CatalogStorage {
 
     List<CalculatedReportItem> calculateMobileReport(String platform, Date from, Date to);
 
-    long getLastCatalogUpdateId();
-
     long createUser(User user);
 
     long createCustomer(Customer customer);
@@ -109,13 +107,14 @@ public interface CatalogStorage {
 
     void removeCustomer(long id);
 
-    int getTempCompCount();
 
-    void resetTempTrackTable();
+    CatalogUpdate saveCatalogUpdate(CatalogUpdate update);
 
-    CatalogUpdate updateCatalog(CatalogUpdate update);
+    CatalogUpdate loadCatalogUpdateIntoTmpTable(CatalogUpdate update);
 
-    Long saveCatalogUpdate(CatalogUpdate update);
+    public CatalogUpdate caclCatalogUpdateStats(long updateId, CatalogUpdate.Status st);
+
+
 
     List<TrackDiff> geChangedTracks(long updateId, int from, final int size);
 

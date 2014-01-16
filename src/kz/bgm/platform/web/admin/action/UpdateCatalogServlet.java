@@ -1,14 +1,13 @@
 package kz.bgm.platform.web.admin.action;
 
 import kz.bgm.platform.model.domain.CatalogUpdate;
-import kz.bgm.platform.model.domain.UpdateWarning;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
+import kz.bgm.platform.utils.TaskRunner;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import javax.servlet.ServletException;
@@ -19,8 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-
-import static kz.bgm.platform.model.domain.CatalogUpdate.Status;
+import java.util.Random;
 
 public class UpdateCatalogServlet extends HttpServlet {
 
@@ -32,14 +30,21 @@ public class UpdateCatalogServlet extends HttpServlet {
 
 
     private static final Logger log = Logger.getLogger(UpdateCatalogServlet.class);
+    public static final String DEFAULT_ENCODING = "utf8";
+    public static final String DEFAULT_FIELD_SEPARATOR = ";";
+    public static final String DEFAULT_ENCLOSED_BY = "\"";
+    public static final String DEFAULT_NEWLINE = "\n";
+    public static final int DEFAULT_FROM_LINE = 1;
 
     private ServletFileUpload fileUploader;
     private CatalogStorage storage;
+    private TaskRunner taskRunner;
 
     @Override
     public void init() throws ServletException {
         storage = CatalogFactory.getStorage();
         fileUploader = new ServletFileUpload(new DiskFileItemFactory());
+        taskRunner = TaskRunner.getInstance();
     }
 
 
@@ -61,65 +66,81 @@ public class UpdateCatalogServlet extends HttpServlet {
                 return;
             }
 
+            String catIdStr = getParam(fields, "catId");
+            if (catIdStr == null) {
+                errorNoFileReport(out, jsonObj);
+                return;
+            }
 
-            Long catalogId = getCatalogId(fields);
-            FileItem item = getFileItem(fields);
+            Long catalogId = Long.parseLong(catIdStr);
+            FileItem fileItem = getFileItem(fields);
 
-            if (catalogId == null || item == null) {
+            if (fileItem == null) {
 //                resp.sendRedirect(RESULT_URL + "?er=no-file-reports-uploaded");
                 errorNoFileReport(out, jsonObj);
                 return;
             }
 
-            String updateFileName = CATALOG_UPDATES_HOME + "/" + item.getName();
+            String updateFileName = CATALOG_UPDATES_HOME + "/" + fileItem.getName();
+            if (updateFileName.isEmpty()) {
+                updateFileName = "tmp_file_" + new Random().nextInt(100000);
+            }
             File updateFile = new File(updateFileName);
-            saveToFile(item, updateFile);
+            saveToFile(fileItem, updateFile);
 
             CatalogUpdate update = new CatalogUpdate();
             update.setCatalogId(catalogId);
             update.setFilePath(updateFile.getAbsolutePath());
             update.setFileName(updateFile.getName());
-            update.setEncoding("utf8");
-            update.setSeparator(";");
-            update.setEnclosedBy("\"");
-            update.setNewline("\n");
-            update.setFromLine(1);
+            update.setEncoding(getParam(fields, "enc", DEFAULT_ENCODING));
+            update.setSeparator(getParam(fields, "fs", DEFAULT_FIELD_SEPARATOR));
+            update.setEnclosedBy(getParam(fields, "eb", DEFAULT_ENCLOSED_BY));
+            update.setNewline(getParam(fields, "nl", DEFAULT_NEWLINE));
+            update.setFromLine(Integer.parseInt(getParam(fields, "fl",
+                    Integer.toString(DEFAULT_FROM_LINE))));
 
-            log.info("Got catalog updates " + item.getName());
+            log.info("Got catalog updates " + fileItem.getName());
 
 //            log.debug("Resetting temp table");
 //            storage.resetTempTrackTable();
+            update = storage.saveCatalogUpdate(update);
 
-            log.debug("Loading csv to temp table...");
-            update = storage.updateCatalog(update);
+            taskRunner.submit("update-task-" + update.getId(), new UpdateTask(update, storage));
 
-            log.debug("Got result: " + update.getStatus());
+//            log.debug("Loading csv to temp table...");
+//            update = storage.updateCatalog(update);
+//
+//            log.debug("Got result: " + update.getStatus());
+//
+//            if (update.getStatus() == Status.HAS_WARNINGS) {
+//                int i = 0;
+//                JSONArray jsonAr = new JSONArray();
+//                for (UpdateWarning wrn : update.getWarnings()) {
+//                    JSONObject jsnWrn = new JSONObject();
+//                    jsnWrn.put("number", wrn.getNumber());
+//                    jsnWrn.put("column", wrn.getColumn());
+//                    jsnWrn.put("row", wrn.getRow());
+//                    jsnWrn.put("message", wrn.getMessage());
+//                    jsonAr.add(jsnWrn);
+//
+//                    if (i++ < 10) {
+//                        log.warn("#" + wrn.getRow() + " at " + wrn.getColumn() + ": " + wrn.getMessage());
+//                    }
+//                }
+//
+//                jsonObj.put("warningsList", jsonAr);
+//            }
+//
+////            resp.sendRedirect(RESULT_URL);
+//            jsonObj.put("id", update.getId());
+//            jsonObj.put("status", update.getStatus() == Status.OK ? "ok" : "warn");
+//            jsonObj.put("redirect", RESULT_URL + "?id=" + update.getId());
+//            jsonObj.writeJSONString(out);
 
-            if (update.getStatus() == Status.HAS_WARNINGS) {
-                int i = 0;
-                JSONArray jsonAr = new JSONArray();
-                for (UpdateWarning wrn : update.getWarnings()) {
-                    JSONObject jsnWrn = new JSONObject();
-                    jsnWrn.put("number", wrn.getNumber());
-                    jsnWrn.put("column", wrn.getColumn());
-                    jsnWrn.put("row", wrn.getRow());
-                    jsnWrn.put("message", wrn.getMessage());
-                    jsonAr.add(jsnWrn);
 
-                    if (i++ < 10) {
-                        log.warn("#" + wrn.getRow() + " at " + wrn.getColumn() + ": " + wrn.getMessage());
-                    }
-                }
-
-                jsonObj.put("warningsList", jsonAr);
-            }
-
-//            resp.sendRedirect(RESULT_URL);
-            jsonObj.put("id", update.getId());
-            jsonObj.put("status", update.getStatus() == Status.OK ? "ok" : "warn");
-            jsonObj.put("redirect", RESULT_URL + "?id=" + update.getId());
+            jsonObj.put("status", "ok");
+            jsonObj.put("uid", update.getId());
             jsonObj.writeJSONString(out);
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,6 +152,7 @@ public class UpdateCatalogServlet extends HttpServlet {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private void errorNoFileReport(PrintWriter out, JSONObject jsonObj) throws IOException {
         jsonObj.put("status", "error");
         jsonObj.put("er", "no-file-reports-uploaded");
@@ -148,16 +170,23 @@ public class UpdateCatalogServlet extends HttpServlet {
         return null;
     }
 
-    private Long getCatalogId(List<FileItem> fields) {
+
+
+    private String getParam(List<FileItem> fields, String name) {
+        return getParam(fields, name, null);
+    }
+
+
+    private String getParam(List<FileItem> fields, String name, String defaultValue) {
         for (FileItem item : fields) {
             if (item.isFormField()) {
-                if ("catId".equals(item.getFieldName())) {
-                    return Long.parseLong(item.getString());
+                if (name.equals(item.getFieldName())) {
+                    return item.getString();
                 }
             }
         }
 
-        return null;
+        return defaultValue;
     }
 
 
@@ -171,6 +200,37 @@ public class UpdateCatalogServlet extends HttpServlet {
         item.write(reportFile);
     }
 
+    public static enum UpdateStatus {
+        FILE_UPLOADED,
+        SQL_LOAD_COMPLETE,
+        UPDATE_STATISTICS_FINISHED
+    }
+
+    public static class UpdateTask extends TaskRunner.Task<UpdateStatus> {
+
+        private final CatalogUpdate update;
+        private final CatalogStorage storage;
+
+        private UpdateTask(CatalogUpdate update, CatalogStorage storage) {
+            this.update = update;
+            this.storage = storage;
+        }
+
+        @Override
+        public Object call() throws Exception {
+            log.debug("Starting update catalog...");
+            changeStatus(UpdateStatus.FILE_UPLOADED);
+            CatalogUpdate updateResult = storage.loadCatalogUpdateIntoTmpTable(update);
+
+            log.debug("Load complete, calc stats...");
+            changeStatus(UpdateStatus.SQL_LOAD_COMPLETE);
+            storage.caclCatalogUpdateStats(update.getId(), updateResult.getStatus());
+
+            log.debug("Stat calc complete.");
+            changeStatus(UpdateStatus.UPDATE_STATISTICS_FINISHED);
+            return null;
+        }
+    }
 }
 
 
