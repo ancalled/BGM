@@ -271,7 +271,6 @@ public class ReportBuilder {
         switch (type) {
             case "mobile":
                 items = storage.calculateMobileReport(platform, from, to);
-
                 break;
             case "public":
                 items = storage.calculatePublicReport(platform, from, to);

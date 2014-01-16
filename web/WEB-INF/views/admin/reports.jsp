@@ -39,10 +39,11 @@
 
             <label>
                 Пользователь <br>
-                <select name="selector" id="customer">
+                <select name="customer-id" id="customer">
 
-                    <c:forEach var="c" items="${customers}" varStatus="s" >
-                        <option class="${c.name}" value="${s.index}" id="${c.id}">${c.name}</option>
+                    <c:forEach var="c" items="${customers}" varStatus="s">
+                        <option class="${c.name}" value="${c.id}"
+                                id="${c.id}" ${s.index==0?"selected":""}>${c.name}</option>
                     </c:forEach>
 
                 </select>
@@ -59,7 +60,6 @@
                 </select>
             </label>
 
-            <input type="hidden" name="customer-id" id="customer-id"/>
             <%--<input type="hidden" name="report-type" id="report-type"/>--%>
 
             <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -96,15 +96,36 @@
 
 
             <div class="row-fluid">
-                <input class="btn" type="submit" value="Отправить">
+                <input class="btn" type="submit" id="submitReport" value="Отправить">
             </div>
         </form>
+
+
+        <div>
+            <span>
+            Для загрузки отчета необходимо
+            подготовить файл отчета в формате excel, с разделителем полей ';'.
+            </span>
+        </div>
 
     </div>
 
 </div>
 
 <script>
+
+
+    $(document).ready(function () {
+        var erParam = getParam("er");
+        if (erParam == "Wrong type") {
+            alert("Вероятно указан не верный тип отчета");
+        }
+    });
+
+
+    //    window.onload(function () {
+    //         $('#submitReport').onclick(sendReport());
+    //    });
 
     $('#type-report-change').change(function () {
         var v = $(this).val();
@@ -126,8 +147,32 @@
     });
 
 
+    function sendReport() {
+        $.ajax({
+            url: "/admin/action/upload-report",
+            dataType: 'json',
+            method: 'post',
+            async: 'true',
+
+            data: {
+                'customer-id': $('#customer').val(),
+                'dt': $('#dt').val(),
+                'repType': $('#repType').val()
+            },
+            error: function () {
+                alert("Неудалось выгрузить каталог в файл" + $('#catName').val() + " .csv");
+            },
+            success: function (data) {
+                $("#file-link").append("<a href='" + data.path + "'>" +
+                        "<i class='icon-download-alt'></i>" + "Скачать " +
+                        $('#catName').val() + ".csv (" + Math.round(data.size / 1024 / 1024) + " Мб)" +
+                        "</a>");
+                $('#loading-gif').css('visibility', 'hidden');
+            }
+        });
+    }
+
     $('#customer').change(function () {
-                $('#customer-id').val(this.options[this.selectedIndex].id);
                 var customerType = $('#customer-' + this.options[this.selectedIndex].id).val();
                 if (customerType == 'MOBILE_AGGREGATOR') {
                     $('#repType').val('MOBILE_AGGREGATOR');
@@ -136,10 +181,10 @@
                 }
             }
     );
-//
-//    $('#repType').change(function(){
-//        $('#report-type').val(this.options[this.selectedIndex].id);
-//    });
+    //
+    //    $('#repType').change(function(){
+    //        $('#report-type').val(this.options[this.selectedIndex].id);
+    //    });
 
 
     var el = document.getElementById('date');
@@ -151,6 +196,14 @@
 
 
     //    $('#report-tab a:first').tab('show');
+
+
+    function getParam(name) {
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
 
 
 </script>
