@@ -93,12 +93,27 @@
 <script>
     var table = $('#table');
 
-    var colsCount = 7;
     table.handsontable({
-        width: 800,
+        width: 900,
+        readOnly: true,
         height: 500,
         font: "Arial",
-        colHeaders: ["Кол-во", "Доля", "Вид объекта", "Сумма", "Исполнитель", "Стоимость", "Вознаграждение", "Каталог"],
+        colHeaders: ["Код",
+            "Трек",
+            "Исполнитель",
+            "Композитор",
+            "Тип контента",
+            "Цена",
+            "Кол-во",
+            "Объем",
+            "Моб.доля",
+            "Публ.доля",
+            "Доля пользователя",
+            "Доля каталога",
+            "Вознаграждение",
+            "Каталог",
+            "права"
+        ],
 //        colWidths: [65, 47, 47, 47, 47, 47, 47, 47, 47, 47],
         rowHeaders: true,
 //        fixedRowsTop: 2,
@@ -136,28 +151,27 @@
                 table.css('visibility', 'visible');
 
                 var rows = [];
-                for (var i = 0; resp.report_items.length; i++) {
+                for (var i = 0; i < resp.report_items.length; i++) {
 
                     var row = [];
 
-                    row.push(resp.report_items[i].qty);
-
-                    if (resp.type == 'mobile') {
-                        row.push(resp.report_items[i].share_mobile);
-                    } else if (resp.type == 'public') {
-                        row.push(resp.report_items[i].share_public);
-                    }
-
-                    row.push(resp.report_items[i].content_type);
-                    row.push(resp.report_items[i].vol);
+                    row.push(resp.report_items[i].code);
+                    row.push(resp.report_items[i].name);
                     row.push(resp.report_items[i].artist);
+                    row.push(resp.report_items[i].composer);
+                    row.push(resp.report_items[i].content_type);
                     row.push(resp.report_items[i].price);
+                    row.push(resp.report_items[i].qty);
+                    row.push(resp.report_items[i].vol);
+                    row.push(resp.report_items[i].share_mobile);
+                    row.push(resp.report_items[i].share_public);
+                    row.push(resp.report_items[i].cust_royal);
                     row.push(resp.report_items[i].cat_royal);
+                    row.push(resp.report_items[i].revenue);
                     row.push(resp.report_items[i].catalog);
+                    row.push(resp.report_items[i].copyright);
+
                     rows.push(row);
-                    if (i >= colsCount) {
-                        break;
-                    }
                 }
                 table.handsontable({data: rows});
             }
