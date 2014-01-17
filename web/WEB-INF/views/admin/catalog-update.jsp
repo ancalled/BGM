@@ -78,14 +78,30 @@
     <div class="apply-pane">
 
         <dl class="unstyled dl-horizontal">
-            <dt>Файл</dt>
+            <dt>Файл с обновлением</dt>
             <dd>${update.fileName}</dd>
-            <dt>Всего треков</dt>
-            <dd><fmt:formatNumber type="number" maxFractionDigits="3" value="${update.tracks}"/></dd>
-            <dt>Новых / измененных</dt>
-            <dd><fmt:formatNumber type="number" maxFractionDigits="3"
-                                  value="${update.tracks - update.crossing}"/> /
-                <fmt:formatNumber type="number" maxFractionDigits="3" value="${update.crossing}"/></dd>
+            <dt>Всего треков:</dt>
+            <dd>
+                <strong>
+                <fmt:formatNumber type="number" maxFractionDigits="3" value="${update.tracks}"/>
+                </strong>
+                /  <fmt:formatNumber type="number" maxFractionDigits="3" value="${catalog.tracks}"/> в каталоге
+            </dd>
+
+            <dt>Новых:</dt>
+            <dd><fmt:formatNumber type="number" maxFractionDigits="3" value="${update.newTracks}"/></dd>
+
+            <dt>Изменилось:</dt>
+            <dd><fmt:formatNumber type="number" maxFractionDigits="3" value="${update.changedTracks}"/></dd>
+
+            <dt>Сменилась доля у:</dt>
+            <dd><fmt:formatNumber type="number" maxFractionDigits="3" value="${update.rateChangedTracks}"/></dd>
+
+
+            <dt>Не изменились:</dt>
+            <dd><fmt:formatNumber type="number" maxFractionDigits="3" value="${update.crossing - update.changedTracks}"/></dd>
+
+
             <dt></dt>
             <dd>
                 <c:choose>

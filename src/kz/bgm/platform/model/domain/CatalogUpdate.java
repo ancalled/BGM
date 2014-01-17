@@ -30,6 +30,9 @@ public class CatalogUpdate {
     private Status status = Status.NONE;
     private int tracks = 0;
     private int crossing;
+    private int newTracks = 0;
+    private int changedTracks = 0;
+    private int rateChangedTracks = 0;
     private boolean applied = false;
 
     private final List<UpdateWarning> warnings = new ArrayList<>();
@@ -142,6 +145,30 @@ public class CatalogUpdate {
 
     public void setCrossing(int crossing) {
         this.crossing = crossing;
+    }
+
+    public int getNewTracks() {
+        return newTracks;
+    }
+
+    public void setNewTracks(int newTracks) {
+        this.newTracks = newTracks;
+    }
+
+    public int getChangedTracks() {
+        return changedTracks;
+    }
+
+    public void setChangedTracks(int changedTracks) {
+        this.changedTracks = changedTracks;
+    }
+
+    public int getRateChangedTracks() {
+        return rateChangedTracks;
+    }
+
+    public void setRateChangedTracks(int rateChangedTracks) {
+        this.rateChangedTracks = rateChangedTracks;
     }
 
     public void addWarning(UpdateWarning w) {

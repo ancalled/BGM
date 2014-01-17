@@ -94,15 +94,18 @@ ALTER TABLE comp_tmp ADD update_id INT NULL;
 
 
 CREATE TABLE catalog_update (
-  id          INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  whenUpdated DATETIME,
-  catalog_id  INT,
-  status      VARCHAR(30),
-  tracks      INT,
+  id                  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  whenUpdated         DATETIME,
+  catalog_id          INT,
+  status              VARCHAR(30),
+  tracks              INT,
   crossing    INT,
-  applied     BOOL,
-  filepath    VARCHAR(300),
-  filename    VARCHAR(100)
+  new_tracks          INT,
+  changed_tracks      INT,
+  rate_changed_tracks INT,
+  applied             BOOL,
+  filepath            VARCHAR(300),
+  filename            VARCHAR(100)
 );
 
 

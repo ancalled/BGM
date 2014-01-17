@@ -230,7 +230,7 @@ public class DispatcherServlet extends HttpServlet {
                             req.setAttribute("catalog", catalog);
 
 
-                            List<CatalogUpdate> updates = catalogStorage.getCatalogUpdates(catId);
+                            List<CatalogUpdate> updates = catalogStorage.getAllCatalogUpdates(catId);
                             req.setAttribute("updates", updates);
 
 //                            if (updates == null || updates.isEmpty()) {
@@ -321,7 +321,7 @@ public class DispatcherServlet extends HttpServlet {
 
                                     List<TrackDiff> diffs =
                                             catalogStorage.
-                                                    geChangedTracks(updateId, from, TRACKS_PER_PAGE);
+                                                    geChangedTracksOfCatalogUpdate(updateId, from, TRACKS_PER_PAGE);
                                     req.setAttribute("diffs", diffs);
 
                                 } else if ("tab2".equals(activeTabStr)) {
@@ -330,7 +330,7 @@ public class DispatcherServlet extends HttpServlet {
 
                                     List<Track> allNewTracks =
                                             catalogStorage.
-                                                    getNewTracks(updateId, fromNew, TRACKS_PER_PAGE);
+                                                    getNewTracksOfCatalogUpdate(updateId, fromNew, TRACKS_PER_PAGE);
 //                                                    getTempTracks(catalog.getId(), fromNew, TRACKS_PER_PAGE);
                                     req.setAttribute("tracks", allNewTracks);
 
@@ -340,12 +340,12 @@ public class DispatcherServlet extends HttpServlet {
 
                                     List<TrackDiff> diffs =
                                             catalogStorage.
-                                                    geChangedTracks(updateId, from, TRACKS_PER_PAGE);
+                                                    geChangedTracksOfCatalogUpdate(updateId, from, TRACKS_PER_PAGE);
                                     req.setAttribute("diffs", diffs);
 
                                     List<Track> allNewTracks =
                                             catalogStorage.
-                                                    getNewTracks(updateId, fromNew, TRACKS_PER_PAGE);
+                                                    getNewTracksOfCatalogUpdate(updateId, fromNew, TRACKS_PER_PAGE);
 //                                                    getTempTracks(catalog.getId(), fromNew, TRACKS_PER_PAGE);
                                     req.setAttribute("tracks", allNewTracks);
 

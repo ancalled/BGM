@@ -98,7 +98,7 @@ public class ApplyUpdateServlet extends HttpServlet {
 
             log.info("Get all new tracks for reindex");
             changeStatus(ApplyStatus.APPLY_CATALOG_STEP3);
-            List<Track> updatedTracks = storage.getUpdates(id);
+            List<Track> updatedTracks = storage.getAllTracksOfCatalogUpdate(id);
 
             log.info("Found " + updatedTracks.size() + " indexes. Rebuilding index for this tracks");
             LuceneIndexRebuildUtil.rebuildIndex(updatedTracks);

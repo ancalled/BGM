@@ -80,11 +80,11 @@ public class UpdateCatalogServlet extends HttpServlet {
                 return;
             }
 
-            String updateFileName = CATALOG_UPDATES_HOME + "/" + fileItem.getName();
-            if (updateFileName.isEmpty()) {
-                updateFileName = "tmp_file_" + new Random().nextInt(100000);
+            String updateFilePath = CATALOG_UPDATES_HOME + "/" + fileItem.getName();
+            if (updateFilePath.isEmpty()) {
+                updateFilePath = "tmp_file_" + new Random().nextInt(100000);
             }
-            File updateFile = new File(updateFileName);
+            File updateFile = new File(updateFilePath);
             saveToFile(fileItem, updateFile);
 
             CatalogUpdate update = new CatalogUpdate();
@@ -166,11 +166,11 @@ public class UpdateCatalogServlet extends HttpServlet {
         public Object call() throws Exception {
             log.debug("Starting update catalog...");
             changeStatus(UpdateStatus.FILE_UPLOADED);
-            CatalogUpdate updateResult = storage.loadCatalogUpdateIntoTmpTable(update);
+            CatalogUpdate updateResult = storage.importCatalogUpdate(update);
 
             log.debug("Load complete, calc stats...");
             changeStatus(UpdateStatus.SQL_LOAD_COMPLETE);
-            storage.caclCatalogUpdateStats(update.getId(), updateResult.getStatus());
+            storage.calculateCatalogUpdateStats(update.getId(), updateResult.getStatus());
 
             log.debug("Stat calc complete.");
             changeStatus(UpdateStatus.UPDATE_STATISTICS_FINISHED);

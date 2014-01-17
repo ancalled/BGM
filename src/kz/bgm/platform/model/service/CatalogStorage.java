@@ -27,13 +27,9 @@ public interface CatalogStorage {
 
     List<Catalog> getCatalogsByPlatform(long catId);
 
-    int getTrackCount();
 
-    List<Track> getTracks(int from, int size);
 
-    List<Track> getTracks(long catalogId, int from, int size);
 
-    List<Track> getTempTracks(long catalogId, int from, int size);
 
     List<Track> getTracks(List<Long> ids);
 
@@ -108,17 +104,22 @@ public interface CatalogStorage {
     void removeCustomer(long id);
 
 
+    //  Catalog update -----------------------------------
+
     CatalogUpdate saveCatalogUpdate(CatalogUpdate update);
 
-    CatalogUpdate loadCatalogUpdateIntoTmpTable(CatalogUpdate update);
+    CatalogUpdate importCatalogUpdate(CatalogUpdate update);
 
-    public CatalogUpdate caclCatalogUpdateStats(long updateId, CatalogUpdate.Status st);
+    public CatalogUpdate calculateCatalogUpdateStats(long updateId, CatalogUpdate.Status st);
 
+    List<Track> getAllTracksOfCatalogUpdate(long updateId);
 
+    List<Track> getNewTracksOfCatalogUpdate(long updateId, int from, final int size);
 
-    List<TrackDiff> geChangedTracks(long updateId, int from, final int size);
+    List<TrackDiff> geChangedTracksOfCatalogUpdate(long updateId, int from, final int size);
 
-    List<Track> getNewTracks(long updateId, int from, final int size);
+    List<TrackDiff> getTracksWithChangedRoyaltyOfCatalogUpdate(long updateId, int from, final int size);
+
 
     void applyCatalogUpdateStep1(long updateId);
 
@@ -126,13 +127,21 @@ public interface CatalogStorage {
 
     void applyCatalogUpdateStep3(long updateId);
 
-    List<Track> getUpdates(final long updateId);
 
     CatalogUpdate getCatalogUpdate(long updateId);
 
-    List<CatalogUpdate> getCatalogUpdates(long catalogId);
+    List<CatalogUpdate> getAllCatalogUpdates(long catalogId);
 
-    void updateCatalogsStat();
+
+    // Index Rebuild -----------------------------------------
+
+    int getTrackCount();
+
+    List<Track> getTracks(int from, int size);
+
+
+    //-------------------------------------------------
+
 
     List<Long> getCustomerBasket(long userId);
 
