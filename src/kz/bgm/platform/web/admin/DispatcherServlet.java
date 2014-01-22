@@ -3,6 +3,7 @@ package kz.bgm.platform.web.admin;
 import kz.bgm.platform.model.domain.*;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
+import kz.bgm.platform.utils.DateUtils;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -13,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -70,38 +70,6 @@ public class DispatcherServlet extends HttpServlet {
                         }
 
                         req.setAttribute("totalTracks", totalTracks);
-
-//                        List<Track> randomTracks = catalogStorage.getRandomTracks(RANDOM_TRACKS_ON_INDEX_PAGE);
-//                        req.setAttribute("randomTracks", randomTracks);
-
-
-//                        List<CustomerReport> reports = catalogStorage.getAllCustomerReports();
-
-//                        List<CustomerReportStatistic> reportStatistics = new ArrayList<>();
-//
-//                        for (CustomerReport rep : reports) {
-//                            Customer customer = catalogStorage.getCustomer(rep.getCustomerId());
-//                            List<CustomerReportItem> repItemList = catalogStorage.
-//                                    getCustomerReportsItems(rep.getId());
-//                            CustomerReportStatistic crs = new CustomerReportStatistic();
-//                            crs.setReportDate(rep.getStartDate());
-//                            crs.setSendDate(rep.getUploadDate());
-//                            crs.setReportPeriod(rep.getPeriodOrdinal());
-//                            crs.setReportType(rep.getTypeOrdinal());
-//
-//                            crs.setCustomerId(rep.getCustomerId());
-//                            if (customer != null) {
-//                                crs.setCustomer(customer.getName());
-//                            }
-//                            if (repItemList.size() > 0) {
-//                                crs.setCalculated(true);
-//                            } else {
-//                                crs.setCalculated(false);
-//                            }
-//                            reportStatistics.add(crs);
-//                        }
-//
-//                        req.setAttribute("reports", reportStatistics);
 
                         return "index";
                     }
@@ -186,6 +154,7 @@ public class DispatcherServlet extends HttpServlet {
                     }
                 };
                 break;
+
 
             case "/report":
                 action = new Action() {
@@ -447,11 +416,21 @@ public class DispatcherServlet extends HttpServlet {
                 action = new Action() {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-                        List<Customer> customers = catalogStorage.getAllCustomers();
 
-                        if (customers != null) {
-                            req.setAttribute("customers", customers);
-                        }
+                        Date now = new Date();
+                        req.setAttribute("now", now);
+
+                        List<Date> months = DateUtils.getMonthsBefore(now, 12);
+                        req.setAttribute("months", months);
+                        Date notLaterThen = months.get(months.size() - 1);
+
+                        List<Customer> customers = catalogStorage.getAllCustomers();
+                        req.setAttribute("customers", customers);
+
+                        List<CustomerReport> reports = catalogStorage.getAllCustomerReports(notLaterThen);
+                        req.setAttribute("reports", reports);
+
+
                         return "reports";
                     }
                 };
@@ -499,6 +478,5 @@ public class DispatcherServlet extends HttpServlet {
 
     public static interface Action {
         String execute(HttpServletRequest req, HttpServletResponse resp);
-
     }
 }

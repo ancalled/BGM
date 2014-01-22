@@ -10,7 +10,6 @@
             <li class="${param.reports}"><a href="/admin/view/reports">Отчеты</a></li>
             <li class="${param.search}"><a href="/admin/view/search">Поиск</a></li>
             <li class="${param.massSearch}"><a href="/admin/view/mass-search">Массовый поиск</a></li>
-            <li class="${param.report_calculate}"><a href="/admin/view/report-calculator">Квартальный отчет</a></li>
             <li class="${param.customers}"><a href="/admin/view/customers">Пользователи</a></li>
             <li><a href="/admin/action/logout">Выход</a></li>
         </ul>

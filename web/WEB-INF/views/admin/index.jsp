@@ -167,66 +167,7 @@
             </section>
 
 
-            <%--<section>--%>
-                <%--<legend>--%>
-                    <%--Входящие отчеты--%>
-                <%--</legend>--%>
 
-                <%--<dl class="dl-horizontal">--%>
-                    <%--<c:forEach items="${reports}" var="r">--%>
-                        <%--<dt>--%>
-                            <%--<a href="customer-detail?customer_id=${r.customerId}">--%>
-                                    <%--${r.customer}--%>
-                            <%--</a>--%>
-                        <%--</dt>--%>
-                        <%--<dd>--%>
-                            <%--<ul class="inline">--%>
-                                    <%--&lt;%&ndash;<li>${r.sendDate}</li>&ndash;%&gt;--%>
-                                <%--<li>${r.reportDate}</li>--%>
-                                <%--<li>--%>
-                                    <%--<c:choose>--%>
-                                        <%--<c:when test="${r.reportType ==1}">--%>
-                                            <%--Публичка--%>
-                                        <%--</c:when>--%>
-                                        <%--<c:otherwise>--%>
-                                            <%--Мобильный--%>
-                                        <%--</c:otherwise>--%>
-                                    <%--</c:choose>--%>
-                                <%--</li>--%>
-                                <%--<li>--%>
-                                    <%--<c:choose>--%>
-                                        <%--<c:when test="${r.reportPeriod ==1}">--%>
-                                            <%--Квартальный--%>
-                                        <%--</c:when>--%>
-                                        <%--<c:otherwise>--%>
-                                            <%--Ежемесячный--%>
-                                        <%--</c:otherwise>--%>
-                                    <%--</c:choose>--%>
-                                <%--</li>--%>
-                                <%--<li>--%>
-                                    <%--<c:choose>--%>
-                                        <%--<c:when test="${r.calculated ==true}">--%>
-                                            <%--<i class="icon-ok"></i>--%>
-                                        <%--</c:when>--%>
-                                        <%--<c:otherwise>--%>
-                                            <%--<i class="icon-remove"></i>--%>
-                                        <%--</c:otherwise>--%>
-                                    <%--</c:choose>--%>
-                                <%--</li>--%>
-                            <%--</ul>--%>
-                        <%--</dd>--%>
-
-                    <%--</c:forEach>--%>
-                <%--</dl>--%>
-
-            <%--</section>--%>
-
-
-            <%--<section>--%>
-                <%--<legend>--%>
-                    <%--Исходящие отчеты--%>
-                <%--</legend>--%>
-            <%--</section>--%>
         </div>
 
         <div class="span4">

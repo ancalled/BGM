@@ -833,27 +833,55 @@ public class DbStorage implements CatalogStorage {
 
 
     @Override
-    public List<CustomerReport> getAllCustomerReports() {
+    public List<CustomerReport> getAllCustomerReports(final Date later) {
+
         return query(new Action<List<CustomerReport>>() {
             @Override
             public List<CustomerReport> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM customer_report ORDER BY start_date",
+                        "SELECT\n" +
+                                "  cr.id cr_id,\n" +
+                                "  cr.customer_id cr_customer_id,\n" +
+                                "  cr.start_date cr_start_date,\n" +
+                                "  cr.upload_date cr_upload_date,\n" +
+                                "  cr.type cr_type,\n" +
+                                "  cr.period cr_period,\n" +
+                                "  cr.tracks cr_tracks,\n" +
+                                "  cr.detected cr_detected,\n" +
+                                "  cr.revenue cr_revenue,\n" +
+                                "  cr.accepted cr_accepted,\n" +
+                                "  c.id c_id,\n" +
+                                "  c.name c_name, \n" +
+                                "  c.customer_type c_customer_type, \n" +
+                                "  c.right_type c_right_type, \n" +
+                                "  c.authorRoyalty c_authorRoyalty, \n" +
+                                "  c.relatedRoyalty c_relatedRoyalty, \n" +
+                                "  c.contract c_contract \n" +
+                                "FROM customer_report cr\n" +
+                                "  LEFT JOIN customer c \n" +
+                                "  ON c.id = cr.customer_id\n" +
+                                "WHERE cr.start_date > ?" +
+                                "ORDER BY start_date",
                         ResultSet.TYPE_FORWARD_ONLY,
                         ResultSet.CONCUR_READ_ONLY);
+                stmt.setDate(1, new java.sql.Date(later.getTime()));
 
                 ResultSet rs = stmt.executeQuery();
 
                 List<CustomerReport> reportList = new ArrayList<>();
 
                 while (rs.next()) {
-                    reportList.add(parseCustomerReport(rs));
+                    CustomerReport report = parseCustomerReport(rs, "cr_");
+                    report.setCustomer(parseCustomer(rs, "c_"));
+                    reportList.add(report);
                 }
 
                 return reportList;
             }
         });
     }
+
+
 
 
     @Override
@@ -1981,14 +2009,20 @@ public class DbStorage implements CatalogStorage {
     }
 
     private static Customer parseCustomer(ResultSet rs) throws SQLException {
+        return parseCustomer(rs, "");
+    }
+
+    private static Customer parseCustomer(ResultSet rs, String prefix) throws SQLException {
         Customer customer = new Customer();
-        customer.setId(rs.getLong("id"));
-        customer.setName(rs.getString("name"));
-        customer.setCustomerType(CustomerType.values()[rs.getInt("customer_type")]);
-        customer.setRightType(RightType.values()[rs.getInt("right_type")]);
-        customer.setAuthorRoyalty(rs.getFloat("authorRoyalty"));
-        customer.setRelatedRoyalty(rs.getFloat("relatedRoyalty"));
-        customer.setContract(rs.getString("contract"));
+        customer.setId(rs.getLong(prefix + "id"));
+        customer.setName(rs.getString(prefix + "name"));
+        int type = rs.getInt(prefix + "customer_type");
+        customer.setCustomerType(CustomerType.values()[type]);
+        int rightType = rs.getInt(prefix + "right_type");
+        customer.setRightType(RightType.values()[rightType]);
+        customer.setAuthorRoyalty(rs.getFloat(prefix + "authorRoyalty"));
+        customer.setRelatedRoyalty(rs.getFloat(prefix + "relatedRoyalty"));
+        customer.setContract(rs.getString(prefix + "contract"));
 
         return customer;
     }
@@ -2013,26 +2047,30 @@ public class DbStorage implements CatalogStorage {
     }
 
     private static CustomerReport parseCustomerReport(ResultSet rs) throws SQLException {
+        return parseCustomerReport(rs, "");
+    }
+
+    private static CustomerReport parseCustomerReport(ResultSet rs, String prefix) throws SQLException {
 
         CustomerReport report = new CustomerReport();
-        report.setId(rs.getLong("id"));
-        int type = rs.getInt("type");
+        report.setId(rs.getLong(prefix + "id"));
+        int type = rs.getInt(prefix + "type");
         report.setType(CustomerReport.Type.values()[type]);
 
         if (report.getType() == CustomerReport.Type.MOBILE) {
-            long customerId = rs.getLong("customer_id");
+            long customerId = rs.getLong(prefix + "customer_id");
             report.setCustomerId(customerId);
         }
 
-        report.setStartDate(rs.getDate("start_date"));
-        int period = rs.getInt("period");
+        report.setStartDate(rs.getDate(prefix + "start_date"));
+        int period = rs.getInt(prefix + "period");
         report.setPeriod(CustomerReport.Period.values()[period]);
-        report.setUploadDate(rs.getDate("upload_date"));
+        report.setUploadDate(rs.getDate(prefix + "upload_date"));
 
-        report.setTracks(rs.getInt("tracks"));
-        report.setDetected(rs.getInt("detected"));
-        report.setRevenue(rs.getLong("revenue"));
-        report.setAccepted(rs.getBoolean("accepted"));
+        report.setTracks(rs.getInt(prefix + "tracks"));
+        report.setDetected(rs.getInt(prefix + "detected"));
+        report.setRevenue(rs.getLong(prefix + "revenue"));
+        report.setAccepted(rs.getBoolean(prefix + "accepted"));
 
         return report;
     }

@@ -79,7 +79,8 @@ public interface CatalogStorage {
 
     CustomerReport getCustomerReport(long id);
 
-    List<CustomerReport> getAllCustomerReports();
+
+    List<CustomerReport> getAllCustomerReports(Date later);
 
     List<CustomerReport> getCustomerReports(long customerId, Date from, Date to);
 

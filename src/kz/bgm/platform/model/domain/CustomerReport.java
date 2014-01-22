@@ -6,11 +6,19 @@ import java.util.Date;
 public class CustomerReport {
 
     public static enum Type {
-        MOBILE, PUBLIC
+        MOBILE, PUBLIC;
+
+        public String getName() {
+            return name();
+        }
     }
 
     public static enum Period {
-        MONTH, QUARTER
+        MONTH, QUARTER;
+
+        public String getName() {
+            return name();
+        }
     }
 
     private long id;
@@ -24,6 +32,8 @@ public class CustomerReport {
     private int detected;
     private long revenue;
     private boolean accepted;
+
+    private Customer customer;
 
 
     public CustomerReport() {
@@ -95,13 +105,6 @@ public class CustomerReport {
         this.detected = detected;
     }
 
-    public int getTypeOrdinal() {
-        return type.ordinal();
-    }
-
-    public int getPeriodOrdinal() {
-        return period.ordinal();
-    }
 
     public long getRevenue() {
         return revenue;
@@ -120,4 +123,11 @@ public class CustomerReport {
     }
 
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }

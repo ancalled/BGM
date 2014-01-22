@@ -6,8 +6,8 @@
 <head>
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.js"></script>
-    <script src="/js/bootstrap-fileupload.js"></script>
-    <script src="/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/js/bootstrap-tab.js"></script>
+
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" media="screen"/>
@@ -23,192 +23,45 @@
 </c:import>
 
 
-<div class="container text-center">
-    <div class="row text-left">
-        <legend>
-            Загрузка отчета
-        </legend>
-    </div>
+<div class="container">
 
-    <div class="row text-left">
-        <c:forEach var="c" items="${customers}" varStatus="s">
-            <input type="hidden" id="customer-${c.id}" value="${c.customerType}">
-        </c:forEach>
-        <form action="/admin/action/upload-report"
-              method="post" enctype="multipart/form-data">
+    <ul id="tabs-nav" class="nav nav-tabs">
+        <li class="active">
+            <a href="#incoming" data-toggle="tab">Входящие</a>
+        </li>
+        <li>
+            <a href="#outgoing" data-toggle="tab">Исходящие</a>
+        </li>
 
-            <label>
-                Пользователь <br>
-                <select name="customer-id" id="customer">
+    </ul>
 
-                    <c:forEach var="c" items="${customers}" varStatus="s">
-                        <option class="${c.name}" value="${c.id}"
-                                id="${c.id}" ${s.index==0?"selected":""}>${c.name}</option>
-                    </c:forEach>
-
-                </select>
-            </label>
-
-
-            <label>
-                Тип отчета <br>
-                <select id="repType" name="repType">
-
-                    <option id="MOBILE_AGGREGATOR" value="MOBILE_AGGREGATOR">Мобильный</option>
-                    <option value="PUBLIC_RIGHTS_SOCIETY" value="PUBLIC_RIGHTS_SOCIETY">Публичный</option>
-
-                </select>
-            </label>
-
-            <%--<input type="hidden" name="report-type" id="report-type"/>--%>
-
-            <div class="fileupload fileupload-new" data-provides="fileupload">
-                <div class="input-append">
-                    <div class="uneditable-input span3">
-                        <i class="icon-file fileupload-exists"></i>
-                        <span class="fileupload-preview"></span></div>
-                                <span class="btn btn-fileName">
-                                    <span class="fileupload-new">Выбрать отчет</span>
-                                    <span class="fileupload-exists">Изменить</span><input name="file" type="file"/>
-                                </span>
-                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Удалить</a>
-                </div>
-            </div>
-
-            Дата отчета <br>
-
-            <div id="date" class="input-append">
-                <input data-format="yyyy-MM-dd" id="dt" class="input-block-level" name="dt" type="text">
-                              <span class="add-on">
-                                 <i data-time-icon="icon-time" data-whenUpdated-icon="icon-calendar">
-                                 </i>
-                                  </span>
-            </div>
-
-
-            <label>
-                Период<br>
-                <select name="period">
-                    <option value="0">Месячный</option>
-                    <option value="1">Квартальный</option>
-                </select>
-            </label>
-
-
-            <div class="row-fluid">
-                <input class="btn" type="submit" id="submitReport" value="Отправить">
-            </div>
-        </form>
-
-
-        <div>
-            <span>
-            Для загрузки отчета необходимо
-            подготовить файл отчета в формате excel.
-            </span>
+    <div class="tab-content">
+        <div class="tab-pane active" id="incoming">
+            <c:import url="reports-incoming.jsp"/>
         </div>
-
+        <div class="tab-pane" id="outgoing">
+            <c:import url="reports-outgoing.jsp"/>
+        </div>
     </div>
 
 </div>
 
+
+
+<c:import url="footer.jsp"/>
+
 <script>
-
-
     $(document).ready(function () {
-        var erParam = getParam("er");
-        if (erParam == "Wrong type") {
-            alert("Вероятно указан не верный тип отчета");
-        }
-    });
 
-
-    //    window.onload(function () {
-    //         $('#submitReport').onclick(sendReport());
-    //    });
-
-    $('#type-report-change').change(function () {
-        var v = $(this).val();
-        if (v == 1) {
-            $("#report-load-form").attr("action", "/admin/action/load-public-reports");
-        }
-        else if (v == 2) {
-            $("#report-load-form").attr("action", "/admin/action/load-mobile-reports");
-        }
-    });
-
-
-    $(function () {
-        $('#date').datetimepicker({
-            pickTime: true
+        $('#tabs-nav a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
         });
 
-
     });
-
-
-    function sendReport() {
-        $.ajax({
-            url: "/admin/action/upload-report",
-            dataType: 'json',
-            method: 'post',
-            async: 'true',
-
-            data: {
-                'customer-id': $('#customer').val(),
-                'dt': $('#dt').val(),
-                'repType': $('#repType').val()
-            },
-            error: function () {
-                alert("Неудалось выгрузить каталог в файл" + $('#catName').val() + " .csv");
-            },
-            success: function (data) {
-                $("#file-link").append("<a href='" + data.path + "'>" +
-                        "<i class='icon-download-alt'></i>" + "Скачать " +
-                        $('#catName').val() + ".csv (" + Math.round(data.size / 1024 / 1024) + " Мб)" +
-                        "</a>");
-                $('#loading-gif').css('visibility', 'hidden');
-            }
-        });
-    }
-
-    $('#customer').change(function () {
-                var customerType = $('#customer-' + this.options[this.selectedIndex].id).val();
-                if (customerType == 'MOBILE_AGGREGATOR') {
-                    $('#repType').val('MOBILE_AGGREGATOR');
-                } else if (customerType = 'PUBLIC_RIGHTS_SOCIETY') {
-                    $('#repType').val('PUBLIC_RIGHTS_SOCIETY');
-                }
-            }
-    );
-    //
-    //    $('#repType').change(function(){
-    //        $('#report-type').val(this.options[this.selectedIndex].id);
-    //    });
-
-
-    var el = document.getElementById('date');
-
-    //    el.on('changeDate', function (e) {
-    //        alert(e.date.toString());
-    //        console.log(e.localDate.toString());
-    //    });
-
-
-    //    $('#report-tab a:first').tab('show');
-
-
-    function getParam(name) {
-        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-                results = regex.exec(location.search);
-        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-    }
 
 
 </script>
-
-<c:import url="footer.jsp"/>
 
 </body>
 </html>
