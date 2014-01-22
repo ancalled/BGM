@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -56,48 +57,51 @@ public class DispatcherServlet extends HttpServlet {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
 
-                        List<Platform> platforms = catalogStorage.getAllPlatforms();
+                        Collection<Platform> platforms = catalogStorage.getAllPlatforms();
                         req.setAttribute("platforms", platforms);
 
                         int totalTracks = 0;
                         for (Platform p : platforms) {
-                            for (Catalog c : p.getCatalogs()) {
-                                totalTracks += c.getTracks();
+                            if (p.getCatalogs() != null) {
+                                for (Catalog c : p.getCatalogs()) {
+                                    totalTracks += c.getTracks();
+                                }
                             }
                         }
+
                         req.setAttribute("totalTracks", totalTracks);
 
+//                        List<Track> randomTracks = catalogStorage.getRandomTracks(RANDOM_TRACKS_ON_INDEX_PAGE);
+//                        req.setAttribute("randomTracks", randomTracks);
 
-                        List<CustomerReport> reports = catalogStorage.getAllCustomerReports();
 
-                        List<Track> randomTracks = catalogStorage.getRandomTracks(RANDOM_TRACKS_ON_INDEX_PAGE);
-                        req.setAttribute("randomTracks", randomTracks);
+//                        List<CustomerReport> reports = catalogStorage.getAllCustomerReports();
 
-                        List<CustomerReportStatistic> reportStatistics = new ArrayList<>();
-
-                        for (CustomerReport rep : reports) {
-                            Customer customer = catalogStorage.getCustomer(rep.getCustomerId());
-                            List<CustomerReportItem> repItemList = catalogStorage.
-                                    getCustomerReportsItems(rep.getId());
-                            CustomerReportStatistic crs = new CustomerReportStatistic();
-                            crs.setReportDate(rep.getStartDate());
-                            crs.setSendDate(rep.getUploadDate());
-                            crs.setReportPeriod(rep.getPeriodOrdinal());
-                            crs.setReportType(rep.getTypeOrdinal());
-
-                            crs.setCustomerId(rep.getCustomerId());
-                            if (customer != null) {
-                                crs.setCustomer(customer.getName());
-                            }
-                            if (repItemList.size() > 0) {
-                                crs.setCalculated(true);
-                            } else {
-                                crs.setCalculated(false);
-                            }
-                            reportStatistics.add(crs);
-                        }
-
-                        req.setAttribute("reports", reportStatistics);
+//                        List<CustomerReportStatistic> reportStatistics = new ArrayList<>();
+//
+//                        for (CustomerReport rep : reports) {
+//                            Customer customer = catalogStorage.getCustomer(rep.getCustomerId());
+//                            List<CustomerReportItem> repItemList = catalogStorage.
+//                                    getCustomerReportsItems(rep.getId());
+//                            CustomerReportStatistic crs = new CustomerReportStatistic();
+//                            crs.setReportDate(rep.getStartDate());
+//                            crs.setSendDate(rep.getUploadDate());
+//                            crs.setReportPeriod(rep.getPeriodOrdinal());
+//                            crs.setReportType(rep.getTypeOrdinal());
+//
+//                            crs.setCustomerId(rep.getCustomerId());
+//                            if (customer != null) {
+//                                crs.setCustomer(customer.getName());
+//                            }
+//                            if (repItemList.size() > 0) {
+//                                crs.setCalculated(true);
+//                            } else {
+//                                crs.setCalculated(false);
+//                            }
+//                            reportStatistics.add(crs);
+//                        }
+//
+//                        req.setAttribute("reports", reportStatistics);
 
                         return "index";
                     }
@@ -108,7 +112,7 @@ public class DispatcherServlet extends HttpServlet {
                 action = new Action() {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-                        List<Platform> platforms = catalogStorage.getAllPlatforms();
+                        Collection<Platform> platforms = catalogStorage.getAllPlatforms();
 
                         req.setAttribute("platforms", platforms);
                         req.setAttribute("query", ses.getAttribute("query"));
@@ -133,8 +137,8 @@ public class DispatcherServlet extends HttpServlet {
                 action = new Action() {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-                        List<Platform> platforms = catalogStorage.getAllPlatforms();
-                        req.setAttribute("platforms",platforms);
+                        Collection<Platform> platforms = catalogStorage.getAllPlatforms();
+                        req.setAttribute("platforms", platforms);
 
                         return "report-calculator";
                     }
@@ -253,7 +257,7 @@ public class DispatcherServlet extends HttpServlet {
                         String platformIdStr = req.getParameter("platformId");
                         if (platformIdStr != null) {
                             long platId = Long.parseLong(platformIdStr);
-                            List<Platform> platforms = catalogStorage.getAllPlatforms();
+                            Collection<Platform> platforms = catalogStorage.getAllPlatforms();
                             req.setAttribute("platforms", platforms);
                             req.setAttribute("platformId", platId);
 
@@ -469,7 +473,7 @@ public class DispatcherServlet extends HttpServlet {
                             }
 
                             Track track = catalogStorage.getTrack(id);
-                            List<Platform> platforms = catalogStorage.getAllPlatforms();
+                            Collection<Platform> platforms = catalogStorage.getAllPlatforms();
 
                             req.setAttribute("track", track);
                             req.setAttribute("platforms", platforms);

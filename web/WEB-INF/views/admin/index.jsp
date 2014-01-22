@@ -167,66 +167,66 @@
             </section>
 
 
-            <section>
-                <legend>
-                    Входящие отчеты
-                </legend>
+            <%--<section>--%>
+                <%--<legend>--%>
+                    <%--Входящие отчеты--%>
+                <%--</legend>--%>
 
-                <dl class="dl-horizontal">
-                    <c:forEach items="${reports}" var="r">
-                        <dt>
-                            <a href="customer-detail?customer_id=${r.customerId}">
-                                    ${r.customer}
-                            </a>
-                        </dt>
-                        <dd>
-                            <ul class="inline">
-                                    <%--<li>${r.sendDate}</li>--%>
-                                <li>${r.reportDate}</li>
-                                <li>
-                                    <c:choose>
-                                        <c:when test="${r.reportType ==1}">
-                                            Публичка
-                                        </c:when>
-                                        <c:otherwise>
-                                            Мобильный
-                                        </c:otherwise>
-                                    </c:choose>
-                                </li>
-                                <li>
-                                    <c:choose>
-                                        <c:when test="${r.reportPeriod ==1}">
-                                            Квартальный
-                                        </c:when>
-                                        <c:otherwise>
-                                            Ежемесячный
-                                        </c:otherwise>
-                                    </c:choose>
-                                </li>
-                                <li>
-                                    <c:choose>
-                                        <c:when test="${r.calculated ==true}">
-                                            <i class="icon-ok"></i>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <i class="icon-remove"></i>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </li>
-                            </ul>
-                        </dd>
+                <%--<dl class="dl-horizontal">--%>
+                    <%--<c:forEach items="${reports}" var="r">--%>
+                        <%--<dt>--%>
+                            <%--<a href="customer-detail?customer_id=${r.customerId}">--%>
+                                    <%--${r.customer}--%>
+                            <%--</a>--%>
+                        <%--</dt>--%>
+                        <%--<dd>--%>
+                            <%--<ul class="inline">--%>
+                                    <%--&lt;%&ndash;<li>${r.sendDate}</li>&ndash;%&gt;--%>
+                                <%--<li>${r.reportDate}</li>--%>
+                                <%--<li>--%>
+                                    <%--<c:choose>--%>
+                                        <%--<c:when test="${r.reportType ==1}">--%>
+                                            <%--Публичка--%>
+                                        <%--</c:when>--%>
+                                        <%--<c:otherwise>--%>
+                                            <%--Мобильный--%>
+                                        <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
+                                <%--</li>--%>
+                                <%--<li>--%>
+                                    <%--<c:choose>--%>
+                                        <%--<c:when test="${r.reportPeriod ==1}">--%>
+                                            <%--Квартальный--%>
+                                        <%--</c:when>--%>
+                                        <%--<c:otherwise>--%>
+                                            <%--Ежемесячный--%>
+                                        <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
+                                <%--</li>--%>
+                                <%--<li>--%>
+                                    <%--<c:choose>--%>
+                                        <%--<c:when test="${r.calculated ==true}">--%>
+                                            <%--<i class="icon-ok"></i>--%>
+                                        <%--</c:when>--%>
+                                        <%--<c:otherwise>--%>
+                                            <%--<i class="icon-remove"></i>--%>
+                                        <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
+                                <%--</li>--%>
+                            <%--</ul>--%>
+                        <%--</dd>--%>
 
-                    </c:forEach>
-                </dl>
+                    <%--</c:forEach>--%>
+                <%--</dl>--%>
 
-            </section>
+            <%--</section>--%>
 
 
-            <section>
-                <legend>
-                    Исходящие отчеты
-                </legend>
-            </section>
+            <%--<section>--%>
+                <%--<legend>--%>
+                    <%--Исходящие отчеты--%>
+                <%--</legend>--%>
+            <%--</section>--%>
         </div>
 
         <div class="span4">
@@ -234,15 +234,6 @@
                 <h4>Случайные треки:</h4>
 
                 <ul class="unstyled">
-                    <c:forEach var="t" items="${randomTracks}">
-                        <li>
-                            <a href="edit-track?id=${t.id}">
-                                    ${t.name}<c:if test="${not empty t.artist}">: ${t.artist}</c:if>
-                            </a>
-                            ${t.catalog}
-
-                        </li>
-                    </c:forEach>
                 </ul>
             </div>
         </div>
@@ -252,6 +243,32 @@
 </div>
 
 <c:import url="footer.jsp"/>
+
+<script>
+    $(document).ready(function() {
+
+        $.ajax({
+            url: "/admin/action/get-random-tracks",
+            dataType: 'json',
+            method: 'get',
+            async: 'true',
+
+            data: {
+                'n': 10
+            },
+            success: function (data) {
+                var rndTracksList = $('#random-tracks > ul');
+                $.each(data.tracks, function(idx, t) {
+                     rndTracksList.append('<li><a href="edit-track?id=' + t.id +'">' +
+                             t.name + (t.artist ? ': ' + t.artist : '') + '</a> ' + t.catalog + '</li>');
+                });
+            }
+        });
+
+    });
+
+
+</script>
 
 
 </body>

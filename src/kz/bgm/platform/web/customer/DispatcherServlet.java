@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -53,10 +54,10 @@ public class DispatcherServlet extends HttpServlet {
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
 
 
-                        List<Platform> platforms = catalogStorage.getOwnPlatforms();
+                        Collection<Platform> platforms = catalogStorage.getOwnPlatforms();
                         req.setAttribute("platforms", platforms);
 
-                        List<CustomerReport> reports = catalogStorage
+                        Collection<CustomerReport> reports = catalogStorage
                                 .getCustomerReports(user.getCustomerId(), new Date(0), new Date());
                         req.setAttribute("reports", reports);
 
@@ -70,12 +71,12 @@ public class DispatcherServlet extends HttpServlet {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
 
-                        List<Long> tracks = catalogStorage.getCustomerBasket(user.getCustomerId());
+                        Collection<Long> tracks = catalogStorage.getCustomerBasket(user.getCustomerId());
                         if (!tracks.isEmpty()) {
                             req.setAttribute("customer_tracks", tracks);
                         }
 
-                        List<Platform> platforms = catalogStorage.getOwnPlatforms();
+                        Collection<Platform> platforms = catalogStorage.getOwnPlatforms();
 
                         req.setAttribute("platforms", platforms);
                         req.setAttribute("query", ses.getAttribute("query"));

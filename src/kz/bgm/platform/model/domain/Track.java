@@ -32,7 +32,8 @@ public class Track implements Serializable {
     public Track() {
     }
 
-    public Track(String code, String name, String artist) {
+    public Track(Long id, String code, String name, String artist) {
+        this.id = id;
         this.code = code;
         this.name = name;
         this.artist = artist;

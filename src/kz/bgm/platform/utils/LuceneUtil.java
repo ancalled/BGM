@@ -248,34 +248,6 @@ public class LuceneUtil {
     }
 
 
-    public static void main1(String[] args) throws IOException, ParseException {
-
-        if (args.length < 1) {
-            System.out.println("Expected:\nsearch-track.sh artist: composition");
-            return;
-        }
-
-        StringBuilder buf = new StringBuilder();
-        for (String a : args) {
-            buf.append(a);
-            buf.append(" ");
-        }
-        String query = buf.toString();
-        query = query.substring(0, query.length() - 1);
-
-        String[] splitted = query.split(":[\\s]?");
-        String artist = splitted[0];
-        String authors = splitted.length > 1 ? splitted[1] : null;
-        String track = splitted.length > 2 ? splitted[2] : null;
-
-        System.out.println("Queried artist: '" + artist + "'" + ", track: '" + track + "'");
-
-        LuceneUtil util = new LuceneUtil();
-        util.search(artist, authors, track);
-
-//        new LuceneUtil().rebuildIndex();
-
-    }
 
 
     public static void main(String[] args) throws IOException {

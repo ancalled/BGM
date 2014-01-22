@@ -2,6 +2,7 @@ package kz.bgm.platform.model.service;
 
 import kz.bgm.platform.model.domain.*;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -15,9 +16,9 @@ public interface CatalogStorage {
 
     Track getTrack(long id);
 
-    List<Platform> getAllPlatforms();
+    Collection<Platform> getAllPlatforms();
 
-    List<Platform> getOwnPlatforms();
+    Collection<Platform> getOwnPlatforms();
 
     List<Long> getOwnCatalogIds();
 
@@ -25,7 +26,6 @@ public interface CatalogStorage {
 
 
 
-    List<Catalog> getCatalogsByPlatform(long catId);
 
 
 

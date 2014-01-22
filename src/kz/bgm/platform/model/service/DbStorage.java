@@ -1,7 +1,6 @@
 package kz.bgm.platform.model.service;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import javafx.stage.Stage;
 import kz.bgm.platform.model.domain.*;
 import org.apache.log4j.Logger;
 
@@ -9,7 +8,6 @@ import java.beans.PropertyVetoException;
 import java.sql.*;
 import java.util.*;
 import java.util.Date;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import static kz.bgm.platform.model.domain.CatalogUpdate.Status;
 
@@ -25,7 +23,6 @@ public class DbStorage implements CatalogStorage {
     public static final int MAX_POOL_SIZE = 10;
 
 
-
     private final ComboPooledDataSource pool;
 
     private static Map<Long, String> catalogMap = new HashMap<>();
@@ -36,7 +33,6 @@ public class DbStorage implements CatalogStorage {
         pool = initPool(host, port, base, user, pass);
         prepareCatalogsMap(catalogMap);
     }
-
 
 
     public void saveTracks(final List<Track> tracks, final String catalog) {
@@ -174,55 +170,85 @@ public class DbStorage implements CatalogStorage {
         });
     }
 
+
     @Override
-    public List<Platform> getAllPlatforms() {
-        return query(new Action<List<Platform>>() {
+    public Collection<Platform> getAllPlatforms() {
+        return query(new Action<Collection<Platform>>() {
             @Override
-            public List<Platform> execute(Connection con) throws SQLException {
-                PreparedStatement stmt = con.prepareStatement("SELECT * FROM platform",
+            public Collection<Platform> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT p.id p_id, " +
+                                "p.NAME p_name, " +
+                                "p.rights p_rights, " +
+                                "c.id c_id, " +
+                                "c.name c_name, " +
+                                "c.royalty c_royalty, " +
+                                "c.platform_id c_platform_id, " +
+                                "c.tracks c_tracks, " +
+                                "c.artists c_artists, " +
+                                "c.right_type c_right_type, " +
+                                "c.color c_color " +
+                                "FROM platform p " +
+                                "LEFT JOIN catalog c " +
+                                "ON p.id = c.platform_id",
                         ResultSet.TYPE_FORWARD_ONLY,
                         ResultSet.CONCUR_READ_ONLY);
 
-                ResultSet rs = stmt.executeQuery();
+                return parsePlatformsAndCatalogs(stmt.executeQuery(), "p_", "c_");
 
-                List<Platform> tracks = new ArrayList<>();
-                while (rs.next()) {
-                    Platform p = parsePlatform(rs);
-                    tracks.add(p);
-
-                    List<Catalog> catalogs = getCatalogsByPlatform(p.getId());
-                    p.setCatalogs(catalogs);
-                }
-
-                return tracks;
             }
         });
     }
 
 
     @Override
-    public List<Platform> getOwnPlatforms() {
-        return query(new Action<List<Platform>>() {
+    public Collection<Platform> getOwnPlatforms() {
+        return query(new Action<Collection<Platform>>() {
             @Override
-            public List<Platform> execute(Connection con) throws SQLException {
-                PreparedStatement stmt = con.prepareStatement("SELECT * FROM platform p WHERE p.rights = TRUE",
+            public Collection<Platform> execute(Connection con) throws SQLException {
+                PreparedStatement stmt = con.prepareStatement(
+                        "SELECT p.id p_id, " +
+                                "p.NAME p_name, " +
+                                "p.rights p_rights, " +
+                                "c.id c_id, " +
+                                "c.name c_name, " +
+                                "c.royalty c_royalty, " +
+                                "c.platform_id c_platform_id, " +
+                                "c.tracks c_tracks, " +
+                                "c.artists c_artists, " +
+                                "c.right_type c_right_type, " +
+                                "c.color c_color " +
+                                "FROM platform p " +
+                                "LEFT JOIN catalog c " +
+                                "ON p.id = c.platform_id  " +
+                                "WHERE p.rights = TRUE",
                         ResultSet.TYPE_FORWARD_ONLY,
                         ResultSet.CONCUR_READ_ONLY);
 
-                ResultSet rs = stmt.executeQuery();
-
-                List<Platform> tracks = new ArrayList<>();
-                while (rs.next()) {
-                    Platform p = parsePlatform(rs);
-                    tracks.add(p);
-
-                    List<Catalog> catalogs = getCatalogsByPlatform(p.getId());
-                    p.setCatalogs(catalogs);
-                }
-
-                return tracks;
+                return parsePlatformsAndCatalogs(stmt.executeQuery(), "p_", "c_");
             }
         });
+    }
+
+    private Collection<Platform> parsePlatformsAndCatalogs(ResultSet rs,
+                                                           String platformPrefix,
+                                                           String catalogPrefix) throws SQLException {
+        Map<Long, Platform> platforms = new HashMap<>();
+        while (rs.next()) {
+
+            Long platformId = rs.getLong(platformPrefix + "id");
+
+            Platform p = platforms.get(platformId);
+            if (p == null) {
+                p = parsePlatform(rs, platformPrefix);
+                p.setCatalogs(new ArrayList<Catalog>());
+                platforms.put(platformId, p);
+            }
+
+            p.getCatalogs().add(parseCatalog(rs, catalogPrefix));
+        }
+
+        return platforms.values();
     }
 
     @Override
@@ -261,31 +287,6 @@ public class DbStorage implements CatalogStorage {
                 List<Long> catalogs = new ArrayList<>();
                 while (rs.next()) {
                     catalogs.add(rs.getLong("id"));
-                }
-                return catalogs;
-            }
-        });
-    }
-
-
-    @Override
-    public List<Catalog> getCatalogsByPlatform(final long platformId) {
-        return query(new Action<List<Catalog>>() {
-            @Override
-            public List<Catalog> execute(Connection con) throws SQLException {
-                PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM  catalog WHERE platform_id = ?",
-                        ResultSet.TYPE_FORWARD_ONLY,
-                        ResultSet.CONCUR_READ_ONLY
-                );
-                stmt.setLong(1, platformId);
-
-                ResultSet rs = stmt.executeQuery();
-
-                List<Catalog> catalogs = new ArrayList<>();
-                while (rs.next()) {
-                    Catalog cat = parseCatalog(rs);
-                    catalogs.add(cat);
                 }
                 return catalogs;
             }
@@ -879,7 +880,9 @@ public class DbStorage implements CatalogStorage {
             @Override
             public List<CustomerReport> execute(Connection con) throws SQLException {
                 PreparedStatement stmt = con.prepareStatement(
-                        "SELECT * FROM customer_report WHERE customer_id = ? AND start_date BETWEEN ? AND ?",
+                        "SELECT * FROM customer_report " +
+                                "WHERE customer_id = ? " +
+                                "AND start_date BETWEEN ? AND ?",
                         ResultSet.TYPE_FORWARD_ONLY,
                         ResultSet.CONCUR_READ_ONLY);
                 stmt.setLong(1, customerId);
@@ -984,8 +987,8 @@ public class DbStorage implements CatalogStorage {
 
                 PreparedStatement stmt = con.prepareStatement(
                         "SELECT\n" +
-                                "  i.id item_id,\n" +
-                                "  i.report_id item_report_id,\n" +
+                                "  i.id item_id," +
+                                "  i.report_id item_report_id," +
                                 "  i.composition_id item_composition_id,\n" +
                                 "  i.name item_name,\n" +
                                 "  i.artist item_artist,\n" +
@@ -1484,7 +1487,7 @@ public class DbStorage implements CatalogStorage {
                                 "           ON c.code = t.code " +
                                 "           AND c.catalog_id = t.catalog_id " +
                                 "   WHERE t.update_id = u.id " +
-                                "           AND t.id is null" +
+                                "           AND t.id IS null" +
                                 "), " +
 
                                 "changed_tracks = (" +
@@ -1700,11 +1703,9 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-
-
-     /*
-        Apply changed tracks
-     */
+    /*
+       Apply changed tracks
+    */
     @Override
     public void applyCatalogUpdateStep1(final long updateId) {
         query(new Action<Object>() {
@@ -1792,12 +1793,6 @@ public class DbStorage implements CatalogStorage {
     }
 
 
-
-
-
-
-
-
     @Override
     public CatalogUpdate getCatalogUpdate(final long updateId) {
         return query(new Action<CatalogUpdate>() {
@@ -1849,8 +1844,6 @@ public class DbStorage implements CatalogStorage {
     // --- Index rebuild utils ---------------------
 
 
-
-
     @Override
     public int getTrackCount() {
         return query(new Action<Integer>() {
@@ -1889,7 +1882,6 @@ public class DbStorage implements CatalogStorage {
             }
         });
     }
-
 
 
     //  User Basket  ----------------------------------------------------------------------------------------
@@ -1941,10 +1933,14 @@ public class DbStorage implements CatalogStorage {
     //  Parsers  ----------------------------------------------------------------------------------------
 
     private static Platform parsePlatform(ResultSet rs) throws SQLException {
+        return parsePlatform(rs, "");
+    }
+
+    private static Platform parsePlatform(ResultSet rs, String tblPrefix) throws SQLException {
         Platform platform = new Platform();
-        platform.setId(rs.getLong("id"));
-        platform.setName(rs.getString("name"));
-        platform.setRights(rs.getBoolean("rights"));
+        platform.setId(rs.getLong(tblPrefix + "id"));
+        platform.setName(rs.getString(tblPrefix + "name"));
+        platform.setRights(rs.getBoolean(tblPrefix + "rights"));
         return platform;
     }
 

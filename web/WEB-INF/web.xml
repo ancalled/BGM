@@ -110,6 +110,10 @@
         <servlet-name>applyUpdateCatalog</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.ApplyUpdateServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>getRandomTracks</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.GetRandomTracksServlet</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -178,6 +182,11 @@
     <servlet-mapping>
         <servlet-name>applyUpdateCatalog</servlet-name>
         <url-pattern>/admin/action/apply-catalog-update</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>getRandomTracks</servlet-name>
+        <url-pattern>/admin/action/get-random-tracks</url-pattern>
     </servlet-mapping>
 
 

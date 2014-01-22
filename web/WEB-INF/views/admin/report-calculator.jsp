@@ -71,7 +71,7 @@
         <br>
         <br>
 
-        <img id="loading-gif" src="../../../img/loading.GIF" style="visibility: hidden">
+        <img id="loading-gif" src="../../../img/loading.gif" style="visibility: hidden">
 
         <div class="rowLayout">
             <div class="descLayout">
