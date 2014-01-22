@@ -5,43 +5,82 @@
 
 <style>
 
-    .active {
-        color: #000000;
+
+
+
+    div.months-by-quarters {
+        margin-top: 20px;
+        overflow: hidden;
     }
 
-    .no-reports {
-        font-size: 9pt;
+    div.months-by-quarters div {
+        display: block;
     }
 
-    .not-active {
-        color: #CCCCCC;
+    div.months-by-quarters div.incoming-report {
+        width: 25%;
+        float: left;
     }
 
-
-    dl.months {
-        margin: 40px 0 10px 0;
+    div.months-by-quarters div.clear {
+        clear: both;
     }
 
-    dl.months dt {
-        font-weight: normal;
+    div.months-by-quarters div.year {
+        font-size: 13pt;
+        font-weight: bold;
+        margin: 5px 0 3px 0;
+    }
+
+    div.incoming-report div.margins {
+        margin: 0 10px 10px 0;
+    }
+
+    div.incoming-report div.content {
+        height: 150px;
+        background: #cceef1;
+    }
+
+    div.outgoing-report-report div.content {
+        height: 150px;
+    }
+
+    div.incoming-report div.future {
+        background: #eaeef1;
+    }
+
+    .content .header {
+        padding-top: 5px;
         font-size: 14pt;
-        margin-left: 20px;
-    }
-
-    dl.months dd {
-        margin: 10px 0 10px 80px;
-    }
-
-    dl.months dt.year {
-        font-size: 15pt;
-        margin: 10px 0 15px 0;
+        text-align: center;
     }
 
 
+    .content .no-reports {
+        padding-top: 10px;
+        width: 100%;
+        text-align: center;
+        /*color: #8f8f8f;*/
+    }
+
+    ul.reports {
+        /*list-style: */
+        padding: 10px 5px 5px 0;
+        font-size: 10pt;
+    }
+
+    li.active a {
+        /*color: #000000;*/
+    }
+
+    li.not-active a {
+        color: #8f8f8f;
+        /*text-decoration: line-through;*/
+    }
 
 </style>
 
-<div class="span10">
+<div class="span12">
 
     <section>
            <input class="btn btn-primary"
@@ -52,202 +91,72 @@
     </section>
 
     <section>
-        <dl class="months">
-            <dt class="year"><fmt:formatDate pattern="yyyy" value="${now}"/></dt>
-            <dd></dd>
-
-            <c:forEach var="i" begin="0" end="${fn:length(months) - 1}" step="1">
-                <c:set var="m" value="${months[i]}"/>
-                <c:set var="mm" value="${months[i + 1]}"/>
-                <c:set var="y"><fmt:formatDate pattern="yyyy" value="${m}"/></c:set>
-                <c:set var="yy"><fmt:formatDate pattern="yyyy" value="${mm}"/></c:set>
-
-                <dt><fmt:formatDate pattern="MMMMM" value="${m}"/></dt>
-                <dd>
-                    <c:set var="hasReports" value="no"/>
-
-                    <c:forEach items="${reports}" var="r">
-                        <c:if test="${r.startDate gt mm and r.startDate lt m}">
-                            <c:set var="status" value="${r.accepted ? 'active' : 'not-active'}"/>
-                            <ul class="inline ${status}">
-                                <li><fmt:formatDate pattern="dd" value="${r.startDate}"/></li>
-
-                                <li><a href="report?id=${r.id}">
-                                ${not empty r.customer.name ? r.customer.name : 'Неизвестно' }
-                                </a>
-                                </li>
-                                <li>
-                                    <c:choose>
-                                        <c:when test="${r.type.name == 'PUBLIC'}">
-                                            Публичка
-                                        </c:when>
-                                        <c:otherwise>
-                                            Мобильный
-                                        </c:otherwise>
-                                    </c:choose>
-                                </li>
-                                <li>
-                                    <c:choose>
-                                        <c:when test="${r.accepted ==true}">
-                                            <i class="icon-ok"></i>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <i class="icon-remove"></i>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </li>
-                            </ul>
-
-                            <c:set var="hasReports" value="yes"/>
-                        </c:if>
-                    </c:forEach>
-
-                    <c:if test="${hasReports == 'no'}">
-                        <span class="no-reports">
-                            Не было отчетов
-                        </span>
-
-                    </c:if>
-                </dd>
-
-                <c:if test="${y > yy}">
-                    <dt class="year">${yy}</dt>
-                    <dd></dd>
-                </c:if>
-            </c:forEach>
-
-        </dl>
-
-        <%--<dl class="dl-horizontal">--%>
-            <%--<c:forEach items="${reports}" var="r">--%>
-                <%--<c:set var="status" value="${r.accepted ? 'active' : 'not-active'}"/>--%>
-
-                <%--<dt>--%>
-                    <%--&lt;%&ndash;<a href="customer-detail?customer_id=${r.customerId}">&ndash;%&gt;--%>
-                    <%--<a href="report?id=${r.id}">--%>
-                            <%--${not empty r.customer.name ? r.customer.name : 'Неизвестно' }--%>
-                    <%--</a>--%>
-                <%--</dt>--%>
-                <%--<dd>--%>
-                    <%--<ul class="inline ${status}">--%>
-                            <%--&lt;%&ndash;<li>${r.uploadDate}</li>&ndash;%&gt;--%>
-                        <%--<li>${r.startDate}</li>--%>
-                        <%--<li>--%>
-                            <%--<c:choose>--%>
-                                <%--<c:when test="${r.type.name == 'PUBLIC'}">--%>
-                                    <%--Публичка--%>
-                                <%--</c:when>--%>
-                                <%--<c:otherwise>--%>
-                                    <%--Мобильный--%>
-                                <%--</c:otherwise>--%>
-                            <%--</c:choose>--%>
-                        <%--</li>--%>
-                        <%--&lt;%&ndash;<li>&ndash;%&gt;--%>
-                            <%--&lt;%&ndash;<c:choose>&ndash;%&gt;--%>
-                                <%--&lt;%&ndash;<c:when test="${r.period.name == 'MONTH'}">&ndash;%&gt;--%>
-                                    <%--&lt;%&ndash;Ежемесячный&ndash;%&gt;--%>
-                                <%--&lt;%&ndash;</c:when>&ndash;%&gt;--%>
-                                <%--&lt;%&ndash;<c:otherwise>&ndash;%&gt;--%>
-                                    <%--&lt;%&ndash;Квартальный&ndash;%&gt;--%>
-                                <%--&lt;%&ndash;</c:otherwise>&ndash;%&gt;--%>
-                            <%--&lt;%&ndash;</c:choose>&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;</li>&ndash;%&gt;--%>
-                        <%--<li>--%>
-                            <%--<c:choose>--%>
-                                <%--<c:when test="${r.accepted ==true}">--%>
-                                    <%--<i class="icon-ok"></i>--%>
-                                <%--</c:when>--%>
-                                <%--<c:otherwise>--%>
-                                    <%--<i class="icon-remove"></i>--%>
-                                <%--</c:otherwise>--%>
-                            <%--</c:choose>--%>
-                        <%--</li>--%>
-                    <%--</ul>--%>
-                <%--</dd>--%>
-
-            <%--</c:forEach>--%>
-        <%--</dl>--%>
+        <div class="months-by-quarters">
 
 
-        <div id="upload-report-form">
-            <c:forEach var="c" items="${customers}" varStatus="s">
-                <input type="hidden" id="customer-${c.id}" value="${c.customerType}">
-            </c:forEach>
-            <form action="/admin/action/upload-report"
-                  method="post" enctype="multipart/form-data">
+            <div class="year"><fmt:formatDate pattern="yyyy" value="${now}"/></div>
 
-                <label>
-                    Пользователь <br>
-                    <select name="customer-id" id="customer">
+                <c:forEach var="i" begin="0" end="${fn:length(months) - 1}" step="1">
+                    <c:set var="m" value="${months[i]}"/>
+                    <c:set var="mm" value="${months[i + 1]}"/>
+                    <c:set var="y"><fmt:formatDate pattern="yyyy" value="${m}"/></c:set>
+                    <c:set var="yy"><fmt:formatDate pattern="yyyy" value="${mm}"/></c:set>
+                    <c:set var="mn"><fmt:formatDate pattern="MM" value="${m}"/></c:set>
 
-                        <c:forEach var="c" items="${customers}" varStatus="s">
-                            <option class="${c.name}" value="${c.id}"
-                                    id="${c.id}" ${s.index==0?"selected":""}>${c.name}</option>
+                    <div class="incoming-report">
+                        <div class="margins">
+                            <div class="content ${m > now ? 'future' : ''}">
+                                <div class="header"><fmt:formatDate pattern="MMMMM" value="${m}"/></div>
+
+                        <c:set var="hasReports" value="no"/>
+
+                        <ul class="reports">
+
+                        <c:forEach items="${reports}" var="r">
+                            <c:if test="${r.startDate gt mm and r.startDate lt m}">
+                                <c:set var="status" value="${r.accepted ? 'active' : 'not-active'}"/>
+
+                                    <li class="${r.accepted ? 'active' : 'not-active'}">
+                                        <a href="report?id=${r.id}">
+                                            ${not empty r.customer.name ? r.customer.name : 'Неизвестно' }
+                                        </a>
+                                    </li>
+
+                                <c:set var="hasReports" value="yes"/>
+                            </c:if>
                         </c:forEach>
+                        </ul>
 
-                    </select>
-                </label>
+                        <c:if test="${hasReports == 'no'}">
+                        <div class="no-reports">
+                            Не было отчетов
+                        </div>
 
+                        </c:if>
 
-                <label>
-                    Тип отчета <br>
-                    <select id="repType" name="repType">
-
-                        <option id="MOBILE_AGGREGATOR" value="MOBILE_AGGREGATOR">Мобильный</option>
-                        <option value="PUBLIC_RIGHTS_SOCIETY" value="PUBLIC_RIGHTS_SOCIETY">Публичный</option>
-
-                    </select>
-                </label>
-
-                <%--<input type="hidden" name="report-type" id="report-type"/>--%>
-
-                <div class="fileupload fileupload-new" data-provides="fileupload">
-                    <div class="input-append">
-                        <div class="uneditable-input span3">
-                            <i class="icon-file fileupload-exists"></i>
-                            <span class="fileupload-preview"></span></div>
-                                <span class="btn btn-fileName">
-                                    <span class="fileupload-new">Выбрать отчет</span>
-                                    <span class="fileupload-exists">Изменить</span><input name="file" type="file"/>
-                                </span>
-                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Удалить</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                Дата отчета <br>
+                    <c:if test="${(mn - 1) % 3 == 0}">
 
-                <div id="date" class="input-append">
-                    <input data-format="yyyy-MM-dd" id="dt" class="input-block-level" name="dt" type="text">
-                              <span class="add-on">
-                                 <i data-time-icon="icon-time" data-whenUpdated-icon="icon-calendar">
-                                 </i>
-                                  </span>
-                </div>
+                        <div class="outgoing-report">
+                             <div class="content">
+                                 <%--3 000 023 тг--%>
+                             </div>
+                        </div>
 
+                        <div class="clear"></div>
+                    </c:if>
 
-                <label>
-                    Период<br>
-                    <select name="period">
-                        <option value="0">Месячный</option>
-                        <option value="1">Квартальный</option>
-                    </select>
-                </label>
+                    <c:if test="${y > yy}">
+                        <div class="year">${yy}</div>
+                    </c:if>
+                </c:forEach>
 
 
-                <div class="row-fluid">
-                    <input class="btn" type="submit" id="submitReport" value="Отправить">
-                </div>
-            </form>
 
-
-            <div>
-            <span>
-            Для загрузки отчета необходимо
-            подготовить файл отчета в формате excel.
-            </span>
-            </div>
         </div>
-
     </section>
 
 

@@ -420,7 +420,7 @@ public class DispatcherServlet extends HttpServlet {
                         Date now = new Date();
                         req.setAttribute("now", now);
 
-                        List<Date> months = DateUtils.getMonthsBefore(now, 12);
+                        List<Date> months = DateUtils.getMonthsBefore(now, 12, true);
                         req.setAttribute("months", months);
                         Date notLaterThen = months.get(months.size() - 1);
 
