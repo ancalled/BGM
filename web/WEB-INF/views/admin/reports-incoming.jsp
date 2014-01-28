@@ -78,6 +78,37 @@
         /*text-decoration: line-through;*/
     }
 
+    .tab-content {
+        overflow: hidden;
+    }
+
+    div.quarter {
+        float: left;
+        width: 30px;
+        height: 150px;
+        font-size: 16pt;
+        padding-top: 5px;
+    }
+
+    div.outgoing-report {
+        width: 20%;
+        float: left;
+        height: 150px;
+    }
+
+
+    div.outgoing-report dl.catalogs {
+        margin: 0 0 5px 2px;
+        font-size: 10pt;
+    }
+
+    div.outgoing-report dl.catalogs dt {
+        width: 70px;
+    }
+
+    div.outgoing-report dl.catalogs dd {
+        margin-left: 85px;
+    }
 </style>
 
 <div class="span12">
@@ -93,8 +124,9 @@
     <section>
         <div class="months-by-quarters">
 
-
             <div class="year"><fmt:formatDate pattern="yyyy" value="${now}"/></div>
+                <c:set var="first"><fmt:formatDate pattern="MM" value="${months[0]}"/></c:set>
+                <c:set var="quarter" value="${(first mod 3) + 1}"/>
 
                 <c:forEach var="i" begin="0" end="${fn:length(months) - 1}" step="1">
                     <c:set var="m" value="${months[i]}"/>
@@ -113,14 +145,14 @@
                         <ul class="reports">
 
                         <c:forEach items="${reports}" var="r">
-                            <c:if test="${r.startDate gt mm and r.startDate lt m}">
-                                <c:set var="status" value="${r.accepted ? 'active' : 'not-active'}"/>
+                            <c:if test="${r.startDate gt mm and r.startDate lt m and r.accepted}">
+                                <%--<c:set var="status" value="${r.accepted ? 'active' : 'not-active'}"/>--%>
 
-                                    <li class="${r.accepted ? 'active' : 'not-active'}">
-                                        <a href="report?id=${r.id}">
-                                            ${not empty r.customer.name ? r.customer.name : 'Неизвестно' }
+                                <li class="${r.accepted ? 'active' : 'not-active'}">
+                                    <a href="report?id=${r.id}">
+                                        ${not empty r.customer.name ? r.customer.name : 'Неизвестно' }
                                         </a>
-                                    </li>
+                                </li>
 
                                 <c:set var="hasReports" value="yes"/>
                             </c:if>
@@ -140,17 +172,30 @@
 
                     <c:if test="${(mn - 1) % 3 == 0}">
 
+                        <div class="quarter">
+                            Q${quarter}
+                        </div>
+
                         <div class="outgoing-report">
-                             <div class="content">
-                                 <%--3 000 023 тг--%>
-                             </div>
+
+                            <dl class="dl-horizontal catalogs">
+                                <dt><a href="#">WCH</a></dt>
+                                <dd>323</dd>
+
+                                <dt><a href="#">NMI Зап</a></dt>
+                                <dd>104</dd>
+                            </dl>
                         </div>
 
                         <div class="clear"></div>
+                        <c:set var="quarter" value="${quarter - 1}"/>
+
                     </c:if>
+
 
                     <c:if test="${y > yy}">
                         <div class="year">${yy}</div>
+                        <c:set var="quarter" value="4"/>
                     </c:if>
                 </c:forEach>
 

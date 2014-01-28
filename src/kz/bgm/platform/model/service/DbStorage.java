@@ -1746,7 +1746,7 @@ public class DbStorage implements CatalogStorage {
                                 "     AND c.catalog_id = t.catalog_id\n" +
                                 "SET c.name = IF(t.name != '', t.name, c.name),\n" +
                                 "  c.composer = IF(t.composer != '', t.composer, c.composer),\n" +
-                                "  c.artist = IF(t.artist != '', t.artist, c.artist),\n" +
+                                "  c.artist = IF(t.artist != '', concat(c.artist, ', ', t.artist), c.artist),\n" +
                                 "  c.shareMobile = IF(t.shareMobile != '', t.shareMobile, c.shareMobile),\n" +
                                 "  c.sharePublic = IF(t.sharePublic != '', t.sharePublic, c.sharePublic),\n" +
                                 "  t.done = 1\n" +
