@@ -179,11 +179,11 @@
                         <div class="outgoing-report">
 
                             <dl class="dl-horizontal catalogs">
-                                <dt><a href="#">WCH</a></dt>
-                                <dd>323</dd>
+                                <%--<dt><a href="#">WCH</a></dt>--%>
+                                <%--<dd>323</dd>--%>
 
-                                <dt><a href="#">NMI Зап</a></dt>
-                                <dd>104</dd>
+                                <%--<dt><a href="#">NMI Зап</a></dt>--%>
+                                <%--<dd>104</dd>--%>
                             </dl>
                         </div>
 

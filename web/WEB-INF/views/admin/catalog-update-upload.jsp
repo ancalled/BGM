@@ -14,7 +14,6 @@
         max-width: none;
     }
 
-
     #upload-options {
 
     }
@@ -40,7 +39,6 @@
         /*margin-top: 10%;*/
     }
 
-
     #preview-container {
         overflow: scroll;
     }
@@ -54,63 +52,63 @@
 
 <section>
 
-    <legend>Обновления</legend>
+    <%--<legend>Обновления</legend>--%>
 
+    <div id="modal-container" class="modal">
+        <p>Файл обновления должен быть в формате <strong><i>csv</i></strong> и содержать поля, как указано в таблице
+            ниже.
+            Разделитель '<strong>;</strong>', кодировка <strong>utf-8</strong>
+        </p>
 
-    <form class="form-horizontal" action="/admin/action/update-catalog" method="post"
-          enctype="multipart/form-data">
+        <form class="form-horizontal" action="/admin/action/update-catalog" method="post"
+              enctype="multipart/form-data">
 
-        <div class="form-group">
-            <div class="fileupload fileupload-new" data-provides="fileupload">
-                <div class="inline">
+            <div class="form-group">
+                <div class="fileupload fileupload-new" data-provides="fileupload">
+                    <div class="inline">
 
-                    <div class="input-group-btn">
-                        <a class="btn btn-primary btn-file">
-                            <span class="fileupload-new">Загрузить обновление каталога</span>
-                            <%--<span class="fileupload-exists">Изменить</span>--%>
-                            <input type="file" name="file" class="file-input" id="fileinput" accept=".csv"
-                                   data-url="/admin/action/update-catalog"/></a>
-                        <a href="#" class="btn btn-default fileupload-exists"
-                           data-dismiss="fileupload">Убрать</a>
+                        <div class="input-group-btn">
+                            <a class="btn btn-primary btn-file">
+                                <span class="fileupload-new">Загрузить обновление каталога</span>
+                                <%--<span class="fileupload-exists">Изменить</span>--%>
+                                <input type="file" name="file" class="file-input" id="fileinput" accept=".csv"
+                                       data-url="/admin/action/update-catalog"/></a>
+                            <a href="#" class="btn btn-default fileupload-exists"
+                               data-dismiss="fileupload">Убрать</a>
+                        </div>
+
                     </div>
-
                 </div>
             </div>
+
+
+            <div class="row-fluid">
+
+                <div id="progress" class="progress progress-success progress-striped">
+                    <div class="bar" style="width: 0%;"></div>
+                </div>
+
+                <div id="status-bar"></div>
+            </div>
+
+        </form>
+
+
+        <div style="overflow: hidden; height: inherit">
+            <div id="preview-container">
+            </div>
         </div>
 
-
-        <div class="row-fluid">
-
-            <div id="progress" class="progress progress-success progress-striped">
-                <div class="bar" style="width: 0%;"></div>
-            </div>
-
-            <div id="status-bar"></div>
+        <div class="upload-btn-container">
+            <button class="btn btn-primary"
+                    id="sbmtBtn">Загрузить
+            </button>
         </div>
 
-        <br>
+    </div>
 
-        <div id="modal-container" class="modal">
-            <p>Файл обновления должен быть в формате <strong><i>csv</i></strong> и содержать поля, как указано в таблице ниже.
-                    Разделитель '<strong>;</strong>', кодировка <strong>utf-8</strong>
-            </p>
-
-
-            <div style="overflow: hidden; height: inherit">
-            <div id="preview-container" >
-            </div>
-            </div>
-
-            <div class="upload-btn-container">
-                <button class="btn btn-primary"
-                        id="sbmtBtn">Загрузить</button>
-            </div>
-
-        </div>
-
-        <input type="hidden" id="catId" name="catId" value="${catalog.id}">
-        <input type="hidden" id="catName" name="catalog_name" value="${catalog.name}">
-    </form>
+    <input type="hidden" id="catId" name="catId" value="${catalog.id}">
+    <input type="hidden" id="catName" name="catalog_name" value="${catalog.name}">
 
 </section>
 
@@ -146,6 +144,7 @@
 
     $(document).ready(function () {
 
+        $('#modal-container').hide();
         $('#preview-container').hide();
         $('#progress').hide();
 
