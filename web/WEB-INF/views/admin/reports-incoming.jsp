@@ -2,10 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="ru_RU" scope="session"/>
 
 <style>
-
-
 
 
     div.months-by-quarters {
@@ -55,7 +54,6 @@
         text-align: center;
     }
 
-
     .content .no-reports {
         padding-top: 10px;
         width: 100%;
@@ -63,10 +61,18 @@
         /*color: #8f8f8f;*/
     }
 
+    .content .send-report {
+        font-size: 10pt;
+        padding-top: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
     ul.reports {
-        /*list-style: */
+        list-style: none;
         padding: 10px 5px 5px 0;
         font-size: 10pt;
+        margin-left: 10px;
     }
 
     li.active a {
@@ -96,7 +102,6 @@
         height: 150px;
     }
 
-
     div.outgoing-report dl.catalogs {
         margin: 0 0 5px 2px;
         font-size: 10pt;
@@ -114,92 +119,72 @@
 <div class="span12">
 
     <section>
-           <input class="btn btn-primary"
-                  type="button"
-                  value="Новый отчет"
-                  id="downloadBtn">
+        <%--<input class="btn btn-primary"--%>
+               <%--type="button"--%>
+               <%--value="Новый отчет"--%>
+               <%--id="downloadBtn">--%>
 
     </section>
 
     <section>
         <div class="months-by-quarters">
+            <c:forEach var="year" items="${years}">
+                <div class="year">${year.year}</div>
+                <c:forEach var="quarter" items="${year.quarters}">
+                    <c:forEach var="month" items="${quarter.months}">
 
-            <div class="year"><fmt:formatDate pattern="yyyy" value="${now}"/></div>
-                <c:set var="first"><fmt:formatDate pattern="MM" value="${months[0]}"/></c:set>
-                <c:set var="quarter" value="${(first mod 3) + 1}"/>
+                        <div class="incoming-report">
+                            <div class="margins">
+                                <div class="content ${month.date gt now ? 'future' : ''}">
+                                    <div class="header"><fmt:formatDate pattern="MMMMM" value="${month.date}"/></div>
 
-                <c:forEach var="i" begin="0" end="${fn:length(months) - 1}" step="1">
-                    <c:set var="m" value="${months[i]}"/>
-                    <c:set var="mm" value="${months[i + 1]}"/>
-                    <c:set var="y"><fmt:formatDate pattern="yyyy" value="${m}"/></c:set>
-                    <c:set var="yy"><fmt:formatDate pattern="yyyy" value="${mm}"/></c:set>
-                    <c:set var="mn"><fmt:formatDate pattern="MM" value="${m}"/></c:set>
+                                    <ul class="reports">
+                                        <c:forEach items="${month.reports}" var="r">
+                                            <li class="${r.accepted ? 'active' : 'not-active'}">
+                                                <a href="report?id=${r.id}">
+                                                        ${not empty r.customer.name ? r.customer.name : 'Неизвестно' }
+                                                </a>
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
 
-                    <div class="incoming-report">
-                        <div class="margins">
-                            <div class="content ${m > now ? 'future' : ''}">
-                                <div class="header"><fmt:formatDate pattern="MMMMM" value="${m}"/></div>
+                                    <c:if test="${fn:length(month.reports) eq 0}">
+                                        <div class="no-reports">
+                                            Не было отчетов
+                                        </div>
+                                    </c:if>
 
-                        <c:set var="hasReports" value="no"/>
+                                    <div class="send-report">
+                                        <button class="btn btn-mini" type="button">Отправить</button>
+                                        <%--<a href="#">Отправить отчет</a>--%>
+                                    </div>
 
-                        <ul class="reports">
-
-                        <c:forEach items="${reports}" var="r">
-                            <c:if test="${r.startDate gt mm and r.startDate lt m and r.accepted}">
-                                <%--<c:set var="status" value="${r.accepted ? 'active' : 'not-active'}"/>--%>
-
-                                <li class="${r.accepted ? 'active' : 'not-active'}">
-                                    <a href="report?id=${r.id}">
-                                        ${not empty r.customer.name ? r.customer.name : 'Неизвестно' }
-                                        </a>
-                                </li>
-
-                                <c:set var="hasReports" value="yes"/>
-                            </c:if>
-                        </c:forEach>
-                        </ul>
-
-                        <c:if test="${hasReports == 'no'}">
-                        <div class="no-reports">
-                            Не было отчетов
-                        </div>
-
-                        </c:if>
-
+                                </div>
                             </div>
                         </div>
+
+                    </c:forEach>
+
+
+                    <div class="quarter">
+                        Q${quarter.number}
                     </div>
 
-                    <c:if test="${(mn - 1) % 3 == 0}">
+                    <div class="outgoing-report">
 
-                        <div class="quarter">
-                            Q${quarter}
-                        </div>
-
-                        <div class="outgoing-report">
-
-                            <dl class="dl-horizontal catalogs">
+                        <dl class="dl-horizontal catalogs">
                                 <%--<dt><a href="#">WCH</a></dt>--%>
                                 <%--<dd>323</dd>--%>
 
                                 <%--<dt><a href="#">NMI Зап</a></dt>--%>
                                 <%--<dd>104</dd>--%>
-                            </dl>
-                        </div>
+                        </dl>
+                    </div>
 
-                        <div class="clear"></div>
-                        <c:set var="quarter" value="${quarter - 1}"/>
-
-                    </c:if>
-
-
-                    <c:if test="${y > yy}">
-                        <div class="year">${yy}</div>
-                        <c:set var="quarter" value="4"/>
-                    </c:if>
+                    <div class="clear"></div>
                 </c:forEach>
 
-
+            </c:forEach>
 
         </div>
     </section>

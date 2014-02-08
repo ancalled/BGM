@@ -4,6 +4,8 @@ import kz.bgm.platform.model.domain.*;
 import kz.bgm.platform.model.service.CatalogFactory;
 import kz.bgm.platform.model.service.CatalogStorage;
 import kz.bgm.platform.utils.DateUtils;
+import kz.bgm.platform.utils.Month;
+import kz.bgm.platform.utils.Year;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -417,19 +419,58 @@ public class DispatcherServlet extends HttpServlet {
                     @Override
                     public String execute(HttpServletRequest req, HttpServletResponse resp) {
 
-                        Date now = new Date();
-                        req.setAttribute("now", now);
-
-                        List<Date> months = DateUtils.getMonthsBefore(now, 12, true);
-                        req.setAttribute("months", months);
-                        Date notLaterThen = months.get(months.size() - 1);
-
                         List<Customer> customers = catalogStorage.getAllCustomers();
                         req.setAttribute("customers", customers);
 
-                        List<CustomerReport> reports = catalogStorage.getAllCustomerReports(notLaterThen);
-                        req.setAttribute("reports", reports);
+                        String nowStr = req.getParameter("from");
 
+                        Date from = new Date();
+                        if (nowStr != null) {
+                            try {
+                                from = new SimpleDateFormat("yyyy-MM").parse(nowStr);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        int quartersAgo = 6;
+                        String quartersAgoStr = req.getParameter("quarters");
+                        if (quartersAgoStr != null) {
+                            quartersAgo = Integer.parseInt(quartersAgoStr);
+                        }
+
+                        String showNonActiveStr = req.getParameter("non-active");
+                        boolean showNonAccepted = "yes".equals(showNonActiveStr);
+
+                        int monthsAgo = quartersAgo * 3;
+
+                        Date notLaterThen = DateUtils.getPreviousMonth(from, monthsAgo);
+
+                        List<CustomerReport> reports = catalogStorage.getAllCustomerReports(notLaterThen);
+
+                        List<Year> years = DateUtils.getQuartersBefore(from, quartersAgo);
+                        for (CustomerReport r : reports) {
+                            if (!showNonAccepted && !r.isAccepted()) continue;
+
+                            Date reportDate = r.getStartDate();
+
+                            for (Year y : years) {
+                                for (Quarter q : y.getQuarters()) {
+                                    for (Month m : q.getMonths()) {
+                                        Date monthStart = m.getDate();
+                                        Date monthEnd = DateUtils.getNextMonth(monthStart, 1);
+
+                                        if (!reportDate.before(monthStart)  &&
+                                                reportDate.before(monthEnd)) {
+                                            m.addReport(r);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        req.setAttribute("now", from);
+                        req.setAttribute("years", years);
 
                         return "reports";
                     }

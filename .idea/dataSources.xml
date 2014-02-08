@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="195066833">
+  <component name="DataSourceManagerImpl" format="xml" hash="141313658">
     <data-source source="LOCAL" name="BGM-platform" uuid="36b914c0-fa2a-44b4-bd9f-ee69f64b7e71">
       <driver-ref>mysql</driver-ref>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>

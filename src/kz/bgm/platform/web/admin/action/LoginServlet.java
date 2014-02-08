@@ -7,10 +7,7 @@ import kz.bgm.platform.model.service.CatalogStorage;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 
 public class LoginServlet extends HttpServlet {
@@ -46,6 +43,8 @@ public class LoginServlet extends HttpServlet {
             }
         }
         resp.sendRedirect("/admin/view/index");
+
+//        resp.addCookie(new Cookie("", "")); //todo запомнить меня
     }
 
 

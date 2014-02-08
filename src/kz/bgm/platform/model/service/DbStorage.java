@@ -1408,12 +1408,13 @@ public class DbStorage implements CatalogStorage {
 
                 PreparedStatement ps =
                         con.prepareStatement(
-                                "INSERT INTO catalog_update(catalog_id, filepath, filename, whenUpdated) " +
-                                        "VALUES (?,?,?, NOW())",
+                                "INSERT INTO catalog_update(catalog_id, filepath, filename, whenUpdated, status) " +
+                                        "VALUES (?,?,?, NOW(), ?)",
                                 Statement.RETURN_GENERATED_KEYS);
                 ps.setLong(1, update.getCatalogId());
                 ps.setString(2, update.getFilePath());
                 ps.setString(3, update.getFileName());
+                ps.setString(4, Status.NONE.toString());
 
                 ps.executeUpdate();
 
