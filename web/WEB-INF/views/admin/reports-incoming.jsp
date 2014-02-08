@@ -35,6 +35,10 @@
         margin: 0 10px 10px 0;
     }
 
+    div.content {
+        position: relative;
+    }
+
     div.incoming-report div.content {
         height: 150px;
         background: #cceef1;
@@ -63,9 +67,17 @@
 
     .content .send-report {
         font-size: 10pt;
-        padding-top: 10px;
+        /*padding-top: 10px;*/
         width: 100%;
         text-align: center;
+        position: absolute;
+        bottom: 0px;
+        margin: 5px 0 10px 0;
+    }
+
+    .btn-send:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] {
+        color: #ffffff;
+        background-color: #bb8f73;
     }
 
     ul.reports {
@@ -118,13 +130,13 @@
 
 <div class="span12">
 
-    <section>
+    <%--<section>--%>
         <%--<input class="btn btn-primary"--%>
                <%--type="button"--%>
                <%--value="Новый отчет"--%>
                <%--id="downloadBtn">--%>
 
-    </section>
+    <%--</section>--%>
 
     <section>
         <div class="months-by-quarters">

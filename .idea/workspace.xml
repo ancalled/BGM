@@ -34,14 +34,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1491f76-2809-4cf0-9e4c-467cce3c9b5d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/utils/Month.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/domain/Quarter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/utils/Year.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/utils/DateUtils.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/utils/DateUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/model/service/DbStorage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/DispatcherServlet.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/DispatcherServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/LoginServlet.java" afterPath="$PROJECT_DIR$/src/kz/bgm/platform/web/admin/action/LoginServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/admin/reports-incoming.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/admin/reports-incoming.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -382,7 +374,7 @@
       <file leaf-file-name="reports-incoming.jsp" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/reports-incoming.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="157" column="87" selection-start="4214" selection-end="4214" vertical-scroll-proportion="0.77077365" vertical-offset="2288" max-vertical-offset="5418">
+            <state line="113" column="108" selection-start="2371" selection-end="2371" vertical-scroll-proportion="0.22636104" vertical-offset="1876" max-vertical-offset="5634">
               <folding />
             </state>
           </provider>
@@ -1469,7 +1461,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Поправил странцу customers" />
     <MESSAGE value="Названия поправил" />
     <MESSAGE value="Поправил страницу поиска у пользователя" />
     <MESSAGE value="Улучшения в поиске" />
@@ -1494,7 +1485,8 @@
     <MESSAGE value="Объединеняем названия артистов при обновлении" />
     <MESSAGE value="Объединеняем названия артистов при обновлении&#10;" />
     <MESSAGE value="Чиним обновления" />
-    <option name="LAST_COMMIT_MESSAGE" value="Чиним обновления" />
+    <MESSAGE value="Поправки в таблице отчетов&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Поправки в таблице отчетов&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1950,7 +1942,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/admin/reports-incoming.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="157" column="87" selection-start="4214" selection-end="4214" vertical-scroll-proportion="0.77077365" vertical-offset="2288" max-vertical-offset="5418">
+        <state line="113" column="108" selection-start="2371" selection-end="2371" vertical-scroll-proportion="0.22636104" vertical-offset="1876" max-vertical-offset="5634">
           <folding />
         </state>
       </provider>
