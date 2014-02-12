@@ -251,7 +251,6 @@
 
             <p>
 
-
                 <c:if test="${fn:length(updates) gt 0}">
             <h4>Предыдущие обновления</h4>
 
