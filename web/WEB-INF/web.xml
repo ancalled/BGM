@@ -101,6 +101,8 @@
         <servlet-class>kz.bgm.platform.web.admin.action.CreateCustomerServlet</servlet-class>
     </servlet>
 
+
+
     <servlet>
         <servlet-name>updateCatalog</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.UpdateCatalogServlet</servlet-class>
@@ -291,6 +293,14 @@
         <servlet-name>calculateReportServlet</servlet-name>
         <servlet-class>kz.bgm.platform.web.admin.action.CalculateReportServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>createPlatformServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.CreatePlatformServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>catalogServlet</servlet-name>
+        <servlet-class>kz.bgm.platform.web.admin.action.CreateCatalogServlet</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -374,6 +384,14 @@
         <servlet-name>calculateReportServlet</servlet-name>
         <url-pattern>admin/action/calculate-report</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createPlatformServlet</servlet-name>
+        <url-pattern>admin/action/create-platform</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>catalogServlet</servlet-name>
+        <url-pattern>admin/action/create-catalog</url-pattern>
+    </servlet-mapping>
 
 
     <context-param>
@@ -382,3 +400,4 @@
     </context-param>
 
 </web-app>
+        

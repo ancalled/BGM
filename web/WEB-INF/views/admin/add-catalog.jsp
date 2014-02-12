@@ -8,11 +8,10 @@
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="/css/csv-preview.css" media="screen"/>
-
+    <script src="/js/jquery.js"></script>
 
     <title>Создание каталога</title>
 </head>
-<body>
 
 <c:import url="navbar.jsp">
     <c:param name="index" value="active"/>
@@ -30,14 +29,15 @@
             <label for="name">Название каталога </label>
             <input type="text" id="name" name="name">
 
-            <input type="hidden" name="platformId" value="${platformId}">
-
             <label for="type">Платформа</label>
-            <select id="platform" name="platform" class="input-block-level">
+
+            <select id="platform" name="platformId" class="input-block-level">
                 <c:forEach items="${platforms}" var="p" varStatus="loop">
-                    <option value="${p.id}" ${platformId==p.id ? "selected":""}>${p.name}</option>
+                    <option value="${p.id}" ${platformId==p.id ? "selected='selected'":""}>${p.name}</option>
                 </c:forEach>
             </select>
+
+            <%--<input type="hidden" name="platformId" value="" id="platform_id">--%>
 
 
             <label for="type">Тип прав</label>
@@ -56,5 +56,14 @@
         </form>
     </div>
 </div>
+
+<%--<script>--%>
+
+    <%--$('#platform').change(function () {--%>
+        <%--var platformId = this.value;--%>
+        <%--$('#platform_id').attr('value',platformId);--%>
+        <%--alert(platformId);--%>
+    <%--})--%>
+<%--</script>--%>
 </body>
 </html>

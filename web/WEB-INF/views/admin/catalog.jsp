@@ -9,6 +9,18 @@
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-fileupload.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="/css/csv-preview.css" media="screen"/>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+
+
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/bootstrap-fileupload.js"></script>
+    <script src="/js/csv-helper.js"></script>
+    <script src="/js/jquery.ui.widget.js"></script>
+    <script src="/js/jquery.iframe-transport.js"></script>
+    <script src="/js/jquery.fileupload.js"></script>
+
 
     <style>
         #random-tracks {
@@ -28,12 +40,33 @@
             -moz-user-select: none;
         }
 
+        div#dialog {
+            display: none;
+        }
+
         .dragtable-sortable li {
             margin: 0;
             padding: 0;
             float: left;
             font-size: 1em;
             background: white;
+        }
+
+            /*.ui-dialog-title {*/
+            /*display:none;*/
+            /*}*/
+
+        .ui-dialog-titlebar {
+            background: transparent;
+            border: none;
+        }
+
+        .ui-dialog .ui-dialog-titlebar-close {
+            display: none;
+        }
+
+        a.btn {
+            color: #ffffff;
         }
 
         .dragtable-sortable th, .dragtable-sortable td {
@@ -78,7 +111,7 @@
         }
 
         #preview-container {
-            height: 40%;
+            height: 350;
         }
 
         #loading-gif {
@@ -181,6 +214,15 @@
 
                         <img id="loading-gif" src="/img/loading.gif" style="visibility: hidden">
                     </dd>
+                    <dt></dt>
+                    <dd>
+                        <br>
+                        <input class="btn btn-primary"
+                               type="button"
+                               value="Обновление"
+                               id="download_new">
+
+                    </dd>
 
 
                 </dl>
@@ -201,55 +243,68 @@
 
             <legend>Обновления</legend>
 
+            <div id="dialog">
 
-            <form class="form-horizontal" action="/admin/action/update-catalog" method="post"
-                  enctype="multipart/form-data">
-
-                <div class="form-group">
-                    <div class="fileupload fileupload-new" data-provides="fileupload">
-                        <div class="inline">
-
-                            <div class="input-group-btn">
-                                <a class="btn btn-primary btn-file">
-                                    <span class="fileupload-new">Выбрать файл с обновлением</span>
-                                    <%--<span class="fileupload-exists">Изменить</span>--%>
-                                    <input type="file" name="file" class="file-input" id="fileinput" accept=".csv"
-                                           data-url="/admin/action/update-catalog"/></a>
-                                <a href="#" class="btn btn-default fileupload-exists"
-                                   data-dismiss="fileupload">Убрать</a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="row-fluid">
-
-                    <div id="progress" class="progress progress-success progress-striped">
-                        <div class="bar" style="width: 0%;"></div>
-                    </div>
-
-                    <input class="btn btn-primary"
-                           type="submit"
-                           value="Загрузить"
-                           id="sbmtBtn"
-                           disabled="disabled">
-
-                    <div id="status-bar"></div>
-                </div>
+                <legend>Загрузка обновлений</legend>
 
                 <br>
-                <span id="example">Файл обновления должен быть в формате <strong><i>csv</i></strong> и содержать поля, как указано в таблице ниже.
-                    Разделитель '<strong>;</strong>', кодировка <strong>utf-8</strong>
-                </span>
 
-                <div id="preview-container"></div>
+                <form class="form-horizontal" action="/admin/action/update-catalog" method="post"
+                      enctype="multipart/form-data">
 
-                <input type="hidden" name="catId" value="${catalog.id}">
-            </form>
+                    <div class="form-group">
+                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="inline">
+
+                                <div class="input-group-btn">
+                                    <a class="btn btn-primary btn-file">
+                                        <span class="fileupload-new">Выбрать файл с обновлением</span>
+                                        <%--<span class="fileupload-exists">Изменить</span>--%>
+                                        <input type="file" name="file" class="file-input" id="fileinput" accept=".csv"
+                                               data-url="/admin/action/update-catalog"/></a>
+                                    <a href="#" class="btn btn-default fileupload-exists"
+                                       data-dismiss="fileupload">Убрать</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                                <span id="example">Файл обновления должен быть в формате <strong><i>csv</i></strong> и содержать поля, как указано в таблице ниже.
+                                    Разделитель '<strong>;</strong>', кодировка <strong>utf-8</strong>
+                                </span>
+
+                    <div id="preview-container"></div>
+                    <p>
+
+                    <div class="row-fluid">
+                        <div id="progress" class="progress progress-success progress-striped">
+                            <div class="bar" style="width: 0%;"></div>
+                        </div>
+
+                        <input class="btn btn-primary"
+                               type="submit"
+                               value="Загрузить"
+                               id="sbmtBtn"
+                               disabled="disabled">
+
+                        <input class="btn btn-primary"
+                               type="button"
+                               value="Отмена"
+                               id=close_dialog>
+
+                        <div id="status-bar"></div>
+                    </div>
+                    </p>
+                    <input type="hidden" name="catId" value="${catalog.id}">
+                </form>
+
+            </div>
+
 
             <p>
+
 
                 <c:if test="${fn:length(updates) gt 0}">
             <h4>Предыдущие обновления</h4>
@@ -268,7 +323,7 @@
                     <tr class="${reportType}">
                         <td>
                             <a href="/admin/view/catalog-update?id=${u.id}">
-                            <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${u.whenUpdated}"/>
+                                <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${u.whenUpdated}"/>
                             </a>
                         </td>
                         <td>
@@ -314,211 +369,224 @@
 </div>
 
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="/js/bootstrap.js"></script>
-<script src="/js/bootstrap-fileupload.js"></script>
-<script src="/js/csv-helper.js"></script>
-<script src="/js/jquery.ui.widget.js"></script>
-<script src="/js/jquery.iframe-transport.js"></script>
-<script src="/js/jquery.fileupload.js"></script>
 <script type="text/javascript">
 
-    $("#status").hide();
 
-    //    var rowsOnPreview = 10;
-    var rowsOnPreview = 100;
-    var fileData;
+$("#status").hide();
 
-    // csv parameters
-    var encoding = 'utf8';
-    var delimiter = ';';
-    var enclosedBy = '\\';
-    var newline = '\n';
-    var fromLine = 1;
+//    var rowsOnPreview = 10;
+var rowsOnPreview = 100;
+var fileData;
 
-    var headers = ['#', 'Код', 'Композиция', 'Автор произведения', 'Исполнитель', 'Доля / моб. контент', 'Доля / публичка'];
-    var empty = ['', '', '', '', '', '', ''];
-    var testData = [
-        ['1', '4235', 'Ramble On', 'Robert Plant', 'Led Zeppelin', '70', '100']
-    ];
+// csv parameters
+var encoding = 'utf8';
+var delimiter = ';';
+var enclosedBy = '\\';
+var newline = '\n';
+var fromLine = 1;
 
-
-    $(document).ready(function () {
-
-        $('#preview-container').hide();
-        $('#progress').hide();
-
-        $('#fileinput').fileupload({
-            dataType: 'json',
-
-            done: function (e, data) {
-
-                $('#progress').html("");
-
-                if (data.result.status == 'ok') {
-                    $('#status-bar').html("<strong>Файл загружен на сервер, идет обработка...</strong>");
-                    var updateId = data.result.uid;
-                    startTaskStatusChecker(updateId);
-
-                } else if (data.result.status == 'warn') {
-                    $.each(data.result.warningsList, function (index, wrn) {
-                        console.log(wrn);
-                    });
-
-                    $('#status-bar').html("<strong>Неверный формат данных в файле!</strong>");
-//                    window.location.href = data.result.redirect;
-
-                } else if (data.result.status == 'error') {
-                    $('#status-bar').html("<strong>Ошибка!</strong>");
-                }
-
-            },
-
-            add: function (e, data) {
-                $("#sbmtBtn").click(function () {
-                    $("#status").show();
-//                    data.context = $('<p/>').text('Загрузка...').replaceAll($(this));
-                    data.context = $('<p/>').text('').replaceAll($(this));
-                    data.submit();
-                });
-            },
-
-            progressall: function (e, data) {
-                var progress = parseInt((data.loaded / data.total * 100) * .25, 10);
-                $('#progress .bar').css('width', progress + '%');
-            }
-        });
-
-        $("#fileinput").on('change', function (e) {
-            var f = this.files[0];
-            this.setAttribute('text', f.name);
-            if (this.files && f) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#preview-container').show();
-                    processContents(event.target.result, delimiter);
-                };
-//                reader.readAsText(f, "UTF8");
-                reader.readAsText(f.slice(0, 1024 * 100), "UTF8");
-            }
-        });
+var headers = ['#', 'Код', 'Композиция', 'Автор произведения', 'Исполнитель', 'Доля / моб. контент', 'Доля / публичка'];
+var empty = ['', '', '', '', '', '', ''];
+var testData = [
+    ['1', '4235', 'Ramble On', 'Robert Plant', 'Led Zeppelin', '70', '100']
+];
 
 
+$(document).ready(function () {
+
+
+    $('#close_dialog').click(function () {
+        $("#dialog").dialog('close');
     });
 
-    var tbl_test = buildTable(testData, headers, 0, 1, "preview-table", 'table table-bordered preview');
+    $('#download_new').click(function () {
+        $("#dialog").dialog({
+//            autoOpen: false,
+            height: 660,
+            width: 800,
+            modal: true,
+            draggable: false
+            //               open: function(type, data) {
+            //                   $(this).parent().appendTo("form");
+            //               }
+        });
+    });
+
+
+    $('#preview-container').hide();
+    $('#progress').hide();
+
+    $('#fileinput').fileupload({
+        dataType: 'json',
+
+        done: function (e, data) {
+
+            $('#progress').html("");
+
+            if (data.result.status == 'ok') {
+                $('#status-bar').html("<strong>Файл загружен на сервер, идет обработка...</strong>");
+                var updateId = data.result.uid;
+                startTaskStatusChecker(updateId);
+
+            } else if (data.result.status == 'warn') {
+                $.each(data.result.warningsList, function (index, wrn) {
+                    console.log(wrn);
+                });
+
+                $('#status-bar').html("<strong>Неверный формат данных в файле!</strong>");
+//                    window.location.href = data.result.redirect;
+
+            } else if (data.result.status == 'error') {
+                $('#status-bar').html("<strong>Ошибка!</strong>");
+            }
+
+        },
+
+        add: function (e, data) {
+            $("#sbmtBtn").click(function () {
+                $("#status").show();
+//                    data.context = $('<p/>').text('Загрузка...').replaceAll($(this));
+                data.context = $('<p/>').text('').replaceAll($(this));
+                data.submit();
+            });
+        },
+
+        progressall: function (e, data) {
+            var progress = parseInt((data.loaded / data.total * 100) * .25, 10);
+            $('#progress .bar').css('width', progress + '%');
+        }
+    });
+
+    $("#fileinput").on('change', function (e) {
+        var f = this.files[0];
+        this.setAttribute('text', f.name);
+        if (this.files && f) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#preview-container').show();
+                processContents(event.target.result, delimiter);
+            };
+//                reader.readAsText(f, "UTF8");
+            reader.readAsText(f.slice(0, 1024 * 100), "UTF8");
+        }
+    });
+
+
+});
+
+var tbl_test = buildTable(testData, headers, 0, 1, "preview-table", 'table table-bordered preview');
+
+var $preview = $("#preview-container");
+$preview.addClass('csv-preview');
+$preview.html(tbl_test);
+
+function processContents(contents, delim) {
+    fileData = contents;
+    var data = parseCSV(contents, delim);
+
+    console.log('Got data of ' + data.length);
+
+    if (validateDate(data, headers)) {
+        $('#sbmtBtn').removeAttr('disabled');
+    }
+
+    var tbl = buildTable(data, headers, 0, rowsOnPreview, "preview-table", 'table table-bordered preview');
+
+    $('#example').html('');
 
     var $preview = $("#preview-container");
     $preview.addClass('csv-preview');
-    $preview.html(tbl_test);
-
-    function processContents(contents, delim) {
-        fileData = contents;
-        var data = parseCSV(contents, delim);
-
-        console.log('Got data of ' + data.length);
-
-        if (validateDate(data, headers)) {
-            $('#sbmtBtn').removeAttr('disabled');
-        }
-
-        var tbl = buildTable(data, headers, 0, rowsOnPreview, "preview-table", 'table table-bordered preview');
-
-        $('#example').html('');
-
-        var $preview = $("#preview-container");
-        $preview.addClass('csv-preview');
-        $preview.html(tbl);
+    $preview.html(tbl);
 
 //        if (data.length > rowsOnPreview) {
 //            $preview.append("<div class='preview-more'>... и еще " + addCommas(data.length - rowsOnPreview) + " строк </div>")
 //        }
 
-        if ($('#preview-table').width() > $preview.width() || $('#preview-table').height() > $preview.height()) {
-            $preview.css('overflow', 'scroll');
-        }
-
+    if ($('#preview-table').width() > $preview.width() || $('#preview-table').height() > $preview.height()) {
+        $preview.css('overflow', 'scroll');
     }
 
+}
 
-    function startTaskStatusChecker(updateId) {
-        var stop = false;
-        (function worker() {
-            $.ajax({
-                url: '/admin/action/check-update-status',
-                dataType: 'json',
-                method: 'get',
-                async: 'true',
-                data: {'uid': updateId},
 
-                success: function (data) {
-                    if (data.status == 'found') {
-                        var taskStatus = data.taskStatus;
-                        console.log('Got task-status: ' + taskStatus);
+function startTaskStatusChecker(updateId) {
+    var stop = false;
+    (function worker() {
+        $.ajax({
+            url: '/admin/action/check-update-status',
+            dataType: 'json',
+            method: 'get',
+            async: 'true',
+            data: {'uid': updateId},
 
-                        if (taskStatus == 'FILE_UPLOADED') {
+            success: function (data) {
+                if (data.status == 'found') {
+                    var taskStatus = data.taskStatus;
+                    console.log('Got task-status: ' + taskStatus);
 
-                        } else if (taskStatus == 'SQL_LOAD_COMPLETE') {
-                            $('#status-bar').html("<strong>Обновление загружено, идет пересчет статистики...</strong>");
-                            $('#progress .bar').css('width', '75%');
-                        } else if (taskStatus == 'UPDATE_STATISTICS_FINISHED') {
-                            $('#status-bar').html("<strong>Загрузка окончена.</strong>");
-                            stop = true;
-                            $('#progress .bar').css('width', '100%');
-                            window.location.href = '/admin/view/catalog-update?id=' + updateId;
-                        }
-                    } else {
-                        $('#status-bar').html("<strong>Задача " + updateId + " не найдена!</strong>");
+                    if (taskStatus == 'FILE_UPLOADED') {
+
+                    } else if (taskStatus == 'SQL_LOAD_COMPLETE') {
+                        $('#status-bar').html("<strong>Обновление загружено, идет пересчет статистики...</strong>");
+                        $('#progress .bar').css('width', '75%');
+                    } else if (taskStatus == 'UPDATE_STATISTICS_FINISHED') {
+                        $('#status-bar').html("<strong>Загрузка окончена.</strong>");
                         stop = true;
+                        $('#progress .bar').css('width', '100%');
+                        window.location.href = '/admin/view/catalog-update?id=' + updateId;
                     }
-
-                },
-                complete: function () {
-                    // Schedule the next request when the current one's complete
-                    if (!stop) {
-                        setTimeout(worker, 2000);
-                    }
-                },
-
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus, errorThrown);
+                } else {
+                    $('#status-bar').html("<strong>Задача " + updateId + " не найдена!</strong>");
                     stop = true;
                 }
-            });
-        })();
-    }
 
-
-    // -------------------------------------------------------
-
-    function downloadCatalog() {
-        $('#downloadBtn').remove();
-        $('#loading-gif').css('visibility', 'visible');
-
-        $.ajax({
-            url: "/admin/action/download-catalog",
-            dataType: 'json',
-            method: 'post',
-            async: 'true',
-
-            data: {
-                'cid': $('#catId').val(),
-                'ft': ';',
-//                'eb': '\\\'',
-                'lt': '\\n'
             },
-            error: function () {
-                alert("Неудалось выгрузить каталог в файл" + $('#catName').val() + " .csv");
+            complete: function () {
+                // Schedule the next request when the current one's complete
+                if (!stop) {
+                    setTimeout(worker, 2000);
+                }
             },
-            success: function (data) {
-                $("#file-link").append("<a href='" + data.path + "'>" +
-                        "<i class='icon-download-alt'></i>" + "Скачать " +
-                        $('#catName').val() + ".csv (" + Math.round(data.size / 1024 / 1024) + " Мб)" +
-                        "</a>");
-                $('#loading-gif').css('visibility', 'hidden');
+
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+                stop = true;
             }
         });
-    }
+    })();
+}
+
+
+// -------------------------------------------------------
+
+function downloadCatalog() {
+    $('#downloadBtn').remove();
+    $('#loading-gif').css('visibility', 'visible');
+
+    $.ajax({
+        url: "/admin/action/download-catalog",
+        dataType: 'json',
+        method: 'post',
+        async: 'true',
+
+        data: {
+            'cid': $('#catId').val(),
+            'ft': ';',
+//                'eb': '\\\'',
+            'lt': '\\n'
+        },
+        error: function () {
+            alert("Неудалось выгрузить каталог в файл" + $('#catName').val() + " .csv");
+        },
+        success: function (data) {
+            $("#file-link").append("<a href='" + data.path + "'>" +
+                    "<i class='icon-download-alt'></i>" + "Скачать " +
+                    $('#catName').val() + ".csv (" + Math.round(data.size / 1024 / 1024) + " Мб)" +
+                    "</a>");
+            $('#loading-gif').css('visibility', 'hidden');
+        }
+    });
+}
 
 
 </script>
